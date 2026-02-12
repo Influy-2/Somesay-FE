@@ -1,0 +1,13 @@
+{
+  "extends": "@somesay/config/typescript/react.json",
+  "compilerOptions": {
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "baseUrl": ".",
+    "composite": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src"]
+}
