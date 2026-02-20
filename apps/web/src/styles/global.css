@@ -8,34 +8,22 @@
   /* Neutral color */
 
   /* 그레이 계열 */
-  --color-black: #17171b;
-  --color-grey11: #2b2b2b;
-  --color-grey10: #3e3e3e;
-  --color-grey09: #575757;
-  --color-grey08: #757575;
-  --color-grey07: #939393;
-  --color-grey06: #adadad;
-  --color-grey05: #c4c4c4;
-  --color-grey04: #d3d3d3;
-  --color-grey03: #e5e5e4;
-  --color-grey02: #f1f1f1;
-  --color-grey01: #f8f8f9;
+  --color-black: #161616;
+  --color-grey09: #252424;
+  --color-grey08: #3d3d3c;
+  --color-grey07: #626160;
+  --color-grey06: #878684;
+  --color-grey05: #abaaa8;
+  --color-grey04: #d0cfcc;
+  --color-grey03: #e4e2df;
+  --color-grey02: #f0eeeb;
+  --color-grey01: #f9f8f6;
   --color-white: #ffffff;
 
-  --color-error: #ff6060;
-
-  /* 키 컬러(레드) */
-  --color-main: #f43232;
-  --color-main-light: #ffe8e8;
-
-  /* 서브 컬러(블루) */
-  --color-sub: #45abeb;
-  --color-sub-light: #e1f3ff;
+  --color-background: #f4f5f7;
 
   /* Fonts */
   --font-pretendard: 'Pretendard', sans-serif;
-
-  --aspect-productImg: 375 / 381;
 }
 
 @layer components {
@@ -45,7 +33,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  .modal {
+  /* .modal {
     @apply fixed inset-0 top-0 right-0 bottom-0 left-0 z-50 flex flex-1 flex-col items-center justify-center;
   }
 
@@ -55,23 +43,13 @@
 
   .modal-bg-layout {
     @apply relative flex h-screen w-screen max-w-[40rem] min-w-[20rem] flex-1 flex-col items-center justify-center bg-[rgba(0,0,0,0.6)] px-11 md:w-[28rem];
-  }
-
-  .animate-slide-up {
-    animation: slide-up 350ms ease-out;
-  }
-
-  .animate-fade-in-out {
-    animation: fadeInOut ease-in-out forwards;
-  }
-
-  .animate-rotation {
-    animation: rotation 1.4s linear infinite;
-  }
+  } */
 
   *:focus {
     outline: none;
   }
+
+  // Typography
 
   .headline1 {
     @apply text-[1.75rem] leading-[155%] font-bold tracking-[-0.001em];
@@ -136,39 +114,6 @@
   .caption-small-m {
     @apply text-[.625rem] leading-[140%] font-medium tracking-[-0.001em];
   }
-
-  @keyframes slide-up {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0rem);
-    }
-  }
-
-  @keyframes fadeInOut {
-    0% {
-      opacity: 0;
-    }
-    15% {
-      opacity: 1;
-    }
-    80% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-
-  @keyframes rotation {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
 }
 
 @layer utilities {
@@ -189,14 +134,6 @@
     max-width: 40rem; /* 640px */
     min-width: 20rem; /* 320px */
     width: 100%;
-
-    /* 반응형 - md 기준 */
-  }
-
-  @media (min-width: 768px) {
-    .bottom-bar {
-      width: 28rem; /* 448px */
-    }
   }
 }
 
