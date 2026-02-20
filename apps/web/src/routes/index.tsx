@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import { PATH } from '@/routes/path';
 
 import { HomePage } from '@/pages/home/HomePage';
-import GlobalLayout from '@/layout/GlobalLayout';
+import { GlobalLayout } from '@/shared/components';
 
 export const appRouter = createBrowserRouter([
   {
