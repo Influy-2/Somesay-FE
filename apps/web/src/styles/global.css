@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Main color */
+
+  /* Sub color */
+
+  /* Neutral color */
+
+  /* 그레이 계열 */
+  --color-black: #161616;
+  --color-grey09: #252424;
+  --color-grey08: #3d3d3c;
+  --color-grey07: #626160;
+  --color-grey06: #878684;
+  --color-grey05: #abaaa8;
+  --color-grey04: #d0cfcc;
+  --color-grey03: #e4e2df;
+  --color-grey02: #f0eeeb;
+  --color-grey01: #f9f8f6;
+  --color-white: #ffffff;
+
+  --color-background: #f4f5f7;
+
+  /* Fonts */
+  --font-pretendard: 'Pretendard', sans-serif;
+}
+
+@layer components {
+  body {
+    @apply bg-grey01 font-pretendard relative box-border flex justify-center text-black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* .modal {
+    @apply fixed inset-0 top-0 right-0 bottom-0 left-0 z-50 flex flex-1 flex-col items-center justify-center;
+  }
+
+  .modal-bg-bottomsheet-layout {
+    @apply flex h-screen w-screen max-w-[40rem] min-w-[20rem] flex-1 flex-col justify-end bg-[rgba(0,0,0,0.6)] md:w-[28rem];
+  }
+
+  .modal-bg-layout {
+    @apply relative flex h-screen w-screen max-w-[40rem] min-w-[20rem] flex-1 flex-col items-center justify-center bg-[rgba(0,0,0,0.6)] px-11 md:w-[28rem];
+  } */
+
+  *:focus {
+    outline: none;
+  }
+
+  // Typography
+
+  .headline1 {
+    @apply text-[1.75rem] leading-[155%] font-bold tracking-[-0.001em];
+  }
+
+  .headline2 {
+    @apply text-[1.5rem] leading-[155%] font-bold tracking-[-0.001em];
+  }
+
+  .headline3 {
+    @apply text-[1.25rem] leading-[155%] font-semibold tracking-[-0.001em];
+  }
+
+  .subhead-b {
+    @apply text-[1.125rem] leading-[150%] font-bold tracking-[-0.001em];
+  }
+
+  .subhead-sb {
+    @apply text-[1.125rem] leading-[150%] font-semibold tracking-[-0.001em];
+  }
+
+  .subhead-m {
+    @apply text-[1.125rem] leading-[150%] font-medium tracking-[-0.001em];
+  }
+
+  .body1-b {
+    @apply text-[1rem] leading-[150%] font-bold tracking-[-0.001em];
+  }
+
+  .body1-sb {
+    @apply text-[1rem] leading-[150%] font-semibold tracking-[-0.001em];
+  }
+
+  .body1-m {
+    @apply text-[1rem] leading-[150%] font-medium tracking-[-0.001em];
+  }
+
+  .body2-sb {
+    @apply text-[0.875rem] leading-[150%] font-semibold tracking-[-0.001em];
+  }
+
+  .body2-b {
+    @apply text-[0.875rem] leading-[150%] font-bold tracking-[-0.001em];
+  }
+
+  .body2-m {
+    @apply text-[0.875rem] leading-[150%] font-medium tracking-[-0.001em];
+  }
+
+  .body2-r {
+    @apply text-[0.875rem] leading-[150%] font-normal tracking-[-0.001em];
+  }
+
+  .caption-b {
+    @apply text-[0.75rem] leading-[140%] font-bold tracking-[-0.001em];
+  }
+
+  .caption-m {
+    @apply text-[0.75rem] leading-[140%] font-medium tracking-[-0.001em];
+  }
+
+  .caption-small-m {
+    @apply text-[.625rem] leading-[140%] font-medium tracking-[-0.001em];
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+
+    z-index: 50;
+
+    /* width constraints */
+    max-width: 40rem; /* 640px */
+    min-width: 20rem; /* 320px */
+    width: 100%;
+  }
+}
+
+/* 숫자 인풋에서 위아래 화살표 제거 */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  position: absolute;
+  right: 0;
+  pointer-events: none;
+}
