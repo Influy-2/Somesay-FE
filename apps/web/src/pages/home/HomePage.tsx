@@ -3,7 +3,7 @@ import { RecommendationSection } from '@/features/home';
 
 export const HomePage = () => {
   return (
-    <div className="inline-flex flex-col items-center gap-17">
+    <div className="inline-flex w-full flex-col items-center gap-17">
       <RecommendationSection />
     </div>
   );
