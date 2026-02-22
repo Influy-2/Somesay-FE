@@ -1,10 +1,10 @@
-import MainArrowIcon from '@/shared/icons/MainArrowIcon.svg?react';
-import cn from '@/utils/cn';
+// import cn from '@/utils/cn';
+import { RecommendationSection } from '@/features/home';
+
 export const HomePage = () => {
   return (
-    <div className={cn('flex')}>
-      홈페이지
-      <MainArrowIcon />
+    <div className="inline-flex flex-col items-center gap-17">
+      <RecommendationSection />
     </div>
   );
 };
