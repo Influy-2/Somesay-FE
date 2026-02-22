@@ -1,4 +1,9 @@
 @import 'tailwindcss';
+@font-face {
+  font-family: Pretendard;
+  font-display: swap;
+  src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
+}
 
 @theme {
   /* Main color */
