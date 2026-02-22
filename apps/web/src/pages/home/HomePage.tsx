@@ -1,3 +1,9 @@
+import MainArrowIcon from '@/shared/icons/MainArrowIcon.svg?react';
 export const HomePage = () => {
-  return <>홈페이지</>;
+  return (
+    <div>
+      홈페이지
+      <MainArrowIcon />
+    </div>
+  );
 };
