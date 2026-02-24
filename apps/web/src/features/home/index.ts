@@ -1,1 +1,3 @@
-export { RecommendationSection } from './components/Recommendation/RecommendationSection';
+export { RecommendationSection } from './components/recommendation/RecommendationSection';
+
+export { BestReviewSection } from './components/bestReview/BestReviewSection';
