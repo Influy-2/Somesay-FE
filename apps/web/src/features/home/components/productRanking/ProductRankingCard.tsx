@@ -85,15 +85,12 @@ export const ProductRankingCard = ({
           {/* 리뷰수 */}
           <span className="body2-m">({formattedReviewCount})</span>
           {/* 크리에이터 프로필 스택 */}
-          <div className="flex items-center">
-            {creators.map((creator, index) => (
+          <div className="flex flex-row-reverse items-center gap-0">
+            {[...creators].reverse().map((creator, index, arr) => (
               <div
                 key={creator.name}
                 className="relative size-[1.375rem] overflow-hidden rounded-full border border-white"
-                style={{
-                  marginLeft: index === 0 ? 0 : -6,
-                  zIndex: creators.length - index,
-                }}
+                style={{ marginLeft: index === arr.length - 1 ? 0 : -6 }}
               >
                 <img
                   src={creator.profileImageUrl}

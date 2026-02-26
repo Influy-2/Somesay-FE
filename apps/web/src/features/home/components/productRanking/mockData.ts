@@ -12,7 +12,11 @@ export const MOCK_PRODUCT_RANKING_CARDS: ProductRankingCardType[] = [
     rank: 1,
     isHearted: false,
     creators: [
-      { name: '김점례', profileImageUrl: '/mocks/images/creator-01.png' },
+      {
+        name: '김점례',
+        profileImageUrl:
+          'https://www.figma.com/api/mcp/asset/39939f4d-3d38-45bb-bb23-dfce01aa3736',
+      },
       { name: '뷰티수달', profileImageUrl: '/mocks/images/creator-02.png' },
       { name: '올리브언니', profileImageUrl: '/mocks/images/creator-03.png' },
     ],
