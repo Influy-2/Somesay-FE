@@ -9,8 +9,6 @@ interface ProductCardThumbnailProps {
   imageUrl: string;
 }
 
-// 임시
-
 export const ProductCardThumbnail = ({
   brand,
   productName,

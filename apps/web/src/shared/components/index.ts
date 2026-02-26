@@ -6,3 +6,6 @@ export { ChipLarge } from './chips/ChipLarge';
 
 /* thumbnail */
 export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
+
+/* profile */
+export { CreatorProfileRegular } from './profile/CreatorProfileRegular';
