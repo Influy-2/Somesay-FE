@@ -12,3 +12,4 @@ export { CreatorProfileRegular } from './profile/CreatorProfileRegular';
 
 /* buttons */
 export { WhiteHeartButton } from './buttons/HeartButton';
+export { MoreButton } from './buttons/MoreButton';
