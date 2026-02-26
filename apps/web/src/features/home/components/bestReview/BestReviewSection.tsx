@@ -1,5 +1,6 @@
 import { ProductCardThumbnail } from '@/shared/components/thumbnail/ProductCardThumbnail';
 import { ReviewContent } from './ReviewContent';
+import { SummaryBox } from './SummaryBox';
 //임시
 const skinType = '';
 
@@ -51,6 +52,10 @@ export const BestReviewSection = () => {
         imageUrl={MOCK_PRODUCT_THUMBNAILS.imageUrl}
       />
       <ReviewContent {...MOCK_REVIEW} />
+      <div className="flex items-start gap-2 self-stretch">
+        <SummaryBox boldText="93%" plainText="의 사용자가 공감했어요" />
+        <SummaryBox boldText="건성" plainText="사용자가 가장 많이 공감했어요" />
+      </div>
     </section>
   );
 };
