@@ -6,5 +6,10 @@
 //예: export { useAuthStore } from "./stores/authStore";
 // Types
 //예 export type { User, ApiResponse } from "./types/common";
+export type {
+  ProductCardType,
+  ProductRankingCardType,
+} from './types/Product.types';
+
 // Utils
 //예 export { formatDate, formatPrice } from "./utils/format";

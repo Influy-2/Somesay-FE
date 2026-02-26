@@ -1,5 +1,9 @@
 // import cn from '@/utils/cn';
-import { RecommendationSection, BestReviewSection } from '@/features/home';
+import {
+  RecommendationSection,
+  BestReviewSection,
+  ProductRankingSection,
+} from '@/features/home';
 export const HomePage = () => {
   return (
     <div className="inline-flex w-full flex-col items-center gap-17 pt-[4.875rem]">
@@ -8,6 +12,7 @@ export const HomePage = () => {
         베너 임시
       </div>
       <BestReviewSection />
+      <ProductRankingSection />
     </div>
   );
 };

@@ -9,3 +9,6 @@ export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 
 /* profile */
 export { CreatorProfileRegular } from './profile/CreatorProfileRegular';
+
+/* buttons */
+export { WhiteHeartButton } from './buttons/HeartButton';
