@@ -40,7 +40,7 @@ export const ReviewContent = ({
           </div>
           <span className="body2-sb text-[#1F2129]">{rating}</span>
         </div>
-        <p aria-hidden="true" className="body2-m line-clamp-5 text-[#1F2129]">
+        <p aria-hidden="true" className="body2-m text-[#1F2129]">
           {content}
         </p>
       </div>
