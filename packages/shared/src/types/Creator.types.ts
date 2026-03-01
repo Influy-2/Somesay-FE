@@ -9,7 +9,6 @@ export interface Creator {
   trustScore: number; // DECIMAL(5,2)
   skinType: string; // ENUM (values not provided)
   personalColor: string; // ENUM (values not provided)
-  birthYear: number; // YEAR
   subscriberNum: ID; // BIGINT
   ranking: number; // INT
   ageGroup: number; // INT (20, 30, 40...)

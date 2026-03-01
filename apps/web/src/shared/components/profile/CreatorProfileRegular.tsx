@@ -1,6 +1,6 @@
 // Profile/크리에이터/기본형 컴포넌트
 import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
-import { ChipHomeProfile } from '@/shared/components/chips/HomeProfileChip';
+import { ChipHomeProfile } from '@/shared/components';
 
 // TODO: Review Content와 통일 (추후 백엔드 연결시 수정)
 interface CreatorProfileRegularProps {

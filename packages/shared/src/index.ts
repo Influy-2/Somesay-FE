@@ -9,7 +9,7 @@
 export type {
   ProductCardType,
   ProductRankingCardType,
-} from './types/Product.types';
+} from './types/product.types';
 
 // Utils
 //예 export { formatDate, formatPrice } from "./utils/format";

@@ -1,1 +1,1 @@
-export type { ProductCardType, ProductRankingCardType } from './Product.types';
+export type { ProductCardType, ProductRankingCardType } from './product.types';
