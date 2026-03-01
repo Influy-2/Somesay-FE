@@ -11,7 +11,10 @@ export type {
   ProductRankingCardType,
 } from './types/product.types';
 
-export type { CreatorType, CreatorRankingUpDown } from './types/creator.types';
+export type {
+  CreatorType,
+  CreatorRankingUpDownType,
+} from './types/creator.types';
 
 // Utils
 //예 export { formatDate, formatPrice } from "./utils/format";

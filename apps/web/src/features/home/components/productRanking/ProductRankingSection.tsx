@@ -13,7 +13,7 @@ export const ProductRankingSection = () => {
         </h2>
         <div className="grid grid-cols-2 grid-rows-2 content-start items-start gap-[1.5rem_.25rem] self-stretch">
           {MOCK_PRODUCT_RANKING_CARDS.map((product) => (
-            <ProductRankingCard {...product} />
+            <ProductRankingCard {...product} key={product.productId} />
           ))}
         </div>
       </div>
