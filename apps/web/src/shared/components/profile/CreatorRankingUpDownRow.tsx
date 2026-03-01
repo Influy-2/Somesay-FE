@@ -2,32 +2,19 @@ import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
 import ArrowUpIcon from '@/shared/icons/ArrowUp12Icon.svg?react';
 import ArrowDownIcon from '@/shared/icons/ArrowDown12Icon.svg?react';
 import { ChipBasic } from '@/shared/components';
-
-// type RankChange = 'up' | 'down' | 'same';
-
-interface CreatorRankingUpDownRowProps {
-  rank: number;
-  rankChange: string;
-  rankChangeDiff: number; // 순위 변동 수치 (예: 2 → "▲2")
-  profileImageUrl: string;
-  name: string;
-  subscriberCount: number; // 단위: 만
-  ageGroup: number; // 단위: 대
-  skinType: string;
-  trustScore: number; // 단위: 점
-}
+import { CreatorRankingUpDownType } from '@somesay/shared';
 
 export const CreatorRankingUpDownRow = ({
-  rank,
+  ranking,
   rankChange,
   rankChangeDiff,
   profileImageUrl,
-  name,
+  nickname,
   subscriberCount,
   ageGroup,
   skinType,
   trustScore,
-}: CreatorRankingUpDownRowProps) => {
+}: CreatorRankingUpDownType) => {
   const rankChangeLabel =
     rankChange === 'up'
       ? `${rankChangeDiff}단계 상승`
@@ -38,13 +25,15 @@ export const CreatorRankingUpDownRow = ({
   return (
     <div
       className="flex w-full items-center justify-between"
-      aria-label={`${rank}위 ${name}, 구독자 ${subscriberCount}만, ${ageGroup}대, ${skinType}, 신뢰도 ${trustScore}점, ${rankChangeLabel}`}
+      aria-label={`${ranking}위 ${name}, 구독자 ${subscriberCount}만, ${ageGroup}대, ${skinType}, 신뢰도 ${trustScore}점, ${rankChangeLabel}`}
     >
       {/* 좌측: 순위 + 프로필 */}
       <div className="flex items-center gap-3" aria-hidden="true">
         {/* 순위 번호 + 변동 */}
         <div className="flex w-[23px] flex-col items-center gap-0.5">
-          <span className="subhead-sb text-grey-black text-center">{rank}</span>
+          <span className="subhead-sb text-grey-black text-center">
+            {ranking}
+          </span>
           <div className="flex items-center gap-0.5">
             {rankChange === 'up' && (
               <ArrowUpIcon className="size-3 text-red-500" />
@@ -70,7 +59,7 @@ export const CreatorRankingUpDownRow = ({
           {/* 이름 + 유튜브 구독자 */}
           <div className="flex items-center gap-1">
             <span className="body1-sb text-grey-black whitespace-nowrap">
-              {name}
+              {nickname}
             </span>
             <div className="flex items-center gap-0.5">
               <YoutubeIcon className="size-3.5" />

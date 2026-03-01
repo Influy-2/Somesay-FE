@@ -1,7 +1,7 @@
 export type ID = number;
 export type ISODateTimeString = string;
 
-export interface Creator {
+export interface CreatorType {
   creatorId: ID; // BIGINT
   nickname: string; // VARCHAR(50)
   profileImageUrl: string; // VARCHAR(500)
@@ -9,7 +9,24 @@ export interface Creator {
   trustScore: number; // DECIMAL(5,2)
   skinType: string; // ENUM (values not provided)
   personalColor: string; // ENUM (values not provided)
-  subscriberNum: ID; // BIGINT
+  subscriberCount: number;
   ranking: number; // INT
   ageGroup: number; // INT (20, 30, 40...)
+}
+
+type RankChangeDirection = 'up' | 'down' | 'same';
+
+export interface CreatorRankingUpDownType extends Pick<
+  CreatorType,
+  | 'creatorId'
+  | 'nickname'
+  | 'profileImageUrl'
+  | 'subscriberCount'
+  | 'trustScore'
+  | 'ageGroup'
+  | 'skinType'
+  | 'ranking'
+> {
+  rankChange: RankChangeDirection;
+  rankChangeDiff: number;
 }

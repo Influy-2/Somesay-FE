@@ -1,19 +1,22 @@
 // Profile/크리에이터/기본형 컴포넌트
 import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
 import { ChipHomeProfile } from '@/shared/components';
+import { CreatorType } from '@somesay/shared';
 
-// TODO: Review Content와 통일 (추후 백엔드 연결시 수정)
-interface CreatorProfileRegularProps {
-  name: string;
-  profileImageUrl: string;
-  subscriberCount: number; // 단위: 만
-  trustScore: number;
-  ageGroup: number; // 단위: 대 (20, 30, 40...)
-  skinType: string;
-}
+type CreatorProfileRegularProps = Pick<
+  CreatorType,
+  | 'creatorId'
+  | 'nickname'
+  | 'profileImageUrl'
+  | 'subscriberCount'
+  | 'trustScore'
+  | 'ageGroup'
+  | 'skinType'
+>;
 
 export const CreatorProfileRegular = ({
-  name,
+  creatorId,
+  nickname,
   profileImageUrl,
   subscriberCount,
   trustScore,
@@ -23,7 +26,8 @@ export const CreatorProfileRegular = ({
   return (
     <div
       className="flex w-full items-center gap-2.5"
-      aria-label={`크리에이터: ${name}, 유튜브 구독자 ${subscriberCount}만, 신뢰도 ${trustScore}, ${ageGroup}대, ${skinType}`}
+      aria-label={`크리에이터: ${nickname}, 유튜브 구독자 ${subscriberCount}만, 신뢰도 ${trustScore}, ${ageGroup}대, ${skinType}`}
+      key={creatorId}
     >
       {/* 프로필 사진 */}
       <div
@@ -33,7 +37,7 @@ export const CreatorProfileRegular = ({
         <img
           className="h-full w-full object-cover"
           src={profileImageUrl}
-          alt={`${name} 프로필 사진`}
+          alt={`${nickname} 프로필 사진`}
         />
       </div>
 
@@ -44,7 +48,7 @@ export const CreatorProfileRegular = ({
       >
         {/* 이름 + 유튜브 구독자 */}
         <div className="flex items-center gap-2">
-          <span className="body1-sb shrink-0 text-black"> {name}</span>
+          <span className="body1-sb shrink-0 text-black"> {nickname}</span>
 
           <div className="text-grey08 caption2-m flex shrink-0 items-center gap-0.5">
             <YoutubeIcon />
