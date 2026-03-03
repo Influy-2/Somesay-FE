@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import { PATH } from '@/routes/path';
 
 import { HomePage } from '@/pages/home/HomePage';
+import { CategoriesPage } from '@/pages/category/CategoriesPage';
 import { GlobalLayout } from '@/shared/components';
 
 export const appRouter = createBrowserRouter([
@@ -12,6 +13,10 @@ export const appRouter = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> }, // "/" 접속 시 홈페이지 렌더링
       // ...authRoutes, 추후 추가
+      {
+        path: PATH.CATEGORIES.BASE,
+        element: <CategoriesPage />,
+      },
     ],
   },
 ]);
