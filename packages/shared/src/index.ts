@@ -8,3 +8,5 @@
 //예 export type { User, ApiResponse } from "./types/common";
 // Utils
 //예 export { formatDate, formatPrice } from "./utils/format";
+
+export * from './types/category.types';
