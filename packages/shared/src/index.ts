@@ -18,3 +18,5 @@ export type {
 
 // Utils
 //예 export { formatDate, formatPrice } from "./utils/format";
+
+export * from './types/category.types';
