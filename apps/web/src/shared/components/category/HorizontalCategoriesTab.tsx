@@ -2,19 +2,19 @@
 import cn from '@/utils/cn';
 import { CategoryType } from '@somesay/shared';
 
-interface HorizontalCategoryTabProps {
+interface HorizontalCategoriesTabProps {
   categories: CategoryType[];
   selectedId: number;
   onSelect: (id: number) => void;
   ariaLabel: string;
 }
 
-export const HorizontalCategoryTab = ({
+export const HorizontalCategoriesTab = ({
   categories,
   selectedId,
   onSelect,
   ariaLabel,
-}: HorizontalCategoryTabProps) => {
+}: HorizontalCategoriesTabProps) => {
   return (
     <div
       role="tablist"
@@ -29,7 +29,7 @@ export const HorizontalCategoryTab = ({
           aria-selected={selectedId === category.id}
           onClick={() => onSelect(category.id)}
           className={cn(
-            'flex shrink-0 items-center justify-center border border-solid px-3 py-1.5 whitespace-nowrap transition-colors',
+            'body2-m flex shrink-0 cursor-pointer items-center justify-center border border-solid px-3 py-1.5',
             selectedId === category.id
               ? 'border-black text-black'
               : 'border-grey02 text-grey06'

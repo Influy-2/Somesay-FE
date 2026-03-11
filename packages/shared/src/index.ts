@@ -9,6 +9,7 @@
 export type {
   ProductCardType,
   ProductRankingCardType,
+  ProductsByCategory,
 } from './types/product.types';
 
 export type {

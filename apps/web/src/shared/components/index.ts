@@ -23,7 +23,7 @@ export type { ReviewVoteType } from './buttons/ReviewVoteButton';
 export { ReviewVoteGroup } from './review/ReviewVoteGroup';
 
 /* category */
-export { HorizontalCategoryTab } from './category/HorizontalCategoryTab';
+export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
 
 /* product card */
 export { BasicProductCard } from './productCard/BasicProductCard';

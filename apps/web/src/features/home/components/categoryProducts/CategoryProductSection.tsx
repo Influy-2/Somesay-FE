@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
-import { HorizontalCategoryTab } from '@/shared/components/category/HorizontalCategoryTab';
-import { BasicProductCard } from '@/shared/components/productCard/BasicProductCard';
-import { ProductCardType } from '@somesay/shared';
+import { HorizontalCategoriesTab } from '@/shared/components/category/HorizontalCategoriesTab';
+import { BasicProductCard, MoreButton } from '@/shared/components';
+import { ProductCardType, ProductsByCategory } from '@somesay/shared';
 import { CategoryType } from '@somesay/shared';
 
 const CATEGORIES: CategoryType[] = [
-  { id: 0, title: '전체' },
-  { id: 1, title: '클렌징/필링' },
-  { id: 2, title: '마스크/팩' },
-  { id: 3, title: '선케어' },
-  { id: 4, title: '베이스' },
+  { id: 1, title: '전체' },
+  { id: 2, title: '클렌징/필링' },
+  { id: 3, title: '마스크/팩' },
+  { id: 4, title: '선케어' },
+  { id: 5, title: '베이스' },
 ];
 
 const MOCK_CREATORS = [
@@ -31,68 +30,87 @@ const MOCK_CREATORS = [
   },
 ];
 
-const MOCK_PRODUCTS: ProductCardType[] = [
+const MOCK_PRODUCT: ProductCardType = {
+  productId: 1,
+  imageUrl:
+    'https://www.figma.com/api/mcp/asset/7e52fcf9-84e4-4618-a738-77f71f7ec940',
+  brand: '토리든',
+  productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
+  price: 10000,
+  rating: 4.9,
+  reviewCount: 43,
+  isHearted: false,
+  creators: MOCK_CREATORS,
+};
+
+const MOCK_CATEGORY_PRODUCTS: ProductsByCategory[] = [
   {
-    productId: '1',
-    imageUrl:
-      'https://www.figma.com/api/mcp/asset/7e52fcf9-84e4-4618-a738-77f71f7ec940',
-    brand: '토리든',
-    productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
-    price: 10000,
-    rating: 4.9,
-    reviewCount: 43,
-    isHearted: false,
-    creators: MOCK_CREATORS,
+    categoryId: 1,
+    categoryTitle: '전체',
+    moreLinkPath: '/category',
+    moreLinkLabel: '스킨케어 상품 더보기',
+    products: [
+      { ...MOCK_PRODUCT, productId: 1 },
+      { ...MOCK_PRODUCT, productId: 2 },
+      { ...MOCK_PRODUCT, productId: 3 },
+      { ...MOCK_PRODUCT, productId: 4 },
+    ],
   },
   {
-    productId: '2',
-    imageUrl:
-      'https://www.figma.com/api/mcp/asset/7e52fcf9-84e4-4618-a738-77f71f7ec940',
-    brand: '토리든',
-    productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
-    price: 10000,
-    rating: 4.9,
-    reviewCount: 43,
-    isHearted: false,
-    creators: MOCK_CREATORS,
+    categoryId: 2,
+    categoryTitle: '클렌징/필링',
+    moreLinkPath: '/category/cleansing',
+    moreLinkLabel: '클렌징/필링 상품 더보기',
+    products: [
+      { ...MOCK_PRODUCT, productId: 5 },
+      { ...MOCK_PRODUCT, productId: 6 },
+    ],
   },
   {
-    productId: '3',
-    imageUrl:
-      'https://www.figma.com/api/mcp/asset/7e52fcf9-84e4-4618-a738-77f71f7ec940',
-    brand: '토리든',
-    productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
-    price: 10000,
-    rating: 4.9,
-    reviewCount: 43,
-    isHearted: false,
-    creators: MOCK_CREATORS,
+    categoryId: 3,
+    categoryTitle: '마스크/팩',
+    moreLinkPath: '/category/mask',
+    moreLinkLabel: '마스크/팩 상품 더보기',
+    products: [
+      { ...MOCK_PRODUCT, productId: 7 },
+      { ...MOCK_PRODUCT, productId: 8 },
+    ],
   },
   {
-    productId: '4',
-    imageUrl:
-      'https://www.figma.com/api/mcp/asset/7e52fcf9-84e4-4618-a738-77f71f7ec940',
-    brand: '토리든',
-    productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
-    price: 10000,
-    rating: 4.9,
-    reviewCount: 43,
-    isHearted: false,
-    creators: MOCK_CREATORS,
+    categoryId: 4,
+    categoryTitle: '선케어',
+    moreLinkPath: '/category/suncare',
+    moreLinkLabel: '선케어 상품 더보기',
+    products: [
+      { ...MOCK_PRODUCT, productId: 9 },
+      { ...MOCK_PRODUCT, productId: 10 },
+    ],
+  },
+  {
+    categoryId: 5,
+    categoryTitle: '베이스',
+    moreLinkPath: '/category/base',
+    moreLinkLabel: '베이스 상품 더보기',
+    products: [
+      { ...MOCK_PRODUCT, productId: 11 },
+      { ...MOCK_PRODUCT, productId: 12 },
+    ],
   },
 ];
 
-// 카테고리 id → 카테고리 페이지 경로 매핑 (4.2.2 기준)
-const CATEGORY_PATH_MAP: Record<string, string> = {
-  all: '/category',
-  cleansing: '/category/cleansing',
-  mask: '/category/mask',
-  suncare: '/category/suncare',
-  base: '/category/base',
-};
-
 export const CategoryProductSection = () => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+
+  const selectedCategoryProducts =
+    MOCK_CATEGORY_PRODUCTS.find(
+      (category) => category.categoryId === selectedCategoryId
+    )?.products || [];
+
+  // TODO: useMemo 사용해서 최적화...? (api 연결시 고려해보기)
+  // const selectedCategoryData = useMemo(
+  //   () => MOCK_CATEGORY_PRODUCTS.find((c) => c.categoryId === selectedCategoryId),
+  //   [selectedCategoryId]
+  // );
 
   return (
     <section
@@ -108,7 +126,7 @@ export const CategoryProductSection = () => {
 
       {/* 카테고리 탭 + 상품 그리드 */}
       <div className="flex flex-col gap-5">
-        <HorizontalCategoryTab
+        <HorizontalCategoriesTab
           categories={CATEGORIES}
           selectedId={selectedCategoryId}
           onSelect={setSelectedCategoryId}
@@ -119,9 +137,9 @@ export const CategoryProductSection = () => {
         <div
           role="list"
           aria-label="추천 상품 목록"
-          className="grid grid-cols-2 gap-x-1 gap-y-6"
+          className="grid grid-cols-2 gap-x-1 gap-y-6 pb-2"
         >
-          {MOCK_PRODUCTS.map((product) => (
+          {selectedCategoryProducts.map((product) => (
             <div key={product.productId} role="listitem">
               <BasicProductCard {...product} />
             </div>
@@ -129,13 +147,10 @@ export const CategoryProductSection = () => {
         </div>
 
         {/* 더보기 버튼 */}
-        <Link
-          to={CATEGORY_PATH_MAP[selectedCategoryId] ?? '/category'}
-          className="body2-m border-grey02 flex w-full items-center justify-center border py-3 text-black"
-          aria-label={`${CATEGORIES.find((c) => c.id === selectedCategoryId)?.title ?? '전체'} 카테고리 더보기`}
-        >
-          스킨케어 상품 더보기
-        </Link>
+        <MoreButton
+          to={'/임시'}
+          text={`${CATEGORIES.find((c) => c.id === selectedCategoryId)?.title || ''} 상품 더보기`}
+        />
       </div>
     </section>
   );
