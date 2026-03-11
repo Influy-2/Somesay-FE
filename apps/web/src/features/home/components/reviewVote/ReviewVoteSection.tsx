@@ -1,5 +1,6 @@
-import { ReviewVoteGroup } from '@/shared/components';
+import { ReviewVoteGroup, ReviewVoteType } from '@/shared/components';
 import { ProductCardThumbnail } from '@/shared/components/thumbnail/ProductCardThumbnail';
+import { useState } from 'react';
 
 const MOCK_PRODUCT_THUMBNAILS = {
   brand: '토리든',
@@ -12,9 +13,15 @@ const MOCK_PRODUCT_THUMBNAILS = {
 };
 
 const MOCK_REVIEW_CONTENT =
-  '이 제품 정말 좋아요! 제 피부에 딱 맞아서 매일 사용하고 있어요. 향도 좋고 흡수도 빠르네요. 강력 추천합니다!';
+  '패드가 얇고 에센스가 흥건해서 얼굴에 올리면 시원하게 진정되는 느낌이에요. 특히 세안 후에 볼 부분이 따갑거나 붉을 때 3분만 올려놔도 금방 가라앉아요. 향도 은은하고, 남은 에센스는 닦토처럼 써도 부담 없어요. 매일 아침 세안 후에 피부결 정돈용으로 딱 좋습니다.';
 
 export const ReviewVoteSection = () => {
+  const [selectedVote, setSelectedVote] = useState<ReviewVoteType | null>(null);
+
+  const onClickVote = (vote: ReviewVoteType) => {
+    if (selectedVote === null) setSelectedVote(vote);
+  };
+
   return (
     <section
       aria-labelledby="review-vote-title"
@@ -27,7 +34,11 @@ export const ReviewVoteSection = () => {
       </h2>
       <div className="flex w-full flex-col items-start gap-2">
         <ProductCardThumbnail {...MOCK_PRODUCT_THUMBNAILS} />
-        <ReviewVoteGroup content={MOCK_REVIEW_CONTENT} onClickVote={() => {}} />
+        <ReviewVoteGroup
+          content={MOCK_REVIEW_CONTENT}
+          onClickVote={onClickVote}
+          selectedVote={selectedVote}
+        />
       </div>
     </section>
   );
