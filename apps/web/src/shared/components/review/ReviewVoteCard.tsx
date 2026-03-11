@@ -1,17 +1,17 @@
 // Review/공감반대 컴포넌트
 import { ReviewVoteButton, ReviewVoteType } from '../buttons/ReviewVoteButton';
 
-interface ReviewVoteGroupProps {
+interface ReviewVoteCardProps {
   content: string;
   selectedVote: ReviewVoteType | null;
   onClickVote: (reaction: ReviewVoteType) => void;
 }
 
-export const ReviewVoteGroup = ({
+export const ReviewVoteCard = ({
   content,
   selectedVote,
   onClickVote,
-}: ReviewVoteGroupProps) => {
+}: ReviewVoteCardProps) => {
   return (
     <article
       aria-label="리뷰 및 리뷰 평가"

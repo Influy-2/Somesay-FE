@@ -1,4 +1,4 @@
-import { ReviewVoteGroup, ReviewVoteType } from '@/shared/components';
+import { ReviewVoteCard, ReviewVoteType } from '@/shared/components';
 import { ProductCardThumbnail } from '@/shared/components/thumbnail/ProductCardThumbnail';
 import { useState } from 'react';
 
@@ -34,7 +34,7 @@ export const ReviewVoteSection = () => {
       </h2>
       <div className="flex w-full flex-col items-start gap-2">
         <ProductCardThumbnail {...MOCK_PRODUCT_THUMBNAILS} />
-        <ReviewVoteGroup
+        <ReviewVoteCard
           content={MOCK_REVIEW_CONTENT}
           onClickVote={onClickVote}
           selectedVote={selectedVote}

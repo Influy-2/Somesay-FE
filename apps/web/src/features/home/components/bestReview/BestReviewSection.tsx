@@ -1,5 +1,4 @@
-import { ProductCardThumbnail } from '@/shared/components/thumbnail/ProductCardThumbnail';
-import { ReviewContent } from './ReviewContent';
+import { ProductCardThumbnail, CreatorReviewCard } from '@/shared/components';
 import { SummaryBox } from './SummaryBox';
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
@@ -53,7 +52,7 @@ export const BestReviewSection = () => {
         reviewCount={MOCK_PRODUCT_THUMBNAILS.reviewCount}
         imageUrl={MOCK_PRODUCT_THUMBNAILS.imageUrl}
       />
-      <ReviewContent {...MOCK_REVIEW} />
+      <CreatorReviewCard {...MOCK_REVIEW} />
       <div className="flex items-start gap-2 self-stretch">
         <SummaryBox boldText="93%" plainText="의 사용자가 공감했어요" />
         <SummaryBox boldText="건성" plainText="사용자가 가장 많이 공감했어요" />

@@ -21,7 +21,8 @@ export { ReviewVoteButton } from './buttons/ReviewVoteButton';
 export type { ReviewVoteType } from './buttons/ReviewVoteButton';
 
 /* review */
-export { ReviewVoteGroup } from './review/ReviewVoteGroup';
+export { ReviewVoteCard } from './review/ReviewVoteCard';
+export { CreatorReviewCard } from './review/CreatorReviewCard';
 
 /* category */
 export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';

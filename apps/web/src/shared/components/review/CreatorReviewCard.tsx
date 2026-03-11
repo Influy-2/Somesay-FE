@@ -1,21 +1,21 @@
+// Review/크리에이터 프로필 공개 컴포넌트
 import { BasicCreatorProfile } from '@/shared/components';
-
 import Star16Icon from '@/shared/icons/Star16Icon.svg?react';
 import { BasicCreatorProfileType } from '@somesay/shared';
 
-interface ReviewContentProps {
+interface CreatorReviewCardProps {
   creator: BasicCreatorProfileType;
   rating: number;
   content: string;
   productName: string;
 }
 
-export const ReviewContent = ({
+export const CreatorReviewCard = ({
   rating,
   content,
   productName,
   creator,
-}: ReviewContentProps) => {
+}: CreatorReviewCardProps) => {
   return (
     <article
       aria-label={`${creator.nickname}의 ${productName} 리뷰`}
