@@ -16,3 +16,8 @@ export { CreatorRankingUpDownRow } from './profile/CreatorRankingUpDownRow';
 /* buttons */
 export { WhiteHeartButton } from './buttons/HeartButton';
 export { MoreButton } from './buttons/MoreButton';
+export { ReviewVoteButton } from './buttons/ReviewVoteButton';
+export type { ReviewVoteType } from './buttons/ReviewVoteButton';
+
+/* review */
+export { ReviewVoteGroup } from './review/ReviewVoteGroup';

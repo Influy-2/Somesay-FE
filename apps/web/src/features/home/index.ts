@@ -5,3 +5,5 @@ export { BestReviewSection } from './components/bestReview/BestReviewSection';
 export { ProductRankingSection } from './components/productRanking/ProductRankingSection';
 
 export { CreatorRankingSection } from './components/creatorRanking/CreatorRankingSection';
+
+export { ReviewVoteSection } from './components/reviewVote/ReviewVoteSection';
