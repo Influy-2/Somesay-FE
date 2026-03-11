@@ -23,7 +23,7 @@ export const CreatorReviewCard = ({
     >
       <BasicCreatorProfile {...creator} />
       <div
-        className="flex w-full flex-col items-start gap-3"
+        className="flex w-full flex-col items-start gap-1"
         aria-label={`별점 ${rating}점. ${content}`}
       >
         {/* 별점 */}
