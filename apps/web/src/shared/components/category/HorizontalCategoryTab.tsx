@@ -1,15 +1,11 @@
 // 1.5 상품 목록의 카테고리 탭 컴포넌트
 import cn from '@/utils/cn';
-
-export type CategoryType = {
-  id: string;
-  label: string;
-};
+import { CategoryType } from '@somesay/shared';
 
 interface HorizontalCategoryTabProps {
   categories: CategoryType[];
-  selectedId: string;
-  onSelect: (id: string) => void;
+  selectedId: number;
+  onSelect: (id: number) => void;
   ariaLabel: string;
 }
 
@@ -39,7 +35,7 @@ export const HorizontalCategoryTab = ({
               : 'border-grey02 text-grey06'
           )}
         >
-          {category.label}
+          {category.title}
         </button>
       ))}
     </div>

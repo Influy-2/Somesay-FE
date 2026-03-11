@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import {
-  HorizontalCategoryTab,
-  CategoryType,
-} from '@/shared/components/category/HorizontalCategoryTab';
+import { HorizontalCategoryTab } from '@/shared/components/category/HorizontalCategoryTab';
 import { BasicProductCard } from '@/shared/components/productCard/BasicProductCard';
 import { ProductCardType } from '@somesay/shared';
+import { CategoryType } from '@somesay/shared';
 
 const CATEGORIES: CategoryType[] = [
-  { id: 'all', label: '전체' },
-  { id: 'cleansing', label: '클렌징/필링' },
-  { id: 'mask', label: '마스크/팩' },
-  { id: 'suncare', label: '선케어' },
-  { id: 'base', label: '베이스' },
+  { id: 0, title: '전체' },
+  { id: 1, title: '클렌징/필링' },
+  { id: 2, title: '마스크/팩' },
+  { id: 3, title: '선케어' },
+  { id: 4, title: '베이스' },
 ];
 
 const MOCK_CREATORS = [
@@ -94,7 +92,7 @@ const CATEGORY_PATH_MAP: Record<string, string> = {
 };
 
 export const CategoryProductSection = () => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState('all');
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
 
   return (
     <section
@@ -134,7 +132,7 @@ export const CategoryProductSection = () => {
         <Link
           to={CATEGORY_PATH_MAP[selectedCategoryId] ?? '/category'}
           className="body2-m border-grey02 flex w-full items-center justify-center border py-3 text-black"
-          aria-label={`${CATEGORIES.find((c) => c.id === selectedCategoryId)?.label ?? '전체'} 카테고리 더보기`}
+          aria-label={`${CATEGORIES.find((c) => c.id === selectedCategoryId)?.title ?? '전체'} 카테고리 더보기`}
         >
           스킨케어 상품 더보기
         </Link>
