@@ -7,3 +7,5 @@ export { ProductRankingSection } from './components/productRanking/ProductRankin
 export { CreatorRankingSection } from './components/creatorRanking/CreatorRankingSection';
 
 export { ReviewVoteSection } from './components/reviewVote/ReviewVoteSection';
+
+export { CategoryProductSection } from './components/categoryProducts/CategoryProductSection';

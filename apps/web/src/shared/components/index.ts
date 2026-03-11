@@ -21,3 +21,10 @@ export type { ReviewVoteType } from './buttons/ReviewVoteButton';
 
 /* review */
 export { ReviewVoteGroup } from './review/ReviewVoteGroup';
+
+/* category */
+export { HorizontalCategoryTab } from './category/HorizontalCategoryTab';
+export type { CategoryType } from './category/HorizontalCategoryTab';
+
+/* product card */
+export { BasicProductCard } from './productCard/BasicProductCard';

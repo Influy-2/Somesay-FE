@@ -5,6 +5,7 @@ import {
   ProductRankingSection,
   CreatorRankingSection,
   ReviewVoteSection,
+  CategoryProductSection,
 } from '@/features/home';
 export const HomePage = () => {
   return (
@@ -18,6 +19,7 @@ export const HomePage = () => {
 
       <CreatorRankingSection />
       <ReviewVoteSection />
+      <CategoryProductSection />
     </div>
   );
 };

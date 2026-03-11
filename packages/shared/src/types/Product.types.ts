@@ -17,3 +17,11 @@ export interface ProductCardType {
 export interface ProductRankingCardType extends ProductCardType {
   rank: number;
 }
+
+export type ProductsByCategory = {
+  id: string;
+  label: string; // 카테고리 텍스트 "클렌징/필링"
+  moreLinkPath: string; // 더보기 링크 "/category/cleansing"
+  moreLinkLabel: string; // 더보기 버튼 텍스트 "클렌징/필링 상품 더보기"
+  products: ProductCardType[];
+};
