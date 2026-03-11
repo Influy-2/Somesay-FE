@@ -3,7 +3,7 @@ import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
 import { ChipHomeProfile } from '@/shared/components';
 import { CreatorType } from '@somesay/shared';
 
-type CreatorProfileRegularProps = Pick<
+type BasicCreatorProfileProps = Pick<
   CreatorType,
   | 'creatorId'
   | 'nickname'
@@ -14,7 +14,7 @@ type CreatorProfileRegularProps = Pick<
   | 'skinType'
 >;
 
-export const CreatorProfileRegular = ({
+export const BasicCreatorProfile = ({
   creatorId,
   nickname,
   profileImageUrl,
@@ -22,7 +22,7 @@ export const CreatorProfileRegular = ({
   trustScore,
   ageGroup,
   skinType,
-}: CreatorProfileRegularProps) => {
+}: BasicCreatorProfileProps) => {
   return (
     <div
       className="flex w-full items-center gap-2.5"

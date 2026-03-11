@@ -10,7 +10,7 @@ export { ChipBasic } from './chips/ChipBasic';
 export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 
 /* profile */
-export { CreatorProfileRegular } from './profile/CreatorProfileRegular';
+export { BasicCreatorProfile } from './profile/BasicCreatorProfile';
 export { CreatorRankingUpDownRow } from './profile/CreatorRankingUpDownRow';
 
 /* buttons */
