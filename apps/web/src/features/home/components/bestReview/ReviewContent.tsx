@@ -1,16 +1,10 @@
-import { CreatorProfileRegular } from '@/shared/components';
-import Star16Icon from '@/shared/icons/Star16Icon.svg?react';
+import { BasicCreatorProfile } from '@/shared/components';
 
-// TODO: CreatorProfileRegular와 통일 (추후 백엔드 연결시 수정)
+import Star16Icon from '@/shared/icons/Star16Icon.svg?react';
+import { BasicCreatorProfileType } from '@somesay/shared';
+
 interface ReviewContentProps {
-  creator: {
-    name: string;
-    profileImageUrl: string;
-    subscriberCount: number;
-    trustScore: number;
-    ageGroup: number;
-    skinType: string;
-  };
+  creator: BasicCreatorProfileType;
   rating: number;
   content: string;
   productName: string;
@@ -24,10 +18,10 @@ export const ReviewContent = ({
 }: ReviewContentProps) => {
   return (
     <article
-      aria-label={`${creator.name}의 ${productName} 리뷰`}
+      aria-label={`${creator.nickname}의 ${productName} 리뷰`}
       className="border-grey03 bg-grey01 flex w-full flex-col items-start gap-5 border border-solid p-5 px-4"
     >
-      <CreatorProfileRegular {...creator} />
+      <BasicCreatorProfile {...creator} />
       <div
         className="flex w-full flex-col items-start gap-3"
         aria-label={`별점 ${rating}점. ${content}`}
@@ -40,6 +34,8 @@ export const ReviewContent = ({
           </div>
           <span className="body2-sb text-[#1F2129]">{rating}</span>
         </div>
+
+        {/* 리뷰 내용 */}
         <p aria-hidden="true" className="body2-m text-[#1F2129]">
           {content}
         </p>

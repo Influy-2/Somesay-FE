@@ -1,6 +1,9 @@
 import { ProductCardThumbnail } from '@/shared/components/thumbnail/ProductCardThumbnail';
 import { ReviewContent } from './ReviewContent';
 import { SummaryBox } from './SummaryBox';
+import mockProfileImg from '@/assets/mock_profile_img.svg';
+import mockProductImg from '@/assets/mock_product_img.png';
+
 //임시
 const skinType = '';
 
@@ -10,13 +13,12 @@ const MOCK_PRODUCT_THUMBNAILS = {
   price: 10000,
   rating: 4.9,
   reviewCount: 1123,
-  imageUrl:
-    'https://www.figma.com/api/mcp/asset/91dd6a94-e9c4-480c-8452-3d916c193bb2',
+  imageUrl: mockProductImg,
 };
 const MOCK_CREATOR = {
-  name: '김점례',
-  profileImageUrl:
-    'https://www.figma.com/api/mcp/asset/39939f4d-3d38-45bb-bb23-dfce01aa3736',
+  creatorId: 1,
+  nickname: '김점례',
+  profileImageUrl: mockProfileImg,
   subscriberCount: 30,
   trustScore: 100,
   ageGroup: 20,

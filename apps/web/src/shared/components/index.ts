@@ -11,6 +11,7 @@ export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 
 /* profile */
 export { BasicCreatorProfile } from './profile/BasicCreatorProfile';
+
 export { CreatorRankingUpDownRow } from './profile/CreatorRankingUpDownRow';
 
 /* buttons */

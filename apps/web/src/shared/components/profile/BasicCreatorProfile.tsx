@@ -1,18 +1,9 @@
 // Profile/크리에이터/기본형 컴포넌트
 import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
 import { ChipHomeProfile } from '@/shared/components';
-import { CreatorType } from '@somesay/shared';
+import { BasicCreatorProfileType } from '@somesay/shared';
 
-type BasicCreatorProfileProps = Pick<
-  CreatorType,
-  | 'creatorId'
-  | 'nickname'
-  | 'profileImageUrl'
-  | 'subscriberCount'
-  | 'trustScore'
-  | 'ageGroup'
-  | 'skinType'
->;
+type BasicCreatorProfileProps = BasicCreatorProfileType;
 
 export const BasicCreatorProfile = ({
   creatorId,

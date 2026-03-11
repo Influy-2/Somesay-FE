@@ -15,6 +15,7 @@ export type {
 export type {
   CreatorType,
   CreatorRankingUpDownType,
+  BasicCreatorProfileType,
 } from './types/creator.types';
 
 // Utils

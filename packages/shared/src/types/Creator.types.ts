@@ -30,3 +30,14 @@ export interface CreatorRankingUpDownType extends Pick<
   rankChange: RankChangeDirection;
   rankChangeDiff: number;
 }
+
+export type BasicCreatorProfileType = Pick<
+  CreatorType,
+  | 'creatorId'
+  | 'nickname'
+  | 'profileImageUrl'
+  | 'subscriberCount'
+  | 'trustScore'
+  | 'ageGroup'
+  | 'skinType'
+>;
