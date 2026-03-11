@@ -43,7 +43,7 @@ export const BasicCreatorProfile = ({
 
           <div className="text-grey08 caption2-m flex shrink-0 items-center gap-0.5">
             <YoutubeIcon />
-            {subscriberCount}
+            {subscriberCount}만
           </div>
         </div>
 

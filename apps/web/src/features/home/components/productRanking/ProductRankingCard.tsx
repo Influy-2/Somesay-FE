@@ -2,6 +2,7 @@ import StarIcon from '@/shared/icons/Star16Icon.svg?react';
 import { Link } from 'react-router';
 import { ProductRankingCardType } from '@somesay/shared';
 import { WhiteHeartButton } from '@/shared/components';
+
 type ProductRankingCardProps = ProductRankingCardType;
 
 export const ProductRankingCard = ({
