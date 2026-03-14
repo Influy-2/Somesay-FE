@@ -3,7 +3,6 @@ export { default as GlobalLayout } from './layout/GlobalLayout';
 
 /* chips */
 export { ChipLarge } from './chips/ChipLarge';
-export { ChipHomeProfile } from './chips/ChipHomeProfile';
 export { ChipBasic } from './chips/ChipBasic';
 
 /* thumbnail */
