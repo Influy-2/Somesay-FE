@@ -55,8 +55,8 @@ export const BasicCreatorProfile = ({
           </p>
 
           <div className="flex items-center gap-1 p-0">
-            <ChipBasic label={`${ageGroup}대`} key={0} bgColor="grey03" />
-            <ChipBasic label={skinType} key={1} bgColor="grey03" />
+            <ChipBasic label={`${ageGroup}대`} bgColor="grey03" />
+            <ChipBasic label={skinType} bgColor="grey03" />
           </div>
         </div>
       </div>
