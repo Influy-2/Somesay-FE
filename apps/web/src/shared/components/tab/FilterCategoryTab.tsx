@@ -1,34 +1,34 @@
 import cn from '@/utils/cn';
 
-interface FilterCategoryTabItem<T extends string> {
-  key: T;
+interface FilterCategoryTabItem {
+  filterId: number;
   label: string;
 }
 
-interface FilterCategoryTabProps<T extends string> {
-  categories: FilterCategoryTabItem<T>[];
-  activeCategory: T;
-  onCategoryChange: (category: T) => void;
+interface FilterCategoryTabProps {
+  categories: FilterCategoryTabItem[];
+  activeCategory: number;
+  onCategoryChange: (category: number) => void;
 }
 
-export const FilterCategoryTab = <T extends string>({
+export const FilterCategoryTab = ({
   categories,
   activeCategory,
   onCategoryChange,
-}: FilterCategoryTabProps<T>) => {
+}: FilterCategoryTabProps) => {
   return (
     <div
       className={cn(
-        'border-grey01 flex w-full shrink-0 items-center gap-[.625rem] border-b-2 pl-4'
+        'border-grey01 flex w-full shrink-0 items-center gap-2.5 border-b-2 pl-4'
       )}
     >
       {categories.map((category) => {
-        const isActive = category.key === activeCategory;
+        const isActive = category.filterId === activeCategory;
         return (
           <button
-            key={category.key}
+            key={category.filterId}
             type="button"
-            onClick={() => onCategoryChange(category.key)}
+            onClick={() => onCategoryChange(category.filterId)}
             className={cn(
               'body2-m -mb-[.125rem] flex shrink-0 items-center justify-center border-b-2 px-1 py-2',
               isActive
