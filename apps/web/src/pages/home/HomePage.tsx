@@ -1,10 +1,25 @@
-import MainArrowIcon from '@/shared/icons/MainArrowIcon.svg?react';
-import cn from '@/utils/cn';
+// import cn from '@/utils/cn';
+import {
+  RecommendationSection,
+  BestReviewSection,
+  ProductRankingSection,
+  CreatorRankingSection,
+  ReviewVoteSection,
+  CategoryProductSection,
+} from '@/features/home';
 export const HomePage = () => {
   return (
-    <div className={cn('flex')}>
-      홈페이지
-      <MainArrowIcon />
+    <div className="inline-flex w-full flex-col items-center gap-17 pt-[4.875rem] pb-[175px]">
+      <RecommendationSection />
+      <div className="flex h-[7.3125rem] w-full items-center justify-center gap-2.5 p-2.5 text-black [background:var(--grey-03,#E4E2DF)]">
+        베너 임시
+      </div>
+      <BestReviewSection />
+      <ProductRankingSection />
+
+      <CreatorRankingSection />
+      <ReviewVoteSection />
+      <CategoryProductSection />
     </div>
   );
 };
