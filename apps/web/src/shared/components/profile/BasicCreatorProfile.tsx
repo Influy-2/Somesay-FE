@@ -1,6 +1,6 @@
 // Profile/크리에이터/기본형 컴포넌트
 import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
-import { ChipHomeProfile } from '@/shared/components';
+import { ChipBasic } from '@/shared/components';
 import { BasicCreatorProfileType } from '@somesay/shared';
 
 type BasicCreatorProfileProps = BasicCreatorProfileType;
@@ -55,8 +55,8 @@ export const BasicCreatorProfile = ({
           </p>
 
           <div className="flex items-center gap-1 p-0">
-            <ChipHomeProfile label={`${ageGroup}대`} />
-            <ChipHomeProfile label={skinType} />
+            <ChipBasic label={`${ageGroup}대`} bgColor="grey03" />
+            <ChipBasic label={skinType} bgColor="grey03" />
           </div>
         </div>
       </div>
