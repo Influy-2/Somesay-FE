@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { SearchResultsCard } from '@/shared/components/productCard/SearchResultsCard';
+import { SearchResultsProductCard } from '@/shared/components';
 import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
 
-interface ProductListProps {
+interface SubcategoryProductListProps {
   categoryId: number;
   selectedSubCategoryId: number;
 }
 
-export function ProductList({
+export function SubcategoryProductList({
   categoryId,
   selectedSubCategoryId,
-}: ProductListProps) {
+}: SubcategoryProductListProps) {
   const [products, setProducts] = useState(MOCK_SUBCATEGORY_PRODUCTS);
 
   const filteredProducts =
@@ -36,7 +36,7 @@ export function ProductList({
       aria-atomic="false"
     >
       {filteredProducts.map((product) => (
-        <SearchResultsCard
+        <SearchResultsProductCard
           key={product.productId}
           product={product}
           onHeartToggle={handleHeartToggle}

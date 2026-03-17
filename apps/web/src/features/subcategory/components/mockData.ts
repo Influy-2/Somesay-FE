@@ -1,18 +1,10 @@
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
+import { ProductCardType } from '@somesay/shared';
 
-export interface SubCategoryProductType {
-  productId: number;
+export interface SubcategoryProductType extends ProductCardType {
   categoryId: number;
   subCategoryId: number;
-  imageUrl: string;
-  brand: string;
-  productName: string;
-  price: number;
-  rating: number;
-  reviewCount: number;
-  isHearted: boolean;
-  creators: { name: string; profileImageUrl: string }[];
   reviewSummary: string;
   skinTypes: string[];
   expectedEffects: string[];
@@ -33,7 +25,7 @@ const MOCK_CREATORS = [
   },
 ];
 
-const MOCK_SUBCATEGORY_PRODUCT: SubCategoryProductType = {
+const MOCK_SUBCATEGORY_PRODUCT: SubcategoryProductType = {
   productId: 1,
   categoryId: 1,
   subCategoryId: 1,
@@ -58,7 +50,7 @@ const MOCK_SUBCATEGORY_PRODUCT: SubCategoryProductType = {
   ],
 };
 
-export const MOCK_SUBCATEGORY_PRODUCTS: SubCategoryProductType[] = [
+export const MOCK_SUBCATEGORY_PRODUCTS: SubcategoryProductType[] = [
   {
     ...MOCK_SUBCATEGORY_PRODUCT,
     productId: 1,
