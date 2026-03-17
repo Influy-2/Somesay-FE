@@ -2,11 +2,11 @@ import ArrowBackIcon from '@/shared/icons/ArrowBackIcon.svg?react';
 import SearchIcon from '@/shared/icons/SearchIcon.svg?react';
 import { useNavigate, Link } from 'react-router';
 
-interface SubCategoryHeaderProps {
+interface SubcategoryHeaderProps {
   title: string;
 }
 
-export function SubCategoryHeader({ title }: SubCategoryHeaderProps) {
+export function SubcategoryHeader({ title }: SubcategoryHeaderProps) {
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);

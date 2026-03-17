@@ -3,11 +3,11 @@ import { useSearchParams } from 'react-router';
 import { SortBottomSheet, SORT_OPTIONS } from './SortBottomSheet';
 import ToggleDownIcon from '@/shared/icons/ToggleDownIcon.svg?react';
 
-interface SubCategorySortBarProps {
+interface SubcategorySortBarProps {
   productCount: number;
 }
 
-export function SubCategorySortBar({ productCount }: SubCategorySortBarProps) {
+export function SubcategorySortBar({ productCount }: SubcategorySortBarProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
