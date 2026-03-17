@@ -11,3 +11,5 @@ export type {
 } from './types/creator.types';
 
 export * from './types/category.types';
+
+export * from './constants/cosmetics.constants';

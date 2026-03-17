@@ -9,9 +9,8 @@ export interface CategoryType {
   subCategories?: SubCategoryType[];
 }
 
-export type FilterCategoryType = 'skinConcern' | 'skinType' | 'productCategory';
+export type FilterCategory = 'skinConcern' | 'skinType' | 'productCategory';
 
-// 피부 고민 (최대 2개)
 export type SkinConcern =
   | '보습'
   | '속건조'
@@ -26,7 +25,6 @@ export type SkinConcern =
   | '피부장벽'
   | '흔적';
 
-// 피부 타입 (최대 1개)
 export type SkinType =
   | '건성'
   | '지성'
@@ -36,8 +34,8 @@ export type SkinType =
   | '여드름성'
   | '모르겠음';
 
-// 제품군 소분류
 export type ProductSubCategory =
+  | '전체'
   // 스킨케어
   | '스킨/토너'
   | '로션/에멀전'
@@ -63,11 +61,28 @@ export type ProductSubCategory =
   | '쿠션'
   | '파운데이션';
 
-// 제품군 선택값: '전체' 또는 소분류 중 하나
-export type ProductCategoryValue = '전체' | ProductSubCategory;
-
 export interface ProductFilterState {
   skinConcerns: SkinConcern[];
   skinType: SkinType | null;
-  productCategory: ProductCategoryValue | null;
+  productCategory: ProductSubCategory | null;
+}
+
+export interface SkinConcernOption {
+  skinConcernId: number;
+  label: SkinConcern;
+}
+
+export interface SkinTypeOption {
+  skinTypeId: number;
+  label: SkinType;
+}
+
+export interface ProductSubCategoryItem {
+  subCategoryId: number;
+  label: ProductSubCategory;
+}
+
+export interface ProductSubCategoryGroup {
+  categoryLabel: string;
+  subcategories: ProductSubCategoryItem[];
 }
