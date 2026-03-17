@@ -1,8 +1,5 @@
-export type ID = number;
-export type ISODateTimeString = string;
-
 export interface CreatorType {
-  creatorId: ID; // BIGINT
+  creatorId: number; // BIGINT
   nickname: string; // VARCHAR(50)
   profileImageUrl: string; // VARCHAR(500)
   youtubeLink: string; // VARCHAR(500)
