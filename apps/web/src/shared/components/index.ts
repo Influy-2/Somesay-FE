@@ -28,3 +28,4 @@ export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
 
 /* product card */
 export { BasicProductCard } from './productCard/BasicProductCard';
+export { SearchResultsProductCard } from './productCard/SearchResultsProductCard';
