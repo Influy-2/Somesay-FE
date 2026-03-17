@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
 import {
-  SubCategoryHeader,
-  SubCategorySortBar,
-  ProductList,
+  SubcategoryProductList,
+  SubcategoryHeader,
+  SubcategorySortBar,
 } from '@/features/subcategory';
 import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
-import { HorizontalCategoriesTab } from '@/shared/components/category/HorizontalCategoriesTab';
+import { HorizontalCategoriesTab } from '@/shared/components';
 
 const CATEGORY_MOCK_DATA = [
   {
@@ -31,12 +31,11 @@ const CATEGORY_MOCK_DATA = [
 ];
 
 export const SubCategoriesPage = () => {
-  const { categoryId } = useParams();
+  const { categoryId: categoryIdParam } = useParams();
+  const categoryId = Number(categoryIdParam);
   const [selectedId, setSelectedId] = useState(0);
 
-  const currentCategory = CATEGORY_MOCK_DATA.find(
-    (c) => c.id === Number(categoryId)
-  );
+  const currentCategory = CATEGORY_MOCK_DATA.find((c) => c.id === categoryId);
   const categoryTitle = currentCategory?.title ?? '';
 
   const tabCategories = [
@@ -49,17 +48,15 @@ export const SubCategoriesPage = () => {
 
   const filteredCount =
     selectedId === 0
-      ? MOCK_SUBCATEGORY_PRODUCTS.filter(
-          (p) => p.categoryId === Number(categoryId)
-        ).length
+      ? MOCK_SUBCATEGORY_PRODUCTS.filter((p) => p.categoryId === categoryId)
+          .length
       : MOCK_SUBCATEGORY_PRODUCTS.filter((p) => p.subCategoryId === selectedId)
           .length;
 
   return (
     <div className="min-dvh-screen flex flex-col bg-white">
-      <SubCategoryHeader title={currentCategory?.title ?? ''} />
-      <div className="pt-5" />
-      <div className="px-4">
+      <SubcategoryHeader title={currentCategory?.title ?? ''} />
+      <div className="mt-5 px-4">
         <HorizontalCategoriesTab
           categories={tabCategories}
           selectedId={selectedId}
@@ -68,10 +65,10 @@ export const SubCategoriesPage = () => {
         />
       </div>
       <div className="pt-4" />
-      <SubCategorySortBar productCount={filteredCount} />
+      <SubcategorySortBar productCount={filteredCount} />
       <div className="pt-6" />
-      <ProductList
-        categoryId={Number(categoryId)}
+      <SubcategoryProductList
+        categoryId={categoryId}
         selectedSubCategoryId={selectedId}
       />
     </div>
