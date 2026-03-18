@@ -6,7 +6,7 @@ interface SubcategoryHeaderProps {
   title: string;
 }
 
-export function SubcategoryHeader({ title }: SubcategoryHeaderProps) {
+export const SubcategoryHeader = ({ title }: SubcategoryHeaderProps) => {
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
@@ -24,4 +24,4 @@ export function SubcategoryHeader({ title }: SubcategoryHeaderProps) {
       </Link>
     </header>
   );
-}
+};

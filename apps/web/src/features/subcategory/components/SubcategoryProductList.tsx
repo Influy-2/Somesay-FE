@@ -7,10 +7,10 @@ interface SubcategoryProductListProps {
   selectedSubCategoryId: number;
 }
 
-export function SubcategoryProductList({
+export const SubcategoryProductList = ({
   categoryId,
   selectedSubCategoryId,
-}: SubcategoryProductListProps) {
+}: SubcategoryProductListProps) => {
   const [products, setProducts] = useState(MOCK_SUBCATEGORY_PRODUCTS);
 
   const filteredProducts =
@@ -44,4 +44,4 @@ export function SubcategoryProductList({
       ))}
     </section>
   );
-}
+};

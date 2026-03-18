@@ -7,7 +7,9 @@ interface SubcategorySortBarProps {
   productCount: number;
 }
 
-export function SubcategorySortBar({ productCount }: SubcategorySortBarProps) {
+export const SubcategorySortBar = ({
+  productCount,
+}: SubcategorySortBarProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -52,4 +54,4 @@ export function SubcategorySortBar({ productCount }: SubcategorySortBarProps) {
       />
     </>
   );
-}
+};

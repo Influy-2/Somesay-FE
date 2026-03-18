@@ -9,10 +9,10 @@ interface SearchResultsProductCardProps {
   onHeartToggle: (productId: number) => void;
 }
 
-export function SearchResultsProductCard({
+export const SearchResultsProductCard = ({
   product,
   onHeartToggle,
-}: SearchResultsProductCardProps) {
+}: SearchResultsProductCardProps) => {
   return (
     <article
       className="flex flex-col gap-5 border-b border-gray-200 px-4 pb-6"
@@ -108,4 +108,4 @@ export function SearchResultsProductCard({
       </div>
     </article>
   );
-}
+};

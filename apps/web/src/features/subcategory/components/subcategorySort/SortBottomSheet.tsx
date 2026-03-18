@@ -11,12 +11,12 @@ export const SORT_OPTIONS = [
   { value: 'price_low', label: '가격 낮은 순' },
 ];
 
-export function SortBottomSheet({
+export const SortBottomSheet = ({
   isOpen,
   onClose,
   currentSortValue,
   onSelectSort,
-}: SortBottomSheetProps) {
+}: SortBottomSheetProps) => {
   if (!isOpen) return null;
 
   return (
@@ -55,4 +55,4 @@ export function SortBottomSheet({
       </div>
     </div>
   );
-}
+};
