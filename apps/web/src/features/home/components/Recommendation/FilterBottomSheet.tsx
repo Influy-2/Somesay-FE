@@ -60,7 +60,7 @@ export const FilterBottomSheet = ({
     >
       <div className="flex h-full w-full flex-col items-center justify-between">
         {/* 상단 콘텐츠 영역 */}
-        <div className="flex w-full flex-col items-start gap-5">
+        <div className="scrollbar-hide flex w-full flex-1 flex-col items-start gap-5 overflow-y-auto">
           {/* 카테고리 탭 */}
           <FilterCategoryTab
             categories={FILTER_CATEGORIES}
