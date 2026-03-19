@@ -5,10 +5,12 @@ interface TypeRowProps {
   rowTitle: string;
   selectedFilters: string[];
   onPress: () => void;
+  category: string;
 }
 
 export const TypeRow = ({
   rowTitle,
+  category,
   selectedFilters,
   onPress,
 }: TypeRowProps) => {
@@ -31,7 +33,17 @@ export const TypeRow = ({
       <div className="flex flex-1 items-center gap-3">
         <div className="flex flex-1 flex-wrap items-center justify-end gap-2">
           {selectedFilters.map((item) => (
-            <ChipLarge key={item} label={item} />
+            <ChipLarge
+              key={item}
+              label={item}
+              bgColor={
+                category === 'skinConcern'
+                  ? 'bg-[#A9A9A9]'
+                  : category === 'skinType'
+                    ? 'bg-grey05'
+                    : 'bg-[#D9D9D9]'
+              }
+            />
           ))}
         </div>
 

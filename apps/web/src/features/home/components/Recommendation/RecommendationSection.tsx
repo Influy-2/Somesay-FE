@@ -58,6 +58,7 @@ export const RecommendationSection = () => {
             {FILTER_CATEGORIES.map(({ category, label }) => (
               <TypeRow
                 key={category}
+                category={category}
                 rowTitle={label}
                 selectedFilters={getSelectedLabel(category)}
                 onPress={() => handleOpenBottomSheet(category)}
