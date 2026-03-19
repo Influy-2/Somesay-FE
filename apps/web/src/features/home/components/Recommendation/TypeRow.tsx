@@ -31,7 +31,7 @@ export const TypeRow = ({
         {rowTitle}
       </span>
       <div className="flex flex-1 items-center gap-3">
-        <div className="flex flex-1 flex-wrap items-center justify-end gap-2">
+        <div className="flex h-7.25 flex-1 flex-wrap items-center justify-end gap-2">
           {selectedFilters.map((item) => (
             <ChipLarge
               key={item}
