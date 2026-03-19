@@ -1,8 +1,5 @@
 import cn from '@/utils/cn';
-// import { ProductCategoryOptions } from './ProductCategoryOptions';
-// import { SkinConcernOptions } from './SkinConcernOptions';
-// import { SkinTypeOptions } from './SkinTypeOptions';
-import { FILTER_CATEGORIES } from './filter.constants';
+import { FILTER_CATEGORIES, MAX_SELECTIONS } from './filter.constants';
 import { BottomSheet, FilterChip } from '@/shared/components';
 import type { FilterCategoryType, SelectedFiltersType } from './filter.types';
 import { FilterCategoryTab } from '@/shared/components/tab/FilterCategoryTab';
@@ -41,12 +38,18 @@ export const FilterBottomSheet = ({
     setSelectedFilters((prev) => {
       const current = prev[activeCategory];
       const exists = (current as unknown[]).includes(item);
-      return {
-        ...prev,
-        [activeCategory]: exists
-          ? current.filter((value) => value !== item)
-          : [...current, item],
-      };
+      const max = MAX_SELECTIONS[activeCategory];
+
+      if (exists) {
+        return { ...prev, [activeCategory]: current.filter((v) => v !== item) };
+      }
+      if (max === 1) {
+        return { ...prev, [activeCategory]: [item] };
+      }
+      if (current.length >= max) {
+        return prev;
+      }
+      return { ...prev, [activeCategory]: [...current, item] };
     });
   };
 
@@ -67,10 +70,12 @@ export const FilterBottomSheet = ({
           />
 
           {/* 옵션 선택 영역 */}
-          <div className="w-full">
+          <div className="w-full pb-[3.3125rem]">
             {activeCategory === 'skinConcern' && (
               <div className="flex flex-col items-start gap-3 px-4">
-                <p className="body2-m text-grey06">최대 2개 선택</p>
+                <p className="body2-m text-grey06">
+                  최대 {MAX_SELECTIONS.skinConcern}개 선택
+                </p>
                 <div
                   className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch"
                   role="group"
@@ -89,7 +94,9 @@ export const FilterBottomSheet = ({
             )}
             {activeCategory === 'skinType' && (
               <div className="flex flex-col items-start gap-3 px-4">
-                <p className="body2-m text-grey06">최대 1개 선택</p>
+                <p className="body2-m text-grey06">
+                  최대 {MAX_SELECTIONS.skinType}개 선택
+                </p>
                 <div
                   className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch"
                   role="group"
@@ -108,7 +115,9 @@ export const FilterBottomSheet = ({
             )}
             {activeCategory === 'productCategory' && (
               <div className="flex flex-col items-start gap-3 px-4">
-                <p className="body2-m text-grey06">최대 1개 선택</p>
+                <p className="body2-m text-grey06">
+                  최대 {MAX_SELECTIONS.productCategory}개 선택
+                </p>
                 <div
                   className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch"
                   role="group"

@@ -13,3 +13,8 @@ export const INITIAL_FILTERS: SelectedFiltersType = {
   skinType: [],
   productCategory: [],
 };
+export const MAX_SELECTIONS: Record<FilterCategoryType, number> = {
+  skinConcern: 2,
+  skinType: 1,
+  productCategory: 1,
+};
