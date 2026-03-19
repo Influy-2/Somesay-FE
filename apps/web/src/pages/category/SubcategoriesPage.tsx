@@ -12,7 +12,7 @@ const CATEGORY_MOCK_DATA = [
   {
     id: 1,
     title: '스킨케어',
-    subCategories: [
+    subcategories: [
       { id: 101, name: '스킨/토너' },
       { id: 102, name: '로션/에멀전' },
       { id: 103, name: '에센스/앰플/세럼' },
@@ -23,14 +23,14 @@ const CATEGORY_MOCK_DATA = [
   {
     id: 2,
     title: '클렌징',
-    subCategories: [
+    subcategories: [
       { id: 201, name: '클렌징 폼' },
       { id: 202, name: '클렌징 오일' },
     ],
   },
 ];
 
-export const SubCategoriesPage = () => {
+export const SubcategoriesPage = () => {
   const { categoryId: categoryIdParam } = useParams();
   const categoryId = Number(categoryIdParam);
   const [selectedId, setSelectedId] = useState(0);
@@ -40,7 +40,7 @@ export const SubCategoriesPage = () => {
 
   const tabCategories = [
     { id: 0, title: '전체' },
-    ...(currentCategory?.subCategories?.map((sub) => ({
+    ...(currentCategory?.subcategories?.map((sub) => ({
       id: sub.id,
       title: sub.name,
     })) ?? []),

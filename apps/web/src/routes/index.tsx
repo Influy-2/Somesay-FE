@@ -3,7 +3,7 @@ import { PATH } from '@/routes/path';
 
 import { HomePage } from '@/pages/home/HomePage';
 import { CategoriesPage } from '@/pages/category/CategoriesPage';
-import { SubCategoriesPage } from '@/pages/category/SubcategoriesPage';
+import { SubcategoriesPage } from '@/pages/category/SubcategoriesPage';
 import { GlobalLayout } from '@/shared/components';
 
 export const appRouter = createBrowserRouter([
@@ -20,7 +20,7 @@ export const appRouter = createBrowserRouter([
       },
       {
         path: `${PATH.CATEGORIES.BASE}/:categoryId`,
-        element: <SubCategoriesPage />,
+        element: <SubcategoriesPage />,
       },
     ],
   },
