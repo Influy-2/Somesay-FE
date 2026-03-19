@@ -1,15 +1,8 @@
 import type {
-  FilterCategory,
   SkinTypeOption,
   SkinConcernOption,
   ProductSubCategoryGroup,
 } from '../types/category.types';
-
-export const FILTER_CATEGORIES: { key: FilterCategory; label: string }[] = [
-  { key: 'skinConcern', label: '피부 고민' },
-  { key: 'skinType', label: '피부 타입' },
-  { key: 'productCategory', label: '제품군' },
-];
 
 // TODO: skinConcernId는 백엔드 API 응답값으로 교체 필요
 export const SKIN_CONCERN_OPTIONS: SkinConcernOption[] = [
@@ -26,6 +19,7 @@ export const SKIN_CONCERN_OPTIONS: SkinConcernOption[] = [
   { skinConcernId: 0, label: '피부장벽' },
   { skinConcernId: 0, label: '흔적' },
 ];
+
 // ⚠️ skinTypeId는 백엔드 API 응답값으로 교체 필요
 export const SKIN_TYPE_OPTIONS: SkinTypeOption[] = [
   { skinTypeId: 0, label: '건성' },
@@ -39,6 +33,10 @@ export const SKIN_TYPE_OPTIONS: SkinTypeOption[] = [
 
 // ⚠️ productCategoryId는 백엔드 API 응답값으로 교체 필요
 export const PRODUCT_SUB_CATEGORY_GROUPS: ProductSubCategoryGroup[] = [
+  {
+    categoryLabel: '전체',
+    subcategories: [{ subCategoryId: 0, label: '전체' }],
+  },
   {
     categoryLabel: '스킨케어',
     subcategories: [

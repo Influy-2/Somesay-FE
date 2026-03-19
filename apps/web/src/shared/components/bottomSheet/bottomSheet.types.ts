@@ -2,7 +2,7 @@ export interface BottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  title?: string;
+  ariaLabel?: string;
   height?: string; // Tailwind height class (예: 'h-[60vh]')
 }
 

@@ -1,23 +1,16 @@
 import cn from '@/utils/cn';
 
-interface OptionChipProps {
+interface FilterChipProps {
   label: string;
   selected: boolean;
   onClick: () => void;
-  optionId: number;
 }
 
-export const FilterChip = ({
-  label,
-  selected,
-  onClick,
-  optionId,
-}: OptionChipProps) => {
+export const FilterChip = ({ label, selected, onClick }: FilterChipProps) => {
   return (
     <button
       type="button"
       onClick={onClick}
-      key={optionId}
       className={cn(
         'body2-m flex shrink-0 items-center justify-center rounded-[1.25rem] border px-3 py-[.375rem]',
         selected

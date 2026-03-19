@@ -32,3 +32,6 @@ export { SearchResultsProductCard } from './productCard/SearchResultsProductCard
 
 /* bottom sheet */
 export { BottomSheet } from './bottomSheet/BottomSheet';
+
+// filter
+export { FilterChip } from './filter/FilterChip';

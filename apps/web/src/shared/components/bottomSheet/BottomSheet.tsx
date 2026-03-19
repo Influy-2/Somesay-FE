@@ -9,7 +9,7 @@ export const BottomSheet = ({
   isOpen,
   onClose,
   children,
-  title,
+  ariaLabel,
   height = 'h-[60vh]',
 }: BottomSheetProps) => {
   const sheetRef = useRef<HTMLDivElement>(null);
@@ -46,7 +46,7 @@ export const BottomSheet = ({
         ref={sheetRef}
         role="dialog"
         aria-modal="true"
-        aria-label={title ?? '바텀시트'}
+        aria-label={ariaLabel ?? '바텀시트'}
         style={{
           // isOpen=false면 화면 밖으로, isOpen=true면 dragY만큼 내려감
           transform: isOpen ? `translateY(${dragY}px)` : 'translateY(100%)',
