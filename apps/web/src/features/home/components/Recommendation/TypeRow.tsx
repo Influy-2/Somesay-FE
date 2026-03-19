@@ -20,13 +20,16 @@ export const TypeRow = ({
   return (
     <div
       aria-label={`${rowTitle}: ${selectionText}`}
-      className="flex w-full items-center justify-between self-stretch px-3 py-5 first:pt-0 last:pb-0"
+      className="flex w-full flex-wrap items-center justify-between px-3 py-5 first:pt-0 last:pb-0"
     >
-      <span aria-hidden="true" className="body1-sb text-black">
+      <span
+        aria-hidden="true"
+        className="body1-sb whitespace-nowrap text-black"
+      >
         {rowTitle}
       </span>
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-1 items-center gap-3">
+        <div className="flex flex-1 flex-wrap items-center justify-end gap-2">
           {selectedFilters.map((item) => (
             <ChipLarge key={item} label={item} />
           ))}
