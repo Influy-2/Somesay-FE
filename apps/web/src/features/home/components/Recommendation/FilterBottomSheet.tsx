@@ -160,7 +160,7 @@ export const FilterBottomSheet = ({
         </div>
 
         {/* 하단 버튼 영역 */}
-        <div className="flex w-full shrink-0 flex-col items-center justify-center border-t border-[#f0eeeb] bg-white px-4 pt-2 pb-[30px]">
+        <div className="border-grey02 flex w-full shrink-0 flex-col items-center justify-center border-t bg-white px-4 pt-2 pb-[1.875rem]">
           <div className="flex w-full items-start gap-2">
             <ResetButton onClick={onReset} />
             <CTAButton

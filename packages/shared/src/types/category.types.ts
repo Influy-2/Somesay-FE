@@ -20,7 +20,7 @@ type SkinConcern =
   | '모공'
   | '피부결'
   | '각질'
-  | '피부장벽'
+  | '피부 장벽'
   | '흔적';
 
 type SkinType =

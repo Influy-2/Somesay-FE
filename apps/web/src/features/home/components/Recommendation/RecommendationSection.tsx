@@ -6,7 +6,7 @@ import { FILTER_CATEGORIES, INITIAL_FILTERS } from './filter.constants';
 import type { FilterCategoryType, SelectedFiltersType } from './filter.types';
 
 export const RecommendationSection = () => {
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(true);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   // 현재 활성화된 필터 카테고리 (피부고민, 피부타입, 제품군 중 하나)
   const [activeCategory, setActiveCategory] =

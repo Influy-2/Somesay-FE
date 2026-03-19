@@ -16,7 +16,7 @@ export const SKIN_CONCERN_OPTIONS: SkinConcernOption[] = [
   { skinConcernId: 8, label: '모공' },
   { skinConcernId: 9, label: '피부결' },
   { skinConcernId: 10, label: '각질' },
-  { skinConcernId: 11, label: '피부장벽' },
+  { skinConcernId: 11, label: '피부 장벽' },
   { skinConcernId: 12, label: '흔적' },
 ];
 
