@@ -1,8 +1,7 @@
-import cn from '@/utils/cn';
 import { FILTER_CATEGORIES, MAX_SELECTIONS } from './filter.constants';
-import { BottomSheet, FilterChip } from '@/shared/components';
+import { BottomSheet, FilterChip, ResetButton } from '@/shared/components';
 import type { FilterCategoryType, SelectedFiltersType } from './filter.types';
-import { FilterCategoryTab } from '@/shared/components/tab/FilterCategoryTab';
+import { FilterCategoryTab, CTAButton } from '@/shared/components';
 import {
   SKIN_CONCERN_OPTIONS,
   SKIN_TYPE_OPTIONS,
@@ -163,32 +162,12 @@ export const FilterBottomSheet = ({
         {/* 하단 버튼 영역 */}
         <div className="flex w-full shrink-0 flex-col items-center justify-center border-t border-[#f0eeeb] bg-white px-4 pt-2 pb-[30px]">
           <div className="flex w-full items-start gap-2">
-            <button
-              type="button"
-              onClick={onReset}
-              className="flex h-12 w-[calc((100%-8px)/3)] shrink-0 items-center justify-center rounded-[4px] border border-[#d0cfcc] px-3 py-1"
-              aria-label="필터 초기화"
-            >
-              <span className="text-[16px] leading-[1.5] font-semibold whitespace-nowrap text-[#161616]">
-                초기화
-              </span>
-            </button>
-
-            <button
-              type="button"
+            <ResetButton onClick={onReset} />
+            <CTAButton
+              label="제품 추천받기"
               onClick={onSubmit}
               disabled={!isSubmitEnabled}
-              className={cn(
-                'flex h-12 flex-1 items-center justify-center rounded-[4px] px-3 py-1 transition-colors',
-                isSubmitEnabled ? 'bg-black' : 'bg-grey04 cursor-not-allowed'
-              )}
-              aria-label="제품 추천받기"
-              aria-disabled={!isSubmitEnabled}
-            >
-              <span className="text-[16px] leading-[1.5] font-semibold whitespace-nowrap text-white">
-                제품 추천받기
-              </span>
-            </button>
+            />
           </div>
         </div>
       </div>
