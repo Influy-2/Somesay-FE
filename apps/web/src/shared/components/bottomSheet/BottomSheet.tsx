@@ -9,6 +9,8 @@ export const BottomSheet = ({
   isOpen,
   onClose,
   children,
+  header,
+  footer,
   ariaLabel,
   height = 'h-[60vh]',
 }: BottomSheetProps) => {
@@ -56,7 +58,7 @@ export const BottomSheet = ({
             ? 'none'
             : 'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)',
         }}
-        className={`fixed bottom-0 left-1/2 z-50 max-h-[90vh] min-h-[35vh] w-full max-w-110 -translate-x-1/2 flex-col bg-white ${height} flex items-center gap-4 rounded-[12px_12px_0_0]`}
+        className={`fixed bottom-0 left-1/2 z-50 min-h-[35vh] w-full max-w-110 -translate-x-1/2 flex-col overflow-hidden bg-white ${height} flex items-center rounded-[.75rem_.75rem_0_0]`}
       >
         {/* 핸들 — scrollable 여부 무관하게 항상 드래그 가능 */}
         <BottomSheetHandle
@@ -64,14 +66,20 @@ export const BottomSheet = ({
           onTouchEnd={handleTouchEnd}
         />
 
+        {/* 스크롤 영역 밖에 고정되는 헤더 슬롯 */}
+        {header && <div className="w-full shrink-0">{header}</div>}
+
         <div
+          id="bottom-sheet-content"
           ref={contentRef}
-          className="h-0 w-full flex-1 overflow-y-auto overscroll-contain"
+          className="scrollbar-hide relative h-0 w-full flex-1 overflow-y-auto overscroll-contain"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
           {children}
         </div>
+        {/* 스크롤 영역 밖에 고정되는 헤더 슬롯 */}
+        {footer && <div className="w-full shrink-0">{footer}</div>}
       </div>
     </>,
     document.body

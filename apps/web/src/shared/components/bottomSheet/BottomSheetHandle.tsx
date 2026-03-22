@@ -10,7 +10,7 @@ export const BottomSheetHandle = ({
   return (
     <div
       data-drag-handle
-      className="flex w-full items-center justify-center pt-2 pb-4"
+      className="mb-4 flex w-full items-center justify-center pt-2 pb-4"
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       aria-label="바텀시트 핸들"

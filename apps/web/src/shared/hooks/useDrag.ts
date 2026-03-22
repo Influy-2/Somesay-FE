@@ -21,7 +21,7 @@ interface UseDragReturn {
 
 export const useDrag = ({
   onClose,
-  threshold = 100,
+  threshold = 200,
   velocityThreshold = 0.7,
   targetRefs,
   scrollRef,
@@ -34,22 +34,22 @@ export const useDrag = ({
   const isDraggingRef = useRef(false);
   // 터치 시작이 핸들([data-drag-handle])에서 비롯됐는지 여부
   const isFromHandleRef = useRef(false);
+  // 터치 시작 시점의 scrollTop — 제스처 중 0이 되더라도 드래그 방지
+  const startScrollTopRef = useRef(0);
 
-  const handleTouchStart = useCallback(
-    (e: React.TouchEvent<HTMLDivElement>) => {
-      const touch = e.touches[0];
-      if (!touch) return;
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const touch = e.touches[0];
+    if (!touch) return;
 
-      startY.current = touch.clientY;
-      startTime.current = Date.now();
-      isDraggingRef.current = true;
-      setIsDragging(true);
-      isFromHandleRef.current = !!(e.target as Element).closest(
-        '[data-drag-handle]'
-      );
-    },
-    []
-  );
+    startY.current = touch.clientY;
+    startTime.current = Date.now();
+    isDraggingRef.current = true;
+    setIsDragging(true);
+    isFromHandleRef.current = !!(e.target as Element).closest(
+      '[data-drag-handle]'
+    );
+    startScrollTopRef.current = scrollRef.current?.scrollTop ?? 0;
+  };
 
   // passive: false로 직접 등록해야 preventDefault()가 동작함
   // React의 onTouchMove는 passive listener라 e.preventDefault() 불가
@@ -67,13 +67,9 @@ export const useDrag = ({
       const deltaY = touch.clientY - startY.current;
       if (deltaY < 0) return; // 위로 드래그 무시
 
-      // 콘텐츠가 스크롤 최상단이 아니면 드래그 비활성화 → 내부 스크롤 우선
-      if (
-        !isFromHandleRef.current &&
-        scrollRef.current &&
-        scrollRef.current.scrollTop > 0
-      )
-        return;
+      // 터치 시작 시점에 스크롤이 최상단이 아니었으면 드래그 비활성화
+      // (제스처 도중 scrollTop이 0이 되더라도 드래그 시작 불가)
+      if (!isFromHandleRef.current && startScrollTopRef.current > 0) return;
 
       e.preventDefault(); // 페이지 스크롤 방지
       setDragY(deltaY);
@@ -96,12 +92,8 @@ export const useDrag = ({
       const deltaTime = Date.now() - startTime.current;
       const velocity = deltaY / deltaTime; // px/ms
 
-      // 스크롤이 최상단이 아니었으면 닫기 동작 무시
-      if (
-        !isFromHandleRef.current &&
-        scrollRef.current &&
-        scrollRef.current.scrollTop > 0
-      ) {
+      // 터치 시작 시점에 스크롤이 최상단이 아니었으면 닫기 동작 무시
+      if (!isFromHandleRef.current && startScrollTopRef.current > 0) {
         isDraggingRef.current = false;
         setIsDragging(false);
         setDragY(0);
@@ -116,7 +108,7 @@ export const useDrag = ({
 
       if (shouldClose) onClose();
     },
-    [onClose, threshold, velocityThreshold, scrollRef]
+    [onClose, threshold, velocityThreshold]
   );
 
   return {

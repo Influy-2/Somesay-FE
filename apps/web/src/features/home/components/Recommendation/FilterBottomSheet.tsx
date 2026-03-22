@@ -57,109 +57,14 @@ export const FilterBottomSheet = ({
       isOpen={isOpen}
       onClose={onClose}
       ariaLabel="제품 옵션 선택 필터"
-    >
-      <div className="flex h-full w-full flex-col items-center justify-between">
-        {/* 상단 콘텐츠 영역 */}
-        <div className="scrollbar-hide flex w-full flex-1 flex-col items-start gap-5 overflow-y-auto">
-          {/* 카테고리 탭 */}
-          <FilterCategoryTab
-            categories={FILTER_CATEGORIES}
-            activeCategory={activeCategory}
-            onCategoryChange={onCategoryChange}
-          />
-
-          {/* 옵션 선택 영역 */}
-          <div className="w-full pb-[3.3125rem]">
-            {activeCategory === 'skinConcern' && (
-              <div className="flex flex-col items-start gap-3 px-4">
-                <p className="body2-m text-grey06">
-                  최대 {MAX_SELECTIONS.skinConcern}개 선택
-                </p>
-                <div
-                  className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch"
-                  role="group"
-                  aria-label="피부 고민 선택"
-                >
-                  {SKIN_CONCERN_OPTIONS.map((filter) => (
-                    <FilterChip
-                      key={filter.skinConcernId}
-                      label={filter.label}
-                      selected={selectedFilters.skinConcern.includes(filter)}
-                      onClick={() => handleToggleFilter(filter)}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-            {activeCategory === 'skinType' && (
-              <div className="flex flex-col items-start gap-3 px-4">
-                <p className="body2-m text-grey06">
-                  최대 {MAX_SELECTIONS.skinType}개 선택
-                </p>
-                <div
-                  className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch"
-                  role="group"
-                  aria-label="피부 타입 선택"
-                >
-                  {SKIN_TYPE_OPTIONS.map((filter) => (
-                    <FilterChip
-                      key={filter.skinTypeId}
-                      label={filter.label}
-                      selected={selectedFilters.skinType.includes(filter)}
-                      onClick={() => handleToggleFilter(filter)}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-            {activeCategory === 'productCategory' && (
-              <div className="flex flex-col items-start gap-3 px-4">
-                <p className="body2-m text-grey06">
-                  최대 {MAX_SELECTIONS.productCategory}개 선택
-                </p>
-                <div
-                  className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch"
-                  role="group"
-                  aria-label="제품군 선택"
-                >
-                  {PRODUCT_SUB_CATEGORY_GROUPS.map((subCategory) => {
-                    const firstItem = subCategory.subcategories[0];
-                    return subCategory.categoryLabel === '전체' && firstItem ? (
-                      <FilterChip
-                        key={firstItem.subCategoryId}
-                        label={firstItem.label}
-                        selected={selectedFilters.productCategory.includes(
-                          firstItem
-                        )}
-                        onClick={() => handleToggleFilter(firstItem)}
-                      />
-                    ) : (
-                      <div className="flex w-full flex-col items-start gap-3 self-stretch">
-                        <p className="body2-sb text-black">
-                          {subCategory.categoryLabel}
-                        </p>
-                        <div className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch">
-                          {subCategory.subcategories.map((filter) => (
-                            <FilterChip
-                              key={filter.subCategoryId}
-                              label={filter.label}
-                              selected={selectedFilters.productCategory.includes(
-                                filter
-                              )}
-                              onClick={() => handleToggleFilter(filter)}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* 하단 버튼 영역 */}
+      header={
+        <FilterCategoryTab
+          categories={FILTER_CATEGORIES}
+          activeCategory={activeCategory}
+          onCategoryChange={onCategoryChange}
+        />
+      }
+      footer={
         <div className="border-grey02 flex w-full shrink-0 flex-col items-center justify-center border-t bg-white px-4 pt-2 pb-[1.875rem]">
           <div className="flex w-full items-start gap-2">
             <ResetButton onClick={onReset} />
@@ -170,7 +75,99 @@ export const FilterBottomSheet = ({
             />
           </div>
         </div>
+      }
+    >
+      {/* 콘텐츠 영역 */}
+      <div className="mt-5 flex w-full flex-1 flex-col items-start gap-5 overflow-y-visible pb-[3.3125rem]">
+        {/* 옵션 선택 영역 */}
+        {activeCategory === 'skinConcern' && (
+          <div className="flex flex-col items-start gap-3 px-4">
+            <p className="body2-m text-grey06">
+              최대 {MAX_SELECTIONS.skinConcern}개 선택
+            </p>
+            <div
+              className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch"
+              role="group"
+              aria-label="피부 고민 선택"
+            >
+              {SKIN_CONCERN_OPTIONS.map((filter) => (
+                <FilterChip
+                  key={filter.skinConcernId}
+                  label={filter.label}
+                  selected={selectedFilters.skinConcern.includes(filter)}
+                  onClick={() => handleToggleFilter(filter)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {activeCategory === 'skinType' && (
+          <div className="flex flex-col items-start gap-3 px-4">
+            <p className="body2-m text-grey06">
+              최대 {MAX_SELECTIONS.skinType}개 선택
+            </p>
+            <div
+              className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch"
+              role="group"
+              aria-label="피부 타입 선택"
+            >
+              {SKIN_TYPE_OPTIONS.map((filter) => (
+                <FilterChip
+                  key={filter.skinTypeId}
+                  label={filter.label}
+                  selected={selectedFilters.skinType.includes(filter)}
+                  onClick={() => handleToggleFilter(filter)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {activeCategory === 'productCategory' && (
+          <div className="flex flex-col items-start gap-3 px-4">
+            <p className="body2-m text-grey06">
+              최대 {MAX_SELECTIONS.productCategory}개 선택
+            </p>
+            <div
+              className="flex flex-wrap content-start items-start gap-y-8 self-stretch"
+              role="group"
+              aria-label="제품군 선택"
+            >
+              {PRODUCT_SUB_CATEGORY_GROUPS.map((subCategory) => {
+                const firstItem = subCategory.subcategories[0];
+                return subCategory.categoryLabel === '전체' && firstItem ? (
+                  <FilterChip
+                    key={firstItem.subCategoryId}
+                    label={firstItem.label}
+                    selected={selectedFilters.productCategory.includes(
+                      firstItem
+                    )}
+                    onClick={() => handleToggleFilter(firstItem)}
+                  />
+                ) : (
+                  <div className="flex w-full flex-col items-start gap-3 self-stretch">
+                    <p className="body2-sb text-black">
+                      {subCategory.categoryLabel}
+                    </p>
+                    <div className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch">
+                      {subCategory.subcategories.map((filter) => (
+                        <FilterChip
+                          key={filter.subCategoryId}
+                          label={filter.label}
+                          selected={selectedFilters.productCategory.includes(
+                            filter
+                          )}
+                          onClick={() => handleToggleFilter(filter)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
+      {/* 하단 버튼 영역 */}
     </BottomSheet>
   );
 };
