@@ -17,7 +17,7 @@ export const CTAButton = ({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        'flex h-12 w-full flex-1 items-center justify-center px-3 py-1 transition-colors',
+        'flex h-12 w-full flex-1 items-center justify-center px-3 py-1',
         disabled ? 'bg-grey04 cursor-not-allowed' : 'cursor-pointer bg-black'
       )}
       aria-label={label}
