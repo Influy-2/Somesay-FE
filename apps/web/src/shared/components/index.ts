@@ -12,6 +12,7 @@ export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 export { BasicCreatorProfile } from './profile/BasicCreatorProfile';
 
 export { CreatorRankingUpDownRow } from './profile/CreatorRankingUpDownRow';
+export { CreatorHomeProfile } from './profile/CreatorHomeProfile';
 
 /* buttons */
 export { WhiteHeartButton } from './buttons/HeartButton';
@@ -40,3 +41,9 @@ export { FilterChip } from './filter/FilterChip';
 
 /* tab */
 export { FilterCategoryTab } from './tab/FilterCategoryTab';
+
+/*search*/
+export { SearchBar } from './search/SearchBar';
+
+/*sort */
+export { SortBar } from './sort/SortBar';
