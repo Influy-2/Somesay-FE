@@ -4,6 +4,7 @@ import { PATH } from '@/routes/path';
 import { HomePage } from '@/pages/home/HomePage';
 import { CategoriesPage } from '@/pages/category/CategoriesPage';
 import { SubcategoriesPage } from '@/pages/category/SubcategoriesPage';
+import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
 import { GlobalLayout } from '@/shared/components';
 
 export const appRouter = createBrowserRouter([
@@ -21,6 +22,10 @@ export const appRouter = createBrowserRouter([
       {
         path: `${PATH.CATEGORIES.BASE}/:categoryId`,
         element: <SubcategoriesPage />,
+      },
+      {
+        path: `${PATH.CREATOR.BASE}/:creatorId`,
+        element: <CreatorHomePage />,
       },
     ],
   },
