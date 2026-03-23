@@ -2,7 +2,7 @@
 export { default as GlobalLayout } from './layout/GlobalLayout';
 
 // bar
-export { PageHeader } from './bar/PageHeader';
+export { PageHeader } from './pageHeader/PageHeader';
 
 /* chips */
 export { ChipLarge } from './chips/ChipLarge';
