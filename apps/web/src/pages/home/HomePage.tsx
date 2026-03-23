@@ -1,3 +1,7 @@
+// import cn from '@/utils/cn';
+import SomesayIcon from '@/shared/icons/SomesayIcon.svg?react';
+import SearchIcon from '@/shared/icons/SearchIcon.svg?react';
+
 import {
   RecommendationSection,
   BestReviewSection,
@@ -6,10 +10,11 @@ import {
   ReviewVoteSection,
   CategoryProductSection,
 } from '@/features/home';
-
+import { PageHeader } from '@/shared/components';
 export const HomePage = () => {
   return (
-    <div className="inline-flex w-full flex-col items-center gap-17 pt-[4.875rem] pb-[10.9375rem]">
+    <div className="inline-flex w-full flex-col items-center gap-17 pt-[4.875rem] pb-[175px]">
+      <PageHeader left={<SomesayIcon />} right={[<SearchIcon />]} />
       <RecommendationSection />
       <div className="flex h-[117px] w-full items-center justify-center gap-2.5 p-2.5 text-black [background:var(--grey-03,#E4E2DF)]">
         베너 임시

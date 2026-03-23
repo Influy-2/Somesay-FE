@@ -1,6 +1,9 @@
 /* layout */
 export { default as GlobalLayout } from './layout/GlobalLayout';
 
+// bar
+export { PageHeader } from './bar/PageHeader';
+
 /* chips */
 export { ChipLarge } from './chips/ChipLarge';
 export { ChipBasic } from './chips/ChipBasic';

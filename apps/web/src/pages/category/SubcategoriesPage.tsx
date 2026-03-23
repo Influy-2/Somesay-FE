@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import {
   SubcategoryProductList,
-  SubcategoryHeader,
   SubcategorySortBar,
 } from '@/features/subcategory';
 import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
-import { HorizontalCategoriesTab } from '@/shared/components';
+import { HorizontalCategoriesTab, PageHeader } from '@/shared/components';
+import ArrowBackIcon from '@/shared/icons/ArrowBackIcon.svg?react';
+import SearchIcon from '@/shared/icons/SearchIcon.svg?react';
 
 const CATEGORY_MOCK_DATA = [
   {
@@ -31,6 +32,7 @@ const CATEGORY_MOCK_DATA = [
 ];
 
 export const SubcategoriesPage = () => {
+  const navigate = useNavigate();
   const { categoryId: categoryIdParam } = useParams();
   const categoryId = Number(categoryIdParam);
   const [selectedId, setSelectedId] = useState(0);
@@ -55,7 +57,23 @@ export const SubcategoriesPage = () => {
 
   return (
     <div className="min-dvh-screen flex flex-col bg-white">
-      <SubcategoryHeader title={currentCategory?.title ?? ''} />
+      <PageHeader
+        left={
+          <button
+            type="button"
+            aria-label="뒤로 가기"
+            onClick={() => navigate(-1)}
+          >
+            <ArrowBackIcon aria-hidden="true" />
+          </button>
+        }
+        title={currentCategory?.title ?? ''}
+        right={[
+          <button type="button" aria-label="검색">
+            <SearchIcon aria-hidden="true" />
+          </button>,
+        ]}
+      />
       <div className="mt-5 px-4">
         <HorizontalCategoriesTab
           categories={tabCategories}
