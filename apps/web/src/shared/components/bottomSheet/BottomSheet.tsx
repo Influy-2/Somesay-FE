@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import type { BottomSheetProps } from './bottomSheet.types';
 import { BottomSheetHandle } from './BottomSheetHandle';
@@ -17,9 +17,10 @@ export const BottomSheet = ({
   const sheetRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  const targetRefs = useMemo(() => [sheetRef, contentRef], []);
   const { dragY, isDragging, handleTouchStart, handleTouchEnd } = useDrag({
     onClose,
-    targetRefs: [sheetRef, contentRef],
+    targetRefs,
     scrollRef: contentRef,
   });
 
