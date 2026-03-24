@@ -5,8 +5,8 @@ export const PATH = {
   },
   RANKING: {
     BASE: '/ranking',
-    PRODUCT: '/products',
-    CREATOR_CREDIBILITY: '/creator-credibility',
+    PRODUCT: 'products',
+    CREATOR_CREDIBILITY: 'creator-credibility',
   },
   REVIEWS: {
     BASE: '/reviews',
@@ -16,6 +16,6 @@ export const PATH = {
   },
   MY_PAGE: {
     BASE: '/my-page',
-    LIKED_PRODUCTS: '/liked-products',
+    LIKED_PRODUCTS: 'liked-products',
   },
 };

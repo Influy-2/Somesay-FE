@@ -1,5 +1,9 @@
 /* layout */
 export { default as GlobalLayout } from './layout/GlobalLayout';
+export { BottomTabLayout } from './layout/BottomTabLayout';
+
+/* navigation */
+export { BottomTabBar } from './navigation/BottomTabBar';
 
 // bar
 export { PageHeader } from './pageHeader/PageHeader';
