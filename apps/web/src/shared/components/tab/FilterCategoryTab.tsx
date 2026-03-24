@@ -28,7 +28,7 @@ export const FilterCategoryTab = <T extends string>({
             type="button"
             onClick={() => onCategoryChange(category.category)}
             className={cn(
-              'body2-m -mb-[.125rem] flex shrink-0 items-center justify-center border-b-2 px-1 py-2',
+              'body2-m -mb-[.125rem] flex shrink-0 cursor-pointer items-center justify-center border-b-2 px-1 py-2',
               isActive
                 ? 'border-black text-black'
                 : 'text-grey06 border-transparent'
