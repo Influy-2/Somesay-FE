@@ -56,7 +56,7 @@ export const SubcategoriesPage = () => {
           .length;
 
   return (
-    <div className="min-dvh-screen flex flex-col bg-white">
+    <div className="min-dvh-screen mt-[4.625rem] flex flex-col bg-white">
       <PageHeader
         left={
           <button
@@ -74,7 +74,7 @@ export const SubcategoriesPage = () => {
           </button>,
         ]}
       />
-      <div className="mt-5 px-4">
+      <div className="px-4">
         <HorizontalCategoriesTab
           categories={tabCategories}
           selectedId={selectedId}
