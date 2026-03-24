@@ -78,7 +78,7 @@ export const BottomSheet = ({
         >
           {children}
         </div>
-        {/* 스크롤 영역 밖에 고정되는 헤더 슬롯 */}
+        {/* 스크롤 영역 밖에 고정되는 footer 슬롯 */}
         {footer && <div className="w-full shrink-0">{footer}</div>}
       </div>
     </>,
