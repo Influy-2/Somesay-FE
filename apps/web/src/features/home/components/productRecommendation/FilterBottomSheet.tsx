@@ -20,6 +20,14 @@ interface FilterBottomSheetProps {
   isSubmitEnabled: boolean;
 }
 
+const getItemId = (
+  v: SelectedFiltersType[FilterCategoryType][number]
+): number => {
+  if ('skinConcernId' in v) return v.skinConcernId;
+  if ('skinTypeId' in v) return v.skinTypeId;
+  return v.subCategoryId;
+};
+
 export const FilterBottomSheet = ({
   isOpen,
   onClose,
@@ -34,13 +42,17 @@ export const FilterBottomSheet = ({
   const handleToggleFilter = (
     item: SelectedFiltersType[FilterCategoryType][number]
   ) => {
+    const itemId = getItemId(item);
     setSelectedFilters((prev) => {
       const current = prev[activeCategory];
-      const exists = (current as unknown[]).includes(item);
+      const exists = current.some((v) => getItemId(v) === itemId);
       const max = MAX_SELECTIONS[activeCategory];
 
       if (exists) {
-        return { ...prev, [activeCategory]: current.filter((v) => v !== item) };
+        return {
+          ...prev,
+          [activeCategory]: current.filter((v) => getItemId(v) !== itemId),
+        };
       }
       if (max === 1) {
         return { ...prev, [activeCategory]: [item] };
