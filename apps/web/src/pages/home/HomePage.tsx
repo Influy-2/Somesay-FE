@@ -1,4 +1,3 @@
-// import cn from '@/utils/cn';
 import {
   RecommendationSection,
   BestReviewSection,
@@ -7,11 +6,12 @@ import {
   ReviewVoteSection,
   CategoryProductSection,
 } from '@/features/home';
+
 export const HomePage = () => {
   return (
-    <div className="inline-flex w-full flex-col items-center gap-17 pt-[4.875rem] pb-[175px]">
+    <div className="inline-flex w-full flex-col items-center gap-17 pt-[4.875rem] pb-[10.9375rem]">
       <RecommendationSection />
-      <div className="flex h-[7.3125rem] w-full items-center justify-center gap-2.5 p-2.5 text-black [background:var(--grey-03,#E4E2DF)]">
+      <div className="flex h-[117px] w-full items-center justify-center gap-2.5 p-2.5 text-black [background:var(--grey-03,#E4E2DF)]">
         베너 임시
       </div>
       <BestReviewSection />

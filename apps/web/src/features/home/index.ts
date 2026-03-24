@@ -1,4 +1,4 @@
-export { RecommendationSection } from './components/recommendation/RecommendationSection';
+export { RecommendationSection } from './components/productRecommendation/RecommendationSection';
 
 export { BestReviewSection } from './components/bestReviews/BestReviewSection';
 

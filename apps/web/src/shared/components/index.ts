@@ -18,6 +18,8 @@ export { WhiteHeartButton } from './buttons/HeartButton';
 export { MoreButton } from './buttons/MoreButton';
 export { ReviewVoteButton } from './buttons/ReviewVoteButton';
 export type { ReviewVoteType } from './buttons/ReviewVoteButton';
+export { CTAButton } from './buttons/CTAButton';
+export { ResetButton } from './buttons/ResetButton';
 
 /* review */
 export { ReviewVoteCard } from './review/ReviewVoteCard';
@@ -29,3 +31,12 @@ export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
 /* product card */
 export { BasicProductCard } from './productCard/BasicProductCard';
 export { SearchResultsProductCard } from './productCard/SearchResultsProductCard';
+
+/* bottom sheet */
+export { BottomSheet } from './bottomSheet/BottomSheet';
+
+// filter
+export { FilterChip } from './filter/FilterChip';
+
+/* tab */
+export { FilterCategoryTab } from './tab/FilterCategoryTab';
