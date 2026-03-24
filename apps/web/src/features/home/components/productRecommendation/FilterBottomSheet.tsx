@@ -144,7 +144,10 @@ export const FilterBottomSheet = ({
                     onClick={() => handleToggleFilter(firstItem)}
                   />
                 ) : (
-                  <div className="flex w-full flex-col items-start gap-3 self-stretch">
+                  <div
+                    className="flex w-full flex-col items-start gap-3 self-stretch"
+                    key={subCategory.categoryLabel}
+                  >
                     <p className="body2-sb text-black">
                       {subCategory.categoryLabel}
                     </p>
