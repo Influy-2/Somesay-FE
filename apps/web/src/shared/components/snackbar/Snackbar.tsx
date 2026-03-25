@@ -14,7 +14,7 @@ interface SnackbarProps {
   onClose: () => void;
   duration?: number;
 }
-
+// TODO: 스낵바 컨텍스트로 관리
 export const Snackbar = ({
   message,
   action,

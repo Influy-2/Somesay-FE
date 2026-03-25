@@ -30,3 +30,4 @@ node_modules
 **/.vite/
 CLAUDE.md
 .claude/
+.vscode/
