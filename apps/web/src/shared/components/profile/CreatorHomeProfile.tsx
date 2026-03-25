@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
-import HeartBlackOffIcon from '@/shared/icons/HeartBlackOffIcon.svg?react';
-import HeartOnIcon from '@/shared/icons/HeartOnIcon.svg?react';
 import Move12Icon from '@/shared/icons/Move12Icon.svg?react';
 import { ChipBasic } from '@/shared/components';
 import { BasicCreatorProfileType } from '@somesay/shared';
+import { BlackHeartButton } from '@/shared/components';
 
 interface CreatorHomeProfileProps extends BasicCreatorProfileType {
   likeCount: number;
@@ -19,23 +18,29 @@ const formatSubscriberCount = (count: number): string => {
 };
 
 export const CreatorHomeProfile = ({
-  creatorId,
   nickname,
   profileImageUrl,
   subscriberCount,
   ageGroup,
   skinType,
-  likeCount,
+  likeCount: initialLikeCount,
   isLiked: initialLiked = false,
   onLikeClick,
   youtubeUrl,
 }: CreatorHomeProfileProps) => {
   const [liked, setLiked] = useState(initialLiked);
+  const [currentLikeCount, setCurrentLikeCount] = useState(initialLikeCount);
+
+  const handleToggle = () => {
+    setLiked((prev) => !prev);
+    setCurrentLikeCount((prev) => (liked ? prev - 1 : prev + 1)); // 숫자는 하트 상태에 따라 +1 하거나 -1
+    onLikeClick?.();
+  };
+
   return (
     <div
       className="flex w-full items-center gap-2"
       aria-label={`크리에이터: ${nickname}, 유튜브 구독자 ${subscriberCount}만, ${ageGroup}대, ${skinType}`}
-      key={creatorId}
     >
       {/* 프로필 사진 */}
       <div
@@ -80,22 +85,11 @@ export const CreatorHomeProfile = ({
       </div>
 
       {/* 좋아요 버튼 */}
-      <button
-        type="button"
-        onClick={() => {
-          setLiked((prev) => !prev);
-          onLikeClick?.();
-        }}
-        className="flex w-8 shrink-0 flex-col items-center gap-0.5"
-        aria-label={liked ? '좋아요 취소' : '좋아요'}
-      >
-        {liked ? <HeartOnIcon /> : <HeartBlackOffIcon />}
-        <span className="caption1-m">
-          {likeCount >= 10000
-            ? `${Math.floor(likeCount / 10000)}만`
-            : likeCount.toLocaleString()}
-        </span>
-      </button>
+      <BlackHeartButton
+        isLiked={liked}
+        onLikeToggle={handleToggle}
+        likeCount={currentLikeCount}
+      />
     </div>
   );
 };
