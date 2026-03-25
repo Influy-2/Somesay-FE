@@ -23,19 +23,19 @@ const CATEGORIES: CategoryType[] = [
 export const CreatorHomePage = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const [searchValue, setSearchValue] = useState('');
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleSelectCategory = (id: number) => {
     setSelectedCategoryId(id);
     setIsExpanded(false);
   };
+
   const filteredReviews =
     selectedCategoryId === 1
       ? MOCK_CREATOR_REVIEWS
       : MOCK_CREATOR_REVIEWS.filter(
           (review) => review.product.categoryId === selectedCategoryId
         );
-
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const visibleReviews = isExpanded
     ? filteredReviews
@@ -68,8 +68,10 @@ export const CreatorHomePage = () => {
       </div>
       <div className="flex flex-col gap-6 px-4 pb-10">
         {/* 리뷰 목록 */}
-        {visibleReviews.map((review, i) => (
-          <CreatorHomeReviewCard key={i} {...review} />
+        {visibleReviews.map((review) => (
+          <li key={review.product.productId}>
+            <CreatorHomeReviewCard {...review} />
+          </li>
         ))}
         {filteredReviews.length > 3 && !isExpanded && (
           <button
