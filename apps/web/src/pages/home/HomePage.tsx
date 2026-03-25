@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import SomesayIcon from '@/shared/icons/SomesayIcon.svg?react';
-import SearchIcon from '@/shared/icons/SearchIcon.svg?react';
+import { SomesayIcon, SearchIcon } from '@/shared/icons';
 
 import {
   RecommendationSection,

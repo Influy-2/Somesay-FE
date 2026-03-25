@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { CategoryType } from '@somesay/shared';
-import MainArrowIcon from '@/shared/icons/MainArrowIcon.svg?react';
+import { MainArrowIcon } from '@/shared/icons';
 
 interface CategoryAccordionProps {
   category: CategoryType;

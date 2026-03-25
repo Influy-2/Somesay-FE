@@ -6,8 +6,7 @@ import {
 } from '@/features/subcategory';
 import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
 import { HorizontalCategoriesTab, PageHeader } from '@/shared/components';
-import ArrowBackIcon from '@/shared/icons/ArrowBackIcon.svg?react';
-import SearchIcon from '@/shared/icons/SearchIcon.svg?react';
+import { ArrowBackIcon, SearchIcon } from '@/shared/icons';
 
 const CATEGORY_MOCK_DATA = [
   {

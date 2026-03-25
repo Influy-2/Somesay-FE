@@ -1,4 +1,4 @@
-import StarIcon from '@/shared/icons/Star16Icon.svg?react';
+import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { ProductRankingCardType } from '@somesay/shared';
 import { WhiteHeartButton } from '@/shared/components';

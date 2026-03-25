@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { SortBottomSheet, SORT_OPTIONS } from './SortBottomSheet';
-import ToggleDownIcon from '@/shared/icons/ToggleDownIcon.svg?react';
+import { ToggleDownIcon } from '@/shared/icons';
 
 interface SubcategorySortBarProps {
   productCount: number;

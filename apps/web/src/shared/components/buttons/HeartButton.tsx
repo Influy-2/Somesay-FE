@@ -1,5 +1,4 @@
-import HeartWhiteOffIcon from '@/shared/icons/HeartWhiteOffIcon.svg?react';
-import HeartOnIcon from '@/shared/icons/HeartOnIcon.svg?react';
+import { HeartWhiteOffIcon, HeartOnIcon } from '@/shared/icons';
 
 interface HeartButtonProps {
   isHearted: boolean;

@@ -1,15 +1,17 @@
 import { Link, useLocation } from 'react-router';
 
-import HomeOnIcon from '@/shared/icons/HomeOnIcon.svg?react';
-import HomeOffIcon from '@/shared/icons/HomeOffIcon.svg?react';
-import RankingOnIcon from '@/shared/icons/RankingOnIcon.svg?react';
-import RankingOffIcon from '@/shared/icons/RankingOffIcon.svg?react';
-import ReviewOnIcon from '@/shared/icons/ReviewOnIcon.svg?react';
-import ReviewOffIcon from '@/shared/icons/ReviewOffIcon.svg?react';
-import CategoryOnIcon from '@/shared/icons/CategoryOnIcon.svg?react';
-import CategoryOffIcon from '@/shared/icons/CategoryOffIcon.svg?react';
-import ProfileOnIcon from '@/shared/icons/ProfileOnIcon.svg?react';
-import ProfileOffIcon from '@/shared/icons/ProfileOffIcon.svg?react';
+import {
+  HomeOnIcon,
+  HomeOffIcon,
+  RankingOnIcon,
+  RankingOffIcon,
+  ReviewOnIcon,
+  ReviewOffIcon,
+  CategoryOnIcon,
+  CategoryOffIcon,
+  ProfileOnIcon,
+  ProfileOffIcon,
+} from '@/shared/icons';
 
 import { PATH } from '@/routes/path';
 

@@ -1,5 +1,5 @@
 import { ChipLarge } from '@/shared/components';
-import MainArrowIcon from '@/shared/icons/MainArrowIcon.svg?react';
+import { MainArrowIcon } from '@/shared/icons';
 
 interface TypeRowProps {
   rowTitle: string;

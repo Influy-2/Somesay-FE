@@ -1,7 +1,9 @@
-import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
-import ArrowUpIcon from '@/shared/icons/ArrowUpIcon.svg?react';
-import ArrowDownIcon from '@/shared/icons/ArrowDownIcon.svg?react';
-import NoRankChangeIcon from '@/shared/icons/NoRankChangeIcon.svg?react';
+import {
+  YoutubeIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
+  NoRankChangeIcon,
+} from '@/shared/icons';
 import { ChipBasic } from '@/shared/components';
 import { CreatorRankingUpDownType } from '@somesay/shared';
 

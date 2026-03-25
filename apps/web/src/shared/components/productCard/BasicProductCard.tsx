@@ -1,6 +1,6 @@
 // Product/기본 컴포넌트
 
-import StarIcon from '@/shared/icons/Star16Icon.svg?react';
+import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { ProductCardType } from '@somesay/shared';
 import { WhiteHeartButton } from '@/shared/components';
