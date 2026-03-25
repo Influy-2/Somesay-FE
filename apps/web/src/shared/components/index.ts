@@ -16,6 +16,7 @@ export { CreatorHomeProfile } from './profile/CreatorHomeProfile';
 
 /* buttons */
 export { WhiteHeartButton } from './buttons/HeartButton';
+export { BlackHeartButton } from './buttons/BlackHeartButton';
 export { MoreButton } from './buttons/MoreButton';
 export { ReviewVoteButton } from './buttons/ReviewVoteButton';
 export type { ReviewVoteType } from './buttons/ReviewVoteButton';
