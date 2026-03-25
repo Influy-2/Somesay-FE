@@ -1,4 +1,5 @@
-// import cn from '@/utils/cn';
+import { useState } from 'react';
+
 import SomesayIcon from '@/shared/icons/SomesayIcon.svg?react';
 import SearchIcon from '@/shared/icons/SearchIcon.svg?react';
 
@@ -10,8 +11,11 @@ import {
   ReviewVoteSection,
   CategoryProductSection,
 } from '@/features/home';
-import { PageHeader } from '@/shared/components';
+import { PageHeader, Snackbar } from '@/shared/components';
+
 export const HomePage = () => {
+  const [showSnackbar, setShowSnackbar] = useState(true);
+
   return (
     <div className="inline-flex w-full flex-col items-center gap-17 pt-[4.875rem] pb-[175px]">
       <PageHeader left={<SomesayIcon />} right={[<SearchIcon />]} />
@@ -25,6 +29,13 @@ export const HomePage = () => {
       <CreatorRankingSection />
       <ReviewVoteSection />
       <CategoryProductSection />
+      {showSnackbar && (
+        <Snackbar
+          message="피부타입을 아직 등록하지 않았어요."
+          action={{ label: '등록하러가기', onClick: () => {} }}
+          onClose={() => setShowSnackbar(false)}
+        />
+      )}
     </div>
   );
 };

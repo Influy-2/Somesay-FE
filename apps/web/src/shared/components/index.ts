@@ -47,3 +47,6 @@ export { FilterChip } from './filter/FilterChip';
 
 /* tab */
 export { FilterCategoryTab } from './tab/FilterCategoryTab';
+
+/* snackbar */
+export { Snackbar } from './snackbar/Snackbar';
