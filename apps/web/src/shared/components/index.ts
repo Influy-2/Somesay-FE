@@ -50,3 +50,6 @@ export { FilterCategoryTab } from './tab/FilterCategoryTab';
 
 /* snackbar */
 export { Snackbar } from './snackbar/Snackbar';
+
+/* modal */
+export { Modal } from './modal/Modal';
