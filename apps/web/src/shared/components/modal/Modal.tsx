@@ -35,7 +35,7 @@ export const Modal = ({
 
   return createPortal(
     <div
-      className="fixed inset-y-0 left-1/2 z-50 flex w-full max-w-110 min-w-[20rem] -translate-x-1/2 items-center justify-center bg-black/30"
+      className="z-modal fixed inset-y-0 left-1/2 flex w-full max-w-110 min-w-[20rem] -translate-x-1/2 items-center justify-center bg-black/30"
       onClick={onClose}
       aria-hidden="true"
     >
