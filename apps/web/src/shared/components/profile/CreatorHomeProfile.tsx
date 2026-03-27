@@ -79,8 +79,8 @@ export const CreatorHomeProfile = ({
 
         {/* 피부/나이 칩 */}
         <div className="flex items-center gap-1 p-0">
-          <ChipBasic label={`${ageGroup}대`} bgColor="grey03" />
-          <ChipBasic label={skinType} bgColor="grey03" />
+          <ChipBasic label={`${ageGroup}대`} bgColor="bg-grey03" />
+          <ChipBasic label={skinType} bgColor="bg-grey03" />
         </div>
       </div>
 
