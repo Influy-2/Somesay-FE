@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import SearchIcon from '@/shared/icons/SearchIcon.svg?react';
 import CircleX14Icon from '@/shared/icons/CircleX14Icon.svg?react';
 
@@ -18,6 +18,7 @@ export const SearchBar = ({
   onClear,
 }: SearchBarProps) => {
   const [isSearched, setIsSearched] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -26,13 +27,24 @@ export const SearchBar = ({
     }
   };
 
+  const handleFocus = () => {
+    containerRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
   return (
-    <div className="bg-grey01 flex h-10 w-full items-center px-2.5 py-2">
+    <div
+      ref={containerRef}
+      className="bg-grey01 flex h-10 w-full items-center px-2.5 py-2"
+    >
       <input
         type="text"
         value={value}
         onChange={onChange}
         onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
         placeholder={placeholder}
         className="body2-m placeholder:text-grey05 mr-3.5 w-full bg-transparent outline-none"
       />

@@ -69,7 +69,7 @@ export const CreatorHomePage = () => {
       <div className="flex flex-col gap-6 px-4 pb-10">
         {/* 리뷰 목록 */}
         {visibleReviews.map((review) => (
-          <li key={review.product.productId}>
+          <li key={review.product.productId} className="list-none">
             <CreatorHomeReviewCard {...review} />
           </li>
         ))}

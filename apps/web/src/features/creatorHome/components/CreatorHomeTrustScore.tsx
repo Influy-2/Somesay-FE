@@ -47,7 +47,6 @@ export const CreatorHomeTrustScore = ({
               >
                 <QuestionIcon />
               </button>
-              {/*TODO: 툴팁 디자인 수정*/}
               {isTooltipVisible && (
                 <div className="body2-m absolute top-6 -left-12 z-10 w-max bg-black px-2.5 py-2.25 text-white after:absolute after:bottom-full after:left-8 after:border-[6px] after:border-transparent after:border-b-[#222222] after:content-['']">
                   신뢰도 점수는 크리에이터의 리뷰에 대한
