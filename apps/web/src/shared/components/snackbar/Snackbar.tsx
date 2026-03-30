@@ -36,7 +36,7 @@ export const Snackbar = ({
       role="status"
       aria-live="polite"
       className={cn(
-        'z-toast absolute bottom-[5.5rem] left-1/2 flex w-[22.375rem] -translate-x-1/2 items-center px-3.5 py-3.5',
+        'z-toast fixed bottom-[5.5rem] left-1/2 flex w-[22.375rem] -translate-x-1/2 items-center px-3.5 py-3.5',
         'bg-[rgba(22,22,22,0.74)] backdrop-blur-[.1875rem]',
         action ? 'justify-between' : 'justify-start',
         isClosing && 'animate-snackbar-out'
