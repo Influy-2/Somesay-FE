@@ -1,8 +1,8 @@
 import cn from '@/utils/cn';
 import { useState } from 'react';
 import { Link } from 'react-router';
-import QuestionIcon from '@/shared/icons/QuestionIcon.svg?react';
-import MainArrowIcon from '@/shared/icons/MainArrowIcon.svg?react';
+import { QuestionIcon } from '@/shared/icons';
+import { MainArrowIcon } from '@/shared/icons';
 
 interface CreatorHomeTrustScoreProps {
   trustScore: number;

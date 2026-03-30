@@ -1,5 +1,5 @@
-import Star16Icon from '@/shared/icons/Star16Icon.svg?react';
-import Move12Icon from '@/shared/icons/Move12Icon.svg?react';
+import { Star16Icon } from '@/shared/icons';
+import { Move12Icon } from '@/shared/icons';
 import { ProductCardType } from '@somesay/shared';
 
 interface CreatorHomeReviewCardProps {

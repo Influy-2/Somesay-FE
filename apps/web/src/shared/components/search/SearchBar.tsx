@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import SearchIcon from '@/shared/icons/SearchIcon.svg?react';
-import CircleX14Icon from '@/shared/icons/CircleX14Icon.svg?react';
+import { SearchIcon } from '@/shared/icons';
+import { CircleX14Icon } from '@/shared/icons';
 
 interface SearchBarProps {
   placeholder: string;

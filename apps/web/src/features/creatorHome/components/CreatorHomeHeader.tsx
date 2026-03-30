@@ -1,5 +1,5 @@
-import ArrowBackIcon from '@/shared/icons/ArrowBackIcon.svg?react';
-import ShareIcon from '@/shared/icons/ShareIcon.svg?react';
+import { ArrowBackIcon } from '@/shared/icons';
+import { ShareIcon } from '@/shared/icons';
 import { useNavigate, Link } from 'react-router';
 
 export const CreatorHomeHeader = () => {

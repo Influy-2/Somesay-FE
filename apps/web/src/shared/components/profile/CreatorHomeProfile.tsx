@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
-import Move12Icon from '@/shared/icons/Move12Icon.svg?react';
+import { YoutubeIcon } from '@/shared/icons';
+import { Move12Icon } from '@/shared/icons';
 import { ChipBasic } from '@/shared/components';
 import { BasicCreatorProfileType } from '@somesay/shared';
 import { BlackHeartButton } from '@/shared/components';

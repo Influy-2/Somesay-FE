@@ -1,4 +1,4 @@
-import ToggleDownIcon from '@/shared/icons/ToggleDownIcon.svg?react';
+import { ToggleDownIcon } from '@/shared/icons';
 
 interface SortBarProps {
   productCount: number;

@@ -1,5 +1,5 @@
-import HeartBlackOffIcon from '@/shared/icons/HeartBlackOffIcon.svg?react';
-import HeartOnIcon from '@/shared/icons/HeartOnIcon.svg?react';
+import { HeartBlackOffIcon } from '@/shared/icons';
+import { HeartOnIcon } from '@/shared/icons';
 
 interface BlackHeartButtonProps {
   isLiked: boolean;
