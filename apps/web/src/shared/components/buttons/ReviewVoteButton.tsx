@@ -1,5 +1,4 @@
-import AgreeIcon from '@/shared/icons/AgreeIcon.svg?react';
-import DisagreeIcon from '@/shared/icons/DisagreeIcon.svg?react';
+import { AgreeIcon, DisagreeIcon } from '@/shared/icons';
 import cn from '@/utils/cn';
 
 export type ReviewVoteType = 'agree' | 'disagree';

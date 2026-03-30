@@ -5,7 +5,13 @@
   src: url('/fonts/PretendardVariable.woff2') format('font-woff2');
 }
 
+@keyframes snackbar-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
 @theme {
+  --animate-snackbar-out: snackbar-out 0.3s ease-in forwards;
   /* Main color */
 
   /* Sub color */
@@ -29,6 +35,13 @@
 
   /* Fonts */
   --font-pretendard: 'Pretendard', sans-serif;
+
+  /* Z-index layers */
+  --z-index-header: 10;
+  --z-index-dropdown: 20;
+  --z-index-overlay: 30;
+  --z-index-modal: 40;
+  --z-index-toast: 50;
 }
 
 @layer components {
@@ -139,7 +152,7 @@
     position: fixed;
     bottom: 0;
 
-    z-index: 50;
+    z-index: var(--z-index-toast);
 
     /* width constraints */
     max-width: 40rem; /* 640px */

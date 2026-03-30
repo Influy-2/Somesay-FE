@@ -1,5 +1,5 @@
 // Profile/크리에이터/기본형 컴포넌트
-import YoutubeIcon from '@/shared/icons/YoutubeIcon.svg?react';
+import { YoutubeIcon } from '@/shared/icons';
 import { ChipBasic } from '@/shared/components';
 import { BasicCreatorProfileType } from '@somesay/shared';
 

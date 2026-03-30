@@ -1,5 +1,12 @@
 /* layout */
 export { default as GlobalLayout } from './layout/GlobalLayout';
+export { BottomTabLayout } from './layout/BottomTabLayout';
+
+/* navigation */
+export { BottomTabBar } from './navigation/BottomTabBar';
+
+// bar
+export { PageHeader } from './pageHeader/PageHeader';
 
 /* chips */
 export { ChipLarge } from './chips/ChipLarge';
@@ -48,3 +55,9 @@ export { SearchBar } from './search/SearchBar';
 
 /*sort */
 export { SortBar } from './sort/SortBar';
+
+/* snackbar */
+export { Snackbar } from './snackbar/Snackbar';
+
+/* modal */
+export { Modal } from './modal/Modal';
