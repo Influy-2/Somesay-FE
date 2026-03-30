@@ -33,6 +33,7 @@ export { ResetButton } from './buttons/ResetButton';
 /* review */
 export { ReviewVoteCard } from './review/ReviewVoteCard';
 export { CreatorReviewCard } from './review/CreatorReviewCard';
+export { CreatorHomeReviewCard } from './review/CreatorHomeReviewCard';
 
 /* category */
 export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';

@@ -3,7 +3,7 @@ import { CreatorHomeHeader } from '@/features/creatorHome';
 import { CreatorHomeProfile, SearchBar, SortBar } from '@/shared/components';
 import { CreatorHomeTrustScore } from '@/features/creatorHome';
 import { HorizontalCategoriesTab } from '@/shared/components';
-import { CreatorHomeReviewCard } from '@/shared/components/review/CreatorHomeReviewCard';
+import { CreatorHomeReviewCard } from '@/shared/components';
 
 import { CategoryType } from '@somesay/shared';
 import {
@@ -20,10 +20,16 @@ const CATEGORIES: CategoryType[] = [
   { id: 5, title: '베이스' },
 ];
 
+const SORT_OPTIONS = [
+  { value: 'popular', label: '인기순' },
+  { value: 'latest', label: '최신순' },
+];
+
 export const CreatorHomePage = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const [searchValue, setSearchValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
+  const [currentSortValue, setCurrentSortValue] = useState('popular');
 
   const handleSelectCategory = (id: number) => {
     setSelectedCategoryId(id);
@@ -64,7 +70,12 @@ export const CreatorHomePage = () => {
           onSelect={handleSelectCategory}
           ariaLabel="상품 카테고리"
         />
-        <SortBar productCount={filteredReviews.length} />
+        <SortBar
+          productCount={filteredReviews.length}
+          sortOptions={SORT_OPTIONS}
+          currentSortValue={currentSortValue}
+          onSelectSort={setCurrentSortValue}
+        />
       </div>
       <div className="flex flex-col gap-6 px-4 pb-10">
         {/* 리뷰 목록 */}
