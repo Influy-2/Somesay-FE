@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { CreatorHomeHeader } from '@/features/creatorHome';
-import { CreatorHomeProfile, SearchBar, SortBar } from '@/shared/components';
+import { useNavigate, Link } from 'react-router';
+import {
+  CreatorHomeProfile,
+  SearchBar,
+  SortBar,
+  PageHeader,
+} from '@/shared/components';
 import { CreatorHomeTrustScore } from '@/features/creatorHome';
 import { HorizontalCategoriesTab } from '@/shared/components';
 import { CreatorHomeReviewCard } from '@/shared/components';
-
+import { ArrowBackIcon, ShareIcon } from '@/shared/icons';
 import { CategoryType } from '@somesay/shared';
 import {
   MOCK_CREATOR,
@@ -26,6 +31,7 @@ const SORT_OPTIONS = [
 ];
 
 export const CreatorHomePage = () => {
+  const navigate = useNavigate();
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const [searchValue, setSearchValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
@@ -48,13 +54,27 @@ export const CreatorHomePage = () => {
     : filteredReviews.slice(0, 3);
 
   return (
-    <div className="flex w-full flex-col">
-      <CreatorHomeHeader />
+    <div className="mt-13.5 flex flex-col bg-white">
+      <PageHeader
+        left={
+          <button
+            type="button"
+            aria-label="뒤로 가기"
+            onClick={() => navigate(-1)}
+          >
+            <ArrowBackIcon aria-hidden="true" />
+          </button>
+        }
+        right={[
+          <Link key="share" to="/" aria-label="공유">
+            <ShareIcon aria-hidden="true" />
+          </Link>,
+        ]}
+      />{' '}
       <div className="mb-7.5 flex flex-col gap-5 px-4 pt-2">
         <CreatorHomeProfile {...MOCK_CREATOR} />
         <CreatorHomeTrustScore {...MOCK_TRUST_SCORE} isLoggedIn={true} />
       </div>
-
       {/* 검색 + 정렬 */}
       <div className="mb-6 flex flex-col gap-4 px-4">
         <SearchBar

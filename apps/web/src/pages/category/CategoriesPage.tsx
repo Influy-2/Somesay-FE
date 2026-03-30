@@ -1,5 +1,6 @@
 import { CategoryAccordion } from '@/features/category/components/CategoryAccordion';
 import { CategoryType } from '@somesay/shared';
+import { PageHeader } from '@/shared/components';
 
 // 임시 Mock 데이터
 const CATEGORY_MOCK_DATA: CategoryType[] = [
@@ -56,11 +57,8 @@ const CATEGORY_MOCK_DATA: CategoryType[] = [
 
 export const CategoriesPage = () => {
   return (
-    <>
-      <header className="flex h-13.5 w-full items-center justify-center bg-white px-4 py-2.5">
-        <h1 className="body1-sb">카테고리</h1>
-      </header>
-
+    <div className="mt-13.5 flex flex-col">
+      <PageHeader title="카테고리" />
       <div className="pt-5">
         <ul className="flex flex-col">
           {CATEGORY_MOCK_DATA.map((category) => (
@@ -68,6 +66,6 @@ export const CategoriesPage = () => {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
