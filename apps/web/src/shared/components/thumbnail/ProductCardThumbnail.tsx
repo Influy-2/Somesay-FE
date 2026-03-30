@@ -1,5 +1,5 @@
 // 컴포넌트 Thumbnail/기본형
-import Star16Icon from '@/shared/icons/Star16Icon.svg?react';
+import { Star16Icon } from '@/shared/icons';
 interface ProductCardThumbnailProps {
   brand: string;
   productName: string;

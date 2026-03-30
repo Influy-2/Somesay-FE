@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { CategoryType } from '@somesay/shared';
-import MainArrowIcon from '@/shared/icons/MainArrowIcon.svg?react';
+import { MainArrowIcon } from '@/shared/icons';
 
 interface CategoryAccordionProps {
   category: CategoryType;
@@ -44,7 +44,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
         role="region"
         className={`flex flex-col gap-6 px-8 pt-6 ${!isOpen ? 'hidden' : ''}`}
       >
-        {category.subCategories.map((sub) => (
+        {category.subCategories?.map((sub) => (
           <li key={sub.id} className="body2-m cursor-pointer">
             {sub.name}
           </li>

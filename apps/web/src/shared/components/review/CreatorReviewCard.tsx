@@ -1,6 +1,6 @@
 // Review/크리에이터 프로필 공개 컴포넌트
 import { BasicCreatorProfile } from '@/shared/components';
-import Star16Icon from '@/shared/icons/Star16Icon.svg?react';
+import { Star16Icon } from '@/shared/icons';
 import { BasicCreatorProfileType } from '@somesay/shared';
 
 interface CreatorReviewCardProps {

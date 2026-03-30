@@ -2,7 +2,7 @@ import { WhiteHeartButton } from '@/shared/components/buttons/HeartButton';
 import { SubcategoryProductType } from '@/features/subcategory';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
-import StarIcon from '@/shared/icons/Star16Icon.svg?react';
+import { Star16Icon as StarIcon } from '@/shared/icons';
 
 interface SearchResultsProductCardProps {
   product: SubcategoryProductType;
