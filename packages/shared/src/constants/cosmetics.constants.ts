@@ -1,7 +1,8 @@
 import type {
   SkinTypeOption,
   SkinConcernOption,
-  ProductSubCategoryGroup,
+  SubcategoryGroup,
+  CategoryType,
 } from '../types/category.types';
 
 // TODO: skinConcernId는 백엔드 API 응답값으로 교체 필요
@@ -31,54 +32,63 @@ export const SKIN_TYPE_OPTIONS: SkinTypeOption[] = [
   { skinTypeId: 7, label: '모르겠음' },
 ];
 
-// ⚠️ productCategoryId는 백엔드 API 응답값으로 교체 필요
-export const PRODUCT_SUB_CATEGORY_GROUPS: ProductSubCategoryGroup[] = [
+export const CATEGORIES: CategoryType[] = [
+  { categoryId: 1, categoryLabel: '전체' },
+  { categoryId: 2, categoryLabel: '클렌징/필링' },
+  { categoryId: 3, categoryLabel: '마스크/팩' },
+  { categoryId: 4, categoryLabel: '선케어' },
+  { categoryId: 5, categoryLabel: '베이스' },
+];
+
+// ⚠️ categoryId, subCategoryId는 백엔드 API 응답값으로 교체 필요
+export const CATEGORY_GROUPS: SubcategoryGroup[] = [
   {
-    categoryLabel: '전체',
-    subcategories: [{ subCategoryId: 1, label: '전체' }],
-  },
-  {
+    categoryId: 1,
     categoryLabel: '스킨케어',
     subcategories: [
-      { subCategoryId: 2, label: '스킨/토너' },
-      { subCategoryId: 3, label: '로션/에멀전' },
-      { subCategoryId: 4, label: '에센스/앰플/세럼' },
-      { subCategoryId: 5, label: '크림' },
-      { subCategoryId: 6, label: '미스트/오일' },
+      { subCategoryId: 101, label: '스킨/토너' },
+      { subCategoryId: 102, label: '로션/에멀전' },
+      { subCategoryId: 103, label: '에센스/앰플/세럼' },
+      { subCategoryId: 104, label: '크림' },
+      { subCategoryId: 105, label: '미스트/오일' },
     ],
   },
   {
+    categoryId: 2,
     categoryLabel: '마스크/팩',
     subcategories: [
-      { subCategoryId: 7, label: '시트 마스크' },
-      { subCategoryId: 8, label: '스킨/토너 패드' },
-      { subCategoryId: 9, label: '코팩' },
-      { subCategoryId: 10, label: '기타 마스크' },
+      { subCategoryId: 201, label: '시트 마스크' },
+      { subCategoryId: 202, label: '스킨/토너 패드' },
+      { subCategoryId: 203, label: '코팩' },
+      { subCategoryId: 204, label: '기타 마스크' },
     ],
   },
   {
+    categoryId: 3,
     categoryLabel: '클렌징',
     subcategories: [
-      { subCategoryId: 11, label: '클렌징 폼' },
-      { subCategoryId: 12, label: '클렌징 오일' },
-      { subCategoryId: 13, label: '클렌징 밤' },
-      { subCategoryId: 14, label: '클렌징 워터/밀크' },
-      { subCategoryId: 15, label: '필링/스크럽' },
+      { subCategoryId: 301, label: '클렌징 폼' },
+      { subCategoryId: 302, label: '클렌징 오일' },
+      { subCategoryId: 303, label: '클렌징 밤' },
+      { subCategoryId: 304, label: '클렌징 워터/밀크' },
+      { subCategoryId: 305, label: '필링/스크럽' },
     ],
   },
   {
+    categoryId: 4,
     categoryLabel: '선케어',
     subcategories: [
-      { subCategoryId: 16, label: '선크림' },
-      { subCategoryId: 17, label: '선앰플' },
+      { subCategoryId: 401, label: '선크림' },
+      { subCategoryId: 402, label: '선앰플' },
     ],
   },
   {
+    categoryId: 5,
     categoryLabel: '베이스 메이크업',
     subcategories: [
-      { subCategoryId: 18, label: '메이크업 베이스' },
-      { subCategoryId: 19, label: '쿠션' },
-      { subCategoryId: 20, label: '파운데이션' },
+      { subCategoryId: 501, label: '메이크업 베이스' },
+      { subCategoryId: 502, label: '쿠션' },
+      { subCategoryId: 503, label: '파운데이션' },
     ],
   },
 ];

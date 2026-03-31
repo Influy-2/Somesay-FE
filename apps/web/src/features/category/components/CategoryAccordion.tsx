@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { CategoryType } from '@somesay/shared';
+import { SubcategoryGroup } from '@somesay/shared';
 import { MainArrowIcon } from '@/shared/icons';
 
 interface CategoryAccordionProps {
-  category: CategoryType;
+  category: SubcategoryGroup;
 }
 
 export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const subListId = `subcategory-list-${category.id}`;
+  const subListId = `subcategory-list-${category.categoryId}`;
 
   const toggleAccordion = () => {
     setIsOpen((prev) => !prev);
@@ -29,11 +29,14 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
           <div className="flex items-center gap-3">
             {/* TODO: 나중에 실제 카테고리 아이콘으로 교체 */}
             <div className="bg-grey04 h-9 w-9 rounded-full" />
-            <span className="body1-sb">{category.title}</span>
+            <span className="body1-sb">{category.categoryLabel}</span>
           </div>
         </button>
         {/* TODO: 나중에 대분류 페이지로 이동 */}
-        <Link to={`/`} aria-label={`${category.title} 전체보기 페이지로 이동`}>
+        <Link
+          to={`/`}
+          aria-label={`${category.categoryLabel} 전체보기 페이지로 이동`}
+        >
           <MainArrowIcon />
         </Link>
       </div>
@@ -44,9 +47,9 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
         role="region"
         className={`flex flex-col gap-6 px-8 pt-6 ${!isOpen ? 'hidden' : ''}`}
       >
-        {category.subCategories?.map((sub) => (
-          <li key={sub.id} className="body2-m cursor-pointer">
-            {sub.name}
+        {category.subcategories.map((sub) => (
+          <li key={sub.subCategoryId} className="body2-m cursor-pointer">
+            {sub.label}
           </li>
         ))}
       </ul>

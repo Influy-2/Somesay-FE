@@ -8,28 +8,7 @@ import {
   SortBar,
 } from '@/shared/components';
 import { ArrowBackIcon, SearchIcon } from '@/shared/icons';
-
-const CATEGORY_MOCK_DATA = [
-  {
-    id: 1,
-    title: '스킨케어',
-    subcategories: [
-      { id: 101, name: '스킨/토너' },
-      { id: 102, name: '로션/에멀전' },
-      { id: 103, name: '에센스/앰플/세럼' },
-      { id: 104, name: '크림' },
-      { id: 105, name: '미스트/오일' },
-    ],
-  },
-  {
-    id: 2,
-    title: '클렌징',
-    subcategories: [
-      { id: 201, name: '클렌징 폼' },
-      { id: 202, name: '클렌징 오일' },
-    ],
-  },
-];
+import { CATEGORY_GROUPS } from '@somesay/shared';
 
 const SORT_OPTIONS = [
   { value: 'rating', label: '평점순' },
@@ -44,14 +23,16 @@ export const SubcategoriesPage = () => {
   const [selectedId, setSelectedId] = useState(0);
   const [currentSortValue, setCurrentSortValue] = useState('rating');
 
-  const currentCategory = CATEGORY_MOCK_DATA.find((c) => c.id === categoryId);
-  const categoryTitle = currentCategory?.title ?? '';
+  const currentCategory = CATEGORY_GROUPS.find(
+    (c) => c.categoryId === categoryId
+  );
+  const categoryTitle = currentCategory?.categoryLabel ?? '';
 
-  const tabCategories = [
-    { id: 0, title: '전체' },
-    ...(currentCategory?.subcategories?.map((sub) => ({
-      id: sub.id,
-      title: sub.name,
+  const tabSubcategories = [
+    { id: 0, label: '전체' },
+    ...(currentCategory?.subcategories.map((sub) => ({
+      id: sub.subCategoryId,
+      label: sub.label,
     })) ?? []),
   ];
 
@@ -74,7 +55,7 @@ export const SubcategoriesPage = () => {
             <ArrowBackIcon aria-hidden="true" />
           </button>
         }
-        title={currentCategory?.title ?? ''}
+        title={currentCategory?.categoryLabel ?? ''}
         right={[
           <button type="button" aria-label="검색">
             <SearchIcon aria-hidden="true" />
@@ -83,7 +64,7 @@ export const SubcategoriesPage = () => {
       />
       <div className="px-4">
         <HorizontalCategoriesTab
-          categories={tabCategories}
+          categories={tabSubcategories}
           selectedId={selectedId}
           onSelect={setSelectedId}
           ariaLabel={`${categoryTitle} 소분류 카테고리`}
@@ -100,7 +81,7 @@ export const SubcategoriesPage = () => {
       <div className="pt-6" />
       <SubcategoryProductList
         categoryId={categoryId}
-        selectedSubCategoryId={selectedId}
+        selectedSubcategoryId={selectedId}
       />
     </div>
   );

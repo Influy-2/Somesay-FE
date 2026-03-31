@@ -10,20 +10,12 @@ import { CreatorHomeTrustScore } from '@/features/creatorHome';
 import { HorizontalCategoriesTab } from '@/shared/components';
 import { CreatorHomeReviewCard } from '@/shared/components';
 import { ArrowBackIcon, ShareIcon } from '@/shared/icons';
-import { CategoryType } from '@somesay/shared';
+import { CATEGORIES } from '@somesay/shared';
 import {
   MOCK_CREATOR,
   MOCK_TRUST_SCORE,
   MOCK_CREATOR_REVIEWS,
 } from '../../features/creatorHome/components/mockData';
-
-const CATEGORIES: CategoryType[] = [
-  { id: 1, title: '전체' },
-  { id: 2, title: '클렌징/필링' },
-  { id: 3, title: '마스크/팩' },
-  { id: 4, title: '선케어' },
-  { id: 5, title: '베이스' },
-];
 
 const SORT_OPTIONS = [
   { value: 'popular', label: '인기순' },
@@ -70,7 +62,7 @@ export const CreatorHomePage = () => {
             <ShareIcon aria-hidden="true" />
           </Link>,
         ]}
-      />{' '}
+      />
       <div className="mb-7.5 flex flex-col gap-5 px-4 pt-2">
         <CreatorHomeProfile {...MOCK_CREATOR} />
         <CreatorHomeTrustScore {...MOCK_TRUST_SCORE} isLoggedIn={true} />
@@ -85,7 +77,10 @@ export const CreatorHomePage = () => {
           onClear={() => setSearchValue('')}
         />
         <HorizontalCategoriesTab
-          categories={CATEGORIES}
+          categories={CATEGORIES.map(({ categoryId, categoryLabel }) => ({
+            id: categoryId,
+            label: categoryLabel,
+          }))}
           selectedId={selectedCategoryId}
           onSelect={handleSelectCategory}
           ariaLabel="상품 카테고리"

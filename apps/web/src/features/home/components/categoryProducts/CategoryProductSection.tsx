@@ -1,16 +1,8 @@
 import { useState } from 'react';
 import { HorizontalCategoriesTab } from '@/shared/components/category/HorizontalCategoriesTab';
 import { BasicProductCard, MoreButton } from '@/shared/components';
-import { CategoryType } from '@somesay/shared';
+import { CATEGORIES } from '@somesay/shared';
 import { MOCK_CATEGORY_PRODUCTS } from './mockData';
-
-const CATEGORIES: CategoryType[] = [
-  { id: 1, title: '전체' },
-  { id: 2, title: '클렌징/필링' },
-  { id: 3, title: '마스크/팩' },
-  { id: 4, title: '선케어' },
-  { id: 5, title: '베이스' },
-];
 
 export const CategoryProductSection = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
@@ -19,7 +11,11 @@ export const CategoryProductSection = () => {
   // const { data: products = [] } = useCategoryProducts(selectedCategoryId);
 
   //TODO: 임시
-  const categories = CATEGORIES;
+  const categories = CATEGORIES.map((category) => ({
+    id: category.categoryId,
+    label: category.categoryLabel,
+  }));
+
   const products =
     MOCK_CATEGORY_PRODUCTS.find(
       (category) => category.categoryId === selectedCategoryId
@@ -62,7 +58,7 @@ export const CategoryProductSection = () => {
         {/* 더보기 버튼 */}
         <MoreButton
           to={'/임시'}
-          text={`${CATEGORIES.find((c) => c.id === selectedCategoryId)?.title === '전체' ? '' : CATEGORIES.find((c) => c.id === selectedCategoryId)?.title} 상품 더보기`}
+          text={`${CATEGORIES.find((c) => c.categoryId === selectedCategoryId)?.categoryLabel === '전체' ? '' : CATEGORIES.find((c) => c.categoryId === selectedCategoryId)?.categoryLabel} 상품 더보기`}
         />
       </div>
     </section>

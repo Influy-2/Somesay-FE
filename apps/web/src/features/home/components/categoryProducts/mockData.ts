@@ -1,19 +1,7 @@
-// features/home/mocks/categories.mock.ts
-import { CategoryType } from '@somesay/shared';
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProfile2Img from '@/assets/mock_profile2_img.png';
 import mockProfile3Img from '@/assets/mock_profile3_img.png';
 import mockProductImg from '@/assets/mock_product_img.png';
-
-export const CATEGORIES: CategoryType[] = [
-  { id: 1, title: '전체' },
-  { id: 2, title: '클렌징/필링' },
-  { id: 3, title: '마스크/팩' },
-  { id: 4, title: '선케어' },
-  { id: 5, title: '베이스' },
-];
-
-// features/home/mocks/categoryProducts.mock.ts
 import { ProductCardType, ProductsByCategory } from '@somesay/shared';
 
 const MOCK_CREATORS = [

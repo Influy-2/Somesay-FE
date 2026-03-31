@@ -4,19 +4,19 @@ import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
 
 interface SubcategoryProductListProps {
   categoryId: number;
-  selectedSubCategoryId: number;
+  selectedSubcategoryId: number;
 }
 
 export const SubcategoryProductList = ({
   categoryId,
-  selectedSubCategoryId,
+  selectedSubcategoryId,
 }: SubcategoryProductListProps) => {
   const [products, setProducts] = useState(MOCK_SUBCATEGORY_PRODUCTS);
 
   const filteredProducts =
-    selectedSubCategoryId === 0
+    selectedSubcategoryId === 0
       ? products.filter((p) => p.categoryId === categoryId)
-      : products.filter((p) => p.subCategoryId === selectedSubCategoryId);
+      : products.filter((p) => p.subCategoryId === selectedSubcategoryId);
 
   const handleHeartToggle = (productId: number) => {
     setProducts((prev) =>

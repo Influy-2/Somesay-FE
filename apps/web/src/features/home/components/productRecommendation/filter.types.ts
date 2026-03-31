@@ -1,13 +1,13 @@
 import type {
   SkinConcernOption,
   SkinTypeOption,
-  ProductSubCategoryOption,
+  SubcategoryOption,
 } from '@somesay/shared';
 
-export type FilterCategoryType = 'skinConcern' | 'skinType' | 'productCategory';
+export type FilterCategoryType = 'skinConcern' | 'skinType' | 'category';
 
 export interface SelectedFiltersType {
   skinConcern: SkinConcernOption[];
   skinType: SkinTypeOption[];
-  productCategory: ProductSubCategoryOption[];
+  category: SubcategoryOption[];
 }
