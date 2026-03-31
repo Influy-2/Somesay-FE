@@ -2,6 +2,7 @@ import type {
   SkinTypeOption,
   SkinConcernOption,
   SubcategoryGroup,
+  CategoryType,
 } from '../types/category.types';
 
 // TODO: skinConcernId는 백엔드 API 응답값으로 교체 필요
@@ -31,13 +32,16 @@ export const SKIN_TYPE_OPTIONS: SkinTypeOption[] = [
   { skinTypeId: 7, label: '모르겠음' },
 ];
 
+export const CATEGORIES: CategoryType[] = [
+  { categoryId: 1, categoryLabel: '전체' },
+  { categoryId: 2, categoryLabel: '클렌징/필링' },
+  { categoryId: 3, categoryLabel: '마스크/팩' },
+  { categoryId: 4, categoryLabel: '선케어' },
+  { categoryId: 5, categoryLabel: '베이스' },
+];
+
 // ⚠️ categoryId, subCategoryId는 백엔드 API 응답값으로 교체 필요
-export const PRODUCT_SUB_CATEGORY_GROUPS: SubcategoryGroup[] = [
-  {
-    categoryId: 0,
-    categoryLabel: '전체',
-    subcategories: [{ subCategoryId: 1, label: '전체' }],
-  },
+export const CATEGORY_GROUPS: SubcategoryGroup[] = [
   {
     categoryId: 1,
     categoryLabel: '스킨케어',

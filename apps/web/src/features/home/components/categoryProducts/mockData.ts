@@ -6,11 +6,11 @@ import mockProfile3Img from '@/assets/mock_profile3_img.png';
 import mockProductImg from '@/assets/mock_product_img.png';
 
 export const CATEGORIES: CategoryType[] = [
-  { id: 1, title: '전체' },
-  { id: 2, title: '클렌징/필링' },
-  { id: 3, title: '마스크/팩' },
-  { id: 4, title: '선케어' },
-  { id: 5, title: '베이스' },
+  { categoryId: 1, categoryLabel: '전체' },
+  { categoryId: 2, categoryLabel: '클렌징/필링' },
+  { categoryId: 3, categoryLabel: '마스크/팩' },
+  { categoryId: 4, categoryLabel: '선케어' },
+  { categoryId: 5, categoryLabel: '베이스' },
 ];
 
 // features/home/mocks/categoryProducts.mock.ts

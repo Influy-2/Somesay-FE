@@ -8,7 +8,7 @@ import {
   SortBar,
 } from '@/shared/components';
 import { ArrowBackIcon, SearchIcon } from '@/shared/icons';
-import { PRODUCT_SUB_CATEGORY_GROUPS } from '@somesay/shared';
+import { CATEGORY_GROUPS } from '@somesay/shared';
 
 const SORT_OPTIONS = [
   { value: 'rating', label: '평점순' },
@@ -23,7 +23,7 @@ export const SubcategoriesPage = () => {
   const [selectedId, setSelectedId] = useState(0);
   const [currentSortValue, setCurrentSortValue] = useState('rating');
 
-  const currentCategory = PRODUCT_SUB_CATEGORY_GROUPS.find(
+  const currentCategory = CATEGORY_GROUPS.find(
     (c) => c.categoryId === categoryId
   );
   const categoryTitle = currentCategory?.categoryLabel ?? '';

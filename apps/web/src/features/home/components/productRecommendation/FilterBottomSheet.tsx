@@ -5,8 +5,14 @@ import { FilterCategoryTab, CTAButton } from '@/shared/components';
 import {
   SKIN_CONCERN_OPTIONS,
   SKIN_TYPE_OPTIONS,
-  PRODUCT_SUB_CATEGORY_GROUPS,
+  CATEGORY_GROUPS,
 } from '@somesay/shared';
+import type { SubcategoryOption } from '@somesay/shared';
+
+const ALL_SUBCATEGORY_OPTION: SubcategoryOption = {
+  subCategoryId: 0,
+  label: '전체',
+};
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
@@ -144,36 +150,36 @@ export const FilterBottomSheet = ({
               role="group"
               aria-label="카테고리 선택"
             >
-              {PRODUCT_SUB_CATEGORY_GROUPS.map((subCategory) => {
-                const firstItem = subCategory.subcategories[0];
-                return subCategory.categoryLabel === '전체' && firstItem ? (
-                  <FilterChip
-                    key={firstItem.subCategoryId}
-                    label={firstItem.label}
-                    selected={selectedFilters.category.includes(firstItem)}
-                    onClick={() => handleToggleFilter(firstItem)}
-                  />
-                ) : (
-                  <div
-                    className="flex w-full flex-col items-start gap-3 self-stretch"
-                    key={subCategory.categoryLabel}
-                  >
-                    <p className="body2-sb text-black">
-                      {subCategory.categoryLabel}
-                    </p>
-                    <div className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch">
-                      {subCategory.subcategories.map((filter) => (
-                        <FilterChip
-                          key={filter.subCategoryId}
-                          label={filter.label}
-                          selected={selectedFilters.category.includes(filter)}
-                          onClick={() => handleToggleFilter(filter)}
-                        />
-                      ))}
-                    </div>
+              {/* 전체 */}
+              <FilterChip
+                key={ALL_SUBCATEGORY_OPTION.subCategoryId}
+                label={ALL_SUBCATEGORY_OPTION.label}
+                selected={selectedFilters.category.some(
+                  (f) =>
+                    f.subCategoryId === ALL_SUBCATEGORY_OPTION.subCategoryId
+                )}
+                onClick={() => handleToggleFilter(ALL_SUBCATEGORY_OPTION)}
+              />
+
+              {/* 스킨케어, 마스크/팩, 클렌징 등 카테고리 그룹과 하위 카테고리를 맵핑하여 렌더링 */}
+              {CATEGORY_GROUPS.map((group) => (
+                <div
+                  className="flex w-full flex-col items-start gap-3 self-stretch"
+                  key={group.categoryId}
+                >
+                  <p className="body2-sb text-black">{group.categoryLabel}</p>
+                  <div className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch">
+                    {group.subcategories.map((filter) => (
+                      <FilterChip
+                        key={filter.subCategoryId}
+                        label={filter.label}
+                        selected={selectedFilters.category.includes(filter)}
+                        onClick={() => handleToggleFilter(filter)}
+                      />
+                    ))}
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
         )}

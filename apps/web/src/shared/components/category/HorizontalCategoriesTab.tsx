@@ -23,19 +23,19 @@ export const HorizontalCategoriesTab = ({
     >
       {categories.map((category) => (
         <button
-          key={category.id}
+          key={category.categoryId}
           role="tab"
           type="button"
-          aria-selected={selectedId === category.id}
-          onClick={() => onSelect(category.id)}
+          aria-selected={selectedId === category.categoryId}
+          onClick={() => onSelect(category.categoryId)}
           className={cn(
             'body2-m flex shrink-0 cursor-pointer items-center justify-center border border-solid px-3 py-1.5',
-            selectedId === category.id
+            selectedId === category.categoryId
               ? 'border-black text-black'
               : 'border-grey02 text-grey06'
           )}
         >
-          {category.title}
+          {category.categoryLabel}
         </button>
       ))}
     </div>
