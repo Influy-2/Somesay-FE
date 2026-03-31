@@ -79,6 +79,7 @@ export interface SubcategoryOption {
 //   subcategories: [
 //     { subCategoryId: 0, label: '스킨/토너' },
 export interface SubcategoryGroup {
+  categoryId: number;
   categoryLabel: string;
   subcategories: SubcategoryOption[];
 }
