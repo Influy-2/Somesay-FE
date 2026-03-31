@@ -19,9 +19,11 @@ export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 export { BasicCreatorProfile } from './profile/BasicCreatorProfile';
 
 export { CreatorRankingUpDownRow } from './profile/CreatorRankingUpDownRow';
+export { CreatorHomeProfile } from './profile/CreatorHomeProfile';
 
 /* buttons */
 export { WhiteHeartButton } from './buttons/HeartButton';
+export { BlackHeartButton } from './buttons/BlackHeartButton';
 export { MoreButton } from './buttons/MoreButton';
 export { ReviewVoteButton } from './buttons/ReviewVoteButton';
 export type { ReviewVoteType } from './buttons/ReviewVoteButton';
@@ -31,6 +33,7 @@ export { ResetButton } from './buttons/ResetButton';
 /* review */
 export { ReviewVoteCard } from './review/ReviewVoteCard';
 export { CreatorReviewCard } from './review/CreatorReviewCard';
+export { CreatorHomeReviewCard } from './review/CreatorHomeReviewCard';
 
 /* category */
 export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
@@ -47,6 +50,12 @@ export { FilterChip } from './filter/FilterChip';
 
 /* tab */
 export { FilterCategoryTab } from './tab/FilterCategoryTab';
+
+/*search*/
+export { SearchBar } from './search/SearchBar';
+
+/*sort */
+export { SortBar } from './sort/SortBar';
 
 /* snackbar */
 export { Snackbar } from './snackbar/Snackbar';

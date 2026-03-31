@@ -18,4 +18,8 @@ export const PATH = {
     BASE: '/my-page',
     LIKED_PRODUCTS: 'liked-products',
   },
+  CREATOR: {
+    BASE: '/creators',
+    HOME: (creatorId: string) => `/creators/${creatorId}`,
+  },
 };

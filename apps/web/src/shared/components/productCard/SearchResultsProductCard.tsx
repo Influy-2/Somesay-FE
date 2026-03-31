@@ -85,8 +85,8 @@ export const SearchResultsProductCard = ({
             <ChipBasic
               key={idx}
               label={type}
-              bgColor="grey05"
-              textColor="grey08"
+              bgColor="bg-grey05"
+              textColor="text-grey08"
             />
           ))}
         </div>
@@ -100,8 +100,8 @@ export const SearchResultsProductCard = ({
             <ChipBasic
               key={idx}
               label={effect}
-              bgColor="grey05"
-              textColor="grey08"
+              bgColor="bg-grey05"
+              textColor="text-grey08"
             />
           ))}
         </div>

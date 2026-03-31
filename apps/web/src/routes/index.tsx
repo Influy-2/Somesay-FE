@@ -7,6 +7,7 @@ import { BottomTabLayout } from '@/shared/components/layout/BottomTabLayout';
 import { HomePage } from '@/pages/home/HomePage';
 import { CategoriesPage } from '@/pages/category/CategoriesPage';
 import { SubcategoriesPage } from '@/pages/category/SubcategoriesPage';
+import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
 import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
 import { MyPage } from '@/pages/mypage/MyPage';
@@ -37,6 +38,10 @@ export const appRouter = createBrowserRouter([
       {
         path: `${PATH.CATEGORIES.BASE}/:categoryId`,
         element: <SubcategoriesPage />,
+      },
+      {
+        path: `${PATH.CREATOR.BASE}/:creatorId`,
+        element: <CreatorHomePage />,
       },
     ],
   },
