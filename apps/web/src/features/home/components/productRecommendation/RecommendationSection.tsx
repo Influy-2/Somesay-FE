@@ -50,6 +50,7 @@ export const RecommendationSection = () => {
           <br />딱 맞는 제품을 추천해 드려요
         </h2>
         <div className="flex flex-col items-start gap-6 self-stretch">
+          {/* 피부고민, 피부 타입, 카테고리 행 */}
           <div
             role="group"
             aria-label="나의 피부 정보"

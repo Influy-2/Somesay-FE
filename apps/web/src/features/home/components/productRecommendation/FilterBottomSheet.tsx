@@ -142,7 +142,7 @@ export const FilterBottomSheet = ({
             <div
               className="flex flex-wrap content-start items-start gap-y-8 self-stretch"
               role="group"
-              aria-label="제품군 선택"
+              aria-label="카테고리 선택"
             >
               {PRODUCT_SUB_CATEGORY_GROUPS.map((subCategory) => {
                 const firstItem = subCategory.subcategories[0];

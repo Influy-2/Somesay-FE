@@ -6,7 +6,7 @@ export const FILTER_CATEGORIES: {
 }[] = [
   { category: 'skinConcern', label: '피부 고민' },
   { category: 'skinType', label: '피부 타입' },
-  { category: 'productCategory', label: '제품군' },
+  { category: 'productCategory', label: '카테고리' },
 ];
 export const INITIAL_FILTERS: SelectedFiltersType = {
   skinConcern: [],
