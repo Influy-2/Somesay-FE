@@ -100,7 +100,7 @@ export const SubcategoriesPage = () => {
       <div className="pt-6" />
       <SubcategoryProductList
         categoryId={categoryId}
-        selectedSubCategoryId={selectedId}
+        selectedSubcategoryId={selectedId}
       />
     </div>
   );

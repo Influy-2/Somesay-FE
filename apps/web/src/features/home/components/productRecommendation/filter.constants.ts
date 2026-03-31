@@ -6,15 +6,15 @@ export const FILTER_CATEGORIES: {
 }[] = [
   { category: 'skinConcern', label: '피부 고민' },
   { category: 'skinType', label: '피부 타입' },
-  { category: 'productCategory', label: '카테고리' },
+  { category: 'category', label: '카테고리' },
 ];
 export const INITIAL_FILTERS: SelectedFiltersType = {
   skinConcern: [],
   skinType: [],
-  productCategory: [],
+  category: [],
 };
 export const MAX_SELECTIONS: Record<FilterCategoryType, number> = {
   skinConcern: 2,
   skinType: 1,
-  productCategory: 1,
+  category: 1,
 };

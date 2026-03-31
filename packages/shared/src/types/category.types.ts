@@ -1,4 +1,4 @@
-export interface SubCategoryType {
+export interface SubcategoryType {
   id: number;
   name: string;
 }
@@ -6,7 +6,7 @@ export interface SubCategoryType {
 export interface CategoryType {
   id: number;
   title: string;
-  subCategories?: SubCategoryType[];
+  subCategories?: SubcategoryType[];
 }
 
 type SkinConcern =
@@ -32,7 +32,7 @@ type SkinType =
   | '여드름성'
   | '모르겠음';
 
-type ProductSubCategory =
+type Subcategory =
   | '전체'
   // 스킨케어
   | '스킨/토너'
@@ -70,15 +70,15 @@ export interface SkinTypeOption {
 }
 
 // { subCategoryId: 0, label: '스킨/토너' },
-export interface ProductSubCategoryOption {
+export interface SubcategoryOption {
   subCategoryId: number;
-  label: ProductSubCategory;
+  label: Subcategory;
 }
 // {
 //   categoryLabel: '스킨케어',
 //   subcategories: [
 //     { subCategoryId: 0, label: '스킨/토너' },
-export interface ProductSubCategoryGroup {
+export interface SubcategoryGroup {
   categoryLabel: string;
-  subcategories: ProductSubCategoryOption[];
+  subcategories: SubcategoryOption[];
 }

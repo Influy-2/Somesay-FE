@@ -1,7 +1,7 @@
 import type {
   SkinTypeOption,
   SkinConcernOption,
-  ProductSubCategoryGroup,
+  SubcategoryGroup,
 } from '../types/category.types';
 
 // TODO: skinConcernId는 백엔드 API 응답값으로 교체 필요
@@ -31,8 +31,8 @@ export const SKIN_TYPE_OPTIONS: SkinTypeOption[] = [
   { skinTypeId: 7, label: '모르겠음' },
 ];
 
-// ⚠️ productCategoryId는 백엔드 API 응답값으로 교체 필요
-export const PRODUCT_SUB_CATEGORY_GROUPS: ProductSubCategoryGroup[] = [
+// ⚠️ categoryId는 백엔드 API 응답값으로 교체 필요
+export const PRODUCT_SUB_CATEGORY_GROUPS: SubcategoryGroup[] = [
   {
     categoryLabel: '전체',
     subcategories: [{ subCategoryId: 1, label: '전체' }],

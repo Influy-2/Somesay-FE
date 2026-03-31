@@ -134,10 +134,10 @@ export const FilterBottomSheet = ({
             </div>
           </div>
         )}
-        {activeCategory === 'productCategory' && (
+        {activeCategory === 'category' && (
           <div className="flex flex-col items-start gap-3 px-4">
             <p className="body2-m text-grey06">
-              최대 {MAX_SELECTIONS.productCategory}개 선택
+              최대 {MAX_SELECTIONS.category}개 선택
             </p>
             <div
               className="flex flex-wrap content-start items-start gap-y-8 self-stretch"
@@ -150,9 +150,7 @@ export const FilterBottomSheet = ({
                   <FilterChip
                     key={firstItem.subCategoryId}
                     label={firstItem.label}
-                    selected={selectedFilters.productCategory.includes(
-                      firstItem
-                    )}
+                    selected={selectedFilters.category.includes(firstItem)}
                     onClick={() => handleToggleFilter(firstItem)}
                   />
                 ) : (
@@ -168,9 +166,7 @@ export const FilterBottomSheet = ({
                         <FilterChip
                           key={filter.subCategoryId}
                           label={filter.label}
-                          selected={selectedFilters.productCategory.includes(
-                            filter
-                          )}
+                          selected={selectedFilters.category.includes(filter)}
                           onClick={() => handleToggleFilter(filter)}
                         />
                       ))}
