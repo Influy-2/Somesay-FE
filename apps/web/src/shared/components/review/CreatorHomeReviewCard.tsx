@@ -52,7 +52,7 @@ export const CreatorHomeReviewCard = ({
         </p>
       </div>
       {/* 구분선 */}
-      <hr className="border-grey03 w-full px-4" />{' '}
+      <hr className="border-grey03 w-full px-4" />
     </article>
   );
 };

@@ -62,7 +62,7 @@ export const CreatorHomePage = () => {
             <ShareIcon aria-hidden="true" />
           </Link>,
         ]}
-      />{' '}
+      />
       <div className="mb-7.5 flex flex-col gap-5 px-4 pt-2">
         <CreatorHomeProfile {...MOCK_CREATOR} />
         <CreatorHomeTrustScore {...MOCK_TRUST_SCORE} isLoggedIn={true} />
