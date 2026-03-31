@@ -28,11 +28,11 @@ export const SubcategoriesPage = () => {
   );
   const categoryTitle = currentCategory?.categoryLabel ?? '';
 
-  const tabCategories = [
-    { id: 0, title: '전체' },
+  const tabSubcategories = [
+    { id: 0, label: '전체' },
     ...(currentCategory?.subcategories.map((sub) => ({
       id: sub.subCategoryId,
-      title: sub.label,
+      label: sub.label,
     })) ?? []),
   ];
 
@@ -64,7 +64,7 @@ export const SubcategoriesPage = () => {
       />
       <div className="px-4">
         <HorizontalCategoriesTab
-          categories={tabCategories}
+          categories={tabSubcategories}
           selectedId={selectedId}
           onSelect={setSelectedId}
           ariaLabel={`${categoryTitle} 소분류 카테고리`}

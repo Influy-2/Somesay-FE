@@ -1,19 +1,7 @@
-// features/home/mocks/categories.mock.ts
-import { CategoryType } from '@somesay/shared';
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProfile2Img from '@/assets/mock_profile2_img.png';
 import mockProfile3Img from '@/assets/mock_profile3_img.png';
 import mockProductImg from '@/assets/mock_product_img.png';
-
-export const CATEGORIES: CategoryType[] = [
-  { categoryId: 1, categoryLabel: '전체' },
-  { categoryId: 2, categoryLabel: '클렌징/필링' },
-  { categoryId: 3, categoryLabel: '마스크/팩' },
-  { categoryId: 4, categoryLabel: '선케어' },
-  { categoryId: 5, categoryLabel: '베이스' },
-];
-
-// features/home/mocks/categoryProducts.mock.ts
 import { ProductCardType, ProductsByCategory } from '@somesay/shared';
 
 const MOCK_CREATORS = [

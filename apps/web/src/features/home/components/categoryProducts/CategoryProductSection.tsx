@@ -11,7 +11,11 @@ export const CategoryProductSection = () => {
   // const { data: products = [] } = useCategoryProducts(selectedCategoryId);
 
   //TODO: 임시
-  const categories = CATEGORIES;
+  const categories = CATEGORIES.map((category) => ({
+    id: category.categoryId,
+    label: category.categoryLabel,
+  }));
+
   const products =
     MOCK_CATEGORY_PRODUCTS.find(
       (category) => category.categoryId === selectedCategoryId
