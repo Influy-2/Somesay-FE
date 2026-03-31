@@ -8,7 +8,7 @@ import type { FilterCategoryType, SelectedFiltersType } from './filter.types';
 export const RecommendationSection = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
-  // 현재 활성화된 필터 카테고리 (피부고민, 피부타입, 제품군 중 하나)
+  // 현재 활성화된 필터 카테고리 (피부고민, 피부타입, 카테고리 중 하나)
   const [activeCategory, setActiveCategory] =
     useState<FilterCategoryType>('skinConcern');
 
@@ -16,7 +16,7 @@ export const RecommendationSection = () => {
   const [selectedFilters, setSelectedFilters] =
     useState<SelectedFiltersType>(INITIAL_FILTERS);
 
-  // (피부고민 피부타입 제품군) 중 하나 선택하면 해당 카테고리의 필터 시트 열기
+  // (피부고민 피부타입 카테고리) 중 하나 선택하면 해당 카테고리의 필터 시트 열기
   const handleOpenBottomSheet = (filter: FilterCategoryType) => {
     setActiveCategory(filter);
     setIsBottomSheetOpen(true);
