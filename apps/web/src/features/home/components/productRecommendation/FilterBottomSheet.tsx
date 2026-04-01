@@ -112,7 +112,7 @@ export const FilterBottomSheet = ({
                 <FilterChip
                   key={filter.skinConcernId}
                   label={filter.label}
-                  selected={selectedFilters.skinConcern.includes(filter)}
+                  isSelected={selectedFilters.skinConcern.includes(filter)}
                   onClick={() => handleToggleFilter(filter)}
                 />
               ))}
@@ -133,7 +133,7 @@ export const FilterBottomSheet = ({
                 <FilterChip
                   key={filter.skinTypeId}
                   label={filter.label}
-                  selected={selectedFilters.skinType.includes(filter)}
+                  isSelected={selectedFilters.skinType.includes(filter)}
                   onClick={() => handleToggleFilter(filter)}
                 />
               ))}
@@ -154,7 +154,7 @@ export const FilterBottomSheet = ({
               <FilterChip
                 key={ALL_SUBCATEGORY_OPTION.subCategoryId}
                 label={ALL_SUBCATEGORY_OPTION.label}
-                selected={selectedFilters.category.some(
+                isSelected={selectedFilters.category.some(
                   (f) =>
                     f.subCategoryId === ALL_SUBCATEGORY_OPTION.subCategoryId
                 )}
@@ -173,7 +173,7 @@ export const FilterBottomSheet = ({
                       <FilterChip
                         key={filter.subCategoryId}
                         label={filter.label}
-                        selected={selectedFilters.category.includes(filter)}
+                        isSelected={selectedFilters.category.includes(filter)}
                         onClick={() => handleToggleFilter(filter)}
                       />
                     ))}

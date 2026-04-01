@@ -61,6 +61,8 @@ export { FilterChip } from './chips/FilterChip';
 
 /* tab */
 export { FilterCategoryTab } from './tab/FilterCategoryTab';
+export { TabItem } from './tab/TabItem';
+export { TabBar } from './tab/TabBar';
 
 /*search*/
 export { SearchBar } from './search/SearchBar';
