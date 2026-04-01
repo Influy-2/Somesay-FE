@@ -23,6 +23,8 @@ export { default as RankingOnIcon } from './RankingOnIcon.svg?react';
 export { default as ReviewOffIcon } from './ReviewOffIcon.svg?react';
 export { default as ReviewOnIcon } from './ReviewOnIcon.svg?react';
 export { default as SearchIcon } from './SearchIcon.svg?react';
+export { default as RecentSearchIcon } from './RecentSearchIcon.svg?react';
+export { default as X16Icon } from './X16Icon.svg?react';
 export { default as SomesayIcon } from './SomesayIcon.svg?react';
 export { default as Star16Icon } from './Star16Icon.svg?react';
 export { default as Star20Icon } from './Star20Icon.svg?react';

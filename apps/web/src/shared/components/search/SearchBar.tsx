@@ -7,6 +7,7 @@ interface SearchBarProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;
   onClear: () => void;
+  autoFocus?: boolean;
 }
 
 export const SearchBar = ({
@@ -15,6 +16,7 @@ export const SearchBar = ({
   onChange,
   onSubmit,
   onClear,
+  autoFocus = false,
 }: SearchBarProps) => {
   const [hasSearched, setHasSearched] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -60,6 +62,7 @@ export const SearchBar = ({
         onBlur={handleBlur}
         placeholder={placeholder}
         aria-label={placeholder}
+        autoFocus={autoFocus}
         className="body2-m placeholder:text-grey05 mr-3.5 w-full bg-transparent outline-none [&::-webkit-search-cancel-button]:appearance-none"
       />
       <div className="flex items-center gap-2">

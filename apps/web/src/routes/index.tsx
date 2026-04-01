@@ -8,6 +8,7 @@ import { HomePage } from '@/pages/home/HomePage';
 import { CategoriesPage } from '@/pages/category/CategoriesPage';
 import { SubcategoriesPage } from '@/pages/category/SubcategoriesPage';
 import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
+import { SearchPage } from '@/pages/search/SearchPage';
 import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
 import { MyPage } from '@/pages/mypage/MyPage';
@@ -65,6 +66,10 @@ export const appRouter = createBrowserRouter([
             element: <ProductDetailPage />,
           },
         ],
+      },
+      {
+        path: PATH.SEARCH.BASE,
+        element: <SearchPage />,
       },
     ],
   },
