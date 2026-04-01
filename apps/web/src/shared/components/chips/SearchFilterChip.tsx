@@ -17,18 +17,13 @@ export const SearchFilterChip = ({
       type="button"
       onClick={onClick}
       className={cn(
-        'bg-grey02 inline-flex items-center justify-center gap-1 rounded-[1.25rem] px-2.5 py-1',
-        isSelected ? 'border border-black' : ''
+        'bg-grey02 inline-flex items-center justify-center gap-1 rounded-[1.25rem] border px-2.5 py-1',
+        isSelected
+          ? 'border-black text-black'
+          : 'text-grey06 border-transparent'
       )}
     >
-      <span
-        className={cn(
-          'body2-m whitespace-nowrap',
-          isSelected ? 'text-black' : 'text-grey06'
-        )}
-      >
-        {label}
-      </span>
+      <span className="body2-m whitespace-nowrap">{label}</span>
       <ToggleDownIcon className="size-[.625rem]" aria-hidden="true" />
     </button>
   );
