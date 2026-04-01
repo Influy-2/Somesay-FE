@@ -96,6 +96,11 @@ export const SearchHeader = ({
               onClick={() => onFilterChange('category')}
             />
           </div>
+          {/* 상단 최근 검색 글씨, 전체삭제 버튼 영역 */}
+          <div className="body2-m flex items-center justify-between">
+            <span className="text-grey08">최근 검색</span>
+            전체 삭제
+          </div>
         </>
       )}
     </header>
