@@ -56,8 +56,8 @@ export { HorizontalScrollProductCard } from './productCard/HorizontalScrollProdu
 /* bottom sheet */
 export { BottomSheet } from './bottomSheet/BottomSheet';
 
-// filter
-export { FilterChip } from './filter/FilterChip';
+/* filter chip */
+export { FilterChip } from './chips/FilterChip';
 
 /* tab */
 export { FilterCategoryTab } from './tab/FilterCategoryTab';
