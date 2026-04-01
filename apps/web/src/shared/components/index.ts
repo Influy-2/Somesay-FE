@@ -14,7 +14,7 @@ export { ReviewComment } from './comment/ReviewComment';
 /* chips */
 export { ChipLarge } from './chips/ChipLarge';
 export { ChipBasic } from './chips/ChipBasic';
-
+export { SearchFilterChip } from './chips/SearchFilterChip';
 /* thumbnail */
 export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 
@@ -57,7 +57,7 @@ export { HorizontalScrollProductCard } from './productCard/HorizontalScrollProdu
 export { BottomSheet } from './bottomSheet/BottomSheet';
 
 /* filter chip */
-export { FilterChip } from './chips/FilterChip';
+export { FilterChip } from './filter/FilterChip';
 
 /* tab */
 export { FilterCategoryTab } from './tab/FilterCategoryTab';

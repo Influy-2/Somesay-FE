@@ -1,17 +1,17 @@
 import ToggleDownIcon from '@/shared/icons/ToggleDownIcon.svg?react';
 import cn from '@/utils/cn';
 
-interface FilterChipProps {
+interface SearchFilterChipProps {
   label: string;
   isSelected?: boolean;
   onClick?: () => void;
 }
 
-export const FilterChip = ({
+export const SearchFilterChip = ({
   label,
   isSelected = false,
   onClick,
-}: FilterChipProps) => {
+}: SearchFilterChipProps) => {
   return (
     <button
       type="button"
@@ -29,7 +29,7 @@ export const FilterChip = ({
       >
         {label}
       </span>
-      <ToggleDownIcon className="size-[10px]" aria-hidden="true" />
+      <ToggleDownIcon className="size-[.625rem]" aria-hidden="true" />
     </button>
   );
 };

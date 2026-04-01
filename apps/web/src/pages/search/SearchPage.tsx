@@ -1,55 +1,70 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 
-import { ArrowBackIcon } from '@/shared/icons';
-import { SearchBar } from '@/shared/components';
-import { SearchBeforeSection, useRecentSearch } from '@/features/search';
+import {
+  SearchBeforeSection,
+  SearchHeader,
+  useRecentSearch,
+} from '@/features/search';
+
+type SearchTab = 'product' | 'review';
 
 export const SearchPage = () => {
-  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
+  const [isSearched, setIsSearched] = useState(false);
+  const [activeTab, setActiveTab] = useState<SearchTab>('product');
+  const [filterState, setFilterState] = useState({
+    skinType: false,
+    effect: false,
+    category: false,
+  });
+
   const { items, addItem, removeItem, clearAll } = useRecentSearch();
 
   const handleSubmit = () => {
     if (!searchValue.trim()) return;
     addItem(searchValue.trim());
-    // TODO: 8.2 검색 결과 페이지로 이동
+    setIsSearched(true);
+    // TODO: 8.2 검색 결과 불러오기
+  };
+
+  const handleClear = () => {
+    setSearchValue('');
+    setIsSearched(false);
   };
 
   const handleSelectRecentSearch = (query: string) => {
     setSearchValue(query);
     addItem(query);
-    // TODO: 8.2 검색 결과 페이지로 이동
+    setIsSearched(true);
+    // TODO: 8.2 검색 결과 불러오기
+  };
+
+  const handleFilterChange = (filter: keyof typeof filterState) => {
+    setFilterState((prev) => ({ ...prev, [filter]: !prev[filter] }));
   };
 
   return (
     <div className="flex h-dvh flex-col bg-white">
-      <header className="z-header flex h-fit items-center gap-2 bg-white px-4 py-2.5">
-        <button
-          type="button"
-          aria-label="뒤로 가기"
-          onClick={() => navigate(-1)}
-          className="shrink-0"
-        >
-          <ArrowBackIcon aria-hidden="true" />
-        </button>
-        <SearchBar
-          placeholder="내돈내산 후기가 궁금한 상품을 검색해보세요"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          onSubmit={handleSubmit}
-          onClear={() => setSearchValue('')}
-          autoFocus
-        />
-      </header>
-      <>
+      <SearchHeader
+        value={searchValue}
+        onQueryChange={(e) => setSearchValue(e.target.value)}
+        onQuerySubmit={handleSubmit}
+        onQueryClear={handleClear}
+        isSearched={isSearched}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        filterState={filterState}
+        onFilterChange={handleFilterChange}
+      />
+      {!isSearched && (
         <SearchBeforeSection
           recentSearches={items}
           onSelect={handleSelectRecentSearch}
           onRemove={removeItem}
           onClearAll={clearAll}
         />
-      </>
+      )}
+      {/* TODO: 8.2 isSearched && <SearchResultsSection activeTab={activeTab} filterState={filterState} /> */}
     </div>
   );
 };
