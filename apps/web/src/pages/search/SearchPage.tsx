@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router';
 
 import {
   SearchBeforeSection,
@@ -9,9 +10,15 @@ import {
 type SearchTab = 'product' | 'review';
 
 export const SearchPage = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const [isSearched, setIsSearched] = useState(false);
-  const [activeTab, setActiveTab] = useState<SearchTab>('product');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const q = searchParams.get('q') ?? '';
+  const activeTab = (searchParams.get('tab') ?? 'product') as SearchTab;
+  const isSearched = q.length > 0;
+
+  // 타이핑 중인 값 — 제출 전까지는 URL에 반영하지 않음
+  const [inputValue, setInputValue] = useState(q);
+
   const [filterState, setFilterState] = useState({
     skinType: false,
     effect: false,
@@ -21,22 +28,27 @@ export const SearchPage = () => {
   const { items, addItem, removeItem, clearAll } = useRecentSearch();
 
   const handleSubmit = () => {
-    if (!searchValue.trim()) return;
-    addItem(searchValue.trim());
-    setIsSearched(true);
-    // TODO: 8.2 검색 결과 불러오기
+    if (!inputValue.trim()) return;
+    addItem(inputValue.trim());
+    setSearchParams({ q: inputValue.trim(), tab: 'product' });
   };
 
   const handleClear = () => {
-    setSearchValue('');
-    setIsSearched(false);
+    setInputValue('');
+    setSearchParams({});
   };
 
   const handleSelectRecentSearch = (query: string) => {
-    setSearchValue(query);
+    setInputValue(query);
     addItem(query);
-    setIsSearched(true);
-    // TODO: 8.2 검색 결과 불러오기
+    setSearchParams({ q: query, tab: 'product' });
+  };
+
+  const handleTabChange = (tab: SearchTab) => {
+    setSearchParams((prev) => {
+      prev.set('tab', tab);
+      return prev;
+    });
   };
 
   const handleFilterChange = (filter: keyof typeof filterState) => {
@@ -46,13 +58,13 @@ export const SearchPage = () => {
   return (
     <div className="flex h-dvh flex-col bg-white">
       <SearchHeader
-        value={searchValue}
-        onQueryChange={(e) => setSearchValue(e.target.value)}
+        value={inputValue}
+        onQueryChange={(e) => setInputValue(e.target.value)}
         onQuerySubmit={handleSubmit}
         onQueryClear={handleClear}
         isSearched={isSearched}
         activeTab={activeTab}
-        onTabChange={setActiveTab}
+        onTabChange={handleTabChange}
         filterState={filterState}
         onFilterChange={handleFilterChange}
       />
