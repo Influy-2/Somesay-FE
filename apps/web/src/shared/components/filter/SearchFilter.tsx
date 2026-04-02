@@ -5,7 +5,7 @@ import cn from '@/utils/cn';
 interface SearchFilterProps {
   placeholder: string;
   selectedLabel: string[];
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export const SearchFilter = ({
@@ -16,7 +16,7 @@ export const SearchFilter = ({
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={() => onClick}
       className={cn(
         'bg-grey02 body2-m inline-flex items-center justify-center gap-1 rounded-[1.25rem] border px-2.5 py-1 whitespace-nowrap',
         selectedLabel.length > 0

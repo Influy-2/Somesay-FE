@@ -14,7 +14,7 @@ export { ReviewComment } from './comment/ReviewComment';
 /* chips */
 export { ChipLarge } from './chips/ChipLarge';
 export { ChipBasic } from './chips/ChipBasic';
-export { SearchFilterChip } from './chips/SearchFilterChip';
+export { SearchFilter } from './filter/SearchFilter';
 /* thumbnail */
 export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 

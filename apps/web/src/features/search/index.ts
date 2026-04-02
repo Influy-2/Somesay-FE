@@ -1,4 +1,11 @@
 export { SearchBeforeSection } from './components/SearchBeforeSection';
 export { SearchHeader } from './components/SearchHeader';
 export { useRecentSearch } from './hooks/useRecentSearch';
-export type { RecentSearchItemType } from './search.types';
+export { useSearchQuery } from './hooks/useSearchQuery';
+export type {
+  RecentSearchItemType,
+  SearchFilterGroupType,
+  SelectedFiltersType,
+  SearchTabType,
+  FilterOptionType,
+} from './types/search.types';
