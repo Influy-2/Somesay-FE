@@ -1,6 +1,9 @@
 import { FILTER_CATEGORIES, MAX_SELECTIONS } from './filter.constants';
 import { BottomSheet, FilterChip, ResetButton } from '@/shared/components';
-import type { FilterGroupType, SelectedFiltersType } from './filter.types';
+import type {
+  RecommendedFilterGroupType,
+  SelectedFiltersType,
+} from './filter.types';
 import { FilterGroupTab, CTAButton } from '@/shared/components';
 import {
   SKIN_CONCERN_OPTIONS,
@@ -19,14 +22,16 @@ interface FilterBottomSheetProps {
   onClose: () => void;
   selectedFilters: SelectedFiltersType;
   setSelectedFilters: React.Dispatch<React.SetStateAction<SelectedFiltersType>>;
-  activeCategory: FilterGroupType;
-  onCategoryChange: (category: FilterGroupType) => void; // setter와 시그니처 일치
+  activeCategory: RecommendedFilterGroupType;
+  onCategoryChange: (category: RecommendedFilterGroupType) => void; // setter와 시그니처 일치
   onSubmit: () => void;
   onReset: () => void;
   isSubmitEnabled: boolean;
 }
 
-const getItemId = (v: SelectedFiltersType[FilterGroupType][number]): number => {
+const getItemId = (
+  v: SelectedFiltersType[RecommendedFilterGroupType][number]
+): number => {
   if ('skinConcernId' in v) return v.skinConcernId;
   if ('skinTypeId' in v) return v.skinTypeId;
   return v.subCategoryId;
@@ -44,7 +49,7 @@ export const FilterBottomSheet = ({
   isSubmitEnabled,
 }: FilterBottomSheetProps) => {
   const handleToggleFilter = (
-    item: SelectedFiltersType[FilterGroupType][number]
+    item: SelectedFiltersType[RecommendedFilterGroupType][number]
   ) => {
     const itemId = getItemId(item);
     setSelectedFilters((prev) => {
