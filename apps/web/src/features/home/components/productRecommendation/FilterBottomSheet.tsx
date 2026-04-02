@@ -1,7 +1,7 @@
 import { FILTER_CATEGORIES, MAX_SELECTIONS } from './filter.constants';
 import { BottomSheet, FilterChip, ResetButton } from '@/shared/components';
-import type { FilterCategoryType, SelectedFiltersType } from './filter.types';
-import { FilterCategoryTab, CTAButton } from '@/shared/components';
+import type { FilterGroupType, SelectedFiltersType } from './filter.types';
+import { FilterGroupTab, CTAButton } from '@/shared/components';
 import {
   SKIN_CONCERN_OPTIONS,
   SKIN_TYPE_OPTIONS,
@@ -19,16 +19,14 @@ interface FilterBottomSheetProps {
   onClose: () => void;
   selectedFilters: SelectedFiltersType;
   setSelectedFilters: React.Dispatch<React.SetStateAction<SelectedFiltersType>>;
-  activeCategory: FilterCategoryType;
-  onCategoryChange: (category: FilterCategoryType) => void; // setter와 시그니처 일치
+  activeCategory: FilterGroupType;
+  onCategoryChange: (category: FilterGroupType) => void; // setter와 시그니처 일치
   onSubmit: () => void;
   onReset: () => void;
   isSubmitEnabled: boolean;
 }
 
-const getItemId = (
-  v: SelectedFiltersType[FilterCategoryType][number]
-): number => {
+const getItemId = (v: SelectedFiltersType[FilterGroupType][number]): number => {
   if ('skinConcernId' in v) return v.skinConcernId;
   if ('skinTypeId' in v) return v.skinTypeId;
   return v.subCategoryId;
@@ -46,7 +44,7 @@ export const FilterBottomSheet = ({
   isSubmitEnabled,
 }: FilterBottomSheetProps) => {
   const handleToggleFilter = (
-    item: SelectedFiltersType[FilterCategoryType][number]
+    item: SelectedFiltersType[FilterGroupType][number]
   ) => {
     const itemId = getItemId(item);
     setSelectedFilters((prev) => {
@@ -76,7 +74,7 @@ export const FilterBottomSheet = ({
       onClose={onClose}
       ariaLabel="제품 옵션 선택 필터"
       header={
-        <FilterCategoryTab
+        <FilterGroupTab
           categories={FILTER_CATEGORIES}
           activeCategory={activeCategory}
           onCategoryChange={onCategoryChange}

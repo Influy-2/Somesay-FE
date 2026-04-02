@@ -60,7 +60,7 @@ export { BottomSheet } from './bottomSheet/BottomSheet';
 export { FilterChip } from './filter/FilterChip';
 
 /* tab */
-export { FilterCategoryTab } from './tab/FilterCategoryTab';
+export { FilterGroupTab } from './tab/FilterGroupTab';
 export { TabItem } from './tab/TabItem';
 export { TabBar } from './tab/TabBar';
 

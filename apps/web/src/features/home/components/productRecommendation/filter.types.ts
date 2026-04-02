@@ -4,7 +4,7 @@ import type {
   SubcategoryOption,
 } from '@somesay/shared';
 
-export type FilterCategoryType = 'skinConcern' | 'skinType' | 'category';
+export type FilterGroupType = 'skinConcern' | 'skinType' | 'category';
 
 export interface SelectedFiltersType {
   skinConcern: SkinConcernOption[];

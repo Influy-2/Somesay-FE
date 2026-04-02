@@ -1,7 +1,7 @@
-import type { FilterCategoryType, SelectedFiltersType } from './filter.types';
+import type { FilterGroupType, SelectedFiltersType } from './filter.types';
 
 export const FILTER_CATEGORIES: {
-  category: FilterCategoryType;
+  category: FilterGroupType;
   label: string;
 }[] = [
   { category: 'skinConcern', label: '피부 고민' },
@@ -13,7 +13,7 @@ export const INITIAL_FILTERS: SelectedFiltersType = {
   skinType: [],
   category: [],
 };
-export const MAX_SELECTIONS: Record<FilterCategoryType, number> = {
+export const MAX_SELECTIONS: Record<FilterGroupType, number> = {
   skinConcern: 2,
   skinType: 1,
   category: 1,

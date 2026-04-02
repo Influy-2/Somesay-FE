@@ -3,21 +3,21 @@ import { TypeRow } from './TypeRow';
 import { useState } from 'react';
 import { FilterBottomSheet } from './FilterBottomSheet';
 import { FILTER_CATEGORIES, INITIAL_FILTERS } from './filter.constants';
-import type { FilterCategoryType, SelectedFiltersType } from './filter.types';
+import type { FilterGroupType, SelectedFiltersType } from './filter.types';
 
 export const RecommendationSection = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   // 현재 활성화된 필터 카테고리 (피부고민, 피부타입, 카테고리 중 하나)
   const [activeCategory, setActiveCategory] =
-    useState<FilterCategoryType>('skinConcern');
+    useState<FilterGroupType>('skinConcern');
 
   // 필터별 선택한 옵션들
   const [selectedFilters, setSelectedFilters] =
     useState<SelectedFiltersType>(INITIAL_FILTERS);
 
   // (피부고민 피부타입 카테고리) 중 하나 선택하면 해당 카테고리의 필터 시트 열기
-  const handleOpenBottomSheet = (filter: FilterCategoryType) => {
+  const handleOpenBottomSheet = (filter: FilterGroupType) => {
     setActiveCategory(filter);
     setIsBottomSheetOpen(true);
   };
@@ -31,7 +31,7 @@ export const RecommendationSection = () => {
   const handleReset = () => setSelectedFilters(INITIAL_FILTERS);
 
   // 선택한 옵션을 label 배열로 반환
-  const getSelectedLabel = (category: FilterCategoryType): string[] =>
+  const getSelectedLabel = (category: FilterGroupType): string[] =>
     selectedFilters[category].map((c) => c.label);
 
   // 제출 버튼 활성화 여부
