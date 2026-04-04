@@ -22,4 +22,8 @@ export const PATH = {
     BASE: '/creators',
     HOME: (creatorId: string) => `/creators/${creatorId}`,
   },
+  PRODUCT: {
+    BASE: '/products',
+    DETAIL: (productId: string) => `/products/${productId}`,
+  },
 };

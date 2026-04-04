@@ -11,6 +11,7 @@ import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
 import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
 import { MyPage } from '@/pages/mypage/MyPage';
+import { ProductDetailPage } from '@/pages/productDetail/ProductDetailPage';
 
 export const appRouter = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const appRouter = createBrowserRouter([
       {
         path: `${PATH.CREATOR.BASE}/:creatorId`,
         element: <CreatorHomePage />,
+      },
+      {
+        path: `${PATH.PRODUCT.BASE}/:productId`,
+        element: <ProductDetailPage />,
       },
     ],
   },
