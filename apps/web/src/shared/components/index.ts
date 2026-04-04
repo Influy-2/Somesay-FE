@@ -29,16 +29,19 @@ export { ReviewVoteButton } from './buttons/ReviewVoteButton';
 export type { ReviewVoteType } from './buttons/ReviewVoteButton';
 export { CTAButton } from './buttons/CTAButton';
 export { ResetButton } from './buttons/ResetButton';
+export { OnOffButton } from './buttons/OnOffButton';
 
 /* review */
 export { ReviewVoteCard } from './review/ReviewVoteCard';
 export { CreatorReviewCard } from './review/CreatorReviewCard';
 export { CreatorHomeReviewCard } from './review/CreatorHomeReviewCard';
+export { CreatorInfoReview } from './review/CreatorInfoReview';
 
 /* category */
 export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
 
 /* product card */
+export { AvatarStack } from './productCard/AvatarStack';
 export { BasicProductCard } from './productCard/BasicProductCard';
 export { SearchResultsProductCard } from './productCard/SearchResultsProductCard';
 
