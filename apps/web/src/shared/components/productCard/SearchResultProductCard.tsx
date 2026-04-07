@@ -4,15 +4,15 @@ import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
 import { Star16Icon as StarIcon } from '@/shared/icons';
 
-interface SearchResultsProductCardProps {
+interface SearchResultProductCardProps {
   product: SubcategoryProductType;
   onHeartToggle: (productId: number) => void;
 }
 
-export const SearchResultsProductCard = ({
+export const SearchResultProductCard = ({
   product,
   onHeartToggle,
-}: SearchResultsProductCardProps) => {
+}: SearchResultProductCardProps) => {
   return (
     <article
       className="flex flex-col gap-5 border-b border-gray-200 px-4 pb-6"

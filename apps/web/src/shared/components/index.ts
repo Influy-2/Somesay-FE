@@ -50,7 +50,7 @@ export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
 /* product card */
 export { AvatarStack } from './productCard/AvatarStack';
 export { BasicProductCard } from './productCard/BasicProductCard';
-export { SearchResultsProductCard } from './productCard/SearchResultsProductCard';
+export { SearchResultProductCard } from './productCard/SearchResultProductCard';
 export { HorizontalScrollProductCard } from './productCard/HorizontalScrollProductCard';
 
 /* bottom sheet */
