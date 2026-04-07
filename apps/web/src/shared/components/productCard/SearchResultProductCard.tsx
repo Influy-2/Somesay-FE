@@ -3,6 +3,7 @@ import { SubcategoryProductType } from '@/features/subcategory';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
 import { Star16Icon as StarIcon } from '@/shared/icons';
+import { Link } from 'react-router';
 
 interface SearchResultProductCardProps {
   product: SubcategoryProductType;
@@ -15,17 +16,18 @@ export const SearchResultProductCard = ({
 }: SearchResultProductCardProps) => {
   return (
     <article
-      className="flex flex-col gap-5 border-b border-gray-200 px-4 pb-6"
-      aria-label={`${product.brand} ${product.productName}`}
+      className="border-grey02 relative flex flex-col gap-5 border-b px-4 pb-6"
+      aria-label={`${product.brand} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.rating}점`}
     >
       <div className="flex gap-3">
-        <div className="relative h-[117.51414px] w-26 shrink-0">
+        {/* 이미지 */}
+        <div className="border-grey02 relative h-[117.5px] w-26 shrink-0 overflow-hidden border">
           <img
             src={product.imageUrl}
-            alt={product.productName}
+            alt=""
             className="h-full w-full object-cover"
           />
-          <div className="absolute right-1 bottom-1">
+          <div className="absolute right-1 bottom-1 z-1">
             <WhiteHeartButton
               isHearted={product.isHearted}
               onHeartToggle={() => onHeartToggle(product.productId)}
@@ -34,44 +36,46 @@ export const SearchResultProductCard = ({
           </div>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <div>
-            <span className="body2-m grey-black">{product.brand}</span>
-            <span className="body2-m text-grey-black line-clamp-2 leading-snug">
-              {product.productName}
+        {/* 텍스트 정보 */}
+        <div className="flex flex-1 flex-col justify-between">
+          <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1">
+              <span className="body2-m text-black">{product.brand}</span>
+              <span className="body2-m line-clamp-2 text-black">
+                {product.productName}
+              </span>
+            </div>
+            <span className="body2-m text-black">
+              {product.price.toLocaleString()}원
             </span>
           </div>
 
-          <div>
-            <span className="body2-m">{product.price.toLocaleString()}원</span>
-
-            <div className="mt-1 flex items-center gap-1">
-              {/* 별점 */}
-              <div
-                className="flex items-center"
-                aria-label={`별점 ${product.rating}점`}
-              >
-                <StarIcon className="size-4" />
-                <span className="body2-sb">{product.rating}</span>
-              </div>
-              {/* 리뷰수 */}
-              <span
-                className="body2-m"
-                aria-label={`리뷰 ${product.reviewCount.toLocaleString()}개`}
-              >
-                ({product.reviewCount.toLocaleString()})
-              </span>
-              {/* 크리에이터 프로필 스택 */}
-              <AvatarStack creators={product.creators}></AvatarStack>
+          <div className="flex items-center gap-1">
+            {/* 별점 */}
+            <div
+              className="flex items-center"
+              aria-label={`별점 ${product.rating}점`}
+            >
+              <StarIcon className="size-4" />
+              <span className="body2-sb">{product.rating}</span>
             </div>
+            {/* 리뷰수 */}
+            <span
+              className="body2-m"
+              aria-label={`리뷰 ${product.reviewCount.toLocaleString()}개`}
+            >
+              ({product.reviewCount.toLocaleString()})
+            </span>
+            {/* 크리에이터 프로필 스택 */}
+            <AvatarStack creators={product.creators} />
           </div>
         </div>
       </div>
 
-      {/*리뷰 한 줄 요약 */}
-      <p className="body2-sb text-grey-black">{product.reviewSummary}</p>
+      {/* 리뷰 한 줄 요약 */}
+      <p className="body2-sb text-grey09">{product.reviewSummary}</p>
 
-      {/*칩 영역 (잘 맞는 타입, 기대 효과) */}
+      {/* 칩 영역 (잘 맞는 타입, 기대 효과) */}
       <div
         className="grid grid-cols-[auto_1fr] items-start gap-x-3 gap-y-3"
         aria-label="상품 태그 정보"
@@ -81,9 +85,9 @@ export const SearchResultProductCard = ({
           className="flex flex-wrap gap-x-1 gap-y-2"
           aria-label={`잘 맞는 타입: ${product.skinTypes.join(', ')}`}
         >
-          {product.skinTypes.map((type, idx) => (
+          {product.skinTypes.map((type) => (
             <ChipBasic
-              key={idx}
+              key={type}
               label={type}
               bgColor="bg-grey05"
               textColor="text-grey08"
@@ -98,7 +102,7 @@ export const SearchResultProductCard = ({
         >
           {product.expectedEffects.map((effect, idx) => (
             <ChipBasic
-              key={idx}
+              key={`${effect}-${idx}`}
               label={effect}
               bgColor="bg-grey05"
               textColor="text-grey08"
@@ -106,6 +110,8 @@ export const SearchResultProductCard = ({
           ))}
         </div>
       </div>
+      {/* TODO: 임시 링크 */}
+      <Link to={`/`} className="absolute inset-0" />
     </article>
   );
 };

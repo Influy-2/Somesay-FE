@@ -8,8 +8,22 @@ import {
   SelectedFiltersType,
   SearchResultSection,
 } from '@/features/search';
+import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
+import type { SubcategoryProductType } from '@/features/subcategory';
 
 export const SearchPage = () => {
+  const [products, setProducts] = useState<SubcategoryProductType[]>(
+    MOCK_SUBCATEGORY_PRODUCTS
+  );
+
+  const handleHeartToggle = (productId: number) => {
+    setProducts((prev) =>
+      prev.map((p) =>
+        p.productId === productId ? { ...p, isHearted: !p.isHearted } : p
+      )
+    );
+  };
+
   //선택한 필터 상태
   const [selectedFilters, setSelectedFilters] = useState<SelectedFiltersType>({
     skinType: [],
@@ -59,7 +73,12 @@ export const SearchPage = () => {
           onClearAll={clearAll}
         />
       )}
-      {isSearched && <SearchResultSection />}
+      {isSearched && activeTab === 'product' && (
+        <SearchResultSection
+          products={products}
+          onHeartToggle={handleHeartToggle}
+        />
+      )}
     </div>
   );
 };

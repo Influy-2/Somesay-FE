@@ -36,7 +36,7 @@ export const SortBar = ({
 
   return (
     <>
-      <div className="flex h-4 items-center justify-between">
+      <div className="flex items-center justify-between bg-white px-4 py-3.5">
         {/* 좌측 개수 */}
         <span className="body2-m text-grey08" aria-live="polite">
           {count >= COUNT_OVERFLOW_THRESHOLD
