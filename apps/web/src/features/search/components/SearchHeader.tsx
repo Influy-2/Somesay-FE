@@ -101,7 +101,7 @@ export const SearchHeader = ({
             <div
               role="group"
               aria-label="검색 결과 필터"
-              className="scrollbar-hide flex w-full gap-3 overflow-x-auto px-4 pt-4"
+              className="scrollbar-hide border-b-grey03 flex w-full gap-3 overflow-x-auto border-b px-4 py-3.5"
             >
               {FILTER_GROUP_CONFIG.map(({ key, placeholder }) => (
                 <SearchFilter
