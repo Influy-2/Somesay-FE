@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ToggleDownIcon } from '@/shared/icons';
 import { BottomSheet } from '@/shared/components';
-
+import cn from '@/utils/cn';
 //이 수 넘기면 9999+로 표현
 const COUNT_OVERFLOW_THRESHOLD = 9999;
 
@@ -65,22 +65,20 @@ export const SortBar = ({
         ariaLabel="정렬 선택"
         height="min-h-[30vh]"
       >
-        <ul className="flex flex-col px-5 pb-8">
-          {sortOptions.map((option, index) => (
+        <ul className="divide-grey03 flex flex-col gap-5 divide-y px-4 pb-8">
+          {sortOptions.map((option) => (
             <li key={option.value}>
               <button
-                className={`w-full py-4 text-left text-[15px] ${
+                className={cn(
+                  'body1-sb w-full cursor-pointer pb-5 text-left',
                   currentSortValue === option.value
-                    ? 'font-bold text-black'
-                    : 'font-medium text-gray-400'
-                }`}
+                    ? 'text-black'
+                    : 'text-grey05'
+                )}
                 onClick={() => handleSelect(option.value)}
               >
                 {option.label}
               </button>
-              {index !== sortOptions.length - 1 && (
-                <hr className="border-gray-100" />
-              )}
             </li>
           ))}
         </ul>
