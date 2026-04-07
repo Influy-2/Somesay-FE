@@ -6,6 +6,7 @@ import {
   useRecentSearch,
   useSearchQuery,
   SelectedFiltersType,
+  SearchResultSection,
 } from '@/features/search';
 
 export const SearchPage = () => {
@@ -58,7 +59,7 @@ export const SearchPage = () => {
           onClearAll={clearAll}
         />
       )}
-      {/* TODO: 8.2 isSearched && <SearchResultsSection activeTab={activeTab} filterState={filterState} /> */}
+      {isSearched && <SearchResultSection />}
     </div>
   );
 };
