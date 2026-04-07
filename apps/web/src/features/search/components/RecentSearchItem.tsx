@@ -1,6 +1,6 @@
 import { RecentSearchIcon, X16Icon } from '@/shared/icons';
 
-import type { RecentSearchItemType } from '../search.types';
+import type { RecentSearchItemType } from '../types/search.types';
 
 interface RecentSearchItemProps {
   item: RecentSearchItemType;

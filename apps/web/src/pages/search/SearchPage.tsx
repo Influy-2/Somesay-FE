@@ -4,10 +4,8 @@ import {
   SearchBeforeSection,
   SearchHeader,
   useRecentSearch,
-  SearchFilterGroupType,
   useSearchQuery,
   SelectedFiltersType,
-  FilterOptionType,
 } from '@/features/search';
 
 export const SearchPage = () => {
@@ -30,20 +28,12 @@ export const SearchPage = () => {
     handleSelectRecentSearch,
   } = useSearchQuery({ addItem });
 
-  // 바텀시트에서 필터 선택 후 '적용' 버튼 누르기
-  const handleFilterApply = (
-    key: SearchFilterGroupType,
-    value: FilterOptionType
-  ) => {
-    setSelectedFilters((prev) => {
-      const list = prev[key] as FilterOptionType[];
-      return {
-        ...prev,
-        [key]: list.includes(value)
-          ? prev[key].filter((v) => v !== value)
-          : [...prev[key], value],
-      };
-    });
+  const handleFilterSubmit = (filters: SelectedFiltersType) => {
+    setSelectedFilters(filters);
+  };
+
+  const handleFilterReset = () => {
+    setSelectedFilters({ skinType: [], effect: [], category: [] });
   };
 
   return (
@@ -57,7 +47,8 @@ export const SearchPage = () => {
         activeTab={activeTab}
         onTabChange={handleTabChange}
         selectedFilters={selectedFilters}
-        onFilterApply={handleFilterApply}
+        onFilterSubmit={handleFilterSubmit}
+        onFilterReset={handleFilterReset}
       />
       {!isSearched && (
         <SearchBeforeSection

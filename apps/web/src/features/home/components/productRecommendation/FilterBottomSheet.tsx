@@ -1,21 +1,31 @@
 import { FILTER_CATEGORIES, MAX_SELECTIONS } from './filter.constants';
-import { BottomSheet, FilterChip, ResetButton } from '@/shared/components';
+import {
+  BottomSheet,
+  FilterChip,
+  ResetButton,
+  FilterGroupTab,
+  CTAButton,
+} from '@/shared/components';
 import type {
   RecommendedFilterGroupType,
   SelectedFiltersType,
 } from './filter.types';
-import { FilterGroupTab, CTAButton } from '@/shared/components';
 import {
   SKIN_CONCERN_OPTIONS,
   SKIN_TYPE_OPTIONS,
   CATEGORY_GROUPS,
 } from '@somesay/shared';
-import type { SubcategoryOption } from '@somesay/shared';
+import type { SkinTypeOption, SubcategoryOption } from '@somesay/shared';
 
 const ALL_SUBCATEGORY_OPTION: SubcategoryOption = {
   subCategoryId: 0,
   label: '전체',
 };
+
+const SKIN_TYPE_OPTIONS_EXTENDED: SkinTypeOption[] = [
+  ...SKIN_TYPE_OPTIONS,
+  { skinTypeId: 0, label: '모르겠음' },
+];
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
@@ -132,7 +142,7 @@ export const FilterBottomSheet = ({
               role="group"
               aria-label="피부 타입 선택"
             >
-              {SKIN_TYPE_OPTIONS.map((filter) => (
+              {SKIN_TYPE_OPTIONS_EXTENDED.map((filter) => (
                 <FilterChip
                   key={filter.skinTypeId}
                   label={filter.label}
@@ -187,7 +197,6 @@ export const FilterBottomSheet = ({
           </div>
         )}
       </div>
-      {/* 하단 버튼 영역 */}
     </BottomSheet>
   );
 };

@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import { ArrowBackIcon } from '@/shared/icons';
 import { SearchBar, SearchFilter, TabBar } from '@/shared/components';
+import { SearchFilterBottomSheet } from './SearchFilterBottomSheet';
 import type {
   SearchFilterGroupType,
-  SelectedFiltersType,
-  FilterOptionType,
   SearchTabType,
+  SelectedFiltersType,
 } from '../types/search.types';
 
 const SEARCH_TABS = [
@@ -32,7 +32,8 @@ interface SearchHeaderProps {
   activeTab: SearchTabType;
   onTabChange: (tab: SearchTabType) => void;
   selectedFilters: SelectedFiltersType;
-  onFilterApply: (key: SearchFilterGroupType, value: FilterOptionType) => void;
+  onFilterSubmit: (filters: SelectedFiltersType) => void;
+  onFilterReset: () => void;
 }
 
 export const SearchHeader = ({
@@ -44,7 +45,8 @@ export const SearchHeader = ({
   activeTab,
   onTabChange,
   selectedFilters,
-  onFilterApply,
+  onFilterSubmit,
+  onFilterReset,
 }: SearchHeaderProps) => {
   // 필터 바텀시트
   const [isFilterBottomSheetOpen, setIsFilterBottomSheetOpen] = useState(false);
@@ -63,6 +65,7 @@ export const SearchHeader = ({
       <header className="z-header flex h-fit flex-col bg-white">
         {/* 상단 검색창 */}
         <div className="flex items-center gap-2 px-4 py-2.5">
+          {/* 뒤로가기 버튼 */}
           <button
             type="button"
             aria-label="뒤로 가기"
@@ -71,6 +74,7 @@ export const SearchHeader = ({
           >
             <ArrowBackIcon aria-hidden="true" />
           </button>
+          {/* 검색창 */}
           <SearchBar
             placeholder="내돈내산 후기가 궁금한 상품을 검색해보세요"
             value={value}
@@ -84,6 +88,7 @@ export const SearchHeader = ({
         {/* 검색 결과 있을 때 */}
         {isSearched && (
           <>
+            {/* 일치하는 제품, 일치하는 리뷰 탭 */}
             <TabBar
               tabs={SEARCH_TABS.map((tab) => ({
                 tabText: tab.tabText,
@@ -91,11 +96,12 @@ export const SearchHeader = ({
                 onClick: () => onTabChange(tab.value),
               }))}
             />
-            {/* 필터 칩 */}
+
+            {/* 필터 카테고리 그룹 */}
             <div
               role="group"
               aria-label="검색 결과 필터"
-              className="flex gap-3 px-4 pt-4"
+              className="scrollbar-hide flex w-full gap-3 overflow-x-auto px-4 pt-4"
             >
               {FILTER_GROUP_CONFIG.map(({ key, placeholder }) => (
                 <SearchFilter
@@ -109,8 +115,17 @@ export const SearchHeader = ({
           </>
         )}
       </header>
-      {isFilterBottomSheetOpen && (
-        <div onClick={() => onFilterApply}>{activeFilterGroup}</div>
+      {/* 바텀시트 */}
+      {isFilterBottomSheetOpen && activeFilterGroup && (
+        <SearchFilterBottomSheet
+          isOpen={isFilterBottomSheetOpen}
+          onClose={() => setIsFilterBottomSheetOpen(false)}
+          selectedFilters={selectedFilters}
+          activeCategory={activeFilterGroup}
+          onCategoryChange={setActiveFilterGroup}
+          onSubmit={onFilterSubmit}
+          onReset={onFilterReset}
+        />
       )}
     </>
   );

@@ -16,19 +16,15 @@ export const SearchFilter = ({
   return (
     <button
       type="button"
-      onClick={() => onClick}
+      onClick={onClick}
       className={cn(
-        'bg-grey02 body2-m inline-flex items-center justify-center gap-1 rounded-[1.25rem] border px-2.5 py-1 whitespace-nowrap',
-        selectedLabel.length > 0
-          ? 'border-black text-black'
-          : 'text-grey06 border-transparent'
+        'bg-grey02 body2-m inline-flex cursor-pointer items-center justify-center gap-1 rounded-[1.25rem] px-2.5 py-1 whitespace-nowrap',
+        selectedLabel.length > 0 ? 'text-grey01 bg-black' : 'text-grey06'
       )}
     >
-      {selectedLabel.length > 0 ? (
-        <></>
-      ) : (
-        <span className="body2-m whitespace-nowrap">{placeholder}</span>
-      )}
+      <span className="body2-m whitespace-nowrap">
+        {selectedLabel.length > 0 ? selectedLabel.join(', ') : placeholder}
+      </span>
       <ToggleDownIcon className="size-[.625rem]" aria-hidden="true" />
     </button>
   );

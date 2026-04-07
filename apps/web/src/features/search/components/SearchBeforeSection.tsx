@@ -1,6 +1,6 @@
 import { RecentSearchItem } from './RecentSearchItem';
 
-import type { RecentSearchItemType } from '../search.types';
+import type { RecentSearchItemType } from '../types/search.types';
 
 interface SearchBeforeSectionProps {
   recentSearches: RecentSearchItemType[];
