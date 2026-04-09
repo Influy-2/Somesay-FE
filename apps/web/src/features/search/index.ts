@@ -9,4 +9,5 @@ export type {
   SelectedFiltersType,
   SearchTabType,
   FilterOptionType,
+  SearchResultReviewType,
 } from './types/search.types';

@@ -73,8 +73,9 @@ export const SearchPage = () => {
           onClearAll={clearAll}
         />
       )}
-      {isSearched && activeTab === 'product' && (
+      {isSearched && (
         <SearchResultSection
+          activeTab={activeTab}
           products={products}
           onHeartToggle={handleHeartToggle}
         />

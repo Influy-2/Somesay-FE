@@ -42,6 +42,8 @@ export { RateBar } from './ratebar/RateBar';
 export { ReviewVoteCard } from './review/ReviewVoteCard';
 export { CreatorReviewCard } from './review/CreatorReviewCard';
 export { CreatorHomeReviewCard } from './review/CreatorHomeReviewCard';
+export { SearchResultReviewCard } from './review/SearchResultReviewCard';
+export { StarRating } from './rating/StarRating';
 export { CreatorInfoReview } from './review/CreatorInfoReview';
 
 /* category */
@@ -52,6 +54,9 @@ export { AvatarStack } from './productCard/AvatarStack';
 export { BasicProductCard } from './productCard/BasicProductCard';
 export { SearchResultProductCard } from './productCard/SearchResultProductCard';
 export { HorizontalScrollProductCard } from './productCard/HorizontalScrollProductCard';
+
+/* product */
+export { ReviewProductLink } from './product/ReviewProductLink';
 
 /* bottom sheet */
 export { BottomSheet } from './bottomSheet/BottomSheet';

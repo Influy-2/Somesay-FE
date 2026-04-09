@@ -34,3 +34,4 @@ export { default as YoutubeIcon } from './YoutubeIcon.svg?react';
 export { default as QuestionIcon } from './QuestionIcon.svg?react';
 export { default as QuoteOpenIcon } from './QuoteOpenIcon.svg?react';
 export { default as QuoteCloseIcon } from './QuoteCloseIcon.svg?react';
+export { default as ArrowRightIcon } from './ArrowRightIcon.svg?react';
