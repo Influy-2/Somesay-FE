@@ -1,12 +1,12 @@
 import {
-  Star16Icon,
+  Star20Icon,
   DotIcon,
   QuoteCloseIcon,
   QuoteOpenIcon,
 } from '@/shared/icons';
 import { ChipLarge } from '@/shared/components';
 
-interface CreatorReviewSummaryProps {
+interface CreatorReviewSummarySectionProps {
   rating: number;
   reviewCount: number;
   summaryText: string;
@@ -14,30 +14,52 @@ interface CreatorReviewSummaryProps {
   effects: string[];
 }
 
-export const CreatorReviewSummary = ({
+export const CreatorReviewSummarySection = ({
   rating,
   reviewCount,
   summaryText,
   skinTypes,
   effects,
-}: CreatorReviewSummaryProps) => {
+}: CreatorReviewSummarySectionProps) => {
   return (
     <section className="flex flex-col gap-5 bg-white px-4 py-5">
       <h2 className="headline4">크리에이터 리뷰 요약</h2>
       <div className="flex items-center">
-        <div className="flex items-center text-black">
-          {[...Array(5)].map((_, i) => (
-            <Star16Icon key={i} />
-          ))}
+        <div className="flex items-center gap-2">
+          {/* 별점 */}
+          <div
+            className="flex items-center gap-1"
+            role="img"
+            aria-label={`5점 만점에 ${rating.toFixed(1)}점`}
+          >
+            <div className="flex items-center text-black">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star20Icon key={i} aria-hidden="true" />
+              ))}
+            </div>
+            <span className="body1-b" aria-hidden="true">
+              {rating.toFixed(1)}
+            </span>
+            <span className="body1-b text-grey06" aria-hidden="true">
+              /
+            </span>
+            <span className="body1-b text-grey06" aria-hidden="true">
+              5
+            </span>
+          </div>
+
+          <DotIcon aria-hidden="true" />
+
+          <span
+            className="body1-b"
+            aria-label={`리뷰 ${reviewCount.toLocaleString()}개`}
+          >
+            리뷰 {reviewCount.toLocaleString()}
+          </span>
         </div>
-        <span className="body1-b ml-1">{rating.toFixed(1)}</span>
-        <span className="body1-b text-grey06 px-1">/</span>
-        <span className="body1-b text-grey06">5</span>
-        <DotIcon className="mx-2" />
-        <span className="body1-b">리뷰 {reviewCount.toLocaleString()}</span>
       </div>
 
-      <div className="bg-grey02 px-5 py-5">
+      <div className="bg-grey02 p-5">
         <div className="flex self-start">
           <QuoteOpenIcon />
           <QuoteOpenIcon />
