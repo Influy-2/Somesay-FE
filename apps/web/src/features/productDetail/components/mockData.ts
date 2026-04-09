@@ -2,6 +2,7 @@ import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
 
 export const MOCK_PRODUCT_DETAIL = {
+  productImgUrl: mockProductImg,
   brandName: '토리든',
   brandImageUrl: 'https://placeholder.com/brand_logo.png',
   productName:
@@ -39,22 +40,25 @@ export const MOCK_REVIEWS = [
     comments: [
       {
         id: 101,
-        userId: 'abcdef',
-        type: 'agree' as const,
+        userId: 1,
+        nickname: 'abcdef',
+        isAgree: true,
         content:
           '이 리뷰에 정말 공감합니다. 이 제품이 메이크업 전에 쓰기에 진짜 좋아요.',
       },
       {
         id: 102,
-        userId: 'qwerty',
-        type: 'disagree' as const,
+        userId: 2,
+        nickname: 'qwerty',
+        isAgree: false,
         content:
           '이 리뷰에 정말 반대합니다. 이 제품이 메이크업 전에 쓰기에 진짜 나빠요.',
       },
       {
         id: 103,
-        userId: 'qwerty',
-        type: 'disagree' as const,
+        userId: 3,
+        nickname: 'qwerty',
+        isAgree: false,
         content:
           '이 리뷰에 정말 반대합니다. 이 제품이 메이크업 전에 쓰기에 진짜 나빠요.',
       },
@@ -84,15 +88,17 @@ export const MOCK_REVIEWS = [
     comments: [
       {
         id: 101,
-        userId: 'abcdef',
-        type: 'agree' as const,
+        userId: 1,
+        nickname: 'abcdef',
+        isAgree: true,
         content:
           '이 리뷰에 정말 공감합니다. 이 제품이 메이크업 전에 쓰기에 진짜 좋아요.',
       },
       {
         id: 102,
-        userId: 'qwerty',
-        type: 'disagree' as const,
+        userId: 2,
+        nickname: 'qwerty',
+        isAgree: false,
         content:
           '이 리뷰에 정말 반대합니다. 이 제품이 메이크업 전에 쓰기에 진짜 나빠요.',
       },
@@ -145,8 +151,9 @@ export const MOCK_REVIEWS = [
     comments: [
       {
         id: 101,
-        userId: 'abcdef',
-        type: 'agree' as const,
+        userId: 1,
+        nickname: 'abcdef',
+        isAgree: true,
         content:
           '이 리뷰에 정말 공감합니다. 이 제품이 메이크업 전에 쓰기에 진짜 좋아요.',
       },
