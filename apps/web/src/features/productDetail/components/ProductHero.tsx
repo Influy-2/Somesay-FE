@@ -1,10 +1,9 @@
-import { BlackHeartButton } from '@/shared/components';
-import { MainArrowIcon } from '@/shared/icons';
-import { Link } from 'react-router';
+import { BlackHeartButton, BrandProfile } from '@/shared/components';
 
 interface ProductHeroProps {
+  productImgUrl?: string | undefined;
   brandName: string;
-  brandImageUrl?: string;
+  brandImageUrl?: string | undefined;
   productName: string;
   price: number;
   capacity: string;
@@ -13,6 +12,7 @@ interface ProductHeroProps {
 }
 
 export const ProductHero = ({
+  productImgUrl,
   brandName,
   brandImageUrl,
   productName,
@@ -26,23 +26,16 @@ export const ProductHero = ({
       className="flex flex-col bg-white"
       aria-label={`${brandName} ${productName} 상품 정보`}
     >
-      <div className="border-grey02 flex items-center justify-between border-b px-4 py-5">
-        <div className="flex items-center gap-1.5">
-          {brandImageUrl && (
-            <img
-              src={brandImageUrl}
-              alt=""
-              aria-hidden="true"
-              className="bg-grey03 h-6 w-6 rounded-full object-cover"
-            />
-          )}
-          <span className="body1-m text-grey08">{brandName}</span>
-        </div>
-        {/* TODO: 브랜드 홈페이지 연결 */}
-        <Link to="/" aria-label={`${brandName} 브랜드 홈페이지로 이동`}>
-          <MainArrowIcon aria-hidden="true" />
-        </Link>
+      <div className="bg-grey01 aspect-square w-full overflow-hidden">
+        {productImgUrl && (
+          <img
+            src={productImgUrl}
+            alt={productName}
+            className="h-full w-full object-cover"
+          />
+        )}
       </div>
+      <BrandProfile brandName={brandName} brandImageUrl={brandImageUrl} />
 
       <div className="px-4 py-5">
         <h2 className="subhead-sb">{productName}</h2>
