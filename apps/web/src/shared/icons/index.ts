@@ -25,6 +25,7 @@ export { default as ReviewOnIcon } from './ReviewOnIcon.svg?react';
 export { default as SearchIcon } from './SearchIcon.svg?react';
 export { default as SomesayIcon } from './SomesayIcon.svg?react';
 export { default as Star16Icon } from './Star16Icon.svg?react';
+export { default as Star20Icon } from './Star20Icon.svg?react';
 export { default as ToggleDownIcon } from './ToggleDownIcon.svg?react';
 export { default as ToggleUpIcon } from './ToggleUpIcon.svg?react';
 export { default as YoutubeIcon } from './YoutubeIcon.svg?react';
