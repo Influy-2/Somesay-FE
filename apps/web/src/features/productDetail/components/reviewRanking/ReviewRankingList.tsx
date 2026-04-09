@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MOCK_REVIEWS } from '@/features/productDetail';
+import { MOCK_REVIEWS } from '../mockData';
 import { ReviewRankingItem } from './ReviewRankingItem';
 import { OnOffButton } from '@/shared/components';
 
@@ -31,9 +31,11 @@ export const ReviewRankingList = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-5">
+      <ol className="flex flex-col gap-5">
         {MOCK_REVIEWS.slice(0, displayCount).map((review) => (
-          <ReviewRankingItem key={review.id} review={review} />
+          <li key={review.id}>
+            <ReviewRankingItem review={review} />
+          </li>
         ))}
 
         {remainingCount > 0 && (
@@ -47,7 +49,7 @@ export const ReviewRankingList = () => {
             </button>
           </div>
         )}
-      </div>
+      </ol>
     </div>
   );
 };

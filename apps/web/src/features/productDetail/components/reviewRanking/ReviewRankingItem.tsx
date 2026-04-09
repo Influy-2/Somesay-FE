@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { ToggleDownIcon, ToggleUpIcon } from '@/shared/icons';
-import { Comments } from '@/features/productDetail';
-import { MoreButton, CreatorInfoReview } from '@/shared/components';
+import {
+  ReviewComment,
+  MoreButton,
+  CreatorInfoReview,
+} from '@/shared/components';
 
 interface ReviewSource {
   thumbnail?: string;
@@ -19,17 +22,18 @@ interface ReviewCreator {
   tags: string[];
 }
 
-interface ReviewComment {
+interface ReviewCommentItem {
   id: number;
-  userId: string;
-  type: 'agree' | 'disagree';
+  userId: number;
+  nickname: string;
+  isAgree: boolean;
   content: string;
 }
 
 interface ReviewRankingItemProps {
   review: {
     id: number;
-    comments?: ReviewComment[];
+    comments: ReviewCommentItem[];
     creator: ReviewCreator;
     source?: ReviewSource;
     ranking: number;
@@ -44,7 +48,7 @@ const THUMBNAIL_FALLBACK = '/images/thumbnail-placeholder.png';
 
 export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const comments = review?.comments || [];
+  const comments = review.comments;
   const remainingComments = comments.length - COMMENTS_PREVIEW_COUNT;
 
   return (
@@ -52,9 +56,10 @@ export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
       <CreatorInfoReview review={review} />
 
       <button
+        type="button"
         onClick={() => setIsExpanded((prev) => !prev)}
         aria-expanded={isExpanded}
-        aria-controls="review-expandable"
+        aria-controls={`review-expandable-${review.id}`}
         className="text-grey06 body2-m flex w-full items-center justify-center gap-0.5"
       >
         {isExpanded ? (
@@ -69,22 +74,27 @@ export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
       </button>
 
       {isExpanded && (
-        <div id="review-expandable" className="flex flex-col bg-white">
+        <div
+          id={`review-expandable-${review.id}`}
+          className="flex flex-col bg-white"
+        >
           {comments.length === 0 ? (
             <div className="mb-5 flex h-24 w-full items-center justify-center">
               <span className="body2-m text-grey05">아직 코멘트가 없어요.</span>
             </div>
           ) : (
-            <div className="divide-grey03 flex flex-col divide-y px-4 pb-4">
+            <ol className="divide-grey03 flex flex-col divide-y px-4 pb-4">
               {comments.slice(0, COMMENTS_PREVIEW_COUNT).map((comment) => (
-                <Comments
-                  key={comment.id}
-                  userId={comment.userId}
-                  type={comment.type}
-                  content={comment.content}
-                />
+                <li key={comment.id}>
+                  <ReviewComment
+                    key={comment.id}
+                    nickname={comment.nickname}
+                    isAgree={comment.isAgree}
+                    content={comment.content}
+                  />
+                </li>
               ))}
-            </div>
+            </ol>
           )}
 
           {remainingComments > 0 && (
@@ -101,15 +111,17 @@ export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
               <h3 className="body2-sb mb-2 text-black">이 리뷰 원본 보기</h3>
               <div className="flex gap-2">
                 <div className="bg-grey02 relative aspect-video w-40 shrink-0 overflow-hidden">
-                  <img
-                    src={review.source?.thumbnail ?? THUMBNAIL_FALLBACK}
-                    alt={
-                      review.source?.title
-                        ? `${review.source.title} 썸네일`
-                        : '영상 썸네일'
-                    }
-                    className="h-full w-full object-cover"
-                  />
+                  {review.source && (
+                    <img
+                      src={review.source.thumbnail ?? THUMBNAIL_FALLBACK}
+                      alt={
+                        review.source.title
+                          ? `${review.source.title} 썸네일`
+                          : '영상 썸네일'
+                      }
+                      className="h-full w-full object-cover"
+                    />
+                  )}
                 </div>
                 <div className="flex flex-col justify-between">
                   <div className="flex flex-col justify-between gap-1">
