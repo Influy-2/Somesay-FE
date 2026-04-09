@@ -22,6 +22,7 @@ export const ReviewProductLink = ({
       className="flex items-center gap-3"
       aria-label={`연결 상품: ${product.brand} ${product.productName}`}
     >
+      {/* 사진 */}
       <div className="border-grey02 h-[3.6875rem] w-[3.25rem] shrink-0 overflow-hidden border">
         <img
           src={product.imageUrl}
@@ -29,6 +30,7 @@ export const ReviewProductLink = ({
           className="h-full w-full object-cover"
         />
       </div>
+      {/* 브랜드 상품이름 가격 */}
       <div className="flex flex-1 flex-col gap-1">
         <span className="caption1-m text-black">{product.brand}</span>
         <span className="caption1-m line-clamp-1 text-black">
@@ -38,7 +40,8 @@ export const ReviewProductLink = ({
           {product.price.toLocaleString()}원
         </span>
       </div>
-      {showArrow && <ArrowRightIcon className="size-4 shrink-0 -rotate-90" />}
+      {/* 우측 화살표 */}
+      {showArrow && <ArrowRightIcon className="size-4 shrink-0" />}
     </Link>
   );
 };

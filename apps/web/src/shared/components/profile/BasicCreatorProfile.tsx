@@ -40,7 +40,7 @@ export const BasicCreatorProfile = ({
         {/* 이름 + 유튜브 구독자 */}
         <div className="flex items-center gap-2">
           <span className="body1-sb shrink-0 text-black"> {nickname}</span>
-
+          {/* // TODO: ~만 수정 필요 */}
           <div className="text-grey08 caption2-m flex shrink-0 items-center gap-0.5">
             <YoutubeIcon />
             {subscriberCount}만
