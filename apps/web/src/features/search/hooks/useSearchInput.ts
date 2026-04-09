@@ -1,8 +1,13 @@
+// useSearchInput — URL/입력 상태 관리
+// - q, tab 쿼리 파라미터 읽기/쓰기
+// - inputValue (제출 전 타이핑 중인 값)
+// - 제출·클리어·탭 변경·최근 검색 선택 핸들러
+
 import { useSearchParams } from 'react-router';
 import { useState } from 'react';
 import { SearchTabType } from '../types/search.types';
 
-export const useSearchQuery = ({
+export const useSearchInput = ({
   addItem,
 }: {
   addItem: (query: string) => void;

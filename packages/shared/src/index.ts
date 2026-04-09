@@ -5,6 +5,11 @@ export type {
 } from './types/product.types';
 
 export type {
+  ProductSearchResultType,
+  ReviewSearchResultType,
+} from './types/search.types';
+
+export type {
   CreatorType,
   CreatorRankingUpDownType,
   BasicCreatorProfileType,
@@ -15,7 +20,4 @@ export * from './types/filter.types';
 
 export * from './constants/cosmetics.constants';
 
-export type {
-  CreatorReviewType,
-  SearchResultReviewType,
-} from './types/review.types';
+export type { CreatorReviewType } from './types/review.types';

@@ -1,12 +1,12 @@
 import { WhiteHeartButton } from '@/shared/components/buttons/HeartButton';
-import { SubcategoryProductType } from '@/features/subcategory';
+import type { ProductSearchResultType } from '@somesay/shared';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 
 interface SearchResultProductCardProps {
-  product: SubcategoryProductType;
+  product: ProductSearchResultType;
   onHeartToggle: (productId: number) => void;
 }
 
@@ -16,7 +16,7 @@ export const SearchResultProductCard = ({
 }: SearchResultProductCardProps) => {
   return (
     <article
-      className="border-grey02 relative flex flex-col gap-5 border-b px-4 pb-6"
+      className="border-grey02 relative mx-4 flex flex-col gap-5 border-b pb-6"
       aria-label={`${product.brand} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.rating}점`}
     >
       <div className="flex gap-3">

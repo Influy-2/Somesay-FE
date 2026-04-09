@@ -3,36 +3,32 @@ import { useState } from 'react';
 import {
   SearchBeforeSection,
   SearchHeader,
-  useRecentSearch,
-  useSearchQuery,
-  SelectedFiltersType,
   SearchResultSection,
+  useRecentSearch,
+  useSearchInput,
+  useSearchResults,
 } from '@/features/search';
-import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
-import type { SubcategoryProductType } from '@/features/subcategory';
+import type {
+  SelectedFiltersType,
+  ProductSearchSortOptionType,
+  ReviewSearchSortOptionType,
+} from '@/features/search';
 
 export const SearchPage = () => {
-  const [products, setProducts] = useState<SubcategoryProductType[]>(
-    MOCK_SUBCATEGORY_PRODUCTS
-  );
-
-  const handleHeartToggle = (productId: number) => {
-    setProducts((prev) =>
-      prev.map((p) =>
-        p.productId === productId ? { ...p, isHearted: !p.isHearted } : p
-      )
-    );
-  };
-
-  //선택한 필터 상태
   const [selectedFilters, setSelectedFilters] = useState<SelectedFiltersType>({
     skinType: [],
     effect: [],
     category: [],
   });
+  const [productSortBy, setProductSortBy] =
+    useState<ProductSearchSortOptionType>('rating');
+  const [reviewSortBy, setReviewSortBy] =
+    useState<ReviewSearchSortOptionType>('latest');
+  const [heartedIds, setHeartedIds] = useState<Set<number>>(new Set());
 
   const { items, addItem, removeItem, clearAll } = useRecentSearch();
   const {
+    query,
     inputValue,
     isSearched,
     activeTab,
@@ -41,7 +37,31 @@ export const SearchPage = () => {
     handleQueryClear,
     handleTabChange,
     handleSelectRecentSearch,
-  } = useSearchQuery({ addItem });
+  } = useSearchInput({ addItem });
+
+  const { products, reviews } = useSearchResults(
+    query,
+    selectedFilters,
+    productSortBy,
+    reviewSortBy
+  );
+
+  const productsWithHeart = products.map((p) => ({
+    ...p,
+    isHearted: heartedIds.has(p.productId) ? !p.isHearted : p.isHearted,
+  }));
+
+  const handleHeartToggle = (productId: number) => {
+    setHeartedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(productId)) {
+        next.delete(productId);
+      } else {
+        next.add(productId);
+      }
+      return next;
+    });
+  };
 
   const handleFilterSubmit = (filters: SelectedFiltersType) => {
     setSelectedFilters(filters);
@@ -76,8 +96,13 @@ export const SearchPage = () => {
       {isSearched && (
         <SearchResultSection
           activeTab={activeTab}
-          products={products}
+          products={productsWithHeart}
+          reviews={reviews}
           onHeartToggle={handleHeartToggle}
+          productSortBy={productSortBy}
+          onProductSortChange={setProductSortBy}
+          reviewSortBy={reviewSortBy}
+          onReviewSortChange={setReviewSortBy}
         />
       )}
     </div>

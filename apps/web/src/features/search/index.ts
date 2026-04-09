@@ -2,12 +2,14 @@ export { SearchBeforeSection } from './components/SearchBeforeSection';
 export { SearchHeader } from './components/SearchHeader';
 export { SearchResultSection } from './components/SearchResultSection';
 export { useRecentSearch } from './hooks/useRecentSearch';
-export { useSearchQuery } from './hooks/useSearchQuery';
+export { useSearchInput } from './hooks/useSearchInput';
+export { useSearchResults } from './hooks/useSearchResults';
 export type {
   RecentSearchItemType,
   SearchFilterGroupType,
   SelectedFiltersType,
   SearchTabType,
   FilterOptionType,
-  SearchResultReviewType,
+  ProductSearchSortOptionType,
+  ReviewSearchSortOptionType,
 } from './types/search.types';

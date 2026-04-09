@@ -1,8 +1,54 @@
-export const SearchReviewSection = () => {
+import type { ReviewSearchResultType } from '@somesay/shared';
+
+import { SortBar, SearchResultReviewCard } from '@/shared/components';
+
+import type { ReviewSearchSortOptionType } from '../types/search.types';
+import { NoResultMessage } from './NoResultMessage';
+
+const REVIEW_SORT_OPTIONS: {
+  value: ReviewSearchSortOptionType;
+  label: string;
+}[] = [
+  { value: 'latest', label: '최신순' },
+  { value: 'rating_desc', label: '리뷰 평점 높은 순' },
+  { value: 'rating_asc', label: '리뷰 평점 낮은 순' },
+];
+
+interface SearchReviewSectionProps {
+  reviews: ReviewSearchResultType[];
+  sortBy: ReviewSearchSortOptionType;
+  onSortChange: (value: ReviewSearchSortOptionType) => void;
+}
+
+export const SearchReviewSection = ({
+  reviews,
+  sortBy,
+  onSortChange,
+}: SearchReviewSectionProps) => {
+  if (reviews.length === 0) {
+    return <NoResultMessage />;
+  }
+
   return (
-    <div className="flex flex-col items-center gap-2 pt-25">
-      <p className="body2-sb text-grey08">일치하는 리뷰 결과가 없습니다.</p>
-      <p className="body2-m text-grey05">다른 키워드로 다시 검색해 보세요.</p>
-    </div>
+    <>
+      <SortBar
+        count={reviews.length}
+        sortOptions={REVIEW_SORT_OPTIONS}
+        currentSortValue={sortBy}
+        onSelectSort={(value) =>
+          onSortChange(value as ReviewSearchSortOptionType)
+        }
+      />
+      <ul
+        className="mt-6 flex flex-col gap-6"
+        aria-label="일치하는 리뷰 검색 결과"
+      >
+        {reviews.map((review) => (
+          <li key={review.reviewId}>
+            <SearchResultReviewCard review={review} />
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };

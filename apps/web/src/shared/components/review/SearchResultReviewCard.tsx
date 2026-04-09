@@ -1,9 +1,9 @@
 import { BasicCreatorProfile, ReviewProductLink } from '@/shared/components';
 import { StarRating } from '../rating/StarRating';
-import type { SearchResultReviewType } from '@somesay/shared';
+import type { ReviewSearchResultType } from '@somesay/shared';
 
 interface SearchResultReviewCardProps {
-  review: SearchResultReviewType;
+  review: ReviewSearchResultType;
 }
 
 export const SearchResultReviewCard = ({
