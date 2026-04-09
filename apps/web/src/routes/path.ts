@@ -13,6 +13,7 @@ export const PATH = {
   },
   CATEGORIES: {
     BASE: '/categories',
+    DETAIL: ':categoryId',
   },
   MY_PAGE: {
     BASE: '/my-page',
@@ -20,10 +21,10 @@ export const PATH = {
   },
   CREATOR: {
     BASE: '/creators',
-    HOME: (creatorId: string) => `/creators/${creatorId}`,
+    HOME: ':creatorId',
   },
   PRODUCT: {
     BASE: '/products',
-    DETAIL: (productId: string) => `/products/${productId}`,
+    DETAIL: ':productId',
   },
 };
