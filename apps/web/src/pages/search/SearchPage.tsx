@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   SearchBeforeSection,
@@ -28,7 +28,6 @@ export const SearchPage = () => {
 
   const { items, addItem, removeItem, clearAll } = useRecentSearch();
   const {
-    query,
     inputValue,
     isSearched,
     activeTab,
@@ -36,15 +35,21 @@ export const SearchPage = () => {
     handleQuerySubmit,
     handleQueryClear,
     handleTabChange,
+    clearTab,
     handleSelectRecentSearch,
   } = useSearchInput({ addItem });
 
   const { products, reviews } = useSearchResults(
-    query,
+    inputValue,
     selectedFilters,
     productSortBy,
     reviewSortBy
   );
+
+  // 검색 결과 하나도 없을 때 tab 상태 삭제
+  useEffect(() => {
+    if (products.length === 0 && reviews.length === 0) clearTab();
+  }, [products, reviews, clearTab]);
 
   const productsWithHeart = products.map((p) => ({
     ...p,
@@ -78,7 +83,7 @@ export const SearchPage = () => {
         onQueryChange={(e) => setInputValue(e.target.value)}
         onQuerySubmit={handleQuerySubmit}
         onQueryClear={handleQueryClear}
-        isSearched={isSearched}
+        isSearchResult={products.length > 0 || reviews.length > 0}
         activeTab={activeTab}
         onTabChange={handleTabChange}
         selectedFilters={selectedFilters}

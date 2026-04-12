@@ -28,7 +28,7 @@ interface SearchHeaderProps {
   onQueryChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onQuerySubmit: () => void;
   onQueryClear: () => void;
-  isSearched: boolean;
+  isSearchResult: boolean;
   activeTab: SearchTabType;
   onTabChange: (tab: SearchTabType) => void;
   selectedFilters: SelectedFiltersType;
@@ -41,7 +41,7 @@ export const SearchHeader = ({
   onQueryChange,
   onQuerySubmit,
   onQueryClear,
-  isSearched,
+  isSearchResult,
   activeTab,
   onTabChange,
   selectedFilters,
@@ -86,7 +86,7 @@ export const SearchHeader = ({
         </div>
 
         {/* 검색 결과 있을 때 */}
-        {isSearched && (
+        {isSearchResult && (
           <>
             {/* 일치하는 제품, 일치하는 리뷰 탭 */}
             <TabBar

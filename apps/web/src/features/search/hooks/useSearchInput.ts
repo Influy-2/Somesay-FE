@@ -34,10 +34,23 @@ export const useSearchInput = ({
   };
 
   const handleTabChange = (tab: SearchTabType) => {
-    setSearchParams((prev) => {
-      prev.set('tab', tab);
-      return prev;
-    });
+    setSearchParams(
+      (prev) => {
+        prev.set('tab', tab);
+        return prev;
+      },
+      { replace: true }
+    );
+  };
+
+  const clearTab = () => {
+    setSearchParams(
+      (prev) => {
+        prev.delete('tab');
+        return prev;
+      },
+      { replace: true }
+    );
   };
 
   const handleSelectRecentSearch = (query: string) => {
@@ -55,6 +68,7 @@ export const useSearchInput = ({
     handleQuerySubmit,
     handleQueryClear,
     handleTabChange,
+    clearTab,
     handleSelectRecentSearch,
   };
 };

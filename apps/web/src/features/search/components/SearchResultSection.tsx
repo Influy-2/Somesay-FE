@@ -5,6 +5,7 @@ import type {
 
 import { SearchProductSection } from './SearchProductSection';
 import { SearchReviewSection } from './SearchReviewSection';
+import { NoResultMessage } from './NoResultMessage';
 import type {
   SearchTabType,
   ProductSearchSortOptionType,
@@ -34,7 +35,7 @@ export const SearchResultSection = ({
 }: SearchResultSectionProps) => {
   return (
     <section className="scrollbar-hide flex h-full flex-col overflow-auto pb-[3.375rem]">
-      {activeTab === 'product' && (
+      {activeTab === 'product' && products.length > 0 && (
         <SearchProductSection
           products={products}
           onHeartToggle={onHeartToggle}
@@ -42,13 +43,14 @@ export const SearchResultSection = ({
           onSortChange={onProductSortChange}
         />
       )}
-      {activeTab === 'review' && (
+      {activeTab === 'review' && reviews.length > 0 && (
         <SearchReviewSection
           reviews={reviews}
           sortBy={reviewSortBy}
           onSortChange={onReviewSortChange}
         />
       )}
+      {reviews.length === 0 && products.length === 0 && <NoResultMessage />}
     </section>
   );
 };
