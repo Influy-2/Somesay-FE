@@ -1,3 +1,5 @@
+// Profile/브랜드
+
 import { MainArrowIcon } from '@/shared/icons';
 
 export interface BrandProfileProps {
