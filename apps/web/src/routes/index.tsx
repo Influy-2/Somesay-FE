@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, Outlet } from 'react-router';
 import { PATH } from '@/routes/path';
 
 import { GlobalLayout } from '@/shared/components';
@@ -11,6 +11,7 @@ import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
 import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
 import { MyPage } from '@/pages/mypage/MyPage';
+import { ProductDetailPage } from '@/pages/productDetail/ProductDetailPage';
 
 export const appRouter = createBrowserRouter([
   {
@@ -36,12 +37,34 @@ export const appRouter = createBrowserRouter([
       },
       // 바텀바 없는 페이지
       {
-        path: `${PATH.CATEGORIES.BASE}/:categoryId`,
-        element: <SubcategoriesPage />,
+        path: PATH.CATEGORIES.BASE,
+        element: <Outlet />,
+        children: [
+          {
+            path: PATH.CATEGORIES.DETAIL,
+            element: <SubcategoriesPage />,
+          },
+        ],
       },
       {
-        path: `${PATH.CREATOR.BASE}/:creatorId`,
-        element: <CreatorHomePage />,
+        path: PATH.CREATOR.BASE,
+        element: <Outlet />,
+        children: [
+          {
+            path: PATH.CREATOR.HOME,
+            element: <CreatorHomePage />,
+          },
+        ],
+      },
+      {
+        path: PATH.PRODUCT.BASE,
+        element: <Outlet />,
+        children: [
+          {
+            path: PATH.PRODUCT.DETAIL,
+            element: <ProductDetailPage />,
+          },
+        ],
       },
     ],
   },

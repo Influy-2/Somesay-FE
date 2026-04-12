@@ -4,7 +4,7 @@ import { HeartOnIcon } from '@/shared/icons';
 interface BlackHeartButtonProps {
   isLiked: boolean;
   onLikeToggle: () => void;
-  likeCount: number;
+  likeCount?: number;
 }
 
 export const BlackHeartButton = ({
@@ -21,11 +21,13 @@ export const BlackHeartButton = ({
       aria-pressed={isLiked}
     >
       {isLiked ? <HeartOnIcon /> : <HeartBlackOffIcon />}
-      <span className="caption1-m">
-        {likeCount >= 10000
-          ? `${Math.floor(likeCount / 10000)}만`
-          : likeCount.toLocaleString()}
-      </span>
+      {likeCount !== undefined && (
+        <span className="caption1-m">
+          {likeCount >= 10000
+            ? `${Math.floor(likeCount / 10000)}만`
+            : likeCount.toLocaleString()}
+        </span>
+      )}
     </button>
   );
 };
