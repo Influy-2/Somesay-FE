@@ -63,7 +63,7 @@ export const ProductDetailPage = () => {
         <ReviewRankingList />
         <SimilarProductsList products={MOCK_SIMILAR_PRODUCTS} />
 
-        <div className="border-grey02 fixed bottom-0 left-1/2 z-(--z-index-toast) w-full max-w-110 -translate-x-1/2 border bg-white px-4 pt-2 pb-7.5">
+        <div className="border-grey02 z-toast fixed bottom-0 left-1/2 w-full max-w-110 -translate-x-1/2 border bg-white px-4 pt-2 pb-7.5">
           <CTAButton
             label="이 상품 리뷰 평가하기"
             onClick={handleReviewClick}
