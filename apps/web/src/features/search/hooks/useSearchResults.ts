@@ -36,10 +36,17 @@ export const useSearchResults = (
 
   //unused var 에러 해제를 위한 임시
   const isError = !!query || !!filters || !!productSortBy || !!reviewSortBy;
+  let products: ProductSearchResultType[] = [];
+  let reviews: ReviewSearchResultType[] = [];
+
+  if (query.length > 0) {
+    products = MOCK_SEARCH_PRODUCTS;
+    reviews = MOCK_SEARCH_REVIEWS;
+  }
 
   return {
-    products: MOCK_SEARCH_PRODUCTS,
-    reviews: MOCK_SEARCH_REVIEWS,
+    products: products,
+    reviews: reviews,
     isLoading: false,
     isError: isError,
   };

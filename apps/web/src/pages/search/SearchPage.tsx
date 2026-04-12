@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import {
   SearchBeforeSection,
@@ -24,10 +24,10 @@ export const SearchPage = () => {
     useState<ProductSearchSortOptionType>('rating');
   const [reviewSortBy, setReviewSortBy] =
     useState<ReviewSearchSortOptionType>('latest');
-  const [heartedIds, setHeartedIds] = useState<Set<number>>(new Set());
 
   const { items, addItem, removeItem, clearAll } = useRecentSearch();
   const {
+    query,
     inputValue,
     isSearched,
     activeTab,
@@ -35,38 +35,17 @@ export const SearchPage = () => {
     handleQuerySubmit,
     handleQueryClear,
     handleTabChange,
-    clearTab,
     handleSelectRecentSearch,
   } = useSearchInput({ addItem });
 
   const { products, reviews } = useSearchResults(
-    inputValue,
+    query,
     selectedFilters,
     productSortBy,
     reviewSortBy
   );
 
-  // 검색 결과 하나도 없을 때 tab 상태 삭제
-  useEffect(() => {
-    if (products.length === 0 && reviews.length === 0) clearTab();
-  }, [products, reviews, clearTab]);
-
-  const productsWithHeart = products.map((p) => ({
-    ...p,
-    isHearted: heartedIds.has(p.productId) ? !p.isHearted : p.isHearted,
-  }));
-
-  const handleHeartToggle = (productId: number) => {
-    setHeartedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(productId)) {
-        next.delete(productId);
-      } else {
-        next.add(productId);
-      }
-      return next;
-    });
-  };
+  const handleHeartToggle = () => {};
 
   const handleFilterSubmit = (filters: SelectedFiltersType) => {
     setSelectedFilters(filters);
@@ -101,7 +80,7 @@ export const SearchPage = () => {
       {isSearched && (
         <SearchResultSection
           activeTab={activeTab}
-          products={productsWithHeart}
+          products={products}
           reviews={reviews}
           onHeartToggle={handleHeartToggle}
           productSortBy={productSortBy}

@@ -4,7 +4,7 @@
 // - 제출·클리어·탭 변경·최근 검색 선택 핸들러
 
 import { useSearchParams } from 'react-router';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { SearchTabType } from '../types/search.types';
 
 export const useSearchInput = ({
@@ -25,12 +25,11 @@ export const useSearchInput = ({
   const handleQuerySubmit = () => {
     if (!inputValue.trim()) return;
     addItem(inputValue.trim());
-    setSearchParams({ q: inputValue.trim(), tab: 'product' });
+    setSearchParams({ q: inputValue.trim() });
   };
 
   const handleQueryClear = () => {
     setInputValue('');
-    setSearchParams({});
   };
 
   const handleTabChange = (tab: SearchTabType) => {
@@ -43,7 +42,7 @@ export const useSearchInput = ({
     );
   };
 
-  const clearTab = () => {
+  const clearTab = useCallback(() => {
     setSearchParams(
       (prev) => {
         prev.delete('tab');
@@ -51,7 +50,7 @@ export const useSearchInput = ({
       },
       { replace: true }
     );
-  };
+  }, [setSearchParams]);
 
   const handleSelectRecentSearch = (query: string) => {
     setInputValue(query);
