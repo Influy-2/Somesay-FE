@@ -51,7 +51,7 @@ export const SearchHeader = ({
   // 필터 바텀시트
   const [isFilterBottomSheetOpen, setIsFilterBottomSheetOpen] = useState(false);
   const [activeFilterGroup, setActiveFilterGroup] =
-    useState<SearchFilterGroupType | null>(null);
+    useState<SearchFilterGroupType>('skinType');
 
   const navigate = useNavigate();
 
@@ -116,17 +116,15 @@ export const SearchHeader = ({
         )}
       </header>
       {/* 바텀시트 */}
-      {isFilterBottomSheetOpen && activeFilterGroup && (
-        <SearchFilterBottomSheet
-          isOpen={isFilterBottomSheetOpen}
-          onClose={() => setIsFilterBottomSheetOpen(false)}
-          selectedFilters={selectedFilters}
-          activeCategory={activeFilterGroup}
-          onCategoryChange={setActiveFilterGroup}
-          onSubmit={onFilterSubmit}
-          onReset={onFilterReset}
-        />
-      )}
+      <SearchFilterBottomSheet
+        isOpen={isFilterBottomSheetOpen}
+        onClose={() => setIsFilterBottomSheetOpen(false)}
+        selectedFilters={selectedFilters}
+        activeCategory={activeFilterGroup}
+        onCategoryChange={setActiveFilterGroup}
+        onSubmit={onFilterSubmit}
+        onReset={onFilterReset}
+      />
     </>
   );
 };
