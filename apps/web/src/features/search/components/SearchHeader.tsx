@@ -73,7 +73,7 @@ export const SearchHeader = ({
               navigate(-1);
               onQueryClear();
             }}
-            className="shrink-0"
+            className="shrink-0 cursor-pointer"
           >
             <ArrowBackIcon aria-hidden="true" />
           </button>
