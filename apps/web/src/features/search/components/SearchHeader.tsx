@@ -69,7 +69,10 @@ export const SearchHeader = ({
           <button
             type="button"
             aria-label="뒤로 가기"
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              navigate(-1);
+              onQueryClear();
+            }}
             className="shrink-0"
           >
             <ArrowBackIcon aria-hidden="true" />
