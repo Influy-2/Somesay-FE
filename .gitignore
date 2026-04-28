@@ -31,3 +31,5 @@ node_modules
 CLAUDE.md
 .claude/
 .vscode/
+*storybook.log
+storybook-static
