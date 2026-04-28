@@ -28,9 +28,11 @@ export const PageHeader = ({
           {title}
         </h1>
       )}
-      {right?.map((icon, idx) => (
-        <React.Fragment key={idx}>{icon}</React.Fragment>
-      ))}
+      <div className="flex items-center justify-end gap-3">
+        {right?.map((icon, idx) => (
+          <React.Fragment key={idx}>{icon}</React.Fragment>
+        ))}
+      </div>
     </header>
   );
 };
