@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx",
     "type-check": "tsc --noEmit",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@somesay/shared": "workspace:*",
@@ -27,6 +29,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@somesay/config": "workspace:*",
+    "@storybook/react-vite": "^10.3.5",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/eslint-plugin-query": "^5.91.4",
     "@types/node": "^24.10.1",
@@ -37,11 +40,23 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "latest": "link:@storybook/addon-essentials/latest",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
     "vite": "^7.3.1",
-    "vite-plugin-svgr": "^4.5.0"
+    "vite-plugin-svgr": "^4.5.0",
+    "storybook": "^10.3.5",
+    "@chromatic-com/storybook": "^5.1.2",
+    "@storybook/addon-vitest": "^10.3.5",
+    "@storybook/addon-a11y": "^10.3.5",
+    "@storybook/addon-docs": "^10.3.5",
+    "@storybook/addon-onboarding": "^10.3.5",
+    "eslint-plugin-storybook": "^10.3.5",
+    "vitest": "^4.1.5",
+    "playwright": "^1.59.1",
+    "@vitest/browser-playwright": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.5"
   }
 }
