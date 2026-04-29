@@ -19,7 +19,7 @@ export const ReviewProductLink = ({
   return (
     <Link
       to={`/임시`}
-      className="flex items-center gap-3"
+      className="flex w-full items-center gap-3"
       aria-label={`연결 상품: ${product.brand} ${product.productName}`}
     >
       {/* 사진 */}

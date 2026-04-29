@@ -16,7 +16,7 @@ export const SearchResultProductCard = ({
 }: SearchResultProductCardProps) => {
   return (
     <article
-      className="border-grey02 relative mx-4 flex flex-col gap-5 border-b pb-6"
+      className="border-grey02 relative mx-4 flex w-full flex-col gap-5 border-b pb-6"
       aria-label={`${product.brand} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.rating}점`}
     >
       <div className="flex gap-3">
