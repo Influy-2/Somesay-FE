@@ -3,7 +3,7 @@ name: Chromatic
 on:
   push:
     branches:
-      - fix/32-storybook-deploy
+      - develop
 
 jobs:
   chromatic:
