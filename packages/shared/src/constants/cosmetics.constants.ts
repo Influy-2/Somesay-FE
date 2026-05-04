@@ -3,6 +3,7 @@ import type {
   SkinConcernOption,
   SubcategoryGroup,
   CategoryType,
+  EffectOption,
 } from '../types/category.types';
 
 // TODO: skinConcernId는 백엔드 API 응답값으로 교체 필요
@@ -29,7 +30,22 @@ export const SKIN_TYPE_OPTIONS: SkinTypeOption[] = [
   { skinTypeId: 4, label: '수부지' },
   { skinTypeId: 5, label: '민감성' },
   { skinTypeId: 6, label: '여드름성' },
-  { skinTypeId: 7, label: '모르겠음' },
+];
+
+// ⚠️ effectId는 백엔드 API 응답값으로 교체 필요
+export const EFFECT_OPTIONS: EffectOption[] = [
+  { effectId: 1, label: '보습' },
+  { effectId: 2, label: '속건조' },
+  { effectId: 3, label: '진정' },
+  { effectId: 4, label: '여드름' },
+  { effectId: 5, label: '붉은기' },
+  { effectId: 6, label: '미백/잡티' },
+  { effectId: 7, label: '주름/탄력' },
+  { effectId: 8, label: '모공' },
+  { effectId: 9, label: '피부결' },
+  { effectId: 10, label: '각질' },
+  { effectId: 11, label: '피부장벽' },
+  { effectId: 12, label: '흔적' },
 ];
 
 export const CATEGORIES: CategoryType[] = [

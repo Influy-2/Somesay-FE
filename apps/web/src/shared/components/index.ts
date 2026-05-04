@@ -14,7 +14,7 @@ export { ReviewComment } from './comment/ReviewComment';
 /* chips */
 export { ChipLarge } from './chips/ChipLarge';
 export { ChipBasic } from './chips/ChipBasic';
-
+export { SearchFilter } from './filter/SearchFilter';
 /* thumbnail */
 export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 
@@ -42,6 +42,8 @@ export { RateBar } from './ratebar/RateBar';
 export { ReviewVoteCard } from './review/ReviewVoteCard';
 export { CreatorReviewCard } from './review/CreatorReviewCard';
 export { CreatorHomeReviewCard } from './review/CreatorHomeReviewCard';
+export { SearchResultReviewCard } from './review/SearchResultReviewCard';
+export { StarRating } from './rating/StarRating';
 export { CreatorInfoReview } from './review/CreatorInfoReview';
 
 /* category */
@@ -50,17 +52,22 @@ export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
 /* product card */
 export { AvatarStack } from './productCard/AvatarStack';
 export { BasicProductCard } from './productCard/BasicProductCard';
-export { SearchResultsProductCard } from './productCard/SearchResultsProductCard';
+export { SearchResultProductCard } from './productCard/SearchResultProductCard';
 export { HorizontalScrollProductCard } from './productCard/HorizontalScrollProductCard';
+
+/* product */
+export { ReviewProductLink } from './product/ReviewProductLink';
 
 /* bottom sheet */
 export { BottomSheet } from './bottomSheet/BottomSheet';
 
-// filter
+/* filter chip */
 export { FilterChip } from './filter/FilterChip';
 
 /* tab */
-export { FilterCategoryTab } from './tab/FilterCategoryTab';
+export { FilterGroupTab } from './tab/FilterGroupTab';
+export { TabItem } from './tab/TabItem';
+export { TabBar } from './tab/TabBar';
 
 /*search*/
 export { SearchBar } from './search/SearchBar';

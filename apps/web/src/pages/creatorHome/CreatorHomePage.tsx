@@ -86,7 +86,7 @@ export const CreatorHomePage = () => {
           ariaLabel="상품 카테고리"
         />
         <SortBar
-          productCount={filteredReviews.length}
+          count={filteredReviews.length}
           sortOptions={SORT_OPTIONS}
           currentSortValue={currentSortValue}
           onSelectSort={setCurrentSortValue}

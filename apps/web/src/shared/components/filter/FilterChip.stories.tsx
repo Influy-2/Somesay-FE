@@ -8,7 +8,8 @@ const meta: Meta<typeof FilterChip> = {
   tags: ['autodocs'],
   argTypes: {
     label: { control: 'text' },
-    selected: { control: 'boolean' },
+    isSelected: { control: 'boolean' },
+
   },
 };
 
@@ -18,7 +19,8 @@ type Story = StoryObj<typeof FilterChip>;
 export const Default: Story = {
   args: {
     label: '샘플 텍스트',
-    selected: false,
+    isSelected: false,
+
     onClick: () => {},
   },
 };

@@ -27,4 +27,7 @@ export const PATH = {
     BASE: '/products',
     DETAIL: ':productId',
   },
+  SEARCH: {
+    BASE: '/search',
+  },
 };

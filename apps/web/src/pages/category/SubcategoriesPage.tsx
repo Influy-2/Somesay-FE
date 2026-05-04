@@ -72,7 +72,7 @@ export const SubcategoriesPage = () => {
       </div>
       <div className="px-4 pt-4">
         <SortBar
-          productCount={filteredCount}
+          count={filteredCount}
           sortOptions={SORT_OPTIONS}
           currentSortValue={currentSortValue}
           onSelectSort={setCurrentSortValue}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SearchResultsProductCard } from '@/shared/components';
+import { SearchResultProductCard } from '@/shared/components';
 import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
 
 interface SubcategoryProductListProps {
@@ -36,7 +36,7 @@ export const SubcategoryProductList = ({
       aria-atomic="false"
     >
       {filteredProducts.map((product) => (
-        <SearchResultsProductCard
+        <SearchResultProductCard
           key={product.productId}
           product={product}
           onHeartToggle={handleHeartToggle}

@@ -1,6 +1,6 @@
 import cn from '@/utils/cn';
 
-interface FilterCategoryTabProps<T extends string> {
+interface FilterGroupTabProps<T extends string> {
   categories: {
     category: T;
     label: string;
@@ -9,11 +9,11 @@ interface FilterCategoryTabProps<T extends string> {
   onCategoryChange: (category: T) => void;
 }
 
-export const FilterCategoryTab = <T extends string>({
+export const FilterGroupTab = <T extends string>({
   categories,
   activeCategory,
   onCategoryChange,
-}: FilterCategoryTabProps<T>) => {
+}: FilterGroupTabProps<T>) => {
   return (
     <div
       className={cn(

@@ -1,79 +1,89 @@
 import { useState, useRef } from 'react';
-import { SearchIcon } from '@/shared/icons';
-import { CircleX14Icon } from '@/shared/icons';
+import { SearchIcon, CircleX14Icon } from '@/shared/icons';
 
 interface SearchBarProps {
   placeholder: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit?: () => void;
-  onClear?: () => void;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
+  onClear: () => void;
+  autoFocus?: boolean;
 }
 
 export const SearchBar = ({
   placeholder,
-  value = '',
+  value,
   onChange,
   onSubmit,
   onClear,
+  autoFocus = false,
 }: SearchBarProps) => {
-  const [isSearched, setIsSearched] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onSubmit?.();
-      setIsSearched(true);
-    }
+  const showSearchButton = !value || isFocused || !hasSearched;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setHasSearched(false);
+    onChange(e);
+  };
+
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit();
+    setHasSearched(true);
   };
 
   const handleFocus = () => {
-    containerRef.current?.scrollIntoView({
+    setIsFocused(true);
+    formRef.current?.scrollIntoView({
       behavior: 'smooth',
-      block: 'start',
+      block: 'nearest',
     });
   };
 
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
   return (
-    <div
-      ref={containerRef}
+    <form
+      ref={formRef}
+      role="search"
+      onSubmit={handleSubmit}
       className="bg-grey01 flex h-10 w-full items-center px-2.5 py-2"
     >
       <input
-        type="text"
+        type="search"
         value={value}
-        onChange={onChange}
-        onKeyDown={handleKeyDown}
+        onChange={handleChange}
         onFocus={handleFocus}
+        onBlur={handleBlur}
         placeholder={placeholder}
-        className="body2-m placeholder:text-grey05 mr-3.5 w-full bg-transparent outline-none"
+        aria-label={placeholder}
+        autoFocus={autoFocus}
+        className="body2-m placeholder:text-grey05 mr-3.5 w-full bg-transparent outline-none [&::-webkit-search-cancel-button]:appearance-none"
       />
       <div className="flex items-center gap-2">
         {value && (
           <button
             type="button"
             onClick={() => {
-              onClear?.();
-              setIsSearched(false);
+              onClear();
+              setHasSearched(false);
             }}
             aria-label="검색어 삭제"
           >
             <CircleX14Icon />
           </button>
         )}
-        {!isSearched && (
-          <button
-            type="button"
-            onClick={() => {
-              onSubmit?.();
-              setIsSearched(true);
-            }}
-            aria-label="검색"
-          >
+        {showSearchButton && (
+          <button type="submit" aria-label="검색">
             <SearchIcon />
           </button>
         )}
       </div>
-    </div>
+    </form>
   );
 };

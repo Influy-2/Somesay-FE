@@ -1,33 +1,46 @@
 import { FILTER_CATEGORIES, MAX_SELECTIONS } from './filter.constants';
-import { BottomSheet, FilterChip, ResetButton } from '@/shared/components';
-import type { FilterCategoryType, SelectedFiltersType } from './filter.types';
-import { FilterCategoryTab, CTAButton } from '@/shared/components';
+import {
+  BottomSheet,
+  FilterChip,
+  ResetButton,
+  FilterGroupTab,
+  CTAButton,
+} from '@/shared/components';
+import type {
+  RecommendedFilterGroupType,
+  SelectedFiltersType,
+} from './filter.types';
 import {
   SKIN_CONCERN_OPTIONS,
   SKIN_TYPE_OPTIONS,
   CATEGORY_GROUPS,
 } from '@somesay/shared';
-import type { SubcategoryOption } from '@somesay/shared';
+import type { SkinTypeOption, SubcategoryOption } from '@somesay/shared';
 
 const ALL_SUBCATEGORY_OPTION: SubcategoryOption = {
   subCategoryId: 0,
   label: '전체',
 };
 
+const SKIN_TYPE_OPTIONS_EXTENDED: SkinTypeOption[] = [
+  ...SKIN_TYPE_OPTIONS,
+  { skinTypeId: 0, label: '모르겠음' },
+];
+
 interface FilterBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
   selectedFilters: SelectedFiltersType;
   setSelectedFilters: React.Dispatch<React.SetStateAction<SelectedFiltersType>>;
-  activeCategory: FilterCategoryType;
-  onCategoryChange: (category: FilterCategoryType) => void; // setter와 시그니처 일치
+  activeCategory: RecommendedFilterGroupType;
+  onCategoryChange: (category: RecommendedFilterGroupType) => void; // setter와 시그니처 일치
   onSubmit: () => void;
   onReset: () => void;
   isSubmitEnabled: boolean;
 }
 
 const getItemId = (
-  v: SelectedFiltersType[FilterCategoryType][number]
+  v: SelectedFiltersType[RecommendedFilterGroupType][number]
 ): number => {
   if ('skinConcernId' in v) return v.skinConcernId;
   if ('skinTypeId' in v) return v.skinTypeId;
@@ -46,7 +59,7 @@ export const FilterBottomSheet = ({
   isSubmitEnabled,
 }: FilterBottomSheetProps) => {
   const handleToggleFilter = (
-    item: SelectedFiltersType[FilterCategoryType][number]
+    item: SelectedFiltersType[RecommendedFilterGroupType][number]
   ) => {
     const itemId = getItemId(item);
     setSelectedFilters((prev) => {
@@ -76,7 +89,7 @@ export const FilterBottomSheet = ({
       onClose={onClose}
       ariaLabel="제품 옵션 선택 필터"
       header={
-        <FilterCategoryTab
+        <FilterGroupTab
           categories={FILTER_CATEGORIES}
           activeCategory={activeCategory}
           onCategoryChange={onCategoryChange}
@@ -112,7 +125,7 @@ export const FilterBottomSheet = ({
                 <FilterChip
                   key={filter.skinConcernId}
                   label={filter.label}
-                  selected={selectedFilters.skinConcern.includes(filter)}
+                  isSelected={selectedFilters.skinConcern.includes(filter)}
                   onClick={() => handleToggleFilter(filter)}
                 />
               ))}
@@ -129,11 +142,11 @@ export const FilterBottomSheet = ({
               role="group"
               aria-label="피부 타입 선택"
             >
-              {SKIN_TYPE_OPTIONS.map((filter) => (
+              {SKIN_TYPE_OPTIONS_EXTENDED.map((filter) => (
                 <FilterChip
                   key={filter.skinTypeId}
                   label={filter.label}
-                  selected={selectedFilters.skinType.includes(filter)}
+                  isSelected={selectedFilters.skinType.includes(filter)}
                   onClick={() => handleToggleFilter(filter)}
                 />
               ))}
@@ -154,7 +167,7 @@ export const FilterBottomSheet = ({
               <FilterChip
                 key={ALL_SUBCATEGORY_OPTION.subCategoryId}
                 label={ALL_SUBCATEGORY_OPTION.label}
-                selected={selectedFilters.category.some(
+                isSelected={selectedFilters.category.some(
                   (f) =>
                     f.subCategoryId === ALL_SUBCATEGORY_OPTION.subCategoryId
                 )}
@@ -173,7 +186,7 @@ export const FilterBottomSheet = ({
                       <FilterChip
                         key={filter.subCategoryId}
                         label={filter.label}
-                        selected={selectedFilters.category.includes(filter)}
+                        isSelected={selectedFilters.category.includes(filter)}
                         onClick={() => handleToggleFilter(filter)}
                       />
                     ))}
@@ -184,7 +197,6 @@ export const FilterBottomSheet = ({
           </div>
         )}
       </div>
-      {/* 하단 버튼 영역 */}
     </BottomSheet>
   );
 };

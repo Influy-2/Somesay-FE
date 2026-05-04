@@ -53,6 +53,20 @@ type Subcategory =
   | '쿠션'
   | '파운데이션';
 
+type Effect =
+  | '보습'
+  | '속건조'
+  | '진정'
+  | '여드름'
+  | '붉은기'
+  | '미백/잡티'
+  | '주름/탄력'
+  | '모공'
+  | '피부결'
+  | '각질'
+  | '피부장벽'
+  | '흔적';
+
 export interface SkinConcernOption {
   skinConcernId: number;
   label: SkinConcern;
@@ -61,6 +75,10 @@ export interface SkinConcernOption {
 export interface SkinTypeOption {
   skinTypeId: number;
   label: SkinType;
+}
+export interface EffectOption {
+  effectId: number;
+  label: Effect;
 }
 
 export interface SubcategoryOption {
