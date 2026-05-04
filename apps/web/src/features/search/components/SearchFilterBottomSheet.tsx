@@ -55,6 +55,7 @@ export const SearchFilterBottomSheet = ({
   const [draftFilters, setDraftFilters] =
     useState<SelectedFiltersType>(selectedFilters);
 
+  //TODO: ID 로 비교?
   const handleToggleFilter = (
     item: SelectedFiltersType[SearchFilterGroupType][number]
   ) => {
