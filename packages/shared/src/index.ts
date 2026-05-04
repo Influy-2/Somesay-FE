@@ -22,4 +22,4 @@ export * from './constants/cosmetics.constants';
 
 export type { CreatorReviewType } from './types/review.types';
 
-export { formatSubscriberCount } from './functions';
+export { formatSubscriberCount } from './utils';
