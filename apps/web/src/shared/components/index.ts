@@ -42,6 +42,7 @@ export { RateBar } from './ratebar/RateBar';
 /* review */
 export { ReviewVoteCard } from './review/ReviewVoteCard';
 export { CreatorReviewCard } from './review/CreatorReviewCard';
+export { EvaluationReviewCard } from './reviewCard/EvaluationReviewCard';
 export { CreatorHomeReviewCard } from './review/CreatorHomeReviewCard';
 export { SearchResultReviewCard } from './review/SearchResultReviewCard';
 export { StarRating } from './rating/StarRating';
