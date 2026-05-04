@@ -24,6 +24,7 @@ export { BrandProfile } from './profile/BrandProfile';
 export { CreatorRankingUpDownRow } from './profile/CreatorRankingUpDownRow';
 export { CreatorHomeProfile } from './profile/CreatorHomeProfile';
 export { CreatorRankingProfile } from './profile/CreatorRankingProfile';
+export { EvaluationCardProfile } from './profile/EvaluationCardProfile';
 
 /* buttons */
 export { WhiteHeartButton } from './buttons/HeartButton';
