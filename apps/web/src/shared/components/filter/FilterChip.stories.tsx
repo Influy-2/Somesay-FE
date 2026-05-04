@@ -9,6 +9,7 @@ const meta: Meta<typeof FilterChip> = {
   argTypes: {
     label: { control: 'text' },
     isSelected: { control: 'boolean' },
+
   },
 };
 
@@ -19,6 +20,7 @@ export const Default: Story = {
   args: {
     label: '샘플 텍스트',
     isSelected: false,
+
     onClick: () => {},
   },
 };

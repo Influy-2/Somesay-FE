@@ -15,6 +15,7 @@ const meta: Meta<typeof SortBar> = {
   tags: ['autodocs'],
   argTypes: {
     count: { control: 'number' },
+
     sortOptions: { control: 'object' },
     currentSortValue: { control: 'text' },
   },
@@ -26,6 +27,7 @@ type Story = StoryObj<typeof SortBar>;
 export const Default: Story = {
   args: {
     count: 0,
+
     sortOptions: [],
     currentSortValue: '텍스트',
     onSelectSort: () => {},
