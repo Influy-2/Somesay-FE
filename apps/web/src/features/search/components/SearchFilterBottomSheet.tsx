@@ -55,7 +55,7 @@ export const SearchFilterBottomSheet = ({
   const [draftFilters, setDraftFilters] =
     useState<SelectedFiltersType>(selectedFilters);
 
-  //TODO: ID 로 비교?
+  //TODO: API 연결 및 전역 상태 관리 도입시 ID 로 비교?
   const handleToggleFilter = (
     item: SelectedFiltersType[SearchFilterGroupType][number]
   ) => {
