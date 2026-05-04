@@ -9,8 +9,8 @@ const PRODUCT_SORT_OPTIONS: {
   label: string;
 }[] = [
   { value: 'rating', label: '평점순' },
-  { value: 'price_asc', label: '가격 낮은순' },
-  { value: 'price_desc', label: '가격 높은순' },
+  { value: 'price_asc', label: '가격 낮은 순' },
+  { value: 'price_desc', label: '가격 높은 순' },
 ];
 
 interface SearchProductSectionProps {
