@@ -41,7 +41,7 @@ export const Small: Story = {
     isOpen: true,
     onClose: () => {},
     ariaLabel: '바텀시트',
-    height: 'h-[60vh]',
+    height: 'h-[40vh]',
     children: '바텀시트 내용',
   },
 };
