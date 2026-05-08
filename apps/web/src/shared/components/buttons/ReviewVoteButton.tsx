@@ -1,3 +1,4 @@
+// Button/공감해요 컴포넌트
 import { AgreeIcon, DisagreeIcon } from '@/shared/icons';
 import cn from '@/utils/cn';
 
