@@ -30,4 +30,7 @@ export const PATH = {
   SEARCH: {
     BASE: '/search',
   },
+  REVIEW_EVALUATION: {
+    BASE: '/review-evaluation',
+  },
 };

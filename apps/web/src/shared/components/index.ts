@@ -82,3 +82,6 @@ export { Snackbar } from './snackbar/Snackbar';
 
 /* modal */
 export { Modal } from './modal/Modal';
+
+/* input */
+export { CommentInput } from './input/CommentInput';
