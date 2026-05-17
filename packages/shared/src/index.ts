@@ -23,3 +23,5 @@ export * from './constants/forbiddenWords.constants';
 export type { CreatorReviewType } from './types/review.types';
 
 export { formatSubscriberCount } from './utils';
+
+export * from './api/client';

@@ -1,27 +1,54 @@
-//임시
-// import axios from "axios";
+import axios, { AxiosError } from 'axios';
 
-// export const apiClient = axios.create({
-//   baseURL: process.env.VITE_API_URL ?? "http://localhost:8080",
-//   timeout: 10000,
-//   headers: { "Content-Type": "application/json" },
-// });
+interface ConfigureApiClientOptions {
+  baseURL: string;
+  getAccessToken?: () => string | null;
+  onUnauthorized?: (error: AxiosError) => void;
+}
 
-// // 요청 인터셉터 - 토큰 자동 첨부
-// apiClient.interceptors.request.use((config) => {
-//   const token = localStorage.getItem("access_token");
-//   if (token) config.headers.Authorization = `Bearer ${token}`;
-//   return config;
-// });
+export const apiClient = axios.create({
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-// // 응답 인터셉터 - 에러 처리
-// apiClient.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     if (error.response?.status === 401) {
-//       // 토큰 만료 처리
-//       localStorage.removeItem("access_token");
-//     }
-//     return Promise.reject(error);
-//   },
-// );
+let requestInterceptorId: number | null = null;
+let responseInterceptorId: number | null = null;
+
+export const configureApiClient = ({
+  baseURL,
+  getAccessToken,
+  onUnauthorized,
+}: ConfigureApiClientOptions) => {
+  apiClient.defaults.baseURL = baseURL;
+
+  if (requestInterceptorId !== null) {
+    apiClient.interceptors.request.eject(requestInterceptorId);
+  }
+
+  if (responseInterceptorId !== null) {
+    apiClient.interceptors.response.eject(responseInterceptorId);
+  }
+
+  requestInterceptorId = apiClient.interceptors.request.use((config) => {
+    const token = getAccessToken?.();
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  });
+
+  responseInterceptorId = apiClient.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response?.status === 401) {
+        onUnauthorized?.(error);
+      }
+
+      return Promise.reject(error);
+    }
+  );
+};
