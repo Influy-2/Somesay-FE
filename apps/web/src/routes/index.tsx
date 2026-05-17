@@ -14,6 +14,8 @@ import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
 import { MyPage } from '@/pages/mypage/MyPage';
 import { ProductDetailPage } from '@/pages/productDetail/ProductDetailPage';
 
+import { ReviewEvaluationPage } from '@/pages/reviewEvaluation/ReviewEvaluationPage';
+
 export const appRouter = createBrowserRouter([
   {
     path: PATH.ROOT,
@@ -70,6 +72,10 @@ export const appRouter = createBrowserRouter([
       {
         path: PATH.SEARCH.BASE,
         element: <SearchPage />,
+      },
+      {
+        path: PATH.REVIEW_EVALUATION.BASE,
+        element: <ReviewEvaluationPage />,
       },
     ],
   },

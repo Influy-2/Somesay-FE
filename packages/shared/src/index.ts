@@ -19,5 +19,7 @@ export * from './types/category.types';
 export * from './types/filter.types';
 
 export * from './constants/cosmetics.constants';
-
+export * from './constants/forbiddenWords.constants';
 export type { CreatorReviewType } from './types/review.types';
+
+export { formatSubscriberCount } from './utils';
