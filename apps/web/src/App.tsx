@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { appRouter } from '@/routes/index';
 import { RouterProvider } from 'react-router';
 import './styles/global.css';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,6 +22,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={appRouter} />
+      {import.meta.env && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   );
 }

@@ -1,7 +1,20 @@
 import { MOCK_PRODUCT_RANKING_CARDS } from './mockData';
 import { ProductRankingCard } from './ProductRankingCard';
 import { MoreButton } from '@/shared/components';
+import { useFetchProductsRanking } from '@/shared/hooks/ranking/useFetchProductsRanking';
+
 export const ProductRankingSection = () => {
+  const {
+    data: productsRankingData,
+    // isLoading,
+    // isError,
+    // fetchNextPage,
+    // hasNextPage,
+    // isFetchingNextPage,
+  } = useFetchProductsRanking({
+    size: 4,
+  });
+  console.log(productsRankingData);
   return (
     <section
       aria-labelledby="product-ranking-title"
