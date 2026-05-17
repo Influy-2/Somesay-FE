@@ -1,4 +1,8 @@
-import { fetchProductsRanking, QUERY_KEYS } from '@somesay/shared';
+import {
+  fetchProductsRanking,
+  mapProductRankingPageDtoToCards,
+  QUERY_KEYS,
+} from '@somesay/shared';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 interface UseFetchProductsRankingOptions {
@@ -20,6 +24,10 @@ export const useFetchProductsRanking = ({
       fetchProductsRanking({ page: pageParam, ...rankingParams }),
     getNextPageParam: (lastPage) =>
       lastPage.hasNext ? lastPage.pageNumber + 1 : undefined,
+    select: (data) => ({
+      ...data,
+      pages: data.pages.map(mapProductRankingPageDtoToCards),
+    }),
   });
 
   return query;

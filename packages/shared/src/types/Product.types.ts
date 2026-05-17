@@ -14,9 +14,6 @@ export interface ProductCardType {
   isHearted: boolean;
   creators: CreatorProfile[];
 }
-export interface ProductRankingCardType extends ProductCardType {
-  rank: number;
-}
 
 export interface ProductsByCategory {
   categoryId: number;

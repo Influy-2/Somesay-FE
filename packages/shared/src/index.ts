@@ -27,6 +27,13 @@ export { formatSubscriberCount } from './utils';
 //api
 export * from './api/client';
 export * from './api/ranking/ranking.api';
+export * from './api/ranking/ranking.mapper';
+export type {
+  FetchProductsRankingParamsDto,
+  ProductRankingCreatorDto,
+  ProductRankingItemDto,
+  ProductRankingPageDto,
+} from './api/ranking/ranking.dto';
 
 //query
 export * from './query/queryKeys';
