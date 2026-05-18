@@ -1,14 +1,14 @@
 export interface CreatorType {
-  creatorId: number; // BIGINT
-  nickname: string; // VARCHAR(50)
-  profileImageUrl: string; // VARCHAR(500)
-  youtubeLink: string; // VARCHAR(500)
-  trustScore: number; // DECIMAL(5,2)
-  skinType: string; // ENUM (values not provided)
-  personalColor: string; // ENUM (values not provided)
+  creatorId: number;
+  nickname: string;
+  profileImageUrl: string;
+  youtubeLink: string;
+  trustScore: number;
+  skinType: string;
+  personalColor: string;
   subscriberCount: number;
-  ranking: number; // INT
-  ageGroup: number; // INT (20, 30, 40...)
+  ranking: number;
+  ageGroup: number;
 }
 
 type RankChangeDirection = 'up' | 'down' | 'same';

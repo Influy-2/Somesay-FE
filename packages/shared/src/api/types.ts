@@ -20,3 +20,8 @@ export interface ApiPage<TItem> {
 }
 
 export type ApiPageResponse<TItem> = ApiResponse<ApiPage<TItem>>;
+
+export interface ApiPageParams {
+  page?: number;
+  size?: number;
+}

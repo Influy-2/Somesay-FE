@@ -2,38 +2,61 @@ export type {
   ProductCardType,
   ProductRankingCardType,
   ProductsByCategory,
-} from './types/product.types';
+} from './domain/product/product.types';
 
 export type {
   ProductSearchResultType,
   ReviewSearchResultType,
-} from './types/search.types';
+} from './domain/search/search.types';
 
 export type {
   CreatorType,
   CreatorRankingUpDownType,
   BasicCreatorProfileType,
-} from './types/creator.types';
+} from './domain/creator/creator.types';
 
-export * from './types/category.types';
-export * from './types/filter.types';
+export * from './domain/category/category.types';
+export * from './domain/filter/filter.types';
 
 export * from './constants/cosmetics.constants';
 export * from './constants/forbiddenWords.constants';
-export type { CreatorReviewType } from './types/review.types';
+export type { CreatorReviewType } from './domain/review/review.types';
 
 export { formatSubscriberCount } from './utils';
 
 //api
 export * from './api/client';
-export * from './api/ranking/ranking.api';
-export * from './api/ranking/ranking.mapper';
+
+//api - ranking
+export * from './api/ranking/fetchCreatorRanking.api';
+export * from './api/ranking/fetchProductRanking.api';
+
+//api - product
+export * from './api/product/fetchProduct.api';
+export * from './api/product/fetchProductProductId.api';
+export * from './api/product/fetchProductProductIdReviewOverview.api';
+export * from './api/product/fetchProductProductIdReviews.api';
+export * from './api/product/fetchProductProductIdSimilar.api';
+
+//domain
+export * from './domain/product/product.mapper';
+export * from './domain/ranking/ranking.mapper';
+export type { ProductDto } from './domain/product/product.dto';
 export type {
-  FetchProductsRankingParamsDto,
-  ProductRankingCreatorDto,
-  ProductRankingItemDto,
-  ProductRankingPageDto,
-} from './api/ranking/ranking.dto';
+  BasicInfoDto,
+  FetchProductParamsDto,
+  FetchProductProductIdPathDto,
+  FetchProductProductIdReviewOverviewPathDto,
+  FetchProductProductIdReviewsParamsDto,
+  FetchProductProductIdReviewsPathDto,
+  FetchProductProductIdSimilarPathDto,
+  PageResponseReviewDetailDto,
+  PreviewInfoDto,
+  ProductCardDto,
+  ProductListResponseDto,
+  ReviewOverviewDto,
+} from './api/product/product.dto';
+export type { CreatorRankingResponseDto } from './domain/creator/creator.dto';
 
 //query
 export * from './query/queryKeys';

@@ -4,7 +4,7 @@ import type {
   SubcategoryGroup,
   CategoryType,
   EffectOption,
-} from '../types/category.types';
+} from '../domain/category/category.types';
 
 // TODO: skinConcernId는 백엔드 API 응답값으로 교체 필요
 export const SKIN_CONCERN_OPTIONS: SkinConcernOption[] = [

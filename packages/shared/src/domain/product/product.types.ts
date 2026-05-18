@@ -15,6 +15,10 @@ export interface ProductCardType {
   creators: CreatorProfile[];
 }
 
+export interface ProductRankingCardType extends ProductCardType {
+  rank: number;
+}
+
 export interface ProductsByCategory {
   categoryId: number;
   categoryTitle: string;

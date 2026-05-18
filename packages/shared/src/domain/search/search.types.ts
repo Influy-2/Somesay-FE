@@ -1,6 +1,6 @@
-import type { BasicCreatorProfileType } from './creator.types';
-import type { CreatorReviewType } from './review.types';
-import type { ProductCardType } from './product.types';
+import type { BasicCreatorProfileType } from '../creator/creator.types';
+import type { ProductCardType } from '../product/product.types';
+import type { CreatorReviewType } from '../review/review.types';
 
 export interface ProductSearchResultType extends ProductCardType {
   reviewSummary: string;

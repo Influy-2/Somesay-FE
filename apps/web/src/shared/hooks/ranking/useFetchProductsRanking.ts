@@ -1,5 +1,5 @@
 import {
-  fetchProductsRanking,
+  fetchProductRanking,
   mapProductRankingPageDtoToCards,
   QUERY_KEYS,
 } from '@somesay/shared';
@@ -21,7 +21,7 @@ export const useFetchProductsRanking = ({
     queryKey: QUERY_KEYS.RANKING.PRODUCTS(rankingParams),
     initialPageParam: 0,
     queryFn: ({ pageParam }) =>
-      fetchProductsRanking({ page: pageParam, ...rankingParams }),
+      fetchProductRanking({ page: pageParam, ...rankingParams }),
     getNextPageParam: (lastPage) =>
       lastPage.hasNext ? lastPage.pageNumber + 1 : undefined,
     select: (data) => ({

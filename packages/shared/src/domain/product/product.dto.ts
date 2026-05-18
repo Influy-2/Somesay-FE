@@ -1,4 +1,5 @@
-export interface ProductItemDto {
+// 상품 하나
+export interface ProductDto {
   productId: number;
   brandName: string;
   productName: string;
