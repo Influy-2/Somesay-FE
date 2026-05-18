@@ -34,6 +34,7 @@ export type { ReviewVoteType } from './buttons/ReviewVoteButton';
 export { CTAButton } from './buttons/CTAButton';
 export { ResetButton } from './buttons/ResetButton';
 export { OnOffButton } from './buttons/OnOffButton';
+export { FloatingButtonPlus } from './buttons/FloatingButtonPlus';
 
 /* ratebar */
 export { RateBar } from './ratebar/RateBar';
@@ -57,6 +58,9 @@ export { HorizontalScrollProductCard } from './productCard/HorizontalScrollProdu
 
 /* product */
 export { ReviewProductLink } from './product/ReviewProductLink';
+export { RemovableProductItem } from './product/RemovableProductItem';
+export { RadioProductItem } from './product/RadioProductItem';
+export { SelectedItem } from './product/SelectedItem';
 
 /* bottom sheet */
 export { BottomSheet } from './bottomSheet/BottomSheet';
@@ -80,3 +84,6 @@ export { Snackbar } from './snackbar/Snackbar';
 
 /* modal */
 export { Modal } from './modal/Modal';
+
+/* inputfild */
+export { InputField } from './inputField/InputField';
