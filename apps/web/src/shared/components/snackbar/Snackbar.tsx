@@ -13,6 +13,7 @@ interface SnackbarProps {
   };
   onClose: () => void;
   duration?: number;
+  className?: string;
 }
 // TODO: 스낵바 컨텍스트로 관리
 export const Snackbar = ({
@@ -20,6 +21,7 @@ export const Snackbar = ({
   action,
   onClose,
   duration = 3000,
+  className,
 }: SnackbarProps) => {
   const [isClosing, setIsClosing] = useState(false);
 
@@ -39,7 +41,8 @@ export const Snackbar = ({
         'z-toast fixed bottom-[5.5rem] left-1/2 flex w-[22.375rem] -translate-x-1/2 items-center px-3.5 py-3.5',
         'bg-[rgba(22,22,22,0.74)] backdrop-blur-[.1875rem]',
         action ? 'justify-between' : 'justify-start',
-        isClosing && 'animate-snackbar-out'
+        isClosing && 'animate-snackbar-out',
+        className
       )}
       onAnimationEnd={() => isClosing && onClose()}
     >
