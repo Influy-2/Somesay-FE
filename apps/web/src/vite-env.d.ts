@@ -2,3 +2,11 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 declare module '*.css';
+interface ImportMetaEnv {
+  readonly VITE_API_BASE_URL: string;
+  // 필요에 따라 추가 환경 변수 타입을 정의
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
