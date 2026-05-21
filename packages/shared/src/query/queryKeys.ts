@@ -1,19 +1,22 @@
+import { SortOptionsType } from '../domain/product/product.types';
+
 export const QUERY_KEYS = {
   PRODUCT: {
     ALL: ['product'] as const,
-    LIST: ({
+    BY_CATEGORY: ({
       mainCategoryId,
       subCategoryId,
       sortType,
     }: {
       mainCategoryId?: number;
       subCategoryId?: number;
-      sortType?: string;
+      sortType?: SortOptionsType['sortType'];
     } = {}) =>
       [
         ...QUERY_KEYS.PRODUCT.ALL,
-        'list',
-        { mainCategoryId, subCategoryId, sortType },
+        mainCategoryId,
+        subCategoryId,
+        sortType,
       ] as const,
     DETAIL: (productId: number) =>
       [...QUERY_KEYS.PRODUCT.ALL, 'detail', productId] as const,

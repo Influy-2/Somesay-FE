@@ -13,6 +13,7 @@ export const ProductRankingSection = () => {
   } = useFetchProductsRanking({
     size: 4,
   });
+  console.log('productsRankingData:', productsRankingData);
   return (
     <section
       aria-labelledby="product-ranking-title"

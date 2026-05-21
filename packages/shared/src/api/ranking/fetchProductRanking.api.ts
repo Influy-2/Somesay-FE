@@ -1,7 +1,8 @@
 import { apiClient } from '../client';
 import { API_ENDPOINTS } from '../../constants/endpoints';
 import type { ApiPageParams, ApiPageResponse } from '../types';
-import type { ProductDto } from '../../domain/product/product.dto';
+import type { PreviewInfoDto } from '../../domain/product/product.dto';
+import { mapProductRankingPageDtoToCards } from '../../domain/ranking/ranking.mapper';
 
 interface ProductRankingParams extends ApiPageParams {
   mainCategoryId?: number;
@@ -15,10 +16,10 @@ export const fetchProductRanking = async ({
   size,
   mainCategoryId,
 }: ProductRankingParams) => {
-  const response = await apiClient.get<ApiPageResponse<ProductDto>>(
+  const response = await apiClient.get<ApiPageResponse<PreviewInfoDto>>(
     API_ENDPOINTS.PRODUCT_RANKING,
     { params: { page, size, mainCategoryId } }
   );
 
-  return response.data.data;
+  return mapProductRankingPageDtoToCards(response.data.data);
 };

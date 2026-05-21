@@ -1,20 +1,20 @@
 import type { ApiPage } from '../../api/types';
 import type { ProductCardType } from '../product/product.types';
-import type { ProductDto } from '../product/product.dto';
-import { mapProductDtoToCard } from '../product/product.mapper';
+import type { PreviewInfoDto } from '../product/product.dto';
+import { mapPreviewInfoDtoToCard } from '../product/product.mapper';
 
 export const mapProductRankingPageDtoToCards = (
-  page: ApiPage<ProductDto>
+  page: ApiPage<PreviewInfoDto>
 ): ApiPage<ProductCardType> => ({
   ...page,
-  content: page.content.map(mapProductDtoToCard),
+  content: page.content.map(mapPreviewInfoDtoToCard),
 });
 
 export const mapProductPreviewRankingPageDtoToCards = (
-  page: ApiPage<ProductDto>
+  page: ApiPage<PreviewInfoDto>
 ): ApiPage<ProductCardType> => ({
   ...page,
-  content: page.content.map(mapProductDtoToCard),
+  content: page.content.map(mapPreviewInfoDtoToCard),
 });
 
 export const rankingMapper = <T>(data: T): T => data;

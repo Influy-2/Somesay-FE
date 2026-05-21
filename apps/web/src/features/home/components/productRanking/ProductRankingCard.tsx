@@ -18,7 +18,9 @@ export const ProductRankingCard = ({
   creators,
 }: ProductRankingCardProps) => {
   const formattedPrice = price.toLocaleString('ko-KR');
-  const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
+  const formattedReviewCount = reviewCount
+    ? reviewCount.toLocaleString('ko-KR')
+    : '0';
 
   const onHeartToggle = () => {
     console.log('하트클릭');

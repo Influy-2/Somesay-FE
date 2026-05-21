@@ -10,8 +10,17 @@ import {
   CategoryProductSection,
 } from '@/features/home';
 import { PageHeader } from '@/shared/components';
+import { useFetchProductsByCategory } from '@/shared/hooks/product/useFetchProductsByCategory';
+import { useFetchProductDetail } from '@/shared/hooks';
 
 export const HomePage = () => {
+  const { data } = useFetchProductsByCategory({
+    mainCategoryId: 5,
+    sortType: 'RATING',
+  });
+  console.log('useFetchProductsByCategory', data);
+  const { data: productDetail } = useFetchProductDetail(1);
+  console.log('useFetchProductDetail', productDetail);
   return (
     <div className="inline-flex w-full flex-col items-center gap-17 pt-[4.875rem] pb-[175px]">
       <PageHeader

@@ -9,6 +9,12 @@ const API_PREFIX_PATTERN = /^\/api\/v\d+/;
 
 const args = parseArgs(process.argv.slice(2));
 const apiRoot = path.resolve(args.output ?? 'packages/shared/src/api');
+const domainRoot = path.resolve(
+  args.domainOutput ??
+    (args.output
+      ? path.join(path.dirname(args.output), 'domain')
+      : 'packages/shared/src/domain')
+);
 const shouldUpdateEndpoints = !args.output || Boolean(args.endpoints);
 const endpointsFile = path.resolve(
   args.endpoints ?? 'packages/shared/src/constants/endpoints.ts'
@@ -28,7 +34,10 @@ const existingEndpointEntries = shouldUpdateEndpoints
   ? await readEndpointEntries(endpointsFile)
   : new Map();
 const existingEndpointKeyByPath = new Map(
-  [...existingEndpointEntries].map(([key, value]) => [value, key])
+  [...existingEndpointEntries].flatMap(([key, value]) => [
+    [value, key],
+    [colonPathToOpenApiPath(value), key],
+  ])
 );
 const operationsByDtoFile = collectOperations(
   openApi.paths ?? {},
@@ -50,12 +59,28 @@ if (shouldUpdateEndpoints) {
 
 for (const group of operationsByDtoFile.values()) {
   await fs.mkdir(group.dir, { recursive: true });
+  await fs.mkdir(group.domainDir, { recursive: true });
 
   const dtoFile = path.join(group.dir, `${group.folderName}.dto.ts`);
-  const mapperFile = path.join(group.dir, `${group.folderName}.mapper.ts`);
+  const domainDtoFile = path.join(
+    group.domainDir,
+    `${group.folderName}.dto.ts`
+  );
+  const mapperFile = path.join(
+    group.domainDir,
+    `${group.folderName}.mapper.ts`
+  );
 
-  const dtoParts = createDtoParts(group);
-  stats.dtoAdded += await ensureDtoFile(dtoFile, dtoParts);
+  stats.dtoAdded += await ensureDtoFile(
+    dtoFile,
+    createApiDtoParts(group),
+    "import type { ApiPage } from '../types';"
+  );
+  stats.dtoAdded += await ensureDtoFile(
+    domainDtoFile,
+    createDomainDtoParts(group),
+    "import type { ApiPage } from '../../api/types';"
+  );
   await ensureMapperFile(mapperFile, group.mapperName);
 
   for (const operation of group.operations) {
@@ -102,6 +127,17 @@ function parseArgs(argv) {
 
     if (arg.startsWith('--output=')) {
       parsed.output = arg.slice('--output='.length);
+      continue;
+    }
+
+    if (arg === '--domain-output') {
+      parsed.domainOutput = argv[index + 1];
+      index += 1;
+      continue;
+    }
+
+    if (arg.startsWith('--domain-output=')) {
+      parsed.domainOutput = arg.slice('--domain-output='.length);
       continue;
     }
 
@@ -187,12 +223,17 @@ async function readEndpointEntries(file) {
 async function writeEndpointEntries(file, entries) {
   const merged = new Map(entries);
   const existingSource = await readTextFile(file);
+  const normalizedExistingSource = normalizeEndpointSource(existingSource);
   const existingEntries = await readEndpointEntries(file);
   const missingEntries = [...merged].filter(
     ([key]) => !existingEntries.has(key)
   );
 
-  if (missingEntries.length === 0 && existingSource) {
+  if (
+    missingEntries.length === 0 &&
+    existingSource &&
+    normalizedExistingSource === existingSource
+  ) {
     return;
   }
 
@@ -208,9 +249,9 @@ async function writeEndpointEntries(file, entries) {
 
     await fs.writeFile(
       file,
-      existingSource.replace(
+      normalizedExistingSource.replace(
         /\n?\}\s*as const;/,
-        `\n${missingSource}\n} as const;`
+        missingSource ? `\n${missingSource}\n} as const;` : '\n} as const;'
       )
     );
 
@@ -235,11 +276,21 @@ function collectEndpointEntries(operationsByDtoFile) {
 
   for (const group of operationsByDtoFile.values()) {
     for (const operation of group.operations) {
-      entries.set(operation.endpointKey, operation.apiPath);
+      entries.set(
+        operation.endpointKey,
+        openApiPathToColonPath(operation.apiPath)
+      );
     }
   }
 
   return entries;
+}
+
+function normalizeEndpointSource(source) {
+  return source.replace(
+    /(['"`])([^'"`]*\{[^'"`]+?\}[^'"`]*)\1/g,
+    (match, quote, value) => `${quote}${openApiPathToColonPath(value)}${quote}`
+  );
 }
 
 function collectOperations(paths, existingEndpointKeyByPath, folderFilter) {
@@ -267,11 +318,13 @@ function collectOperations(paths, existingEndpointKeyByPath, folderFilter) {
       }
 
       const dir = path.join(apiRoot, folderName);
+      const domainDir = path.join(domainRoot, folderName);
       const groupKey = folderName;
 
       if (!groups.has(groupKey)) {
         groups.set(groupKey, {
           dir,
+          domainDir,
           folderName,
           mapperName: `${folderName}Mapper`,
           operations: [],
@@ -373,16 +426,8 @@ function getResponseInfo(operation) {
   };
 }
 
-function createDtoParts(group) {
+function createApiDtoParts(group) {
   const declarations = [];
-  const schemaNames = [...group.referencedSchemas].filter((schemaName) => {
-    const schema = schemas[schemaName];
-
-    return schema && !isApiResponseSchema(schema);
-  });
-  const requiresApiPage = schemaNames.some((schemaName) =>
-    isPageSchema(schemas[schemaName])
-  );
 
   for (const operation of group.operations) {
     if (operation.queryTypeName) {
@@ -398,6 +443,23 @@ function createDtoParts(group) {
     }
   }
 
+  return {
+    requiresApiPage: false,
+    declarations: declarations.filter(Boolean),
+  };
+}
+
+function createDomainDtoParts(group) {
+  const declarations = [];
+  const schemaNames = [...group.referencedSchemas].filter((schemaName) => {
+    const schema = schemas[schemaName];
+
+    return schema && !isApiResponseSchema(schema);
+  });
+  const requiresApiPage = schemaNames.some((schemaName) =>
+    isPageSchema(schemas[schemaName])
+  );
+
   for (const schemaName of schemaNames.sort()) {
     declarations.push(createSchemaDeclaration(schemaName, schemas[schemaName]));
   }
@@ -409,12 +471,14 @@ function createDtoParts(group) {
 }
 
 function createApiSource(operation, group) {
-  const dtoImports = [
+  const apiDtoImports = [
     operation.queryTypeName,
     operation.pathTypeName,
+  ].filter(Boolean);
+  const domainDtoImports = [
     operation.bodyTypeName,
     ...responseDtoImports(operation.responseInfo),
-  ].filter(Boolean);
+  ].filter(isImportableTypeName);
   const apiResponseImports = operation.responseInfo?.isPage
     ? ['ApiPageResponse']
     : ['ApiResponse'];
@@ -425,14 +489,18 @@ function createApiSource(operation, group) {
     ? `/**\n * ${operation.summary}\n */\n`
     : '';
   const dtoImportSource =
-    dtoImports.length > 0
-      ? `import type { ${unique(dtoImports).join(', ')} } from './${group.folderName}.dto';\n`
+    apiDtoImports.length > 0
+      ? `import type { ${unique(apiDtoImports).join(', ')} } from './${group.folderName}.dto';\n`
+      : '';
+  const domainDtoImportSource =
+    domainDtoImports.length > 0
+      ? `import type { ${unique(domainDtoImports).join(', ')} } from '../../domain/${group.folderName}/${group.folderName}.dto';\n`
       : '';
 
   return `import { apiClient } from '../client';
 import { API_ENDPOINTS } from '../../constants/endpoints';
 import type { ${apiResponseImports.join(', ')} } from '../types';
-${dtoImportSource}import { ${group.mapperName} } from './${group.folderName}.mapper';
+${dtoImportSource}${domainDtoImportSource}import { ${group.mapperName} } from '../../domain/${group.folderName}/${group.folderName}.mapper';
 
 ${comment}export const ${operation.functionName} = async (${params}) => {
   const response = await apiClient.${operation.method}<${responseGeneric}>(${axiosArgs});
@@ -551,7 +619,7 @@ function createEndpointPathExpression(operation, pathParamsAccessor) {
 
   return pathParamNames.reduce(
     (expression, name) =>
-      `${expression}.replace('{${name}}', String(${pathParamsAccessor}.${name}))`,
+      `${expression}.replace(':${name}', String(${pathParamsAccessor}.${name})).replace('{${name}}', String(${pathParamsAccessor}.${name}))`,
     `API_ENDPOINTS.${operation.endpointKey}`
   );
 }
@@ -568,7 +636,7 @@ function createResponseGeneric(responseInfo) {
   return `ApiResponse<${responseInfo.apiType}>`;
 }
 
-async function ensureDtoFile(dtoFile, dtoParts) {
+async function ensureDtoFile(dtoFile, dtoParts, apiPageImportSource) {
   const source = await readTextFile(dtoFile);
   const existingExportNames = new Set(
     [...source.matchAll(/export\s+(?:interface|type)\s+([A-Za-z0-9_]+)/g)].map(
@@ -582,7 +650,7 @@ async function ensureDtoFile(dtoFile, dtoParts) {
   });
 
   if (!source) {
-    await fs.writeFile(dtoFile, createDtoSource(dtoParts));
+    await fs.writeFile(dtoFile, createDtoSource(dtoParts, apiPageImportSource));
 
     return dtoParts.declarations.length;
   }
@@ -594,7 +662,7 @@ async function ensureDtoFile(dtoFile, dtoParts) {
   const chunks = [];
 
   if (dtoParts.requiresApiPage && !hasApiPageImport(source)) {
-    chunks.push("import type { ApiPage } from '../types';\n");
+    chunks.push(`${apiPageImportSource}\n`);
   }
 
   chunks.push(source.trimEnd());
@@ -605,11 +673,11 @@ async function ensureDtoFile(dtoFile, dtoParts) {
   return missingDeclarations.length;
 }
 
-function createDtoSource(dtoParts) {
+function createDtoSource(dtoParts, apiPageImportSource) {
   const chunks = [];
 
   if (dtoParts.requiresApiPage) {
-    chunks.push("import type { ApiPage } from '../types';");
+    chunks.push(apiPageImportSource);
   }
 
   chunks.push(
@@ -689,7 +757,7 @@ async function fileExists(file) {
 }
 
 function hasApiPageImport(source) {
-  return /import\s+type\s+\{[^}]*\bApiPage\b[^}]*\}\s+from\s+['"]\.\.\/types['"]/.test(
+  return /import\s+type\s+\{[^}]*\bApiPage\b[^}]*\}\s+from\s+['"][^'"]+['"]/.test(
     source
   );
 }
@@ -898,6 +966,14 @@ function stripApiPrefix(rawPath) {
   return withoutPrefix || '/';
 }
 
+function openApiPathToColonPath(value) {
+  return value.replace(/\{([^}]+)\}/g, ':$1');
+}
+
+function colonPathToOpenApiPath(value) {
+  return value.replace(/:([A-Za-z0-9_]+)/g, '{$1}');
+}
+
 function tagToFolderName(tag) {
   return toCamelCase(tag.replace(/-?controller$/i, ''));
 }
@@ -948,6 +1024,10 @@ function stripDtoSuffix(typeName) {
 
 function getTypeIdentifiers(type) {
   return type.match(/\b[A-Z][A-Za-z0-9]*Dto\b/g) ?? [];
+}
+
+function isImportableTypeName(typeName) {
+  return Boolean(typeName && /^[A-Z][A-Za-z0-9_]*$/.test(typeName));
 }
 
 function escapeRegExp(value) {

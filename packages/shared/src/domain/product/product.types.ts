@@ -26,3 +26,7 @@ export interface ProductsByCategory {
   moreLinkLabel: string;
   products: ProductCardType[];
 }
+
+export interface SortOptionsType {
+  sortType: 'RATING' | 'REVIEW' | 'PRICE' | 'RECOMMEND';
+}
