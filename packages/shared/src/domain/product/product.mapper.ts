@@ -6,6 +6,8 @@ import type {
   ProductListResponseDto,
 } from './product.dto';
 import type { ProductCardType, ProductDetailType } from './product.types';
+import type { ReviewOverviewDto } from '../review/review.dto';
+import type { CreatorReviewSummaryType } from '../review/review.types';
 
 export const mapProductDetailDto = (
   item: ProductDetailDto
@@ -18,6 +20,18 @@ export const mapProductDetailDto = (
   isHearted: item.userWish,
   brandImageUrl: item.brandImageUrl,
   volume: item.volume,
+});
+
+// ReviewOverviewDto를 CreatorReviewSummaryType으로 변환합니다.
+export const mapCreatorReviewSummary = (
+  item: ReviewOverviewDto
+): CreatorReviewSummaryType => ({
+  productId: item.productId,
+  aveRating: item.aveRating,
+  reviewCount: item.reviewCount,
+  aiSummary: item.aiSummary,
+  productSkinType: item.productSkinType,
+  productSkinExpectations: item.productSkinExpectations,
 });
 
 const mapCreatorUrls = (urls: string[]) =>

@@ -1,26 +1,17 @@
-import {
-  Star20Icon,
-  DotIcon,
-  QuoteCloseIcon,
-  QuoteOpenIcon,
-} from '@/shared/icons';
-import { ChipLarge } from '@/shared/components';
+import type { CreatorReviewSummaryType } from '@somesay/shared';
 
-interface CreatorReviewSummarySectionProps {
-  rating: number;
-  reviewCount: number;
-  summaryText: string;
-  skinTypes: string[];
-  effects: string[];
-}
+import { ChipLarge, StarRating } from '@/shared/components';
+import { DotIcon, QuoteCloseIcon, QuoteOpenIcon } from '@/shared/icons';
 
+// 크리에이터 리뷰 요약 정보를 표시하는 섹션입니다.
 export const CreatorReviewSummarySection = ({
-  rating,
+  aveRating,
   reviewCount,
-  summaryText,
-  skinTypes,
-  effects,
-}: CreatorReviewSummarySectionProps) => {
+  aiSummary,
+  productSkinType,
+  productSkinExpectations,
+}: CreatorReviewSummaryType) => {
+  console.log(reviewCount);
   return (
     <section className="flex flex-col gap-5 bg-white px-4 py-5">
       <h2 className="headline4">크리에이터 리뷰 요약</h2>
@@ -30,15 +21,11 @@ export const CreatorReviewSummarySection = ({
           <div
             className="flex items-center gap-1"
             role="img"
-            aria-label={`5점 만점에 ${rating.toFixed(1)}점`}
+            aria-label={`5점 만점에 ${aveRating.toFixed(1)}점`}
           >
-            <div className="flex items-center text-black">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star20Icon key={i} aria-hidden="true" />
-              ))}
-            </div>
+            <StarRating rating={aveRating} />
             <span className="body1-b" aria-hidden="true">
-              {rating.toFixed(1)}
+              {aveRating.toFixed(1)}
             </span>
             <span className="body1-b text-grey06" aria-hidden="true">
               /
@@ -52,9 +39,9 @@ export const CreatorReviewSummarySection = ({
 
           <span
             className="body1-b"
-            aria-label={`리뷰 ${reviewCount.toLocaleString()}개`}
+            aria-label={`리뷰 ${reviewCount?.toLocaleString() ?? '0'}개`}
           >
-            리뷰 {reviewCount.toLocaleString()}
+            리뷰 {reviewCount?.toLocaleString() ?? '0'}
           </span>
         </div>
       </div>
@@ -65,7 +52,7 @@ export const CreatorReviewSummarySection = ({
           <QuoteOpenIcon />
         </div>
 
-        <p className="body1-sb py-2 text-center">{summaryText}</p>
+        <p className="body1-sb py-2 text-center">{aiSummary}</p>
 
         <div className="flex w-full justify-end">
           <QuoteCloseIcon />
@@ -78,7 +65,7 @@ export const CreatorReviewSummarySection = ({
         <div>
           <p className="body2-m mb-2">잘 맞는 피부 타입</p>
           <div className="flex flex-wrap gap-1.5">
-            {skinTypes.map((type) => (
+            {productSkinType.map((type) => (
               <ChipLarge
                 key={type}
                 label={type}
@@ -91,10 +78,10 @@ export const CreatorReviewSummarySection = ({
         <div>
           <p className="body2-m mb-2">기대 효과</p>
           <div className="flex flex-wrap gap-1.5">
-            {effects.map((type) => (
+            {productSkinExpectations.map((effect) => (
               <ChipLarge
-                key={type}
-                label={type}
+                key={effect.productSkinExpectationId}
+                label={effect.concern}
                 bgColor="bg-grey05"
                 textColor="text-grey08"
               />

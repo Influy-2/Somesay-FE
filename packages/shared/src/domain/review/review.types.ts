@@ -1,3 +1,5 @@
+import type { ProductEffectResponseDto } from '../product/product.dto';
+
 export interface CreatorReviewType {
   reviewId: number;
   content: string;
@@ -9,4 +11,13 @@ export interface CreatorReviewType {
   timelinkCount?: number;
   creatorId: number;
   productId: number;
+}
+
+export interface CreatorReviewSummaryType {
+  productId: number;
+  aveRating: number;
+  reviewCount: number;
+  aiSummary: string;
+  productSkinType: string[];
+  productSkinExpectations: ProductEffectResponseDto[];
 }

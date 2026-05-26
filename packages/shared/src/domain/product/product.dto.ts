@@ -100,12 +100,3 @@ export interface PageResponseReviewDetailDto {
   totalPages: number;
   hasNext: boolean;
 }
-
-export interface ReviewOverviewDto {
-  productId: number;
-  aveRating: number;
-  reviewCount: number;
-  aiSummary: string;
-  productSkinType: string[];
-  productSkinExpectations: ProductEffectResponseDto[];
-}

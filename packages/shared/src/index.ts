@@ -23,7 +23,10 @@ export * from './domain/filter/filter.types';
 
 export * from './constants/cosmetics.constants';
 export * from './constants/forbiddenWords.constants';
-export type { CreatorReviewType } from './domain/review/review.types';
+export type {
+  CreatorReviewType,
+  CreatorReviewSummaryType,
+} from './domain/review/review.types';
 
 export { formatSubscriberCount } from './utils';
 
@@ -37,7 +40,7 @@ export * from './api/ranking/fetchProductRanking.api';
 //api - product
 export * from './api/product/fetchProductsByCategory.api';
 export * from './api/product/fetchProductDetail.api';
-export * from './api/product/fetchProductProductIdReviewOverview.api';
+export * from './api/product/fetchProductReviewOverview.api';
 export * from './api/product/fetchProductProductIdReviews.api';
 export * from './api/product/fetchProductProductIdSimilar.api';
 

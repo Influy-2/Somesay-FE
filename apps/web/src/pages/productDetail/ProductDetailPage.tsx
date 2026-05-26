@@ -7,10 +7,12 @@ import {
   CreatorReviewSummarySection,
   ReviewRankingList,
   SimilarProductsList,
-  MOCK_REVIEW_SUMMARY,
   MOCK_SIMILAR_PRODUCTS,
 } from '@/features/productDetail';
-import { useFetchProductDetail } from '@/shared/hooks';
+import {
+  useFetchProductDetail,
+  useFetchProductReviewOverview,
+} from '@/shared/hooks';
 
 export const ProductDetailPage = () => {
   const navigate = useNavigate();
@@ -31,6 +33,15 @@ export const ProductDetailPage = () => {
   } = useFetchProductDetail(productId);
 
   const hasProductError = productId === undefined || isError;
+
+  // 상품 리뷰 개요 정보 API 호출
+  // TODO: Loading, Error 상태 UI 개선 (현재는 상품 정보 로딩/에러와 동일하게 처리)
+  const {
+    data: reviewOverview,
+    isLoading: isReviewOverviewLoading,
+    isError: isReviewOverviewError,
+  } = useFetchProductReviewOverview(productId);
+  console.log(isReviewOverviewLoading, isReviewOverviewError); //삭제 예정
 
   // TODO: 좋아요 상태 관리 (로컬 상태로 관리, 실제 구현에서는 API 연동 필요)
   const [heartStateByProductId, setHeartStateByProductId] = useState<
@@ -108,7 +119,9 @@ export const ProductDetailPage = () => {
               isHearted={isHearted}
               onLikeClick={handleLikeToggle}
             />
-            <CreatorReviewSummarySection {...MOCK_REVIEW_SUMMARY} />
+            {reviewOverview && (
+              <CreatorReviewSummarySection {...reviewOverview} />
+            )}
             <ReviewRankingList />
             <SimilarProductsList products={MOCK_SIMILAR_PRODUCTS} />
           </>
