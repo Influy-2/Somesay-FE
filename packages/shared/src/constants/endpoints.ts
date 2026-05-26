@@ -1,12 +1,12 @@
 export const API_ENDPOINTS = {
   /** Ranking  **/
-  PRODUCT_RANKING: '/ranking/product-ranking',
-  RANKING_CREATOR_RANKING: '/ranking/creator-ranking',
+  PRODUCT_RANKING: '/rankings/product-ranking',
+  RANKING_CREATOR_RANKING: '/rankings/creator-ranking',
 
   /** Product  **/
-  PRODUCT: '/product',
-  PRODUCT_DETAIL: '/product/:productId',
-  PRODUCT_PRODUCT_ID_REVIEW_OVERVIEW: '/product/:productId/review-overview',
-  PRODUCT_PRODUCT_ID_REVIEWS: '/product/:productId/reviews',
-  PRODUCT_PRODUCT_ID_SIMILAR: '/product/:productId/similar',
+  PRODUCT: '/products',
+  PRODUCT_DETAIL: '/products/:productId',
+  PRODUCT_PRODUCT_ID_REVIEW_OVERVIEW: '/products/:productId/review-overview',
+  PRODUCT_PRODUCT_ID_REVIEWS: '/products/:productId/reviews',
+  PRODUCT_PRODUCT_ID_SIMILAR: '/products/:productId/similar',
 } as const;
