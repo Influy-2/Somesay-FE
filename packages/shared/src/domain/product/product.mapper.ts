@@ -40,7 +40,10 @@ const mapCreatorUrls = (urls: string[]) =>
     profileImageUrl: url,
   }));
 
-export const mapProductDtoToCard = (item: ProductCardDto): ProductCardType => ({
+//TODO: 수정 이거 뭐임?
+export const mapProductCardDtoToCard = (
+  item: ProductCardDto
+): ProductCardType => ({
   productId: item.productId,
   imageUrl: item.productImageUrl,
   brand: item.brandName,
@@ -52,20 +55,7 @@ export const mapProductDtoToCard = (item: ProductCardDto): ProductCardType => ({
   creators: mapCreatorUrls(item.creatorImageUrls),
 });
 
-export const mapProductCardDtoToCard = (
-  item: ProductCardDto
-): ProductCardType => ({
-  productId: item.productId,
-  imageUrl: item.productImageUrl,
-  brand: item.brandName,
-  productName: item.productName,
-  price: item.price,
-  rating: item.aveRating,
-  reviewCount: item.reviewCount,
-  isHearted: item.userWish,
-  creators: mapCreatorUrls(item.creatorImageUrls),
-});
-
+// 상품 카드에 사용.
 export const mapPreviewInfoDtoToCard = (
   item: PreviewInfoDto
 ): ProductCardType => ({

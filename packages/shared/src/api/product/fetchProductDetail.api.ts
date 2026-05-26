@@ -7,9 +7,9 @@ import { buildPath } from '../buildApi';
 /**
  * 제품 기본 정보 제공
  */
-export const fetchProductDetail = async (pathParams: { productId: number }) => {
+export const fetchProductDetail = async (productId: number) => {
   const response = await apiClient.get<ApiResponse<ProductDetailDto>>(
-    buildPath(API_ENDPOINTS.PRODUCT_DETAIL, pathParams)
+    buildPath(API_ENDPOINTS.PRODUCT_DETAIL, { productId })
   );
 
   return mapProductDetailDto(response.data.data);

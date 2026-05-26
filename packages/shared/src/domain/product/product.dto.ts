@@ -1,4 +1,3 @@
-import type { ApiPageParams } from '../../api/types';
 import type {
   ProductSkinExpectationType,
   ProductSkinType,
@@ -36,26 +35,6 @@ export interface PreviewInfoDto extends ProductBasicDto {
 export interface ProductDetailDto extends ProductBasicDto {
   volume: number;
   brandImageUrl: string;
-}
-
-export interface FetchProductProductIdPathDto {
-  productId: number;
-}
-
-export interface FetchProductProductIdSimilarPathDto {
-  productId: number;
-}
-
-export interface FetchProductProductIdReviewsParamsDto extends ApiPageParams {
-  filterByMySkin?: boolean;
-}
-
-export interface FetchProductProductIdReviewsPathDto {
-  productId: number;
-}
-
-export interface FetchProductProductIdReviewOverviewPathDto {
-  productId: number;
 }
 
 export interface ProductListResponseDto {

@@ -9,7 +9,7 @@ export const useFetchProductDetail = (productId?: number) => {
     queryKey: isValidProductId
       ? QUERY_KEYS.PRODUCT.DETAIL(productId)
       : [...QUERY_KEYS.PRODUCT.ALL, productId],
-    queryFn: () => fetchProductDetail({ productId: productId ?? 0 }),
+    queryFn: () => fetchProductDetail(productId ?? 0),
     enabled: isValidProductId,
   });
 
