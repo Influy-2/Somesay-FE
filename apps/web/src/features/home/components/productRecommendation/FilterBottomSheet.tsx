@@ -10,21 +10,39 @@ import type {
   RecommendedFilterGroupType,
   SelectedFiltersType,
 } from './filter.types';
-import {
-  SKIN_CONCERN_OPTIONS,
-  SKIN_TYPE_OPTIONS,
-  CATEGORY_GROUPS,
-} from '@somesay/shared';
-import type { SkinTypeOption, SubcategoryOption } from '@somesay/shared';
+import { type CategoryGroupType, type SubcategoryType } from '@somesay/shared';
+import { useFetchCategories } from '@/shared/hooks';
 
-const ALL_SUBCATEGORY_OPTION: SubcategoryOption = {
+const ALL_SUBCATEGORY_OPTION: SubcategoryType = {
   subCategoryId: 0,
-  label: '전체',
+  subName: '전체',
 };
 
-const SKIN_TYPE_OPTIONS_EXTENDED: SkinTypeOption[] = [
-  ...SKIN_TYPE_OPTIONS,
-  { skinTypeId: 0, label: '모르겠음' },
+// TODO: 피부 고민 선택지 API가 생기면 백엔드 응답값으로 교체
+const SKIN_CONCERN_OPTIONS = [
+  '보습',
+  '속건조',
+  '진정',
+  '여드름',
+  '붉은기',
+  '미백/잡티',
+  '주름/탄력',
+  '모공',
+  '피부결',
+  '각질',
+  '피부 장벽',
+  '흔적',
+];
+
+// TODO: 피부 타입 선택지 API가 생기면 백엔드 응답값으로 교체
+const SKIN_TYPE_OPTIONS = [
+  '건성',
+  '지성',
+  '복합성',
+  '수부지',
+  '민감성',
+  '여드름성',
+  '모르겠음',
 ];
 
 interface FilterBottomSheetProps {
@@ -39,11 +57,10 @@ interface FilterBottomSheetProps {
   isSubmitEnabled: boolean;
 }
 
-const getItemId = (
-  v: SelectedFiltersType[RecommendedFilterGroupType][number]
-): number => {
-  if ('skinConcernId' in v) return v.skinConcernId;
-  if ('skinTypeId' in v) return v.skinTypeId;
+type FilterItem = string | SubcategoryType;
+
+const getItemId = (v: FilterItem): string | number => {
+  if (typeof v === 'string') return v;
   return v.subCategoryId;
 };
 
@@ -58,9 +75,9 @@ export const FilterBottomSheet = ({
   onReset,
   isSubmitEnabled,
 }: FilterBottomSheetProps) => {
-  const handleToggleFilter = (
-    item: SelectedFiltersType[RecommendedFilterGroupType][number]
-  ) => {
+  const { data: categoryGroups = [] } = useFetchCategories();
+
+  const handleToggleFilter = (item: FilterItem) => {
     const itemId = getItemId(item);
     setSelectedFilters((prev) => {
       const current = prev[activeCategory];
@@ -123,8 +140,8 @@ export const FilterBottomSheet = ({
             >
               {SKIN_CONCERN_OPTIONS.map((filter) => (
                 <FilterChip
-                  key={filter.skinConcernId}
-                  label={filter.label}
+                  key={filter}
+                  label={filter}
                   isSelected={selectedFilters.skinConcern.includes(filter)}
                   onClick={() => handleToggleFilter(filter)}
                 />
@@ -142,10 +159,10 @@ export const FilterBottomSheet = ({
               role="group"
               aria-label="피부 타입 선택"
             >
-              {SKIN_TYPE_OPTIONS_EXTENDED.map((filter) => (
+              {SKIN_TYPE_OPTIONS.map((filter) => (
                 <FilterChip
-                  key={filter.skinTypeId}
-                  label={filter.label}
+                  key={filter}
+                  label={filter}
                   isSelected={selectedFilters.skinType.includes(filter)}
                   onClick={() => handleToggleFilter(filter)}
                 />
@@ -166,7 +183,7 @@ export const FilterBottomSheet = ({
               {/* 전체 */}
               <FilterChip
                 key={ALL_SUBCATEGORY_OPTION.subCategoryId}
-                label={ALL_SUBCATEGORY_OPTION.label}
+                label={ALL_SUBCATEGORY_OPTION.subName}
                 isSelected={selectedFilters.category.some(
                   (f) =>
                     f.subCategoryId === ALL_SUBCATEGORY_OPTION.subCategoryId
@@ -175,18 +192,21 @@ export const FilterBottomSheet = ({
               />
 
               {/* 스킨케어, 마스크/팩, 클렌징 등 카테고리 그룹과 하위 카테고리를 맵핑하여 렌더링 */}
-              {CATEGORY_GROUPS.map((group) => (
+              {categoryGroups.map((group: CategoryGroupType) => (
                 <div
                   className="flex w-full flex-col items-start gap-3 self-stretch"
-                  key={group.categoryId}
+                  key={group.mainCategoryId}
                 >
-                  <p className="body2-sb text-black">{group.categoryLabel}</p>
+                  <p className="body2-sb text-black">{group.mainName}</p>
                   <div className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch">
-                    {group.subcategories.map((filter) => (
+                    {group.subCategories.map((filter) => (
                       <FilterChip
                         key={filter.subCategoryId}
-                        label={filter.label}
-                        isSelected={selectedFilters.category.includes(filter)}
+                        label={filter.subName}
+                        isSelected={selectedFilters.category.some(
+                          (selected) =>
+                            selected.subCategoryId === filter.subCategoryId
+                        )}
                         onClick={() => handleToggleFilter(filter)}
                       />
                     ))}

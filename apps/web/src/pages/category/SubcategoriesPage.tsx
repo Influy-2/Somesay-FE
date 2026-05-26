@@ -8,7 +8,7 @@ import {
   SortBar,
 } from '@/shared/components';
 import { ArrowBackIcon, SearchIcon } from '@/shared/icons';
-import { CATEGORY_GROUPS } from '@somesay/shared';
+import { useFetchCategories } from '@/shared/hooks';
 
 const SORT_OPTIONS = [
   { value: 'rating', label: '평점순' },
@@ -22,17 +22,18 @@ export const SubcategoriesPage = () => {
   const categoryId = Number(categoryIdParam);
   const [selectedId, setSelectedId] = useState(0);
   const [currentSortValue, setCurrentSortValue] = useState('rating');
+  const { data: categoryGroups = [] } = useFetchCategories();
 
-  const currentCategory = CATEGORY_GROUPS.find(
-    (c) => c.categoryId === categoryId
+  const currentCategory = categoryGroups.find(
+    (c) => c.mainCategoryId === categoryId
   );
-  const categoryTitle = currentCategory?.categoryLabel ?? '';
+  const categoryTitle = currentCategory?.mainName ?? '';
 
   const tabSubcategories = [
     { id: 0, label: '전체' },
-    ...(currentCategory?.subcategories.map((sub) => ({
+    ...(currentCategory?.subCategories.map((sub) => ({
       id: sub.subCategoryId,
-      label: sub.label,
+      label: sub.subName,
     })) ?? []),
   ];
 
@@ -55,7 +56,7 @@ export const SubcategoriesPage = () => {
             <ArrowBackIcon aria-hidden="true" />
           </button>
         }
-        title={currentCategory?.categoryLabel ?? ''}
+        title={currentCategory?.mainName ?? ''}
         right={[
           <button type="button" aria-label="검색">
             <SearchIcon aria-hidden="true" />

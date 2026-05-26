@@ -1,4 +1,7 @@
-import type { ProductEffectResponseDto } from '../product/product.dto';
+import type {
+  ProductSkinExpectationType,
+  ProductSkinType,
+} from '../product/product.types';
 
 export interface CreatorReviewType {
   reviewId: number;
@@ -18,6 +21,6 @@ export interface CreatorReviewSummaryType {
   aveRating: number;
   reviewCount: number;
   aiSummary: string;
-  productSkinType: string[];
-  productSkinExpectations: ProductEffectResponseDto[];
+  productSkinType: ProductSkinType[];
+  productSkinExpectations: ProductSkinExpectationType[];
 }

@@ -47,4 +47,8 @@ export const QUERY_KEYS = {
     } = {}) =>
       [...QUERY_KEYS.RANKING.ALL, 'products', { mainCategoryId }] as const,
   },
+  CATEGORY: {
+    ALL: ['category'] as const,
+    LIST: () => [...QUERY_KEYS.CATEGORY.ALL, 'list'] as const,
+  },
 };

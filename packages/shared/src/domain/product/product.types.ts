@@ -6,6 +6,14 @@ export interface ProductBasicType {
   price: number;
   isHearted: boolean;
 }
+
+export type ProductSkinType = string;
+
+export interface ProductSkinExpectationType {
+  productSkinExpectationId: number;
+  concern: string;
+  isPrimary: boolean;
+}
 export interface ProductCardType extends ProductBasicType {
   rating: number;
   reviewCount: number;

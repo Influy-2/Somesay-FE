@@ -1,4 +1,8 @@
 import type { ApiPageParams } from '../../api/types';
+import type {
+  ProductSkinExpectationType,
+  ProductSkinType,
+} from './product.types';
 
 // 여러 상품 응답 DTO에서 공통으로 사용하는 최소 상품 정보입니다.
 export interface ProductBasicDto {
@@ -18,8 +22,8 @@ export interface ProductCardDto extends ProductBasicDto {
   reviewCount: number;
   creatorImageUrls: string[];
   shortSummary: string;
-  productSkinType: string[];
-  productSkinExpectations: ProductEffectResponseDto[];
+  productSkinType: ProductSkinType[];
+  productSkinExpectations: ProductSkinExpectationType[];
 }
 // 상품 랭킹/비슷한 기대효과 상품의 미리보기 카드 응답에 사용합니다.
 export interface PreviewInfoDto extends ProductBasicDto {
@@ -54,12 +58,6 @@ export interface FetchProductProductIdReviewOverviewPathDto {
   productId: number;
 }
 
-export interface ProductEffectResponseDto {
-  productSkinExpectationId: number;
-  concern: string;
-  isPrimary: boolean;
-}
-
 export interface ProductListResponseDto {
   products: ProductCardDto[];
   totalCount: number;
@@ -81,7 +79,7 @@ export interface ReviewDetailDto {
   subscriberNum: number;
   profileImageUrl: string;
   trustScore: number;
-  creatorSkinTypes: string[];
+  creatorSkinTypes: ProductSkinType[];
   reviewId: number;
   content: string;
   rating: number;

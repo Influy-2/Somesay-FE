@@ -3,6 +3,8 @@ export type {
   ProductCardType,
   ProductDetailType,
   ProductRankingCardType,
+  ProductSkinExpectationType,
+  ProductSkinType,
   ProductsByCategory,
   SortOptionsType,
 } from './domain/product/product.types';
@@ -43,6 +45,9 @@ export * from './api/product/fetchProductDetail.api';
 export * from './api/product/fetchProductReviewOverview.api';
 export * from './api/product/fetchProductProductIdReviews.api';
 export * from './api/product/fetchProductProductIdSimilar.api';
+
+//api - category
+export * from './api/category/fetchCategories.api';
 
 //query
 export * from './query/queryKeys';

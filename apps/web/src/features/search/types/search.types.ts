@@ -1,9 +1,4 @@
-import {
-  EffectOption,
-  SubcategoryOption,
-  FilterGroupType,
-  SkinTypeOption,
-} from '@somesay/shared';
+import { SubcategoryType, FilterGroupType } from '@somesay/shared';
 
 export type SearchTabType = 'product' | 'review';
 export type ProductSearchSortOptionType = 'rating' | 'price_asc' | 'price_desc';
@@ -18,12 +13,9 @@ export interface RecentSearchItemType {
 }
 
 export interface SelectedFiltersType {
-  skinType: SkinTypeOption[];
-  effect: EffectOption[];
-  category: SubcategoryOption[];
+  skinType: string[];
+  effect: string[];
+  category: SubcategoryType[];
 }
 
-export type FilterOptionType =
-  | SkinTypeOption
-  | SubcategoryOption
-  | EffectOption;
+export type FilterOptionType = string | SubcategoryType;
