@@ -23,7 +23,6 @@ export type {
 export * from './domain/category/category.types';
 export * from './domain/filter/filter.types';
 
-export * from './constants/cosmetics.constants';
 export * from './constants/forbiddenWords.constants';
 export type {
   CreatorReviewType,
