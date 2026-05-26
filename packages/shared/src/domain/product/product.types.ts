@@ -1,18 +1,25 @@
-interface CreatorProfile {
-  name: string;
-  profileImageUrl: string;
-}
-
-export interface ProductCardType {
+export interface ProductBasicType {
   productId: number;
   imageUrl: string;
   brand: string;
   productName: string;
   price: number;
+  isHearted: boolean;
+}
+export interface ProductCardType extends ProductBasicType {
   rating: number;
   reviewCount: number;
-  isHearted: boolean;
   creators: CreatorProfile[];
+}
+
+interface CreatorProfile {
+  name: string;
+  profileImageUrl: string;
+}
+
+export interface ProductDetailType extends ProductBasicType {
+  brandImageUrl?: string | undefined;
+  volume: number;
 }
 
 export interface ProductRankingCardType extends ProductCardType {

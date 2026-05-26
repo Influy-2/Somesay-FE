@@ -1,5 +1,7 @@
 export type {
+  ProductBasicType,
   ProductCardType,
+  ProductDetailType,
   ProductRankingCardType,
   ProductsByCategory,
   SortOptionsType,

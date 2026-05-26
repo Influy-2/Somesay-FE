@@ -1,41 +1,35 @@
+import type { ProductDetailType } from '@somesay/shared';
 import { BlackHeartButton, BrandProfile } from '@/shared/components';
 
-interface ProductHeroProps {
-  productImgUrl?: string | undefined;
-  brandName: string;
-  brandImageUrl?: string | undefined;
-  productName: string;
-  price: number;
-  capacity: string;
-  isLiked: boolean;
+interface ProductHeroProps extends ProductDetailType {
   onLikeClick: () => void;
 }
 
 export const ProductHero = ({
-  productImgUrl,
-  brandName,
+  imageUrl,
+  brand,
   brandImageUrl,
   productName,
   price,
-  capacity,
-  isLiked,
+  volume,
+  isHearted,
   onLikeClick,
 }: ProductHeroProps) => {
   return (
     <section
       className="flex flex-col bg-white"
-      aria-label={`${brandName} ${productName} 상품 정보`}
+      aria-label={`${brand} ${productName} 상품 정보`}
     >
       <div className="bg-grey01 aspect-square w-full overflow-hidden">
-        {productImgUrl && (
+        {imageUrl && (
           <img
-            src={productImgUrl}
+            src={imageUrl}
             alt={productName}
             className="h-full w-full object-cover"
           />
         )}
       </div>
-      <BrandProfile brandName={brandName} brandImageUrl={brandImageUrl} />
+      <BrandProfile brandName={brand} brandImageUrl={brandImageUrl} />
 
       <div className="px-4 py-5">
         <h2 className="subhead-sb">{productName}</h2>
@@ -47,10 +41,10 @@ export const ProductHero = ({
             </div>
             <div className="flex items-center gap-1">
               <dt className="body2-b">용량</dt>
-              <dd className="body2-m">{capacity}</dd>
+              <dd className="body2-m">{volume}ml</dd>
             </div>
           </dl>
-          <BlackHeartButton isLiked={isLiked} onLikeToggle={onLikeClick} />
+          <BlackHeartButton isLiked={isHearted} onLikeToggle={onLikeClick} />
         </div>
       </div>
     </section>

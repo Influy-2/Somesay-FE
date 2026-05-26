@@ -2,13 +2,23 @@ import type { ApiPage } from '../../api/types';
 import type {
   PreviewInfoDto,
   ProductCardDto,
-  // ProductDetailDto,
+  ProductDetailDto,
   ProductListResponseDto,
 } from './product.dto';
-import type { ProductCardType } from './product.types';
+import type { ProductCardType, ProductDetailType } from './product.types';
 
-// fetchProductDetail
-// export const mapProductDetailDto = (item: ProductDetailDto): Product => ({});
+export const mapProductDetailDto = (
+  item: ProductDetailDto
+): ProductDetailType => ({
+  productId: item.productId,
+  imageUrl: item.productImageUrl,
+  brand: item.brandName,
+  productName: item.productName,
+  price: item.price,
+  isHearted: item.userWish,
+  brandImageUrl: item.brandImageUrl,
+  volume: item.volume,
+});
 
 const mapCreatorUrls = (urls: string[]) =>
   urls.map((url) => ({

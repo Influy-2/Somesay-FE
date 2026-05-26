@@ -2,15 +2,16 @@ import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
 
 export const MOCK_PRODUCT_DETAIL = {
-  productImgUrl: mockProductImg,
-  brandName: '토리든',
+  productId: 1,
+  imageUrl: mockProductImg,
+  brand: '토리든',
   brandImageUrl: 'https://placeholder.com/brand_logo.png',
   productName:
     '다이브인 저분자 히알루론산 세럼 [흔적 리페어] 10개입 마데카소사이드',
   price: 30000,
-  capacity: '50ml',
+  volume: 50,
   likeCount: 1250,
-  isLiked: false,
+  isHearted: false,
 };
 
 export const MOCK_REVIEW_SUMMARY = {
