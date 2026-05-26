@@ -9,7 +9,7 @@ export interface CreatorRankingProfileProps {
     name: string;
     profileImg: string;
     subscriberCount: string;
-    reliability: number;
+    trustScore: number;
     tags: string[];
   };
 }
@@ -51,7 +51,7 @@ export const CreatorRankingProfile = ({
         <div className="flex w-full items-center justify-between">
           <dl className="flex items-center gap-1">
             <dt className="caption1-m text-grey07">신뢰도</dt>
-            <dd className="caption1-b text-grey07">{creator.reliability}점</dd>
+            <dd className="caption1-b text-grey07">{creator.trustScore}점</dd>
           </dl>
           <div
             className="flex gap-1"

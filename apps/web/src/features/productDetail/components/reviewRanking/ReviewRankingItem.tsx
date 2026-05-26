@@ -18,7 +18,7 @@ interface ReviewCreator {
   channelName?: string;
   profileImg: string;
   subscriberCount: string;
-  reliability: number;
+  trustScore: number;
   tags: string[];
 }
 
