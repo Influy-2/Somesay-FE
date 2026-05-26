@@ -11,7 +11,6 @@ export const CreatorReviewSummarySection = ({
   productSkinType,
   productSkinExpectations,
 }: CreatorReviewSummaryType) => {
-  console.log(reviewCount);
   return (
     <section className="flex flex-col gap-5 bg-white px-4 py-5">
       <h2 className="headline4">크리에이터 리뷰 요약</h2>
