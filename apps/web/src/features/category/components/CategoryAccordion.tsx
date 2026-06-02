@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import type { CategoryGroupType } from '@somesay/shared';
 import { MainArrowIcon } from '@/shared/icons';
+import cn from '@/utils/cn';
 
 interface CategoryAccordionProps {
   category: CategoryGroupType;
@@ -45,7 +46,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
       <ul
         id={subListId}
         role="region"
-        className={`flex flex-col gap-6 px-8 pt-6 ${!isOpen ? 'hidden' : ''}`}
+        className={cn('flex flex-col gap-6 px-8 pt-6', !isOpen && 'hidden')}
       >
         {category.subCategories.map((sub) => (
           <li key={sub.subCategoryId} className="body2-m cursor-pointer">
