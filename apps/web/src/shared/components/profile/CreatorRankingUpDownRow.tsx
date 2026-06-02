@@ -6,7 +6,7 @@ import {
 } from '@/shared/icons';
 import { ChipBasic } from '@/shared/components';
 import { CreatorRankingUpDownType } from '@somesay/shared';
-import { formatSubscriberCount } from '@somesay/shared/src/utils';
+import { formatSubscriberCount } from '@somesay/shared';
 
 export const CreatorRankingUpDownRow = ({
   ranking,
