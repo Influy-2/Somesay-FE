@@ -8,8 +8,7 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
-    "prepare": "husky",
-    "api:generate:custom": "node scripts/generate-api.mjs"
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
