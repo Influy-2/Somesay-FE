@@ -21,7 +21,7 @@ export const QUERY_KEYS = {
     DETAIL: (productId: number) =>
       [...QUERY_KEYS.PRODUCT.ALL, 'detail', productId] as const,
     REVIEW_OVERVIEW: (productId: number) =>
-      [...QUERY_KEYS.PRODUCT.DETAIL(productId), 'review-overview'] as const,
+      [...QUERY_KEYS.PRODUCT.ALL, 'review-overview', productId] as const,
     REVIEWS: (
       productId: number,
       {

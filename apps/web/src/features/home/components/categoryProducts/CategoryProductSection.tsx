@@ -8,14 +8,13 @@ const ALL_CATEGORY = { id: 0, label: '전체' };
 
 export const CategoryProductSection = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
-  const { data: categoryGroups = [] } = useFetchCategories();
+  const { data: mainCategories = [] } = useFetchCategories();
 
-  // const { data: categories = [] } = useCategories();
   // const { data: products = [] } = useCategoryProducts(selectedCategoryId);
 
   const categories = [
     ALL_CATEGORY,
-    ...categoryGroups.map((category) => ({
+    ...mainCategories.map((category) => ({
       id: category.mainCategoryId,
       label: category.mainName,
     })),

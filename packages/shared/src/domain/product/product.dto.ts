@@ -2,6 +2,9 @@ import type {
   ProductSkinExpectationType,
   ProductSkinType,
 } from './product.types';
+import type { CommentPreviewDto } from '../comment/comment.types';
+
+import type { CreatorType } from '../creator/creator.types';
 
 // 여러 상품 응답 DTO에서 공통으로 사용하는 최소 상품 정보입니다.
 export interface ProductBasicDto {
@@ -43,22 +46,14 @@ export interface ProductListResponseDto {
   hasNext: boolean;
 }
 
-export interface CommentDetailDto {
-  commentId: number;
-  nickname: string;
-  profileImageUrl: string;
-  reactionType: 'AGREE' | 'DISAGREE' | 'SKIP';
-  comment: string;
-  createdAt: string;
+interface ProductReviewCreatorDto extends Pick<
+  CreatorType,
+  'nickname' | 'ranking' | 'subscriberNum' | 'profileImageUrl' | 'trustScore'
+> {
+  skinTypes: string[];
 }
 
-export interface ReviewDetailDto {
-  nickname: string;
-  ranking: number;
-  subscriberNum: number;
-  profileImageUrl: string;
-  trustScore: number;
-  creatorSkinTypes: ProductSkinType[];
+export interface ProductReviewsDto extends ProductReviewCreatorDto {
   reviewId: number;
   content: string;
   rating: number;
@@ -68,12 +63,5 @@ export interface ReviewDetailDto {
   youtubeUrl: string;
   timeLinkCount: number;
   totalCommentCount: number;
-  previewComments: CommentDetailDto[];
-}
-
-export interface PageResponseReviewDetailDto {
-  content: ReviewDetailDto[];
-  totalElements: number;
-  totalPages: number;
-  hasNext: boolean;
+  previewComments: CommentPreviewDto[];
 }

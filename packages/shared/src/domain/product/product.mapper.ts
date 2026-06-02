@@ -40,7 +40,6 @@ const mapCreatorUrls = (urls: string[]) =>
     profileImageUrl: url,
   }));
 
-//TODO: 수정 이거 뭐임?
 export const mapProductCardDtoToCard = (
   item: ProductCardDto
 ): ProductCardType => ({
