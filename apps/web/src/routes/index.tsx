@@ -11,7 +11,7 @@ import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
 import { SearchPage } from '@/pages/search/SearchPage';
 import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
-import { MyPage } from '@/pages/mypage/MyPage';
+import { MyPage } from '@/pages/myPage/MyPage';
 import { ProductDetailPage } from '@/pages/productDetail/ProductDetailPage';
 
 import { ReviewEvaluationPage } from '@/pages/reviewEvaluation/ReviewEvaluationPage';
