@@ -43,7 +43,6 @@ export * from './api/product/fetchProductsByCategory.api';
 export * from './api/product/fetchProductDetail.api';
 export * from './api/product/fetchProductReviewOverview.api';
 export * from './api/product/fetchProductReviews.api';
-export * from './api/product/fetchProductSimilar.api';
 
 //api - category
 export * from './api/category/fetchCategories.api';
