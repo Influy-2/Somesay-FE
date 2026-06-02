@@ -9,15 +9,16 @@ export const BasicCreatorProfile = ({
   creatorId,
   nickname,
   profileImageUrl,
-  subscriberCount,
+  subscriberNum,
   trustScore,
   ageGroup,
-  skinType,
+  skinTypes,
 }: BasicCreatorProfileProps) => {
+  const skinTypeLabel = skinTypes.join(', '); // 여러 피부 타입을 쉼표로 구분하여 표시
   return (
     <div
       className="flex w-full items-center gap-2.5"
-      aria-label={`크리에이터: ${nickname}, 유튜브 구독자 ${subscriberCount}만, 신뢰도 ${trustScore}, ${ageGroup}대, ${skinType}`}
+      aria-label={`크리에이터: ${nickname}, 유튜브 구독자 ${subscriberNum}만, 신뢰도 ${trustScore}, ${ageGroup}대, ${skinTypeLabel}`}
       key={creatorId}
     >
       {/* 프로필 사진 */}
@@ -43,7 +44,7 @@ export const BasicCreatorProfile = ({
           {/* // TODO: ~만 수정 필요 */}
           <div className="text-grey08 caption2-m flex shrink-0 items-center gap-0.5">
             <YoutubeIcon />
-            {subscriberCount}만
+            {subscriberNum}만
           </div>
         </div>
 
@@ -56,7 +57,9 @@ export const BasicCreatorProfile = ({
 
           <div className="flex items-center gap-1 p-0">
             <ChipBasic label={`${ageGroup}대`} bgColor="bg-grey03" />
-            <ChipBasic label={skinType} bgColor="bg-grey03" />
+            {skinTypes.map((skinType) => (
+              <ChipBasic key={skinType} label={skinType} bgColor="bg-grey03" />
+            ))}
           </div>
         </div>
       </div>

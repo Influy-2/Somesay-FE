@@ -49,10 +49,10 @@ const MOCK_CREATOR_PROFILE = {
   creatorId: 1,
   nickname: '크리에이터닉네임',
   profileImageUrl: mockProfileImg,
-  subscriberCount: 12000,
+  subscriberNum: 12000,
   trustScore: 4.7,
   ageGroup: 20,
-  skinType: '건성',
+  skinTypes: ['건성'],
 };
 
 const MOCK_REVIEW_PRODUCT: ProductSearchResultType = {

@@ -9,11 +9,11 @@ type EvaluationCardProfileProps = Pick<
   CreatorType,
   | 'nickname'
   | 'profileImageUrl'
-  | 'subscriberCount'
+  | 'subscriberNum'
   | 'trustScore'
   | 'ranking'
   | 'ageGroup'
-  | 'skinType'
+  | 'skinTypes'
 > & {
   evaluated: boolean;
 };
@@ -22,11 +22,11 @@ export const EvaluationCardProfile = ({
   evaluated,
   nickname,
   profileImageUrl,
-  subscriberCount,
+  subscriberNum,
   trustScore,
   ranking,
   ageGroup,
-  skinType,
+  skinTypes,
 }: EvaluationCardProfileProps) => {
   const showRank = ranking > 0 && ranking <= 30;
 
@@ -68,7 +68,7 @@ export const EvaluationCardProfile = ({
           {/* 유튜브 */}
           <div className="caption2-m flex shrink-0 items-center gap-0.5 text-black">
             <YoutubeIcon />
-            {evaluated ? formatSubscriberCount(subscriberCount) : '???만'}
+            {evaluated ? formatSubscriberCount(subscriberNum) : '???만'}
           </div>
         </div>
 
@@ -91,7 +91,13 @@ export const EvaluationCardProfile = ({
           {evaluated && (
             <div className="flex items-center gap-1">
               <ChipBasic label={`${ageGroup}대`} bgColor="bg-grey02" />
-              <ChipBasic label={skinType} bgColor="bg-grey02" />
+              {skinTypes.map((skinType) => (
+                <ChipBasic
+                  key={skinType}
+                  label={skinType}
+                  bgColor="bg-grey02"
+                />
+              ))}
             </div>
           )}
         </div>

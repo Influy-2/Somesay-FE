@@ -4,28 +4,21 @@ export interface CreatorType {
   profileImageUrl: string;
   youtubeLink: string;
   trustScore: number;
-  skinType: string;
+  skinTypes: string[];
   personalColor: string;
-  subscriberCount: number;
+  subscriberNum: number;
   ranking: number;
   ageGroup: number;
 }
 
 type RankChangeDirection = 'up' | 'down' | 'same';
 
-export interface CreatorRankingUpDownType extends Pick<
+export interface CreatorRankingUpDownType extends Omit<
   CreatorType,
-  | 'creatorId'
-  | 'nickname'
-  | 'profileImageUrl'
-  | 'subscriberCount'
-  | 'trustScore'
-  | 'ageGroup'
-  | 'skinType'
-  | 'ranking'
+  'personalColor'
 > {
-  rankChange: RankChangeDirection;
-  rankChangeDiff: number;
+  rankChange: number;
+  rankChangeDiff: RankChangeDirection;
 }
 
 export type BasicCreatorProfileType = Pick<
@@ -33,8 +26,8 @@ export type BasicCreatorProfileType = Pick<
   | 'creatorId'
   | 'nickname'
   | 'profileImageUrl'
-  | 'subscriberCount'
+  | 'subscriberNum'
   | 'trustScore'
   | 'ageGroup'
-  | 'skinType'
+  | 'skinTypes'
 >;

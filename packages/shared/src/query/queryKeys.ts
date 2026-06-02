@@ -46,6 +46,8 @@ export const QUERY_KEYS = {
       mainCategoryId?: number;
     } = {}) =>
       [...QUERY_KEYS.RANKING.ALL, 'products', { mainCategoryId }] as const,
+    CREATORS: ({ size }: { size?: number } = {}) =>
+      [...QUERY_KEYS.RANKING.ALL, 'creators', { size }] as const,
   },
   CATEGORY: {
     ALL: ['category'] as const,

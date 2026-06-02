@@ -13,10 +13,10 @@ const meta: Meta<typeof CreatorHomeProfile> = {
     creatorId: { control: 'number' },
     nickname: { control: 'text' },
     profileImageUrl: { control: 'text' },
-    subscriberCount: { control: 'number' },
+    subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
     ageGroup: { control: 'number' },
-    skinType: { control: 'text' },
+    skinTypes: { control: 'object' },
   },
 };
 
@@ -30,9 +30,9 @@ export const Default: Story = {
     creatorId: 1,
     nickname: '이름',
     profileImageUrl: 'https://placehold.co/100',
-    subscriberCount: 0,
+    subscriberNum: 0,
     trustScore: 4.5,
     ageGroup: 0,
-    skinType: '텍스트',
+    skinTypes: ['텍스트'],
   },
 };

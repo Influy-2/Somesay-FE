@@ -1,7 +1,7 @@
 export const API_ENDPOINTS = {
   /** Ranking  **/
   PRODUCT_RANKING: '/rankings/product-ranking',
-  RANKING_CREATOR_RANKING: '/rankings/creator-ranking',
+  CREATOR_RANKING: '/rankings/creator-ranking',
 
   /** Product  **/
   PRODUCT: '/products',

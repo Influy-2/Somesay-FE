@@ -12,11 +12,11 @@ type EvaluationReviewCardProps = {
     CreatorType,
     | 'nickname'
     | 'profileImageUrl'
-    | 'subscriberCount'
+    | 'subscriberNum'
     | 'trustScore'
     | 'ranking'
     | 'ageGroup'
-    | 'skinType'
+    | 'skinTypes'
   >;
   rating: number;
   content: string;

@@ -12,11 +12,11 @@ const meta: Meta<typeof EvaluationCardProfile> = {
     evaluated: { control: 'boolean' },
     nickname: { control: 'text' },
     profileImageUrl: { control: 'text' },
-    subscriberCount: { control: 'number' },
+    subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
     ranking: { control: 'number' },
     ageGroup: { control: 'number' },
-    skinType: { control: 'text' },
+    skinTypes: { control: 'object' },
   },
 };
 
@@ -28,11 +28,11 @@ export const Evaluated: Story = {
     evaluated: true,
     nickname: '글로우픽',
     profileImageUrl: mockProfile,
-    subscriberCount: 1240000,
+    subscriberNum: 1240000,
     trustScore: 4.5,
     ranking: 5,
     ageGroup: 20,
-    skinType: '복합성',
+    skinTypes: ['복합성'],
   },
 };
 
@@ -41,11 +41,11 @@ export const EvaluatedNoRank: Story = {
     evaluated: true,
     nickname: '글로우픽',
     profileImageUrl: mockProfile,
-    subscriberCount: 1010,
+    subscriberNum: 1010,
     trustScore: 4.5,
     ranking: 0,
     ageGroup: 30,
-    skinType: '지성',
+    skinTypes: ['지성'],
   },
 };
 
@@ -54,10 +54,10 @@ export const NotEvaluated: Story = {
     evaluated: false,
     nickname: '글로우픽',
     profileImageUrl: mockProfile,
-    subscriberCount: 1240000,
+    subscriberNum: 1240000,
     trustScore: 4.5,
     ranking: 5,
     ageGroup: 20,
-    skinType: '복합성',
+    skinTypes: ['복합성'],
   },
 };

@@ -13,10 +13,10 @@ const MOCK_CREATOR = {
   creatorId: 1,
   nickname: '김점례',
   profileImageUrl: mockProfileImg,
-  subscriberCount: 30,
+  subscriberNum: 30,
   trustScore: 100,
   ageGroup: 20,
-  skinType: '건성',
+  skinTypes: ['건성'],
 };
 
 const MOCK_REVIEW = {

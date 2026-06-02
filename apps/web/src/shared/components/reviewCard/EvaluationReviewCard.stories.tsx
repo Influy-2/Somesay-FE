@@ -28,11 +28,11 @@ type Story = StoryObj<typeof EvaluationReviewCard>;
 const mockCreator = {
   nickname: '김점례',
   profileImageUrl: mockProfile as string,
-  subscriberCount: 300000,
+  subscriberNum: 300000,
   trustScore: 100,
   ranking: 1,
   ageGroup: 20,
-  skinType: '건성',
+  skinTypes: ['건성'],
 };
 
 const reviewContent =

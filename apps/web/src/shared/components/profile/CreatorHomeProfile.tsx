@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { YoutubeIcon } from '@/shared/icons';
 import { Move12Icon } from '@/shared/icons';
 import { ChipBasic } from '@/shared/components';
-import { BasicCreatorProfileType } from '@somesay/shared';
+import {
+  BasicCreatorProfileType,
+  formatSubscriberCount,
+} from '@somesay/shared';
 import { BlackHeartButton } from '@/shared/components';
 
 interface CreatorHomeProfileProps extends BasicCreatorProfileType {
@@ -12,22 +15,18 @@ interface CreatorHomeProfileProps extends BasicCreatorProfileType {
   youtubeUrl: string;
 }
 
-const formatSubscriberCount = (count: number): string => {
-  const man = count / 10000;
-  return man % 1 === 0 ? `${man}만` : `${man.toFixed(1)}만`;
-};
-
 export const CreatorHomeProfile = ({
   nickname,
   profileImageUrl,
-  subscriberCount,
+  subscriberNum,
   ageGroup,
-  skinType,
+  skinTypes,
   likeCount: initialLikeCount,
   isLiked: initialLiked = false,
   onLikeClick,
   youtubeUrl,
 }: CreatorHomeProfileProps) => {
+  const skinTypeLabel = skinTypes.join(', ');
   const [liked, setLiked] = useState(initialLiked);
   const [currentLikeCount, setCurrentLikeCount] = useState(initialLikeCount);
 
@@ -40,7 +39,7 @@ export const CreatorHomeProfile = ({
   return (
     <div
       className="flex w-full items-center gap-2"
-      aria-label={`크리에이터: ${nickname}, 유튜브 구독자 ${subscriberCount}만, ${ageGroup}대, ${skinType}`}
+      aria-label={`크리에이터: ${nickname}, 유튜브 구독자 ${subscriberNum}만, ${ageGroup}대, ${skinTypeLabel}`}
     >
       {/* 프로필 사진 */}
       <div
@@ -72,7 +71,7 @@ export const CreatorHomeProfile = ({
             aria-label={`${nickname} 유튜브 채널로 이동`}
           >
             <YoutubeIcon />
-            {formatSubscriberCount(subscriberCount)}
+            {formatSubscriberCount(subscriberNum)}
             <Move12Icon />
           </a>
         </div>
@@ -80,7 +79,9 @@ export const CreatorHomeProfile = ({
         {/* 피부/나이 칩 */}
         <div className="flex items-center gap-1 p-0">
           <ChipBasic label={`${ageGroup}대`} bgColor="bg-grey03" />
-          <ChipBasic label={skinType} bgColor="bg-grey03" />
+          {skinTypes.map((skinType) => (
+            <ChipBasic key={skinType} label={skinType} bgColor="bg-grey03" />
+          ))}
         </div>
       </div>
 
