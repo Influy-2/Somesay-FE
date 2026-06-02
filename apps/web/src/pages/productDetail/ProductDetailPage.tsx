@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import { PageHeader, CTAButton } from '@/shared/components';
 import { ArrowBackIcon, ShareIcon, HomeOffIcon } from '@/shared/icons';
 import {
@@ -41,6 +41,7 @@ export const ProductDetailPage = () => {
     isLoading: isReviewOverviewLoading,
     isError: isReviewOverviewError,
   } = useFetchProductReviewOverview(productId);
+  // 임시
   console.log(isReviewOverviewLoading, isReviewOverviewError); //삭제 예정
 
   // TODO: 좋아요 상태 관리 (로컬 상태로 관리, 실제 구현에서는 API 연동 필요)
@@ -73,25 +74,22 @@ export const ProductDetailPage = () => {
             onClick={() => navigate(-1)}
             className="p-1"
             aria-label="뒤로 가기"
+            type="button"
           >
             <ArrowBackIcon aria-hidden="true" />
           </button>
         }
         right={[
           <div key="right-icons" className="flex items-center gap-1">
-            <button
-              key="home"
-              onClick={() => navigate('/')}
-              className="p-1"
-              aria-label="홈으로 이동"
-            >
+            <Link key="home" to="/" className="p-1" aria-label="홈으로 이동">
               <HomeOffIcon aria-hidden="true" />
-            </button>
+            </Link>
             <button
               key="share"
               onClick={() => alert('공유하기')}
               className="pl-1"
               aria-label="공유하기"
+              type="button"
             >
               <ShareIcon aria-hidden="true" />
             </button>

@@ -5,7 +5,6 @@ export const CreatorRankingSection = () => {
   const { data: creatorRankingData } = useFetchCreatorRanking({
     size: 5,
   });
-  console.log('creatorRankingData', creatorRankingData);
 
   return (
     <section
