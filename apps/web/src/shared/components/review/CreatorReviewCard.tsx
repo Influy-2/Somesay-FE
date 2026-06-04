@@ -1,4 +1,5 @@
 // Review/크리에이터 프로필 공개 컴포넌트
+// 글 길어지면 스크롤 가능한 버전(하단 블러)
 import { BasicCreatorProfile } from '@/shared/components';
 import { Star16Icon } from '@/shared/icons';
 import { BasicCreatorProfileType } from '@somesay/shared';
@@ -36,9 +37,12 @@ export const CreatorReviewCard = ({
         </div>
 
         {/* 리뷰 내용 */}
-        <p aria-hidden="true" className="body2-m text-[#1F2129]">
-          {content}
-        </p>
+        <div className="scrollbar-hide relative max-h-[6.875rem] w-full overflow-y-auto">
+          <p aria-hidden="true" className="body2-m text-[#1F2129]">
+            {content}
+          </p>
+          <div className="from-grey01/0 to-grey01 pointer-events-none sticky -bottom-2 h-9 w-full bg-gradient-to-b" />
+        </div>
       </div>
     </article>
   );
