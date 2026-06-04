@@ -63,6 +63,7 @@ export { ReviewProductLink } from './product/ReviewProductLink';
 export { RemovableProductItem } from './product/RemovableProductItem';
 export { RadioProductItem } from './product/RadioProductItem';
 export { SelectedItem } from './product/SelectedItem';
+export { RecommendedProductCard } from './product/RecommendedProductCard';
 
 /* bottom sheet */
 export { BottomSheet } from './bottomSheet/BottomSheet';
