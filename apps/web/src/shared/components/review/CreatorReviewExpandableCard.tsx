@@ -1,5 +1,5 @@
 // Review/크리에이터 프로필 공개 컴포넌트
-// 글 길어지면 스크롤 가능한 버전(하단 블러)
+// 글 길어지면 더보기 버전
 import { BasicCreatorProfile } from '@/shared/components';
 import { Star16Icon } from '@/shared/icons';
 import { BasicCreatorProfileType } from '@somesay/shared';
