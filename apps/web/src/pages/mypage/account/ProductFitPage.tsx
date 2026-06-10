@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import {
   PageHeader,
   RemovableProductItem,
@@ -12,10 +12,21 @@ import { PATH } from '@/routes/path';
 
 const MAX_PRODUCTS = 15;
 
-export const BadProductPage = () => {
+type FitType = 'matches' | 'mismatches';
+
+export const ProductFitPage = () => {
   const navigate = useNavigate();
-  const [products, setProducts] = useState(MOCK_ACCOUNT.badProducts);
+  const { pathname } = useLocation();
+
+  const isMatches = pathname.endsWith(PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.MATCHES);
+  const fitType: FitType = isMatches ? 'matches' : 'mismatches';
+
+  const [products, setProducts] = useState(
+    isMatches ? MOCK_ACCOUNT.goodProducts : MOCK_ACCOUNT.badProducts
+  );
   const [showSnackbar, setShowSnackbar] = useState(false);
+
+  const title = isMatches ? '잘 맞았던 제품' : '안 맞았던 제품';
 
   const handleDelete = (productId: number) => {
     setProducts((prev) => prev.filter((p) => p.productId !== productId));
@@ -27,9 +38,9 @@ export const BadProductPage = () => {
       return;
     }
     navigate(
-      `${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.ACCOUNT}/${PATH.MY_PAGE.ADD_PRODUCT}`,
+      `${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.ACCOUNT.BASE}/${PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.BASE}/${PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.ADD_PRODUCTS}`,
       {
-        state: { type: 'bad', currentProducts: products },
+        state: { type: fitType, currentProducts: products },
       }
     );
   };
@@ -42,12 +53,12 @@ export const BadProductPage = () => {
             <ArrowBackIcon />
           </button>
         }
-        title="안 맞았던 제품"
+        title={title}
       />
       <div className="flex flex-1 flex-col">
         <p className="body1-sb p-4 text-black">
-          가장 안 맞았던 제품을 최대 15개 저장할 수 있어요.
-        </p>
+          최대 15개까지 저장할 수 있어요.
+        </p>{' '}
         {products.length === 0 ? (
           <div className="flex flex-1 items-center justify-center">
             <p className="body2-m text-grey05">아직 추가된 상품이 없어요.</p>
@@ -58,7 +69,7 @@ export const BadProductPage = () => {
               <RemovableProductItem
                 key={product.productId}
                 {...product}
-                type="bad"
+                type={isMatches ? 'good' : 'bad'}
                 onDelete={handleDelete}
               />
             ))}
