@@ -1,7 +1,5 @@
 /* InputField */
 
-import React from 'react';
-
 interface InputFieldProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

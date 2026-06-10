@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import cn from '@/utils/cn';
 import { PageHeader, FilterChip } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { USER_SKIN_TYPE_OPTIONS } from '@somesay/shared';
@@ -43,7 +44,7 @@ export const SkinTypePage = () => {
             type="button"
             onClick={handleComplete}
             disabled={!isChanged}
-            className={`body1-sb ${isChanged ? 'text-black' : 'text-grey04'}`}
+            className={cn('body1-sb', isChanged ? 'text-black' : 'text-grey04')}
           >
             완료
           </button>,
