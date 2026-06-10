@@ -9,7 +9,7 @@ type InfoSectionProps = {
 export const InfoSection = ({ title, children }: InfoSectionProps) => {
   return (
     <section className="flex flex-col gap-6 py-8">
-      <p className="body2-sb text-grey06">{title}</p>
+      <h3 className="body2-sb text-grey06">{title}</h3>
       <div className="flex flex-col gap-6">{children}</div>
     </section>
   );
