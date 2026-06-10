@@ -39,5 +39,7 @@ export { default as QuestionIcon } from './QuestionIcon.svg?react';
 export { default as QuoteOpenIcon } from './QuoteOpenIcon.svg?react';
 export { default as QuoteCloseIcon } from './QuoteCloseIcon.svg?react';
 export { default as ArrowRightIcon } from './ArrowRightIcon.svg?react';
+export { default as SomesaySmIcon } from './SomesaySmIcon.svg?react';
+export { default as SendIcon } from './SendIcon.svg?react';
 export { default as RadioOnIcon } from './RadioOnIcon.svg?react';
 export { default as RadioOffIcon } from './RadioOffIcon.svg?react';

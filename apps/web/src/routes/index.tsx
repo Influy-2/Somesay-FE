@@ -13,6 +13,8 @@ import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
 import { MyPage } from '@/pages/myPage/MyPage';
 import { ProductDetailPage } from '@/pages/productDetail/ProductDetailPage';
+
+import { ReviewEvaluationPage } from '@/pages/reviewEvaluation/ReviewEvaluationPage';
 import { AccountPage } from '@/pages/myPage/AccountPage';
 import { NicknamePage } from '@/pages/myPage/account/NicknamePage';
 import { GenderPage } from '@/pages/myPage/account/GenderPage';
@@ -79,6 +81,10 @@ export const appRouter = createBrowserRouter([
       {
         path: PATH.SEARCH.BASE,
         element: <SearchPage />,
+      },
+      {
+        path: PATH.REVIEW_EVALUATION.BASE,
+        element: <ReviewEvaluationPage />,
       },
       {
         path: PATH.MY_PAGE.BASE,

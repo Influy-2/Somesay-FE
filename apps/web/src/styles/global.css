@@ -6,8 +6,12 @@
 }
 
 @keyframes snackbar-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @theme {
@@ -32,6 +36,8 @@
   --color-white: #ffffff;
 
   --color-background: #f4f5f7;
+
+  --color-error: #f05354;
 
   /* Fonts */
   --font-pretendard: 'Pretendard', sans-serif;

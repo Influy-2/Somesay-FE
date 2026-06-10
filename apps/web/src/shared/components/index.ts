@@ -24,6 +24,7 @@ export { BrandProfile } from './profile/BrandProfile';
 export { CreatorRankingUpDownRow } from './profile/CreatorRankingUpDownRow';
 export { CreatorHomeProfile } from './profile/CreatorHomeProfile';
 export { CreatorRankingProfile } from './profile/CreatorRankingProfile';
+export { EvaluationCardProfile } from './profile/EvaluationCardProfile';
 
 /* buttons */
 export { WhiteHeartButton } from './buttons/HeartButton';
@@ -42,6 +43,7 @@ export { RateBar } from './ratebar/RateBar';
 /* review */
 export { ReviewVoteCard } from './review/ReviewVoteCard';
 export { CreatorReviewCard } from './review/CreatorReviewCard';
+export { EvaluationReviewCard } from './reviewCard/EvaluationReviewCard';
 export { CreatorHomeReviewCard } from './review/CreatorHomeReviewCard';
 export { SearchResultReviewCard } from './review/SearchResultReviewCard';
 export { StarRating } from './rating/StarRating';
@@ -84,6 +86,9 @@ export { Snackbar } from './snackbar/Snackbar';
 
 /* modal */
 export { Modal } from './modal/Modal';
+
+/* input */
+export { CommentInput } from './input/CommentInput';
 
 /* inputfild */
 export { InputField } from './inputField/InputField';
