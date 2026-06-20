@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import mockProfile from '@/assets/mock_profile_img.svg';
 
-import { CreatorReviewExpandableCard } from './CreatorReviewExpandableCard';
+import { CreatorReviewExpandedCard } from './CreatorReviewExpandedCard';
 
-const meta: Meta<typeof CreatorReviewExpandableCard> = {
-  title: 'Shared/Review/CreatorReviewExpandableCard',
-  component: CreatorReviewExpandableCard,
+const meta: Meta<typeof CreatorReviewExpandedCard> = {
+  title: 'Shared/Review/CreatorReviewExpandedCard',
+  component: CreatorReviewExpandedCard,
   tags: ['autodocs'],
   argTypes: {
     creator: { control: 'object' },
@@ -17,7 +17,7 @@ const meta: Meta<typeof CreatorReviewExpandableCard> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof CreatorReviewExpandableCard>;
+type Story = StoryObj<typeof CreatorReviewExpandedCard>;
 
 const mockCreator = {
   creatorId: 1,

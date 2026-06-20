@@ -7,7 +7,7 @@ export const ProductRecommendationHeader = ({
   keywords: string[];
 }) => {
   return (
-    <section className="flex w-full flex-col items-center gap-3 px-4">
+    <section className="mb-[19px] flex w-full flex-col items-center gap-3 px-4">
       <h3 className="text-center text-black">
         <span className="flex items-center justify-center">
           <SomesayIcon />

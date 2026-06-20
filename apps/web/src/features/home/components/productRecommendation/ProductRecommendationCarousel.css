@@ -1,0 +1,62 @@
+.product-carousel {
+  --product-carousel-side-padding: 16px;
+  --product-carousel-active-width: calc(
+    100% - (var(--product-carousel-side-padding) * 2)
+  );
+  --product-carousel-overlap: calc(var(--product-carousel-active-width) / -2);
+  width: 100%;
+  overflow: hidden;
+}
+
+.product-carousel__viewport {
+  overflow: hidden;
+}
+
+.product-carousel__container {
+  display: flex;
+}
+
+.product-carousel__slide {
+  position: relative;
+  min-width: 0;
+  flex: 0 0 var(--product-carousel-active-width);
+}
+
+.product-carousel__slide:not(:last-child) {
+  margin-right: var(--product-carousel-overlap);
+}
+
+.product-carousel__slide--selected {
+  z-index: 2;
+}
+
+.product-carousel__slide--inactive {
+  z-index: 1;
+}
+
+.product-carousel__slide-inner {
+  position: relative;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.product-carousel__slide-inner--selected {
+  transform: scale(1);
+}
+
+.product-carousel__slide-inner--inactive {
+  transform: scale(0.72);
+}
+
+.product-carousel__dim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: #00000066;
+  opacity: 1;
+  will-change: opacity;
+}
+
+.product-carousel__slide--selected .product-carousel__dim {
+  opacity: 0;
+}

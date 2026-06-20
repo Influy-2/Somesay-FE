@@ -1,5 +1,9 @@
 export const PATH = {
   ROOT: '/',
+  HOME: {
+    BASE: '/',
+    PRODUCT_RECOMMENDATIONS: 'product-recommendations',
+  },
   LOGIN: {
     BASE: '/login',
   },

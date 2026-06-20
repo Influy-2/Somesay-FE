@@ -11,7 +11,7 @@ interface CreatorReviewCardProps {
   productName: string;
 }
 
-export const CreatorReviewExpandableCard = ({
+export const CreatorReviewExpandedCard = ({
   rating,
   content,
   productName,
@@ -37,11 +37,9 @@ export const CreatorReviewExpandableCard = ({
         </div>
 
         {/* 리뷰 내용 */}
-        <div className="w-full flex-col">
-          <p aria-hidden="true" className="body2-m line-clamp-4 text-[#1F2129]">
-            {content}
-          </p>
-        </div>
+        <p aria-hidden="true" className="body2-m text-[#1F2129]">
+          {content}
+        </p>
       </div>
     </article>
   );
