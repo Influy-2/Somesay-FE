@@ -27,6 +27,7 @@ export const USER_SKIN_TYPE_OPTIONS: UserSkinTypeOption[] = [
   { value: 4, label: '수부지' },
   { value: 5, label: '민감성' },
   { value: 6, label: '여드름성' },
+  { value: 0, label: '모르겠음' },
 ];
 
 export const USER_SKIN_CONCERN_OPTIONS: UserSkinConcernOption[] = [

@@ -10,17 +10,23 @@ export const SkinTypePage = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string[]>(MOCK_ACCOUNT.skinTypes);
 
+  const isCompleted = selected.length > 0;
   const isChanged =
     JSON.stringify(selected) !== JSON.stringify(MOCK_ACCOUNT.skinTypes);
 
   const handleSelect = (label: string) => {
-    setSelected((prev) =>
-      prev.includes(label)
-        ? prev.filter((s) => s !== label)
-        : prev.length < 2
-          ? [...prev, label]
-          : prev
-    );
+    if (label === '모르겠음') {
+      setSelected((prev) => (prev.includes('모르겠음') ? [] : ['모르겠음']));
+      return;
+    }
+    setSelected((prev) => {
+      const withoutUnknown = prev.filter((s) => s !== '모르겠음');
+      return withoutUnknown.includes(label)
+        ? withoutUnknown.filter((s) => s !== label)
+        : withoutUnknown.length < 2
+          ? [...withoutUnknown, label]
+          : withoutUnknown;
+    });
   };
 
   const handleComplete = () => {
@@ -43,8 +49,11 @@ export const SkinTypePage = () => {
             key="complete"
             type="button"
             onClick={handleComplete}
-            disabled={!isChanged}
-            className={cn('body1-sb', isChanged ? 'text-black' : 'text-grey04')}
+            disabled={!isChanged || !isCompleted}
+            className={cn(
+              'body1-sb',
+              isChanged && isCompleted ? 'text-black' : 'text-grey04'
+            )}
           >
             완료
           </button>,
