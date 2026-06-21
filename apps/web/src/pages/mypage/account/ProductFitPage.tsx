@@ -18,7 +18,9 @@ export const ProductFitPage = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const isMatches = pathname.endsWith(PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.MATCHES);
+  const segments = pathname.split('/');
+  const lastSegment = segments[segments.length - 1];
+  const isMatches = lastSegment === PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.MATCHES;
   const fitType: FitType = isMatches ? 'matches' : 'mismatches';
 
   const [products, setProducts] = useState(
@@ -58,7 +60,7 @@ export const ProductFitPage = () => {
       <div className="flex flex-1 flex-col">
         <p className="body1-sb p-4 text-black">
           최대 15개까지 저장할 수 있어요.
-        </p>{' '}
+        </p>
         {products.length === 0 ? (
           <div className="flex flex-1 items-center justify-center">
             <p className="body2-m text-grey05">아직 추가된 상품이 없어요.</p>
