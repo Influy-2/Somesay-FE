@@ -48,7 +48,7 @@ export const Modal = ({
       >
         {/* 상단 타이틀 설명 */}
         <div className="flex flex-col gap-2 text-center">
-          <p className="body1-b text-black">{title}</p>
+          <p className="body1-b whitespace-pre-line text-black">{title}</p>
           <div className="body2-m text-grey08">{description}</div>
         </div>
 
