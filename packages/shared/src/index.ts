@@ -22,4 +22,5 @@ export * from './constants/cosmetics.constants';
 export * from './constants/forbiddenWords.constants';
 export type { CreatorReviewType } from './types/review.types';
 
+export * from './constants/user.constants';
 export { formatSubscriberCount } from './utils';

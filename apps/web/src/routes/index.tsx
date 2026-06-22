@@ -11,10 +11,18 @@ import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
 import { SearchPage } from '@/pages/search/SearchPage';
 import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
-import { MyPage } from '@/pages/mypage/MyPage';
+import { MyPage } from '@/pages/myPage/MyPage';
 import { ProductDetailPage } from '@/pages/productDetail/ProductDetailPage';
 
 import { ReviewEvaluationPage } from '@/pages/reviewEvaluation/ReviewEvaluationPage';
+import { AccountPage } from '@/pages/myPage/AccountPage';
+import { NicknamePage } from '@/pages/myPage/account/NicknamePage';
+import { GenderPage } from '@/pages/myPage/account/GenderPage';
+import { AgePage } from '@/pages/myPage/account/AgePage';
+import { SkinTypePage } from '@/pages/myPage/account/SkinTypePage';
+import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
+import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
+import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
 
 export const appRouter = createBrowserRouter([
   {
@@ -76,6 +84,54 @@ export const appRouter = createBrowserRouter([
       {
         path: PATH.REVIEW_EVALUATION.BASE,
         element: <ReviewEvaluationPage />,
+      },
+      {
+        path: PATH.MY_PAGE.BASE,
+        element: <Outlet />,
+        children: [
+          {
+            path: PATH.MY_PAGE.ACCOUNT.BASE,
+            element: <Outlet />,
+            children: [
+              {
+                index: true,
+                element: <AccountPage />,
+              },
+              {
+                path: PATH.MY_PAGE.ACCOUNT.NICKNAME,
+                element: <NicknamePage />,
+              },
+              { path: PATH.MY_PAGE.ACCOUNT.GENDER, element: <GenderPage /> },
+              { path: PATH.MY_PAGE.ACCOUNT.AGE, element: <AgePage /> },
+              {
+                path: PATH.MY_PAGE.ACCOUNT.SKIN_TYPE,
+                element: <SkinTypePage />,
+              },
+              {
+                path: PATH.MY_PAGE.ACCOUNT.SKIN_CONCERN,
+                element: <SkinConcernPage />,
+              },
+              {
+                path: PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.BASE,
+                element: <Outlet />,
+                children: [
+                  {
+                    path: PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.MATCHES,
+                    element: <ProductFitPage />,
+                  },
+                  {
+                    path: PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.MISMATCHES,
+                    element: <ProductFitPage />,
+                  },
+                  {
+                    path: PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.ADD_PRODUCTS,
+                    element: <AddProductPage />,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
   },

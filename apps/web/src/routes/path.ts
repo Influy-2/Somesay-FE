@@ -18,6 +18,20 @@ export const PATH = {
   MY_PAGE: {
     BASE: '/my-page',
     LIKED_PRODUCTS: 'liked-products',
+    ACCOUNT: {
+      BASE: 'account',
+      NICKNAME: 'nickname',
+      GENDER: 'gender',
+      AGE: 'age',
+      SKIN_TYPE: 'skin-type',
+      SKIN_CONCERN: 'skin-concern',
+      PRODUCT_FIT: {
+        BASE: 'product-fit',
+        MATCHES: 'matches',
+        MISMATCHES: 'mismatches',
+        ADD_PRODUCTS: 'add-products',
+      },
+    },
   },
   CREATOR: {
     BASE: '/creators',
