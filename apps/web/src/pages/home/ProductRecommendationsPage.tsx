@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-
+import { ProductAttributeSection } from '@/features/home/components/productRecommendation/ProductAttributeSection';
 import mockProfile from '@/assets/mock_profile_img.svg';
 import {
   ProductRecommendationCarousel,
@@ -8,7 +8,6 @@ import {
 import { ArrowBackIcon } from '@/shared/icons';
 import {
   CTAButton,
-  ChipLarge,
   CreatorReviewExpandedCard,
   PageHeader,
 } from '@/shared/components';
@@ -37,9 +36,13 @@ export const ProductRecommendationsPage = () => {
       />
 
       <main className="flex w-full flex-col pt-15 pb-[10.9375rem]">
+        {/* 제목 및 해시태그 */}
         <ProductRecommendationHeader count={5} keywords={SELECTED_KEYWORDS} />
+
+        {/* 제품 Carousel */}
         <ProductRecommendationCarousel />
 
+        {/* 피부 타입, 기대효과, 리뷰 */}
         <section className="mt-7 flex w-full flex-col gap-7 px-4">
           <ProductAttributeSection
             title="잘 맞는 피부 타입"
@@ -65,37 +68,6 @@ export const ProductRecommendationsPage = () => {
         <CTAButton label="추천 제품 모두 찜하기" onClick={handleLikeAll} />
       </div>
     </div>
-  );
-};
-
-interface ProductAttributeItem {
-  label: string;
-  isHighlighted: boolean;
-}
-
-interface ProductAttributeSectionProps {
-  title: string;
-  items: ProductAttributeItem[];
-}
-
-const ProductAttributeSection = ({
-  title,
-  items,
-}: ProductAttributeSectionProps) => {
-  return (
-    <section className="flex w-full flex-col gap-2">
-      <h2 className="body2-b text-black">{title}</h2>
-      <div className="flex flex-wrap gap-x-1.5 gap-y-2">
-        {items.map((item) => (
-          <ChipLarge
-            key={item.label}
-            label={item.label}
-            bgColor={item.isHighlighted ? 'bg-black' : 'bg-grey05'}
-            textColor={item.isHighlighted ? 'text-white' : 'text-grey08'}
-          />
-        ))}
-      </div>
-    </section>
   );
 };
 
