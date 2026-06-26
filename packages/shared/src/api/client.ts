@@ -13,9 +13,6 @@ export const apiClient = axios.create({
   },
 });
 
-let requestInterceptorId: number | null = null;
-let responseInterceptorId: number | null = null;
-
 export const configureApiClient = ({
   baseURL,
   getAccessToken,
@@ -23,15 +20,11 @@ export const configureApiClient = ({
 }: ConfigureApiClientOptions) => {
   apiClient.defaults.baseURL = baseURL;
 
-  if (requestInterceptorId !== null) {
-    apiClient.interceptors.request.eject(requestInterceptorId);
-  }
+  // 앱 초기화가 반복되어도 인터셉터가 중복 등록되지 않도록 초기화합니다.
+  apiClient.interceptors.request.clear();
+  apiClient.interceptors.response.clear();
 
-  if (responseInterceptorId !== null) {
-    apiClient.interceptors.response.eject(responseInterceptorId);
-  }
-
-  requestInterceptorId = apiClient.interceptors.request.use((config) => {
+  apiClient.interceptors.request.use((config) => {
     const token = getAccessToken?.();
 
     if (token) {
@@ -41,7 +34,7 @@ export const configureApiClient = ({
     return config;
   });
 
-  responseInterceptorId = apiClient.interceptors.response.use(
+  apiClient.interceptors.response.use(
     (response) => response,
     (error) => {
       if (error.response?.status === 401) {

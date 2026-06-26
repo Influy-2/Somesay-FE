@@ -7,7 +7,7 @@ export const useFetchProductReviewOverview = (productId?: number) => {
     typeof productId === 'number' && Number.isFinite(productId);
 
   const query = useQuery({
-    queryKey: QUERY_KEYS.PRODUCT.REVIEW_OVERVIEW(productId || 0),
+    queryKey: QUERY_KEYS.PRODUCT.REVIEW_OVERVIEW(productId ?? 0),
     queryFn: () => fetchProductReviewOverview(productId ?? 0),
     enabled: isValidProductId,
     staleTime: 1000 * 60 * 30,

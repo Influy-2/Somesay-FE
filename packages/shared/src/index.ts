@@ -32,7 +32,7 @@ export type {
 export { formatSubscriberCount } from './utils';
 
 //api
-export * from './api/client';
+export { apiClient, configureApiClient } from './api/client';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';
