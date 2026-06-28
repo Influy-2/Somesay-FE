@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { PageHeader } from '@/shared/components';
-import { ArrowBackIcon, X16Icon } from '@/shared/icons';
+import { ArrowBackIcon, X24Icon } from '@/shared/icons';
 
 export type OnboardingHeaderVariant = 'terms' | 'signup';
 
@@ -24,7 +24,7 @@ const HeaderIconButton = ({
     type="button"
     onClick={onClick}
     aria-label={label}
-    className="flex size-9 items-center justify-center"
+    className="flex size-9 cursor-pointer items-center justify-center"
   >
     {children}
   </button>
@@ -38,7 +38,7 @@ export const OnboardingHeader = ({
 }: OnboardingHeaderProps) => {
   const exitButton = (
     <HeaderIconButton label="회원가입 종료" onClick={onExit}>
-      <X16Icon />
+      <X24Icon />
     </HeaderIconButton>
   );
 
