@@ -45,17 +45,16 @@ export const RecommendedProductCard = () => {
       {/* 하단 제품 정보 및 하트 */}
       <div className="absolute inset-x-0 bottom-0 flex items-end bg-linear-to-t from-black to-black/0 p-5">
         <div className="flex min-w-0 flex-1 flex-col gap-1 text-white">
+          {/* 상품 기본 정보 */}
           <div aria-hidden="true">
-            {/* 브랜드 */}
             <p className="body2-m truncate">{PRODUCT.brand}</p>
-            {/* 제품명 */}
             <p className="body2-m line-clamp-1">{PRODUCT.productName}</p>
-            {/* 가격 */}
             <p className="body2-m truncate">{PRODUCT.price}</p>
           </div>
 
-          {/* 별점, 리뷰수, 리뷰어, 하트 */}
+          {/* 상품 평가와 찜 */}
           <div className="flex items-center justify-between gap-3">
+            {/* 상품 평가 정보 */}
             <div className="flex min-w-0 items-center gap-1" aria-hidden="true">
               <div className="flex shrink-0 items-center">
                 <StarIcon className="size-4 text-white" />
@@ -68,6 +67,7 @@ export const RecommendedProductCard = () => {
               />
             </div>
 
+            {/* 상품 찜 버튼 */}
             <WhiteHeartButton
               isHearted={isHearted}
               onHeartToggle={() => setIsHearted((prev) => !prev)}
@@ -77,7 +77,7 @@ export const RecommendedProductCard = () => {
         </div>
       </div>
 
-      {/* 제품 순위 표시 */}
+      {/* 추천 상품 순위 */}
       <div
         className="body2-m absolute top-0 left-0 flex size-9 items-center justify-center bg-black text-white"
         aria-hidden="true"

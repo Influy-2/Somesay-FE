@@ -9,6 +9,7 @@ import { ProductRecommendationCarousel } from './ProductRecommendationCarousel';
 const PRODUCT_COUNT = 5;
 
 export const ProductRecommendationSection = () => {
+  // 상단 Embla의 선택 위치로 하단 상세 트랙을 이동한다.
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
@@ -16,8 +17,10 @@ export const ProductRecommendationSection = () => {
       className="flex w-full flex-col gap-6"
       aria-label="추천 제품 상세 정보"
     >
+      {/* 추천 상품 캐러셀 */}
       <ProductRecommendationCarousel onSelectedIndexChange={setSelectedIndex} />
 
+      {/* 상품 상세 슬라이드 */}
       <div className="w-full overflow-hidden">
         <div
           className="flex transition-transform duration-300 ease-out motion-reduce:transition-none"

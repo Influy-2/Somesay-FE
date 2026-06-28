@@ -34,12 +34,13 @@ export const ProductRecommendationsPage = () => {
       />
 
       <div className="flex w-full flex-col pt-15 pb-[10.9375rem]">
-        {/* 제목 및 해시태그 */}
+        {/* 추천 결과 요약 */}
         <ProductRecommendationHeader count={5} keywords={SELECTED_KEYWORDS} />
-        {/* 제품+리뷰 영역 */}
+        {/* 추천 상품 상세 */}
         <ProductRecommendationSection />
       </div>
-      {/* 추천 제품 모두 찜하기 버튼 */}
+
+      {/* 전체 상품 찜 */}
       <div className="border-grey02 z-toast fixed bottom-0 left-1/2 flex w-full max-w-110 min-w-[320px] -translate-x-1/2 border-t bg-white px-4 pt-2 pb-[30px]">
         <CTAButton label="추천 제품 모두 찜하기" onClick={handleLikeAll} />
       </div>

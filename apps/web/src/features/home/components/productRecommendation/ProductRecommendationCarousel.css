@@ -22,6 +22,7 @@
   flex: 0 0 var(--product-carousel-active-width);
 }
 
+/* 비활성 카드가 활성 카드 뒤로 겹치도록 배치한다. */
 .product-carousel__slide:not(:last-child) {
   margin-right: var(--product-carousel-overlap);
 }

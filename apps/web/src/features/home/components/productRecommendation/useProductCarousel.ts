@@ -23,6 +23,7 @@ export const useProductCarousel = ({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [slideProgresses, setSlideProgresses] = useState<number[]>([]);
 
+  // Embla의 현재 스냅을 외부 상세 영역과 공유한다.
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
 
@@ -32,6 +33,7 @@ export const useProductCarousel = ({
     onSelectedIndexChange?.(nextIndex);
   }, [emblaApi, onSelectedIndexChange]);
 
+  // 인접 스냅 간 거리를 기준으로 각 슬라이드 진행률을 정규화한다.
   const updateSlideProgresses = useCallback(() => {
     if (!emblaApi) return;
 
@@ -108,6 +110,7 @@ export const useProductCarousel = ({
         ]
           .filter(Boolean)
           .join(' '),
+        // Embla가 측정하는 슬라이드 크기는 유지하고 내부 카드만 확대한다.
         innerStyle: {
           transform: `scale(${scale})`,
         } satisfies CSSProperties,

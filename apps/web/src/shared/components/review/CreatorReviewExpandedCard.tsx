@@ -22,12 +22,13 @@ export const CreatorReviewExpandedCard = ({
       aria-label={`${creator.nickname}의 ${productName} 리뷰`}
       className="border-grey03 bg-grey01 flex w-full flex-col items-start gap-5 border border-solid p-5 px-4"
     >
+      {/* 크리에이터 프로필 */}
       <BasicCreatorProfile {...creator} />
       <div
         className="flex w-full flex-col items-start gap-1"
         aria-label={`별점 ${rating}점. ${content}`}
       >
-        {/* 별점 */}
+        {/* 리뷰 별점 */}
         <div className="flex items-center gap-1" aria-hidden="true">
           {/* TODO: 디자인 전달되는 대로 별 구현 */}
           <div className="flex items-center gap-px">
@@ -36,7 +37,7 @@ export const CreatorReviewExpandedCard = ({
           <span className="body2-sb text-[#1F2129]">{rating}</span>
         </div>
 
-        {/* 리뷰 내용 */}
+        {/* 전체 리뷰 내용 */}
         <p aria-hidden="true" className="body2-m text-[#1F2129]">
           {content}
         </p>

@@ -8,6 +8,7 @@ export const ProductRecommendationHeader = ({
 }) => {
   return (
     <section className="mb-[19px] flex w-full flex-col items-center gap-3 px-4">
+      {/* 추천 결과 제목 */}
       <h3 className="text-center text-black">
         <span className="flex items-center justify-center">
           <SomesayIcon />
@@ -16,6 +17,7 @@ export const ProductRecommendationHeader = ({
         <span className="headline4 block">{count}개의 제품을 추천드려요</span>
       </h3>
 
+      {/* 선택 키워드 목록 */}
       <div className="body2-m text-grey08 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
         {keywords.map((keyword) => (
           <span key={keyword}>
