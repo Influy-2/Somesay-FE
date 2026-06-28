@@ -3,6 +3,19 @@ export const PATH = {
   LOGIN: {
     BASE: '/login',
   },
+  ONBOARDING: {
+    BASE: '/onboarding',
+    TERMS: 'terms',
+    EMAIL: 'email',
+    EMAIL_VERIFICATION: 'email-verification',
+    NICKNAME: 'nickname',
+    PROFILE: 'profile',
+    SKIN_TYPES: 'skin-types',
+    SKIN_CONCERNS: 'skin-concerns',
+    MATCHED_PRODUCTS: 'matched-products',
+    MISMATCHED_PRODUCTS: 'mismatched-products',
+    COMPLETE: 'complete',
+  },
   RANKING: {
     BASE: '/ranking',
     PRODUCT: 'products',

@@ -23,6 +23,19 @@ import { SkinTypePage } from '@/pages/myPage/account/SkinTypePage';
 import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
 import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
 import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
+import { LoginPlaceholderPage } from '@/pages/login/LoginPlaceholderPage';
+import { OnboardingPlaceholderPage } from '@/pages/onboarding/OnboardingPlaceholderPage';
+import {
+  OnboardingIndexRedirect,
+  OnboardingRouteGuard,
+  type OnboardingStep,
+} from '@/features/onboarding';
+
+const onboardingStepElement = (step: OnboardingStep) => (
+  <OnboardingRouteGuard step={step}>
+    <OnboardingPlaceholderPage step={step} />
+  </OnboardingRouteGuard>
+);
 
 export const appRouter = createBrowserRouter([
   {
@@ -84,6 +97,60 @@ export const appRouter = createBrowserRouter([
       {
         path: PATH.REVIEW_EVALUATION.BASE,
         element: <ReviewEvaluationPage />,
+      },
+      {
+        path: PATH.LOGIN.BASE,
+        element: <LoginPlaceholderPage />,
+      },
+      {
+        path: PATH.ONBOARDING.BASE,
+        element: <Outlet />,
+        children: [
+          {
+            index: true,
+            element: <OnboardingIndexRedirect />,
+          },
+          {
+            path: PATH.ONBOARDING.TERMS,
+            element: onboardingStepElement('terms'),
+          },
+          {
+            path: PATH.ONBOARDING.EMAIL,
+            element: onboardingStepElement('email'),
+          },
+          {
+            path: PATH.ONBOARDING.EMAIL_VERIFICATION,
+            element: onboardingStepElement('emailVerification'),
+          },
+          {
+            path: PATH.ONBOARDING.NICKNAME,
+            element: onboardingStepElement('nickname'),
+          },
+          {
+            path: PATH.ONBOARDING.PROFILE,
+            element: onboardingStepElement('profile'),
+          },
+          {
+            path: PATH.ONBOARDING.SKIN_TYPES,
+            element: onboardingStepElement('skinTypes'),
+          },
+          {
+            path: PATH.ONBOARDING.SKIN_CONCERNS,
+            element: onboardingStepElement('skinConcerns'),
+          },
+          {
+            path: PATH.ONBOARDING.MATCHED_PRODUCTS,
+            element: onboardingStepElement('matchedProducts'),
+          },
+          {
+            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS,
+            element: onboardingStepElement('mismatchedProducts'),
+          },
+          {
+            path: PATH.ONBOARDING.COMPLETE,
+            element: onboardingStepElement('complete'),
+          },
+        ],
       },
       {
         path: PATH.MY_PAGE.BASE,
