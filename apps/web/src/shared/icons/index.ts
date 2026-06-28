@@ -49,5 +49,5 @@ export { default as SomesaySmIcon } from './SomesaySmIcon.svg?react';
 export { default as SendIcon } from './SendIcon.svg?react';
 export { default as RadioOnIcon } from './RadioOnIcon.svg?react';
 export { default as RadioOffIcon } from './RadioOffIcon.svg?react';
-export { default as CheckOffIcon } from './CheckOffIcon.svg';
-export { default as CheckOnIcon } from './CheckOnIcon.svg';
+export { default as CheckOffIcon } from './CheckOffIcon.svg?react';
+export { default as CheckOnIcon } from './CheckOnIcon.svg?react';
