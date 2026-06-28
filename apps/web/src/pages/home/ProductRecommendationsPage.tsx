@@ -42,32 +42,34 @@ export const ProductRecommendationsPage = () => {
       <main className="flex w-full flex-col pt-15 pb-[10.9375rem]">
         {/* 제목 및 해시태그 */}
         <ProductRecommendationHeader count={5} keywords={SELECTED_KEYWORDS} />
+        {/* 제품+리뷰 영역 */}
+        <div className="flex w-full flex-col gap-6">
+          {/* 제품 Carousel */}
+          <ProductRecommendationCarousel />
 
-        {/* 제품 Carousel */}
-        <ProductRecommendationCarousel />
-
-        {/* 피부 타입, 기대효과, 리뷰 */}
-        <section className="mt-7 flex w-full flex-col gap-7 px-4">
-          <ProductAttributeSection
-            title="잘 맞는 피부 타입"
-            items={SKIN_TYPE_CHIPS}
-          />
-          <ProductAttributeSection title="기대 효과" items={EFFECT_CHIPS} />
-
-          <section className="flex w-full flex-col gap-2">
-            <h2 className="body2-b text-black">
-              나의 고민과 연관성이 가장 높은 리뷰
-            </h2>
-            <CreatorReviewExpandedCard
-              creator={RELATED_REVIEW.creator}
-              rating={RELATED_REVIEW.rating}
-              content={RELATED_REVIEW.content}
-              productName={RELATED_REVIEW.productName}
+          {/* 피부 타입, 기대효과, 리뷰 */}
+          <section className="flex w-full flex-col gap-7 px-4">
+            <ProductAttributeSection
+              title="잘 맞는 피부 타입"
+              items={SKIN_TYPE_CHIPS}
             />
-          </section>
-        </section>
-      </main>
+            <ProductAttributeSection title="기대 효과" items={EFFECT_CHIPS} />
 
+            <div className="flex w-full flex-col gap-2">
+              <h2 className="body2-b text-black">
+                나의 고민과 연관성이 가장 높은 리뷰
+              </h2>
+              <CreatorReviewExpandedCard
+                creator={RELATED_REVIEW.creator}
+                rating={RELATED_REVIEW.rating}
+                content={RELATED_REVIEW.content}
+                productName={RELATED_REVIEW.productName}
+              />
+            </div>
+          </section>
+        </div>
+      </main>
+      {/* 추천 제품 모두 찜하기 버튼 */}
       <div className="border-grey02 z-toast fixed bottom-0 left-1/2 flex w-full max-w-110 min-w-[320px] -translate-x-1/2 border-t bg-white px-4 pt-2 pb-[30px]">
         <CTAButton label="추천 제품 모두 찜하기" onClick={handleLikeAll} />
       </div>
