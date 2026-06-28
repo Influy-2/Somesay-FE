@@ -33,6 +33,7 @@ export { default as ScrollTopIcon } from './ScrollTopIcon.svg?react';
 export { default as SearchIcon } from './SearchIcon.svg?react';
 export { default as RecentSearchIcon } from './RecentSearchIcon.svg?react';
 export { default as X16Icon } from './X16Icon.svg?react';
+export { default as X24Icon } from './X24Icon.svg?react';
 export { default as SomesayIcon } from './SomesayIcon.svg?react';
 export { default as Star16Icon } from './Star16Icon.svg?react';
 export { default as Star20Icon } from './Star20Icon.svg?react';
