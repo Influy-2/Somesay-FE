@@ -1,4 +1,5 @@
 export { OnboardingLayout } from './components/OnboardingLayout';
+export { AgreementCheckbox } from './components/AgreementCheckbox';
 export {
   OnboardingIndexRedirect,
   OnboardingRouteGuard,
@@ -6,6 +7,7 @@ export {
 export {
   AGE_LABELS,
   GENDER_LABELS,
+  ONBOARDING_AGREEMENTS,
   ONBOARDING_STEP_LABELS,
   OPTIONAL_ONBOARDING_STEPS,
   REQUIRED_AGREEMENT_IDS,

@@ -29,6 +29,7 @@ import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
 import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
 import { LoginPage } from '@/pages/login/LoginPage';
 import { OnboardingPlaceholderPage } from '@/pages/onboarding/OnboardingPlaceholderPage';
+import { TermsAgreementPage } from '@/pages/onboarding/TermsAgreementPage';
 import {
   OnboardingIndexRedirect,
   OnboardingRouteGuard,
@@ -130,7 +131,11 @@ export const appRouter = createBrowserRouter([
           },
           {
             path: PATH.ONBOARDING.TERMS,
-            element: onboardingStepElement('terms'),
+            element: (
+              <OnboardingRouteGuard step="terms">
+                <TermsAgreementPage />
+              </OnboardingRouteGuard>
+            ),
           },
           {
             path: PATH.ONBOARDING.EMAIL,

@@ -61,6 +61,20 @@ describe('onboarding store', () => {
     expect(useOnboardingStore.getState().completedSteps).toEqual(['terms']);
   });
 
+  it('여러 약관 상태를 한 번에 저장한다', () => {
+    const store = useOnboardingStore.getState();
+
+    store.setAgreements({
+      TERMS_OF_SERVICE: true,
+      PRIVACY_POLICY: true,
+    });
+
+    expect(useOnboardingStore.getState().agreements).toEqual({
+      TERMS_OF_SERVICE: true,
+      PRIVACY_POLICY: true,
+    });
+  });
+
   it('새 온보딩을 시작하면 이전 온보딩 초안을 초기화한다', () => {
     const store = useOnboardingStore.getState();
 

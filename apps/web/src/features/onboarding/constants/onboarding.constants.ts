@@ -8,10 +8,22 @@ import type {
 //sessionStorage에 온보딩 상태를 저장할 때 사용하는 key입니다.
 export const ONBOARDING_STORAGE_KEY = 'somesay-onboarding';
 
-export const REQUIRED_AGREEMENT_IDS = [
-  'TERMS_OF_SERVICE',
-  'PRIVACY_POLICY',
+export const ONBOARDING_AGREEMENTS = [
+  {
+    id: 'TERMS_OF_SERVICE',
+    label: '(필수) 서비스 이용약관 동의',
+    required: true,
+  },
+  {
+    id: 'PRIVACY_POLICY',
+    label: '(필수) 개인정보 수집 및 이용 동의',
+    required: true,
+  },
 ] as const;
+
+export const REQUIRED_AGREEMENT_IDS = ONBOARDING_AGREEMENTS.filter(
+  (agreement) => agreement.required
+).map((agreement) => agreement.id);
 // 전체 온보딩 순서입니다.
 export const ONBOARDING_STEP_ORDER: OnboardingStep[] = [
   'terms',

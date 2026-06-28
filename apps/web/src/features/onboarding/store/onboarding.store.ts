@@ -20,6 +20,7 @@ interface OnboardingActions {
   setHasHydrated: (hasHydrated: boolean) => void; //sessionStorage 복원이 끝났는지를 기록합니다.
   startOnboarding: (provider: SocialProvider) => void; //신규 회원의 provider를 저장하며 이전 온보딩 데이터는 초기화합니다.
   setAgreement: (agreementId: string, agreed: boolean) => void; //특정 약관 동의 상태를 저장합니다.
+  setAgreements: (agreements: Record<string, boolean>) => void;
   setEmail: (email: string) => void;
   markEmailVerified: (verified?: boolean) => void;
   setNickname: (nickname: string) => void;
@@ -79,6 +80,11 @@ export const useOnboardingStore = create<OnboardingStore>()(
             ...state.agreements,
             [agreementId]: agreed,
           },
+          completedSteps: invalidateFrom(state.completedSteps, 'terms'),
+        })),
+      setAgreements: (agreements) =>
+        set((state) => ({
+          agreements,
           completedSteps: invalidateFrom(state.completedSteps, 'terms'),
         })),
       setEmail: (email) =>
