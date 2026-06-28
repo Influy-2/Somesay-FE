@@ -39,6 +39,17 @@
 
   --color-error: #f05354;
 
+  /* Primitive palette */
+  /* 파란색 계열 */
+  --color-primary-100: #daeeff;
+  --color-primary-200: #b4ddff;
+  --color-primary-300: #6abbff;
+  --color-primary-400: #39a5ff;
+
+  /* 노란색 계열 */
+  --color-secondary-100: #fff7da;
+  --color-secondary-200: #fcebaa;
+
   /* Fonts */
   --font-pretendard: 'Pretendard', sans-serif;
 
