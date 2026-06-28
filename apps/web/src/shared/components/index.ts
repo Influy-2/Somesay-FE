@@ -48,6 +48,7 @@ export { CreatorHomeReviewCard } from './review/CreatorHomeReviewCard';
 export { SearchResultReviewCard } from './review/SearchResultReviewCard';
 export { StarRating } from './rating/StarRating';
 export { CreatorInfoReview } from './review/CreatorInfoReview';
+export { CreatorReviewExpandedCard } from './review/CreatorReviewExpandedCard';
 
 /* category */
 export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
@@ -63,6 +64,7 @@ export { ReviewProductLink } from './product/ReviewProductLink';
 export { RemovableProductItem } from './product/RemovableProductItem';
 export { RadioProductItem } from './product/RadioProductItem';
 export { SelectedItem } from './product/SelectedItem';
+export { RecommendedProductCard } from './product/RecommendedProductCard';
 
 /* bottom sheet */
 export { BottomSheet } from './bottomSheet/BottomSheet';
