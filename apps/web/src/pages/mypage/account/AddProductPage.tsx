@@ -12,7 +12,6 @@ import {
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { MOCK_PRODUCTS } from '@/features/myPage/components/mockData';
-import { CATEGORIES } from '@somesay/shared';
 import cn from '@/utils/cn';
 
 type FitProduct = {
@@ -27,6 +26,12 @@ const SORT_OPTIONS = [
   { value: 'latest', label: '최신순' },
 ];
 
+const MOCK_CATEGORIES = [
+  { id: 0, label: '전체' },
+  { id: 1, label: '스킨케어' },
+  { id: 3, label: '클렌징' },
+];
+
 export const AddProductPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,7 +40,7 @@ export const AddProductPage = () => {
     currentProducts: FitProduct[];
   } | null;
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
   const [searchValue, setSearchValue] = useState('');
   const [selectedProducts, setSelectedProducts] = useState<FitProduct[]>([]);
   const [currentSortValue, setCurrentSortValue] = useState('popular');
@@ -49,7 +54,7 @@ export const AddProductPage = () => {
 
   const filteredProducts = useMemo(
     () =>
-      selectedCategoryId === 1
+      selectedCategoryId === 0
         ? MOCK_PRODUCTS
         : MOCK_PRODUCTS.filter((p) => p.categoryId === selectedCategoryId),
     [selectedCategoryId]
@@ -146,10 +151,7 @@ export const AddProductPage = () => {
         {/* 카테고리 필터 */}
         <div className="px-4 pt-4">
           <HorizontalCategoriesTab
-            categories={CATEGORIES.map(({ categoryId, categoryLabel }) => ({
-              id: categoryId,
-              label: categoryLabel,
-            }))}
+            categories={MOCK_CATEGORIES}
             selectedId={selectedCategoryId}
             onSelect={setSelectedCategoryId}
             ariaLabel="상품 카테고리"
