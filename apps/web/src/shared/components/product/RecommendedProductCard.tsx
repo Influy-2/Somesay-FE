@@ -44,7 +44,7 @@ export const RecommendedProductCard = () => {
 
       {/* 하단 제품 정보 및 하트 */}
       <div
-        className="absolute inset-x-0 bottom-0 flex items-end bg-gradient-to-t from-black to-black/0 p-5"
+        className="absolute inset-x-0 bottom-0 flex items-end bg-linear-to-t from-black to-black/0 p-5"
         aria-hidden="true"
       >
         <div className="flex min-w-0 flex-1 flex-col gap-1 text-white">
@@ -63,7 +63,10 @@ export const RecommendedProductCard = () => {
                 <span className="body2-sb">{PRODUCT.rating}</span>
               </div>
               <span className="body2-m shrink-0">({formattedReviewCount})</span>
-              <AvatarStack creators={PRODUCT.creators} />
+              <AvatarStack
+                creators={PRODUCT.creators}
+                borderColor="border-grey09"
+              />
             </div>
 
             <WhiteHeartButton
@@ -75,7 +78,7 @@ export const RecommendedProductCard = () => {
         </div>
       </div>
 
-      {/* 제품 순서 표시 */}
+      {/* 제품 순위 표시 */}
       <div
         className="body2-m absolute top-0 left-0 flex size-9 items-center justify-center bg-black text-white"
         aria-hidden="true"

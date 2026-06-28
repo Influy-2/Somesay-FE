@@ -1,16 +1,19 @@
+// 1.6 상품 추천 화면
 import { useNavigate } from 'react-router';
-import { ProductAttributeSection } from '@/features/home/components/productRecommendation/ProductAttributeSection';
 import mockProfile from '@/assets/mock_profile_img.svg';
+
 import {
   ProductRecommendationCarousel,
   ProductRecommendationHeader,
 } from '@/features/home';
-import { ArrowBackIcon } from '@/shared/icons';
+import { ProductAttributeSection } from '@/features/home/components/productRecommendation/ProductAttributeSection';
 import {
   CTAButton,
   CreatorReviewExpandedCard,
   PageHeader,
 } from '@/shared/components';
+
+import { ArrowBackIcon } from '@/shared/icons';
 
 export const ProductRecommendationsPage = () => {
   const navigate = useNavigate();
@@ -20,7 +23,8 @@ export const ProductRecommendationsPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white pb-[126px]">
+    <div className="min-h-screen w-full bg-white pb-[7.875rem]">
+      {/* 페이지 헤더 */}
       <PageHeader
         title="상품 추천"
         left={
