@@ -43,21 +43,20 @@ export const RecommendedProductCard = () => {
       />
 
       {/* 하단 제품 정보 및 하트 */}
-      <div
-        className="absolute inset-x-0 bottom-0 flex items-end bg-linear-to-t from-black to-black/0 p-5"
-        aria-hidden="true"
-      >
+      <div className="absolute inset-x-0 bottom-0 flex items-end bg-linear-to-t from-black to-black/0 p-5">
         <div className="flex min-w-0 flex-1 flex-col gap-1 text-white">
-          {/* 브랜드 */}
-          <p className="body2-m truncate">{PRODUCT.brand}</p>
-          {/* 제품명 */}
-          <p className="body2-m line-clamp-1">{PRODUCT.productName}</p>
-          {/* 가격 */}
-          <p className="body2-m truncate">{PRODUCT.price}</p>
+          <div aria-hidden="true">
+            {/* 브랜드 */}
+            <p className="body2-m truncate">{PRODUCT.brand}</p>
+            {/* 제품명 */}
+            <p className="body2-m line-clamp-1">{PRODUCT.productName}</p>
+            {/* 가격 */}
+            <p className="body2-m truncate">{PRODUCT.price}</p>
+          </div>
 
           {/* 별점, 리뷰수, 리뷰어, 하트 */}
           <div className="flex items-center justify-between gap-3">
-            <div className="flex min-w-0 items-center gap-1">
+            <div className="flex min-w-0 items-center gap-1" aria-hidden="true">
               <div className="flex shrink-0 items-center">
                 <StarIcon className="size-4 text-white" />
                 <span className="body2-sb">{PRODUCT.rating}</span>
