@@ -8,7 +8,13 @@ const ACTIVE_SLIDE_SCALE = 1;
 const numberWithinRange = (number: number, min: number, max: number) =>
   Math.min(Math.max(number, min), max);
 
-export const useProductCarousel = () => {
+interface UseProductCarouselOptions {
+  onSelectedIndexChange?: ((index: number) => void) | undefined;
+}
+
+export const useProductCarousel = ({
+  onSelectedIndexChange,
+}: UseProductCarouselOptions = {}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center',
     loop: false,
@@ -19,8 +25,12 @@ export const useProductCarousel = () => {
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
+
+    const nextIndex = emblaApi.selectedScrollSnap();
+
+    setSelectedIndex(nextIndex);
+    onSelectedIndexChange?.(nextIndex);
+  }, [emblaApi, onSelectedIndexChange]);
 
   const updateSlideProgresses = useCallback(() => {
     if (!emblaApi) return;

@@ -1,5 +1,6 @@
 export { RecommendationSection } from './components/productRecommendation/RecommendationSection';
 export { ProductRecommendationCarousel } from './components/productRecommendation/ProductRecommendationCarousel';
+export { ProductRecommendationSection } from './components/productRecommendation/ProductRecommendationSection';
 
 export { BestReviewSection } from './components/bestReviews/BestReviewSection';
 

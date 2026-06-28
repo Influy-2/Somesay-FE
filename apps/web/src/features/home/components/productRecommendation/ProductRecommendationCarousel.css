@@ -42,10 +42,13 @@
 
 .product-carousel__slide-inner--selected {
   transform: scale(1);
+  transition-property: opacity;
+  opacity: 1;
 }
 
 .product-carousel__slide-inner--inactive {
   transform: scale(0.72);
+  will-change: opacity;
 }
 
 .product-carousel__dim {

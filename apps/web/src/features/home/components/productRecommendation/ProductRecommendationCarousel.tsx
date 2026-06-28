@@ -5,8 +5,16 @@ import { useProductCarousel } from './useProductCarousel';
 
 const MOCK_DATA = ['', '', '', '', ''];
 
-export const ProductRecommendationCarousel = () => {
-  const { emblaRef, selectedIndex, getSlideState } = useProductCarousel();
+interface ProductRecommendationCarouselProps {
+  onSelectedIndexChange?: (index: number) => void;
+}
+
+export const ProductRecommendationCarousel = ({
+  onSelectedIndexChange,
+}: ProductRecommendationCarouselProps) => {
+  const { emblaRef, selectedIndex, getSlideState } = useProductCarousel({
+    onSelectedIndexChange,
+  });
 
   return (
     <section className="product-carousel" aria-label="추천 제품 캐러셀">
