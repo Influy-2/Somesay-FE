@@ -62,6 +62,7 @@ export const ProductRecommendationSection = () => {
   );
 };
 
+//임시
 const SKIN_TYPE_CHIPS = [
   { label: '건성', isHighlighted: true },
   { label: '민감성', isHighlighted: false },
