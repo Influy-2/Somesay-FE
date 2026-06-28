@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { BasicCreatorProfileType } from '@somesay/shared';
 
 import mockProfile from '@/assets/mock_profile_img.svg';
 import { CreatorReviewExpandedCard } from '@/shared/components';
@@ -78,11 +79,11 @@ const RELATED_REVIEW = {
     creatorId: 1,
     nickname: '김점례',
     profileImageUrl: mockProfile,
-    subscriberCount: 30,
+    subscriberNum: 30,
     trustScore: 100,
     ageGroup: 20,
-    skinType: '건성',
-  },
+    skinTypes: ['건성'],
+  } satisfies BasicCreatorProfileType,
   rating: 4.8,
   productName: '캐롯 카로팅 카밍 워터 패드 50p',
   content:
