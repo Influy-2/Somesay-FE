@@ -1,15 +1,20 @@
 // 모든 온보딩 페이지가 공유할 화면 골격
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router';
-import { CTAButton, PageHeader } from '@/shared/components';
-import { ArrowBackIcon } from '@/shared/icons';
+import { CTAButton } from '@/shared/components';
+import { PATH } from '@/routes/path';
+import { useOnboardingStore } from '../store/onboarding.store';
+import { OnboardingExitDialog } from './OnboardingExitDialog';
+import {
+  OnboardingHeader,
+  type OnboardingHeaderVariant,
+} from './OnboardingHeader';
 
 interface OnboardingLayoutProps {
-  title?: string;
+  headerVariant: OnboardingHeaderVariant;
   children: ReactNode;
-  showBackButton?: boolean;
   onBack?: () => void;
-  rightAction?: ReactNode;
+  onSkip?: () => void;
   cta?: {
     label: string;
     onClick: () => void;
@@ -18,33 +23,29 @@ interface OnboardingLayoutProps {
 }
 
 export const OnboardingLayout = ({
-  title,
+  headerVariant,
   children,
-  showBackButton = true,
   onBack,
-  rightAction,
+  onSkip,
   cta,
 }: OnboardingLayoutProps) => {
   const navigate = useNavigate();
+  const reset = useOnboardingStore((state) => state.reset);
+  const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
+
+  const handleExit = () => {
+    reset();
+    setIsExitDialogOpen(false);
+    navigate(PATH.LOGIN.BASE, { replace: true });
+  };
 
   return (
     <div className="flex min-h-full flex-1 flex-col pt-13.5">
-      <PageHeader
-        {...(title ? { title } : {})}
-        {...(showBackButton
-          ? {
-              left: (
-                <button
-                  type="button"
-                  onClick={onBack ?? (() => navigate(-1))}
-                  aria-label="이전 단계로 이동"
-                >
-                  <ArrowBackIcon />
-                </button>
-              ),
-            }
-          : {})}
-        {...(rightAction ? { right: [rightAction] } : {})}
+      <OnboardingHeader
+        variant={headerVariant}
+        onBack={onBack ?? (() => navigate(-1))}
+        onExit={() => setIsExitDialogOpen(true)}
+        {...(onSkip ? { onSkip } : {})}
       />
 
       <div className={cta ? 'flex-1 px-4 py-8 pb-28' : 'flex-1 px-4 py-8'}>
@@ -60,6 +61,12 @@ export const OnboardingLayout = ({
           />
         </div>
       )}
+
+      <OnboardingExitDialog
+        isOpen={isExitDialogOpen}
+        onCancel={() => setIsExitDialogOpen(false)}
+        onExit={handleExit}
+      />
     </div>
   );
 };

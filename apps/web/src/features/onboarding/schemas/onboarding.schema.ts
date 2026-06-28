@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { REQUIRED_AGREEMENT_IDS } from '../constants/onboarding.constants';
 import type { OnboardingStep } from '../types/onboarding.types';
 
-export const socialProviderSchema = z.enum(['KAKAO', 'NAVER', 'GOOGLE']);
 export const onboardingGenderSchema = z.enum(['MALE', 'FEMALE', 'NONE']);
 export const onboardingAgeSchema = z.enum([
   'TEENS',

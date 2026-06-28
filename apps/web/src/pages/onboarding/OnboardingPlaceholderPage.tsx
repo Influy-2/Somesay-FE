@@ -50,7 +50,7 @@ export const OnboardingPlaceholderPage = ({
         actions.markEmailVerified();
         break;
       case 'nickname':
-        actions.setNickname('somesay_user');
+        actions.setNickname('somesayuser');
         break;
       case 'profile':
         actions.setProfile('FEMALE', 'TWENTIES');
@@ -100,18 +100,8 @@ export const OnboardingPlaceholderPage = ({
 
   return (
     <OnboardingLayout
-      title={ONBOARDING_STEP_LABELS[step]}
-      rightAction={
-        isOptional ? (
-          <button
-            type="button"
-            onClick={skipCurrentStep}
-            className="body1-sb text-black"
-          >
-            건너뛰기
-          </button>
-        ) : undefined
-      }
+      headerVariant={step === 'terms' ? 'terms' : 'signup'}
+      {...(isOptional ? { onSkip: skipCurrentStep } : {})}
       cta={{
         label:
           step === 'complete' ? '임시 온보딩 종료' : '임시 값 저장 후 다음',

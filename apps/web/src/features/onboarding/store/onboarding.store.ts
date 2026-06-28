@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import type { SocialProvider } from '@/features/auth';
 import {
   INITIAL_ONBOARDING_DRAFT,
   ONBOARDING_STEP_ORDER,
@@ -11,14 +12,13 @@ import type {
   OnboardingGender,
   OnboardingStep,
   ProductFitStatus,
-  SocialProvider,
 } from '../types/onboarding.types';
 
 //스토어가 제공하는 모든 변경 함수의 타입입니다.
 interface OnboardingActions {
   hasHydrated: boolean;
   setHasHydrated: (hasHydrated: boolean) => void; //sessionStorage 복원이 끝났는지를 기록합니다.
-  selectProvider: (provider: SocialProvider) => void; //로그인 provider를 선택합니다. 새 provider를 선택하면 기존 온보딩 데이터는 초기화합니다. 다른 계정이나 로그인 방법의 데이터가 섞이지 않게 하기 위함입니다.
+  startOnboarding: (provider: SocialProvider) => void; //신규 회원의 provider를 저장하며 이전 온보딩 데이터는 초기화합니다.
   setAgreement: (agreementId: string, agreed: boolean) => void; //특정 약관 동의 상태를 저장합니다.
   setEmail: (email: string) => void;
   markEmailVerified: (verified?: boolean) => void;
@@ -68,7 +68,7 @@ export const useOnboardingStore = create<OnboardingStore>()(
       ...INITIAL_ONBOARDING_DRAFT,
       hasHydrated: false,
       setHasHydrated: (hasHydrated) => set({ hasHydrated }),
-      selectProvider: (provider) =>
+      startOnboarding: (provider) =>
         set({
           ...INITIAL_ONBOARDING_DRAFT,
           provider,
