@@ -3,7 +3,6 @@ import type {
   OnboardingDraft,
   OnboardingGender,
   OnboardingStep,
-  SocialProvider,
 } from '../types/onboarding.types';
 
 //sessionStorage에 온보딩 상태를 저장할 때 사용하는 key입니다.
@@ -45,12 +44,6 @@ export const OPTIONAL_ONBOARDING_STEPS: OnboardingStep[] = [
   'matchedProducts',
   'mismatchedProducts',
 ];
-
-export const SOCIAL_PROVIDER_LABELS: Record<SocialProvider, string> = {
-  KAKAO: '카카오',
-  NAVER: '네이버',
-  GOOGLE: '구글',
-};
 
 export const GENDER_LABELS: Record<OnboardingGender, string> = {
   MALE: '남성',

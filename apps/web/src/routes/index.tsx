@@ -23,7 +23,7 @@ import { SkinTypePage } from '@/pages/myPage/account/SkinTypePage';
 import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
 import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
 import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
-import { LoginPlaceholderPage } from '@/pages/login/LoginPlaceholderPage';
+import { LoginPage } from '@/pages/login/LoginPage';
 import { OnboardingPlaceholderPage } from '@/pages/onboarding/OnboardingPlaceholderPage';
 import {
   OnboardingIndexRedirect,
@@ -100,7 +100,7 @@ export const appRouter = createBrowserRouter([
       },
       {
         path: PATH.LOGIN.BASE,
-        element: <LoginPlaceholderPage />,
+        element: <LoginPage />,
       },
       {
         path: PATH.ONBOARDING.BASE,

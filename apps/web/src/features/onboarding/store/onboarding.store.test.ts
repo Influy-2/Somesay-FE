@@ -61,12 +61,12 @@ describe('onboarding store', () => {
     expect(useOnboardingStore.getState().completedSteps).toEqual(['terms']);
   });
 
-  it('provider를 다시 선택하면 이전 온보딩 초안을 초기화한다', () => {
+  it('새 온보딩을 시작하면 이전 온보딩 초안을 초기화한다', () => {
     const store = useOnboardingStore.getState();
 
-    store.selectProvider('KAKAO');
+    store.startOnboarding('KAKAO');
     store.setNickname('somesay');
-    store.selectProvider('GOOGLE');
+    store.startOnboarding('GOOGLE');
 
     expect(useOnboardingStore.getState()).toMatchObject({
       provider: 'GOOGLE',
@@ -78,7 +78,7 @@ describe('onboarding store', () => {
   it('sessionStorage에 저장된 초안을 다시 복원한다', async () => {
     const store = useOnboardingStore.getState();
 
-    store.selectProvider('KAKAO');
+    store.startOnboarding('KAKAO');
     store.setNickname('저장된닉네임');
 
     const persistedDraft = memorySessionStorage.getItem(ONBOARDING_STORAGE_KEY);

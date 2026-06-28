@@ -1,5 +1,4 @@
 export { OnboardingLayout } from './components/OnboardingLayout';
-export { OnboardingSelectionButton } from './components/OnboardingSelectionButton';
 export {
   OnboardingIndexRedirect,
   OnboardingRouteGuard,
@@ -10,7 +9,6 @@ export {
   ONBOARDING_STEP_LABELS,
   OPTIONAL_ONBOARDING_STEPS,
   REQUIRED_AGREEMENT_IDS,
-  SOCIAL_PROVIDER_LABELS,
 } from './constants/onboarding.constants';
 export { useOnboardingStore } from './store/onboarding.store';
 export type {
@@ -19,7 +17,6 @@ export type {
   OnboardingGender,
   OnboardingStep,
   ProductFitStatus,
-  SocialProvider,
 } from './types/onboarding.types';
 export {
   agreementsSchema,
@@ -35,7 +32,6 @@ export {
   productIdsSchema,
   signupPayloadSchema,
   skinTypeNamesSchema,
-  socialProviderSchema,
 } from './schemas/onboarding.schema';
 export type {
   ProductFitPayload,

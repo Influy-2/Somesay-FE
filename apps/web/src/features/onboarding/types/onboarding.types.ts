@@ -1,4 +1,4 @@
-export type SocialProvider = 'KAKAO' | 'NAVER' | 'GOOGLE';
+import type { SocialProvider } from '@/features/auth';
 
 export type OnboardingGender = 'MALE' | 'FEMALE' | 'NONE';
 

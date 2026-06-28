@@ -1,13 +1,10 @@
 import { PATH } from '@/routes/path';
+import { socialProviderSchema, type SocialProvider } from '@/features/auth';
 import { ONBOARDING_STEP_ORDER } from '../constants/onboarding.constants';
-import {
-  onboardingStepSchemas,
-  socialProviderSchema,
-} from '../schemas/onboarding.schema';
+import { onboardingStepSchemas } from '../schemas/onboarding.schema';
 import type {
   OnboardingDraft,
   OnboardingStep,
-  SocialProvider,
 } from '../types/onboarding.types';
 
 export const ONBOARDING_PATH_BY_STEP: Record<OnboardingStep, string> = {
