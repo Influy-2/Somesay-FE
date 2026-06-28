@@ -1,6 +1,11 @@
 import { CreatorRankingUpDownRow, MoreButton } from '@/shared/components';
-import { MOCK_RANKING_CREATORS } from './mock';
+import { useFetchCreatorRanking } from '@/shared/hooks/ranking/useFetchCreatorRanking';
+
 export const CreatorRankingSection = () => {
+  const { data: creatorRankingData } = useFetchCreatorRanking({
+    size: 5,
+  });
+
   return (
     <section
       aria-labelledby="creator-ranking-title"
@@ -11,9 +16,11 @@ export const CreatorRankingSection = () => {
       </h2>
       <div className="flex w-full flex-col items-center justify-center gap-5">
         <ol className="flex flex-col items-start gap-6 self-stretch py-0">
-          {MOCK_RANKING_CREATORS.map((creator) => (
-            <CreatorRankingUpDownRow {...creator} key={creator.creatorId} />
-          ))}
+          {creatorRankingData?.pages
+            .flatMap((page) => page.content)
+            .map((creator) => (
+              <CreatorRankingUpDownRow {...creator} key={creator.creatorId} />
+            ))}
         </ol>
         {/* TODO: 경로 수정 */}
         <MoreButton to={'/임시'} text="순위 더보기" />

@@ -10,7 +10,7 @@ import { CreatorHomeTrustScore } from '@/features/creatorHome';
 import { HorizontalCategoriesTab } from '@/shared/components';
 import { CreatorHomeReviewCard } from '@/shared/components';
 import { ArrowBackIcon, ShareIcon } from '@/shared/icons';
-import { CATEGORIES } from '@somesay/shared';
+import { useFetchCategories } from '@/shared/hooks';
 import {
   MOCK_CREATOR,
   MOCK_TRUST_SCORE,
@@ -21,13 +21,23 @@ const SORT_OPTIONS = [
   { value: 'popular', label: '인기순' },
   { value: 'latest', label: '최신순' },
 ];
+const ALL_CATEGORY = { id: 0, label: '전체' };
 
 export const CreatorHomePage = () => {
   const navigate = useNavigate();
-  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
   const [searchValue, setSearchValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentSortValue, setCurrentSortValue] = useState('popular');
+  const { data: categoryGroups = [] } = useFetchCategories();
+
+  const categories = [
+    ALL_CATEGORY,
+    ...categoryGroups.map(({ mainCategoryId, mainName }) => ({
+      id: mainCategoryId,
+      label: mainName,
+    })),
+  ];
 
   const handleSelectCategory = (id: number) => {
     setSelectedCategoryId(id);
@@ -35,7 +45,7 @@ export const CreatorHomePage = () => {
   };
 
   const filteredReviews =
-    selectedCategoryId === 1
+    selectedCategoryId === ALL_CATEGORY.id
       ? MOCK_CREATOR_REVIEWS
       : MOCK_CREATOR_REVIEWS.filter(
           (review) => review.product.categoryId === selectedCategoryId
@@ -77,10 +87,7 @@ export const CreatorHomePage = () => {
           onClear={() => setSearchValue('')}
         />
         <HorizontalCategoriesTab
-          categories={CATEGORIES.map(({ categoryId, categoryLabel }) => ({
-            id: categoryId,
-            label: categoryLabel,
-          }))}
+          categories={categories}
           selectedId={selectedCategoryId}
           onSelect={handleSelectCategory}
           ariaLabel="상품 카테고리"

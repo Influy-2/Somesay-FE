@@ -110,7 +110,9 @@ export const SearchHeader = ({
                 <SearchFilter
                   key={key}
                   placeholder={placeholder}
-                  selectedLabel={selectedFilters[key].map((v) => v.label)}
+                  selectedLabel={selectedFilters[key].map((v) =>
+                    typeof v === 'string' ? v : v.subName
+                  )}
                   onClick={() => handleFilterGroupToggle(key)}
                 />
               ))}

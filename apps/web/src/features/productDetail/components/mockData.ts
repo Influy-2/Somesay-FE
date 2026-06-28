@@ -1,27 +1,6 @@
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
 
-export const MOCK_PRODUCT_DETAIL = {
-  productImgUrl: mockProductImg,
-  brandName: '토리든',
-  brandImageUrl: 'https://placeholder.com/brand_logo.png',
-  productName:
-    '다이브인 저분자 히알루론산 세럼 [흔적 리페어] 10개입 마데카소사이드',
-  price: 30000,
-  capacity: '50ml',
-  likeCount: 1250,
-  isLiked: false,
-};
-
-export const MOCK_REVIEW_SUMMARY = {
-  rating: 4.9,
-  reviewCount: 423,
-  summaryText:
-    '세럼이 끈적임 없이 촉촉하고, 수분감이 많아서 특히 건성 피부인 분들에게 추천해요.',
-  skinTypes: ['건성'],
-  effects: ['여드름 진정', '붉은기 완화', '각질제거'],
-};
-
 export const MOCK_REVIEWS = [
   {
     id: 1,
@@ -30,7 +9,7 @@ export const MOCK_REVIEWS = [
       name: '김점례',
       profileImg: mockProfileImg,
       subscriberCount: '30만',
-      reliability: 100,
+      trustScore: 100,
       tags: ['20대', '건성'],
     },
     rating: 4.8,
@@ -78,7 +57,7 @@ export const MOCK_REVIEWS = [
       name: '김점례',
       profileImg: mockProfileImg,
       subscriberCount: '30만',
-      reliability: 100,
+      trustScore: 100,
       tags: ['20대', '건성'],
     },
     rating: 4.8,
@@ -118,7 +97,7 @@ export const MOCK_REVIEWS = [
       name: '김점례',
       profileImg: mockProfileImg,
       subscriberCount: '30만',
-      reliability: 100,
+      trustScore: 100,
       tags: ['20대', '건성'],
     },
     rating: 4.8,
@@ -141,7 +120,7 @@ export const MOCK_REVIEWS = [
       name: '김점례',
       profileImg: mockProfileImg,
       subscriberCount: '30만',
-      reliability: 100,
+      trustScore: 100,
       tags: ['20대', '건성'],
     },
     rating: 4.8,

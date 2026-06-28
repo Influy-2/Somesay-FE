@@ -24,7 +24,7 @@ export const Default: Story = {
       name: '글로우픽',
       profileImg: mockProfile,
       subscriberCount: '12.4만',
-      reliability: 92,
+      trustScore: 92,
       tags: ['건성', '보습'],
     },
   },

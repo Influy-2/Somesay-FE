@@ -6,6 +6,7 @@ import {
 } from '@/shared/icons';
 import { ChipBasic } from '@/shared/components';
 import { CreatorRankingUpDownType } from '@somesay/shared';
+import { formatSubscriberCount } from '@somesay/shared';
 
 export const CreatorRankingUpDownRow = ({
   ranking,
@@ -13,22 +14,25 @@ export const CreatorRankingUpDownRow = ({
   rankChangeDiff,
   profileImageUrl,
   nickname,
-  subscriberCount,
+  subscriberNum,
   ageGroup,
-  skinType,
+  skinTypes,
   trustScore,
 }: CreatorRankingUpDownType) => {
+  // aria-label을 위한 문자열 생성
+  const skinTypeLabel = skinTypes.join(', ');
+
   const rankChangeLabel =
-    rankChange === 'up'
-      ? `${rankChangeDiff}단계 상승`
-      : rankChange === 'down'
-        ? `${rankChangeDiff}단계 하락`
+    rankChangeDiff === 'up'
+      ? `${rankChange}단계 상승`
+      : rankChangeDiff === 'down'
+        ? `${rankChange}단계 하락`
         : '순위 변동 없음';
 
   return (
     <li
       className="flex w-full items-center justify-between"
-      aria-label={`${ranking}위 ${nickname}, 구독자 ${subscriberCount}만, ${ageGroup}대, ${skinType}, 신뢰도 ${trustScore}점, ${rankChangeLabel}`}
+      aria-label={`${ranking}위 ${nickname}, 구독자 ${subscriberNum}만, ${ageGroup}대, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel}`}
     >
       {/* 좌측: 순위 + 프로필 */}
       <div className="flex items-center gap-3" aria-hidden="true">
@@ -36,18 +40,20 @@ export const CreatorRankingUpDownRow = ({
         <div className="flex w-[1.4375rem] flex-col items-center gap-0.5">
           <span className="subhead-sb text-center text-black">{ranking}</span>
           <div className="flex items-center gap-0.5">
-            {rankChange === 'up' ? (
+            {rankChangeDiff === 'up' ? (
               <>
                 <ArrowUpIcon className="size-3" />
-                <span className="caption1-m">{rankChangeDiff}</span>
+                <span className="caption1-m">{rankChange}</span>
               </>
-            ) : rankChange === 'down' ? (
+            ) : rankChangeDiff === 'down' ? (
               <>
                 <ArrowDownIcon className="size-3" />
-                <span className="caption1-m">{rankChangeDiff}</span>
+                <span className="caption1-m">{rankChange}</span>
               </>
             ) : (
-              rankChange === 'same' && <NoRankChangeIcon className="size-3" />
+              rankChangeDiff === 'same' && (
+                <NoRankChangeIcon className="size-3" />
+              )
             )}
           </div>
         </div>
@@ -71,15 +77,17 @@ export const CreatorRankingUpDownRow = ({
             <div className="flex items-center gap-0.5">
               <YoutubeIcon className="text-grey08 size-3.5" />
               <span className="caption2-m text-grey08 whitespace-nowrap">
-                {subscriberCount}만
+                {formatSubscriberCount(subscriberNum)}
               </span>
             </div>
           </div>
 
           {/* 칩: 나이대 + 피부타입 */}
           <div className="flex items-center gap-1">
-            <ChipBasic label={`${ageGroup}대`} bgColor="bg-grey02" />
-            <ChipBasic label={skinType} bgColor="bg-grey02" />
+            <ChipBasic label={`${ageGroup}`} bgColor="bg-grey02" />
+            {skinTypes.map((type) => (
+              <ChipBasic key={type} label={type} bgColor="bg-grey02" />
+            ))}
           </div>
         </div>
       </div>
@@ -89,7 +97,7 @@ export const CreatorRankingUpDownRow = ({
         className="body1-sb whitespace-nowrap text-black"
         aria-hidden="true"
       >
-        {trustScore}점
+        {trustScore.toFixed(0)}점
       </span>
     </li>
   );

@@ -1,5 +1,7 @@
 import { useEffect, RefObject } from 'react';
 
+const TEXTAREA_LINE_HEIGHT_PX = 21;
+
 /**
  * textarea의 높이를 내용에 따라 자동으로 조절해주는 커스텀 훅
  *
@@ -13,7 +15,9 @@ const useAutoResizeTextArea = (
 ) => {
   useEffect(() => {
     if (ref?.current) {
-      const maxHeight = maxLines ? 21 * maxLines : Infinity;
+      const maxHeight = maxLines
+        ? TEXTAREA_LINE_HEIGHT_PX * maxLines
+        : Infinity;
       ref.current.style.height = 'auto'; // 높이 초기화
       ref.current.style.height = `${Math.min(maxHeight, ref.current.scrollHeight)}px`; // 스크롤 높이에 맞춰 자동 조절
     }

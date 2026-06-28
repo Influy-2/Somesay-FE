@@ -7,16 +7,17 @@ const meta: Meta<typeof CreatorRankingUpDownRow> = {
   component: CreatorRankingUpDownRow,
   tags: ['autodocs'],
   argTypes: {
-    rankChange: { control: 'select', options: ['up', 'down', 'same'] },
-    rankChangeDiff: { control: 'number' },
+    rankChange: { control: 'number' },
+    rankChangeDiff: { control: 'select', options: ['up', 'down', 'same'] },
     creatorId: { control: 'number' },
     nickname: { control: 'text' },
     profileImageUrl: { control: 'text' },
-    subscriberCount: { control: 'number' },
+    subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
     ageGroup: { control: 'number' },
-    skinType: { control: 'text' },
+    skinTypes: { control: 'object' },
     ranking: { control: 'number' },
+    youtubeLink: { control: 'text' },
   },
 };
 
@@ -25,15 +26,16 @@ type Story = StoryObj<typeof CreatorRankingUpDownRow>;
 
 export const Default: Story = {
   args: {
-    rankChange: 'down',
-    rankChangeDiff: 1,
+    rankChange: 1,
+    rankChangeDiff: 'down',
     creatorId: 1,
     nickname: '이름',
     profileImageUrl: 'https://placehold.co/100',
-    subscriberCount: 2,
+    youtubeLink: 'https://youtube.com',
+    subscriberNum: 2,
     trustScore: 90,
     ageGroup: 20,
-    skinType: '텍스트',
+    skinTypes: ['텍스트'],
     ranking: 2,
   },
 };

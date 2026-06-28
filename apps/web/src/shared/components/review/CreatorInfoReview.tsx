@@ -10,7 +10,7 @@ export interface CreatorInfoReviewProps {
       name: string;
       profileImg: string;
       subscriberCount: string;
-      reliability: number;
+      trustScore: number;
       tags: string[];
     };
     rating: number;

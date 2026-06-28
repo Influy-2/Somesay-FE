@@ -1,25 +1,35 @@
 import { useState } from 'react';
 import { HorizontalCategoriesTab } from '@/shared/components/category/HorizontalCategoriesTab';
 import { BasicProductCard, MoreButton } from '@/shared/components';
-import { CATEGORIES } from '@somesay/shared';
 import { MOCK_CATEGORY_PRODUCTS } from './mockData';
+import { useFetchCategories } from '@/shared/hooks';
+
+const ALL_CATEGORY = { id: 0, label: '전체' };
 
 export const CategoryProductSection = () => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
+  const { data: mainCategories = [] } = useFetchCategories();
 
-  // const { data: categories = [] } = useCategories();
   // const { data: products = [] } = useCategoryProducts(selectedCategoryId);
 
-  //TODO: 임시
-  const categories = CATEGORIES.map((category) => ({
-    id: category.categoryId,
-    label: category.categoryLabel,
-  }));
+  const categories = [
+    ALL_CATEGORY,
+    ...mainCategories.map((category) => ({
+      id: category.mainCategoryId,
+      label: category.mainName,
+    })),
+  ];
 
   const products =
-    MOCK_CATEGORY_PRODUCTS.find(
-      (category) => category.categoryId === selectedCategoryId
-    )?.products || [];
+    selectedCategoryId === ALL_CATEGORY.id
+      ? (MOCK_CATEGORY_PRODUCTS[0]?.products ?? [])
+      : MOCK_CATEGORY_PRODUCTS.find(
+          (category) => category.categoryId === selectedCategoryId
+        )?.products || [];
+
+  const selectedCategoryLabel =
+    categories.find((category) => category.id === selectedCategoryId)?.label ??
+    '';
 
   return (
     <section
@@ -58,7 +68,7 @@ export const CategoryProductSection = () => {
         {/* 더보기 버튼 */}
         <MoreButton
           to={'/임시'}
-          text={`${CATEGORIES.find((c) => c.categoryId === selectedCategoryId)?.categoryLabel === '전체' ? '' : CATEGORIES.find((c) => c.categoryId === selectedCategoryId)?.categoryLabel} 상품 더보기`}
+          text={`${selectedCategoryLabel === ALL_CATEGORY.label ? '' : selectedCategoryLabel} 상품 더보기`}
         />
       </div>
     </section>

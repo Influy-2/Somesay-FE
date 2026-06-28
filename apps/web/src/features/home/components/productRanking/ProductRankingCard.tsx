@@ -1,9 +1,9 @@
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
-import { ProductRankingCardType } from '@somesay/shared';
+import { ProductCardType } from '@somesay/shared';
 import { WhiteHeartButton } from '@/shared/components';
 
-type ProductRankingCardProps = ProductRankingCardType;
+type ProductRankingCardProps = ProductCardType & { ranking: number };
 
 export const ProductRankingCard = ({
   productId,
@@ -13,12 +13,14 @@ export const ProductRankingCard = ({
   price,
   rating,
   reviewCount,
-  rank,
+  ranking,
   isHearted,
   creators,
 }: ProductRankingCardProps) => {
   const formattedPrice = price.toLocaleString('ko-KR');
-  const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
+  const formattedReviewCount = reviewCount
+    ? reviewCount.toLocaleString('ko-KR')
+    : '0';
 
   const onHeartToggle = () => {
     console.log('하트클릭');
@@ -27,10 +29,10 @@ export const ProductRankingCard = ({
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${rank}위 ${brand} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creators.map((c) => c.name).join(', ')}`}
+      aria-label={`${ranking}위 ${brand} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creators.map((c) => c.name).join(', ')}`}
     >
       {/* 이미지 영역 */}
-      <div className="relative h-[200px] w-full overflow-hidden border-none">
+      <div className="relative h-[12.5rem] w-full overflow-hidden border-none">
         {/* 상품 이미지 */}
         <div aria-hidden="true" className="border-grey02 h-full w-full border">
           {imageUrl && imageUrl.length > 0 && (
@@ -47,7 +49,7 @@ export const ProductRankingCard = ({
           aria-hidden="true"
           className="absolute top-0 left-0 flex size-8 items-center justify-center bg-black"
         >
-          <span className="body2-m text-white">{rank}</span>
+          <span className="body2-m text-white">{ranking}</span>
         </div>
 
         {/* 찜 버튼 */}
@@ -81,7 +83,7 @@ export const ProductRankingCard = ({
           {/* 별점 */}
           <div className="flex items-center">
             <StarIcon className="size-4" />
-            <span className="body2-sb">{rating}</span>
+            <span className="body2-sb">{rating.toFixed(1)}</span>
           </div>
           {/* 리뷰수 */}
           <span className="body2-m">({formattedReviewCount})</span>

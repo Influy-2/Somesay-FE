@@ -1,26 +1,52 @@
 export type {
+  ProductBasicType,
   ProductCardType,
+  ProductDetailType,
   ProductRankingCardType,
+  ProductSkinExpectationType,
+  ProductSkinType,
   ProductsByCategory,
-} from './types/product.types';
+  SortOptionsType,
+} from './domain/product/product.types';
 
 export type {
   ProductSearchResultType,
   ReviewSearchResultType,
-} from './types/search.types';
+} from './domain/search/search.types';
 
 export type {
   CreatorType,
   CreatorRankingUpDownType,
   BasicCreatorProfileType,
-} from './types/creator.types';
+} from './domain/creator/creator.types';
 
-export * from './types/category.types';
-export * from './types/filter.types';
+export * from './domain/category/category.types';
+export * from './domain/filter/filter.types';
 
-export * from './constants/cosmetics.constants';
 export * from './constants/forbiddenWords.constants';
-export type { CreatorReviewType } from './types/review.types';
+export type {
+  CreatorReviewType,
+  CreatorReviewSummaryType,
+} from './domain/review/review.types';
 
 export * from './constants/user.constants';
 export { formatSubscriberCount } from './utils';
+
+//api
+export { apiClient, configureApiClient } from './api/client';
+
+//api - ranking
+export * from './api/ranking/fetchCreatorRanking.api';
+export * from './api/ranking/fetchProductRanking.api';
+
+//api - product
+export * from './api/product/fetchProductsByCategory.api';
+export * from './api/product/fetchProductDetail.api';
+export * from './api/product/fetchProductReviewOverview.api';
+export * from './api/product/fetchProductReviews.api';
+
+//api - category
+export * from './api/category/fetchCategories.api';
+
+//query
+export * from './query/queryKeys';

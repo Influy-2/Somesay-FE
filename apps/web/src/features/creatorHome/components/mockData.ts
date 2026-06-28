@@ -29,10 +29,10 @@ export const MOCK_CREATOR: MockCreatorType = {
   creatorId: 1,
   nickname: '레오제이',
   profileImageUrl: mockProfileImg,
-  subscriberCount: 300000,
+  subscriberNum: 300000,
   trustScore: 0.99,
   ageGroup: 20,
-  skinType: '건성',
+  skinTypes: ['건성'],
   likeCount: 10000,
   youtubeUrl: 'https://www.youtube.com',
 };

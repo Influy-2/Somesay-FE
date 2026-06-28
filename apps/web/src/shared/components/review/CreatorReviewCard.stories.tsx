@@ -23,10 +23,10 @@ const mockCreator = {
   creatorId: 1,
   nickname: '글로우픽',
   profileImageUrl: mockProfile,
-  subscriberCount: 124000,
+  subscriberNum: 124000,
   trustScore: 92,
   ageGroup: 20,
-  skinType: '건성',
+  skinTypes: ['건성'],
 };
 
 export const Default: Story = {

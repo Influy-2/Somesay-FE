@@ -11,11 +11,8 @@ import {
   FilterChip,
 } from '@/shared/components';
 
-import {
-  SKIN_TYPE_OPTIONS,
-  CATEGORY_GROUPS,
-  EFFECT_OPTIONS,
-} from '@somesay/shared';
+import { type CategoryGroupType, type SubcategoryType } from '@somesay/shared';
+import { useFetchCategories } from '@/shared/hooks';
 
 const FILTER_GROUP: {
   category: SearchFilterGroupType;
@@ -31,6 +28,33 @@ const EMPTY_FILTERS: SelectedFiltersType = {
   effect: [],
   category: [],
 };
+
+// TODO: 피부 타입 선택지 API가 생기면 백엔드 응답값으로 교체
+const SKIN_TYPE_OPTIONS = [
+  '건성',
+  '지성',
+  '복합성',
+  '수부지',
+  '민감성',
+  '여드름성',
+  '모르겠음',
+];
+
+// TODO: 기대 효과 선택지 API가 생기면 백엔드 응답값으로 교체
+const EFFECT_OPTIONS = [
+  '보습',
+  '속건조',
+  '진정',
+  '여드름',
+  '붉은기',
+  '미백/잡티',
+  '주름/탄력',
+  '모공',
+  '피부결',
+  '각질',
+  '피부 장벽',
+  '흔적',
+];
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
@@ -51,21 +75,29 @@ export const SearchFilterBottomSheet = ({
   onSubmit,
   onReset,
 }: FilterBottomSheetProps) => {
+  const { data: categoryGroups = [] } = useFetchCategories();
+
   // 마운트 시점(바텀시트가 열릴 때)의 selectedFilters로 초기화
   const [draftFilters, setDraftFilters] =
     useState<SelectedFiltersType>(selectedFilters);
 
   //TODO: API 연결 및 전역 상태 관리 도입시 ID 로 비교?
-  const handleToggleFilter = (
-    item: SelectedFiltersType[SearchFilterGroupType][number]
-  ) => {
+  const handleToggleFilter = (item: string | SubcategoryType) => {
     setDraftFilters((prev) => {
       const current = prev[activeCategory];
-      const exists = current.some((v) => v === item);
+      const exists = current.some((v) =>
+        typeof v === 'string' || typeof item === 'string'
+          ? v === item
+          : v.subCategoryId === item.subCategoryId
+      );
       return {
         ...prev,
         [activeCategory]: exists
-          ? current.filter((v) => v !== item)
+          ? current.filter((v) =>
+              typeof v === 'string' || typeof item === 'string'
+                ? v !== item
+                : v.subCategoryId !== item.subCategoryId
+            )
           : [...current, item],
       };
     });
@@ -112,8 +144,8 @@ export const SearchFilterBottomSheet = ({
           >
             {SKIN_TYPE_OPTIONS.map((filter) => (
               <FilterChip
-                key={filter.skinTypeId}
-                label={filter.label}
+                key={filter}
+                label={filter}
                 isSelected={draftFilters.skinType.includes(filter)}
                 onClick={() => handleToggleFilter(filter)}
               />
@@ -129,8 +161,8 @@ export const SearchFilterBottomSheet = ({
           >
             {EFFECT_OPTIONS.map((filter) => (
               <FilterChip
-                key={filter.effectId}
-                label={filter.label}
+                key={filter}
+                label={filter}
                 isSelected={draftFilters.effect.includes(filter)}
                 onClick={() => handleToggleFilter(filter)}
               />
@@ -145,18 +177,21 @@ export const SearchFilterBottomSheet = ({
             aria-label="카테고리 선택"
           >
             {/* 스킨케어, 마스크/팩, 클렌징 등 카테고리 그룹과 하위 카테고리를 맵핑하여 렌더링 */}
-            {CATEGORY_GROUPS.map((group) => (
+            {categoryGroups.map((group: CategoryGroupType) => (
               <div
                 className="flex w-full flex-col items-start gap-3 self-stretch"
-                key={group.categoryId}
+                key={group.mainCategoryId}
               >
-                <p className="body2-sb text-black">{group.categoryLabel}</p>
+                <p className="body2-sb text-black">{group.mainName}</p>
                 <div className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch">
-                  {group.subcategories.map((filter) => (
+                  {group.subCategories.map((filter) => (
                     <FilterChip
                       key={filter.subCategoryId}
-                      label={filter.label}
-                      isSelected={draftFilters.category.includes(filter)}
+                      label={filter.subName}
+                      isSelected={draftFilters.category.some(
+                        (selected) =>
+                          selected.subCategoryId === filter.subCategoryId
+                      )}
                       onClick={() => handleToggleFilter(filter)}
                     />
                   ))}
