@@ -1,5 +1,5 @@
 import cn from '@/utils/cn';
-
+import { CheckOffIcon, CheckOnIcon } from '@/shared/icons';
 interface AgreementCheckboxProps {
   checked: boolean;
   label: string;
@@ -25,26 +25,10 @@ export const AgreementCheckbox = ({
     <span
       aria-hidden="true"
       className={cn(
-        'flex size-6 shrink-0 items-center justify-center rounded-full border-[1.8px]',
-        checked ? 'border-black bg-black' : 'border-grey04 bg-white'
+        'flex size-6 shrink-0 items-center justify-center rounded-full'
       )}
     >
-      {checked && (
-        <svg
-          width="12"
-          height="9"
-          viewBox="0 0 12 9"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M1 4L4.5 7.5L11 1"
-            stroke="white"
-            strokeWidth="1.6"
-            strokeLinecap="square"
-          />
-        </svg>
-      )}
+      {checked ? <CheckOnIcon /> : <CheckOffIcon />}
     </span>
     <span className={cn('min-w-0 text-black', labelClassName)}>{label}</span>
   </button>
