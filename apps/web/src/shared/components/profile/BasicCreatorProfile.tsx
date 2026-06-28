@@ -12,7 +12,7 @@ export const BasicCreatorProfile = ({
   subscriberNum,
   trustScore,
   ageGroup,
-  skinTypes,
+  skinTypes = [],
 }: BasicCreatorProfileProps) => {
   const skinTypeLabel = skinTypes.join(', '); // 여러 피부 타입을 쉼표로 구분하여 표시
   return (
