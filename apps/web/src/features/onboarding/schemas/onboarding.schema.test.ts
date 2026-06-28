@@ -18,8 +18,18 @@ describe('onboarding field schemas', () => {
 
   it('닉네임 길이와 허용 문자를 검사한다', () => {
     expect(nicknameSchema.parse(' 썸세이12 ')).toBe('썸세이12');
-    expect(nicknameSchema.safeParse('nickname!').success).toBe(false);
-    expect(nicknameSchema.safeParse('1234567890123').success).toBe(false);
+    expect(nicknameSchema.safeParse('ab').error?.issues[0]?.message).toBe(
+      '아이디는 최소 3자, 최대 12자까지 입력할 수 있습니다.'
+    );
+    expect(
+      nicknameSchema.safeParse('nickname!').error?.issues[0]?.message
+    ).toBe('아이디는 한글, 영어 소문자, 숫자만 사용할 수 있습니다.');
+    expect(nicknameSchema.safeParse('Nickname').error?.issues[0]?.message).toBe(
+      '아이디는 한글, 영어 소문자, 숫자만 사용할 수 있습니다.'
+    );
+    expect(
+      nicknameSchema.safeParse('1234567890123').error?.issues[0]?.message
+    ).toBe('아이디는 최소 3자, 최대 12자까지 입력할 수 있습니다.');
   });
 
   it('필수 약관 동의를 검사한다', () => {

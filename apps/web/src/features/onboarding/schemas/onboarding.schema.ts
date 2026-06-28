@@ -35,12 +35,12 @@ export const emailSchema = z
 export const nicknameSchema = z
   .string()
   .trim()
-  .min(1, '닉네임을 입력해주세요.')
-  .max(12, '닉네임은 12자 이하로 입력해주세요.')
   .regex(
-    /^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]+$/,
-    '닉네임은 한글, 영문, 숫자만 입력할 수 있어요.'
-  );
+    /^[가-힣ㄱ-ㅎㅏ-ㅣa-z0-9]+$/,
+    '아이디는 한글, 영어 소문자, 숫자만 사용할 수 있습니다.'
+  )
+  .min(3, '아이디는 최소 3자, 최대 12자까지 입력할 수 있습니다.')
+  .max(12, '아이디는 최소 3자, 최대 12자까지 입력할 수 있습니다.');
 
 export const agreementsSchema = z
   .record(z.string(), z.boolean())

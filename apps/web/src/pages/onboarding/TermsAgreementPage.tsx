@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
   agreementsSchema,
@@ -12,8 +13,8 @@ import { PATH } from '@/routes/path';
 
 export const TermsAgreementPage = () => {
   const navigate = useNavigate();
-  const agreements = useOnboardingStore((state) => state.agreements);
-  const setAgreement = useOnboardingStore((state) => state.setAgreement);
+  const savedAgreements = useOnboardingStore((state) => state.agreements);
+  const [agreements, setLocalAgreements] = useState(savedAgreements);
   const setAgreements = useOnboardingStore((state) => state.setAgreements);
   const markStepComplete = useOnboardingStore(
     (state) => state.markStepComplete
@@ -28,7 +29,7 @@ export const TermsAgreementPage = () => {
       ONBOARDING_AGREEMENTS.map(({ id }) => [id, nextAgreed])
     );
 
-    setAgreements(nextAgreements);
+    setLocalAgreements(nextAgreements);
   };
 
   const handleAgreementDetails = (agreementId: string) => {
@@ -44,6 +45,7 @@ export const TermsAgreementPage = () => {
       return;
     }
 
+    setAgreements(agreements);
     markStepComplete('terms');
     navigate(getNextOnboardingPath(provider, 'terms'));
   };
@@ -77,7 +79,12 @@ export const TermsAgreementPage = () => {
               <AgreementCheckbox
                 checked={Boolean(agreements[id])}
                 label={label}
-                onChange={() => setAgreement(id, !agreements[id])}
+                onChange={() =>
+                  setLocalAgreements((currentAgreements) => ({
+                    ...currentAgreements,
+                    [id]: !currentAgreements[id],
+                  }))
+                }
                 labelClassName="body1-m"
                 className="flex-1"
               />

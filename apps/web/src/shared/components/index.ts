@@ -96,3 +96,8 @@ export { CommentInput } from './input/CommentInput';
 
 /* inputfild */
 export { InputField } from './inputField/InputField';
+export {
+  OnboardingEmailInput,
+  OnboardingNicknameInput,
+  OnboardingVerificationCodeInput,
+} from './inputField/OnboardingTextInput';

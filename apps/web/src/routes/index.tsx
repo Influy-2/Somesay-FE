@@ -28,6 +28,7 @@ import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
 import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
 import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
 import { LoginPage } from '@/pages/login/LoginPage';
+import { NicknamePage as OnboardingNicknamePage } from '@/pages/onboarding/NicknamePage';
 import { OnboardingPlaceholderPage } from '@/pages/onboarding/OnboardingPlaceholderPage';
 import { TermsAgreementPage } from '@/pages/onboarding/TermsAgreementPage';
 import {
@@ -147,7 +148,11 @@ export const appRouter = createBrowserRouter([
           },
           {
             path: PATH.ONBOARDING.NICKNAME,
-            element: onboardingStepElement('nickname'),
+            element: (
+              <OnboardingRouteGuard step="nickname">
+                <OnboardingNicknamePage />
+              </OnboardingRouteGuard>
+            ),
           },
           {
             path: PATH.ONBOARDING.PROFILE,
