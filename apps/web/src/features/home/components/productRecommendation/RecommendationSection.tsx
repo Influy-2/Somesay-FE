@@ -1,6 +1,7 @@
 import { TypeRow } from './TypeRow';
-
+import { PATH } from '@/routes/path';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { FilterBottomSheet } from './FilterBottomSheet';
 import { FILTER_CATEGORIES, INITIAL_FILTERS } from './filter.constants';
 import type {
@@ -9,6 +10,7 @@ import type {
 } from './filter.types';
 
 export const RecommendationSection = () => {
+  const navigate = useNavigate();
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   // 현재 활성화된 필터 카테고리 (피부고민, 피부타입, 카테고리 중 하나)
@@ -28,6 +30,7 @@ export const RecommendationSection = () => {
   //제품 추천받기 버튼 클릭
   const handleSubmit = () => {
     setIsBottomSheetOpen(false);
+    navigate(`/${PATH.HOME.PRODUCT_RECOMMENDATIONS}`);
   };
 
   // 필터 초기화
