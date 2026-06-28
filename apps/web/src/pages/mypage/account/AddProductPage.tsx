@@ -12,7 +12,7 @@ import {
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { MOCK_PRODUCTS } from '@/features/myPage/components/mockData';
-import { CATEGORIES } from '@somesay/shared';
+import { useFetchCategories } from '@/shared/hooks';
 import cn from '@/utils/cn';
 
 type FitProduct = {
@@ -27,6 +27,8 @@ const SORT_OPTIONS = [
   { value: 'latest', label: '최신순' },
 ];
 
+const ALL_CATEGORY = { id: 0, label: '전체' };
+
 export const AddProductPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,12 +37,21 @@ export const AddProductPage = () => {
     currentProducts: FitProduct[];
   } | null;
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(ALL_CATEGORY.id);
   const [searchValue, setSearchValue] = useState('');
   const [selectedProducts, setSelectedProducts] = useState<FitProduct[]>([]);
   const [currentSortValue, setCurrentSortValue] = useState('popular');
   const [showAlreadyAddedSnackbar, setShowAlreadyAddedSnackbar] =
     useState(false);
+  const { data: categoryGroups = [] } = useFetchCategories();
+
+  const categories = [
+    ALL_CATEGORY,
+    ...categoryGroups.map((category) => ({
+      id: category.mainCategoryId,
+      label: category.mainName,
+    })),
+  ];
 
   const { type, currentProducts } = state ?? {
     type: null,
@@ -49,7 +60,7 @@ export const AddProductPage = () => {
 
   const filteredProducts = useMemo(
     () =>
-      selectedCategoryId === 1
+      selectedCategoryId === ALL_CATEGORY.id
         ? MOCK_PRODUCTS
         : MOCK_PRODUCTS.filter((p) => p.categoryId === selectedCategoryId),
     [selectedCategoryId]
@@ -146,10 +157,7 @@ export const AddProductPage = () => {
         {/* 카테고리 필터 */}
         <div className="px-4 pt-4">
           <HorizontalCategoriesTab
-            categories={CATEGORIES.map(({ categoryId, categoryLabel }) => ({
-              id: categoryId,
-              label: categoryLabel,
-            }))}
+            categories={categories}
             selectedId={selectedCategoryId}
             onSelect={setSelectedCategoryId}
             ariaLabel="상품 카테고리"
