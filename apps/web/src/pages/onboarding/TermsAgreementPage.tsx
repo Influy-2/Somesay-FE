@@ -57,6 +57,7 @@ export const TermsAgreementPage = () => {
         label: '다음',
         onClick: handleNext,
         disabled: !canProceed,
+        showPrevious: false,
       }}
     >
       <div className="flex flex-col gap-10 pt-3.5">

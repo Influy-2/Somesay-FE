@@ -46,6 +46,7 @@ export const NicknamePage = () => {
         label: '다음',
         onClick: handleNext,
         disabled: !nicknameResult.success,
+        showPrevious: false,
       }}
     >
       <div className="flex flex-col gap-10 pt-3.5">

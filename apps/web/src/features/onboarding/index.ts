@@ -1,4 +1,5 @@
 export { OnboardingLayout } from './components/OnboardingLayout';
+export { OnboardingOptionGroup } from './components/OnboardingOptionGroup';
 export { AgreementCheckbox } from './components/AgreementCheckbox';
 export {
   OnboardingIndexRedirect,

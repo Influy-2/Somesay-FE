@@ -106,6 +106,7 @@ export const OnboardingPlaceholderPage = ({
         label:
           step === 'complete' ? '임시 온보딩 종료' : '임시 값 저장 후 다음',
         onClick: markCurrentStepComplete,
+        showPrevious: true,
       }}
     >
       <div className="flex flex-col gap-5">

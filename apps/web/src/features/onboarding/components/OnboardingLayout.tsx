@@ -19,6 +19,7 @@ interface OnboardingLayoutProps {
     label: string;
     onClick: () => void;
     disabled?: boolean;
+    showPrevious: boolean;
   };
 }
 
@@ -54,11 +55,24 @@ export const OnboardingLayout = ({
 
       {cta && (
         <div className="z-header fixed bottom-0 left-1/2 w-full max-w-110 min-w-[20rem] -translate-x-1/2 bg-white px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]">
-          <CTAButton
-            label={cta.label}
-            onClick={cta.onClick}
-            {...(cta.disabled === undefined ? {} : { disabled: cta.disabled })}
-          />
+          <div className="flex gap-2">
+            {cta.showPrevious && (
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="body1-sb border-grey04 h-12 w-1/3 shrink-0 cursor-pointer border"
+              >
+                이전
+              </button>
+            )}
+            <CTAButton
+              label={cta.label}
+              onClick={cta.onClick}
+              {...(cta.disabled === undefined
+                ? {}
+                : { disabled: cta.disabled })}
+            />
+          </div>
         </div>
       )}
 
