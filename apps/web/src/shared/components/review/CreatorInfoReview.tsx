@@ -16,6 +16,7 @@ export interface CreatorInfoReviewProps {
     rating: number;
     content: string;
     agreedPercentage: number;
+    participantCount: number;
   };
 }
 
@@ -50,12 +51,17 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
       <div className="pb-4">
         <p className="mb-1">
           {isEvaluated ? (
-            <>
-              <span className="body2-b">{review.agreedPercentage}%</span>
-              <span className="body2-m text-grey08">
-                의 사용자가 이 리뷰에 공감했어요
-              </span>{' '}
-            </>
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="body2-b">{review.agreedPercentage}%</span>
+                <span className="body2-m text-grey08">
+                  의 사용자가 이 리뷰에 공감했어요
+                </span>
+              </div>
+              <span className="body2-m text-grey06">
+                {review.participantCount.toLocaleString()}명 참여
+              </span>
+            </div>
           ) : (
             <span className="body2-m text-grey05">
               아직 이 리뷰에 대한 평가가 이루어지지 않았어요.
