@@ -47,7 +47,7 @@ export const TermsAgreementPage = () => {
 
     setAgreements(agreements);
     markStepComplete('terms');
-    navigate(getNextOnboardingPath(provider, 'terms'));
+    navigate(getNextOnboardingPath('terms'));
   };
 
   return (

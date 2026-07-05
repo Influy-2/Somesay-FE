@@ -24,7 +24,7 @@ export const EmailVerificationPage = () => {
 
     store.markEmailVerified();
     store.markStepComplete('emailVerification');
-    navigate(getNextOnboardingPath(store.provider, 'emailVerification'));
+    navigate(getNextOnboardingPath('emailVerification'));
   }, [navigate]);
 
   const {

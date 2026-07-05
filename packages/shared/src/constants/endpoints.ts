@@ -1,4 +1,10 @@
 export const API_ENDPOINTS = {
+  /** Auth **/
+  AUTH: {
+    // 회원가입 후 기본 정보를 저장하기 위한 API URL입니다.
+    LOGIN_INFO: '/api/v1/auth/login/info',
+  },
+
   /** Ranking  **/
   PRODUCT_RANKING: '/rankings/product-ranking',
   CREATOR_RANKING: '/rankings/creator-ranking',

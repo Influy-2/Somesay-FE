@@ -39,8 +39,19 @@ export type {
 export * from './constants/user.constants';
 export { formatSubscriberCount } from './utils';
 
+//domain - auth
+export type {
+  AuthAgeDto,
+  AuthGenderDto,
+  LoginInfoRequestDto,
+  LoginInfoResponseDto,
+} from './domain/auth/auth.dto';
+
 //api
 export { apiClient, configureApiClient } from './api/client';
+
+//api - auth
+export * from './api/auth/postLoginInfo.api';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';

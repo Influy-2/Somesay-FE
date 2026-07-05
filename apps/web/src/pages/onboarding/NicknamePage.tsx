@@ -36,7 +36,7 @@ export const NicknamePage = () => {
 
     setNickname(result.data);
     markStepComplete('nickname');
-    navigate(getNextOnboardingPath(provider, 'nickname'));
+    navigate(getNextOnboardingPath('nickname'));
   };
 
   return (

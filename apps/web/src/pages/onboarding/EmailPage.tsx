@@ -49,7 +49,7 @@ export const EmailPage = () => {
 
     setEmail(result.data);
     markStepComplete('email');
-    navigate(getNextOnboardingPath(provider, 'email'));
+    navigate(getNextOnboardingPath('email'));
   };
 
   return (

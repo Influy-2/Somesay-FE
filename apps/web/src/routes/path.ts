@@ -6,6 +6,7 @@ export const PATH = {
   },
   LOGIN: {
     BASE: '/login',
+    KAKAO_CALLBACK: '/login/kakao/callback',
   },
   ONBOARDING: {
     BASE: '/onboarding',

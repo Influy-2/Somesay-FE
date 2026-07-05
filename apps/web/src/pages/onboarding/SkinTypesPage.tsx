@@ -31,7 +31,7 @@ export const SkinTypesPage = () => {
     }
 
     store.markStepComplete('skinTypes');
-    navigate(getNextOnboardingPath(store.provider, 'skinTypes'));
+    navigate(getNextOnboardingPath('skinTypes'));
   };
 
   return (

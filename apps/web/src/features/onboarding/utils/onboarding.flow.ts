@@ -1,5 +1,5 @@
 import { PATH } from '@/routes/path';
-import { socialProviderSchema, type SocialProvider } from '@/features/auth';
+import { socialProviderSchema } from '@/features/auth';
 import { ONBOARDING_STEP_ORDER } from '../constants/onboarding.constants';
 import { onboardingStepSchemas } from '../schemas/onboarding.schema';
 import type {
@@ -22,12 +22,8 @@ export const ONBOARDING_PATH_BY_STEP: Record<OnboardingStep, string> = {
 
 const EMAIL_STEPS: OnboardingStep[] = ['email', 'emailVerification'];
 
-export const getOnboardingSteps = (
-  provider: SocialProvider
-): OnboardingStep[] =>
-  provider === 'KAKAO'
-    ? ONBOARDING_STEP_ORDER
-    : ONBOARDING_STEP_ORDER.filter((step) => !EMAIL_STEPS.includes(step));
+export const getOnboardingSteps = (): OnboardingStep[] =>
+  ONBOARDING_STEP_ORDER.filter((step) => !EMAIL_STEPS.includes(step));
 
 export const isOnboardingStepComplete = (
   draft: OnboardingDraft,
@@ -44,7 +40,7 @@ export const getFirstIncompleteStep = (
   const providerResult = socialProviderSchema.safeParse(draft.provider);
   if (!providerResult.success) return null;
 
-  const steps = getOnboardingSteps(providerResult.data);
+  const steps = getOnboardingSteps();
 
   return (
     steps.find(
@@ -70,7 +66,7 @@ export const getOnboardingRedirectPath = (
   const providerResult = socialProviderSchema.safeParse(draft.provider);
   if (!providerResult.success) return PATH.LOGIN.BASE;
 
-  const steps = getOnboardingSteps(providerResult.data);
+  const steps = getOnboardingSteps();
   const targetIndex = steps.indexOf(targetStep);
   const firstIncompleteStep = getFirstIncompleteStep(draft);
 
@@ -85,11 +81,8 @@ export const getOnboardingRedirectPath = (
     : null;
 };
 
-export const getNextOnboardingPath = (
-  provider: SocialProvider,
-  currentStep: OnboardingStep
-) => {
-  const steps = getOnboardingSteps(provider);
+export const getNextOnboardingPath = (currentStep: OnboardingStep) => {
+  const steps = getOnboardingSteps();
   const currentIndex = steps.indexOf(currentStep);
   const nextStep = steps[currentIndex + 1] ?? 'complete';
 

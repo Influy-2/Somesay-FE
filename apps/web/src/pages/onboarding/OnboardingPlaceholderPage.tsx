@@ -31,7 +31,7 @@ export const OnboardingPlaceholderPage = ({
       return;
     }
 
-    navigate(getNextOnboardingPath(currentStore.provider, step));
+    navigate(getNextOnboardingPath(step));
   };
 
   const markCurrentStepComplete = () => {

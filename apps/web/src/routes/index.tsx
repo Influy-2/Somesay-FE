@@ -28,6 +28,7 @@ import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
 import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
 import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
 import { LoginPage } from '@/pages/login/LoginPage';
+import { KakaoCallbackPage } from '@/pages/login/KakaoCallbackPage';
 import { EmailPage } from '@/pages/onboarding/EmailPage';
 import { EmailVerificationPage } from '@/pages/onboarding/EmailVerificationPage';
 import { NicknamePage as OnboardingNicknamePage } from '@/pages/onboarding/NicknamePage';
@@ -130,6 +131,10 @@ export const appRouter = createBrowserRouter([
       {
         path: PATH.LOGIN.BASE,
         element: <LoginPage />,
+      },
+      {
+        path: PATH.LOGIN.KAKAO_CALLBACK,
+        element: <KakaoCallbackPage />,
       },
       {
         path: PATH.ONBOARDING.BASE,

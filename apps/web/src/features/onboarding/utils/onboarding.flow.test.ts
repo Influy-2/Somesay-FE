@@ -72,18 +72,18 @@ describe('onboarding flow', () => {
     );
   });
 
-  it('카카오는 이메일 입력과 인증 단계를 포함한다', () => {
+  it('카카오도 이메일 입력과 인증 단계를 제외한다', () => {
     const draft = createTermsCompletedDraft('KAKAO');
 
-    expect(getFirstIncompleteStep(draft)).toBe('email');
-    expect(getOnboardingRedirectPath(draft, 'nickname')).toBe(
-      ONBOARDING_PATH_BY_STEP.email
-    );
+    expect(getOnboardingSteps()).not.toContain('email');
+    expect(getOnboardingSteps()).not.toContain('emailVerification');
+    expect(getFirstIncompleteStep(draft)).toBe('nickname');
+    expect(getOnboardingRedirectPath(draft, 'nickname')).toBe(null);
   });
 
   it('네이버와 구글은 이메일 단계를 제외한다', () => {
-    expect(getOnboardingSteps('NAVER')).not.toContain('email');
-    expect(getOnboardingSteps('GOOGLE')).not.toContain('emailVerification');
+    expect(getOnboardingSteps()).not.toContain('email');
+    expect(getOnboardingSteps()).not.toContain('emailVerification');
     expect(getFirstIncompleteStep(createTermsCompletedDraft('GOOGLE'))).toBe(
       'nickname'
     );

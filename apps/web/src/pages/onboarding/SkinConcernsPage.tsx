@@ -28,7 +28,7 @@ export const SkinConcernsPage = () => {
     }
 
     store.markStepComplete('skinConcerns');
-    navigate(getNextOnboardingPath(store.provider, 'skinConcerns'));
+    navigate(getNextOnboardingPath('skinConcerns'));
   };
 
   const handleNext = () => {

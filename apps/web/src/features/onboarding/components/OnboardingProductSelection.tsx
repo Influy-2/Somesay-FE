@@ -14,6 +14,7 @@ import {
 import { PATH } from '@/routes/path';
 import { HorizontalCategoriesTab } from '@/shared/components';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useCompleteOnboarding } from '../hooks/useCompleteOnboarding';
 import { productIdsSchema } from '../schemas/onboarding.schema';
 import { useOnboardingStore } from '../store/onboarding.store';
 import type {
@@ -43,6 +44,7 @@ export const OnboardingProductSelection = ({
   const navigate = useNavigate();
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
   const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
+  const { completeOnboarding, isPending } = useCompleteOnboarding();
   const productIds = useOnboardingStore((state) =>
     status === 'MATCHED' ? state.matchedProductIds : state.mismatchedProductIds
   );
@@ -75,7 +77,13 @@ export const OnboardingProductSelection = ({
     }
 
     store.markStepComplete(step);
-    navigate(getNextOnboardingPath(store.provider, step));
+
+    if (step === 'mismatchedProducts') {
+      void completeOnboarding();
+      return;
+    }
+
+    navigate(getNextOnboardingPath(step));
   };
 
   return (
@@ -95,7 +103,7 @@ export const OnboardingProductSelection = ({
       cta={{
         label: ctaLabel,
         onClick: moveToNextStep,
-        disabled: !canProceed,
+        disabled: !canProceed || isPending,
         showPrevious: true,
       }}
     >

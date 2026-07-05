@@ -36,7 +36,7 @@ export const ProfilePage = () => {
 
     store.setProfile(gender, age);
     store.markStepComplete('profile');
-    navigate(getNextOnboardingPath(store.provider, 'profile'));
+    navigate(getNextOnboardingPath('profile'));
   };
 
   return (

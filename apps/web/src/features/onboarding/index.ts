@@ -24,6 +24,7 @@ export {
   REQUIRED_AGREEMENT_IDS,
 } from './constants/onboarding.constants';
 export type { OnboardingProgressStep } from './constants/onboarding.constants';
+export { useCompleteOnboarding } from './hooks/useCompleteOnboarding';
 export { useEmailVerification } from './hooks/useEmailVerification';
 export { useOnboardingStore } from './store/onboarding.store';
 export type {
