@@ -64,6 +64,7 @@ interface FilterBottomSheetProps {
   onCategoryChange: (category: SearchFilterGroupType) => void;
   onSubmit: (filters: SelectedFiltersType) => void;
   onReset: () => void;
+  visibleCategories?: SearchFilterGroupType[];
 }
 
 export const SearchFilterBottomSheet = ({
@@ -74,8 +75,13 @@ export const SearchFilterBottomSheet = ({
   onCategoryChange,
   onSubmit,
   onReset,
+  visibleCategories,
 }: FilterBottomSheetProps) => {
   const { data: categoryGroups = [] } = useFetchCategories();
+
+  const visibleFilterGroup = visibleCategories
+    ? FILTER_GROUP.filter((f) => visibleCategories.includes(f.category))
+    : FILTER_GROUP;
 
   // 마운트 시점(바텀시트가 열릴 때)의 selectedFilters로 초기화
   const [draftFilters, setDraftFilters] =
@@ -120,13 +126,13 @@ export const SearchFilterBottomSheet = ({
       ariaLabel="검색 옵션 선택 필터"
       header={
         <FilterGroupTab
-          categories={FILTER_GROUP}
+          categories={visibleFilterGroup}
           activeCategory={activeCategory}
           onCategoryChange={onCategoryChange}
         />
       }
       footer={
-        <div className="border-grey02 flex w-full shrink-0 flex-col items-center justify-center border-t bg-white px-4 pt-2 pb-[1.875rem]">
+        <div className="border-grey02 flex w-full shrink-0 flex-col items-center justify-center border-t bg-white px-4 pt-2 pb-7.5">
           <div className="flex w-full items-start gap-2">
             <ResetButton onClick={handleReset} />
             <CTAButton label="적용하기" onClick={handleSubmit} />
@@ -135,7 +141,7 @@ export const SearchFilterBottomSheet = ({
       }
     >
       {/* 콘텐츠 영역 */}
-      <div className="mt-5 flex w-full flex-1 flex-col items-start gap-5 overflow-y-visible pb-[3.3125rem]">
+      <div className="mt-5 flex w-full flex-1 flex-col items-start gap-5 overflow-y-visible pb-13.25">
         {activeCategory === 'skinType' && (
           <div
             className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch px-4"
