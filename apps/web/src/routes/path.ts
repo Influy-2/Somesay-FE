@@ -14,6 +14,7 @@ export const PATH = {
   CATEGORIES: {
     BASE: '/categories',
     DETAIL: ':categoryId',
+    DAISO: 'daiso',
   },
   MY_PAGE: {
     BASE: '/my-page',
