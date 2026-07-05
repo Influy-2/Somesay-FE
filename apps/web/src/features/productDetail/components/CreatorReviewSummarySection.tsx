@@ -60,17 +60,13 @@ export const CreatorReviewSummarySection = ({
       </div>
 
       {/* 4. 태그 영역 */}
+      {/* TODO: 태그 색상 수정 필요 */}
       <div className="flex flex-col gap-5">
         <div>
           <p className="body2-m mb-2">잘 맞는 피부 타입</p>
           <div className="flex flex-wrap gap-1.5">
             {productSkinType.map((type) => (
-              <ChipLarge
-                key={type}
-                label={type}
-                bgColor="bg-grey05"
-                textColor="text-grey08"
-              />
+              <ChipLarge key={type} label={type} />
             ))}
           </div>
         </div>
@@ -81,8 +77,6 @@ export const CreatorReviewSummarySection = ({
               <ChipLarge
                 key={effect.productSkinExpectationId}
                 label={effect.concern}
-                bgColor="bg-grey05"
-                textColor="text-grey08"
               />
             ))}
           </div>

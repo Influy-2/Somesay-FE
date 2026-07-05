@@ -8,8 +8,10 @@ const meta: Meta<typeof ChipLarge> = {
   tags: ['autodocs'],
   argTypes: {
     label: { control: 'text' },
-    bgColor: { control: 'text' },
-    textColor: { control: 'text' },
+    variant: {
+      control: 'radio',
+      options: ['default', 'highlight', 'filter'],
+    },
   },
 };
 
@@ -19,5 +21,19 @@ type Story = StoryObj<typeof ChipLarge>;
 export const Default: Story = {
   args: {
     label: '샘플 텍스트',
+  },
+};
+
+export const Highlight: Story = {
+  args: {
+    label: '샘플 텍스트',
+    variant: 'highlight',
+  },
+};
+
+export const Filter: Story = {
+  args: {
+    label: '샘플 텍스트',
+    variant: 'filter',
   },
 };
