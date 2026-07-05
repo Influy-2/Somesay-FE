@@ -23,16 +23,6 @@ export const useProductCarousel = ({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [slideProgresses, setSlideProgresses] = useState<number[]>([]);
 
-  // Embla의 현재 스냅을 외부 상세 영역과 공유한다.
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-
-    const nextIndex = emblaApi.selectedScrollSnap();
-
-    setSelectedIndex(nextIndex);
-    onSelectedIndexChange?.(nextIndex);
-  }, [emblaApi, onSelectedIndexChange]);
-
   // 인접 스냅 간 거리를 기준으로 각 슬라이드 진행률을 정규화한다.
   const updateSlideProgresses = useCallback(() => {
     if (!emblaApi) return;
@@ -62,22 +52,29 @@ export const useProductCarousel = ({
     );
   }, [emblaApi]);
 
+  // Embla의 현재 스냅을 외부 상세 영역과 공유한다.
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+
+    const nextIndex = emblaApi.selectedScrollSnap();
+
+    setSelectedIndex(nextIndex);
+    onSelectedIndexChange?.(nextIndex);
+    updateSlideProgresses();
+  }, [emblaApi, onSelectedIndexChange, updateSlideProgresses]);
+
   useEffect(() => {
     if (!emblaApi) return;
 
     emblaApi
       .on('select', onSelect)
-      .on('select', updateSlideProgresses)
       .on('reInit', onSelect)
-      .on('reInit', updateSlideProgresses)
       .on('scroll', updateSlideProgresses);
 
     return () => {
       emblaApi
         .off('select', onSelect)
-        .off('select', updateSlideProgresses)
         .off('reInit', onSelect)
-        .off('reInit', updateSlideProgresses)
         .off('scroll', updateSlideProgresses);
     };
   }, [emblaApi, onSelect, updateSlideProgresses]);

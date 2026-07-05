@@ -30,7 +30,7 @@ export const ProductRecommendationCarousel = ({
                 className={slideState.slideClassName}
                 style={slideState.slideStyle}
                 aria-label={`${index + 1}번째 추천 제품`}
-                aria-current={index === selectedIndex}
+                aria-current={index === selectedIndex ? 'true' : undefined}
               >
                 {/* 상품 카드 확대 영역 */}
                 <div
