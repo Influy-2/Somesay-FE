@@ -33,9 +33,8 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
             <span className="body1-sb">{category.mainName}</span>
           </div>
         </button>
-        {/* TODO: 나중에 대분류 페이지로 이동 */}
         <Link
-          to={`/`}
+          to={`/categories/${category.mainCategoryId}`}
           aria-label={`${category.mainName} 전체보기 페이지로 이동`}
         >
           <MainArrowIcon />
@@ -49,8 +48,14 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
         className={cn('flex flex-col gap-6 px-8 pt-6', !isOpen && 'hidden')}
       >
         {category.subCategories.map((sub) => (
-          <li key={sub.subCategoryId} className="body2-m cursor-pointer">
-            {sub.subName}
+          <li key={sub.subCategoryId}>
+            <Link
+              to={`/categories/${category.mainCategoryId}`}
+              state={{ selectedSubCategoryId: sub.subCategoryId }}
+              className="body2-m cursor-pointer"
+            >
+              {sub.subName}
+            </Link>
           </li>
         ))}
       </ul>
