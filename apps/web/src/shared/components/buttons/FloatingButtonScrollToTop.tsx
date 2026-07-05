@@ -10,10 +10,10 @@ export const FloatingButtonScrollToTop = ({
   className,
 }: FloatingButtonScrollToTopProps) => {
   const handleClick = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    const main = document.querySelector('main');
+    if (main) {
+      main.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
