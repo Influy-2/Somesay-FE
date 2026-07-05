@@ -36,6 +36,7 @@ export { CTAButton } from './buttons/CTAButton';
 export { ResetButton } from './buttons/ResetButton';
 export { OnOffButton } from './buttons/OnOffButton';
 export { FloatingButtonPlus } from './buttons/FloatingButtonPlus';
+export { FloatingButtonScrollToTop } from './buttons/FloatingButtonScrollToTop';
 
 /* ratebar */
 export { RateBar } from './ratebar/RateBar';

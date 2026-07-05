@@ -26,6 +26,7 @@ export { default as RankingOffIcon } from './RankingOffIcon.svg?react';
 export { default as RankingOnIcon } from './RankingOnIcon.svg?react';
 export { default as ReviewOffIcon } from './ReviewOffIcon.svg?react';
 export { default as ReviewOnIcon } from './ReviewOnIcon.svg?react';
+export { default as ScrollTopIcon } from './ScrollTopIcon.svg?react';
 export { default as SearchIcon } from './SearchIcon.svg?react';
 export { default as RecentSearchIcon } from './RecentSearchIcon.svg?react';
 export { default as X16Icon } from './X16Icon.svg?react';
