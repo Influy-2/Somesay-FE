@@ -56,13 +56,6 @@ export const ONBOARDING_PROGRESS_STEP_COUNT = ONBOARDING_PROGRESS_STEPS.length;
 
 export type OnboardingProgressStep = (typeof ONBOARDING_PROGRESS_STEPS)[number];
 
-export const ONBOARDING_COMPLETION_AVAILABLE_STEPS = [
-  'skinTypes',
-  'skinConcerns',
-  'matchedProducts',
-  'mismatchedProducts',
-] as const satisfies readonly OnboardingProgressStep[];
-
 export const ONBOARDING_STEP_LABELS: Record<OnboardingStep, string> = {
   terms: '약관 동의',
   email: '이메일 입력',

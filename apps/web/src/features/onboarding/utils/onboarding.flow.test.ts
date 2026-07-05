@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { PATH } from '@/routes/path';
 import {
   INITIAL_ONBOARDING_DRAFT,
-  ONBOARDING_COMPLETION_AVAILABLE_STEPS,
   ONBOARDING_PROGRESS_STEP_COUNT,
   ONBOARDING_PROGRESS_STEPS,
   REQUIRED_AGREEMENT_IDS,
@@ -15,6 +14,7 @@ import {
   getOnboardingSteps,
   ONBOARDING_PATH_BY_STEP,
 } from './onboarding.flow';
+import { isOnboardingCompletionAvailable } from './onboarding.completion';
 
 const createTermsCompletedDraft = (
   provider: OnboardingDraft['provider']
@@ -26,6 +26,16 @@ const createTermsCompletedDraft = (
   ),
   completedSteps: ['terms'],
 });
+
+const completeRequiredInfo = {
+  nickname: 'somesay',
+  gender: 'NONE',
+  age: 'TWENTIES',
+  skinTypeNames: ['건성'],
+} satisfies Pick<
+  OnboardingDraft,
+  'nickname' | 'gender' | 'age' | 'skinTypeNames'
+>;
 
 describe('onboarding flow', () => {
   it('프로필 입력 진행률은 닉네임부터 안 맞았던 제품까지 6단계다', () => {
@@ -40,14 +50,21 @@ describe('onboarding flow', () => {
     expect(ONBOARDING_PROGRESS_STEP_COUNT).toBe(6);
   });
 
-  it('피부 타입부터 X 버튼으로 회원가입을 완료할 수 있다', () => {
-    expect(ONBOARDING_COMPLETION_AVAILABLE_STEPS).toEqual([
-      'skinTypes',
-      'skinConcerns',
-      'matchedProducts',
-      'mismatchedProducts',
-    ]);
+  it('필수 기본 정보가 모두 입력되면 X 버튼으로 회원가입을 완료할 수 있다', () => {
+    expect(isOnboardingCompletionAvailable(completeRequiredInfo)).toBe(true);
   });
+
+  it.each([
+    { ...completeRequiredInfo, nickname: '' },
+    { ...completeRequiredInfo, gender: null },
+    { ...completeRequiredInfo, age: null },
+    { ...completeRequiredInfo, skinTypeNames: [] },
+  ])(
+    '필수 기본 정보 중 하나라도 비어 있으면 완료할 수 없다',
+    (requiredInfo) => {
+      expect(isOnboardingCompletionAvailable(requiredInfo)).toBe(false);
+    }
+  );
 
   it('provider가 없으면 로그인으로 이동시킨다', () => {
     expect(getOnboardingRedirectPath(INITIAL_ONBOARDING_DRAFT, 'terms')).toBe(

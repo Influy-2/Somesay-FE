@@ -17,7 +17,6 @@ export {
   GENDER_LABELS,
   MOCK_EMAIL_VERIFICATION_CODE,
   ONBOARDING_AGREEMENTS,
-  ONBOARDING_COMPLETION_AVAILABLE_STEPS,
   ONBOARDING_PROGRESS_STEP_COUNT,
   ONBOARDING_PROGRESS_STEPS,
   ONBOARDING_STEP_LABELS,
@@ -66,3 +65,4 @@ export {
   buildProductFitPayloads,
   buildSignupPayload,
 } from './utils/onboarding.mapper';
+export { isOnboardingCompletionAvailable } from './utils/onboarding.completion';

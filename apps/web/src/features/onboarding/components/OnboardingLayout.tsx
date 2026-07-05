@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router';
 import { CTAButton } from '@/shared/components';
 import { PATH } from '@/routes/path';
 import cn from '@/utils/cn';
-import { ONBOARDING_COMPLETION_AVAILABLE_STEPS } from '../constants/onboarding.constants';
 import { useOnboardingStore } from '../store/onboarding.store';
+import { isOnboardingCompletionAvailable } from '../utils/onboarding.completion';
 import { OnboardingCompleteDialog } from './OnboardingCompleteDialog';
 import { OnboardingExitDialog } from './OnboardingExitDialog';
 import {
@@ -42,10 +42,10 @@ export const OnboardingLayout = ({
 }: OnboardingLayoutProps) => {
   const navigate = useNavigate();
   const reset = useOnboardingStore((state) => state.reset);
+  const canCompleteOnClose = useOnboardingStore(
+    isOnboardingCompletionAvailable
+  );
   const [isCloseDialogOpen, setIsCloseDialogOpen] = useState(false);
-  const canCompleteOnClose =
-    progressStep !== undefined &&
-    ONBOARDING_COMPLETION_AVAILABLE_STEPS.some((step) => step === progressStep);
 
   const handleExit = () => {
     reset();
