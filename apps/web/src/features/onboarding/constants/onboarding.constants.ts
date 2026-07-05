@@ -8,6 +8,11 @@ import type {
 //sessionStorage에 온보딩 상태를 저장할 때 사용하는 key입니다.
 export const ONBOARDING_STORAGE_KEY = 'somesay-onboarding';
 
+export const EMAIL_VERIFICATION_CODE_LENGTH = 6;
+export const EMAIL_VERIFICATION_DURATION_SECONDS = 5 * 60;
+export const EMAIL_VERIFICATION_MAX_ATTEMPTS = 5;
+export const MOCK_EMAIL_VERIFICATION_CODE = '123456';
+
 export const ONBOARDING_AGREEMENTS = [
   {
     id: 'TERMS_OF_SERVICE',
@@ -37,6 +42,26 @@ export const ONBOARDING_STEP_ORDER: OnboardingStep[] = [
   'mismatchedProducts',
   'complete',
 ];
+
+export const ONBOARDING_PROGRESS_STEPS = [
+  'nickname',
+  'profile',
+  'skinTypes',
+  'skinConcerns',
+  'matchedProducts',
+  'mismatchedProducts',
+] as const satisfies readonly OnboardingStep[];
+
+export const ONBOARDING_PROGRESS_STEP_COUNT = ONBOARDING_PROGRESS_STEPS.length;
+
+export type OnboardingProgressStep = (typeof ONBOARDING_PROGRESS_STEPS)[number];
+
+export const ONBOARDING_COMPLETION_AVAILABLE_STEPS = [
+  'skinTypes',
+  'skinConcerns',
+  'matchedProducts',
+  'mismatchedProducts',
+] as const satisfies readonly OnboardingProgressStep[];
 
 export const ONBOARDING_STEP_LABELS: Record<OnboardingStep, string> = {
   terms: '약관 동의',

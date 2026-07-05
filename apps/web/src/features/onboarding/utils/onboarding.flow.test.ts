@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { PATH } from '@/routes/path';
 import {
   INITIAL_ONBOARDING_DRAFT,
+  ONBOARDING_COMPLETION_AVAILABLE_STEPS,
+  ONBOARDING_PROGRESS_STEP_COUNT,
+  ONBOARDING_PROGRESS_STEPS,
   REQUIRED_AGREEMENT_IDS,
 } from '../constants/onboarding.constants';
 import type { OnboardingDraft } from '../types/onboarding.types';
@@ -25,6 +28,27 @@ const createTermsCompletedDraft = (
 });
 
 describe('onboarding flow', () => {
+  it('프로필 입력 진행률은 닉네임부터 안 맞았던 제품까지 6단계다', () => {
+    expect(ONBOARDING_PROGRESS_STEPS).toEqual([
+      'nickname',
+      'profile',
+      'skinTypes',
+      'skinConcerns',
+      'matchedProducts',
+      'mismatchedProducts',
+    ]);
+    expect(ONBOARDING_PROGRESS_STEP_COUNT).toBe(6);
+  });
+
+  it('피부 타입부터 X 버튼으로 회원가입을 완료할 수 있다', () => {
+    expect(ONBOARDING_COMPLETION_AVAILABLE_STEPS).toEqual([
+      'skinTypes',
+      'skinConcerns',
+      'matchedProducts',
+      'mismatchedProducts',
+    ]);
+  });
+
   it('provider가 없으면 로그인으로 이동시킨다', () => {
     expect(getOnboardingRedirectPath(INITIAL_ONBOARDING_DRAFT, 'terms')).toBe(
       PATH.LOGIN.BASE

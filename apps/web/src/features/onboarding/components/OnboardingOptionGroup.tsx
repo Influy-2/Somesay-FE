@@ -3,8 +3,8 @@ import { FilterChip } from '@/shared/components';
 interface OnboardingOptionGroupProps<T extends string> {
   title?: string;
   helperText?: string;
-  options: [T, string][];
-  selectedValue: T | null;
+  options: ReadonlyArray<readonly [T, string]>;
+  selectedValue: T | T[] | null;
   onSelect: (value: T) => void;
 }
 
@@ -30,7 +30,11 @@ export const OnboardingOptionGroup = <T extends string>({
         <FilterChip
           key={value}
           label={label}
-          isSelected={selectedValue === value}
+          isSelected={
+            Array.isArray(selectedValue)
+              ? selectedValue.includes(value)
+              : selectedValue === value
+          }
           onClick={() => onSelect(value)}
         />
       ))}

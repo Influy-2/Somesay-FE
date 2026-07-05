@@ -5,6 +5,7 @@ import {
   emailSchema,
   nicknameSchema,
   onboardingStepSchemas,
+  productIdsSchema,
   productFitPayloadSchema,
   signupPayloadSchema,
   skinTypeNamesSchema,
@@ -58,6 +59,14 @@ describe('onboarding field schemas', () => {
     expect(concernsSchema.safeParse(['보습', '진정', '모공']).success).toBe(
       false
     );
+  });
+
+  it('제품 ID는 중복 없이 최대 15개까지 허용한다', () => {
+    const productIds = Array.from({ length: 15 }, (_, index) => index + 1);
+
+    expect(productIdsSchema.safeParse(productIds).success).toBe(true);
+    expect(productIdsSchema.safeParse([...productIds, 16]).success).toBe(false);
+    expect(productIdsSchema.safeParse([1, 1]).success).toBe(false);
   });
 });
 

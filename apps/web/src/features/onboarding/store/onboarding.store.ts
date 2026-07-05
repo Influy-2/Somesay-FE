@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { SocialProvider } from '@/features/auth';
+import { MAX_PRODUCT_SELECTION } from '@/features/productSelection/model/productSelection.constants';
 import {
   INITIAL_ONBOARDING_DRAFT,
   ONBOARDING_STEP_ORDER,
@@ -46,10 +47,17 @@ const toggleWithLimit = (values: string[], value: string, limit = 2) => {
   return values.length < limit ? [...values, value] : values;
 };
 
-const toggleNumber = (values: number[], value: number) =>
-  values.includes(value)
-    ? values.filter((item) => item !== value)
-    : [...values, value];
+const toggleNumber = (
+  values: number[],
+  value: number,
+  limit = MAX_PRODUCT_SELECTION
+) => {
+  if (values.includes(value)) {
+    return values.filter((item) => item !== value);
+  }
+
+  return values.length < limit ? [...values, value] : values;
+};
 
 const invalidateFrom = (
   completedSteps: OnboardingStep[],
@@ -113,7 +121,17 @@ export const useOnboardingStore = create<OnboardingStore>()(
         })),
       toggleSkinTypeName: (skinTypeName) =>
         set((state) => ({
-          skinTypeNames: toggleWithLimit(state.skinTypeNames, skinTypeName),
+          skinTypeNames:
+            skinTypeName === '모르겠음'
+              ? state.skinTypeNames.includes(skinTypeName)
+                ? []
+                : [skinTypeName]
+              : toggleWithLimit(
+                  state.skinTypeNames.filter(
+                    (selectedSkinType) => selectedSkinType !== '모르겠음'
+                  ),
+                  skinTypeName
+                ),
           completedSteps: invalidateFrom(state.completedSteps, 'skinTypes'),
         })),
       toggleConcern: (concern) =>

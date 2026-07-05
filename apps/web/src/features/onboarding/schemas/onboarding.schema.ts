@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { MAX_PRODUCT_SELECTION } from '@/features/productSelection/model/productSelection.constants';
 import { REQUIRED_AGREEMENT_IDS } from '../constants/onboarding.constants';
 import type { OnboardingStep } from '../types/onboarding.types';
 
@@ -73,6 +74,10 @@ export const concernsSchema = uniqueStringArraySchema.max(
 
 export const productIdsSchema = z
   .array(z.number().int().positive('올바른 제품 ID가 아닙니다.'))
+  .max(
+    MAX_PRODUCT_SELECTION,
+    `제품은 최대 ${MAX_PRODUCT_SELECTION}개까지 선택할 수 있습니다.`
+  )
   .refine((values) => new Set(values).size === values.length, {
     message: '같은 제품을 중복으로 선택할 수 없습니다.',
   });

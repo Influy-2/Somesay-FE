@@ -28,8 +28,16 @@ import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
 import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
 import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
 import { LoginPage } from '@/pages/login/LoginPage';
+import { EmailPage } from '@/pages/onboarding/EmailPage';
+import { EmailVerificationPage } from '@/pages/onboarding/EmailVerificationPage';
 import { NicknamePage as OnboardingNicknamePage } from '@/pages/onboarding/NicknamePage';
 import { ProfilePage } from '@/pages/onboarding/ProfilePage';
+import { SkinTypesPage } from '@/pages/onboarding/SkinTypesPage';
+import { SkinConcernsPage } from '@/pages/onboarding/SkinConcernsPage';
+import { MatchedProductsPage } from '@/pages/onboarding/MatchedProductsPage';
+import { MatchedProductSearchPage } from '@/pages/onboarding/MatchedProductSearchPage';
+import { MismatchedProductsPage } from '@/pages/onboarding/MismatchedProductsPage';
+import { MismatchedProductSearchPage } from '@/pages/onboarding/MismatchedProductSearchPage';
 import { OnboardingPlaceholderPage } from '@/pages/onboarding/OnboardingPlaceholderPage';
 import { TermsAgreementPage } from '@/pages/onboarding/TermsAgreementPage';
 import {
@@ -141,11 +149,19 @@ export const appRouter = createBrowserRouter([
           },
           {
             path: PATH.ONBOARDING.EMAIL,
-            element: onboardingStepElement('email'),
+            element: (
+              <OnboardingRouteGuard step="email">
+                <EmailPage />
+              </OnboardingRouteGuard>
+            ),
           },
           {
             path: PATH.ONBOARDING.EMAIL_VERIFICATION,
-            element: onboardingStepElement('emailVerification'),
+            element: (
+              <OnboardingRouteGuard step="emailVerification">
+                <EmailVerificationPage />
+              </OnboardingRouteGuard>
+            ),
           },
           {
             path: PATH.ONBOARDING.NICKNAME,
@@ -165,19 +181,51 @@ export const appRouter = createBrowserRouter([
           },
           {
             path: PATH.ONBOARDING.SKIN_TYPES,
-            element: onboardingStepElement('skinTypes'),
+            element: (
+              <OnboardingRouteGuard step="skinTypes">
+                <SkinTypesPage />
+              </OnboardingRouteGuard>
+            ),
           },
           {
             path: PATH.ONBOARDING.SKIN_CONCERNS,
-            element: onboardingStepElement('skinConcerns'),
+            element: (
+              <OnboardingRouteGuard step="skinConcerns">
+                <SkinConcernsPage />
+              </OnboardingRouteGuard>
+            ),
           },
           {
             path: PATH.ONBOARDING.MATCHED_PRODUCTS,
-            element: onboardingStepElement('matchedProducts'),
+            element: (
+              <OnboardingRouteGuard step="matchedProducts">
+                <MatchedProductsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MATCHED_PRODUCTS_SEARCH,
+            element: (
+              <OnboardingRouteGuard step="matchedProducts">
+                <MatchedProductSearchPage />
+              </OnboardingRouteGuard>
+            ),
           },
           {
             path: PATH.ONBOARDING.MISMATCHED_PRODUCTS,
-            element: onboardingStepElement('mismatchedProducts'),
+            element: (
+              <OnboardingRouteGuard step="mismatchedProducts">
+                <MismatchedProductsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS_SEARCH,
+            element: (
+              <OnboardingRouteGuard step="mismatchedProducts">
+                <MismatchedProductSearchPage />
+              </OnboardingRouteGuard>
+            ),
           },
           {
             path: PATH.ONBOARDING.COMPLETE,

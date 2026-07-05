@@ -42,6 +42,7 @@ export const NicknamePage = () => {
   return (
     <OnboardingLayout
       headerVariant="signup"
+      progressStep="nickname"
       cta={{
         label: '다음',
         onClick: handleNext,

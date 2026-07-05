@@ -42,6 +42,7 @@ export const ProfilePage = () => {
   return (
     <OnboardingLayout
       headerVariant="signup"
+      progressStep="profile"
       cta={{
         label: '다음',
         onClick: handleNext,

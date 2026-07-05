@@ -17,7 +17,9 @@ export const PATH = {
     SKIN_TYPES: 'skin-types',
     SKIN_CONCERNS: 'skin-concerns',
     MATCHED_PRODUCTS: 'matched-products',
+    MATCHED_PRODUCTS_SEARCH: 'matched-products/search',
     MISMATCHED_PRODUCTS: 'mismatched-products',
+    MISMATCHED_PRODUCTS_SEARCH: 'mismatched-products/search',
     COMPLETE: 'complete',
   },
   RANKING: {

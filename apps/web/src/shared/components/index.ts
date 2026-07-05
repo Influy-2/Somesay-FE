@@ -87,6 +87,7 @@ export { SortBar } from './sort/SortBar';
 
 /* snackbar */
 export { Snackbar } from './snackbar/Snackbar';
+export { SnackbarHost } from './snackbar/SnackbarHost';
 
 /* modal */
 export { Modal } from './modal/Modal';

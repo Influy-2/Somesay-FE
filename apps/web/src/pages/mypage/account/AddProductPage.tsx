@@ -7,12 +7,13 @@ import {
   SearchBar,
   HorizontalCategoriesTab,
   SortBar,
-  Snackbar,
   SelectedItem,
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { MOCK_PRODUCTS } from '@/features/myPage/components/mockData';
 import { useFetchCategories } from '@/shared/hooks';
+import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
+import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 import cn from '@/utils/cn';
 
 type FitProduct = {
@@ -41,8 +42,7 @@ export const AddProductPage = () => {
   const [searchValue, setSearchValue] = useState('');
   const [selectedProducts, setSelectedProducts] = useState<FitProduct[]>([]);
   const [currentSortValue, setCurrentSortValue] = useState('popular');
-  const [showAlreadyAddedSnackbar, setShowAlreadyAddedSnackbar] =
-    useState(false);
+  const showSnackbar = useSnackbarStore((store) => store.showSnackbar);
   const { data: categoryGroups = [] } = useFetchCategories();
 
   const categories = [
@@ -80,18 +80,35 @@ export const AddProductPage = () => {
     (productId: number) => {
       const product = MOCK_PRODUCTS.find((p) => p.productId === productId);
       if (!product || currentProductIds.has(productId)) return;
+
+      const isSelected = selectedProductIds.has(productId);
+      if (
+        !isSelected &&
+        currentProducts.length + selectedProducts.length >=
+          MAX_PRODUCT_SELECTION
+      ) {
+        showSnackbar('최대 15개까지 저장 가능해요.');
+        return;
+      }
+
       setSelectedProducts((prev) =>
         prev.some((p) => p.productId === product.productId)
           ? prev.filter((p) => p.productId !== product.productId)
           : [...prev, product]
       );
     },
-    [currentProductIds]
+    [
+      currentProductIds,
+      currentProducts.length,
+      selectedProductIds,
+      selectedProducts.length,
+      showSnackbar,
+    ]
   );
 
   const handleAlreadyAdded = useCallback(() => {
-    setShowAlreadyAddedSnackbar(true);
-  }, []);
+    showSnackbar('이미 저장된 상품입니다.');
+  }, [showSnackbar]);
 
   const handleRemoveSelected = useCallback((productId: number) => {
     setSelectedProducts((prev) =>
@@ -211,13 +228,6 @@ export const AddProductPage = () => {
           </div>
         )}
       </div>
-      {showAlreadyAddedSnackbar && (
-        <Snackbar
-          message="이미 저장된 상품입니다."
-          onClose={() => setShowAlreadyAddedSnackbar(false)}
-          className="bottom-10 w-fit"
-        />
-      )}
     </div>
   );
 };

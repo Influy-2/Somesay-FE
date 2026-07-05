@@ -3,18 +3,25 @@ import { useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router';
 import { CTAButton } from '@/shared/components';
 import { PATH } from '@/routes/path';
+import cn from '@/utils/cn';
+import { ONBOARDING_COMPLETION_AVAILABLE_STEPS } from '../constants/onboarding.constants';
 import { useOnboardingStore } from '../store/onboarding.store';
+import { OnboardingCompleteDialog } from './OnboardingCompleteDialog';
 import { OnboardingExitDialog } from './OnboardingExitDialog';
 import {
   OnboardingHeader,
   type OnboardingHeaderVariant,
 } from './OnboardingHeader';
+import type { OnboardingProgressStep } from '../constants/onboarding.constants';
 
 interface OnboardingLayoutProps {
   headerVariant: OnboardingHeaderVariant;
+  progressStep?: OnboardingProgressStep;
   children: ReactNode;
+  footerContent?: ReactNode;
   onBack?: () => void;
   onSkip?: () => void;
+  contentClassName?: string;
   cta?: {
     label: string;
     onClick: () => void;
@@ -25,37 +32,60 @@ interface OnboardingLayoutProps {
 
 export const OnboardingLayout = ({
   headerVariant,
+  progressStep,
   children,
+  footerContent,
   onBack,
   onSkip,
+  contentClassName,
   cta,
 }: OnboardingLayoutProps) => {
   const navigate = useNavigate();
   const reset = useOnboardingStore((state) => state.reset);
-  const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
+  const [isCloseDialogOpen, setIsCloseDialogOpen] = useState(false);
+  const canCompleteOnClose =
+    progressStep !== undefined &&
+    ONBOARDING_COMPLETION_AVAILABLE_STEPS.some((step) => step === progressStep);
 
   const handleExit = () => {
     reset();
-    setIsExitDialogOpen(false);
+    setIsCloseDialogOpen(false);
     navigate(PATH.LOGIN.BASE, { replace: true });
   };
 
+  const handleComplete = () => {
+    reset();
+    setIsCloseDialogOpen(false);
+    navigate(PATH.ROOT, { replace: true });
+  };
+
   return (
-    <div className="flex min-h-full flex-1 flex-col pt-13.5">
+    <div className="flex h-full min-h-0 flex-1 flex-col pt-13.5">
       <OnboardingHeader
         variant={headerVariant}
         onBack={onBack ?? (() => navigate(-1))}
-        onExit={() => setIsExitDialogOpen(true)}
+        onExit={() => setIsCloseDialogOpen(true)}
+        {...(progressStep ? { progressStep } : {})}
         {...(onSkip ? { onSkip } : {})}
       />
 
-      <div className={cta ? 'flex-1 px-4 py-8 pb-28' : 'flex-1 px-4 py-8'}>
+      <div
+        className={cn(
+          cta
+            ? footerContent
+              ? 'flex-1 px-4 py-8'
+              : 'flex-1 px-4 py-8 pb-28'
+            : 'flex-1 px-4 py-8',
+          contentClassName
+        )}
+      >
         {children}
       </div>
 
       {cta && (
-        <div className="z-header fixed bottom-0 left-1/2 w-full max-w-110 min-w-[20rem] -translate-x-1/2 bg-white px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]">
-          <div className="flex gap-2">
+        <div className="z-header fixed bottom-0 left-1/2 w-full max-w-110 min-w-[20rem] -translate-x-1/2 bg-white">
+          {footerContent}
+          <div className="flex gap-2 px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]">
             {cta.showPrevious && (
               <button
                 type="button"
@@ -76,11 +106,19 @@ export const OnboardingLayout = ({
         </div>
       )}
 
-      <OnboardingExitDialog
-        isOpen={isExitDialogOpen}
-        onCancel={() => setIsExitDialogOpen(false)}
-        onExit={handleExit}
-      />
+      {canCompleteOnClose ? (
+        <OnboardingCompleteDialog
+          isOpen={isCloseDialogOpen}
+          onCancel={() => setIsCloseDialogOpen(false)}
+          onComplete={handleComplete}
+        />
+      ) : (
+        <OnboardingExitDialog
+          isOpen={isCloseDialogOpen}
+          onCancel={() => setIsCloseDialogOpen(false)}
+          onExit={handleExit}
+        />
+      )}
     </div>
   );
 };

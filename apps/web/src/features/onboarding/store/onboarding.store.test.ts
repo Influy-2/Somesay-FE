@@ -50,6 +50,46 @@ describe('onboarding store', () => {
     expect(useOnboardingStore.getState().skinTypeNames).toEqual(['지성']);
   });
 
+  it('제품은 최대 15개까지 선택하고 해제 후 다시 추가할 수 있다', () => {
+    const store = useOnboardingStore.getState();
+
+    Array.from({ length: 16 }, (_, index) => index + 1).forEach((productId) =>
+      store.toggleProduct('MATCHED', productId)
+    );
+
+    expect(useOnboardingStore.getState().matchedProductIds).toHaveLength(15);
+    expect(useOnboardingStore.getState().matchedProductIds).not.toContain(16);
+
+    store.toggleProduct('MATCHED', 1);
+    store.toggleProduct('MATCHED', 16);
+
+    expect(useOnboardingStore.getState().matchedProductIds).toHaveLength(15);
+    expect(useOnboardingStore.getState().matchedProductIds).toContain(16);
+  });
+
+  it('잘 맞는 제품과 안 맞는 제품의 선택 제한은 서로 독립적이다', () => {
+    const store = useOnboardingStore.getState();
+
+    Array.from({ length: 15 }, (_, index) => index + 1).forEach((productId) => {
+      store.toggleProduct('MATCHED', productId);
+      store.toggleProduct('MISMATCHED', productId);
+    });
+
+    expect(useOnboardingStore.getState().matchedProductIds).toHaveLength(15);
+    expect(useOnboardingStore.getState().mismatchedProductIds).toHaveLength(15);
+  });
+
+  it('모르겠음은 다른 피부 타입과 함께 선택할 수 없다', () => {
+    const store = useOnboardingStore.getState();
+
+    store.toggleSkinTypeName('건성');
+    store.toggleSkinTypeName('모르겠음');
+    expect(useOnboardingStore.getState().skinTypeNames).toEqual(['모르겠음']);
+
+    store.toggleSkinTypeName('지성');
+    expect(useOnboardingStore.getState().skinTypeNames).toEqual(['지성']);
+  });
+
   it('앞 단계 값을 변경하면 해당 단계 이후 완료 상태를 무효화한다', () => {
     const store = useOnboardingStore.getState();
 

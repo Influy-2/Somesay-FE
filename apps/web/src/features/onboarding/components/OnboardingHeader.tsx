@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { PageHeader } from '@/shared/components';
 import { ArrowBackIcon, X24Icon } from '@/shared/icons';
+import type { OnboardingProgressStep } from '../constants/onboarding.constants';
+import { OnboardingProgressBar } from './OnboardingProgressBar';
 
 export type OnboardingHeaderVariant = 'terms' | 'signup';
 
@@ -9,6 +11,7 @@ interface OnboardingHeaderProps {
   onBack: () => void;
   onExit: () => void;
   onSkip?: () => void;
+  progressStep?: OnboardingProgressStep;
 }
 
 const HeaderIconButton = ({
@@ -35,6 +38,7 @@ export const OnboardingHeader = ({
   onBack,
   onExit,
   onSkip,
+  progressStep,
 }: OnboardingHeaderProps) => {
   const exitButton = (
     <HeaderIconButton label="회원가입 종료" onClick={onExit}>
@@ -57,22 +61,29 @@ export const OnboardingHeader = ({
   }
 
   return (
-    <PageHeader
-      title="회원가입"
-      left={exitButton}
-      {...(onSkip
-        ? {
-            right: [
-              <button
-                type="button"
-                onClick={onSkip}
-                className="body1-sb text-black"
-              >
-                건너뛰기
-              </button>,
-            ],
-          }
-        : {})}
-    />
+    <>
+      <PageHeader
+        title="회원가입"
+        left={exitButton}
+        {...(onSkip
+          ? {
+              right: [
+                <button
+                  type="button"
+                  onClick={onSkip}
+                  className="body2-sb text-grey05"
+                >
+                  건너뛰기
+                </button>,
+              ],
+            }
+          : {})}
+      />
+      {progressStep && (
+        <div className="z-header fixed top-13.5 left-1/2 w-full max-w-110 min-w-[20rem] -translate-x-1/2 bg-white px-4 pt-2">
+          <OnboardingProgressBar currentStep={progressStep} />
+        </div>
+      )}
+    </>
   );
 };
