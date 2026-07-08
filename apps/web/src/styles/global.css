@@ -14,6 +14,22 @@
   }
 }
 
+@keyframes guest-preview-chip-cycle {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  15%,
+  78% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
 @theme {
   --animate-snackbar-out: snackbar-out 0.3s ease-in forwards;
   /* Main color */
@@ -175,6 +191,17 @@
     max-width: 40rem; /* 640px */
     min-width: 20rem; /* 320px */
     width: 100%;
+  }
+
+  .guest-preview-chip {
+    animation: guest-preview-chip-cycle 2s ease-in-out both;
+    will-change: opacity, transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .guest-preview-chip {
+      animation: none;
+    }
   }
 }
 

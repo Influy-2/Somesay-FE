@@ -1,18 +1,22 @@
 import { ChipLarge } from '@/shared/components';
 import { MainArrowIcon } from '@/shared/icons';
+import type { GuestPreviewChip } from './useGuestPreviewChips';
 
 interface TypeRowProps {
   rowTitle: string;
   selectedFilters: string[];
+  previewChips?: GuestPreviewChip[];
   onPress: () => void;
 }
 
 export const TypeRow = ({
   rowTitle,
   selectedFilters,
+  previewChips = [],
   onPress,
 }: TypeRowProps) => {
   const hasSelection = selectedFilters.length > 0;
+  const visiblePreviewChips = hasSelection ? [] : previewChips;
   const selectionText = hasSelection
     ? selectedFilters.join(', ')
     : '선택 안 됨';
@@ -30,8 +34,21 @@ export const TypeRow = ({
       </span>
       <div className="flex flex-1 items-center gap-3">
         <div className="flex h-7.25 flex-1 flex-wrap items-center justify-end gap-2">
+          {/* 칩 미선택시 */}
+          <div
+            aria-hidden="true"
+            className="flex items-center justify-end gap-2"
+          >
+            {visiblePreviewChips.map(({ id, label, color }) => (
+              <div key={id} className="guest-preview-chip">
+                <ChipLarge label={label} color={color} />
+              </div>
+            ))}
+          </div>
+
+          {/* 칩 선택시 */}
           {selectedFilters.map((item) => (
-            <ChipLarge key={item} label={item} variant="filter" />
+            <ChipLarge key={item} label={item} color={'gray02'} />
           ))}
         </div>
 

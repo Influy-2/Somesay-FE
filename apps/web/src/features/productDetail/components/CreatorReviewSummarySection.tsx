@@ -98,9 +98,7 @@ export const CreatorReviewSummarySection = ({
               <ChipLarge
                 key={type}
                 label={type}
-                variant={
-                  userSkinTypeLabels.includes(type) ? 'highlight' : 'default'
-                }
+                color={userSkinTypeLabels.includes(type) ? 'blue100' : 'white'}
               />
             ))}
           </div>
@@ -112,6 +110,7 @@ export const CreatorReviewSummarySection = ({
               <ChipLarge
                 key={effect.productSkinExpectationId}
                 label={effect.concern}
+                color="white"
               />
             ))}
           </div>

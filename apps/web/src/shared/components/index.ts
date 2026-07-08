@@ -13,6 +13,7 @@ export { ReviewComment } from './comment/ReviewComment';
 
 /* chips */
 export { ChipLarge } from './chips/ChipLarge';
+export type { ChipLargeColor } from './chips/ChipLarge';
 export { ChipBasic, type ChipBasicVariant } from './chips/ChipBasic';
 export { SearchFilter } from './filter/SearchFilter';
 export { ChipAgreement } from './chips/ChipAgreement';

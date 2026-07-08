@@ -1,17 +1,20 @@
 import { TypeRow } from './TypeRow';
 import { PATH } from '@/routes/path';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { FilterBottomSheet } from './FilterBottomSheet';
 import { FILTER_CATEGORIES, INITIAL_FILTERS } from './filter.constants';
+import { useGuestPreviewChips } from './useGuestPreviewChips';
 import type {
   RecommendedFilterGroupType,
   SelectedFiltersType,
 } from './filter.types';
+import { useFetchCategories } from '@/shared/hooks';
 
 export const RecommendationSection = () => {
   const navigate = useNavigate();
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const { data: categoryGroups = [] } = useFetchCategories();
 
   // 현재 활성화된 필터 카테고리 (피부고민, 피부타입, 카테고리 중 하나)
   const [activeCategory, setActiveCategory] =
@@ -21,6 +24,20 @@ export const RecommendationSection = () => {
   const [selectedFilters, setSelectedFilters] =
     useState<SelectedFiltersType>(INITIAL_FILTERS);
 
+  const categoryOptions = useMemo(
+    () =>
+      categoryGroups.flatMap(({ mainCategoryName, subCategories }) => [
+        mainCategoryName,
+        ...subCategories.map(({ subCategoryName }) => subCategoryName),
+      ]),
+    [categoryGroups]
+  );
+  const isAnyFilterSelected = Object.values(selectedFilters).some(
+    (v) => v.length > 0
+  );
+  const isPreviewEnabled = !isAnyFilterSelected;
+  const previewChips = useGuestPreviewChips(isPreviewEnabled, categoryOptions);
+
   // (피부고민 피부타입 카테고리) 중 하나 선택하면 해당 카테고리의 필터 시트 열기
   const handleOpenBottomSheet = (filter: RecommendedFilterGroupType) => {
     setActiveCategory(filter);
@@ -28,6 +45,15 @@ export const RecommendationSection = () => {
   };
 
   //제품 추천받기 버튼 클릭
+  const handleHomeCTAButton = () => {
+    if (isAnyFilterSelected) {
+      handleSubmit();
+    } else {
+      setIsBottomSheetOpen(true);
+    }
+  };
+
+  // 바텀시트 제품 추천받기 버튼 클릭
   const handleSubmit = () => {
     setIsBottomSheetOpen(false);
     navigate(`/${PATH.HOME.PRODUCT_RECOMMENDATIONS}`);
@@ -43,9 +69,7 @@ export const RecommendationSection = () => {
     );
 
   // 제출 버튼 활성화 여부
-  const isSubmitEnabled = Object.values(selectedFilters).some(
-    (v) => v.length > 0
-  );
+  const isSubmitEnabled = isAnyFilterSelected;
 
   return (
     <>
@@ -69,6 +93,7 @@ export const RecommendationSection = () => {
                 key={category}
                 rowTitle={label}
                 selectedFilters={getSelectedLabel(category)}
+                previewChips={isPreviewEnabled ? previewChips[category] : []}
                 onPress={() => handleOpenBottomSheet(category)}
               />
             ))}
@@ -79,8 +104,7 @@ export const RecommendationSection = () => {
             aria-label="제품 추천받기"
             // aria-busy={isLoading}
             // disabled={isLoading}
-            onClick={handleSubmit}
-            disabled={!isSubmitEnabled}
+            onClick={handleHomeCTAButton}
             className="body2-sb flex h-12 w-full cursor-pointer items-center justify-center bg-black px-3 py-1 text-white"
           >
             제품 추천받기
