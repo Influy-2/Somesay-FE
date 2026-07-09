@@ -5,3 +5,8 @@ export { useFetchProductReviews } from './product/useFetchProductReviews';
 
 // Category
 export { useFetchCategories } from './category/useFetchCategories';
+
+// Brand
+export { useFetchBrandDetail } from './brand/useFetchBrandDetail';
+export { useFetchBrandProducts } from './brand/useFetchBrandProducts';
+export { useFetchBrandProductSearch } from './brand/useFetchBrandProductSearch';

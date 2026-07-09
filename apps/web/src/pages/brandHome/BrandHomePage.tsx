@@ -1,12 +1,19 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import type { BrandProductSortType, BrandProductType } from '@somesay/shared';
+import type { BrandProductSortType } from '@somesay/shared';
 import {
   BrandHomeHero,
   BrandProductFilters,
   BrandProductList,
-  MOCK_BRAND_HOME_DATA,
+  useDebouncedSearchKeyword,
+  useInfiniteScroll,
 } from '@/features/brandHome';
+import {
+  useFetchBrandDetail,
+  useFetchBrandProducts,
+  useFetchBrandProductSearch,
+  useFetchCategories,
+} from '@/shared/hooks';
 
 const ALL_CATEGORY_ID = 0;
 
@@ -15,43 +22,98 @@ export const BrandHomePage = () => {
   const { brandId: brandIdParam } = useParams();
   const parsedBrandId = Number(brandIdParam);
   const isValidBrandId = Number.isInteger(parsedBrandId) && parsedBrandId > 0;
+  const brandId = isValidBrandId ? parsedBrandId : undefined;
 
   const [searchValue, setSearchValue] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState(ALL_CATEGORY_ID);
   const [sortType, setSortType] = useState<BrandProductSortType>('RATING');
-  const [products, setProducts] = useState<BrandProductType[]>(
-    MOCK_BRAND_HOME_DATA.productPage.products
+  const [wishOverrides, setWishOverrides] = useState<Record<number, boolean>>(
+    {}
+  );
+  const { debouncedKeyword, updateDebouncedKeyword } =
+    useDebouncedSearchKeyword();
+  const isSearchMode = debouncedKeyword.length > 0;
+
+  const brandQuery = useFetchBrandDetail(brandId);
+  const { data: categoryGroups = [] } = useFetchCategories();
+  const productsQuery = useFetchBrandProducts({
+    ...(brandId !== undefined ? { brandId } : {}),
+    ...(selectedCategoryId !== ALL_CATEGORY_ID
+      ? { mainCategoryId: selectedCategoryId }
+      : {}),
+    sortType,
+    enabled: !isSearchMode,
+  });
+  const searchQuery = useFetchBrandProductSearch({
+    ...(brandId !== undefined ? { brandId } : {}),
+    keyword: debouncedKeyword,
+    sortType,
+    enabled: isSearchMode,
+  });
+  const activeProductQuery = isSearchMode ? searchQuery : productsQuery;
+
+  const categories = useMemo(
+    () => [
+      { id: ALL_CATEGORY_ID, label: '전체' },
+      ...categoryGroups.map(({ mainCategoryId, mainName }) => ({
+        id: mainCategoryId,
+        label: mainName,
+      })),
+    ],
+    [categoryGroups]
   );
 
-  const visibleProducts = useMemo(() => {
-    const filteredProducts =
-      selectedCategoryId === ALL_CATEGORY_ID
-        ? products
-        : products.filter(
-            (product) => product.mainCategoryId === selectedCategoryId
-          );
+  const products = useMemo(
+    () =>
+      (
+        activeProductQuery.data?.pages.flatMap((page) => page.products) ?? []
+      ).map((product) => ({
+        ...product,
+        isHearted: wishOverrides[product.productId] ?? product.isHearted,
+      })),
+    [activeProductQuery.data?.pages, wishOverrides]
+  );
+  const productCount = activeProductQuery.data?.pages[0]?.totalCount ?? 0;
+  const loadMoreRef = useInfiniteScroll({
+    hasNextPage: activeProductQuery.hasNextPage ?? false,
+    isFetchingNextPage: activeProductQuery.isFetchingNextPage,
+    fetchNextPage: activeProductQuery.fetchNextPage,
+  });
 
-    return [...filteredProducts].sort((first, second) => {
-      if (sortType === 'REVIEW') {
-        return second.reviewCount - first.reviewCount;
-      }
+  const handleSearchChange = (value: string) => {
+    setSearchValue(value);
+    updateDebouncedKeyword(value);
 
-      if (sortType === 'PRICE') {
-        return first.price - second.price;
-      }
+    if (value.trim().length > 0) {
+      setSelectedCategoryId(ALL_CATEGORY_ID);
+    }
+  };
 
-      return second.rating - first.rating;
-    });
-  }, [products, selectedCategoryId, sortType]);
+  const handleSearchClear = () => {
+    setSearchValue('');
+    updateDebouncedKeyword('');
+  };
+
+  const handleSelectCategory = (categoryId: number) => {
+    if (searchValue.trim().length > 0) {
+      setSearchValue('');
+      updateDebouncedKeyword('');
+    }
+
+    setSelectedCategoryId(categoryId);
+  };
 
   const handleHeartToggle = (productId: number) => {
-    setProducts((currentProducts) =>
-      currentProducts.map((product) =>
-        product.productId === productId
-          ? { ...product, isHearted: !product.isHearted }
-          : product
-      )
-    );
+    const product = products.find((item) => item.productId === productId);
+
+    if (!product) {
+      return;
+    }
+
+    setWishOverrides((currentOverrides) => ({
+      ...currentOverrides,
+      [productId]: !product.isHearted,
+    }));
   };
 
   if (!isValidBrandId) {
@@ -62,10 +124,23 @@ export const BrandHomePage = () => {
     );
   }
 
-  const brand = {
-    ...MOCK_BRAND_HOME_DATA.brand,
-    brandId: parsedBrandId,
-  };
+  if (brandQuery.isPending) {
+    return (
+      <div className="body2-m flex min-h-dvh items-center justify-center px-4 text-center">
+        브랜드 정보를 불러오는 중이에요.
+      </div>
+    );
+  }
+
+  if (brandQuery.isError || !brandQuery.data) {
+    return (
+      <div className="body2-m flex min-h-dvh items-center justify-center px-4 text-center">
+        브랜드 정보를 불러오지 못했어요.
+      </div>
+    );
+  }
+
+  const brand = brandQuery.data;
 
   return (
     <div className="flex min-h-dvh flex-col bg-white">
@@ -73,18 +148,27 @@ export const BrandHomePage = () => {
       <BrandProductFilters
         brandName={brand.brandName}
         searchValue={searchValue}
-        onSearchChange={setSearchValue}
-        onSearchSubmit={() => {}}
-        categories={MOCK_BRAND_HOME_DATA.categories}
+        onSearchChange={handleSearchChange}
+        onSearchClear={handleSearchClear}
+        categories={categories}
         selectedCategoryId={selectedCategoryId}
-        onSelectCategory={setSelectedCategoryId}
-        productCount={visibleProducts.length}
+        onSelectCategory={handleSelectCategory}
+        productCount={productCount}
         sortType={sortType}
         onSelectSort={setSortType}
       />
       <BrandProductList
-        products={visibleProducts}
+        products={products}
         onHeartToggle={handleHeartToggle}
+        isLoading={activeProductQuery.isPending}
+        isError={activeProductQuery.isError}
+        emptyMessage={
+          isSearchMode
+            ? '검색 결과가 없어요.'
+            : '해당 카테고리에 등록된 상품이 없어요.'
+        }
+        isFetchingNextPage={activeProductQuery.isFetchingNextPage}
+        loadMoreRef={loadMoreRef}
       />
     </div>
   );

@@ -24,7 +24,7 @@ export interface ProductCardDto extends ProductBasicDto {
   reviewCount: number;
   creatorImageUrls: string[];
   shortSummary: string;
-  productSkinType: ProductSkinType[];
+  productSkinTypes: ProductSkinType[];
   productSkinExpectations: ProductSkinExpectationType[];
 }
 // 상품 랭킹/비슷한 기대효과 상품의 미리보기 카드 응답에 사용합니다.

@@ -5,7 +5,7 @@ interface SearchBarProps {
   placeholder: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
+  onSubmit?: () => void;
   onClear: () => void;
   autoFocus?: boolean;
 }
@@ -31,7 +31,7 @@ export const SearchBar = ({
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit();
+    onSubmit?.();
     setHasSearched(true);
   };
 

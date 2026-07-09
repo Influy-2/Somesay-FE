@@ -55,5 +55,10 @@ export * from './api/product/fetchProductReviews.api';
 //api - category
 export * from './api/category/fetchCategories.api';
 
+//api - brand
+export * from './api/brand/fetchBrandDetail.api';
+export * from './api/brand/fetchBrandProducts.api';
+export * from './api/brand/fetchBrandProductSearch.api';
+
 //query
 export * from './query/queryKeys';

@@ -14,7 +14,7 @@ interface BrandProductFiltersProps {
   brandName: string;
   searchValue: string;
   onSearchChange: (value: string) => void;
-  onSearchSubmit: () => void;
+  onSearchClear: () => void;
   categories: BrandCategoryOption[];
   selectedCategoryId: number;
   onSelectCategory: (id: number) => void;
@@ -36,7 +36,7 @@ export const BrandProductFilters = ({
   brandName,
   searchValue,
   onSearchChange,
-  onSearchSubmit,
+  onSearchClear,
   categories,
   selectedCategoryId,
   onSelectCategory,
@@ -54,8 +54,7 @@ export const BrandProductFilters = ({
           placeholder={`${brandName}에서의 검색`}
           value={searchValue}
           onChange={(event) => onSearchChange(event.target.value)}
-          onSubmit={onSearchSubmit}
-          onClear={() => onSearchChange('')}
+          onClear={onSearchClear}
         />
       </div>
       <div className="px-4">
