@@ -150,8 +150,8 @@ export const MOCK_REVIEWS = [
 export const MOCK_SIMILAR_PRODUCTS = [
   {
     productId: 101,
-    imageUrl: mockProductImg,
-    brand: '토리든',
+    productImageUrl: mockProductImg,
+    brandName: '토리든',
     productName: '[캐롯] 카로틴 카밍워터 패드',
     price: 10000,
     rating: 4.9,
@@ -174,8 +174,8 @@ export const MOCK_SIMILAR_PRODUCTS = [
   },
   {
     productId: 102,
-    imageUrl: mockProductImg,
-    brand: '스킨푸드',
+    productImageUrl: mockProductImg,
+    brandName: '스킨푸드',
     productName: '당근 수분 패드 60매',
     price: 18000,
     rating: 4.8,
@@ -194,8 +194,8 @@ export const MOCK_SIMILAR_PRODUCTS = [
   },
   {
     productId: 103,
-    imageUrl: mockProductImg,
-    brand: '메디힐',
+    productImageUrl: mockProductImg,
+    brandName: '메디힐',
     productName: '티트리 트러블 패드 더블기획',
     price: 22000,
     rating: 4.7,
@@ -210,8 +210,8 @@ export const MOCK_SIMILAR_PRODUCTS = [
   },
   {
     productId: 104,
-    imageUrl: mockProductImg,
-    brand: '아누아',
+    productImageUrl: mockProductImg,
+    brandName: '아누아',
     productName: '어성초 77 클리어 패드',
     price: 15000,
     rating: 4.9,

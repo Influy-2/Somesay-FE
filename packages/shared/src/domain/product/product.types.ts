@@ -1,7 +1,7 @@
 export interface ProductBasicType {
   productId: number;
-  imageUrl: string;
-  brand: string;
+  productImageUrl: string;
+  brandName: string;
   productName: string;
   price: number;
   isHearted: boolean;

@@ -2,12 +2,12 @@ import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
 
 const MOCK_PRODUCT_THUMBNAILS = {
-  brand: '토리든',
+  brandName: '토리든',
   productName: '캐롯 캐롯 캐롯 캐롯 카로팅 카밍 세럼',
   price: 10000,
   rating: 4.9,
   reviewCount: 1123,
-  imageUrl: mockProductImg,
+  productImageUrl: mockProductImg,
 };
 const MOCK_CREATOR = {
   creatorId: 1,

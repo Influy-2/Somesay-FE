@@ -12,12 +12,12 @@ import { Star16Icon as StarIcon } from '@/shared/icons';
 // TODO: API 연동 후 더미 데이터 제거
 const PRODUCT = {
   order: 1,
-  brand: '토리든',
+  brandName: '토리든',
   productName: '캐롯 카로팅 카밍 워터 패드 50p',
   price: '10,000원',
   rating: 4.9,
   reviewCount: 43,
-  imageUrl: recommendedProductCardImg,
+  productImageUrl: recommendedProductCardImg,
   creators: [
     { name: 'creator1', profileImageUrl: mockProfileImg },
     { name: 'creator2', profileImageUrl: mockProfile2Img },
@@ -33,10 +33,10 @@ export const RecommendedProductCard = () => {
   return (
     <article
       className="bg-grey02 relative aspect-[358/341] w-full overflow-hidden"
-      aria-label={`${PRODUCT.brand} ${PRODUCT.productName}, ${PRODUCT.price}, 별점 ${PRODUCT.rating}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${PRODUCT.brandName} ${PRODUCT.productName}, ${PRODUCT.price}, 별점 ${PRODUCT.rating}점, 리뷰 ${formattedReviewCount}개`}
     >
       <img
-        src={PRODUCT.imageUrl}
+        src={PRODUCT.productImageUrl}
         alt=""
         className="absolute inset-0 size-full object-cover"
         aria-hidden="true"
@@ -47,7 +47,7 @@ export const RecommendedProductCard = () => {
         <div className="flex min-w-0 flex-1 flex-col gap-1 text-white">
           {/* 상품 기본 정보 */}
           <div aria-hidden="true">
-            <p className="body2-m truncate">{PRODUCT.brand}</p>
+            <p className="body2-m truncate">{PRODUCT.brandName}</p>
             <p className="body2-m line-clamp-1">{PRODUCT.productName}</p>
             <p className="body2-m truncate">{PRODUCT.price}</p>
           </div>

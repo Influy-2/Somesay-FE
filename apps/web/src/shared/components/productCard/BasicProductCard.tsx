@@ -8,8 +8,8 @@ type ProductRankingCardProps = ProductCardType;
 
 export const BasicProductCard = ({
   productId,
-  imageUrl,
-  brand,
+  productImageUrl,
+  brandName,
   productName,
   price,
   rating,
@@ -27,15 +27,15 @@ export const BasicProductCard = ({
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${brand} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creators.map((c) => c.name).join(', ')}`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creators.map((c) => c.name).join(', ')}`}
     >
       {/* 이미지 영역 */}
       <div className="relative h-50 w-full overflow-hidden border-none">
         {/* 상품 이미지 */}
         <div aria-hidden="true" className="border-grey02 h-full w-full border">
-          {imageUrl && imageUrl.length > 0 && (
+          {productImageUrl && productImageUrl.length > 0 && (
             <img
-              src={imageUrl}
+              src={productImageUrl}
               alt=""
               className="size-full border border-none object-cover"
             />
@@ -58,7 +58,7 @@ export const BasicProductCard = ({
         aria-hidden="true"
       >
         {/* 브랜드 */}
-        <p className="body2-m text-grey-black truncate">{brand}</p>
+        <p className="body2-m text-grey-black truncate">{brandName}</p>
 
         {/* 상품명 */}
         <p className="body2-m text-grey-black w-full truncate whitespace-pre-wrap">

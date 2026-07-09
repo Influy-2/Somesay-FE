@@ -21,12 +21,12 @@ export const CreatorHomeReviewCard = ({
       {/* 상품 정보 */}
       <div className="flex w-full items-center gap-3">
         <img
-          src={product.imageUrl}
+          src={product.productImageUrl}
           alt={product.productName}
           className="h-auto w-15 object-cover"
         />
         <div className="caption1-m flex flex-1 flex-col gap-1">
-          <span>{product.brand}</span>
+          <span>{product.brandName}</span>
           <span className="line-clamp-1">{product.productName}</span>
           <span>{product.price.toLocaleString()}원</span>
         </div>

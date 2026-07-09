@@ -17,9 +17,9 @@ import cn from '@/utils/cn';
 
 type FitProduct = {
   productId: number;
-  imageUrl: string;
+  productImageUrl: string;
   productName: string;
-  brand: string;
+  brandName: string;
 };
 
 const SORT_OPTIONS = [

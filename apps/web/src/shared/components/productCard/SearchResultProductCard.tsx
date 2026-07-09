@@ -17,13 +17,13 @@ export const SearchResultProductCard = ({
   return (
     <article
       className="border-grey02 relative mx-4 flex w-full flex-col gap-5 border-b pb-6"
-      aria-label={`${product.brand} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.rating}점`}
+      aria-label={`${product.brandName} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.rating}점`}
     >
       <div className="flex gap-3">
         {/* 이미지 */}
         <div className="border-grey02 relative h-[117.5px] w-26 shrink-0 overflow-hidden border">
           <img
-            src={product.imageUrl}
+            src={product.productImageUrl}
             alt=""
             className="h-full w-full object-cover"
           />
@@ -40,7 +40,7 @@ export const SearchResultProductCard = ({
         <div className="flex flex-1 flex-col justify-between">
           <div className="flex flex-col gap-1">
             <div className="flex flex-col gap-1">
-              <span className="body2-m text-black">{product.brand}</span>
+              <span className="body2-m text-black">{product.brandName}</span>
               <span className="body2-m line-clamp-2 text-black">
                 {product.productName}
               </span>

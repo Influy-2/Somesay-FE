@@ -6,8 +6,8 @@ interface ProductHeroProps extends ProductDetailType {
 }
 
 export const ProductHero = ({
-  imageUrl,
-  brand,
+  productImageUrl,
+  brandName,
   brandImageUrl,
   productName,
   price,
@@ -18,18 +18,18 @@ export const ProductHero = ({
   return (
     <section
       className="flex flex-col bg-white"
-      aria-label={`${brand} ${productName} 상품 정보`}
+      aria-label={`${brandName} ${productName} 상품 정보`}
     >
       <div className="bg-grey01 aspect-square w-full overflow-hidden">
-        {imageUrl && (
+        {productImageUrl && (
           <img
-            src={imageUrl}
+            src={productImageUrl}
             alt={productName}
             className="h-full w-full object-cover"
           />
         )}
       </div>
-      <BrandProfile brandName={brand} brandImageUrl={brandImageUrl} />
+      <BrandProfile brandName={brandName} brandImageUrl={brandImageUrl} />
 
       <div className="px-4 py-5">
         <h2 className="subhead-sb">{productName}</h2>

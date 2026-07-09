@@ -4,16 +4,16 @@ import { CircleX20Icon } from '@/shared/icons';
 
 type SelectedItemProps = {
   productId: number;
-  imageUrl: string;
-  brand: string;
+  productImageUrl: string;
+  brandName: string;
   productName: string;
   onRemove: (productId: number) => void;
 };
 
 export const SelectedItem = ({
   productId,
-  imageUrl,
-  brand,
+  productImageUrl,
+  brandName,
   productName,
   onRemove,
 }: SelectedItemProps) => {
@@ -21,9 +21,9 @@ export const SelectedItem = ({
     <div className="flex flex-col items-center">
       <div className="relative w-20">
         <div className="bg-grey02 aspect-8/9 w-full overflow-hidden">
-          {imageUrl && (
+          {productImageUrl && (
             <img
-              src={imageUrl}
+              src={productImageUrl}
               alt={productName}
               className="size-full object-cover"
             />
@@ -39,7 +39,7 @@ export const SelectedItem = ({
         </button>
       </div>
       <p className="body2-m text-grey-black mt-2 line-clamp-2 w-20">
-        {`[${brand}]${productName}`}
+        {`[${brandName}]${productName}`}
       </p>
     </div>
   );

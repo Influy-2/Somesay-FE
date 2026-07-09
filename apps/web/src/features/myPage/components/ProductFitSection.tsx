@@ -5,9 +5,9 @@ import { MainArrowIcon } from '@/shared/icons';
 
 type FitProduct = {
   productId: number;
-  imageUrl: string;
+  productImageUrl: string;
   productName: string;
-  brand: string;
+  brandName: string;
 };
 
 type ProductFitSectionProps = {
@@ -46,9 +46,9 @@ const FitProductRow = ({
                 to={`${PATH.PRODUCT.BASE}/${product.productId}`}
                 className="bg-grey02 size-15 overflow-hidden rounded-full"
               >
-                {product.imageUrl && (
+                {product.productImageUrl && (
                   <img
-                    src={product.imageUrl}
+                    src={product.productImageUrl}
                     alt={product.productName}
                     className="size-full object-cover"
                   />

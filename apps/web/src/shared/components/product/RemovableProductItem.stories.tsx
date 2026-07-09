@@ -13,8 +13,8 @@ type Story = StoryObj<typeof RemovableProductItem>;
 export const Good: Story = {
   args: {
     productId: 1,
-    imageUrl: '',
-    brand: '스킨푸드',
+    productImageUrl: '',
+    brandName: '스킨푸드',
     productName: '당근 패드당근 패드',
     type: 'good',
     onDelete: (id) => console.log('삭제', id),
@@ -24,8 +24,8 @@ export const Good: Story = {
 export const Bad: Story = {
   args: {
     productId: 1,
-    imageUrl: '',
-    brand: '스킨푸드',
+    productImageUrl: '',
+    brandName: '스킨푸드',
     productName: '당근 패드당근 패드',
     type: 'bad',
     onDelete: (id) => console.log('삭제', id),
