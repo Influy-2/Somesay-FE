@@ -15,6 +15,13 @@ export type {
 } from './domain/search/search.types';
 
 export type {
+  BrandSummaryType,
+  BrandProductSortType,
+  BrandProductType,
+  BrandProductPageType,
+} from './domain/brand/brand.types';
+
+export type {
   CreatorType,
   CreatorRankingUpDownType,
   BasicCreatorProfileType,

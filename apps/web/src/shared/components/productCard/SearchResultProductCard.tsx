@@ -4,6 +4,7 @@ import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
+import { PATH } from '@/routes/path';
 
 interface SearchResultProductCardProps {
   product: ProductSearchResultType;
@@ -16,7 +17,7 @@ export const SearchResultProductCard = ({
 }: SearchResultProductCardProps) => {
   return (
     <article
-      className="border-grey02 relative mx-4 flex w-full flex-col gap-5 border-b pb-6"
+      className="border-grey02 relative mx-4 flex flex-col gap-5 border-b pb-6"
       aria-label={`${product.brandName} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.rating}점`}
     >
       <div className="flex gap-3">
@@ -110,8 +111,11 @@ export const SearchResultProductCard = ({
           ))}
         </div>
       </div>
-      {/* TODO: 임시 링크 */}
-      <Link to={`/`} className="absolute inset-0" />
+      <Link
+        to={`${PATH.PRODUCT.BASE}/${product.productId}`}
+        className="absolute inset-0"
+        aria-label={`${product.brandName} ${product.productName} 상품 상세로 이동`}
+      />
     </article>
   );
 };
