@@ -90,13 +90,9 @@ export const EvaluationCardProfile = ({
           </div>
           {evaluated && (
             <div className="flex items-center gap-1">
-              <ChipBasic label={`${ageGroup}대`} bgColor="bg-grey02" />
+              <ChipBasic label={`${ageGroup}대`} />
               {skinTypes.map((skinType) => (
-                <ChipBasic
-                  key={skinType}
-                  label={skinType}
-                  bgColor="bg-grey02"
-                />
+                <ChipBasic key={skinType} label={skinType} />
               ))}
             </div>
           )}

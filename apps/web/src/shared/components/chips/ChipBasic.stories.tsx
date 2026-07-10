@@ -8,8 +8,10 @@ const meta: Meta<typeof ChipBasic> = {
   tags: ['autodocs'],
   argTypes: {
     label: { control: 'text' },
-    bgColor: { control: 'text' },
-    textColor: { control: 'text' },
+    variant: {
+      control: 'radio',
+      options: ['default', 'blue', 'black'],
+    },
   },
 };
 
@@ -22,18 +24,16 @@ export const Default: Story = {
   },
 };
 
-export const Dark: Story = {
+export const Blue: Story = {
   args: {
     label: '뷰티',
-    bgColor: 'bg-black',
-    textColor: 'text-white',
+    variant: 'blue',
   },
 };
 
-export const Grey: Story = {
+export const Black: Story = {
   args: {
-    label: '스킨케어',
-    bgColor: 'bg-grey03',
-    textColor: 'text-grey07',
+    label: '뷰티',
+    variant: 'black',
   },
 };

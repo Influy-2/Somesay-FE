@@ -58,12 +58,7 @@ export const CreatorRankingProfile = ({
             aria-label={`태그: ${creator.tags.join(', ')}`}
           >
             {creator.tags.map((tag) => (
-              <ChipBasic
-                key={tag}
-                label={tag}
-                bgColor="bg-grey02"
-                textColor="text-grey07"
-              />
+              <ChipBasic key={tag} label={tag} />
             ))}
           </div>
         </div>

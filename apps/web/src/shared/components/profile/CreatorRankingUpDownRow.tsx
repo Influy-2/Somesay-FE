@@ -84,9 +84,9 @@ export const CreatorRankingUpDownRow = ({
 
           {/* 칩: 나이대 + 피부타입 */}
           <div className="flex items-center gap-1">
-            <ChipBasic label={`${ageGroup}`} bgColor="bg-grey02" />
+            <ChipBasic label={`${ageGroup}`} />
             {skinTypes.map((type) => (
-              <ChipBasic key={type} label={type} bgColor="bg-grey02" />
+              <ChipBasic key={type} label={type} />
             ))}
           </div>
         </div>

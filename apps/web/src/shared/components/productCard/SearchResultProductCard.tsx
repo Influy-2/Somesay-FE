@@ -100,8 +100,7 @@ export const SearchResultProductCard = ({
               <ChipBasic
                 key={type}
                 label={type}
-                bgColor={isMatched ? 'bg-primary-100' : 'bg-grey02'}
-                textColor={isMatched ? 'text-black' : 'text-grey08'}
+                variant={isMatched ? 'blue' : 'default'}
               />
             );
           })}
@@ -120,8 +119,7 @@ export const SearchResultProductCard = ({
               <ChipBasic
                 key={`${effect}-${idx}`}
                 label={effect}
-                bgColor={isMatched ? 'bg-primary-100' : 'bg-grey02'}
-                textColor={isMatched ? 'text-black' : 'text-grey08'}
+                variant={isMatched ? 'blue' : 'default'}
               />
             );
           })}
