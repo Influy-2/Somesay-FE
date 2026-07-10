@@ -2,6 +2,7 @@ import { createBrowserRouter, Outlet } from 'react-router';
 import { PATH } from '@/routes/path';
 
 import { GlobalLayout } from '@/shared/components';
+import { GlobalError } from '@/shared/components/error/GlobalError';
 import { BottomTabLayout } from '@/shared/components/layout/BottomTabLayout';
 
 import { HomePage } from '@/pages/home/HomePage';
@@ -54,7 +55,7 @@ export const appRouter = createBrowserRouter([
   {
     path: PATH.ROOT,
     element: <GlobalLayout />,
-    // errorElement: <GlobalError />,
+    errorElement: <GlobalError />,
     children: [
       {
         //바텀바 있는 페이지
