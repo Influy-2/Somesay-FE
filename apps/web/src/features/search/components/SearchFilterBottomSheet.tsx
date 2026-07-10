@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   SearchFilterGroupType,
   SelectedFiltersType,
@@ -64,42 +63,47 @@ interface FilterBottomSheetProps {
   onCategoryChange: (category: SearchFilterGroupType) => void;
   onSubmit: (filters: SelectedFiltersType) => void;
   onReset: () => void;
+  visibleCategories?: SearchFilterGroupType[];
+  draftFilters: SelectedFiltersType;
+  onDraftFiltersChange: (filters: SelectedFiltersType) => void;
 }
 
 export const SearchFilterBottomSheet = ({
   isOpen,
   onClose,
-  selectedFilters,
   activeCategory,
   onCategoryChange,
   onSubmit,
   onReset,
+  visibleCategories,
+  draftFilters,
+  onDraftFiltersChange,
 }: FilterBottomSheetProps) => {
   const { data: categoryGroups = [] } = useFetchCategories();
 
-  // 마운트 시점(바텀시트가 열릴 때)의 selectedFilters로 초기화
-  const [draftFilters, setDraftFilters] =
-    useState<SelectedFiltersType>(selectedFilters);
+  const visibleFilterGroup = visibleCategories
+    ? FILTER_GROUP.filter((f) => visibleCategories.includes(f.category))
+    : FILTER_GROUP;
 
   //TODO: API 연결 및 전역 상태 관리 도입시 ID 로 비교?
   const handleToggleFilter = (item: string | SubcategoryType) => {
-    setDraftFilters((prev) => {
-      const current = prev[activeCategory];
-      const exists = current.some((v) =>
-        typeof v === 'string' || typeof item === 'string'
-          ? v === item
-          : v.subCategoryId === item.subCategoryId
-      );
-      return {
-        ...prev,
-        [activeCategory]: exists
-          ? current.filter((v) =>
-              typeof v === 'string' || typeof item === 'string'
-                ? v !== item
-                : v.subCategoryId !== item.subCategoryId
-            )
-          : [...current, item],
-      };
+    const current = draftFilters[activeCategory];
+    const exists = current.some((v) =>
+      typeof v === 'string' || typeof item === 'string'
+        ? v === item
+        : v.subCategoryId === item.subCategoryId
+    );
+    const next = exists
+      ? current.filter((v) =>
+          typeof v === 'string' || typeof item === 'string'
+            ? v !== item
+            : v.subCategoryId !== item.subCategoryId
+        )
+      : [...current, item];
+
+    onDraftFiltersChange({
+      ...draftFilters,
+      [activeCategory]: next,
     });
   };
 
@@ -109,7 +113,7 @@ export const SearchFilterBottomSheet = ({
   };
 
   const handleReset = () => {
-    setDraftFilters(EMPTY_FILTERS);
+    onDraftFiltersChange(EMPTY_FILTERS);
     onReset();
   };
 
@@ -120,13 +124,13 @@ export const SearchFilterBottomSheet = ({
       ariaLabel="검색 옵션 선택 필터"
       header={
         <FilterGroupTab
-          categories={FILTER_GROUP}
+          categories={visibleFilterGroup}
           activeCategory={activeCategory}
           onCategoryChange={onCategoryChange}
         />
       }
       footer={
-        <div className="border-grey02 flex w-full shrink-0 flex-col items-center justify-center border-t bg-white px-4 pt-2 pb-[1.875rem]">
+        <div className="border-grey02 flex w-full shrink-0 flex-col items-center justify-center border-t bg-white px-4 pt-2 pb-7.5">
           <div className="flex w-full items-start gap-2">
             <ResetButton onClick={handleReset} />
             <CTAButton label="적용하기" onClick={handleSubmit} />
@@ -135,7 +139,7 @@ export const SearchFilterBottomSheet = ({
       }
     >
       {/* 콘텐츠 영역 */}
-      <div className="mt-5 flex w-full flex-1 flex-col items-start gap-5 overflow-y-visible pb-[3.3125rem]">
+      <div className="mt-5 flex w-full flex-1 flex-col items-start gap-5 overflow-y-visible pb-13.25">
         {activeCategory === 'skinType' && (
           <div
             className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch px-4"

@@ -8,6 +8,7 @@ import { HomePage } from '@/pages/home/HomePage';
 import { ProductRecommendationsPage } from '@/pages/home/ProductRecommendationsPage';
 
 import { CategoriesPage } from '@/pages/category/CategoriesPage';
+import { DaisoProductsPage } from '@/pages/category/DaisoProductPage';
 import { SubcategoriesPage } from '@/pages/category/SubcategoriesPage';
 import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
 import { SearchPage } from '@/pages/search/SearchPage';
@@ -54,6 +55,10 @@ export const appRouter = createBrowserRouter([
         path: PATH.CATEGORIES.BASE,
         element: <Outlet />,
         children: [
+          {
+            path: PATH.CATEGORIES.DAISO,
+            element: <DaisoProductsPage />,
+          },
           {
             path: PATH.CATEGORIES.DETAIL,
             element: <SubcategoriesPage />,

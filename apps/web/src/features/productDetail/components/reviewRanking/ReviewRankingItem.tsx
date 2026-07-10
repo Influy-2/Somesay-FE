@@ -4,6 +4,7 @@ import {
   ReviewComment,
   MoreButton,
   CreatorInfoReview,
+  BottomSheet,
 } from '@/shared/components';
 
 interface ReviewSource {
@@ -40,6 +41,7 @@ interface ReviewRankingItemProps {
     rating: number;
     content: string;
     agreedPercentage: number;
+    participantCount: number;
   };
 }
 
@@ -48,6 +50,7 @@ const THUMBNAIL_FALLBACK = '/images/thumbnail-placeholder.png';
 
 export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isCommentSheetOpen, setIsCommentSheetOpen] = useState(false);
   const comments = review.comments;
   const remainingComments = comments.length - COMMENTS_PREVIEW_COUNT;
 
@@ -100,8 +103,8 @@ export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
           {remainingComments > 0 && (
             <div className="px-5 pb-6">
               <MoreButton
-                to={`/reviews/${review.id}/comments`}
                 text={`코멘트 ${remainingComments}개 더보기`}
+                onClick={() => setIsCommentSheetOpen(true)}
               />
             </div>
           )}
@@ -154,6 +157,28 @@ export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
           </div>
         </div>
       )}
+      <BottomSheet
+        isOpen={isCommentSheetOpen}
+        onClose={() => setIsCommentSheetOpen(false)}
+        ariaLabel={`이 리뷰에 대한 코멘트 (${comments.length})`}
+        header={
+          <div className="body1-sb px-4">
+            이 리뷰에 대한 코멘트 ({comments.length})
+          </div>
+        }
+      >
+        <ol className="divide-grey03 flex flex-col divide-y px-4">
+          {comments.map((comment) => (
+            <li key={comment.id}>
+              <ReviewComment
+                nickname={comment.nickname}
+                isAgree={comment.isAgree}
+                content={comment.content}
+              />
+            </li>
+          ))}
+        </ol>
+      </BottomSheet>
     </div>
   );
 };

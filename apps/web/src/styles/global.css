@@ -136,7 +136,7 @@
   }
 
   .body2-m {
-    @apply text-[0.875rem] leading-[150%] font-medium tracking-[0em];
+    @apply text-[0.875rem] leading-[155%] font-medium tracking-[0em];
   }
 
   /* Caption */
