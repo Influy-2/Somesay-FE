@@ -65,7 +65,7 @@ export const CreatorReviewSummarySection = ({
         <div>
           <p className="body2-m mb-2">잘 맞는 피부 타입</p>
           <div className="flex flex-wrap gap-1.5">
-            {productSkinType.map((type) => (
+            {productSkinType?.map((type) => (
               <ChipLarge key={type} label={type} />
             ))}
           </div>
@@ -73,7 +73,7 @@ export const CreatorReviewSummarySection = ({
         <div>
           <p className="body2-m mb-2">기대 효과</p>
           <div className="flex flex-wrap gap-1.5">
-            {productSkinExpectations.map((effect) => (
+            {productSkinExpectations?.map((effect) => (
               <ChipLarge
                 key={effect.productSkinExpectationId}
                 label={effect.concern}

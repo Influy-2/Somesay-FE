@@ -52,10 +52,13 @@ export const SearchHeader = ({
   const [isFilterBottomSheetOpen, setIsFilterBottomSheetOpen] = useState(false);
   const [activeFilterGroup, setActiveFilterGroup] =
     useState<SearchFilterGroupType>('skinType');
+  const [draftFilters, setDraftFilters] =
+    useState<SelectedFiltersType>(selectedFilters);
 
   const navigate = useNavigate();
 
   const handleFilterGroupToggle = (filterGroup: SearchFilterGroupType) => {
+    setDraftFilters(selectedFilters);
     setActiveFilterGroup(filterGroup);
     setIsFilterBottomSheetOpen(true);
   };
@@ -129,6 +132,8 @@ export const SearchHeader = ({
         onCategoryChange={setActiveFilterGroup}
         onSubmit={onFilterSubmit}
         onReset={onFilterReset}
+        draftFilters={draftFilters}
+        onDraftFiltersChange={setDraftFilters}
       />
     </>
   );

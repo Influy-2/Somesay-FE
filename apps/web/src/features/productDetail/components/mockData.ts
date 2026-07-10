@@ -16,6 +16,7 @@ export const MOCK_REVIEWS = [
     content:
       '패드가 얇고 에센스가 흥건해서 얼굴에 올리면 시원하게 진정되는 느낌이에요. 특히 세안 후에 볼 부분이 따갑거나 붉을 때 3분만 올려놔도 금방 가라앉아요. 향도 은은하고, 남은 에센스는 닦토처럼 써도 부담 없어요. \n 매일 아침 세안 후에 피부결 정돈용으로 딱 좋습니다.',
     agreedPercentage: 82,
+    participantCount: 31243,
     comments: [
       {
         id: 101,
@@ -64,6 +65,7 @@ export const MOCK_REVIEWS = [
     content:
       '패드가 얇고 에센스가 흥건해서 얼굴에 올리면 시원하게 진정되는 느낌이에요. 특히 세안 후에 볼 부분이 따갑거나 붉을 때 3분만 올려놔도 금방 가라앉아요. 향도 은은하고, 남은 에센스는 닦토처럼 써도 부담 없어요. \n 매일 아침 세안 후에 피부결 정돈용으로 딱 좋습니다.',
     agreedPercentage: 82,
+    participantCount: 12500,
     comments: [
       {
         id: 101,
@@ -104,6 +106,7 @@ export const MOCK_REVIEWS = [
     content:
       '패드가 얇고 에센스가 흥건해서 얼굴에 올리면 시원하게 진정되는 느낌이에요. 특히 세안 후에 볼 부분이 따갑거나 붉을 때 3분만 올려놔도 금방 가라앉아요. 향도 은은하고, 남은 에센스는 닦토처럼 써도 부담 없어요. \n 매일 아침 세안 후에 피부결 정돈용으로 딱 좋습니다.',
     agreedPercentage: 0,
+    participantCount: 0,
     comments: [],
     source: {
       title: '광고❌ 올리브영 1등 수분 세럼! 과연 다른 것도 좋을까..?',
@@ -127,6 +130,7 @@ export const MOCK_REVIEWS = [
     content:
       '패드가 얇고 에센스가 흥건해서 얼굴에 올리면 시원하게 진정되는 느낌이에요. 특히 세안 후에 볼 부분이 따갑거나 붉을 때 3분만 올려놔도 금방 가라앉아요. 향도 은은하고, 남은 에센스는 닦토처럼 써도 부담 없어요. \n 매일 아침 세안 후에 피부결 정돈용으로 딱 좋습니다.',
     agreedPercentage: 82,
+    participantCount: 8721,
     comments: [
       {
         id: 101,

@@ -31,6 +31,7 @@ export const Default: Story = {
       content:
         '촉촉하고 흡수가 빨라서 데일리로 쓰기 정말 좋아요. 자극 없이 순하게 스며드는 느낌이에요.',
       agreedPercentage: 78,
+      participantCount: 31243,
     },
   },
 };
@@ -49,6 +50,7 @@ export const NoEvaluation: Story = {
       rating: 4,
       content: '향이 은은하고 발림성이 좋아요.',
       agreedPercentage: 0,
+      participantCount: 0,
     },
   },
 };

@@ -1,7 +1,5 @@
 // product/리뷰용 컴포넌트
 import { Link } from 'react-router';
-
-import { ArrowRightIcon } from '@/shared/icons';
 import type { ProductCardType } from '@somesay/shared';
 
 interface ReviewProductLinkProps {
@@ -12,10 +10,7 @@ interface ReviewProductLinkProps {
   showArrow?: boolean;
 }
 
-export const ReviewProductLink = ({
-  product,
-  showArrow,
-}: ReviewProductLinkProps) => {
+export const ReviewProductLink = ({ product }: ReviewProductLinkProps) => {
   return (
     <Link
       to={`/임시`}
@@ -40,8 +35,6 @@ export const ReviewProductLink = ({
           {product.price.toLocaleString()}원
         </span>
       </div>
-      {/* 우측 화살표 */}
-      {showArrow && <ArrowRightIcon className="size-4 shrink-0" />}
     </Link>
   );
 };

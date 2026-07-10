@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
-import { PageHeader, CTAButton } from '@/shared/components';
+import {
+  PageHeader,
+  CTAButton,
+  FloatingButtonScrollToTop,
+} from '@/shared/components';
 import { ArrowBackIcon, ShareIcon, HomeOffIcon } from '@/shared/icons';
 import {
   ProductHero,
@@ -126,6 +130,7 @@ export const ProductDetailPage = () => {
         )}
 
         <div className="border-grey02 z-toast fixed bottom-0 left-1/2 w-full max-w-110 -translate-x-1/2 border bg-white px-4 pt-2 pb-7.5">
+          <FloatingButtonScrollToTop className="z-toast absolute right-4 bottom-[calc(100%+12px)]" />
           <CTAButton
             label="이 상품 리뷰 평가하기"
             onClick={handleReviewClick}
