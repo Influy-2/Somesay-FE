@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { HorizontalCategoriesTab } from '@/shared/components/category/HorizontalCategoriesTab';
 import { BasicProductCard, MoreButton } from '@/shared/components';
 import { useFetchCategories, useFetchHomeProductList } from '@/shared/hooks';
+import { CategoryProductEmptyState } from './CategoryProductEmptyState';
 
 const ALL_CATEGORY = { id: 0, label: '전체' };
 
@@ -12,7 +13,9 @@ export const CategoryProductSection = () => {
     selectedCategoryId === ALL_CATEGORY.id
       ? {}
       : { mainCategoryId: selectedCategoryId };
-  const { data: products = [] } = useFetchHomeProductList(homeProductParams);
+  const { data: products = [], isLoading } =
+    useFetchHomeProductList(homeProductParams);
+  const isEmpty = !isLoading && products.length === 0;
 
   const categories = [
     ALL_CATEGORY,
@@ -47,24 +50,29 @@ export const CategoryProductSection = () => {
           ariaLabel="상품 카테고리"
         />
 
-        {/* 2열 상품 그리드 */}
-        <div
-          role="list"
-          aria-label="추천 상품 목록"
-          className="grid grid-cols-2 gap-x-1 gap-y-6 pb-2"
-        >
-          {products.map((product) => (
-            <div key={product.productId} role="listitem">
-              <BasicProductCard {...product} />
-            </div>
-          ))}
-        </div>
+        {isEmpty ? (
+          <CategoryProductEmptyState />
+        ) : (
+          <div
+            role="list"
+            aria-label="추천 상품 목록"
+            className="grid grid-cols-2 gap-x-1 gap-y-6 pb-2"
+          >
+            {products.map((product) => (
+              <div key={product.productId} role="listitem">
+                <BasicProductCard {...product} />
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* 더보기 버튼 */}
-        <MoreButton
-          to={'/임시'}
-          text={`${selectedCategoryLabel === ALL_CATEGORY.label ? '' : selectedCategoryLabel} 상품 더보기`}
-        />
+        {!isEmpty && (
+          <MoreButton
+            to={'/임시'}
+            text={`${selectedCategoryLabel === ALL_CATEGORY.label ? '' : selectedCategoryLabel} 상품 더보기`}
+          />
+        )}
       </div>
     </section>
   );
