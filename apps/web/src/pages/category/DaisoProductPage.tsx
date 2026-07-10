@@ -30,7 +30,8 @@ export const DaisoProductsPage = () => {
   ];
 
   return (
-    <div className="min-dvh-screen mt-18.5 flex flex-col bg-white">
+    <div className="mt-18.5 flex min-h-dvh flex-col bg-white">
+      {' '}
       <PageHeader
         left={
           <button
