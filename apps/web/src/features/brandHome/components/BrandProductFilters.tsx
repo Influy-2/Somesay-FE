@@ -58,6 +58,7 @@ export const BrandProductFilters = ({
         />
       </div>
       <div className="px-4">
+        {/* TODO: 백엔드 수정에 맞춰서 수정 필요 */}
         <HorizontalCategoriesTab
           categories={categories}
           selectedId={selectedCategoryId}
