@@ -1,7 +1,7 @@
 // Profile/크리에이터/기본형 컴포넌트
 import { YoutubeIcon } from '@/shared/icons';
 import { ChipBasic } from '@/shared/components';
-import { BasicCreatorProfileType } from '@somesay/shared';
+import type { BasicCreatorProfileType } from '@somesay/shared';
 
 type BasicCreatorProfileProps = BasicCreatorProfileType;
 
@@ -12,7 +12,7 @@ export const BasicCreatorProfile = ({
   subscriberNum,
   trustScore,
   ageGroup,
-  skinTypes,
+  skinTypes = [],
 }: BasicCreatorProfileProps) => {
   const skinTypeLabel = skinTypes.join(', '); // 여러 피부 타입을 쉼표로 구분하여 표시
   return (

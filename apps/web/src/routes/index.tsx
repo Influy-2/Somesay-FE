@@ -5,6 +5,8 @@ import { GlobalLayout } from '@/shared/components';
 import { BottomTabLayout } from '@/shared/components/layout/BottomTabLayout';
 
 import { HomePage } from '@/pages/home/HomePage';
+import { ProductRecommendationsPage } from '@/pages/home/ProductRecommendationsPage';
+
 import { CategoriesPage } from '@/pages/category/CategoriesPage';
 import { DaisoProductsPage } from '@/pages/category/DaisoProductPage';
 import { SubcategoriesPage } from '@/pages/category/SubcategoriesPage';
@@ -137,6 +139,10 @@ export const appRouter = createBrowserRouter([
             ],
           },
         ],
+      },
+      {
+        path: PATH.HOME.PRODUCT_RECOMMENDATIONS,
+        element: <ProductRecommendationsPage />,
       },
     ],
   },
