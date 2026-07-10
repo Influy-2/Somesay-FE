@@ -7,14 +7,24 @@ interface MoreButtonProps {
   onClick?: () => void;
 }
 
-export const MoreButton = ({ to = '#', text, onClick }: MoreButtonProps) => {
+export const MoreButton = ({ to, text, onClick }: MoreButtonProps) => {
+  if (to) {
+    return (
+      <Link
+        to={to}
+        className="border-grey03 body2-m text-grey-black flex h-10 w-full items-center justify-center border"
+      >
+        {text}
+      </Link>
+    );
+  }
   return (
-    <Link
-      to={to}
+    <button
+      type="button"
       onClick={onClick}
       className="border-grey03 body2-m text-grey-black flex h-10 w-full items-center justify-center border"
     >
       {text}
-    </Link>
+    </button>
   );
 };

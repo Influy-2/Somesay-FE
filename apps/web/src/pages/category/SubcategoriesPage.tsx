@@ -40,6 +40,8 @@ export const SubcategoriesPage = () => {
     useState<SearchFilterGroupType>('skinType');
   const [selectedFilters, setSelectedFilters] =
     useState<SelectedFiltersType>(EMPTY_FILTERS);
+  const [draftFilters, setDraftFilters] =
+    useState<SelectedFiltersType>(EMPTY_FILTERS);
 
   const currentCategory = categoryGroups.find(
     (c) => c.mainCategoryId === categoryId
@@ -68,7 +70,8 @@ export const SubcategoriesPage = () => {
           .length;
 
   return (
-    <div className="min-dvh-screen mt-18.5 flex flex-col bg-white">
+    <div className="mt-18.5 flex min-h-dvh flex-col bg-white">
+      {' '}
       <PageHeader
         left={
           <button
@@ -99,6 +102,7 @@ export const SubcategoriesPage = () => {
           placeholder="피부타입"
           selectedLabel={selectedFilters.skinType as string[]}
           onClick={() => {
+            setDraftFilters(selectedFilters);
             setActiveCategory('skinType');
             setIsFilterOpen(true);
           }}
@@ -107,6 +111,7 @@ export const SubcategoriesPage = () => {
           placeholder="기대효과"
           selectedLabel={selectedFilters.effect as string[]}
           onClick={() => {
+            setDraftFilters(selectedFilters);
             setActiveCategory('effect');
             setIsFilterOpen(true);
           }}
@@ -133,6 +138,8 @@ export const SubcategoriesPage = () => {
         onSubmit={(filters) => setSelectedFilters(filters)}
         onReset={() => setSelectedFilters(EMPTY_FILTERS)}
         visibleCategories={['skinType', 'effect']}
+        draftFilters={draftFilters}
+        onDraftFiltersChange={setDraftFilters}
       />
     </div>
   );

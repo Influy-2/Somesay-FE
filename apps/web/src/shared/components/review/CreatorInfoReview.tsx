@@ -49,7 +49,7 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
       </div>
 
       <div className="pb-4">
-        <p className="mb-1">
+        <div className="mb-1">
           {isEvaluated ? (
             <div className="flex items-center justify-between">
               <div>
@@ -67,7 +67,7 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
               아직 이 리뷰에 대한 평가가 이루어지지 않았어요.
             </span>
           )}
-        </p>
+        </div>
         {isEvaluated ? (
           <RateBar percentage={review.agreedPercentage} />
         ) : (

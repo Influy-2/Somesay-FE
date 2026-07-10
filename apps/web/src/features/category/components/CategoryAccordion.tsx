@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import type { CategoryGroupType } from '@somesay/shared';
 import { MainArrowIcon } from '@/shared/icons';
 import cn from '@/utils/cn';
+import { PATH } from '@/routes/path';
 
 interface CategoryAccordionProps {
   category: CategoryGroupType;
@@ -34,14 +35,14 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
           </div>
         </button>
         <Link
-          to={`/categories/${category.mainCategoryId}`}
+          to={`${PATH.CATEGORIES.BASE}/${category.mainCategoryId}`}
           aria-label={`${category.mainName} 전체보기 페이지로 이동`}
         >
           <MainArrowIcon />
         </Link>
       </div>
-      {/* 소분류 목록 렌더링 */}
 
+      {/* 소분류 목록 렌더링 */}
       <ul
         id={subListId}
         role="region"
@@ -50,7 +51,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
         {category.subCategories.map((sub) => (
           <li key={sub.subCategoryId}>
             <Link
-              to={`/categories/${category.mainCategoryId}`}
+              to={`${PATH.CATEGORIES.BASE}/${category.mainCategoryId}`}
               state={{ selectedSubCategoryId: sub.subCategoryId }}
               className="body2-m cursor-pointer"
             >

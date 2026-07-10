@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   SearchFilterGroupType,
   SelectedFiltersType,
@@ -65,17 +64,20 @@ interface FilterBottomSheetProps {
   onSubmit: (filters: SelectedFiltersType) => void;
   onReset: () => void;
   visibleCategories?: SearchFilterGroupType[];
+  draftFilters: SelectedFiltersType;
+  onDraftFiltersChange: (filters: SelectedFiltersType) => void;
 }
 
 export const SearchFilterBottomSheet = ({
   isOpen,
   onClose,
-  selectedFilters,
   activeCategory,
   onCategoryChange,
   onSubmit,
   onReset,
   visibleCategories,
+  draftFilters,
+  onDraftFiltersChange,
 }: FilterBottomSheetProps) => {
   const { data: categoryGroups = [] } = useFetchCategories();
 
@@ -83,29 +85,25 @@ export const SearchFilterBottomSheet = ({
     ? FILTER_GROUP.filter((f) => visibleCategories.includes(f.category))
     : FILTER_GROUP;
 
-  // 마운트 시점(바텀시트가 열릴 때)의 selectedFilters로 초기화
-  const [draftFilters, setDraftFilters] =
-    useState<SelectedFiltersType>(selectedFilters);
-
   //TODO: API 연결 및 전역 상태 관리 도입시 ID 로 비교?
   const handleToggleFilter = (item: string | SubcategoryType) => {
-    setDraftFilters((prev) => {
-      const current = prev[activeCategory];
-      const exists = current.some((v) =>
-        typeof v === 'string' || typeof item === 'string'
-          ? v === item
-          : v.subCategoryId === item.subCategoryId
-      );
-      return {
-        ...prev,
-        [activeCategory]: exists
-          ? current.filter((v) =>
-              typeof v === 'string' || typeof item === 'string'
-                ? v !== item
-                : v.subCategoryId !== item.subCategoryId
-            )
-          : [...current, item],
-      };
+    const current = draftFilters[activeCategory];
+    const exists = current.some((v) =>
+      typeof v === 'string' || typeof item === 'string'
+        ? v === item
+        : v.subCategoryId === item.subCategoryId
+    );
+    const next = exists
+      ? current.filter((v) =>
+          typeof v === 'string' || typeof item === 'string'
+            ? v !== item
+            : v.subCategoryId !== item.subCategoryId
+        )
+      : [...current, item];
+
+    onDraftFiltersChange({
+      ...draftFilters,
+      [activeCategory]: next,
     });
   };
 
@@ -115,7 +113,7 @@ export const SearchFilterBottomSheet = ({
   };
 
   const handleReset = () => {
-    setDraftFilters(EMPTY_FILTERS);
+    onDraftFiltersChange(EMPTY_FILTERS);
     onReset();
   };
 
