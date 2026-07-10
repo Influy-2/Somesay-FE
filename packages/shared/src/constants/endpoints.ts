@@ -28,6 +28,9 @@ export const API_ENDPOINTS = {
     INFO: '/users/info',
   },
 
+  /** Home **/
+  HOME_PRODUCT_LIST: '/home/product/list',
+
   /** Category **/
   CATEGORY: '/categories',
 

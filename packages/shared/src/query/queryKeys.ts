@@ -43,6 +43,21 @@ export const QUERY_KEYS = {
     SIMILAR: (productId: number) =>
       [...QUERY_KEYS.PRODUCT.DETAIL(productId), 'similar'] as const,
   },
+  HOME: {
+    ALL: ['home'] as const,
+    PRODUCT_LIST: ({
+      mainCategoryId,
+      subCategoryId,
+    }: {
+      mainCategoryId?: number;
+      subCategoryId?: number;
+    } = {}) =>
+      [
+        ...QUERY_KEYS.HOME.ALL,
+        'product-list',
+        { mainCategoryId, subCategoryId },
+      ] as const,
+  },
   RANKING: {
     ALL: ['ranking'] as const,
     PRODUCTS: ({

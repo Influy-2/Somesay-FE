@@ -85,6 +85,7 @@ export * from './api/ranking/fetchCreatorRanking.api';
 export * from './api/ranking/fetchProductRanking.api';
 
 //api - product
+export * from './api/product/fetchHomeProductList.api';
 export * from './api/product/fetchProductsByCategory.api';
 export * from './api/product/fetchProductDetail.api';
 export * from './api/product/fetchProductReviewOverview.api';

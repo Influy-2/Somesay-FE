@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { HorizontalCategoriesTab } from '@/shared/components/category/HorizontalCategoriesTab';
 import { BasicProductCard, MoreButton } from '@/shared/components';
-import { MOCK_CATEGORY_PRODUCTS } from './mockData';
-import { useFetchCategories } from '@/shared/hooks';
+import { useFetchCategories, useFetchHomeProductList } from '@/shared/hooks';
 
 const ALL_CATEGORY = { id: 0, label: '전체' };
 
 export const CategoryProductSection = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
   const { data: mainCategories = [] } = useFetchCategories();
-
-  // const { data: products = [] } = useCategoryProducts(selectedCategoryId);
+  const homeProductParams =
+    selectedCategoryId === ALL_CATEGORY.id
+      ? {}
+      : { mainCategoryId: selectedCategoryId };
+  const { data: products = [] } = useFetchHomeProductList(homeProductParams);
 
   const categories = [
     ALL_CATEGORY,
@@ -19,13 +21,6 @@ export const CategoryProductSection = () => {
       label: category.mainCategoryName,
     })),
   ];
-
-  const products =
-    selectedCategoryId === ALL_CATEGORY.id
-      ? (MOCK_CATEGORY_PRODUCTS[0]?.products ?? [])
-      : MOCK_CATEGORY_PRODUCTS.find(
-          (category) => category.categoryId === selectedCategoryId
-        )?.products || [];
 
   const selectedCategoryLabel =
     categories.find((category) => category.id === selectedCategoryId)?.label ??

@@ -1,4 +1,5 @@
 // Product
+export { useFetchHomeProductList } from './product/useFetchHomeProductList';
 export { useFetchProductDetail } from './product/useFetchProductDetail';
 export { useFetchProductReviewOverview } from './product/useFetchProductReviewOverview';
 export { useFetchProductReviews } from './product/useFetchProductReviews';
