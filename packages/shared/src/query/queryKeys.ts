@@ -1,4 +1,5 @@
 import { SortOptionsType } from '../domain/product/product.types';
+import type { BrandProductSortType } from '../domain/brand/brand.types';
 
 export const QUERY_KEYS = {
   PRODUCT: {
@@ -58,5 +59,48 @@ export const QUERY_KEYS = {
   CATEGORY: {
     ALL: ['category'] as const,
     LIST: () => [...QUERY_KEYS.CATEGORY.ALL, 'list'] as const,
+  },
+  BRAND: {
+    ALL: ['brand'] as const,
+    DETAIL: (brandId: number) =>
+      [...QUERY_KEYS.BRAND.ALL, 'detail', brandId] as const,
+    PRODUCTS: (
+      brandId: number,
+      {
+        mainCategoryId,
+        sortType,
+        size,
+      }: {
+        mainCategoryId?: number;
+        sortType?: BrandProductSortType;
+        size?: number;
+      } = {}
+    ) =>
+      [
+        ...QUERY_KEYS.BRAND.ALL,
+        brandId,
+        'products',
+        { mainCategoryId, sortType, size },
+      ] as const,
+    SEARCH: (
+      brandId: number,
+      {
+        keyword,
+        subCategoryId,
+        sortType,
+        size,
+      }: {
+        keyword: string;
+        subCategoryId?: number;
+        sortType?: BrandProductSortType;
+        size?: number;
+      }
+    ) =>
+      [
+        ...QUERY_KEYS.BRAND.ALL,
+        brandId,
+        'search',
+        { keyword, subCategoryId, sortType, size },
+      ] as const,
   },
 };

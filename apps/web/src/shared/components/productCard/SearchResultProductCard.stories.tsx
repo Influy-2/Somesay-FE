@@ -30,8 +30,8 @@ const MOCK_PRODUCT = {
   productId: 1,
   categoryId: 1,
   subCategoryId: 1,
-  imageUrl: mockProductImg,
-  brand: '이니스프리',
+  productImageUrl: mockProductImg,
+  brandName: '이니스프리',
   productName: '블랙티 유스 에센스 200ml 인기 베스트 세럼',
   price: 38000,
   rating: 4.5,
@@ -87,7 +87,7 @@ export const HighPrice: Story = {
   args: {
     product: {
       ...MOCK_PRODUCT,
-      brand: '설화수',
+      brandName: '설화수',
       productName: '자음 생크림 진설',
       price: 289000,
       rating: 4.8,

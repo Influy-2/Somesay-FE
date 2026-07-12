@@ -26,9 +26,9 @@ const MOCK_CREATOR = {
 
 const MOCK_PRODUCT = {
   productId: 1,
-  brand: '이니스프리',
+  brandName: '이니스프리',
   productName: '그린티 씨드 세럼 80ml',
-  imageUrl: mockProductImg,
+  productImageUrl: mockProductImg,
   price: 35000,
   rating: 4.5,
   reviewCount: 1280,
@@ -122,7 +122,7 @@ export const LuxuryProduct: Story = {
       },
       product: {
         ...MOCK_PRODUCT,
-        brand: '설화수',
+        brandName: '설화수',
         productName: '자음 생크림 진설',
         price: 289000,
       },

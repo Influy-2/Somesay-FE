@@ -15,6 +15,13 @@ export type {
 } from './domain/search/search.types';
 
 export type {
+  BrandSummaryType,
+  BrandProductSortType,
+  BrandProductType,
+  BrandProductPageType,
+} from './domain/brand/brand.types';
+
+export type {
   CreatorType,
   CreatorRankingUpDownType,
   BasicCreatorProfileType,
@@ -47,6 +54,11 @@ export * from './api/product/fetchProductReviews.api';
 
 //api - category
 export * from './api/category/fetchCategories.api';
+
+//api - brand
+export * from './api/brand/fetchBrandDetail.api';
+export * from './api/brand/fetchBrandProducts.api';
+export * from './api/brand/fetchBrandProductSearch.api';
 
 //query
 export * from './query/queryKeys';

@@ -13,7 +13,7 @@ export { ReviewComment } from './comment/ReviewComment';
 
 /* chips */
 export { ChipLarge } from './chips/ChipLarge';
-export { ChipBasic } from './chips/ChipBasic';
+export { ChipBasic, type ChipBasicVariant } from './chips/ChipBasic';
 export { SearchFilter } from './filter/SearchFilter';
 /* thumbnail */
 export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
@@ -36,6 +36,7 @@ export { CTAButton } from './buttons/CTAButton';
 export { ResetButton } from './buttons/ResetButton';
 export { OnOffButton } from './buttons/OnOffButton';
 export { FloatingButtonPlus } from './buttons/FloatingButtonPlus';
+export { ShareButton } from './buttons/ShareButton';
 export { FloatingButtonScrollToTop } from './buttons/FloatingButtonScrollToTop';
 
 /* ratebar */

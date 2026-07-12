@@ -13,8 +13,8 @@ type Story = StoryObj<typeof SelectedItem>;
 export const Default: Story = {
   args: {
     productId: 1,
-    imageUrl: '',
-    brand: '스킨푸드',
+    productImageUrl: '',
+    brandName: '스킨푸드',
     productName: '당근 패드당근 패드',
     onRemove: (id) => console.log('제거', id),
   },

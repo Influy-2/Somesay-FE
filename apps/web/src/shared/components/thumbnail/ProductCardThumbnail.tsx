@@ -1,35 +1,35 @@
 // 컴포넌트 Thumbnail/기본형
 import { Star16Icon } from '@/shared/icons';
 interface ProductCardThumbnailProps {
-  brand: string;
+  brandName: string;
   productName: string;
   price: number;
   rating: number;
   reviewCount: number;
-  imageUrl: string;
+  productImageUrl: string;
 }
 
 export const ProductCardThumbnail = ({
-  brand,
+  brandName,
   productName,
   price,
   rating,
   reviewCount,
-  imageUrl,
+  productImageUrl,
 }: ProductCardThumbnailProps) => {
   const formattedPrice = price.toLocaleString('ko-KR');
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
   return (
     <div
       className="border-grey03 relative flex w-full items-center overflow-hidden border bg-white p-5"
-      aria-label={`${brand} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 좌측 텍스트 */}
       <div
         className="body2-m relative flex w-1/2 shrink-0 flex-col gap-1 text-black"
         aria-hidden="true"
       >
-        <p className="truncate">{brand} </p>
+        <p className="truncate">{brandName} </p>
         <p className="truncate tracking-[-0.014px]">{productName} </p>
         <p className="truncate">{formattedPrice}원</p>
         <div className="flex items-center gap-1">
@@ -48,8 +48,8 @@ export const ProductCardThumbnail = ({
         aria-hidden="true"
       >
         <img
-          src={imageUrl}
-          alt={`${brand} ${productName} 제품 이미지`}
+          src={productImageUrl}
+          alt={`${brandName} ${productName} 제품 이미지`}
           className="h-full w-full object-cover"
         />
         <div

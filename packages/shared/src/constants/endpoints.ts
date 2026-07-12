@@ -12,4 +12,12 @@ export const API_ENDPOINTS = {
 
   /** Category **/
   CATEGORY: '/categories',
+
+  /** Brand **/
+  BRAND: {
+    BASE: '/brands',
+    DETAIL: ':brandId',
+    PRODUCTS: ':brandId/products',
+    PRODUCT_SEARCH: ':brandId/products/search',
+  },
 } as const;

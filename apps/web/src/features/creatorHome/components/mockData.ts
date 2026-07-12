@@ -51,8 +51,8 @@ export const MOCK_TRUST_SCORE = {
 // 공통 상품 베이스
 const MOCK_PRODUCT_BASE: Omit<MockProductCardType, 'productId' | 'categoryId'> =
   {
-    imageUrl: mockProductImg,
-    brand: '토리든',
+    productImageUrl: mockProductImg,
+    brandName: '토리든',
     productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
     price: 10000,
     rating: 4.9,

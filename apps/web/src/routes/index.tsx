@@ -16,6 +16,7 @@ import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
 import { MyPage } from '@/pages/myPage/MyPage';
 import { ProductDetailPage } from '@/pages/productDetail/ProductDetailPage';
+import { BrandHomePage } from '@/pages/brandHome/BrandHomePage';
 
 import { ReviewEvaluationPage } from '@/pages/reviewEvaluation/ReviewEvaluationPage';
 import { AccountPage } from '@/pages/myPage/AccountPage';
@@ -71,6 +72,16 @@ export const appRouter = createBrowserRouter([
           {
             path: PATH.CREATOR.HOME,
             element: <CreatorHomePage />,
+          },
+        ],
+      },
+      {
+        path: PATH.BRAND.BASE,
+        element: <Outlet />,
+        children: [
+          {
+            path: PATH.BRAND.HOME,
+            element: <BrandHomePage />,
           },
         ],
       },

@@ -13,8 +13,8 @@ const MOCK_CREATORS = [
 
 const MOCK_SEARCH_PRODUCT: ProductSearchResultType = {
   productId: 1,
-  imageUrl: mockProductImg,
-  brand: '브랜드명',
+  productImageUrl: mockProductImg,
+  brandName: '브랜드명',
   productName:
     '캐롯 카터 패드 (200매)캐롯 카밍 워터 패드 캐롯 카터 패드 (200매)캐롯 카밍 워터 패...',
   price: 10000,

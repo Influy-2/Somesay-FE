@@ -42,6 +42,10 @@ export const PATH = {
     BASE: '/creators',
     HOME: ':creatorId',
   },
+  BRAND: {
+    BASE: '/brands',
+    HOME: ':brandId',
+  },
   PRODUCT: {
     BASE: '/products',
     DETAIL: ':productId',

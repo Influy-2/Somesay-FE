@@ -3,12 +3,12 @@ import { ProductCardThumbnail } from '@/shared/components/thumbnail/ProductCardT
 import { useState } from 'react';
 
 const MOCK_PRODUCT_THUMBNAILS = {
-  brand: '토리든',
+  brandName: '토리든',
   productName: '캐롯 캐롯 캐롯 캐롯 카로팅 카밍 세럼',
   price: 10000,
   rating: 4.9,
   reviewCount: 1123,
-  imageUrl:
+  productImageUrl:
     'https://www.figma.com/api/mcp/asset/91dd6a94-e9c4-480c-8452-3d916c193bb2',
 };
 

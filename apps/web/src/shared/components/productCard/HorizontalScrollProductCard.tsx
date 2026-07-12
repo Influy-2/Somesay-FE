@@ -10,8 +10,8 @@ export type HorizontalScrollProductCardProps = ProductCardType;
 
 export const HorizontalScrollProductCard = ({
   productId,
-  imageUrl,
-  brand,
+  productImageUrl,
+  brandName,
   productName,
   price,
   rating,
@@ -30,12 +30,16 @@ export const HorizontalScrollProductCard = ({
   return (
     <article
       className="relative flex w-39 shrink-0 flex-col items-start gap-2"
-      aria-label={`${brand} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creatorNames}`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creatorNames}`}
     >
       <div className="bg-grey02 relative aspect-39/44 h-44 self-stretch overflow-hidden">
         <div aria-hidden="true" className="h-full w-full">
-          {imageUrl && imageUrl.length > 0 && (
-            <img src={imageUrl} alt="" className="size-full object-cover" />
+          {productImageUrl && productImageUrl.length > 0 && (
+            <img
+              src={productImageUrl}
+              alt=""
+              className="size-full object-cover"
+            />
           )}
         </div>
 
@@ -49,7 +53,7 @@ export const HorizontalScrollProductCard = ({
       </div>
 
       <div className="flex w-full flex-col gap-1" aria-hidden="true">
-        <p className="caption2-m truncate text-black">{brand}</p>
+        <p className="caption2-m truncate text-black">{brandName}</p>
         <p className="body2-m line-clamp-1 w-full truncate text-black">
           {productName}
         </p>
@@ -70,7 +74,7 @@ export const HorizontalScrollProductCard = ({
       <Link
         to={`${PATH.PRODUCT.BASE}/${productId}`}
         className="absolute inset-0"
-        aria-label={`${brand} ${productName} 상세 페이지로 이동`}
+        aria-label={`${brandName} ${productName} 상세 페이지로 이동`}
       />
     </article>
   );

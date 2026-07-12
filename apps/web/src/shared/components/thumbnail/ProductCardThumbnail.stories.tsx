@@ -7,12 +7,12 @@ const meta: Meta<typeof ProductCardThumbnail> = {
   component: ProductCardThumbnail,
   tags: ['autodocs'],
   argTypes: {
-    brand: { control: 'text' },
+    brandName: { control: 'text' },
     productName: { control: 'text' },
     price: { control: 'number' },
     rating: { control: 'number' },
     reviewCount: { control: 'number' },
-    imageUrl: { control: 'text' },
+    productImageUrl: { control: 'text' },
   },
 };
 
@@ -21,11 +21,11 @@ type Story = StoryObj<typeof ProductCardThumbnail>;
 
 export const Default: Story = {
   args: {
-    brand: '브랜드명',
+    brandName: '브랜드명',
     productName: '이름',
     price: 10000,
     rating: 4.5,
     reviewCount: 0,
-    imageUrl: 'https://placehold.co/100',
+    productImageUrl: 'https://placehold.co/100',
   },
 };

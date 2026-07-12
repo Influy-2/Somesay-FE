@@ -13,8 +13,8 @@ export const mapProductDetailDto = (
   item: ProductDetailDto
 ): ProductDetailType => ({
   productId: item.productId,
-  imageUrl: item.productImageUrl,
-  brand: item.brandName,
+  productImageUrl: item.productImageUrl,
+  brandName: item.brandName,
   productName: item.productName,
   price: item.price,
   isHearted: item.userWish,
@@ -44,8 +44,8 @@ export const mapProductCardDtoToCard = (
   item: ProductCardDto
 ): ProductCardType => ({
   productId: item.productId,
-  imageUrl: item.productImageUrl,
-  brand: item.brandName,
+  productImageUrl: item.productImageUrl,
+  brandName: item.brandName,
   productName: item.productName,
   price: item.price,
   rating: item.aveRating,
@@ -59,8 +59,8 @@ export const mapPreviewInfoDtoToCard = (
   item: PreviewInfoDto
 ): ProductCardType => ({
   productId: item.productId,
-  imageUrl: item.productImageUrl,
-  brand: item.brandName,
+  productImageUrl: item.productImageUrl,
+  brandName: item.brandName,
   productName: item.productName,
   price: item.price,
   rating: item.aveRating,
