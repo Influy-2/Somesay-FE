@@ -14,10 +14,12 @@ import {
 
 interface UseEmailVerificationOptions {
   onVerified: () => void;
+  autoVerify?: boolean;
 }
 
 export const useEmailVerification = ({
   onVerified,
+  autoVerify = true,
 }: UseEmailVerificationOptions) => {
   const [code, setCode] = useState('');
   const [remainingSeconds, setRemainingSeconds] = useState(
@@ -80,14 +82,18 @@ export const useEmailVerification = ({
   );
 
   useEffect(() => {
-    if (code.length !== EMAIL_VERIFICATION_CODE_LENGTH || validationError) {
+    if (
+      !autoVerify ||
+      code.length !== EMAIL_VERIFICATION_CODE_LENGTH ||
+      validationError
+    ) {
       return;
     }
 
     const autoVerification = window.setTimeout(() => verifyCode(code), 0);
 
     return () => window.clearTimeout(autoVerification);
-  }, [code, validationError, verifyCode]);
+  }, [autoVerify, code, validationError, verifyCode]);
 
   const handleCodeChange = useCallback(
     (value: string) => {
