@@ -32,14 +32,14 @@ export const ProductRankingCard = ({
       aria-label={`${ranking}위 ${brandName} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creators.map((c) => c.name).join(', ')}`}
     >
       {/* 이미지 영역 */}
-      <div className="relative h-[12.5rem] w-full overflow-hidden border-none">
+      <div className="relative h-[12.5rem] w-full overflow-hidden">
         {/* 상품 이미지 */}
         <div aria-hidden="true" className="border-grey02 h-full w-full border">
           {productImageUrl && productImageUrl.length > 0 && (
             <img
               src={productImageUrl}
               alt=""
-              className="size-full border border-none object-cover"
+              className="size-full object-cover"
             />
           )}
         </div>

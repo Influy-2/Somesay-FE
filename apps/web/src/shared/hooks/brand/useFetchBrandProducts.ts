@@ -40,6 +40,7 @@ export const useFetchBrandProducts = ({
     getNextPageParam: (lastPage, pages) =>
       lastPage.hasNext ? pages.length : undefined,
     enabled: enabled && isValidBrandId,
+    throwOnError: false,
   });
 
   return query;

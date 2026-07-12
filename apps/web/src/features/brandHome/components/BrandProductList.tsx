@@ -1,6 +1,6 @@
 import type { BrandProductType } from '@somesay/shared';
 import { SearchResultProductCard } from '@/shared/components';
-import type { RefObject } from 'react';
+import type { Ref } from 'react';
 
 interface BrandProductListProps {
   products: BrandProductType[];
@@ -9,7 +9,10 @@ interface BrandProductListProps {
   isError: boolean;
   emptyMessage: string;
   isFetchingNextPage: boolean;
-  loadMoreRef: RefObject<HTMLDivElement | null>;
+  isFetchNextPageError: boolean;
+  onRetry: () => void;
+  onRetryNextPage: () => void;
+  loadMoreRef: Ref<HTMLDivElement>;
 }
 
 export const BrandProductList = ({
@@ -19,6 +22,9 @@ export const BrandProductList = ({
   isError,
   emptyMessage,
   isFetchingNextPage,
+  isFetchNextPageError,
+  onRetry,
+  onRetryNextPage,
   loadMoreRef,
 }: BrandProductListProps) => {
   if (isLoading) {
@@ -31,9 +37,16 @@ export const BrandProductList = ({
 
   if (isError && products.length === 0) {
     return (
-      <p className="body2-m text-grey06 px-4 py-16 text-center">
-        상품을 불러오지 못했어요.
-      </p>
+      <div className="flex flex-col items-center gap-3 px-4 py-16 text-center">
+        <p className="body2-m text-grey06">상품을 불러오지 못했어요.</p>
+        <button
+          type="button"
+          className="body2-sb border-grey03 text-grey-black border px-4 py-2"
+          onClick={onRetry}
+        >
+          다시 시도
+        </button>
+      </div>
     );
   }
 
@@ -57,11 +70,23 @@ export const BrandProductList = ({
           </li>
         ))}
       </ul>
-      <div ref={loadMoreRef} className="min-h-10 pb-10" aria-hidden="true">
+      <div ref={loadMoreRef} className="min-h-10 pb-10">
         {isFetchingNextPage && (
           <p className="body2-m text-grey06 py-4 text-center">
             상품을 더 불러오는 중이에요.
           </p>
+        )}
+        {isFetchNextPageError && !isFetchingNextPage && (
+          <div className="flex flex-col items-center gap-3 py-4 text-center">
+            <p className="body2-m text-grey06">상품을 더 불러오지 못했어요.</p>
+            <button
+              type="button"
+              className="body2-sb border-grey03 text-grey-black border px-4 py-2"
+              onClick={onRetryNextPage}
+            >
+              다시 시도
+            </button>
+          </div>
         )}
       </div>
     </>

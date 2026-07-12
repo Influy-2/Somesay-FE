@@ -32,7 +32,9 @@ export const BrandHomePage = () => {
   );
   const { debouncedKeyword, updateDebouncedKeyword } =
     useDebouncedSearchKeyword();
-  const isSearchMode = debouncedKeyword.length > 0;
+  const hasSearchInput = searchValue.trim().length > 0;
+  const hasDebouncedKeyword = debouncedKeyword.length > 0;
+  const isSearchMode = hasSearchInput;
 
   const brandQuery = useFetchBrandDetail(brandId);
   const { data: categoryGroups = [] } = useFetchCategories();
@@ -42,15 +44,15 @@ export const BrandHomePage = () => {
       ? { mainCategoryId: selectedCategoryId }
       : {}),
     sortType,
-    enabled: !isSearchMode,
+    enabled: !hasSearchInput,
   });
   const searchQuery = useFetchBrandProductSearch({
     ...(brandId !== undefined ? { brandId } : {}),
     keyword: debouncedKeyword,
     sortType,
-    enabled: isSearchMode,
+    enabled: hasDebouncedKeyword,
   });
-  const activeProductQuery = isSearchMode ? searchQuery : productsQuery;
+  const activeProductQuery = hasSearchInput ? searchQuery : productsQuery;
 
   const categories = useMemo(
     () => [
@@ -168,6 +170,13 @@ export const BrandHomePage = () => {
             : '해당 카테고리에 등록된 상품이 없어요.'
         }
         isFetchingNextPage={activeProductQuery.isFetchingNextPage}
+        isFetchNextPageError={activeProductQuery.isFetchNextPageError}
+        onRetry={() => {
+          void activeProductQuery.refetch();
+        }}
+        onRetryNextPage={() => {
+          void activeProductQuery.fetchNextPage();
+        }}
         loadMoreRef={loadMoreRef}
       />
     </div>
