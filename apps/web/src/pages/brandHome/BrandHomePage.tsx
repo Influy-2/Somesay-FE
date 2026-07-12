@@ -16,7 +16,8 @@ import {
 } from '@/shared/hooks';
 
 const ALL_CATEGORY_ID = 0;
-
+// TODO: 검색어를 입력하면 카테고리가 전체로 초기화되고, 카테고리를 선택하면 검색어가 초기화되는데 이 동작이 맞는지 확인이 필요해보입니다!
+//백엔드 카테고리 수정 후 수정
 export const BrandHomePage = () => {
   const navigate = useNavigate();
   const { brandId: brandIdParam } = useParams();
