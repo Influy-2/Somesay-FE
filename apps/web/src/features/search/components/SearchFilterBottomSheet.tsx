@@ -186,12 +186,12 @@ export const SearchFilterBottomSheet = ({
                 className="flex w-full flex-col items-start gap-3 self-stretch"
                 key={group.mainCategoryId}
               >
-                <p className="body2-sb text-black">{group.mainName}</p>
+                <p className="body2-sb text-black">{group.mainCategoryName}</p>
                 <div className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch">
                   {group.subCategories.map((filter) => (
                     <FilterChip
                       key={filter.subCategoryId}
-                      label={filter.subName}
+                      label={filter.subCategoryName}
                       isSelected={draftFilters.category.some(
                         (selected) =>
                           selected.subCategoryId === filter.subCategoryId

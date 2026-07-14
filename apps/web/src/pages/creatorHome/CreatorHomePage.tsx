@@ -33,9 +33,9 @@ export const CreatorHomePage = () => {
 
   const categories = [
     ALL_CATEGORY,
-    ...categoryGroups.map(({ mainCategoryId, mainName }) => ({
+    ...categoryGroups.map(({ mainCategoryId, mainCategoryName }) => ({
       id: mainCategoryId,
-      label: mainName,
+      label: mainCategoryName,
     })),
   ];
 

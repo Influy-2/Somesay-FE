@@ -16,7 +16,7 @@ export const CategoryProductSection = () => {
     ALL_CATEGORY,
     ...mainCategories.map((category) => ({
       id: category.mainCategoryId,
-      label: category.mainName,
+      label: category.mainCategoryName,
     })),
   ];
 

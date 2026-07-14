@@ -49,7 +49,7 @@ export const AddProductPage = () => {
     ALL_CATEGORY,
     ...categoryGroups.map((category) => ({
       id: category.mainCategoryId,
-      label: category.mainName,
+      label: category.mainCategoryName,
     })),
   ];
 

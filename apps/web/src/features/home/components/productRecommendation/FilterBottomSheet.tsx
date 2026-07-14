@@ -15,7 +15,7 @@ import { useFetchCategories } from '@/shared/hooks';
 
 const ALL_SUBCATEGORY_OPTION: SubcategoryType = {
   subCategoryId: 0,
-  subName: '전체',
+  subCategoryName: '전체',
 };
 
 // TODO: 피부 고민 선택지 API가 생기면 백엔드 응답값으로 교체
@@ -183,7 +183,7 @@ export const FilterBottomSheet = ({
               {/* 전체 */}
               <FilterChip
                 key={ALL_SUBCATEGORY_OPTION.subCategoryId}
-                label={ALL_SUBCATEGORY_OPTION.subName}
+                label={ALL_SUBCATEGORY_OPTION.subCategoryName}
                 isSelected={selectedFilters.category.some(
                   (f) =>
                     f.subCategoryId === ALL_SUBCATEGORY_OPTION.subCategoryId
@@ -197,12 +197,14 @@ export const FilterBottomSheet = ({
                   className="flex w-full flex-col items-start gap-3 self-stretch"
                   key={group.mainCategoryId}
                 >
-                  <p className="body2-sb text-black">{group.mainName}</p>
+                  <p className="body2-sb text-black">
+                    {group.mainCategoryName}
+                  </p>
                   <div className="flex flex-wrap content-start items-start gap-x-2 gap-y-3 self-stretch">
                     {group.subCategories.map((filter) => (
                       <FilterChip
                         key={filter.subCategoryId}
-                        label={filter.subName}
+                        label={filter.subCategoryName}
                         isSelected={selectedFilters.category.some(
                           (selected) =>
                             selected.subCategoryId === filter.subCategoryId
