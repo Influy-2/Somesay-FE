@@ -17,7 +17,9 @@ export const ProductRankingCard = ({
   isHearted,
   creators,
 }: ProductRankingCardProps) => {
-  const formattedPrice = price.toLocaleString('ko-KR');
+  //TODO: 임시 null처리
+
+  const formattedPrice = price?.toLocaleString('ko-KR') || 0;
   const formattedReviewCount = reviewCount
     ? reviewCount.toLocaleString('ko-KR')
     : '0';
