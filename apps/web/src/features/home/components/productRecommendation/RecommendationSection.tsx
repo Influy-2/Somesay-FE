@@ -39,7 +39,7 @@ export const RecommendationSection = () => {
   // 선택한 옵션을 label 배열로 반환
   const getSelectedLabel = (category: RecommendedFilterGroupType): string[] =>
     selectedFilters[category].map((c) =>
-      typeof c === 'string' ? c : c.subName
+      typeof c === 'string' ? c : c.subCategoryName
     );
 
   // 제출 버튼 활성화 여부

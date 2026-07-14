@@ -1,11 +1,11 @@
 export interface CategoryGroupType {
   mainCategoryId: number;
-  mainName: string;
+  mainCategoryName: string;
   imageUrl: string;
   subCategories: SubcategoryType[];
 }
 
 export interface SubcategoryType {
   subCategoryId: number;
-  subName: string;
+  subCategoryName: string;
 }

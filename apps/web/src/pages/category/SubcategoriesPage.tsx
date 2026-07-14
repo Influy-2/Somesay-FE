@@ -46,13 +46,13 @@ export const SubcategoriesPage = () => {
   const currentCategory = categoryGroups.find(
     (c) => c.mainCategoryId === categoryId
   );
-  const categoryTitle = currentCategory?.mainName ?? '';
+  const categoryTitle = currentCategory?.mainCategoryName ?? '';
 
   const tabSubcategories = [
     { id: 0, label: '전체' },
     ...(currentCategory?.subCategories.map((sub) => ({
       id: sub.subCategoryId,
-      label: sub.subName,
+      label: sub.subCategoryName,
     })) ?? []),
   ];
 
@@ -82,7 +82,7 @@ export const SubcategoriesPage = () => {
             <ArrowBackIcon aria-hidden="true" />
           </button>
         }
-        title={currentCategory?.mainName ?? ''}
+        title={currentCategory?.mainCategoryName ?? ''}
         right={[
           <button type="button" aria-label="검색">
             <SearchIcon aria-hidden="true" />

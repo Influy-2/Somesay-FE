@@ -58,9 +58,9 @@ export const BrandHomePage = () => {
   const categories = useMemo(
     () => [
       { id: ALL_CATEGORY_ID, label: '전체' },
-      ...categoryGroups.map(({ mainCategoryId, mainName }) => ({
+      ...categoryGroups.map(({ mainCategoryId, mainCategoryName }) => ({
         id: mainCategoryId,
-        label: mainName,
+        label: mainCategoryName,
       })),
     ],
     [categoryGroups]
