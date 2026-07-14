@@ -18,9 +18,9 @@ export interface CreatorReviewType {
 
 export interface CreatorReviewSummaryType {
   productId: number;
-  aveRating: number;
+  avgRating: number;
   reviewCount: number;
   aiSummary: string;
-  productSkinType: ProductSkinType[];
+  productSkinTypes: ProductSkinType[];
   productSkinExpectations: ProductSkinExpectationType[];
 }

@@ -44,7 +44,7 @@ export interface ProductReviewType {
   rating: number;
   agreeCount: number;
   disagreeCount: number;
-  agreeRate: number;
+  agreeRatio: number;
   youtubeUrl: string;
   timeLinkCount: number;
   totalCommentCount: number;
