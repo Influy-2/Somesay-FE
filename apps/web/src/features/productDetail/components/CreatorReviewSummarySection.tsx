@@ -5,10 +5,10 @@ import { DotIcon, QuoteCloseIcon, QuoteOpenIcon } from '@/shared/icons';
 
 // 크리에이터 리뷰 요약 정보를 표시하는 섹션입니다.
 export const CreatorReviewSummarySection = ({
-  aveRating,
+  avgRating,
   reviewCount,
   aiSummary,
-  productSkinType,
+  productSkinTypes,
   productSkinExpectations,
 }: CreatorReviewSummaryType) => {
   return (
@@ -20,11 +20,11 @@ export const CreatorReviewSummarySection = ({
           <div
             className="flex items-center gap-1"
             role="img"
-            aria-label={`5점 만점에 ${aveRating.toFixed(1)}점`}
+            aria-label={`5점 만점에 ${avgRating.toFixed(1)}점`}
           >
-            <StarRating rating={aveRating} />
+            <StarRating rating={avgRating} />
             <span className="body1-b" aria-hidden="true">
-              {aveRating.toFixed(1)}
+              {avgRating.toFixed(1)}
             </span>
             <span className="body1-b text-grey06" aria-hidden="true">
               /
@@ -65,7 +65,7 @@ export const CreatorReviewSummarySection = ({
         <div>
           <p className="body2-m mb-2">잘 맞는 피부 타입</p>
           <div className="flex flex-wrap gap-1.5">
-            {productSkinType?.map((type) => (
+            {productSkinTypes?.map((type) => (
               <ChipLarge key={type} label={type} />
             ))}
           </div>

@@ -34,10 +34,10 @@ export const mapCreatorReviewSummary = (
   item: ReviewOverviewDto
 ): CreatorReviewSummaryType => ({
   productId: item.productId,
-  aveRating: item.avgRating,
+  avgRating: item.avgRating,
   reviewCount: item.reviewCount,
   aiSummary: item.aiSummary,
-  productSkinType: item.productSkinType,
+  productSkinTypes: item.productSkinTypes,
   productSkinExpectations: item.productSkinExpectations,
 });
 
@@ -113,7 +113,7 @@ export const mapProductReviewDto = (
   rating: item.rating,
   agreeCount: item.agreeCount,
   disagreeCount: item.disagreeCount,
-  agreeRate: item.agreeRatio,
+  agreeRatio: item.agreeRatio,
   youtubeUrl: item.youtubeUrl,
   timeLinkCount: item.timeLinkCount,
   totalCommentCount: item.totalCommentCount,

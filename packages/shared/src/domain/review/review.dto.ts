@@ -9,6 +9,6 @@ export interface ReviewOverviewDto {
   avgRating: number;
   reviewCount: number;
   aiSummary: string;
-  productSkinType: ProductSkinType[];
+  productSkinTypes: ProductSkinType[];
   productSkinExpectations: ProductSkinExpectationType[];
 }
