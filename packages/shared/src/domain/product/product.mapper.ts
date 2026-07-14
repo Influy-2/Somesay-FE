@@ -4,21 +4,28 @@ import type {
   ProductCardDto,
   ProductDetailDto,
   ProductListResponseDto,
+  ProductReviewsDto,
 } from './product.dto';
-import type { ProductCardType, ProductDetailType } from './product.types';
+import type {
+  ProductCardType,
+  ProductDetailType,
+  ProductReviewType,
+} from './product.types';
 import type { ReviewOverviewDto } from '../review/review.dto';
 import type { CreatorReviewSummaryType } from '../review/review.types';
+import type { CommentPreviewDto } from '../comment/comment.dto';
+import type { CommentPreviewType } from '../comment/comment.types';
 
 export const mapProductDetailDto = (
   item: ProductDetailDto
 ): ProductDetailType => ({
   productId: item.productId,
-  productImageUrl: item.productImageUrl,
+  productImageUrl: item.productImgUrl,
   brandName: item.brandName,
   productName: item.productName,
   price: item.price,
   isHearted: item.userWish,
-  brandImageUrl: item.brandImageUrl,
+  brandImageUrl: item.brandImgUrl,
   volume: item.volume,
 });
 
@@ -27,7 +34,7 @@ export const mapCreatorReviewSummary = (
   item: ReviewOverviewDto
 ): CreatorReviewSummaryType => ({
   productId: item.productId,
-  aveRating: item.aveRating,
+  aveRating: item.avgRating,
   reviewCount: item.reviewCount,
   aiSummary: item.aiSummary,
   productSkinType: item.productSkinType,
@@ -44,11 +51,11 @@ export const mapProductCardDtoToCard = (
   item: ProductCardDto
 ): ProductCardType => ({
   productId: item.productId,
-  productImageUrl: item.productImageUrl,
+  productImageUrl: item.productImgUrl,
   brandName: item.brandName,
   productName: item.productName,
   price: item.price,
-  rating: item.aveRating,
+  rating: item.avgRating,
   reviewCount: item.reviewCount ?? 0,
   isHearted: item.userWish,
   creators: mapCreatorUrls(item.creatorImageUrls),
@@ -59,11 +66,11 @@ export const mapPreviewInfoDtoToCard = (
   item: PreviewInfoDto
 ): ProductCardType => ({
   productId: item.productId,
-  productImageUrl: item.productImageUrl,
+  productImageUrl: item.productImgUrl,
   brandName: item.brandName,
   productName: item.productName,
   price: item.price,
-  rating: item.aveRating,
+  rating: item.avgRating,
   reviewCount: item.reviewCount,
   isHearted: item.userWish,
   creators: mapCreatorUrls(item.creatorImageUrls),
@@ -79,4 +86,43 @@ export const mapProductPreviewPageDtoToCards = (
 ): ApiPage<ProductCardType> => ({
   ...page,
   content: page.content.map(mapPreviewInfoDtoToCard),
+});
+
+// 백엔드 코멘트 DTO를 화면에서 사용하던 코멘트 타입으로 변환합니다.
+const mapCommentPreviewDto = (item: CommentPreviewDto): CommentPreviewType => ({
+  commentId: item.commentId,
+  nickname: item.nickname,
+  profileImageUrl: item.profileImgUrl,
+  reactionType: item.reactionType,
+  comment: item.content,
+  createdAt: item.createdAt,
+});
+
+// 백엔드 상품 리뷰 DTO를 화면에서 사용하던 상품 리뷰 타입으로 변환합니다.
+export const mapProductReviewDto = (
+  item: ProductReviewsDto
+): ProductReviewType => ({
+  nickname: item.creatorName,
+  ranking: item.ranking,
+  subscriberNum: item.subscriberNum,
+  profileImageUrl: item.profileImgUrl,
+  trustScore: item.trustScore,
+  skinTypes: item.skinTypes,
+  reviewId: item.reviewId,
+  content: item.content,
+  rating: item.rating,
+  agreeCount: item.agreeCount,
+  disagreeCount: item.disagreeCount,
+  agreeRate: item.agreeRatio,
+  youtubeUrl: item.youtubeUrl,
+  timeLinkCount: item.timeLinkCount,
+  totalCommentCount: item.totalCommentCount,
+  previewComments: item.previewComments.map(mapCommentPreviewDto),
+});
+
+export const mapProductReviewPageDto = (
+  page: ApiPage<ProductReviewsDto>
+): ApiPage<ProductReviewType> => ({
+  ...page,
+  content: page.content.map(mapProductReviewDto),
 });

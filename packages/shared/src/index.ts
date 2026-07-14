@@ -3,6 +3,7 @@ export type {
   ProductCardType,
   ProductDetailType,
   ProductRankingCardType,
+  ProductReviewType,
   ProductSkinExpectationType,
   ProductSkinType,
   ProductsByCategory,
