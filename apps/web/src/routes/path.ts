@@ -23,6 +23,17 @@ export const PATH = {
   MY_PAGE: {
     BASE: '/my-page',
     LIKED_PRODUCTS: 'liked-products',
+    REVIEW_EVALUATION: {
+      BASE: 'review-evaluation',
+      PRODUCTS: {
+        BASE: 'products',
+        DETAIL: ':productId',
+      },
+      CREATORS: {
+        BASE: 'creators',
+        DETAIL: ':creatorId',
+      },
+    },
     ACCOUNT: {
       BASE: 'account',
       NICKNAME: 'nickname',

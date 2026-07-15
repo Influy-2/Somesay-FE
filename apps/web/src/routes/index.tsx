@@ -27,6 +27,9 @@ import { SkinTypePage } from '@/pages/myPage/account/SkinTypePage';
 import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
 import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
 import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
+import { MyReviewEvaluationPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationPage';
+import { MyReviewEvaluationProductListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationProductListPage';
+import { MyReviewEvaluationCreatorListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationCreatorListPage';
 
 export const appRouter = createBrowserRouter([
   {
@@ -107,6 +110,33 @@ export const appRouter = createBrowserRouter([
         path: PATH.MY_PAGE.BASE,
         element: <Outlet />,
         children: [
+          {
+            path: PATH.MY_PAGE.REVIEW_EVALUATION.BASE,
+            element: <Outlet />,
+            children: [
+              { index: true, element: <MyReviewEvaluationPage /> },
+              {
+                path: PATH.MY_PAGE.REVIEW_EVALUATION.PRODUCTS.BASE,
+                element: <Outlet />,
+                children: [
+                  {
+                    index: true,
+                    element: <MyReviewEvaluationProductListPage />,
+                  },
+                ],
+              },
+              {
+                path: PATH.MY_PAGE.REVIEW_EVALUATION.CREATORS.BASE,
+                element: <Outlet />,
+                children: [
+                  {
+                    index: true,
+                    element: <MyReviewEvaluationCreatorListPage />,
+                  },
+                ],
+              },
+            ],
+          },
           {
             path: PATH.MY_PAGE.ACCOUNT.BASE,
             element: <Outlet />,
