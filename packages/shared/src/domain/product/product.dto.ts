@@ -36,6 +36,9 @@ export interface PreviewInfoDto extends ProductBasicDto {
 export interface ProductDetailDto extends ProductBasicDto {
   volume: number;
   brandImgUrl: string;
+  collabChannelUrl: string | null;
+  collabChannelName: string | null;
+  collabProfileImgUrl: string | null;
 }
 
 export interface ProductListResponseDto {
@@ -64,4 +67,12 @@ export interface ProductReviewsDto extends ProductReviewCreatorDto {
   timeLinkCount: number;
   totalCommentCount: number;
   previewComments: CommentPreviewDto[];
+}
+
+// 상품 리뷰 목록 API의 페이지 응답 DTO입니다.
+export interface ProductReviewsPageDto {
+  content: ProductReviewsDto[];
+  totalElements: number;
+  totalPages: number;
+  hasNext: boolean;
 }
