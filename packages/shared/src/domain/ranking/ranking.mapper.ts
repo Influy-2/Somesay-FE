@@ -35,14 +35,30 @@ const getRankChangeDiff = (
 
 export const mapCreatorRanking = ({
   oldRanking,
-  ...creator
+  creatorName,
+  profileImgUrl,
+  creatorId,
+  youtubeLink,
+  trustScore,
+  skinTypes,
+  subscriberNum,
+  ranking,
+  ageGroup,
 }: CreatorRankingDto): CreatorRankingUpDownType => {
-  const rankingDiff = creator.ranking - oldRanking;
+  const rankingDiff = ranking - oldRanking;
 
   return {
-    ...creator,
+    creatorId,
+    nickname: creatorName,
+    profileImageUrl: profileImgUrl,
+    youtubeLink,
+    trustScore,
+    skinTypes,
+    subscriberNum,
+    ranking,
+    ageGroup,
     rankChange: Math.abs(rankingDiff),
-    rankChangeDiff: getRankChangeDiff(creator.ranking, oldRanking),
+    rankChangeDiff: getRankChangeDiff(ranking, oldRanking),
   };
 };
 

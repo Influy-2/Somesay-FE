@@ -1,3 +1,5 @@
+import type { CommentPreviewType } from '../comment/comment.types';
+
 export interface ProductBasicType {
   productId: number;
   productImageUrl: string;
@@ -28,6 +30,35 @@ interface CreatorProfile {
 export interface ProductDetailType extends ProductBasicType {
   brandImageUrl?: string | undefined;
   volume: number;
+  collabChannelUrl: string | null;
+  collabChannelName: string | null;
+  collabProfileImgUrl: string | null;
+}
+
+export interface ProductReviewType {
+  nickname: string;
+  ranking: number;
+  subscriberNum: number;
+  profileImageUrl: string;
+  trustScore: number;
+  skinTypes: string[];
+  reviewId: number;
+  content: string;
+  rating: number;
+  agreeCount: number;
+  disagreeCount: number;
+  agreeRatio: number;
+  youtubeUrl: string;
+  timeLinkCount: number;
+  totalCommentCount: number;
+  previewComments: CommentPreviewType[];
+}
+
+export interface ProductReviewPageType {
+  content: ProductReviewType[];
+  totalElements: number;
+  totalPages: number;
+  hasNext: boolean;
 }
 
 export interface ProductRankingCardType extends ProductCardType {

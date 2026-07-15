@@ -26,8 +26,8 @@ export const useFetchProductReviews = (
         size,
         ...reviewParams,
       }),
-    getNextPageParam: (lastPage) =>
-      lastPage.hasNext ? lastPage.pageNumber + 1 : undefined,
+    getNextPageParam: (lastPage, pages) =>
+      lastPage.hasNext ? pages.length : undefined,
     enabled: isValidProductId,
   });
 

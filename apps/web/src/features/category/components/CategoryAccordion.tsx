@@ -31,12 +31,12 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
           <div className="flex items-center gap-3">
             {/* TODO: 나중에 실제 카테고리 아이콘으로 교체 */}
             <div className="bg-grey04 h-9 w-9 rounded-full" />
-            <span className="body1-sb">{category.mainName}</span>
+            <span className="body1-sb">{category.mainCategoryName}</span>
           </div>
         </button>
         <Link
           to={`${PATH.CATEGORIES.BASE}/${category.mainCategoryId}`}
-          aria-label={`${category.mainName} 전체보기 페이지로 이동`}
+          aria-label={`${category.mainCategoryName} 전체보기 페이지로 이동`}
         >
           <MainArrowIcon />
         </Link>
@@ -55,7 +55,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
               state={{ selectedSubCategoryId: sub.subCategoryId }}
               className="body2-m cursor-pointer"
             >
-              {sub.subName}
+              {sub.subCategoryName}
             </Link>
           </li>
         ))}

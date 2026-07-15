@@ -25,7 +25,7 @@ export const DaisoProductsPage = () => {
     { id: 0, label: '전체' },
     ...categoryGroups.map((c) => ({
       id: c.mainCategoryId,
-      label: c.mainName,
+      label: c.mainCategoryName,
     })),
   ];
 

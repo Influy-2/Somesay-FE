@@ -12,12 +12,9 @@ import {
   useFetchBrandDetail,
   useFetchBrandProducts,
   useFetchBrandProductSearch,
-  useFetchCategories,
 } from '@/shared/hooks';
 
 const ALL_CATEGORY_ID = 0;
-// TODO: 검색어를 입력하면 카테고리가 전체로 초기화되고, 카테고리를 선택하면 검색어가 초기화되는데 이 동작이 맞는지 확인이 필요해보입니다!
-//백엔드 카테고리 수정 후 수정
 export const BrandHomePage = () => {
   const navigate = useNavigate();
   const { brandId: brandIdParam } = useParams();
@@ -26,7 +23,8 @@ export const BrandHomePage = () => {
   const brandId = isValidBrandId ? parsedBrandId : undefined;
 
   const [searchValue, setSearchValue] = useState('');
-  const [selectedCategoryId, setSelectedCategoryId] = useState(ALL_CATEGORY_ID);
+  const [selectedSubCategoryId, setSelectedSubCategoryId] =
+    useState(ALL_CATEGORY_ID);
   const [sortType, setSortType] = useState<BrandProductSortType>('RATING');
   const [wishOverrides, setWishOverrides] = useState<Record<number, boolean>>(
     {}
@@ -38,11 +36,10 @@ export const BrandHomePage = () => {
   const isSearchMode = hasSearchInput;
 
   const brandQuery = useFetchBrandDetail(brandId);
-  const { data: categoryGroups = [] } = useFetchCategories();
   const productsQuery = useFetchBrandProducts({
     ...(brandId !== undefined ? { brandId } : {}),
-    ...(selectedCategoryId !== ALL_CATEGORY_ID
-      ? { mainCategoryId: selectedCategoryId }
+    ...(selectedSubCategoryId !== ALL_CATEGORY_ID
+      ? { subCategoryId: selectedSubCategoryId }
       : {}),
     sortType,
     enabled: !hasSearchInput,
@@ -50,6 +47,9 @@ export const BrandHomePage = () => {
   const searchQuery = useFetchBrandProductSearch({
     ...(brandId !== undefined ? { brandId } : {}),
     keyword: debouncedKeyword,
+    ...(selectedSubCategoryId !== ALL_CATEGORY_ID
+      ? { subCategoryId: selectedSubCategoryId }
+      : {}),
     sortType,
     enabled: hasDebouncedKeyword,
   });
@@ -58,12 +58,14 @@ export const BrandHomePage = () => {
   const categories = useMemo(
     () => [
       { id: ALL_CATEGORY_ID, label: '전체' },
-      ...categoryGroups.map(({ mainCategoryId, mainName }) => ({
-        id: mainCategoryId,
-        label: mainName,
-      })),
+      ...(brandQuery.data?.availableSubCategories.map(
+        ({ subCategoryId, subCategoryName }) => ({
+          id: subCategoryId,
+          label: subCategoryName,
+        })
+      ) ?? []),
     ],
-    [categoryGroups]
+    [brandQuery.data?.availableSubCategories]
   );
 
   const products = useMemo(
@@ -86,10 +88,6 @@ export const BrandHomePage = () => {
   const handleSearchChange = (value: string) => {
     setSearchValue(value);
     updateDebouncedKeyword(value);
-
-    if (value.trim().length > 0) {
-      setSelectedCategoryId(ALL_CATEGORY_ID);
-    }
   };
 
   const handleSearchClear = () => {
@@ -97,13 +95,8 @@ export const BrandHomePage = () => {
     updateDebouncedKeyword('');
   };
 
-  const handleSelectCategory = (categoryId: number) => {
-    if (searchValue.trim().length > 0) {
-      setSearchValue('');
-      updateDebouncedKeyword('');
-    }
-
-    setSelectedCategoryId(categoryId);
+  const handleSelectCategory = (subCategoryId: number) => {
+    setSelectedSubCategoryId(subCategoryId);
   };
 
   const handleHeartToggle = (productId: number) => {
@@ -154,7 +147,7 @@ export const BrandHomePage = () => {
         onSearchChange={handleSearchChange}
         onSearchClear={handleSearchClear}
         categories={categories}
-        selectedCategoryId={selectedCategoryId}
+        selectedCategoryId={selectedSubCategoryId}
         onSelectCategory={handleSelectCategory}
         productCount={productCount}
         sortType={sortType}

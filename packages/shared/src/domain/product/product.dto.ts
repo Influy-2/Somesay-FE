@@ -2,16 +2,14 @@ import type {
   ProductSkinExpectationType,
   ProductSkinType,
 } from './product.types';
-import type { CommentPreviewDto } from '../comment/comment.types';
-
-import type { CreatorType } from '../creator/creator.types';
+import type { CommentPreviewDto } from '../comment/comment.dto';
 
 // 여러 상품 응답 DTO에서 공통으로 사용하는 최소 상품 정보입니다.
 export interface ProductBasicDto {
   productId: number;
   brandName: string;
   productName: string;
-  productImageUrl: string;
+  productImgUrl: string;
   price: number;
   userWish: boolean;
 }
@@ -20,7 +18,7 @@ export interface ProductBasicDto {
 export interface ProductCardDto extends ProductBasicDto {
   mainCategoryId: number;
   subCategoryId: number;
-  aveRating: number;
+  avgRating: number;
   reviewCount: number;
   creatorImageUrls: string[];
   shortSummary: string;
@@ -29,7 +27,7 @@ export interface ProductCardDto extends ProductBasicDto {
 }
 // 상품 랭킹/비슷한 기대효과 상품의 미리보기 카드 응답에 사용합니다.
 export interface PreviewInfoDto extends ProductBasicDto {
-  aveRating: number;
+  avgRating: number;
   reviewCount: number;
   creatorImageUrls: string[];
 }
@@ -37,7 +35,10 @@ export interface PreviewInfoDto extends ProductBasicDto {
 // 상품 상세 페이지의 기본 정보 영역 조회 응답에 사용합니다.
 export interface ProductDetailDto extends ProductBasicDto {
   volume: number;
-  brandImageUrl: string;
+  brandImgUrl: string;
+  collabChannelUrl: string | null;
+  collabChannelName: string | null;
+  collabProfileImgUrl: string | null;
 }
 
 export interface ProductListResponseDto {
@@ -46,10 +47,12 @@ export interface ProductListResponseDto {
   hasNext: boolean;
 }
 
-interface ProductReviewCreatorDto extends Pick<
-  CreatorType,
-  'nickname' | 'ranking' | 'subscriberNum' | 'profileImageUrl' | 'trustScore'
-> {
+interface ProductReviewCreatorDto {
+  creatorName: string;
+  ranking: number;
+  subscriberNum: number;
+  profileImgUrl: string;
+  trustScore: number;
   skinTypes: string[];
 }
 
@@ -59,9 +62,17 @@ export interface ProductReviewsDto extends ProductReviewCreatorDto {
   rating: number;
   agreeCount: number;
   disagreeCount: number;
-  agreeRate: number;
+  agreeRatio: number;
   youtubeUrl: string;
   timeLinkCount: number;
   totalCommentCount: number;
   previewComments: CommentPreviewDto[];
+}
+
+// 상품 리뷰 목록 API의 페이지 응답 DTO입니다.
+export interface ProductReviewsPageDto {
+  content: ProductReviewsDto[];
+  totalElements: number;
+  totalPages: number;
+  hasNext: boolean;
 }
