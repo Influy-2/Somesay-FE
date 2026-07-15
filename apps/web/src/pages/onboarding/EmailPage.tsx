@@ -7,7 +7,7 @@ import {
   useOnboardingStore,
 } from '@/features/onboarding';
 import { PATH } from '@/routes/path';
-import { OnboardingEmailInput } from '@/shared/components';
+import { EmailInput } from '@/shared/components';
 
 const EMAIL_DOMAINS = ['gmail.com', 'naver.com', 'daum.net', 'nate.com'];
 
@@ -65,7 +65,7 @@ export const EmailPage = () => {
       <div className="flex flex-col gap-7 pt-3.5">
         <h1 className="headline4">이메일을 입력해 주세요</h1>
 
-        <OnboardingEmailInput
+        <EmailInput
           value={email}
           onChange={(event) => {
             setLocalEmail(event.target.value);

@@ -6,7 +6,7 @@ import {
   OnboardingLayout,
   useOnboardingStore,
 } from '@/features/onboarding';
-import { OnboardingNicknameInput } from '@/shared/components';
+import { CharacterCountInput } from '@/shared/components';
 import { PATH } from '@/routes/path';
 
 export const NicknamePage = () => {
@@ -53,7 +53,7 @@ export const NicknamePage = () => {
       <div className="flex flex-col gap-10 pt-3.5">
         <h1 className="headline4">닉네임을 입력해 주세요</h1>
 
-        <OnboardingNicknameInput
+        <CharacterCountInput
           value={nickname}
           onChange={(event) => setLocalNickname(event.target.value)}
           {...(errorMessage ? { errorMessage } : {})}

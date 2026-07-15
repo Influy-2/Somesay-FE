@@ -95,10 +95,9 @@ export { Modal } from './modal/Modal';
 /* input */
 export { CommentInput } from './input/CommentInput';
 
-/* inputfild */
+/* input field */
 export { InputField } from './inputField/InputField';
-export {
-  OnboardingEmailInput,
-  OnboardingNicknameInput,
-  OnboardingVerificationCodeInput,
-} from './inputField/OnboardingTextInput';
+export { CharacterCountInput } from './inputField/CharacterCountInput';
+export { TextArea } from './inputField/TextArea';
+export { VerificationCodeInput } from './inputField/VerificationCodeInput';
+export { EmailInput } from './inputField/EmailInput';

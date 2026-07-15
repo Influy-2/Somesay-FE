@@ -7,7 +7,7 @@ import {
   useOnboardingStore,
 } from '@/features/onboarding';
 import { PATH } from '@/routes/path';
-import { OnboardingVerificationCodeInput } from '@/shared/components';
+import { VerificationCodeInput } from '@/shared/components';
 import { CheckOnIcon } from '@/shared/icons';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 
@@ -93,7 +93,7 @@ export const EmailVerificationPage = () => {
           인증번호를 보내드렸습니다
         </h1>
 
-        <OnboardingVerificationCodeInput
+        <VerificationCodeInput
           key={timerGeneration}
           value={code}
           onChange={(event) => handleCodeChange(event.target.value)}
