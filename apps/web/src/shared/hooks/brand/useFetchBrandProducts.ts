@@ -7,7 +7,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 interface UseFetchBrandProductsOptions {
   brandId?: number;
-  mainCategoryId?: number;
+  subCategoryId?: number;
   sortType?: BrandProductSortType;
   size?: number;
   enabled?: boolean;
@@ -16,7 +16,7 @@ interface UseFetchBrandProductsOptions {
 // 브랜드 상품 목록을 무한 스크롤 페이지 단위로 조회합니다.
 export const useFetchBrandProducts = ({
   brandId,
-  mainCategoryId,
+  subCategoryId,
   sortType,
   size = 10,
   enabled = true,
@@ -25,7 +25,7 @@ export const useFetchBrandProducts = ({
     typeof brandId === 'number' && Number.isInteger(brandId) && brandId > 0;
   const productParams = {
     size,
-    ...(typeof mainCategoryId === 'number' ? { mainCategoryId } : {}),
+    ...(typeof subCategoryId === 'number' ? { subCategoryId } : {}),
     ...(sortType ? { sortType } : {}),
   };
 

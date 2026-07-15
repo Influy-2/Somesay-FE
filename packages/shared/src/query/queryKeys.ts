@@ -67,11 +67,11 @@ export const QUERY_KEYS = {
     PRODUCTS: (
       brandId: number,
       {
-        mainCategoryId,
+        subCategoryId,
         sortType,
         size,
       }: {
-        mainCategoryId?: number;
+        subCategoryId?: number;
         sortType?: BrandProductSortType;
         size?: number;
       } = {}
@@ -80,7 +80,7 @@ export const QUERY_KEYS = {
         ...QUERY_KEYS.BRAND.ALL,
         brandId,
         'products',
-        { mainCategoryId, sortType, size },
+        { subCategoryId, sortType, size },
       ] as const,
     SEARCH: (
       brandId: number,

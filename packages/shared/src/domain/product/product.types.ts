@@ -30,6 +30,9 @@ interface CreatorProfile {
 export interface ProductDetailType extends ProductBasicType {
   brandImageUrl?: string | undefined;
   volume: number;
+  collabChannelUrl: string | null;
+  collabChannelName: string | null;
+  collabProfileImgUrl: string | null;
 }
 
 export interface ProductReviewType {
@@ -49,6 +52,13 @@ export interface ProductReviewType {
   timeLinkCount: number;
   totalCommentCount: number;
   previewComments: CommentPreviewType[];
+}
+
+export interface ProductReviewPageType {
+  content: ProductReviewType[];
+  totalElements: number;
+  totalPages: number;
+  hasNext: boolean;
 }
 
 export interface ProductRankingCardType extends ProductCardType {

@@ -4,11 +4,13 @@ import type {
   ProductCardDto,
   ProductDetailDto,
   ProductListResponseDto,
+  ProductReviewsPageDto,
   ProductReviewsDto,
 } from './product.dto';
 import type {
   ProductCardType,
   ProductDetailType,
+  ProductReviewPageType,
   ProductReviewType,
 } from './product.types';
 import type { ReviewOverviewDto } from '../review/review.dto';
@@ -27,6 +29,9 @@ export const mapProductDetailDto = (
   isHearted: item.userWish,
   brandImageUrl: item.brandImgUrl,
   volume: item.volume,
+  collabChannelUrl: item.collabChannelUrl,
+  collabChannelName: item.collabChannelName,
+  collabProfileImgUrl: item.collabProfileImgUrl,
 });
 
 // ReviewOverviewDto를 CreatorReviewSummaryType으로 변환합니다.
@@ -121,8 +126,8 @@ export const mapProductReviewDto = (
 });
 
 export const mapProductReviewPageDto = (
-  page: ApiPage<ProductReviewsDto>
-): ApiPage<ProductReviewType> => ({
+  page: ProductReviewsPageDto
+): ProductReviewPageType => ({
   ...page,
   content: page.content.map(mapProductReviewDto),
 });
