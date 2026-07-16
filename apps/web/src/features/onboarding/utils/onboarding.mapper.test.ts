@@ -17,6 +17,19 @@ const createCompletedDraft = (): OnboardingDraft => ({
 });
 
 describe('onboarding payload mappers', () => {
+  it('잘 맞는 상품과 안 맞는 상품이 있으면 각각 payload를 만든다', () => {
+    expect(buildProductFitPayloads(createCompletedDraft())).toEqual([
+      {
+        status: 'MATCHED',
+        productIds: [1, 2],
+      },
+      {
+        status: 'MISMATCHED',
+        productIds: [3],
+      },
+    ]);
+  });
+
   it('제품이 선택된 상태의 payload만 만든다', () => {
     expect(
       buildProductFitPayloads({
@@ -29,6 +42,16 @@ describe('onboarding payload mappers', () => {
         productIds: [1, 2],
       },
     ]);
+  });
+
+  it('선택된 제품이 없으면 payload를 만들지 않는다', () => {
+    expect(
+      buildProductFitPayloads({
+        ...createCompletedDraft(),
+        matchedProductIds: [],
+        mismatchedProductIds: [],
+      })
+    ).toEqual([]);
   });
 
   it('최종 제품 payload의 배열 제한을 다시 검증한다', () => {

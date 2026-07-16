@@ -50,12 +50,23 @@ export type {
 } from './domain/auth/auth.types';
 export { mapJwtLoginResponseDto } from './domain/auth/auth.mapper';
 
+//domain - user product
+export type {
+  UserProductDetailType,
+  UserProductRequestType,
+  UserProductResponseType,
+  UserProductStatusType,
+} from './domain/userProduct/userProduct.types';
+
 //api
 export { apiClient, configureApiClient } from './api/client';
 
 //api - auth
 export * from './api/auth/postKakaoLogin.api';
 export * from './api/auth/postLoginInfo.api';
+
+//api - user product
+export * from './api/userProduct/postUserProduct.api';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';

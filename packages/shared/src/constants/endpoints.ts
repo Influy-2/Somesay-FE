@@ -18,6 +18,10 @@ export const API_ENDPOINTS = {
   PRODUCT_REVIEWS: '/products/:productId/reviews',
   PRODUCT_SIMILAR: '/products/:productId/similar',
 
+  /** User Product **/
+  // 사용자에게 잘 맞거나 맞지 않는 상품을 저장하기 위한 API URL입니다.
+  USER_PRODUCT: '/users/product',
+
   /** Category **/
   CATEGORY: '/categories',
 

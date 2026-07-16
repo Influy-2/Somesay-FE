@@ -48,7 +48,6 @@ export {
   productIdsSchema,
   skinTypeNamesSchema,
 } from './schemas/onboarding.schema';
-export type { ProductFitPayload } from './schemas/onboarding.schema';
 export {
   getFirstIncompleteStep,
   getNextOnboardingPath,

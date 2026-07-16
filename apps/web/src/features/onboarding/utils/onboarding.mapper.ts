@@ -1,13 +1,11 @@
-import {
-  productFitPayloadSchema,
-  type ProductFitPayload,
-} from '../schemas/onboarding.schema';
+import type { UserProductRequestType } from '@somesay/shared';
+import { productFitPayloadSchema } from '../schemas/onboarding.schema';
 import type { OnboardingDraft } from '../types/onboarding.types';
 
 export const buildProductFitPayloads = (
   draft: OnboardingDraft
-): ProductFitPayload[] => {
-  const payloads: ProductFitPayload[] = [];
+): UserProductRequestType[] => {
+  const payloads: UserProductRequestType[] = [];
 
   if (draft.matchedProductIds.length > 0) {
     payloads.push(

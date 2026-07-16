@@ -1,17 +1,37 @@
 import { useCallback } from 'react';
-import { postLoginInfo, type LoginInfoType } from '@somesay/shared';
+import {
+  postLoginInfo,
+  type LoginInfoType,
+  type UserProductRequestType,
+} from '@somesay/shared';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { PATH } from '@/routes/path';
+import { usePostUserProduct } from '@/shared/hooks';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 import { useOnboardingStore } from '../store/onboarding.store';
+import { buildProductFitPayloads } from '../utils/onboarding.mapper';
+
+interface CompleteOnboardingVariables {
+  loginInfo: LoginInfoType;
+  userProducts: UserProductRequestType[];
+}
 
 // 온보딩 기본 정보를 저장하고 회원가입을 완료합니다.
 export const useCompleteOnboarding = () => {
   const navigate = useNavigate();
   const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
+  const { mutateAsync: postUserProduct } = usePostUserProduct();
   const { mutate, isPending } = useMutation({
-    mutationFn: postLoginInfo,
+    mutationFn: async ({
+      loginInfo,
+      userProducts,
+    }: CompleteOnboardingVariables) => {
+      await postLoginInfo(loginInfo);
+      await Promise.all(
+        userProducts.map((userProduct) => postUserProduct(userProduct))
+      );
+    },
     retry: false,
     onSuccess: () => {
       useOnboardingStore.getState().reset();
@@ -27,8 +47,8 @@ export const useCompleteOnboarding = () => {
   const completeOnboarding = useCallback(() => {
     if (isPending) return;
 
-    const { nickname, gender, age, concerns, skinTypeNames } =
-      useOnboardingStore.getState();
+    const store = useOnboardingStore.getState();
+    const { nickname, gender, age, concerns, skinTypeNames } = store;
 
     if (gender === null || age === null) {
       showSnackbar('회원가입 기본 정보를 확인해 주세요.', {
@@ -45,7 +65,10 @@ export const useCompleteOnboarding = () => {
       skinTypeNames,
     };
 
-    mutate(loginInfo);
+    mutate({
+      loginInfo,
+      userProducts: buildProductFitPayloads(store),
+    });
   }, [isPending, mutate, showSnackbar]);
 
   return { completeOnboarding, isPending };

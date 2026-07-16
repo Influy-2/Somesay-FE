@@ -134,5 +134,3 @@ export const productFitPayloadSchema = z.object({
     '제품을 1개 이상 선택한 경우에만 전송할 수 있습니다.'
   ),
 });
-
-export type ProductFitPayload = z.infer<typeof productFitPayloadSchema>;
