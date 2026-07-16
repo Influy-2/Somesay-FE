@@ -1,6 +1,8 @@
 import {
   apiClient,
+  postKakaoLogin,
   postLoginInfo,
+  type JwtLoginResponseDto,
   type LoginInfoRequestDto,
   type LoginInfoResponseDto,
 } from '@somesay/shared';
@@ -19,8 +21,36 @@ const loginInfoResponse: LoginInfoResponseDto = {
   ...loginInfoRequest,
 };
 
+const kakaoLoginResponse: JwtLoginResponseDto = {
+  userId: 1,
+  email: 'somesay@example.com',
+  nickname: 'somesay',
+  profileImgUrl: 'https://example.com/profile.png',
+  jwtAccessToken: 'access-token',
+  refreshToken: 'refresh-token',
+  enabled: true,
+  newUser: true,
+};
+
 describe('auth API', () => {
   afterEach(() => vi.restoreAllMocks());
+
+  it('카카오 인가 코드를 query parameter로 전송하고 JWT 정보를 반환한다', async () => {
+    const post = vi.spyOn(apiClient, 'post').mockResolvedValue({
+      data: kakaoLoginResponse,
+    });
+
+    await expect(postKakaoLogin('kakao-auth-code')).resolves.toEqual({
+      accessToken: 'access-token',
+      refreshToken: 'refresh-token',
+      newUser: true,
+    });
+    expect(post).toHaveBeenCalledWith('/auth/login/kakao', undefined, {
+      params: {
+        code: 'kakao-auth-code',
+      },
+    });
+  });
 
   it('회원가입 기본 정보만 body로 전송하고 data를 반환한다', async () => {
     const post = vi.spyOn(apiClient, 'post').mockResolvedValue({
@@ -30,10 +60,7 @@ describe('auth API', () => {
     await expect(postLoginInfo(loginInfoRequest)).resolves.toEqual(
       loginInfoResponse
     );
-    expect(post).toHaveBeenCalledWith(
-      '/api/v1/auth/login/info',
-      loginInfoRequest
-    );
+    expect(post).toHaveBeenCalledWith('/auth/login/info', loginInfoRequest);
     expect(loginInfoRequest).not.toHaveProperty('matchedProductIds');
     expect(loginInfoRequest).not.toHaveProperty('mismatchedProductIds');
   });

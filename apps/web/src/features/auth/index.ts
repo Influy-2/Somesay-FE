@@ -15,7 +15,9 @@ export {
   saveAuthTokens,
 } from './services/authToken.service';
 export {
+  clearKakaoAuthorizationState,
   createKakaoAuthorizationUrl,
+  isValidKakaoAuthorizationState,
   startKakaoAuthorization,
 } from './services/kakaoOAuth.service';
 export { requestSocialLogin } from './services/socialLogin.service';

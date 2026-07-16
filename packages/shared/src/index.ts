@@ -44,14 +44,17 @@ export { formatSubscriberCount } from './utils';
 export type {
   AuthAgeDto,
   AuthGenderDto,
+  JwtLoginResponseDto,
   LoginInfoRequestDto,
   LoginInfoResponseDto,
 } from './domain/auth/auth.dto';
+export type { KakaoLoginResultType } from './domain/auth/auth.types';
 
 //api
 export { apiClient, configureApiClient } from './api/client';
 
 //api - auth
+export * from './api/auth/postKakaoLogin.api';
 export * from './api/auth/postLoginInfo.api';
 
 //api - ranking

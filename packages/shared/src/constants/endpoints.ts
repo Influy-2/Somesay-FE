@@ -1,8 +1,10 @@
 export const API_ENDPOINTS = {
   /** Auth **/
   AUTH: {
+    // 카카오 인가 코드로 로그인하기 위한 API URL입니다.
+    KAKAO_LOGIN: '/auth/login/kakao',
     // 회원가입 후 기본 정보를 저장하기 위한 API URL입니다.
-    LOGIN_INFO: '/api/v1/auth/login/info',
+    LOGIN_INFO: '/auth/login/info',
   },
 
   /** Ranking  **/
