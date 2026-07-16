@@ -63,7 +63,7 @@ export const SortBar = ({
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         ariaLabel="정렬 선택"
-        height="min-h-[30vh]"
+        size="small"
       >
         <ul className="divide-grey03 flex flex-col gap-5 divide-y px-4 pb-8">
           {sortOptions.map((option) => (

@@ -24,6 +24,7 @@ export const RecommendationSection = () => {
   const [selectedFilters, setSelectedFilters] =
     useState<SelectedFiltersType>(INITIAL_FILTERS);
 
+  // (상품) 카테고리 펼치기
   const categoryOptions = useMemo(
     () =>
       categoryGroups.flatMap(({ mainCategoryName, subCategories }) => [
@@ -32,9 +33,13 @@ export const RecommendationSection = () => {
       ]),
     [categoryGroups]
   );
+
+  // 선택된 필터 있는지 확인
   const isAnyFilterSelected = Object.values(selectedFilters).some(
     (v) => v.length > 0
   );
+
+  // 선택된 필터 없다면 프리뷰 상태
   const isPreviewEnabled = !isAnyFilterSelected;
   const previewChips = useGuestPreviewChips(isPreviewEnabled, categoryOptions);
 

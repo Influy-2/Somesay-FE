@@ -85,6 +85,7 @@ export { EvaluatedProductItemHorizontal } from './product/EvaluatedProductItemHo
 
 /* bottom sheet */
 export { BottomSheet } from './bottomSheet/BottomSheet';
+export type { BottomSheetSize } from './bottomSheet/bottomSheet.types';
 
 /* filter chip */
 export { FilterChip } from './filter/FilterChip';
