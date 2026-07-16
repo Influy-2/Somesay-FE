@@ -127,14 +127,6 @@ export const onboardingStepSchemas = {
   }),
 } satisfies Record<Exclude<OnboardingStep, 'complete'>, z.ZodType>;
 
-export const signupPayloadSchema = z.object({
-  nickname: nicknameSchema,
-  gender: onboardingGenderSchema,
-  age: onboardingAgeSchema,
-  concerns: concernsSchema,
-  skinTypeNames: skinTypeNamesSchema,
-});
-
 export const productFitPayloadSchema = z.object({
   status: productFitStatusSchema,
   productIds: productIdsSchema.min(
@@ -143,5 +135,4 @@ export const productFitPayloadSchema = z.object({
   ),
 });
 
-export type SignupPayload = z.infer<typeof signupPayloadSchema>;
 export type ProductFitPayload = z.infer<typeof productFitPayloadSchema>;

@@ -1,20 +1,8 @@
 import {
   productFitPayloadSchema,
-  signupPayloadSchema,
   type ProductFitPayload,
-  type SignupPayload,
 } from '../schemas/onboarding.schema';
 import type { OnboardingDraft } from '../types/onboarding.types';
-
-export const buildSignupPayload = (draft: OnboardingDraft): SignupPayload => {
-  return signupPayloadSchema.parse({
-    nickname: draft.nickname,
-    gender: draft.gender,
-    age: draft.age,
-    concerns: draft.concerns,
-    skinTypeNames: draft.skinTypeNames,
-  });
-};
 
 export const buildProductFitPayloads = (
   draft: OnboardingDraft

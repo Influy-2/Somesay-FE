@@ -7,7 +7,6 @@ import {
   onboardingStepSchemas,
   productIdsSchema,
   productFitPayloadSchema,
-  signupPayloadSchema,
   skinTypeNamesSchema,
 } from './onboarding.schema';
 
@@ -107,24 +106,6 @@ describe('onboarding step schemas', () => {
 });
 
 describe('onboarding payload schemas', () => {
-  it('가입 payload를 검증하고 변환한다', () => {
-    expect(
-      signupPayloadSchema.parse({
-        nickname: ' somesay ',
-        gender: 'FEMALE',
-        age: 'TWENTIES',
-        concerns: [],
-        skinTypeNames: ['건성'],
-      })
-    ).toEqual({
-      nickname: 'somesay',
-      gender: 'FEMALE',
-      age: 'TWENTIES',
-      concerns: [],
-      skinTypeNames: ['건성'],
-    });
-  });
-
   it('제품 API payload는 최소 한 개의 제품을 요구한다', () => {
     expect(
       productFitPayloadSchema.safeParse({

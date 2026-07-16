@@ -41,14 +41,14 @@ export * from './constants/user.constants';
 export { formatSubscriberCount } from './utils';
 
 //domain - auth
+export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
 export type {
-  AuthAgeDto,
-  AuthGenderDto,
-  JwtLoginResponseDto,
-  LoginInfoRequestDto,
-  LoginInfoResponseDto,
-} from './domain/auth/auth.dto';
-export type { KakaoLoginResultType } from './domain/auth/auth.types';
+  AuthAgeType,
+  AuthGenderType,
+  KakaoLoginResultType,
+  LoginInfoType,
+} from './domain/auth/auth.types';
+export { mapJwtLoginResponseDto } from './domain/auth/auth.mapper';
 
 //api
 export { apiClient, configureApiClient } from './api/client';

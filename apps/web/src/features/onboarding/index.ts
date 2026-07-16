@@ -46,13 +46,9 @@ export {
   productFitPayloadSchema,
   productFitStatusSchema,
   productIdsSchema,
-  signupPayloadSchema,
   skinTypeNamesSchema,
 } from './schemas/onboarding.schema';
-export type {
-  ProductFitPayload,
-  SignupPayload,
-} from './schemas/onboarding.schema';
+export type { ProductFitPayload } from './schemas/onboarding.schema';
 export {
   getFirstIncompleteStep,
   getNextOnboardingPath,
@@ -62,8 +58,5 @@ export {
   isOnboardingStepComplete,
   ONBOARDING_PATH_BY_STEP,
 } from './utils/onboarding.flow';
-export {
-  buildProductFitPayloads,
-  buildSignupPayload,
-} from './utils/onboarding.mapper';
+export { buildProductFitPayloads } from './utils/onboarding.mapper';
 export { isOnboardingCompletionAvailable } from './utils/onboarding.completion';

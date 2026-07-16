@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router';
 import {
   buildProductFitPayloads,
-  buildSignupPayload,
   getNextOnboardingPath,
   OnboardingLayout,
   ONBOARDING_STEP_LABELS,
@@ -91,9 +90,15 @@ export const OnboardingPlaceholderPage = ({
   };
 
   const payloadPreview =
-    step === 'complete'
+    step === 'complete' && store.gender !== null && store.age !== null
       ? {
-          signup: buildSignupPayload(store),
+          signup: {
+            nickname: store.nickname.trim(),
+            gender: store.gender,
+            age: store.age,
+            concerns: store.concerns,
+            skinTypeNames: store.skinTypeNames,
+          },
           productFits: buildProductFitPayloads(store),
         }
       : null;
