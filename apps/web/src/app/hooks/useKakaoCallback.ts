@@ -75,7 +75,7 @@ export const useKakaoCallback = () => {
         clearKakaoAuthorizationState();
         saveAuthTokens({ accessToken, refreshToken });
 
-        if (!newUser) {
+        if (newUser) {
           startOnboarding('KAKAO');
           navigate(ONBOARDING_PATH_BY_STEP.terms, { replace: true });
           return;
