@@ -12,7 +12,7 @@ export const mapUserProductRequestToDto = ({
   status,
   productIds,
 }: UserProductRequestType): UserProductRequestDto => ({
-  status: status === 'MISMATCHED' ? 'UNMATCH' : status,
+  status: status === 'MISMATCHED' ? 'UNMATCHED' : status,
   productIds,
 });
 
@@ -21,6 +21,6 @@ export const mapUserProductResponseDto = ({
   status,
   details,
 }: UserProductResponseDto): UserProductResponseType => ({
-  status: status === 'UNMATCH' ? 'MISMATCHED' : status,
+  status: status === 'UNMATCHED' ? 'MISMATCHED' : status,
   details,
 });

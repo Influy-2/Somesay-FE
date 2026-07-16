@@ -1,4 +1,4 @@
-export type UserProductStatusDto = 'MATCHED' | 'UNMATCH';
+export type UserProductStatusDto = 'MATCHED' | 'UNMATCHED';
 
 // 사용자 상품 저장 API에 전달하는 백엔드 요청 데이터입니다.
 export interface UserProductRequestDto {
