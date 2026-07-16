@@ -14,7 +14,11 @@ import {
   getOnboardingSteps,
   ONBOARDING_PATH_BY_STEP,
 } from './onboarding.flow';
-import { isOnboardingCompletionAvailable } from './onboarding.completion';
+import {
+  isOnboardingCompleteEntry,
+  isOnboardingCompletionAvailable,
+  ONBOARDING_COMPLETE_LOCATION_STATE,
+} from './onboarding.completion';
 
 const createTermsCompletedDraft = (
   provider: OnboardingDraft['provider']
@@ -38,6 +42,16 @@ const completeRequiredInfo = {
 >;
 
 describe('onboarding flow', () => {
+  it('정상 회원가입 완료 이동인 경우에만 완료 화면 진입을 허용한다', () => {
+    expect(
+      isOnboardingCompleteEntry(ONBOARDING_COMPLETE_LOCATION_STATE, 'REPLACE')
+    ).toBe(true);
+    expect(
+      isOnboardingCompleteEntry(ONBOARDING_COMPLETE_LOCATION_STATE, 'POP')
+    ).toBe(false);
+    expect(isOnboardingCompleteEntry(null, 'REPLACE')).toBe(false);
+  });
+
   it('프로필 입력 진행률은 닉네임부터 안 맞았던 제품까지 6단계다', () => {
     expect(ONBOARDING_PROGRESS_STEPS).toEqual([
       'nickname',

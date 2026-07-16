@@ -1,17 +1,19 @@
 import { API_ENDPOINTS } from '../../constants/endpoints';
-import type {
-  UserProductRequestType,
-  UserProductResponseType,
-} from '../../domain/userProduct/userProduct.types';
+import type { UserProductResponseDto } from '../../domain/userProduct/userProduct.dto';
+import {
+  mapUserProductRequestToDto,
+  mapUserProductResponseDto,
+} from '../../domain/userProduct/userProduct.mapper';
+import type { UserProductRequestType } from '../../domain/userProduct/userProduct.types';
 import { apiClient } from '../client';
 import type { ApiResponse } from '../types';
 
-// 사용자에게 잘 맞거나 맞지 않는 상품을 저장하는 API 함수입니다.
+// JWT 인증을 사용해 사용자에게 잘 맞거나 맞지 않는 상품을 저장합니다.
 export const postUserProduct = async (body: UserProductRequestType) => {
-  const response = await apiClient.post<ApiResponse<UserProductResponseType>>(
+  const response = await apiClient.post<ApiResponse<UserProductResponseDto>>(
     API_ENDPOINTS.USER_PRODUCT,
-    body
+    mapUserProductRequestToDto(body)
   );
 
-  return response.data.data;
+  return mapUserProductResponseDto(response.data.data);
 };

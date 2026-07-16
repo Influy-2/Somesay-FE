@@ -58,4 +58,8 @@ export {
   ONBOARDING_PATH_BY_STEP,
 } from './utils/onboarding.flow';
 export { buildProductFitPayloads } from './utils/onboarding.mapper';
-export { isOnboardingCompletionAvailable } from './utils/onboarding.completion';
+export {
+  isOnboardingCompleteEntry,
+  isOnboardingCompletionAvailable,
+  ONBOARDING_COMPLETE_LOCATION_STATE,
+} from './utils/onboarding.completion';

@@ -39,19 +39,12 @@ import { MatchedProductsPage } from '@/pages/onboarding/MatchedProductsPage';
 import { MatchedProductSearchPage } from '@/pages/onboarding/MatchedProductSearchPage';
 import { MismatchedProductsPage } from '@/pages/onboarding/MismatchedProductsPage';
 import { MismatchedProductSearchPage } from '@/pages/onboarding/MismatchedProductSearchPage';
-import { OnboardingPlaceholderPage } from '@/pages/onboarding/OnboardingPlaceholderPage';
+import { CompletePage } from '@/pages/onboarding/CompletePage';
 import { TermsAgreementPage } from '@/pages/onboarding/TermsAgreementPage';
 import {
   OnboardingIndexRedirect,
   OnboardingRouteGuard,
-  type OnboardingStep,
 } from '@/features/onboarding';
-
-const onboardingStepElement = (step: OnboardingStep) => (
-  <OnboardingRouteGuard step={step}>
-    <OnboardingPlaceholderPage step={step} />
-  </OnboardingRouteGuard>
-);
 
 export const appRouter = createBrowserRouter([
   {
@@ -234,7 +227,7 @@ export const appRouter = createBrowserRouter([
           },
           {
             path: PATH.ONBOARDING.COMPLETE,
-            element: onboardingStepElement('complete'),
+            element: <CompletePage />,
           },
         ],
       },
