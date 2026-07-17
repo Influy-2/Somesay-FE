@@ -1,6 +1,6 @@
 // InfoRow.tsx
 import { Link } from 'react-router';
-import { MainArrowIcon } from '@/shared/icons';
+import { MainArrow20Icon } from '@/shared/icons';
 
 type InfoRowProps = {
   label: string;
@@ -12,7 +12,7 @@ type InfoRowProps = {
 export const InfoRow = ({ label, value, to, onClick }: InfoRowProps) => {
   const arrowButton = to ? (
     <Link to={to} aria-label={`${label} 페이지로 이동`}>
-      <MainArrowIcon className="text-grey06" />
+      <MainArrow20Icon />
     </Link>
   ) : onClick ? (
     <button
@@ -20,7 +20,7 @@ export const InfoRow = ({ label, value, to, onClick }: InfoRowProps) => {
       onClick={onClick}
       aria-label={`${label} 페이지로 이동`}
     >
-      <MainArrowIcon className="text-grey06" />
+      <MainArrow20Icon />
     </button>
   ) : null;
   return (
