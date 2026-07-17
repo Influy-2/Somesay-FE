@@ -49,6 +49,14 @@ export type {
 } from './domain/auth/auth.types';
 export { mapJwtLoginResponseDto } from './domain/auth/auth.mapper';
 
+//domain - user
+export type {
+  AgeType,
+  GenderType,
+  UserInfoType,
+  UserType,
+} from './domain/user/user.types';
+
 //domain - user product
 export type {
   UserProductDetailType,
@@ -66,6 +74,9 @@ export * from './api/auth/postLoginInfo.api';
 
 //api - user product
 export * from './api/userProduct/postUserProduct.api';
+
+//api - user
+export * from './api/user/fetchUserInfo.api';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';

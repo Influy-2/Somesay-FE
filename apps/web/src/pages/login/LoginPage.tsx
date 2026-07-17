@@ -1,5 +1,7 @@
 // 소셜 로그인 버튼 페이지
+import { useEffect } from 'react';
 import {
+  saveAuthRedirectPath,
   SOCIAL_PROVIDERS,
   SOCIAL_PROVIDER_LABELS,
   SocialLoginButton,
@@ -7,10 +9,25 @@ import {
 } from '@/features/auth';
 import { ArrowBackIcon } from '@/shared/icons';
 import { useSocialAuthFlow } from '@/app/hooks/useSocialAuthFlow';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 export const LoginPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useSocialAuthFlow();
+
+  // 이전에 왔던 경로로 되돌아가기 위함
+  useEffect(() => {
+    const state = location.state;
+
+    if (
+      typeof state === 'object' &&
+      state !== null &&
+      'from' in state &&
+      typeof state.from === 'string'
+    ) {
+      saveAuthRedirectPath(state.from);
+    }
+  }, [location.state]);
 
   const handleProviderSelect = (provider: SocialProvider) => {
     void login(provider);

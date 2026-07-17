@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 import {
   postLoginInfo,
+  QUERY_KEYS,
   type LoginInfoType,
   type UserProductRequestType,
 } from '@somesay/shared';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { usePostUserProduct } from '@/shared/hooks';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
@@ -20,6 +21,7 @@ interface CompleteOnboardingVariables {
 // 온보딩 기본 정보를 저장하고 회원가입을 완료합니다.
 export const useCompleteOnboarding = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
   const { mutateAsync: postUserProduct } = usePostUserProduct();
   const { mutate, isPending } = useMutation({
@@ -34,6 +36,7 @@ export const useCompleteOnboarding = () => {
     },
     retry: false,
     onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: QUERY_KEYS.USER.INFO() });
       finalizeOnboarding(navigate);
     },
     onError: () => {

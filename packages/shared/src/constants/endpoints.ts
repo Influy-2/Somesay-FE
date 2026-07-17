@@ -22,6 +22,12 @@ export const API_ENDPOINTS = {
   // 사용자에게 잘 맞거나 맞지 않는 상품을 저장하기 위한 API URL입니다.
   USER_PRODUCT: '/users/product',
 
+  /** User **/
+  USER: {
+    // 로그인한 사용자의 서비스 공통 정보를 조회하기 위한 API URL입니다.
+    INFO: '/users/info',
+  },
+
   /** Category **/
   CATEGORY: '/categories',
 

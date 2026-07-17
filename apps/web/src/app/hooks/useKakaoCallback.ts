@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router';
 import {
   clearAuthTokens,
   clearKakaoAuthorizationState,
+  consumeAuthRedirectPath,
   isValidKakaoAuthorizationState,
   saveAuthTokens,
 } from '@/features/auth';
@@ -82,7 +83,7 @@ export const useKakaoCallback = () => {
         }
 
         resetOnboarding();
-        navigate(PATH.ROOT, { replace: true });
+        navigate(consumeAuthRedirectPath() ?? PATH.ROOT, { replace: true });
       } catch {
         if (!ignore) {
           failKakaoLogin();

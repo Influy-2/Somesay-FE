@@ -45,6 +45,7 @@ import {
   OnboardingIndexRedirect,
   OnboardingRouteGuard,
 } from '@/features/onboarding';
+import { ProtectedRoute } from '@/features/auth';
 
 export const appRouter = createBrowserRouter([
   {
@@ -65,7 +66,10 @@ export const appRouter = createBrowserRouter([
           //카테고리
           { path: PATH.CATEGORIES.BASE, element: <CategoriesPage /> },
           //마이페이지
-          { path: PATH.MY_PAGE.BASE, element: <MyPage /> },
+          {
+            path: PATH.MY_PAGE.BASE,
+            element: <MyPage />,
+          },
         ],
       },
       // 바텀바 없는 페이지
@@ -233,7 +237,7 @@ export const appRouter = createBrowserRouter([
       },
       {
         path: PATH.MY_PAGE.BASE,
-        element: <Outlet />,
+        element: <ProtectedRoute />,
         children: [
           {
             path: PATH.MY_PAGE.ACCOUNT.BASE,
