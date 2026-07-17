@@ -13,7 +13,7 @@ const MOCK_CREATOR_IMAGE_URLS = [
 
 const MOCK_SEARCH_PRODUCT: ProductSearchResultType = {
   productId: 1,
-  productImageUrl: mockProductImg,
+  productImgUrl: mockProductImg,
   brandName: '브랜드명',
   productName:
     '캐롯 카터 패드 (200매)캐롯 카밍 워터 패드 캐롯 카터 패드 (200매)캐롯 카밍 워터 패...',
@@ -51,7 +51,7 @@ const MOCK_CREATOR_PROFILE = {
   profileImageUrl: mockProfileImg,
   subscriberNum: 12000,
   trustScore: 4.7,
-  ageGroup: 20,
+  ageGroup: '20',
   skinTypes: ['건성'],
 };
 

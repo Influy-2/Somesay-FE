@@ -20,7 +20,7 @@ const MOCK_PRODUCT = {
   productId: 1,
   brandName: '이니스프리',
   productName: '그린티 씨드 세럼 80ml',
-  productImageUrl: mockProductImg,
+  productImgUrl: mockProductImg,
   price: 35000,
 };
 

@@ -8,7 +8,7 @@ const meta: Meta<typeof HorizontalScrollProductCard> = {
   tags: ['autodocs'],
   argTypes: {
     productId: { control: 'number' },
-    productImageUrl: { control: 'text' },
+    productImgUrl: { control: 'text' },
     brandName: { control: 'text' },
     productName: { control: 'text' },
     price: { control: 'number' },
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof HorizontalScrollProductCard>;
 export const Default: Story = {
   args: {
     productId: 1,
-    productImageUrl: 'https://placehold.co/100',
+    productImgUrl: 'https://placehold.co/100',
     brandName: '브랜드명',
     productName: '이름',
     price: 10000,

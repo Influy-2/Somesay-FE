@@ -82,7 +82,7 @@ const RELATED_REVIEW = {
     profileImageUrl: mockProfile,
     subscriberNum: 30,
     trustScore: 100,
-    ageGroup: 20,
+    ageGroup: '20',
     skinTypes: ['건성'],
   } satisfies BasicCreatorProfileType,
   rating: 4.8,

@@ -31,7 +31,7 @@ export const MOCK_CREATOR: MockCreatorType = {
   profileImageUrl: mockProfileImg,
   subscriberNum: 300000,
   trustScore: 0.99,
-  ageGroup: 20,
+  ageGroup: '20',
   skinTypes: ['건성'],
   likeCount: 10000,
   youtubeUrl: 'https://www.youtube.com',
@@ -51,7 +51,7 @@ export const MOCK_TRUST_SCORE = {
 // 공통 상품 베이스
 const MOCK_PRODUCT_BASE: Omit<MockProductCardType, 'productId' | 'categoryId'> =
   {
-    productImageUrl: mockProductImg,
+    productImgUrl: mockProductImg,
     brandName: '토리든',
     productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
     price: 10000,

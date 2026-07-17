@@ -20,7 +20,7 @@ const MOCK_SUBCATEGORY_PRODUCT: SubcategoryProductType = {
   productId: 1,
   categoryId: 1,
   subCategoryId: 1,
-  productImageUrl: mockProductImg,
+  productImgUrl: mockProductImg,
   brandName: '브랜드명',
   productName:
     '캐롯 카터 패드 (200매)캐롯 카밍 워터 패드 캐롯 카터 패드 (200매)캐롯 카밍 워터 패...',

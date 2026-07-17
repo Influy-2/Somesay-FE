@@ -13,7 +13,7 @@ type Story = StoryObj<typeof RadioProductItem>;
 export const Default: Story = {
   args: {
     productId: 1,
-    productImageUrl: '',
+    productImgUrl: '',
     brandName: '스킨푸드',
     productName: '당근 패드당근 패드',
     isSelected: false,

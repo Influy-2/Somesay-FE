@@ -7,7 +7,7 @@ const MOCK_PRODUCT_THUMBNAILS = {
   price: 10000,
   rating: 4.9,
   reviewCount: 1123,
-  productImageUrl: mockProductImg,
+  productImgUrl: mockProductImg,
 };
 const MOCK_CREATOR = {
   creatorId: 1,
@@ -15,7 +15,7 @@ const MOCK_CREATOR = {
   profileImageUrl: mockProfileImg,
   subscriberNum: 30,
   trustScore: 100,
-  ageGroup: 20,
+  ageGroup: '20',
   skinTypes: ['건성'],
 };
 

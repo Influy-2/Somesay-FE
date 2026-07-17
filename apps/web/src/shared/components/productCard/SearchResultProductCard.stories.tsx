@@ -26,7 +26,7 @@ const MOCK_PRODUCT = {
   productId: 1,
   categoryId: 1,
   subCategoryId: 1,
-  productImageUrl: mockProductImg,
+  productImgUrl: mockProductImg,
   brandName: '이니스프리',
   productName: '블랙티 유스 에센스 200ml 인기 베스트 세럼',
   price: 38000,

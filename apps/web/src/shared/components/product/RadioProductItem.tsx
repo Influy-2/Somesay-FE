@@ -5,7 +5,7 @@ import { RadioOnIcon, RadioOffIcon } from '@/shared/icons';
 
 type RadioProductItemProps = {
   productId: number;
-  productImageUrl: string;
+  productImgUrl: string;
   brandName: string;
   productName: string;
   isSelected: boolean;
@@ -17,7 +17,7 @@ type RadioProductItemProps = {
 export const RadioProductItem = memo(
   ({
     productId,
-    productImageUrl,
+    productImgUrl,
     brandName,
     productName,
     isSelected,
@@ -42,9 +42,9 @@ export const RadioProductItem = memo(
         >
           <div className="flex flex-1 items-start gap-3">
             <div className="bg-grey02 h-20 w-18 overflow-hidden">
-              {productImageUrl && (
+              {productImgUrl && (
                 <img
-                  src={productImageUrl}
+                  src={productImgUrl}
                   alt={productName}
                   className="size-full object-cover"
                 />

@@ -61,9 +61,9 @@ export const BrandHomePage = () => {
     () => [
       { id: ALL_CATEGORY_ID, label: '전체' },
       ...(brandQuery.data?.availableSubCategories.map(
-        ({ subCategoryId, subCategoryName }) => ({
+        ({ subCategoryId, subName }) => ({
           id: subCategoryId,
-          label: subCategoryName,
+          label: subName,
         })
       ) ?? []),
     ],

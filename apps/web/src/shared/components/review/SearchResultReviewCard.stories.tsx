@@ -20,7 +20,7 @@ const MOCK_CREATOR = {
   profileImageUrl: mockProfile1,
   subscriberNum: 128000,
   trustScore: 92.4,
-  ageGroup: 20,
+  ageGroup: '20',
   skinTypes: ['건성'],
 };
 
@@ -28,7 +28,7 @@ const MOCK_PRODUCT = {
   productId: 1,
   brandName: '이니스프리',
   productName: '그린티 씨드 세럼 80ml',
-  productImageUrl: mockProductImg,
+  productImgUrl: mockProductImg,
   price: 35000,
   rating: 4.5,
   reviewCount: 1280,

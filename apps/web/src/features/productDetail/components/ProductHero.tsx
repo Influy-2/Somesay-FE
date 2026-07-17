@@ -6,7 +6,7 @@ interface ProductHeroProps extends ProductDetailType {
 }
 
 export const ProductHero = ({
-  productImageUrl,
+  productImgUrl,
   brandName,
   brandId,
   brandLogoUrl,
@@ -25,9 +25,9 @@ export const ProductHero = ({
       aria-label={`${brandName} ${productName} 상품 정보`}
     >
       <div className="bg-grey01 aspect-square w-full overflow-hidden">
-        {productImageUrl && (
+        {productImgUrl && (
           <img
-            src={productImageUrl}
+            src={productImgUrl}
             alt={productName}
             className="h-full w-full object-cover"
           />

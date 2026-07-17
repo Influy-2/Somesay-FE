@@ -16,6 +16,7 @@ export type {
 } from './domain/search/search.types';
 
 export type {
+  BrandAvailableSubCategoryType,
   BrandSummaryType,
   BrandProductSortType,
   BrandProductType,

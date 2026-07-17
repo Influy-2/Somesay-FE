@@ -31,7 +31,7 @@ const mockCreator = {
   subscriberNum: 300000,
   trustScore: 100,
   ranking: 1,
-  ageGroup: 20,
+  ageGroup: '20',
   skinTypes: ['건성'],
 };
 

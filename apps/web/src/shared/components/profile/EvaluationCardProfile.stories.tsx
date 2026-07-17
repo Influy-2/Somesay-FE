@@ -15,7 +15,7 @@ const meta: Meta<typeof EvaluationCardProfile> = {
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
     ranking: { control: 'number' },
-    ageGroup: { control: 'number' },
+    ageGroup: { control: 'text' },
     skinTypes: { control: 'object' },
   },
 };
@@ -31,7 +31,7 @@ export const Evaluated: Story = {
     subscriberNum: 1240000,
     trustScore: 4.5,
     ranking: 5,
-    ageGroup: 20,
+    ageGroup: '20',
     skinTypes: ['복합성'],
   },
 };
@@ -44,7 +44,7 @@ export const EvaluatedNoRank: Story = {
     subscriberNum: 1010,
     trustScore: 4.5,
     ranking: 0,
-    ageGroup: 30,
+    ageGroup: '30',
     skinTypes: ['지성'],
   },
 };
@@ -57,7 +57,7 @@ export const NotEvaluated: Story = {
     subscriberNum: 1240000,
     trustScore: 4.5,
     ranking: 5,
-    ageGroup: 20,
+    ageGroup: '20',
     skinTypes: ['복합성'],
   },
 };

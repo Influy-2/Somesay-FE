@@ -7,7 +7,7 @@ import mockProductImg from '@/assets/mock_product_img.png';
 export const MOCK_PRODUCT_RANKING_CARDS: ProductRankingCardType[] = [
   {
     productId: 1,
-    productImageUrl: mockProductImg,
+    productImgUrl: mockProductImg,
     brandName: '토리든',
     productName: '[스킨푸드] 캐롯 카로팅 카밍...',
     price: 10000,
@@ -19,7 +19,7 @@ export const MOCK_PRODUCT_RANKING_CARDS: ProductRankingCardType[] = [
   },
   {
     productId: 2,
-    productImageUrl: mockProductImg,
+    productImgUrl: mockProductImg,
     brandName: '토리든',
     productName: '[스킨푸드] 캐롯 카로팅 카밍...',
     price: 10000,
@@ -31,7 +31,7 @@ export const MOCK_PRODUCT_RANKING_CARDS: ProductRankingCardType[] = [
   },
   {
     productId: 3,
-    productImageUrl: mockProductImg,
+    productImgUrl: mockProductImg,
     brandName: '토리든',
     productName: '[스킨푸드] 캐롯 카로팅 카밍...',
     price: 10000,
@@ -43,7 +43,7 @@ export const MOCK_PRODUCT_RANKING_CARDS: ProductRankingCardType[] = [
   },
   {
     productId: 4,
-    productImageUrl: mockProductImg,
+    productImgUrl: mockProductImg,
     brandName: '토리든',
     productName: '[스킨푸드] 캐롯 카로팅 카밍...',
     price: 10000,

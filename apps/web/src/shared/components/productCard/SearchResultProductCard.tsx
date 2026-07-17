@@ -30,7 +30,7 @@ export const SearchResultProductCard = ({
         {/* 이미지 */}
         <div className="border-grey02 relative h-[117.5px] w-26 shrink-0 overflow-hidden border-[0.7px]">
           <img
-            src={product.productImageUrl}
+            src={product.productImgUrl}
             alt=""
             className="h-full w-full object-cover"
           />

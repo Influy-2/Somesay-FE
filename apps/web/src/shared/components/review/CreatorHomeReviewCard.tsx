@@ -21,7 +21,7 @@ export const CreatorHomeReviewCard = ({
       {/* 상품 정보 */}
       <div className="flex w-full items-center gap-3">
         <img
-          src={product.productImageUrl}
+          src={product.productImgUrl}
           alt={product.productName}
           className="h-auto w-15 object-cover"
         />

@@ -10,7 +10,7 @@ export type HorizontalScrollProductCardProps = ProductCardType;
 
 export const HorizontalScrollProductCard = ({
   productId,
-  productImageUrl,
+  productImgUrl,
   brandName,
   productName,
   price,
@@ -38,9 +38,9 @@ export const HorizontalScrollProductCard = ({
     >
       <div className="bg-grey02 relative aspect-39/44 h-44 self-stretch overflow-hidden">
         <div aria-hidden="true" className="h-full w-full">
-          {productImageUrl && productImageUrl.length > 0 && (
+          {productImgUrl && productImgUrl.length > 0 && (
             <img
-              src={productImageUrl}
+              src={productImgUrl}
               alt=""
               className="size-full object-cover"
             />

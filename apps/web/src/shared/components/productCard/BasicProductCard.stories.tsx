@@ -13,7 +13,7 @@ const meta: Meta<typeof BasicProductCard> = {
 
   argTypes: {
     productId: { control: 'number' },
-    productImageUrl: { control: 'text' },
+    productImgUrl: { control: 'text' },
     brandName: { control: 'text' },
     productName: { control: 'text' },
     price: { control: 'number' },
@@ -30,7 +30,7 @@ type Story = StoryObj<typeof BasicProductCard>;
 export const Default: Story = {
   args: {
     productId: 1,
-    productImageUrl: mockItem,
+    productImgUrl: mockItem,
     brandName: '브랜드명',
     productName: '이름',
     price: 10000,

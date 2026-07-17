@@ -8,7 +8,7 @@ type ProductRankingCardProps = ProductCardType;
 
 export const BasicProductCard = ({
   productId,
-  productImageUrl,
+  productImgUrl,
   brandName,
   productName,
   price,
@@ -33,9 +33,9 @@ export const BasicProductCard = ({
       <div className="relative h-50 w-full overflow-hidden border-none">
         {/* 상품 이미지 */}
         <div aria-hidden="true" className="border-grey02 h-full w-full border">
-          {productImageUrl && productImageUrl.length > 0 && (
+          {productImgUrl && productImgUrl.length > 0 && (
             <img
-              src={productImageUrl}
+              src={productImgUrl}
               alt=""
               className="size-full border border-none object-cover"
             />

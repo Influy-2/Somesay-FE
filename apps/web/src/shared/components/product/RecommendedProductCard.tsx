@@ -17,7 +17,7 @@ const PRODUCT = {
   price: '10,000원',
   rating: 4.9,
   reviewCount: 43,
-  productImageUrl: recommendedProductCardImg,
+  productImgUrl: recommendedProductCardImg,
   creatorImageUrls: [mockProfileImg, mockProfile2Img, mockProfile3Img],
 };
 
@@ -32,7 +32,7 @@ export const RecommendedProductCard = () => {
       aria-label={`${PRODUCT.brandName} ${PRODUCT.productName}, ${PRODUCT.price}, 별점 ${PRODUCT.rating}점, 리뷰 ${formattedReviewCount}개`}
     >
       <img
-        src={PRODUCT.productImageUrl}
+        src={PRODUCT.productImgUrl}
         alt=""
         className="absolute inset-0 size-full object-cover"
         aria-hidden="true"

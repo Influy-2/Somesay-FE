@@ -6,7 +6,7 @@ interface ProductCardThumbnailProps {
   price: number;
   rating: number;
   reviewCount: number;
-  productImageUrl: string;
+  productImgUrl: string;
 }
 
 export const ProductCardThumbnail = ({
@@ -15,7 +15,7 @@ export const ProductCardThumbnail = ({
   price,
   rating,
   reviewCount,
-  productImageUrl,
+  productImgUrl,
 }: ProductCardThumbnailProps) => {
   const formattedPrice = price.toLocaleString('ko-KR');
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
@@ -48,7 +48,7 @@ export const ProductCardThumbnail = ({
         aria-hidden="true"
       >
         <img
-          src={productImageUrl}
+          src={productImgUrl}
           alt={`${brandName} ${productName} 제품 이미지`}
           className="h-full w-full object-cover"
         />

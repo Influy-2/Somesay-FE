@@ -8,7 +8,7 @@ const MOCK_PRODUCT_THUMBNAILS = {
   price: 10000,
   rating: 4.9,
   reviewCount: 1123,
-  productImageUrl:
+  productImgUrl:
     'https://www.figma.com/api/mcp/asset/91dd6a94-e9c4-480c-8452-3d916c193bb2',
 };
 

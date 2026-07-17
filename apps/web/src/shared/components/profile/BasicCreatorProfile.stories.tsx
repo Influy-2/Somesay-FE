@@ -12,7 +12,7 @@ const meta: Meta<typeof BasicCreatorProfile> = {
     profileImageUrl: { control: 'text' },
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
-    ageGroup: { control: 'number' },
+    ageGroup: { control: 'text' },
     skinTypes: { control: 'object' },
   },
 };
@@ -27,7 +27,7 @@ export const Default: Story = {
     profileImageUrl: 'https://placehold.co/100',
     subscriberNum: 0,
     trustScore: 4.5,
-    ageGroup: 0,
+    ageGroup: '0',
     skinTypes: ['텍스트'],
   },
 };
