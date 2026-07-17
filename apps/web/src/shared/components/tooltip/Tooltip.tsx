@@ -40,7 +40,7 @@ export const Tooltip = ({
           arrowClassName
         )}
       />
-      <div className="whitespace-pre-line">{label}</div>{' '}
+      <div className="whitespace-pre-line">{label}</div>
       {variant === 'withClose' && onClose && (
         <button
           type="button"
