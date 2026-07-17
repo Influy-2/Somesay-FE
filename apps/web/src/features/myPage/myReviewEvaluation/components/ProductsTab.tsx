@@ -47,17 +47,16 @@ export const ProductsTab = ({
 
   return (
     <div className="flex flex-col">
-      <p className="body2-m px-4 pt-4">
-        <span className="body2-sb">
+      <p className="body1-sb flex items-center gap-1 truncate px-4 pt-5">
+        <span className="min-w-0 truncate">
           '
           {
             MOCK_EVALUATED_PRODUCTS.find(
               (p) => p.productId === selectedProductId
             )?.productName
           }
-          '
         </span>
-        리뷰에 남긴 평가
+        <span className="shrink-0">' 리뷰에 남긴 평가</span>
       </p>
 
       <div className="relative flex items-center">

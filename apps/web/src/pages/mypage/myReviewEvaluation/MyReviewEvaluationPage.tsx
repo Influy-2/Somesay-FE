@@ -80,20 +80,22 @@ export const MyReviewEvaluationPage = () => {
           </button>
         }
       />
-      <TabBar
-        tabs={[
-          {
-            tabText: '상품별',
-            isActive: activeTab === 'products',
-            onClick: () => setActiveTab('products'),
-          },
-          {
-            tabText: '크리에이터별',
-            isActive: activeTab === 'creators',
-            onClick: () => setActiveTab('creators'),
-          },
-        ]}
-      />
+      <div className="border-grey02 border-b-2 px-4 [&>div]:border-none">
+        <TabBar
+          tabs={[
+            {
+              tabText: '상품별',
+              isActive: activeTab === 'products',
+              onClick: () => setActiveTab('products'),
+            },
+            {
+              tabText: '크리에이터별',
+              isActive: activeTab === 'creators',
+              onClick: () => setActiveTab('creators'),
+            },
+          ]}
+        />
+      </div>
 
       {activeTab === 'products' && (
         <ProductsTab
