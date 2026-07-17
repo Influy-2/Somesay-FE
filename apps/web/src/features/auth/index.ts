@@ -1,7 +1,5 @@
 export { SocialLoginButton } from './components/SocialLoginButton';
 export {
-  ACCESS_TOKEN_STORAGE_KEY,
-  REFRESH_TOKEN_STORAGE_KEY,
   SOCIAL_PROVIDERS,
   SOCIAL_PROVIDER_LABELS,
 } from './constants/auth.constants';

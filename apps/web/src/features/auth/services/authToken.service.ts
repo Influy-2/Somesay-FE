@@ -1,22 +1,21 @@
-import {
-  ACCESS_TOKEN_STORAGE_KEY,
-  REFRESH_TOKEN_STORAGE_KEY,
-} from '../constants/auth.constants';
+import { useAuthTokenStore } from '@/shared/stores/auth.store';
 
 interface AuthTokens {
   accessToken: string;
   refreshToken: string;
 }
 
-export const getAccessToken = () =>
-  localStorage.getItem(ACCESS_TOKEN_STORAGE_KEY);
+export const getAccessToken = () => useAuthTokenStore.getState().accessToken;
+
+export const getRefreshToken = () => useAuthTokenStore.getState().refreshToken;
 
 export const saveAuthTokens = ({ accessToken, refreshToken }: AuthTokens) => {
-  localStorage.setItem(ACCESS_TOKEN_STORAGE_KEY, accessToken);
-  localStorage.setItem(REFRESH_TOKEN_STORAGE_KEY, refreshToken);
+  useAuthTokenStore.getState().setTokens({
+    accessToken,
+    refreshToken,
+  });
 };
 
 export const clearAuthTokens = () => {
-  localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
-  localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
+  useAuthTokenStore.getState().clearTokens();
 };

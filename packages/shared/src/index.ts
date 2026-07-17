@@ -43,8 +43,7 @@ export { formatSubscriberCount } from './utils';
 //domain - auth
 export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
 export type {
-  AuthAgeType,
-  AuthGenderType,
+  AuthTokenType,
   KakaoLoginResultType,
   LoginInfoType,
 } from './domain/auth/auth.types';
