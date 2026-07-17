@@ -1,13 +1,14 @@
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { ProductCardType } from '@somesay/shared';
-import { WhiteHeartButton } from '@/shared/components';
+import { WhiteHeartButton, AvatarStack } from '@/shared/components';
+import { PATH } from '@/routes/path';
 
 type ProductRankingCardProps = ProductCardType & { ranking: number };
 
 export const ProductRankingCard = ({
   productId,
-  productImageUrl,
+  productImgUrl,
   brandName,
   productName,
   price,
@@ -17,8 +18,6 @@ export const ProductRankingCard = ({
   isHearted,
   creators,
 }: ProductRankingCardProps) => {
-  //TODO: 임시 null처리
-
   const formattedReviewCount = reviewCount
     ? reviewCount.toLocaleString('ko-KR')
     : '0';
@@ -36,9 +35,9 @@ export const ProductRankingCard = ({
       <div className="relative h-[12.5rem] w-full overflow-hidden">
         {/* 상품 이미지 */}
         <div aria-hidden="true" className="border-grey02 h-full w-full border">
-          {productImageUrl && productImageUrl.length > 0 && (
+          {productImgUrl && productImgUrl.length > 0 && (
             <img
-              src={productImageUrl}
+              src={productImgUrl}
               alt=""
               className="size-full object-cover"
             />
@@ -69,15 +68,15 @@ export const ProductRankingCard = ({
         aria-hidden="true"
       >
         {/* 브랜드 */}
-        <p className="body2-m text-grey-black truncate">{brandName}</p>
+        <p className="body2-m truncate text-black">{brandName}</p>
 
         {/* 상품명 */}
-        <p className="body2-m text-grey-black w-full truncate whitespace-pre-wrap">
+        <p className="body2-m line-clamp-1 w-full truncate whitespace-pre-wrap text-black">
           {productName}
         </p>
 
         {/* 가격 */}
-        <p className="body2-m text-grey-black truncate">
+        <p className="body2-m truncate text-black">
           {price ? price.toLocaleString('ko-KR') + '원' : '가격 정보 없음'}
         </p>
 
@@ -85,31 +84,19 @@ export const ProductRankingCard = ({
         <div className="flex items-center gap-1">
           {/* 별점 */}
           <div className="flex items-center">
-            <StarIcon className="size-4" />
+            <StarIcon className="text-primary-300 size-4" />
             <span className="body2-sb">{rating.toFixed(1)}</span>
           </div>
           {/* 리뷰수 */}
           <span className="body2-m">({formattedReviewCount})</span>
           {/* 크리에이터 프로필 스택 */}
-          <div className="flex flex-row-reverse items-center gap-0">
-            {[...creators].reverse().map((creator, index, arr) => (
-              <div
-                key={creator.name}
-                className="relative size-[1.375rem] overflow-hidden rounded-full border border-white"
-                style={{ marginLeft: index === arr.length - 1 ? 0 : -6 }}
-              >
-                <img
-                  src={creator.profileImageUrl}
-                  alt=""
-                  className="size-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
+          <AvatarStack creators={creators} />
         </div>
       </div>
-      {/* TODO: 임시 링크 */}
-      <Link to={`/${productId}`} className="absolute inset-0" />
+      <Link
+        to={`${PATH.PRODUCT.BASE}/${productId}`}
+        className="absolute inset-0"
+      />
     </article>
   );
 };

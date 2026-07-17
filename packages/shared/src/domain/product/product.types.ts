@@ -2,7 +2,7 @@ import type { CommentPreviewType } from '../comment/comment.types';
 
 export interface ProductBasicType {
   productId: number;
-  productImageUrl: string;
+  productImgUrl: string;
   brandName: string;
   productName: string;
   price: number;

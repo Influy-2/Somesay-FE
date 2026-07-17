@@ -8,6 +8,6 @@ export interface CreatorRankingDto {
   skinTypes: string[];
   subscriberNum: number;
   ranking: number;
-  ageGroup: number;
+  ageGroup: string; //TODO: enum으로 교체
   oldRanking: number;
 }

@@ -1,10 +1,7 @@
 import { CreatorRankingUpDownRow, MoreButton } from '@/shared/components';
-import { useFetchCreatorRanking } from '@/shared/hooks/ranking/useFetchCreatorRanking';
-
+import { useFetchHomeCreatorRanking } from '@/shared/hooks';
 export const CreatorRankingSection = () => {
-  const { data: creatorRankingData } = useFetchCreatorRanking({
-    size: 5,
-  });
+  const { data: creatorRankingData } = useFetchHomeCreatorRanking();
 
   return (
     <section
@@ -16,11 +13,9 @@ export const CreatorRankingSection = () => {
       </h2>
       <div className="flex w-full flex-col items-center justify-center gap-5">
         <ol className="flex flex-col items-start gap-6 self-stretch py-0">
-          {creatorRankingData?.pages
-            .flatMap((page) => page.content)
-            .map((creator) => (
-              <CreatorRankingUpDownRow {...creator} key={creator.creatorId} />
-            ))}
+          {creatorRankingData?.map((creator) => (
+            <CreatorRankingUpDownRow {...creator} key={creator.creatorId} />
+          ))}
         </ol>
         {/* TODO: 경로 수정 */}
         <MoreButton to={'/임시'} text="순위 더보기" />

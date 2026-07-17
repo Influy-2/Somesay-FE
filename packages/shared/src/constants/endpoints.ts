@@ -28,7 +28,9 @@ export const API_ENDPOINTS = {
     INFO: '/users/info',
   },
 
-  /** Home **/
+  /** home ranking controller **/
+  HOME_CREATOR_RANKING: '/home/creators',
+  HOME_PRODUCT_RANKING: '/home/products',
   HOME_PRODUCT_LIST: '/home/product/list',
 
   /** Category **/

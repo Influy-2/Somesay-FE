@@ -45,6 +45,8 @@ export const QUERY_KEYS = {
   },
   HOME: {
     ALL: ['home'] as const,
+    CREATOR_RANKING: () => [...QUERY_KEYS.HOME.ALL, 'creator-ranking'] as const,
+    PRODUCT_RANKING: () => [...QUERY_KEYS.HOME.ALL, 'product-ranking'] as const,
     PRODUCT_LIST: ({
       mainCategoryId,
       subCategoryId,

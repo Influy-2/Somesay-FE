@@ -5,6 +5,10 @@ export { useFetchProductReviewOverview } from './product/useFetchProductReviewOv
 export { useFetchProductReviews } from './product/useFetchProductReviews';
 export { useFetchSimilarProducts } from './product/useFetchSimilarProducts';
 
+// Home
+export { useFetchHomeCreatorRanking } from './home/useFetchHomeCreatorRanking';
+export { useFetchHomeProductRanking } from './home/useFetchHomeProductRanking';
+
 // Category
 export { useFetchCategories } from './category/useFetchCategories';
 

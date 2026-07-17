@@ -27,6 +27,7 @@ export type {
   CreatorRankingUpDownType,
   BasicCreatorProfileType,
 } from './domain/creator/creator.types';
+export type { HomeCreatorRankingType } from './domain/ranking/ranking.types';
 
 export * from './domain/category/category.types';
 export * from './domain/filter/filter.types';
@@ -83,6 +84,10 @@ export * from './api/user/fetchUserInfo.api';
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';
 export * from './api/ranking/fetchProductRanking.api';
+
+//api - home
+export * from './api/home/fetchHomeCreatorRanking.api';
+export * from './api/home/fetchHomeProductRanking.api';
 
 //api - product
 export * from './api/product/fetchHomeProductList.api';

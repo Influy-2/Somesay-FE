@@ -39,11 +39,14 @@ export const CreatorRankingUpDownRow = ({
         {/* 순위 번호 + 변동 */}
         <div className="flex w-[1.4375rem] flex-col items-center gap-0.5">
           <span className="subhead-sb text-center text-black">{ranking}</span>
+          {/* 업다운 화살표 */}
           <div className="flex items-center gap-0.5">
             {rankChangeDiff === 'up' ? (
               <>
-                <ArrowUpIcon className="size-3" />
-                <span className="caption1-m">{rankChange}</span>
+                <ArrowUpIcon className="text-primary-400" />
+                <span className="caption1-m text-primary-400">
+                  {rankChange}
+                </span>
               </>
             ) : rankChangeDiff === 'down' ? (
               <>
@@ -70,7 +73,7 @@ export const CreatorRankingUpDownRow = ({
         {/* 이름 + 채널 + 칩 */}
         <div className="flex flex-col gap-1.5">
           {/* 이름 + 유튜브 구독자 */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <span className="body1-sb whitespace-nowrap text-black">
               {nickname}
             </span>
