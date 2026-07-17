@@ -1,9 +1,8 @@
 //Review/ Preview
 
-import { Star16Icon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
-import { ReviewProductLink } from '@/shared/components';
+import { ReviewProductLink, StarRating } from '@/shared/components';
 
 interface PreviewProps {
   rating: number;
@@ -26,15 +25,9 @@ export const Preview = ({ rating, content, product }: PreviewProps) => {
         aria-label="리뷰 원본 보기"
       >
         {/* 별점 */}
-        <div className="flex items-center gap-px">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star16Icon
-              key={i}
-              className={i < rating ? 'text-primary-300' : 'text-grey03'}
-              aria-hidden="true"
-            />
-          ))}
-          <span className="body2-sb ml-0.5">{rating}</span>
+        <div className="flex items-center gap-1">
+          <StarRating rating={rating} />
+          <span className="body2-sb">{rating}</span>
         </div>
         {/* 리뷰 */}
         <div className="flex flex-1 items-center">
