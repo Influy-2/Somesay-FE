@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
 import { InfoSection } from './InfoSection';
-import { MainArrowIcon } from '@/shared/icons';
+import { MainArrow20Icon } from '@/shared/icons';
 
 type FitProduct = {
   productId: number;
@@ -32,7 +32,7 @@ const FitProductRow = ({
       <div className="flex w-full items-center justify-between">
         <span className="body1-sb text-grey-black">{label}</span>
         <Link to={to} aria-label={`${label} 페이지로 이동`}>
-          <MainArrowIcon className="text-grey06" />
+          <MainArrow20Icon className="text-grey06" />
         </Link>
       </div>
       {products.length > 0 && (
