@@ -18,11 +18,7 @@ const PRODUCT = {
   rating: 4.9,
   reviewCount: 43,
   productImageUrl: recommendedProductCardImg,
-  creators: [
-    { name: 'creator1', profileImageUrl: mockProfileImg },
-    { name: 'creator2', profileImageUrl: mockProfile2Img },
-    { name: 'creator3', profileImageUrl: mockProfile3Img },
-  ],
+  creatorImageUrls: [mockProfileImg, mockProfile2Img, mockProfile3Img],
 };
 
 export const RecommendedProductCard = () => {
@@ -62,7 +58,7 @@ export const RecommendedProductCard = () => {
               </div>
               <span className="body2-m shrink-0">({formattedReviewCount})</span>
               <AvatarStack
-                creators={PRODUCT.creators}
+                creatorImageUrls={PRODUCT.creatorImageUrls}
                 borderColor="border-grey09"
               />
             </div>

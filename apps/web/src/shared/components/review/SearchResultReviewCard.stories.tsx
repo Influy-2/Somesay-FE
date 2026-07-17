@@ -33,7 +33,7 @@ const MOCK_PRODUCT = {
   rating: 4.5,
   reviewCount: 1280,
   isHearted: false,
-  creators: [{ name: '올리브영언니', profileImageUrl: mockProfile1 }],
+  creatorImageUrls: [mockProfile1],
 };
 
 // 기본 — 별점 5점

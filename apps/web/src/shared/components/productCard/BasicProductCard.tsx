@@ -15,7 +15,7 @@ export const BasicProductCard = ({
   rating,
   reviewCount,
   isHearted,
-  creators,
+  creatorImageUrls,
 }: ProductRankingCardProps) => {
   const formattedPrice = price.toLocaleString('ko-KR');
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
@@ -27,7 +27,7 @@ export const BasicProductCard = ({
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${brandName} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creators.map((c) => c.name).join(', ')}`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 이미지 영역 */}
       <div className="relative h-50 w-full overflow-hidden border-none">
@@ -79,17 +79,13 @@ export const BasicProductCard = ({
           <span className="body2-m">({formattedReviewCount})</span>
           {/* 크리에이터 프로필 스택 */}
           <div className="flex flex-row-reverse items-center gap-0">
-            {[...creators].reverse().map((creator, index, arr) => (
+            {[...creatorImageUrls].reverse().map((imageUrl, index, arr) => (
               <div
-                key={creator.name}
+                key={`${imageUrl}-${index}`}
                 className="relative size-5.5 overflow-hidden rounded-full border border-white"
                 style={{ marginLeft: index === arr.length - 1 ? 0 : -6 }}
               >
-                <img
-                  src={creator.profileImageUrl}
-                  alt=""
-                  className="size-full object-cover"
-                />
+                <img src={imageUrl} alt="" className="size-full object-cover" />
               </div>
             ))}
           </div>

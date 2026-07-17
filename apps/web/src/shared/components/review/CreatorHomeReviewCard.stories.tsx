@@ -33,7 +33,7 @@ export const Default: Story = {
       rating: 4.5,
       reviewCount: 1240,
       isHearted: false,
-      creators: [{ name: '크리에이터1', profileImageUrl: mockProfile }],
+      creatorImageUrls: [mockProfile],
     },
   },
 };

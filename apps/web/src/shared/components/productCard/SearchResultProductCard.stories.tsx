@@ -20,11 +20,7 @@ const meta: Meta<typeof SearchResultProductCard> = {
 export default meta;
 type Story = StoryObj<typeof SearchResultProductCard>;
 
-const MOCK_CREATORS = [
-  { name: '크리에이터1', profileImageUrl: mockProfile1 },
-  { name: '크리에이터2', profileImageUrl: mockProfile2 },
-  { name: '크리에이터3', profileImageUrl: mockProfile3 },
-];
+const MOCK_CREATOR_IMAGE_URLS = [mockProfile1, mockProfile2, mockProfile3];
 
 const MOCK_PRODUCT = {
   productId: 1,
@@ -37,7 +33,7 @@ const MOCK_PRODUCT = {
   rating: 4.5,
   reviewCount: 1240,
   isHearted: false,
-  creators: MOCK_CREATORS,
+  creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
   reviewSummary: '촉촉하고 흡수가 빨라서 데일리로 쓰기 좋아요.',
   skinTypes: ['건성', '복합성'],
   expectedEffects: ['보습', '탄력', '미백'],
@@ -64,7 +60,7 @@ export const SingleCreator: Story = {
   args: {
     product: {
       ...MOCK_PRODUCT,
-      creators: [MOCK_CREATORS[0]!],
+      creatorImageUrls: [MOCK_CREATOR_IMAGE_URLS[0]!],
     },
     onHeartToggle: () => {},
   },

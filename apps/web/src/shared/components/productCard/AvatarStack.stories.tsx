@@ -11,7 +11,7 @@ const meta: Meta<typeof AvatarStack> = {
   component: AvatarStack,
   tags: ['autodocs'],
   argTypes: {
-    creators: { control: 'object' },
+    creatorImageUrls: { control: 'object' },
   },
 };
 
@@ -20,10 +20,6 @@ type Story = StoryObj<typeof AvatarStack>;
 
 export const Default: Story = {
   args: {
-    creators: [
-      { name: '크리에이터1', profileImageUrl: mockProfile1 },
-      { name: '크리에이터2', profileImageUrl: mockProfile2 },
-      { name: '크리에이터3', profileImageUrl: mockProfile3 },
-    ],
+    creatorImageUrls: [mockProfile1, mockProfile2, mockProfile3],
   },
 };

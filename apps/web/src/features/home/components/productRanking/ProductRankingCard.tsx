@@ -16,7 +16,7 @@ export const ProductRankingCard = ({
   reviewCount,
   ranking,
   isHearted,
-  creators,
+  creatorImageUrls,
 }: ProductRankingCardProps) => {
   const formattedReviewCount = reviewCount
     ? reviewCount.toLocaleString('ko-KR')
@@ -29,7 +29,7 @@ export const ProductRankingCard = ({
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${ranking}위 ${brandName} ${productName}, ${price ? price + '원' : '가격 정보 없음'}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creators.map((c) => c.name).join(', ')}`}
+      aria-label={`${ranking}위 ${brandName} ${productName}, ${price ? price + '원' : '가격 정보 없음'}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 이미지 영역 */}
       <div className="relative h-[12.5rem] w-full overflow-hidden">
@@ -90,7 +90,7 @@ export const ProductRankingCard = ({
           {/* 리뷰수 */}
           <span className="body2-m">({formattedReviewCount})</span>
           {/* 크리에이터 프로필 스택 */}
-          <AvatarStack creators={creators} />
+          <AvatarStack creatorImageUrls={creatorImageUrls} />
         </div>
       </div>
       <Link

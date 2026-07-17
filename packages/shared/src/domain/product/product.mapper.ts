@@ -50,12 +50,6 @@ export const mapCreatorReviewSummary = (
   productSkinExpectations: item.productSkinExpectations,
 });
 
-const mapCreatorUrls = (urls: string[]) =>
-  urls.map((url) => ({
-    name: '',
-    profileImageUrl: url,
-  }));
-
 export const mapProductCardDtoToCard = (
   item: ProductCardDto
 ): ProductCardType => ({
@@ -67,7 +61,7 @@ export const mapProductCardDtoToCard = (
   rating: item.avgRating,
   reviewCount: item.reviewCount ?? 0,
   isHearted: item.userWish,
-  creators: mapCreatorUrls(item.creatorImageUrls),
+  creatorImageUrls: item.creatorImageUrls,
 });
 
 // 상품 카드에 사용.
@@ -82,7 +76,7 @@ export const mapPreviewInfoDtoToCard = (
   rating: item.avgRating,
   reviewCount: item.reviewCount,
   isHearted: item.userWish,
-  creators: mapCreatorUrls(item.creatorImageUrls),
+  creatorImageUrls: item.creatorImageUrls,
 });
 
 export const mapProductListDtoToCards = (data: ProductListResponseDto) => ({

@@ -5,10 +5,10 @@ import type {
   ReviewSearchResultType,
 } from '@somesay/shared';
 
-const MOCK_CREATORS = [
-  { name: '크리에이터1', profileImageUrl: mockProfileImg },
-  { name: '크리에이터2', profileImageUrl: mockProfileImg },
-  { name: '크리에이터3', profileImageUrl: mockProfileImg },
+const MOCK_CREATOR_IMAGE_URLS = [
+  mockProfileImg,
+  mockProfileImg,
+  mockProfileImg,
 ];
 
 const MOCK_SEARCH_PRODUCT: ProductSearchResultType = {
@@ -21,7 +21,7 @@ const MOCK_SEARCH_PRODUCT: ProductSearchResultType = {
   rating: 4.9,
   reviewCount: 43,
   isHearted: false,
-  creators: MOCK_CREATORS,
+  creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
   reviewSummary:
     '"세럼이 끈적임 없이 촉촉하고, 수분감이 많아서 특히 건성 피부인 분들에게 추천해요."',
   skinTypes: ['건성', '민감성'],

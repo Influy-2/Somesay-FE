@@ -19,12 +19,7 @@ export interface ProductSkinExpectationType {
 export interface ProductCardType extends ProductBasicType {
   rating: number;
   reviewCount: number;
-  creators: CreatorProfile[];
-}
-
-interface CreatorProfile {
-  name: string;
-  profileImageUrl: string;
+  creatorImageUrls: string[];
 }
 
 export interface ProductDetailType extends ProductBasicType {

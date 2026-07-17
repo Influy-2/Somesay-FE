@@ -74,7 +74,7 @@ export const SearchResultProductCard = ({
                 ({product.reviewCount.toLocaleString()})
               </span>
               {/* 크리에이터 프로필 스택 */}
-              <AvatarStack creators={product.creators} />
+              <AvatarStack creatorImageUrls={product.creatorImageUrls} />
             </div>
           </div>
         </div>

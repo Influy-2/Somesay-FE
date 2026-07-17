@@ -17,14 +17,12 @@ export const HorizontalScrollProductCard = ({
   rating,
   reviewCount,
   isHearted,
-  creators,
+  creatorImageUrls,
 }: HorizontalScrollProductCardProps) => {
   const formattedPrice = price
     ? price.toLocaleString('ko-KR') + '원'
     : '가격 정보 없음';
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
-  const creatorNames = creators.map((c) => c.name).join(', ');
-
   const onHeartToggle = () => {
     console.log('하트클릭');
   };
@@ -36,7 +34,7 @@ export const HorizontalScrollProductCard = ({
   return (
     <article
       className="relative flex w-39 shrink-0 flex-col items-start gap-2"
-      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creatorNames}`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
     >
       <div className="bg-grey02 relative aspect-39/44 h-44 self-stretch overflow-hidden">
         <div aria-hidden="true" className="h-full w-full">
@@ -73,7 +71,7 @@ export const HorizontalScrollProductCard = ({
             </div>
             <span className="body2-m text-black">({formattedReviewCount})</span>
           </div>
-          <AvatarStack creators={creators} />
+          <AvatarStack creatorImageUrls={creatorImageUrls} />
         </div>
       </div>
 

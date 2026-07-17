@@ -1,35 +1,27 @@
 // apps/web/src/shared/components/productCard/AvatarStack.tsx
 import cn from '@/utils/cn';
-interface AvatarItem {
-  name: string;
-  profileImageUrl: string;
-}
 
 interface AvatarStackProps {
-  creators: AvatarItem[];
+  creatorImageUrls: string[];
   borderColor?: string;
 }
 
 export const AvatarStack = ({
-  creators,
+  creatorImageUrls,
   borderColor = 'border-white',
 }: AvatarStackProps) => {
   return (
     <div className="flex flex-row-reverse items-center">
-      {[...creators].reverse().map((creator, index, arr) => (
+      {[...creatorImageUrls].reverse().map((imageUrl, index, arr) => (
         <div
-          key={creator.name}
+          key={`${imageUrl}-${index}`}
           className={cn(
             `relative size-5.5 overflow-hidden rounded-full border`,
             borderColor
           )}
           style={{ marginLeft: index === arr.length - 1 ? 0 : -6 }}
         >
-          <img
-            src={creator.profileImageUrl}
-            alt=""
-            className="size-full object-cover"
-          />
+          <img src={imageUrl} alt="" className="size-full object-cover" />
         </div>
       ))}
     </div>

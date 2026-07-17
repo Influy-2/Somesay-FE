@@ -4,19 +4,10 @@ import mockProfile3Img from '@/assets/mock_profile3_img.png';
 import mockProductImg from '@/assets/mock_product_img.png';
 import { ProductCardType, ProductsByCategory } from '@somesay/shared';
 
-const MOCK_CREATORS = [
-  {
-    name: '크리에이터1',
-    profileImageUrl: mockProfileImg,
-  },
-  {
-    name: '크리에이터2',
-    profileImageUrl: mockProfile2Img,
-  },
-  {
-    name: '크리에이터3',
-    profileImageUrl: mockProfile3Img,
-  },
+const MOCK_CREATOR_IMAGE_URLS = [
+  mockProfileImg,
+  mockProfile2Img,
+  mockProfile3Img,
 ];
 
 const MOCK_PRODUCT: ProductCardType = {
@@ -28,7 +19,7 @@ const MOCK_PRODUCT: ProductCardType = {
   rating: 4.9,
   reviewCount: 43,
   isHearted: false,
-  creators: MOCK_CREATORS,
+  creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
 };
 
 // categoryId를 key로 하는 Map 구조

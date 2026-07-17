@@ -15,7 +15,7 @@ const meta: Meta<typeof HorizontalScrollProductCard> = {
     rating: { control: 'number' },
     reviewCount: { control: 'number' },
     isHearted: { control: 'boolean' },
-    creators: { control: 'object' },
+    creatorImageUrls: { control: 'object' },
   },
 };
 
@@ -32,6 +32,6 @@ export const Default: Story = {
     rating: 4.5,
     reviewCount: 0,
     isHearted: false,
-    creators: [],
+    creatorImageUrls: [],
   },
 };

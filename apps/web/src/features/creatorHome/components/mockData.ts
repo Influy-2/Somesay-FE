@@ -58,11 +58,7 @@ const MOCK_PRODUCT_BASE: Omit<MockProductCardType, 'productId' | 'categoryId'> =
     rating: 4.9,
     reviewCount: 43,
     isHearted: false,
-    creators: [
-      { name: '크리에이터1', profileImageUrl: mockProfileImg },
-      { name: '크리에이터2', profileImageUrl: mockProfile2Img },
-      { name: '크리에이터3', profileImageUrl: mockProfile3Img },
-    ],
+    creatorImageUrls: [mockProfileImg, mockProfile2Img, mockProfile3Img],
   };
 
 // 카테고리별 상품 목록

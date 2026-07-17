@@ -20,7 +20,7 @@ const meta: Meta<typeof BasicProductCard> = {
     rating: { control: 'number' },
     reviewCount: { control: 'number' },
     isHearted: { control: 'boolean' },
-    creators: { control: 'object' },
+    creatorImageUrls: { control: 'object' },
   },
 };
 
@@ -37,10 +37,6 @@ export const Default: Story = {
     rating: 4.5,
     reviewCount: 0,
     isHearted: false,
-    creators: [
-      { name: '크리에이터1', profileImageUrl: mockProfile1 },
-      { name: '크리에이터2', profileImageUrl: mockProfile2 },
-      { name: '크리에이터3', profileImageUrl: mockProfile3 },
-    ],
+    creatorImageUrls: [mockProfile1, mockProfile2, mockProfile3],
   },
 };
