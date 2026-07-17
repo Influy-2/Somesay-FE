@@ -4,6 +4,8 @@ import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { ProductCardType } from '@somesay/shared';
 import { WhiteHeartButton } from '@/shared/components';
+import { PATH } from '@/routes/path';
+import { AvatarStack } from '@/shared/components';
 type ProductRankingCardProps = ProductCardType;
 
 export const BasicProductCard = ({
@@ -81,21 +83,13 @@ export const BasicProductCard = ({
           {/* 리뷰수 */}
           <span className="body2-m">({formattedReviewCount})</span>
           {/* 크리에이터 프로필 스택 */}
-          <div className="flex flex-row-reverse items-center gap-0">
-            {[...creatorImageUrls].reverse().map((imageUrl, index, arr) => (
-              <div
-                key={`${imageUrl}-${index}`}
-                className="relative size-5.5 overflow-hidden rounded-full border border-white"
-                style={{ marginLeft: index === arr.length - 1 ? 0 : -6 }}
-              >
-                <img src={imageUrl} alt="" className="size-full object-cover" />
-              </div>
-            ))}
-          </div>
+          <AvatarStack creatorImageUrls={creatorImageUrls} />
         </div>
       </div>
-      {/* TODO: 임시 링크 */}
-      <Link to={`/${productId}`} className="absolute inset-0" />
+      <Link
+        to={`${PATH.PRODUCT.BASE}/${productId}`}
+        className="absolute inset-0"
+      />
     </article>
   );
 };
