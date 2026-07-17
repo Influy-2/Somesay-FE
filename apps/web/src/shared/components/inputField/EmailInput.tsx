@@ -46,6 +46,10 @@ export const EmailInput = ({
                 <button
                   type="button"
                   className="body2-m text-grey06 h-[21px] w-full text-left focus-visible:underline"
+                  onPointerDown={(event) => {
+                    event.preventDefault();
+                    onSuggestionSelect(suggestion);
+                  }}
                   onClick={() => onSuggestionSelect(suggestion)}
                 >
                   {suggestion}

@@ -7,7 +7,10 @@ import {
   useNavigationType,
 } from 'react-router';
 import { OnboardingCompleteBottomSheet } from '@/features/onboarding/components/OnboardingCompleteBottomSheet';
-import { isOnboardingCompleteEntry } from '@/features/onboarding';
+import {
+  isOnboardingCompleteEntry,
+  useOnboardingStore,
+} from '@/features/onboarding';
 import { PATH } from '@/routes/path';
 import { CTAButton, PageHeader } from '@/shared/components';
 import { SomesayIcon, X24Icon } from '@/shared/icons';
@@ -16,6 +19,7 @@ export const CompletePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const navigationType = useNavigationType();
+  const resetOnboarding = useOnboardingStore((state) => state.reset);
   const [isValidEntry] = useState(() =>
     isOnboardingCompleteEntry(location.state, navigationType)
   );
@@ -24,6 +28,12 @@ export const CompletePage = () => {
   const blocker = useBlocker(
     ({ historyAction }) => isValidEntry && historyAction === 'POP'
   );
+
+  useEffect(() => {
+    if (isValidEntry) {
+      resetOnboarding();
+    }
+  }, [isValidEntry, resetOnboarding]);
 
   useEffect(() => {
     if (blocker.state === 'blocked') {

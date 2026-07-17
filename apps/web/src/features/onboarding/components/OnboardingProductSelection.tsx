@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
   getProductsByIds,
@@ -58,16 +58,21 @@ export const OnboardingProductSelection = ({
   const canProceed =
     productIds.length > 0 && productIdsSchema.safeParse(productIds).success;
 
-  const handleToggleProduct = (productId: number) => {
-    if (hasReachedProductLimit(productIds, productId, MAX_PRODUCT_SELECTION)) {
-      showSnackbar('최대 15개까지 저장 가능해요.', {
-        placement: 'onboardingBottom72',
-      });
-      return;
-    }
+  const handleToggleProduct = useCallback(
+    (productId: number) => {
+      if (
+        hasReachedProductLimit(productIds, productId, MAX_PRODUCT_SELECTION)
+      ) {
+        showSnackbar('최대 15개까지 저장 가능해요.', {
+          placement: 'onboardingBottom72',
+        });
+        return;
+      }
 
-    toggleProduct(status, productId);
-  };
+      toggleProduct(status, productId);
+    },
+    [productIds, showSnackbar, status, toggleProduct]
+  );
 
   const moveToNextStep = () => {
     const store = useOnboardingStore.getState();

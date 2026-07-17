@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { RadioProductItem } from '@/shared/components';
 import type { SelectableProduct } from '../model/productSelection.types';
 
@@ -7,11 +8,11 @@ interface SelectableProductListProps {
   onToggle: (productId: number) => void;
 }
 
-export const SelectableProductList = ({
+export const SelectableProductList = memo(function SelectableProductList({
   products,
   selectedProductIds,
   onToggle,
-}: SelectableProductListProps) => {
+}: SelectableProductListProps) {
   if (products.length === 0) {
     return (
       <p className="body2-m text-grey05 py-24 text-center">
@@ -32,4 +33,4 @@ export const SelectableProductList = ({
       ))}
     </ul>
   );
-};
+});

@@ -9,8 +9,7 @@ import { useNavigate } from 'react-router';
 import { usePostUserProduct } from '@/shared/hooks';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 import { useOnboardingStore } from '../store/onboarding.store';
-import { ONBOARDING_COMPLETE_LOCATION_STATE } from '../utils/onboarding.completion';
-import { ONBOARDING_PATH_BY_STEP } from '../utils/onboarding.flow';
+import { finalizeOnboarding } from '../utils/onboarding.completion';
 import { buildProductFitPayloads } from '../utils/onboarding.mapper';
 
 interface CompleteOnboardingVariables {
@@ -35,11 +34,7 @@ export const useCompleteOnboarding = () => {
     },
     retry: false,
     onSuccess: () => {
-      useOnboardingStore.getState().reset();
-      navigate(ONBOARDING_PATH_BY_STEP.complete, {
-        replace: true,
-        state: ONBOARDING_COMPLETE_LOCATION_STATE,
-      });
+      finalizeOnboarding(navigate);
     },
     onError: () => {
       showSnackbar('회원가입 정보 저장에 실패했습니다. 다시 시도해 주세요.', {

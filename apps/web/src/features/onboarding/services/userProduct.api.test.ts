@@ -27,7 +27,7 @@ const response: UserProductResponseType = {
 
 const responseDto = {
   ...response,
-  status: 'UNMATCH' as const,
+  status: 'UNMATCHED' as const,
 };
 
 describe('user product API', () => {
@@ -40,7 +40,7 @@ describe('user product API', () => {
 
     await expect(postUserProduct(request)).resolves.toEqual(response);
     expect(post).toHaveBeenCalledWith('/users/product', {
-      status: 'UNMATCH',
+      status: 'UNMATCHED',
       productIds: request.productIds,
     });
   });

@@ -20,10 +20,7 @@ export const ONBOARDING_PATH_BY_STEP: Record<OnboardingStep, string> = {
   complete: `${PATH.ONBOARDING.BASE}/${PATH.ONBOARDING.COMPLETE}`,
 };
 
-const EMAIL_STEPS: OnboardingStep[] = ['email', 'emailVerification'];
-
-export const getOnboardingSteps = (): OnboardingStep[] =>
-  ONBOARDING_STEP_ORDER.filter((step) => !EMAIL_STEPS.includes(step));
+export const getOnboardingSteps = (): OnboardingStep[] => ONBOARDING_STEP_ORDER;
 
 export const isOnboardingStepComplete = (
   draft: OnboardingDraft,

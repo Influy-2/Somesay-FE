@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { PATH } from '@/routes/path';
 import {
   INITIAL_ONBOARDING_DRAFT,
@@ -10,11 +10,13 @@ import type { OnboardingDraft } from '../types/onboarding.types';
 import type { OnboardingStep } from '../types/onboarding.types';
 import {
   getFirstIncompleteStep,
+  getNextOnboardingPath,
   getOnboardingRedirectPath,
   getOnboardingSteps,
   ONBOARDING_PATH_BY_STEP,
 } from './onboarding.flow';
 import {
+  finalizeOnboarding,
   isOnboardingCompleteEntry,
   isOnboardingCompletionAvailable,
   ONBOARDING_COMPLETE_LOCATION_STATE,
@@ -31,6 +33,15 @@ const createTermsCompletedDraft = (
   completedSteps: ['terms'],
 });
 
+const createEmailVerifiedDraft = (
+  provider: OnboardingDraft['provider']
+): OnboardingDraft => ({
+  ...createTermsCompletedDraft(provider),
+  email: 'somesay@example.com',
+  emailVerified: true,
+  completedSteps: ['terms', 'email', 'emailVerification'],
+});
+
 const completeRequiredInfo = {
   nickname: 'somesay',
   gender: 'NONE',
@@ -42,6 +53,18 @@ const completeRequiredInfo = {
 >;
 
 describe('onboarding flow', () => {
+  it('온보딩 guard가 가로채기 전에 완료 경로를 동기적으로 확정한다', () => {
+    const navigate = vi.fn();
+
+    finalizeOnboarding(navigate);
+
+    expect(navigate).toHaveBeenCalledWith(ONBOARDING_PATH_BY_STEP.complete, {
+      replace: true,
+      state: ONBOARDING_COMPLETE_LOCATION_STATE,
+      flushSync: true,
+    });
+  });
+
   it('정상 회원가입 완료 이동인 경우에만 완료 화면 진입을 허용한다', () => {
     expect(
       isOnboardingCompleteEntry(ONBOARDING_COMPLETE_LOCATION_STATE, 'REPLACE')
@@ -86,28 +109,35 @@ describe('onboarding flow', () => {
     );
   });
 
-  it('카카오도 이메일 입력과 인증 단계를 제외한다', () => {
+  it('카카오 신규 회원은 약관 다음에 이메일 입력과 인증을 진행한다', () => {
     const draft = createTermsCompletedDraft('KAKAO');
 
-    expect(getOnboardingSteps()).not.toContain('email');
-    expect(getOnboardingSteps()).not.toContain('emailVerification');
-    expect(getFirstIncompleteStep(draft)).toBe('nickname');
-    expect(getOnboardingRedirectPath(draft, 'nickname')).toBe(null);
+    expect(getOnboardingSteps()).toContain('email');
+    expect(getOnboardingSteps()).toContain('emailVerification');
+    expect(getNextOnboardingPath('terms')).toBe(ONBOARDING_PATH_BY_STEP.email);
+    expect(getFirstIncompleteStep(draft)).toBe('email');
+    expect(getOnboardingRedirectPath(draft, 'email')).toBe(null);
+    expect(getOnboardingRedirectPath(draft, 'nickname')).toBe(
+      ONBOARDING_PATH_BY_STEP.email
+    );
   });
 
-  it('네이버와 구글은 이메일 단계를 제외한다', () => {
-    expect(getOnboardingSteps()).not.toContain('email');
-    expect(getOnboardingSteps()).not.toContain('emailVerification');
-    expect(getFirstIncompleteStep(createTermsCompletedDraft('GOOGLE'))).toBe(
+  it('이메일 인증을 마치면 닉네임 단계로 이동한다', () => {
+    expect(getFirstIncompleteStep(createEmailVerifiedDraft('KAKAO'))).toBe(
       'nickname'
     );
   });
 
   it('선행 단계보다 앞선 단계는 다시 방문할 수 있다', () => {
     const draft = {
-      ...createTermsCompletedDraft('NAVER'),
+      ...createEmailVerifiedDraft('NAVER'),
       nickname: 'somesay',
-      completedSteps: ['terms', 'nickname'] as OnboardingStep[],
+      completedSteps: [
+        'terms',
+        'email',
+        'emailVerification',
+        'nickname',
+      ] as OnboardingStep[],
     };
 
     expect(getOnboardingRedirectPath(draft, 'terms')).toBeNull();
@@ -118,12 +148,19 @@ describe('onboarding flow', () => {
 
   it('복원된 데이터가 Zod 스키마에 맞지 않으면 해당 단계로 이동시킨다', () => {
     const draft: OnboardingDraft = {
-      ...createTermsCompletedDraft('NAVER'),
+      ...createEmailVerifiedDraft('NAVER'),
       nickname: 'somesay',
       gender: 'FEMALE',
       age: 'TWENTIES',
       skinTypeNames: ['건성', '지성', '복합성'],
-      completedSteps: ['terms', 'nickname', 'profile', 'skinTypes'],
+      completedSteps: [
+        'terms',
+        'email',
+        'emailVerification',
+        'nickname',
+        'profile',
+        'skinTypes',
+      ],
     };
 
     expect(getFirstIncompleteStep(draft)).toBe('skinTypes');
