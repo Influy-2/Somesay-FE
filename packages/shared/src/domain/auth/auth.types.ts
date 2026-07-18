@@ -8,6 +8,8 @@ export interface AuthTokenType {
 // 카카오 로그인 후 프론트엔드에서 사용하는 인증 결과입니다.
 export interface KakaoLoginResultType extends AuthTokenType {
   newUser: boolean;
+  nickname: string;
+  enabled: boolean;
 }
 
 // 회원가입 기본 정보 API에서 사용하는 프론트엔드 데이터입니다.

@@ -6,8 +6,12 @@ export const mapJwtLoginResponseDto = ({
   jwtAccessToken,
   refreshToken,
   newUser,
+  nickname,
+  enabled,
 }: JwtLoginResponseDto): KakaoLoginResultType => ({
   accessToken: jwtAccessToken,
   refreshToken,
   newUser,
+  nickname,
+  enabled,
 });
