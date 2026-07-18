@@ -10,3 +10,9 @@ export { useFetchCategories } from './category/useFetchCategories';
 export { useFetchBrandDetail } from './brand/useFetchBrandDetail';
 export { useFetchBrandProducts } from './brand/useFetchBrandProducts';
 export { useFetchBrandProductSearch } from './brand/useFetchBrandProductSearch';
+
+// User Product
+export { usePostUserProduct } from './userProduct/usePostUserProduct';
+
+// User
+export { useFetchUserInfo } from './user/useFetchUserInfo';

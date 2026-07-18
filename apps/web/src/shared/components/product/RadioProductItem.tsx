@@ -34,7 +34,7 @@ export const RadioProductItem = memo(
     };
 
     return (
-      <li className="flex items-center px-4 py-5">
+      <li className="flex items-center py-5">
         <button
           type="button"
           onClick={handleClick}

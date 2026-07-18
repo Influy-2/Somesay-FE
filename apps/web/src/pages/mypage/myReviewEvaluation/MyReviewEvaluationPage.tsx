@@ -1,18 +1,14 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
-import {
-  PageHeader,
-  TabBar,
-  CommentInput,
-  Snackbar,
-  Modal,
-} from '@/shared/components';
+import { PageHeader, TabBar, CommentInput, Modal } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { ReviewEvaluationBottomSheet } from '@/features/myPage/myReviewEvaluation/components/ReviewEvaluationBottomSheet';
 import { MOCK_EVALUATED_REVIEWS } from '@/features/myPage/components/mockData';
 
 import { ProductsTab } from '@/features/myPage/myReviewEvaluation/components/ProductsTab';
 import { CreatorsTab } from '@/features/myPage/myReviewEvaluation/components/Creatorstab';
+
+import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 
 type TabType = 'products' | 'creators';
 type SheetState =
@@ -42,14 +38,13 @@ export const MyReviewEvaluationPage = () => {
   const [selectedCreatorId, setSelectedCreatorId] = useState(initialCreatorId);
   const [selectedProductId, setSelectedProductId] = useState(initialProductId);
   const [editingComment, setEditingComment] = useState<string | null>(null);
-  const [snackbarMessage, setSnackbarMessage] = useState<string | null>(null);
   const [showGuideTooltip, setShowGuideTooltip] = useState(true);
   const [sheetState, setSheetState] = useState<SheetState>(null);
   const [modalState, setModalState] = useState<ModalState>(null);
   const handleChangeVote = () => {
     // TODO: API 연결
     const isAgreed = sheetState?.type === 'vote' ? sheetState.isAgreed : false;
-    setSnackbarMessage(
+    showSnackbar(
       `평가를 '${isAgreed ? '반대해요' : '공감해요'}'로 변경했습니다.`
     );
   };
@@ -66,6 +61,9 @@ export const MyReviewEvaluationPage = () => {
   const handleDeleteComment = (reviewId: number) => {
     setModalState({ type: 'deleteComment', reviewId });
   };
+
+  const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
+
   return (
     <div className="mt-13.5 flex flex-col">
       <PageHeader
@@ -136,7 +134,7 @@ export const MyReviewEvaluationPage = () => {
             // defaultValue={editingComment}
             onSubmit={() => {
               setEditingComment(null);
-              setSnackbarMessage('코멘트가 수정되었습니다.');
+              showSnackbar('코멘트가 수정되었습니다.');
             }}
           />
         </div>
@@ -166,7 +164,7 @@ export const MyReviewEvaluationPage = () => {
         rightButton={{
           label: '삭제',
           onClick: () => {
-            setSnackbarMessage(
+            showSnackbar(
               modalState?.type === 'deleteVote'
                 ? '평가가 삭제되었습니다.'
                 : '코멘트가 삭제되었습니다.'
@@ -175,14 +173,6 @@ export const MyReviewEvaluationPage = () => {
           },
         }}
       />
-
-      {snackbarMessage && (
-        <Snackbar
-          message={snackbarMessage}
-          onClose={() => setSnackbarMessage(null)}
-          className="bottom-7.5"
-        />
-      )}
     </div>
   );
 };

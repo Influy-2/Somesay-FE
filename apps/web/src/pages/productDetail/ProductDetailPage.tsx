@@ -17,9 +17,11 @@ import {
   useFetchProductDetail,
   useFetchProductReviewOverview,
 } from '@/shared/hooks';
+import { useAuthGuard } from '@/features/auth';
 
 export const ProductDetailPage = () => {
   const navigate = useNavigate();
+  const guardAction = useAuthGuard();
 
   // URL에서 productId 추출 및 유효성 검사
   const { productId: productIdParam } = useParams();
@@ -57,16 +59,14 @@ export const ProductDetailPage = () => {
       productDetail.isHearted)
     : false;
 
-  const handleLikeToggle = () => {
-    if (!productDetail) {
-      return;
-    }
+  const handleLikeToggle = guardAction(() => {
+    if (!productDetail) return;
 
     setHeartStateByProductId((prev) => ({
       ...prev,
       [productDetail.productId]: !isHearted,
     }));
-  };
+  });
   const handleReviewClick = () => navigate('/'); // TODO: 리뷰하기 페이지로 이동
 
   return (

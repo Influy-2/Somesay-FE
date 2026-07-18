@@ -27,6 +27,25 @@ import { SkinTypePage } from '@/pages/myPage/account/SkinTypePage';
 import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
 import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
 import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
+import { LoginPage } from '@/pages/login/LoginPage';
+import { KakaoCallbackPage } from '@/pages/login/KakaoCallbackPage';
+import { EmailPage } from '@/pages/onboarding/EmailPage';
+import { EmailVerificationPage } from '@/pages/onboarding/EmailVerificationPage';
+import { NicknamePage as OnboardingNicknamePage } from '@/pages/onboarding/NicknamePage';
+import { ProfilePage } from '@/pages/onboarding/ProfilePage';
+import { SkinTypesPage } from '@/pages/onboarding/SkinTypesPage';
+import { SkinConcernsPage } from '@/pages/onboarding/SkinConcernsPage';
+import { MatchedProductsPage } from '@/pages/onboarding/MatchedProductsPage';
+import { MatchedProductSearchPage } from '@/pages/onboarding/MatchedProductSearchPage';
+import { MismatchedProductsPage } from '@/pages/onboarding/MismatchedProductsPage';
+import { MismatchedProductSearchPage } from '@/pages/onboarding/MismatchedProductSearchPage';
+import { CompletePage } from '@/pages/onboarding/CompletePage';
+import { TermsAgreementPage } from '@/pages/onboarding/TermsAgreementPage';
+import {
+  OnboardingIndexRedirect,
+  OnboardingRouteGuard,
+} from '@/features/onboarding';
+import { ProtectedRoute } from '@/features/auth';
 import { MyReviewEvaluationPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationPage';
 import { MyReviewEvaluationProductListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationProductListPage';
 import { MyReviewEvaluationCreatorListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationCreatorListPage';
@@ -50,7 +69,10 @@ export const appRouter = createBrowserRouter([
           //카테고리
           { path: PATH.CATEGORIES.BASE, element: <CategoriesPage /> },
           //마이페이지
-          { path: PATH.MY_PAGE.BASE, element: <MyPage /> },
+          {
+            path: PATH.MY_PAGE.BASE,
+            element: <MyPage />,
+          },
         ],
       },
       // 바텀바 없는 페이지
@@ -107,8 +129,220 @@ export const appRouter = createBrowserRouter([
         element: <ReviewEvaluationPage />,
       },
       {
-        path: PATH.MY_PAGE.BASE,
+        path: PATH.LOGIN.BASE,
+        element: <LoginPage />,
+      },
+      {
+        path: PATH.LOGIN.KAKAO_CALLBACK,
+        element: <KakaoCallbackPage />,
+      },
+      {
+        path: PATH.ONBOARDING.BASE,
         element: <Outlet />,
+        children: [
+          {
+            index: true,
+            element: <OnboardingIndexRedirect />,
+          },
+          {
+            path: PATH.ONBOARDING.TERMS,
+            element: (
+              <OnboardingRouteGuard step="terms">
+                <TermsAgreementPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.EMAIL,
+            element: (
+              <OnboardingRouteGuard step="email">
+                <EmailPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.EMAIL_VERIFICATION,
+            element: (
+              <OnboardingRouteGuard step="emailVerification">
+                <EmailVerificationPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.NICKNAME,
+            element: (
+              <OnboardingRouteGuard step="nickname">
+                <OnboardingNicknamePage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.PROFILE,
+            element: (
+              <OnboardingRouteGuard step="profile">
+                <ProfilePage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.SKIN_TYPES,
+            element: (
+              <OnboardingRouteGuard step="skinTypes">
+                <SkinTypesPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.SKIN_CONCERNS,
+            element: (
+              <OnboardingRouteGuard step="skinConcerns">
+                <SkinConcernsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MATCHED_PRODUCTS,
+            element: (
+              <OnboardingRouteGuard step="matchedProducts">
+                <MatchedProductsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MATCHED_PRODUCTS_SEARCH,
+            element: (
+              <OnboardingRouteGuard step="matchedProducts">
+                <MatchedProductSearchPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS,
+            element: (
+              <OnboardingRouteGuard step="mismatchedProducts">
+                <MismatchedProductsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS_SEARCH,
+            element: (
+              <OnboardingRouteGuard step="mismatchedProducts">
+                <MismatchedProductSearchPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.COMPLETE,
+            element: <CompletePage />,
+          },
+        ],
+      },
+      {
+        path: PATH.MY_PAGE.BASE,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            index: true,
+            element: <OnboardingIndexRedirect />,
+          },
+          {
+            path: PATH.ONBOARDING.TERMS,
+            element: (
+              <OnboardingRouteGuard step="terms">
+                <TermsAgreementPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.EMAIL,
+            element: (
+              <OnboardingRouteGuard step="email">
+                <EmailPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.EMAIL_VERIFICATION,
+            element: (
+              <OnboardingRouteGuard step="emailVerification">
+                <EmailVerificationPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.NICKNAME,
+            element: (
+              <OnboardingRouteGuard step="nickname">
+                <OnboardingNicknamePage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.PROFILE,
+            element: (
+              <OnboardingRouteGuard step="profile">
+                <ProfilePage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.SKIN_TYPES,
+            element: (
+              <OnboardingRouteGuard step="skinTypes">
+                <SkinTypesPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.SKIN_CONCERNS,
+            element: (
+              <OnboardingRouteGuard step="skinConcerns">
+                <SkinConcernsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MATCHED_PRODUCTS,
+            element: (
+              <OnboardingRouteGuard step="matchedProducts">
+                <MatchedProductsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MATCHED_PRODUCTS_SEARCH,
+            element: (
+              <OnboardingRouteGuard step="matchedProducts">
+                <MatchedProductSearchPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS,
+            element: (
+              <OnboardingRouteGuard step="mismatchedProducts">
+                <MismatchedProductsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS_SEARCH,
+            element: (
+              <OnboardingRouteGuard step="mismatchedProducts">
+                <MismatchedProductSearchPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.COMPLETE,
+            element: <CompletePage />,
+          },
+        ],
+      },
+      {
+        path: PATH.MY_PAGE.BASE,
+        element: <ProtectedRoute />,
         children: [
           {
             path: PATH.MY_PAGE.REVIEW_EVALUATION.BASE,

@@ -17,9 +17,8 @@ export const PageHeader = ({
   return (
     <header
       className={cn(
-        'fixed top-0 flex h-[3.375rem] w-screen max-w-110 min-w-[20rem] items-center justify-between bg-white px-4 py-2.5',
-        className,
-        'z-header'
+        'z-header fixed top-0 flex h-[3.375rem] w-screen max-w-110 min-w-[20rem] items-center justify-between bg-white px-4 py-2.5',
+        className
       )}
     >
       {left && <div className="flex shrink-0 items-center">{left}</div>}

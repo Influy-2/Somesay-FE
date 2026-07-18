@@ -2,6 +2,10 @@ import { SortOptionsType } from '../domain/product/product.types';
 import type { BrandProductSortType } from '../domain/brand/brand.types';
 
 export const QUERY_KEYS = {
+  USER: {
+    ALL: ['user'] as const,
+    INFO: () => [...QUERY_KEYS.USER.ALL, 'info'] as const,
+  },
   PRODUCT: {
     ALL: ['product'] as const,
     BY_CATEGORY: ({

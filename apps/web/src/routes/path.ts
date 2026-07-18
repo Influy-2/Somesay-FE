@@ -6,6 +6,22 @@ export const PATH = {
   },
   LOGIN: {
     BASE: '/login',
+    KAKAO_CALLBACK: '/login/kakao/callback',
+  },
+  ONBOARDING: {
+    BASE: '/onboarding',
+    TERMS: 'terms',
+    EMAIL: 'email',
+    EMAIL_VERIFICATION: 'email-verification',
+    NICKNAME: 'nickname',
+    PROFILE: 'profile',
+    SKIN_TYPES: 'skin-types',
+    SKIN_CONCERNS: 'skin-concerns',
+    MATCHED_PRODUCTS: 'matched-products',
+    MATCHED_PRODUCTS_SEARCH: 'matched-products/search',
+    MISMATCHED_PRODUCTS: 'mismatched-products',
+    MISMATCHED_PRODUCTS_SEARCH: 'mismatched-products/search',
+    COMPLETE: 'complete',
   },
   RANKING: {
     BASE: '/ranking',

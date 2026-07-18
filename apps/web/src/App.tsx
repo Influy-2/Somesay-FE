@@ -3,6 +3,8 @@ import { appRouter } from '@/routes/index';
 import { RouterProvider } from 'react-router';
 import './styles/global.css';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { SnackbarHost } from '@/shared/components';
+import { AuthProvider } from '@/features/auth';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,7 +23,10 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={appRouter} />
+      <AuthProvider>
+        <RouterProvider router={appRouter} />
+      </AuthProvider>
+      <SnackbarHost />
       {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   );
