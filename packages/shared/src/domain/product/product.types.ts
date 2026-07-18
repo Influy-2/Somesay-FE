@@ -6,6 +6,9 @@ export interface ProductBasicType {
   brandName: string;
   productName: string;
   price: number;
+}
+
+export interface ProductWishType extends ProductBasicType {
   isHearted: boolean;
 }
 
@@ -16,13 +19,13 @@ export interface ProductSkinExpectationType {
   concern: string;
   isPrimary: boolean;
 }
-export interface ProductCardType extends ProductBasicType {
+export interface ProductCardType extends ProductWishType {
   rating: number;
   reviewCount: number;
   creatorImageUrls: string[];
 }
 
-export interface ProductDetailType extends ProductBasicType {
+export interface ProductDetailType extends ProductWishType {
   brandId: number;
   brandLogoUrl: string | null;
   volume: string | null;

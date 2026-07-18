@@ -1,7 +1,9 @@
 import type {
   ProductSkinExpectationType,
   ProductSkinType,
+  ProductBasicType,
 } from '../product/product.types';
+import type { BasicCreatorDto } from '../creator/creator.dto';
 
 // 상품 리뷰 개요 API의 백엔드 응답 DTO입니다.
 export interface ReviewOverviewDto {
@@ -26,4 +28,12 @@ export interface TimeLinkDto {
 export interface TimeLinksResponseDto {
   reviewId: number;
   timeLinks: TimeLinkDto[];
+}
+
+export interface CurationReviewDto extends BasicCreatorDto, ProductBasicType {
+  reviewId: number;
+  content: string;
+  rating: number;
+  agreeRatio: number;
+  mostAgreedSkinTypeName: string;
 }

@@ -1,5 +1,5 @@
 export type {
-  ProductBasicType,
+  ProductWishType,
   ProductCardType,
   ProductDetailType,
   ProductRankingCardType,
