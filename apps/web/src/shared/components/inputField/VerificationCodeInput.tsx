@@ -15,7 +15,7 @@ export const VerificationCodeInput = ({
   maxLength = 6,
   timerText = '04:59',
   isExpired = false,
-  placeholder = '인증번호 6자리',
+  placeholder = '인증번호 6자리 (임시 인증번호:123456)',
   inputMode = 'numeric',
   ...props
 }: VerificationCodeInputProps) => {
