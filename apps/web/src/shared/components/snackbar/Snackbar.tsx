@@ -1,26 +1,34 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import {
+  FLOATING_PLACEMENT_CLASS,
+  type SnackbarPlacement,
+} from '@/shared/constants/floating.constants';
+import type {
+  SnackbarAction,
+  SnackbarVariant,
+} from '@/shared/stores/snackbar.store';
 import cn from '@/utils/cn';
 
 const FADE_OUT_DURATION = 300;
+const SNACKBAR_DURATION = 3000;
 
 interface SnackbarProps {
   message: string;
-  action?: {
-    label: string;
-    onClick: () => void;
-  };
+  variant?: SnackbarVariant;
+  placement?: SnackbarPlacement;
+  action?: SnackbarAction;
   onClose: () => void;
-  duration?: number;
   className?: string;
 }
-// TODO: 스낵바 컨텍스트로 관리
+
 export const Snackbar = ({
   message,
+  variant = 'default',
+  placement = 'default',
   action,
   onClose,
-  duration = 3000,
   className,
 }: SnackbarProps) => {
   const [isClosing, setIsClosing] = useState(false);
@@ -28,18 +36,21 @@ export const Snackbar = ({
   useEffect(() => {
     const timer = setTimeout(
       () => setIsClosing(true),
-      duration - FADE_OUT_DURATION
+      SNACKBAR_DURATION - FADE_OUT_DURATION
     );
     return () => clearTimeout(timer);
-  }, [duration]);
+  }, []);
 
   return createPortal(
     <div
-      role="status"
-      aria-live="polite"
+      role={variant === 'error' ? 'alert' : 'status'}
+      aria-live={variant === 'error' ? 'assertive' : 'polite'}
       className={cn(
-        'z-toast fixed bottom-[5.5rem] left-1/2 flex w-[22.375rem] -translate-x-1/2 items-center px-3.5 py-3.5',
-        'bg-[rgba(22,22,22,0.74)] backdrop-blur-[.1875rem]',
+        'z-toast fixed left-1/2 flex w-[22.375rem] -translate-x-1/2 items-center px-3.5 py-3.5',
+        variant === 'error'
+          ? 'bg-error'
+          : 'bg-[rgba(22,22,22,0.74)] backdrop-blur-[.1875rem]',
+        FLOATING_PLACEMENT_CLASS[placement],
         action ? 'justify-between' : 'justify-start',
         isClosing && 'animate-snackbar-out',
         className

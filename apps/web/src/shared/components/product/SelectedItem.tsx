@@ -18,7 +18,7 @@ export const SelectedItem = ({
   onRemove,
 }: SelectedItemProps) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex shrink-0 flex-col items-center">
       <div className="relative w-20">
         <div className="bg-grey02 aspect-8/9 w-full overflow-hidden">
           {productImageUrl && (
@@ -38,7 +38,7 @@ export const SelectedItem = ({
           <CircleX20Icon />
         </button>
       </div>
-      <p className="body2-m text-grey-black mt-2 line-clamp-2 w-20">
+      <p className="caption1-m text-grey09 mt-2 line-clamp-2 w-20">
         {`[${brandName}]${productName}`}
       </p>
     </div>

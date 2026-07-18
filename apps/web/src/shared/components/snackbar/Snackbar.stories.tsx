@@ -8,7 +8,6 @@ const meta: Meta<typeof Snackbar> = {
   tags: ['autodocs'],
   argTypes: {
     message: { control: 'text' },
-    duration: { control: 'number' },
   },
 };
 
@@ -18,6 +17,22 @@ type Story = StoryObj<typeof Snackbar>;
 export const Default: Story = {
   args: {
     message: '텍스트',
+    onClose: () => {},
+  },
+};
+
+export const WithBottomBar: Story = {
+  args: {
+    message: '텍스트',
+    placement: 'bottomBar',
+    onClose: () => {},
+  },
+};
+
+export const Error: Story = {
+  args: {
+    message: '오류가 발생했습니다.',
+    variant: 'error',
     onClose: () => {},
   },
 };

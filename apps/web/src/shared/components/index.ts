@@ -87,6 +87,7 @@ export { SortBar } from './sort/SortBar';
 
 /* snackbar */
 export { Snackbar } from './snackbar/Snackbar';
+export { SnackbarHost } from './snackbar/SnackbarHost';
 
 /* modal */
 export { Modal } from './modal/Modal';
@@ -94,5 +95,9 @@ export { Modal } from './modal/Modal';
 /* input */
 export { CommentInput } from './input/CommentInput';
 
-/* inputfild */
+/* input field */
 export { InputField } from './inputField/InputField';
+export { CharacterCountInput } from './inputField/CharacterCountInput';
+export { TextArea } from './inputField/TextArea';
+export { VerificationCodeInput } from './inputField/VerificationCodeInput';
+export { EmailInput } from './inputField/EmailInput';

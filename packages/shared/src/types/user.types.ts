@@ -17,3 +17,9 @@ export interface UserSkinConcernOption {
   value: number;
   label: string;
 }
+
+export interface UserSkinExpectationOption {
+  value: number;
+  concern: string;
+  productEffect: string;
+}

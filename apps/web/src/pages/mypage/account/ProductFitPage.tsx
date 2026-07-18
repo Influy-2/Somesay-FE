@@ -3,14 +3,13 @@ import { useNavigate, useLocation } from 'react-router';
 import {
   PageHeader,
   RemovableProductItem,
-  Snackbar,
   FloatingButtonPlus,
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { MOCK_ACCOUNT } from '@/features/myPage/components/mockData';
 import { PATH } from '@/routes/path';
-
-const MAX_PRODUCTS = 15;
+import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
+import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 
 type FitType = 'matches' | 'mismatches';
 
@@ -26,17 +25,20 @@ export const ProductFitPage = () => {
   const [products, setProducts] = useState(
     isMatches ? MOCK_ACCOUNT.goodProducts : MOCK_ACCOUNT.badProducts
   );
-  const [showSnackbar, setShowSnackbar] = useState(false);
+  const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
 
   const title = isMatches ? '잘 맞았던 제품' : '안 맞았던 제품';
+  const description = isMatches
+    ? '가장 잘 맞았던 제품을 최대 15개 저장할 수 있어요.'
+    : '안 맞았던 제품을 최대 15개 저장할 수 있어요.';
 
   const handleDelete = (productId: number) => {
     setProducts((prev) => prev.filter((p) => p.productId !== productId));
   };
 
   const handleAdd = () => {
-    if (products.length >= MAX_PRODUCTS) {
-      setShowSnackbar(true);
+    if (products.length >= MAX_PRODUCT_SELECTION) {
+      showSnackbar('최대 15개까지 저장 가능해요.');
       return;
     }
     navigate(
@@ -58,9 +60,7 @@ export const ProductFitPage = () => {
         title={title}
       />
       <div className="flex flex-1 flex-col">
-        <p className="body1-sb p-4 text-black">
-          최대 15개까지 저장할 수 있어요.
-        </p>
+        <p className="body1-sb p-4 text-black">{description}</p>
         {products.length === 0 ? (
           <div className="flex flex-1 items-center justify-center">
             <p className="body2-m text-grey05">아직 추가된 상품이 없어요.</p>
@@ -79,13 +79,6 @@ export const ProductFitPage = () => {
         )}
       </div>
       <FloatingButtonPlus onClick={handleAdd} />
-      {showSnackbar && (
-        <Snackbar
-          message="최대 15개까지 저장 가능해요."
-          onClose={() => setShowSnackbar(false)}
-          className="bottom-10 w-fit"
-        />
-      )}
     </div>
   );
 };

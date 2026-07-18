@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { PageHeader, InputField } from '@/shared/components';
+import { CharacterCountInput, PageHeader } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import {
   MOCK_ACCOUNT,
@@ -70,7 +70,7 @@ export const NicknamePage = () => {
         ]}
       />
       <div className="px-4 pt-10">
-        <InputField
+        <CharacterCountInput
           value={nickname}
           onChange={handleChange}
           placeholder="닉네임을 입력해주세요"

@@ -15,3 +15,10 @@ export const Default: Story = {
     onClick: () => console.log('클릭'),
   },
 };
+
+export const WithBottomBar: Story = {
+  args: {
+    onClick: () => console.log('클릭'),
+    placement: 'bottomBar',
+  },
+};

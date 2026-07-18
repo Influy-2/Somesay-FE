@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 interface ModalButton {
   label: string;
   onClick: () => void;
+  disabled?: boolean;
 }
 
 interface ModalProps {
@@ -37,7 +38,6 @@ export const Modal = ({
     <div
       className="z-modal fixed inset-y-0 left-1/2 flex w-full max-w-110 min-w-[20rem] -translate-x-1/2 items-center justify-center bg-black/30"
       onClick={onClose}
-      aria-hidden="true"
     >
       <div
         role="dialog"
@@ -57,14 +57,16 @@ export const Modal = ({
           <button
             type="button"
             onClick={leftButton.onClick}
-            className="body2-m flex h-10 flex-1 cursor-pointer items-center justify-center border border-black text-black"
+            disabled={leftButton.disabled}
+            className="body2-m flex h-10 flex-1 cursor-pointer items-center justify-center border border-black text-black disabled:cursor-not-allowed disabled:opacity-50"
           >
             {leftButton.label}
           </button>
           <button
             type="button"
             onClick={rightButton.onClick}
-            className="body2-m flex h-10 flex-1 cursor-pointer items-center justify-center bg-black text-white"
+            disabled={rightButton.disabled}
+            className="body2-m flex h-10 flex-1 cursor-pointer items-center justify-center bg-black text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
             {rightButton.label}
           </button>

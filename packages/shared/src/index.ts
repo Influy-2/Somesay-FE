@@ -40,8 +40,43 @@ export type {
 export * from './constants/user.constants';
 export { formatSubscriberCount } from './utils';
 
+//domain - auth
+export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
+export type {
+  AuthTokenType,
+  KakaoLoginResultType,
+  LoginInfoType,
+} from './domain/auth/auth.types';
+export { mapJwtLoginResponseDto } from './domain/auth/auth.mapper';
+
+//domain - user
+export type {
+  AgeType,
+  GenderType,
+  UserInfoType,
+  UserType,
+} from './domain/user/user.types';
+
+//domain - user product
+export type {
+  UserProductDetailType,
+  UserProductRequestType,
+  UserProductResponseType,
+  UserProductStatusType,
+} from './domain/userProduct/userProduct.types';
+
 //api
 export { apiClient, configureApiClient } from './api/client';
+
+//api - auth
+export * from './api/auth/postKakaoLogin.api';
+export * from './api/auth/postLoginInfo.api';
+
+//api - user product
+export * from './api/userProduct/postUserProduct.api';
+
+//api - user
+export * from './api/user/fetchUserInfo.api';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';

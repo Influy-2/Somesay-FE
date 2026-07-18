@@ -13,10 +13,12 @@ import {
   useFetchBrandProducts,
   useFetchBrandProductSearch,
 } from '@/shared/hooks';
+import { useAuthGuard } from '@/features/auth';
 
 const ALL_CATEGORY_ID = 0;
 export const BrandHomePage = () => {
   const navigate = useNavigate();
+  const guardAction = useAuthGuard();
   const { brandId: brandIdParam } = useParams();
   const parsedBrandId = Number(brandIdParam);
   const isValidBrandId = Number.isInteger(parsedBrandId) && parsedBrandId > 0;
@@ -99,7 +101,7 @@ export const BrandHomePage = () => {
     setSelectedSubCategoryId(subCategoryId);
   };
 
-  const handleHeartToggle = (productId: number) => {
+  const handleHeartToggle = guardAction((productId: number) => {
     const product = products.find((item) => item.productId === productId);
 
     if (!product) {
@@ -110,7 +112,7 @@ export const BrandHomePage = () => {
       ...currentOverrides,
       [productId]: !product.isHearted,
     }));
-  };
+  });
 
   if (!isValidBrandId) {
     return (

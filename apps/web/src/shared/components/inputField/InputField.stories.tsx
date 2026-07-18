@@ -8,8 +8,8 @@ const meta: Meta<typeof InputField> = {
   tags: ['autodocs'],
   argTypes: {
     placeholder: { control: 'text' },
-    maxLength: { control: 'number' },
     errorMessage: { control: 'text' },
+    helperText: { control: 'text' },
   },
 };
 
@@ -20,8 +20,7 @@ const DefaultTemplate = () => {
   const [value, setValue] = useState('');
   return (
     <InputField
-      placeholder="닉네임을 입력해주세요"
-      maxLength={12}
+      placeholder="입력해 주세요"
       value={value}
       onChange={(e) => setValue(e.target.value)}
     />
@@ -32,9 +31,8 @@ const WithErrorTemplate = () => {
   const [value, setValue] = useState('닉네임123');
   return (
     <InputField
-      placeholder="닉네임을 입력해주세요"
-      maxLength={12}
-      errorMessage="이미 사용 중인 닉네임입니다."
+      placeholder="입력해 주세요"
+      errorMessage="올바르게 입력해 주세요."
       value={value}
       onChange={(e) => setValue(e.target.value)}
     />
