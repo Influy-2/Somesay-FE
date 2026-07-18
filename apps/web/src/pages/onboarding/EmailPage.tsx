@@ -35,8 +35,7 @@ export const EmailPage = () => {
       : undefined;
 
   const handleNext = () => {
-    const result = emailSchema.safeParse(email);
-    if (!result.success) {
+    if (!emailResult.success) {
       setHasBlurred(true);
       return;
     }
@@ -47,7 +46,7 @@ export const EmailPage = () => {
       return;
     }
 
-    setEmail(result.data);
+    setEmail(emailResult.data);
     markStepComplete('email');
     navigate(getNextOnboardingPath('email'));
   };
