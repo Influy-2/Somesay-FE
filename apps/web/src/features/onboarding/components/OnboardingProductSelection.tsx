@@ -11,7 +11,6 @@ import {
   SelectedProductDock,
   useProductCatalog,
 } from '@/features/productSelection';
-import { PATH } from '@/routes/path';
 import { HorizontalCategoriesTab } from '@/shared/components';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 import { useCompleteOnboarding } from '../hooks/useCompleteOnboarding';
@@ -76,11 +75,6 @@ export const OnboardingProductSelection = ({
 
   const moveToNextStep = () => {
     const store = useOnboardingStore.getState();
-    if (!store.provider) {
-      navigate(PATH.LOGIN.BASE, { replace: true });
-      return;
-    }
-
     store.markStepComplete(step);
 
     if (step === 'mismatchedProducts') {

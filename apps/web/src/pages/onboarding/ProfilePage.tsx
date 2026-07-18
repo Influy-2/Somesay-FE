@@ -10,7 +10,6 @@ import {
   type OnboardingAge,
   type OnboardingGender,
 } from '@/features/onboarding';
-import { PATH } from '@/routes/path';
 
 const GENDER_OPTIONS = Object.entries(GENDER_LABELS) as [
   OnboardingGender,
@@ -29,11 +28,6 @@ export const ProfilePage = () => {
     if (!gender || !age) return;
 
     const store = useOnboardingStore.getState();
-    if (!store.provider) {
-      navigate(PATH.LOGIN.BASE, { replace: true });
-      return;
-    }
-
     store.setProfile(gender, age);
     store.markStepComplete('profile');
     navigate(getNextOnboardingPath('profile'));

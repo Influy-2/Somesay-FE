@@ -6,7 +6,6 @@ import {
   useEmailVerification,
   useOnboardingStore,
 } from '@/features/onboarding';
-import { PATH } from '@/routes/path';
 import { VerificationCodeInput } from '@/shared/components';
 import { CheckOnIcon } from '@/shared/icons';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
@@ -22,11 +21,6 @@ export const EmailVerificationPage = () => {
 
   const handleVerified = useCallback(() => {
     const store = useOnboardingStore.getState();
-    if (!store.provider) {
-      navigate(PATH.LOGIN.BASE, { replace: true });
-      return;
-    }
-
     store.markEmailVerified();
     store.markStepComplete('emailVerification');
 

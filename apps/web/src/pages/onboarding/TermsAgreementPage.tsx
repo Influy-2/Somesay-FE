@@ -9,7 +9,6 @@ import {
   useOnboardingStore,
 } from '@/features/onboarding';
 import { ChevronRight20Icon } from '@/shared/icons';
-import { PATH } from '@/routes/path';
 
 export const TermsAgreementPage = () => {
   const navigate = useNavigate();
@@ -36,12 +35,6 @@ export const TermsAgreementPage = () => {
 
   const handleNext = () => {
     if (!agreementsSchema.safeParse(agreements).success) return;
-
-    const { provider } = useOnboardingStore.getState();
-    if (!provider) {
-      navigate(PATH.LOGIN.BASE, { replace: true });
-      return;
-    }
 
     setAgreements(agreements);
     markStepComplete('terms');

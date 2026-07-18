@@ -7,7 +7,6 @@ import {
   useOnboardingStore,
 } from '@/features/onboarding';
 import { CharacterCountInput } from '@/shared/components';
-import { PATH } from '@/routes/path';
 
 export const NicknamePage = () => {
   const navigate = useNavigate();
@@ -27,12 +26,6 @@ export const NicknamePage = () => {
   const handleNext = () => {
     const result = nicknameSchema.safeParse(nickname);
     if (!result.success) return;
-
-    const { provider } = useOnboardingStore.getState();
-    if (!provider) {
-      navigate(PATH.LOGIN.BASE, { replace: true });
-      return;
-    }
 
     setNickname(result.data);
     markStepComplete('nickname');

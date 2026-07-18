@@ -6,7 +6,6 @@ import {
   OnboardingLayout,
   useOnboardingStore,
 } from '@/features/onboarding';
-import { PATH } from '@/routes/path';
 import { EmailInput } from '@/shared/components';
 
 const EMAIL_DOMAINS = ['gmail.com', 'naver.com', 'daum.net', 'nate.com'];
@@ -37,12 +36,6 @@ export const EmailPage = () => {
   const handleNext = () => {
     if (!emailResult.success) {
       setHasBlurred(true);
-      return;
-    }
-
-    const { provider } = useOnboardingStore.getState();
-    if (!provider) {
-      navigate(PATH.LOGIN.BASE, { replace: true });
       return;
     }
 

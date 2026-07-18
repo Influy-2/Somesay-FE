@@ -7,7 +7,6 @@ import {
   skinTypeNamesSchema,
   useOnboardingStore,
 } from '@/features/onboarding';
-import { PATH } from '@/routes/path';
 
 const SKIN_TYPE_OPTIONS = USER_SKIN_TYPE_OPTIONS.map(
   ({ label }) => [label, label] as const
@@ -25,11 +24,6 @@ export const SkinTypesPage = () => {
     if (!canProceed) return;
 
     const store = useOnboardingStore.getState();
-    if (!store.provider) {
-      navigate(PATH.LOGIN.BASE, { replace: true });
-      return;
-    }
-
     store.markStepComplete('skinTypes');
     navigate(getNextOnboardingPath('skinTypes'));
   };

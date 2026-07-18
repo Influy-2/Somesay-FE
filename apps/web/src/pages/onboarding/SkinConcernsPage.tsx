@@ -7,7 +7,6 @@ import {
   OnboardingOptionGroup,
   useOnboardingStore,
 } from '@/features/onboarding';
-import { PATH } from '@/routes/path';
 
 const CONCERN_OPTIONS = USER_SKIN_CONCERN_OPTIONS.map(
   ({ label }) => [label, label] as const
@@ -22,11 +21,6 @@ export const SkinConcernsPage = () => {
 
   const moveToNextStep = () => {
     const store = useOnboardingStore.getState();
-    if (!store.provider) {
-      navigate(PATH.LOGIN.BASE, { replace: true });
-      return;
-    }
-
     store.markStepComplete('skinConcerns');
     navigate(getNextOnboardingPath('skinConcerns'));
   };
