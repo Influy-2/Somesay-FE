@@ -32,9 +32,7 @@ export const TermsAgreementPage = () => {
     setLocalAgreements(nextAgreements);
   };
 
-  const handleAgreementDetails = (agreementId: string) => {
-    console.info('[TermsAgreementPage] view agreement', agreementId);
-  };
+  const handleAgreementDetails = () => {};
 
   const handleNext = () => {
     if (!agreementsSchema.safeParse(agreements).success) return;
@@ -91,7 +89,7 @@ export const TermsAgreementPage = () => {
               />
               <button
                 type="button"
-                onClick={() => handleAgreementDetails(id)}
+                onClick={handleAgreementDetails}
                 aria-label={`${label} 보기`}
                 className="flex size-6 shrink-0 items-center justify-center"
               >
