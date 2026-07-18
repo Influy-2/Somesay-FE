@@ -31,7 +31,7 @@ export const API_ENDPOINTS = {
   /** home ranking controller **/
   HOME_CREATOR_RANKING: '/home/creators',
   HOME_PRODUCT_RANKING: '/home/products',
-  HOME_PRODUCT_LIST: '/home/product/list',
+  HOME_PRODUCT_LIST: '/home/products/list',
 
   /** Category **/
   CATEGORY: '/categories',
