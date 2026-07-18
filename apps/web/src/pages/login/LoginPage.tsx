@@ -10,6 +10,17 @@ import {
 import { ArrowBackIcon } from '@/shared/icons';
 import { useSocialAuthFlow } from '@/app/hooks/useSocialAuthFlow';
 import { useLocation, useNavigate } from 'react-router';
+
+interface LoginRedirectState {
+  from: string;
+}
+
+const isLoginRedirectState = (state: unknown): state is LoginRedirectState =>
+  typeof state === 'object' &&
+  state !== null &&
+  'from' in state &&
+  typeof state.from === 'string';
+
 export const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,12 +30,7 @@ export const LoginPage = () => {
   useEffect(() => {
     const state = location.state;
 
-    if (
-      typeof state === 'object' &&
-      state !== null &&
-      'from' in state &&
-      typeof state.from === 'string'
-    ) {
+    if (isLoginRedirectState(state)) {
       saveAuthRedirectPath(state.from);
     }
   }, [location.state]);
