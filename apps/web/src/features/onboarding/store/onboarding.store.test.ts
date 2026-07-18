@@ -120,13 +120,37 @@ describe('onboarding store', () => {
 
     store.startOnboarding('KAKAO');
     store.setNickname('somesay');
+    store.setPreviousProgressStep('skinTypes');
     store.startOnboarding('GOOGLE');
 
     expect(useOnboardingStore.getState()).toMatchObject({
       provider: 'GOOGLE',
       nickname: '',
       completedSteps: [],
+      previousProgressStep: null,
     });
+  });
+
+  it('온보딩을 초기화하면 이전 진행 단계를 제거한다', () => {
+    const store = useOnboardingStore.getState();
+
+    store.setPreviousProgressStep('skinConcerns');
+    store.reset();
+
+    expect(useOnboardingStore.getState().previousProgressStep).toBeNull();
+  });
+
+  it('이전 진행 단계는 sessionStorage에 저장하지 않는다', () => {
+    const store = useOnboardingStore.getState();
+
+    store.startOnboarding('KAKAO');
+    store.setPreviousProgressStep('profile');
+
+    const persistedDraft = JSON.parse(
+      memorySessionStorage.getItem(ONBOARDING_STORAGE_KEY) ?? '{}'
+    ) as { state?: Record<string, unknown> };
+
+    expect(persistedDraft.state).not.toHaveProperty('previousProgressStep');
   });
 
   it('sessionStorage에 저장된 초안을 다시 복원한다', async () => {

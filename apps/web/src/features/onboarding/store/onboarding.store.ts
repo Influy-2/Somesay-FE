@@ -6,6 +6,7 @@ import {
   INITIAL_ONBOARDING_DRAFT,
   ONBOARDING_STEP_ORDER,
   ONBOARDING_STORAGE_KEY,
+  type OnboardingProgressStep,
 } from '../constants/onboarding.constants';
 import type {
   OnboardingAge,
@@ -18,7 +19,9 @@ import type {
 //스토어가 제공하는 모든 변경 함수의 타입입니다.
 interface OnboardingActions {
   hasHydrated: boolean;
+  previousProgressStep: OnboardingProgressStep | null;
   setHasHydrated: (hasHydrated: boolean) => void; //sessionStorage 복원이 끝났는지를 기록합니다.
+  setPreviousProgressStep: (step: OnboardingProgressStep) => void;
   startOnboarding: (provider: SocialProvider) => void; //신규 회원의 provider를 저장하며 이전 온보딩 데이터는 초기화합니다.
   setAgreement: (agreementId: string, agreed: boolean) => void; //특정 약관 동의 상태를 저장합니다.
   setAgreements: (agreements: Record<string, boolean>) => void;
@@ -76,11 +79,15 @@ export const useOnboardingStore = create<OnboardingStore>()(
     (set) => ({
       ...INITIAL_ONBOARDING_DRAFT,
       hasHydrated: false,
+      previousProgressStep: null,
       setHasHydrated: (hasHydrated) => set({ hasHydrated }),
+      setPreviousProgressStep: (previousProgressStep) =>
+        set({ previousProgressStep }),
       startOnboarding: (provider) =>
         set({
           ...INITIAL_ONBOARDING_DRAFT,
           provider,
+          previousProgressStep: null,
         }),
       setAgreement: (agreementId, agreed) =>
         set((state) => ({
@@ -166,6 +173,7 @@ export const useOnboardingStore = create<OnboardingStore>()(
         set((state) => ({
           ...INITIAL_ONBOARDING_DRAFT,
           hasHydrated: state.hasHydrated,
+          previousProgressStep: null,
         })),
     }),
     {

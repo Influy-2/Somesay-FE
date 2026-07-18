@@ -4,12 +4,11 @@ import {
   ONBOARDING_PROGRESS_STEPS,
   type OnboardingProgressStep,
 } from '../constants/onboarding.constants';
+import { useOnboardingStore } from '../store/onboarding.store';
 
 interface OnboardingProgressBarProps {
   currentStep: OnboardingProgressStep;
 }
-
-let previousStepNumber: number | null = null;
 
 const getPercentage = (stepNumber: number) =>
   (stepNumber / ONBOARDING_PROGRESS_STEP_COUNT) * 100;
@@ -17,7 +16,16 @@ const getPercentage = (stepNumber: number) =>
 export const OnboardingProgressBar = ({
   currentStep,
 }: OnboardingProgressBarProps) => {
+  const previousProgressStep = useOnboardingStore(
+    (state) => state.previousProgressStep
+  );
+  const setPreviousProgressStep = useOnboardingStore(
+    (state) => state.setPreviousProgressStep
+  );
   const currentStepNumber = ONBOARDING_PROGRESS_STEPS.indexOf(currentStep) + 1;
+  const previousStepNumber = previousProgressStep
+    ? ONBOARDING_PROGRESS_STEPS.indexOf(previousProgressStep) + 1
+    : null;
   const targetPercentage = getPercentage(currentStepNumber);
   const [displayedPercentage, setDisplayedPercentage] = useState(() =>
     previousStepNumber === null
@@ -28,11 +36,11 @@ export const OnboardingProgressBar = ({
   useEffect(() => {
     const animationFrame = requestAnimationFrame(() => {
       setDisplayedPercentage(targetPercentage);
-      previousStepNumber = currentStepNumber;
+      setPreviousProgressStep(currentStep);
     });
 
     return () => cancelAnimationFrame(animationFrame);
-  }, [currentStepNumber, targetPercentage]);
+  }, [currentStep, setPreviousProgressStep, targetPercentage]);
 
   return (
     <div
