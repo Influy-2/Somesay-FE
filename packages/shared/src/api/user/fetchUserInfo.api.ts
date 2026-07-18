@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from '../../constants/endpoints';
-import { UserInfoType } from '../../domain/user/user.types';
+import type { UserInfoType } from '../../domain/user/user.types';
 import { apiClient } from '../client';
 import type { ApiResponse } from '../types';
 
