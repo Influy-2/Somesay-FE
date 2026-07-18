@@ -46,6 +46,9 @@ import {
   OnboardingRouteGuard,
 } from '@/features/onboarding';
 import { ProtectedRoute } from '@/features/auth';
+import { MyReviewEvaluationPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationPage';
+import { MyReviewEvaluationProductListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationProductListPage';
+import { MyReviewEvaluationCreatorListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationCreatorListPage';
 
 export const appRouter = createBrowserRouter([
   {
@@ -239,6 +242,135 @@ export const appRouter = createBrowserRouter([
         path: PATH.MY_PAGE.BASE,
         element: <ProtectedRoute />,
         children: [
+          {
+            index: true,
+            element: <OnboardingIndexRedirect />,
+          },
+          {
+            path: PATH.ONBOARDING.TERMS,
+            element: (
+              <OnboardingRouteGuard step="terms">
+                <TermsAgreementPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.EMAIL,
+            element: (
+              <OnboardingRouteGuard step="email">
+                <EmailPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.EMAIL_VERIFICATION,
+            element: (
+              <OnboardingRouteGuard step="emailVerification">
+                <EmailVerificationPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.NICKNAME,
+            element: (
+              <OnboardingRouteGuard step="nickname">
+                <OnboardingNicknamePage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.PROFILE,
+            element: (
+              <OnboardingRouteGuard step="profile">
+                <ProfilePage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.SKIN_TYPES,
+            element: (
+              <OnboardingRouteGuard step="skinTypes">
+                <SkinTypesPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.SKIN_CONCERNS,
+            element: (
+              <OnboardingRouteGuard step="skinConcerns">
+                <SkinConcernsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MATCHED_PRODUCTS,
+            element: (
+              <OnboardingRouteGuard step="matchedProducts">
+                <MatchedProductsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MATCHED_PRODUCTS_SEARCH,
+            element: (
+              <OnboardingRouteGuard step="matchedProducts">
+                <MatchedProductSearchPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS,
+            element: (
+              <OnboardingRouteGuard step="mismatchedProducts">
+                <MismatchedProductsPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS_SEARCH,
+            element: (
+              <OnboardingRouteGuard step="mismatchedProducts">
+                <MismatchedProductSearchPage />
+              </OnboardingRouteGuard>
+            ),
+          },
+          {
+            path: PATH.ONBOARDING.COMPLETE,
+            element: <CompletePage />,
+          },
+        ],
+      },
+      {
+        path: PATH.MY_PAGE.BASE,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: PATH.MY_PAGE.REVIEW_EVALUATION.BASE,
+            element: <Outlet />,
+            children: [
+              { index: true, element: <MyReviewEvaluationPage /> },
+              {
+                path: PATH.MY_PAGE.REVIEW_EVALUATION.PRODUCTS.BASE,
+                element: <Outlet />,
+                children: [
+                  {
+                    index: true,
+                    element: <MyReviewEvaluationProductListPage />,
+                  },
+                ],
+              },
+              {
+                path: PATH.MY_PAGE.REVIEW_EVALUATION.CREATORS.BASE,
+                element: <Outlet />,
+                children: [
+                  {
+                    index: true,
+                    element: <MyReviewEvaluationCreatorListPage />,
+                  },
+                ],
+              },
+            ],
+          },
           {
             path: PATH.MY_PAGE.ACCOUNT.BASE,
             element: <Outlet />,
