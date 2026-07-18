@@ -12,6 +12,7 @@ import {
   useProductCatalog,
 } from '@/features/productSelection';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import cn from '@/utils/cn';
 import { useOnboardingStore } from '../store/onboarding.store';
 import type { ProductFitStatus } from '../types/onboarding.types';
 
@@ -78,11 +79,10 @@ export const OnboardingProductSearch = ({
 
   return (
     <div
-      className={
-        isResultMode && selectedProducts.length > 0
-          ? 'flex min-h-full flex-col pt-13.5 pb-48'
-          : 'flex min-h-full flex-col pt-13.5'
-      }
+      className={cn(
+        'flex min-h-full flex-col pt-13.5',
+        isResultMode && selectedProducts.length > 0 && 'pb-48'
+      )}
     >
       {isResultMode ? (
         <ProductSearchHeader
