@@ -45,6 +45,25 @@ describe('user product API', () => {
     });
   });
 
+  it('MATCHED 상태는 요청과 응답에서 그대로 유지한다', async () => {
+    const matchedRequest: UserProductRequestType = {
+      status: 'MATCHED',
+      productIds: [3],
+    };
+    const matchedResponse: UserProductResponseType = {
+      ...response,
+      status: 'MATCHED',
+    };
+    const post = vi.spyOn(apiClient, 'post').mockResolvedValue({
+      data: { code: 'SUCCESS', message: '', data: matchedResponse },
+    });
+
+    await expect(postUserProduct(matchedRequest)).resolves.toEqual(
+      matchedResponse
+    );
+    expect(post).toHaveBeenCalledWith('/users/product', matchedRequest);
+  });
+
   it('저장된 JWT를 Authorization 헤더에 포함한다', async () => {
     configureApiClient({
       baseURL: 'https://api.example.com',
