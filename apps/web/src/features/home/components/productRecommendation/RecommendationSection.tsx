@@ -1,21 +1,22 @@
-import { TypeRow } from './TypeRow';
 import { PATH } from '@/routes/path';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { FilterBottomSheet } from './FilterBottomSheet';
 import { FILTER_CATEGORIES, INITIAL_FILTERS } from './filter.constants';
-import { useGuestPreviewChips } from './useGuestPreviewChips';
+import { RecommendationFilterRow } from './RecommendationFilterRow';
 import type {
   RecommendedFilterGroupType,
   SelectedFiltersType,
 } from './filter.types';
 import { useFetchCategories } from '@/shared/hooks';
+// import { useFetchUserInfo } from '@/shared/hooks';
+// import { SKIN_TYPE_OPTIONS } from '@somesay/shared';
 
 export const RecommendationSection = () => {
   const navigate = useNavigate();
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const { data: categoryGroups = [] } = useFetchCategories();
-
+  // const { data: user } = useFetchUserInfo();
   // 현재 활성화된 필터 카테고리 (피부고민, 피부타입, 카테고리 중 하나)
   const [activeCategory, setActiveCategory] =
     useState<RecommendedFilterGroupType>('skinConcern');
@@ -38,10 +39,6 @@ export const RecommendationSection = () => {
   const isAnyFilterSelected = Object.values(selectedFilters).some(
     (v) => v.length > 0
   );
-
-  // 선택된 필터 없다면 프리뷰 상태
-  const isPreviewEnabled = !isAnyFilterSelected;
-  const previewChips = useGuestPreviewChips(isPreviewEnabled, categoryOptions);
 
   // (피부고민 피부타입 카테고리) 중 하나 선택하면 해당 카테고리의 필터 시트 열기
   const handleOpenBottomSheet = (filter: RecommendedFilterGroupType) => {
@@ -94,12 +91,13 @@ export const RecommendationSection = () => {
             className="divide-grey03 flex flex-col items-start divide-y self-stretch"
           >
             {FILTER_CATEGORIES.map(({ category, label }) => (
-              <TypeRow
+              <RecommendationFilterRow
                 key={category}
-                rowTitle={label}
+                category={category}
+                label={label}
                 selectedFilters={getSelectedLabel(category)}
-                previewChips={isPreviewEnabled ? previewChips[category] : []}
-                onPress={() => handleOpenBottomSheet(category)}
+                {...(category === 'category' && { categoryOptions })}
+                onPress={handleOpenBottomSheet}
               />
             ))}
           </div>

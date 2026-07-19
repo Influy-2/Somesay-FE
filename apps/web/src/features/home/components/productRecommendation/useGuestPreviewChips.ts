@@ -20,10 +20,11 @@ export interface GuestPreviewChip {
   color: ChipLargeColor;
 }
 
-export type GuestPreviewChips = Record<
-  RecommendedFilterGroupType,
-  GuestPreviewChip[]
->;
+interface UseGuestPreviewChipsParams {
+  category: RecommendedFilterGroupType;
+  isEnabled: boolean;
+  categoryOptions?: string[];
+}
 
 const getRandomItem = <T>(items: T[]): T =>
   items[Math.floor(Math.random() * items.length)] as T;
@@ -43,32 +44,32 @@ const createPreviewChip = (
 });
 
 const createPreviewChips = (
+  category: RecommendedFilterGroupType,
   categoryOptions: string[],
   cycle: number
-): GuestPreviewChips => {
+): GuestPreviewChip[] => {
   const categories =
     categoryOptions.length > 0 ? categoryOptions : FALLBACK_CATEGORY_OPTIONS;
 
-  return {
-    skinConcern: getRandomUniqueItems(SKIN_CONCERN_OPTIONS, 2).map(
-      (label, index) => createPreviewChip('skinConcern', label, cycle, index)
-    ),
-    skinType: [
-      createPreviewChip('skinType', getRandomItem(SKIN_TYPE_OPTIONS), cycle, 0),
-    ],
-    category: [
-      createPreviewChip('category', getRandomItem(categories), cycle, 0),
-    ],
-  };
+  if (category === 'skinConcern') {
+    return getRandomUniqueItems(SKIN_CONCERN_OPTIONS, 2).map((label, index) =>
+      createPreviewChip(category, label, cycle, index)
+    );
+  }
+
+  const options = category === 'skinType' ? SKIN_TYPE_OPTIONS : categories;
+
+  return [createPreviewChip(category, getRandomItem(options), cycle, 0)];
 };
 
-export const useGuestPreviewChips = (
-  isEnabled: boolean,
-  categoryOptions: string[]
-) => {
+export const useGuestPreviewChips = ({
+  category,
+  isEnabled,
+  categoryOptions = [],
+}: UseGuestPreviewChipsParams) => {
   const cycleRef = useRef(0);
   const [previewChips, setPreviewChips] = useState(() =>
-    createPreviewChips(categoryOptions, 0)
+    createPreviewChips(category, categoryOptions, 0)
   );
 
   useEffect(() => {
@@ -76,11 +77,13 @@ export const useGuestPreviewChips = (
 
     const intervalId = window.setInterval(() => {
       cycleRef.current += 1;
-      setPreviewChips(createPreviewChips(categoryOptions, cycleRef.current));
+      setPreviewChips(
+        createPreviewChips(category, categoryOptions, cycleRef.current)
+      );
     }, PREVIEW_CHANGE_INTERVAL_MS);
 
     return () => window.clearInterval(intervalId);
-  }, [categoryOptions, isEnabled]);
+  }, [category, categoryOptions, isEnabled]);
 
   return previewChips;
 };

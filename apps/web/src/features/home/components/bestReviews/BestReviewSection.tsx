@@ -4,11 +4,12 @@ import { useCarousel } from '@/shared/hooks/useCarousel';
 import { CarouselIndicator } from '@/shared/components/indicator/CarouselIndicator';
 
 //임시
-const skinType = '';
 import { MOCK_REVIEWS } from './mockData';
+import { useFetchUserInfo } from '@/shared/hooks';
 
 export const BestReviewSection = () => {
   const { emblaRef, selectedIndex, slideCount } = useCarousel();
+  const { data: user } = useFetchUserInfo();
 
   return (
     <section
@@ -16,8 +17,8 @@ export const BestReviewSection = () => {
       className="flex w-full flex-col items-center justify-center gap-5 overflow-hidden px-4"
     >
       <h2 id="best-review-title" className="headline4 w-full">
-        {skinType
-          ? `${skinType} 유저들이 가장 많이 공감한 리뷰`
+        {user?.skinTypes
+          ? `${user?.skinTypes} 유저들이 가장 많이 공감한 리뷰`
           : '유저들이 가장 많이 공감한 리뷰'}
       </h2>
 
