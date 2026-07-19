@@ -14,19 +14,19 @@ import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
 import { SearchPage } from '@/pages/search/SearchPage';
 import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
-import { MyPage } from '@/pages/myPage/MyPage';
+import { MyPage } from '@/pages/mypage/MyPage';
 import { ProductDetailPage } from '@/pages/productDetail/ProductDetailPage';
 import { BrandHomePage } from '@/pages/brandHome/BrandHomePage';
 
 import { ReviewEvaluationPage } from '@/pages/reviewEvaluation/ReviewEvaluationPage';
-import { AccountPage } from '@/pages/myPage/AccountPage';
-import { NicknamePage } from '@/pages/myPage/account/NicknamePage';
-import { GenderPage } from '@/pages/myPage/account/GenderPage';
-import { AgePage } from '@/pages/myPage/account/AgePage';
-import { SkinTypePage } from '@/pages/myPage/account/SkinTypePage';
-import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
-import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
-import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
+import { AccountPage } from '@/pages/mypage/AccountPage';
+import { NicknamePage } from '@/pages/mypage/account/NicknamePage';
+import { GenderPage } from '@/pages/mypage/account/GenderPage';
+import { AgePage } from '@/pages/mypage/account/AgePage';
+import { SkinTypePage } from '@/pages/mypage/account/SkinTypePage';
+import { SkinConcernPage } from '@/pages/mypage/account/SkinConcernPage';
+import { ProductFitPage } from '@/pages/mypage/account/ProductFitPage';
+import { AddProductPage } from '@/pages/mypage/account/AddProductPage';
 import { LoginPage } from '@/pages/login/LoginPage';
 import { KakaoCallbackPage } from '@/pages/login/KakaoCallbackPage';
 import { EmailPage } from '@/pages/onboarding/EmailPage';
@@ -46,9 +46,9 @@ import {
   OnboardingRouteGuard,
 } from '@/features/onboarding';
 import { ProtectedRoute } from '@/features/auth';
-import { MyReviewEvaluationPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationPage';
-import { MyReviewEvaluationProductListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationProductListPage';
-import { MyReviewEvaluationCreatorListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationCreatorListPage';
+import { MyReviewEvaluationPage } from '@/pages/mypage/myReviewEvaluation/MyReviewEvaluationPage';
+import { MyReviewEvaluationProductListPage } from '@/pages/mypage/myReviewEvaluation/MyReviewEvaluationProductListPage';
+import { MyReviewEvaluationCreatorListPage } from '@/pages/mypage/myReviewEvaluation/MyReviewEvaluationCreatorListPage';
 
 export const appRouter = createBrowserRouter([
   {

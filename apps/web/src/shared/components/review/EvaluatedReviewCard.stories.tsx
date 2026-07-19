@@ -20,8 +20,8 @@ const baseReview = {
   product: {
     productId: 1,
     productName: '[캐롯] 카로팅 카밍밍밍ㅁ이밍밍밍밍...',
-    brand: '토리든',
-    imageUrl: '',
+    brandName: '토리든',
+    productImageUrl: '',
     price: 10000,
   },
 };

@@ -5,17 +5,17 @@ import type {
   BrandProductListDto,
 } from './brand.dto';
 import type {
-  BrandAvailableSubCategoryType,
   BrandSummaryType,
   BrandProductType,
   BrandProductPageType,
 } from './brand.types';
+import type { SubcategoryType } from '../category/category.types';
 import { mapProductCardDtoToCard } from '../product/product.mapper';
 
 // 백엔드 브랜드 소분류 DTO를 프론트엔드 소분류 타입으로 변환합니다.
 const mapBrandAvailableSubCategoryDto = (
   item: BrandAvailableSubCategoryDto
-): BrandAvailableSubCategoryType => ({
+): SubcategoryType => ({
   subCategoryId: item.subCategoryId,
   subCategoryName: item.subName,
 });
