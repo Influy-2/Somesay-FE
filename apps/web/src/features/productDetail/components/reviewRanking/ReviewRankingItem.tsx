@@ -4,55 +4,27 @@ import {
   ReviewComment,
   MoreButton,
   CreatorInfoReview,
-  BottomSheet,
 } from '@/shared/components';
 
-interface ReviewSource {
-  thumbnail?: string;
-  title?: string;
-  viewCount?: string;
-  uploadDate?: string;
-}
-
-interface ReviewCreator {
-  name: string;
-  channelName?: string;
-  profileImg: string;
-  subscriberCount: string;
-  trustScore: number;
-  tags: string[];
-}
-
-interface ReviewCommentItem {
-  id: number;
-  userId: number;
-  nickname: string;
-  isAgree: boolean;
-  content: string;
-}
+import type { ProductReviewType } from '@somesay/shared';
+import { OriginalVideoCard } from '@/shared/components';
 
 interface ReviewRankingItemProps {
-  review: {
-    id: number;
-    comments: ReviewCommentItem[];
-    creator: ReviewCreator;
-    source?: ReviewSource;
-    ranking: number;
-    rating: number;
-    content: string;
-    agreedPercentage: number;
-    participantCount: number;
-  };
+  review: ProductReviewType;
+  onOpenTimeLinkSheet?: (reviewId: number) => void;
+  onOpenCommentSheet?: (reviewId: number) => void;
 }
 
 const COMMENTS_PREVIEW_COUNT = 2;
-const THUMBNAIL_FALLBACK = '/images/thumbnail-placeholder.png';
 
-export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
+export const ReviewRankingItem = ({
+  review,
+  onOpenTimeLinkSheet,
+  onOpenCommentSheet,
+}: ReviewRankingItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isCommentSheetOpen, setIsCommentSheetOpen] = useState(false);
-  const comments = review.comments;
-  const remainingComments = comments.length - COMMENTS_PREVIEW_COUNT;
+  const comments = review.previewComments;
+  const remainingComments = review.totalCommentCount - COMMENTS_PREVIEW_COUNT;
 
   return (
     <div className="border-grey01 flex flex-col">
@@ -62,7 +34,7 @@ export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
         type="button"
         onClick={() => setIsExpanded((prev) => !prev)}
         aria-expanded={isExpanded}
-        aria-controls={`review-expandable-${review.id}`}
+        aria-controls={`review-expandable-${review.reviewId}`}
         className="text-grey06 body2-m flex w-full items-center justify-center gap-0.5"
       >
         {isExpanded ? (
@@ -78,7 +50,7 @@ export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
 
       {isExpanded && (
         <div
-          id={`review-expandable-${review.id}`}
+          id={`review-expandable-${review.reviewId}`}
           className="flex flex-col bg-white"
         >
           {comments.length === 0 ? (
@@ -88,12 +60,14 @@ export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
           ) : (
             <ol className="divide-grey03 flex flex-col divide-y px-4 pb-4">
               {comments.slice(0, COMMENTS_PREVIEW_COUNT).map((comment) => (
-                <li key={comment.id}>
+                <li key={comment.commentId}>
                   <ReviewComment
-                    key={comment.id}
+                    key={comment.commentId}
                     nickname={comment.nickname}
-                    isAgree={comment.isAgree}
-                    content={comment.content}
+                    isAgree={comment.reactionType === 'AGREE'}
+                    content={comment.comment}
+                    skinTypes={comment.skinTypes}
+                    skinExpectations={comment.skinExpectations}
                   />
                 </li>
               ))}
@@ -104,81 +78,27 @@ export const ReviewRankingItem = ({ review }: ReviewRankingItemProps) => {
             <div className="px-5 pb-6">
               <MoreButton
                 text={`코멘트 ${remainingComments}개 더보기`}
-                onClick={() => setIsCommentSheetOpen(true)}
+                onClick={() => onOpenCommentSheet?.(review.reviewId)}
               />
             </div>
           )}
 
           <div className="bg-white px-4">
-            <div className="bg-grey01 px-4 py-3">
-              <h3 className="body2-sb mb-2 text-black">이 리뷰 원본 보기</h3>
-              <div className="flex gap-2">
-                <div className="bg-grey02 relative aspect-video w-40 shrink-0 overflow-hidden">
-                  {review.source && (
-                    <img
-                      src={review.source.thumbnail ?? THUMBNAIL_FALLBACK}
-                      alt={
-                        review.source.title
-                          ? `${review.source.title} 썸네일`
-                          : '영상 썸네일'
-                      }
-                      className="h-full w-full object-cover"
-                    />
-                  )}
-                </div>
-                <div className="flex flex-col justify-between">
-                  <div className="flex flex-col justify-between gap-1">
-                    <p className="caption1-m line-clamp-2 leading-[140%] text-black">
-                      {review.source?.title || '영상 제목'}
-                    </p>
-                    <p className="text-grey06 caption2-m">
-                      조회수 {review.source?.viewCount} ·{' '}
-                      {review.source?.uploadDate}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div
-                      className="bg-grey02 h-5 w-5 overflow-hidden rounded-full"
-                      aria-hidden="true"
-                    >
-                      <img
-                        src={review.creator.profileImg}
-                        className="h-full w-full object-cover"
-                        alt=""
-                      />
-                    </div>
-                    <span className="text-grey07 caption1-m">
-                      {review.creator.channelName ?? review.creator.name}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {review.youtubeUrl && (
+              <OriginalVideoCard
+                youtubeUrl={review.youtubeUrl}
+                creatorName={review.nickname}
+                creatorProfileImgUrl={review.profileImageUrl}
+                timeLinkCount={review.timeLinkCount}
+                reviewId={review.reviewId}
+                videoTitle={review.videoTitle}
+                viewCount={review.viewCount}
+                {...(onOpenTimeLinkSheet ? { onOpenTimeLinkSheet } : {})}
+              />
+            )}
           </div>
         </div>
       )}
-      <BottomSheet
-        isOpen={isCommentSheetOpen}
-        onClose={() => setIsCommentSheetOpen(false)}
-        ariaLabel={`이 리뷰에 대한 코멘트 (${comments.length})`}
-        header={
-          <div className="body1-sb px-4">
-            이 리뷰에 대한 코멘트 ({comments.length})
-          </div>
-        }
-      >
-        <ol className="divide-grey03 flex flex-col divide-y px-4">
-          {comments.map((comment) => (
-            <li key={comment.id}>
-              <ReviewComment
-                nickname={comment.nickname}
-                isAgree={comment.isAgree}
-                content={comment.content}
-              />
-            </li>
-          ))}
-        </ol>
-      </BottomSheet>
     </div>
   );
 };

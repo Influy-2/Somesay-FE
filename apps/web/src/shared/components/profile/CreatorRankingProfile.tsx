@@ -2,21 +2,24 @@
 
 import { YoutubeIcon } from '@/shared/icons';
 import { ChipBasic } from '@/shared/components';
+import { formatSubscriberCount } from '@somesay/shared';
 
 export interface CreatorRankingProfileProps {
   ranking: number;
-  creator: {
-    name: string;
-    profileImg: string;
-    subscriberCount: string;
-    trustScore: number;
-    tags: string[];
-  };
+  nickname: string;
+  profileImageUrl: string;
+  subscriberNum: number;
+  trustScore: number;
+  skinTypes: string[];
 }
 
 export const CreatorRankingProfile = ({
   ranking,
-  creator,
+  nickname,
+  profileImageUrl,
+  subscriberNum,
+  trustScore,
+  skinTypes,
 }: CreatorRankingProfileProps) => {
   return (
     <div className="mb-4 flex gap-2.5">
@@ -30,34 +33,34 @@ export const CreatorRankingProfile = ({
       )}
       <div className="bg-grey02 h-11 w-11 shrink-0 overflow-hidden rounded-full">
         <img
-          src={creator.profileImg}
-          alt={`${creator.name} 프로필 이미지`}
+          src={profileImageUrl}
+          alt={`${nickname} 프로필 이미지`}
           className="h-full w-full object-cover"
         />
       </div>
       <div className="flex flex-1 flex-col">
         <div className="flex items-center gap-2">
-          <span className="body1-sb">{creator.name}</span>
+          <span className="body1-sb">{nickname}</span>
           <div
             className="flex items-center gap-0.5"
-            aria-label={`유튜브 구독자 수 ${creator.subscriberCount}`}
+            aria-label={`유튜브 구독자 수 ${subscriberNum}`}
           >
             <YoutubeIcon className="h-3.5 w-3.5" aria-hidden="true" />
             <span className="caption2-m" aria-hidden="true">
-              {creator.subscriberCount}
+              {formatSubscriberCount(subscriberNum)}
             </span>
           </div>
         </div>
         <div className="flex w-full items-center justify-between">
           <dl className="flex items-center gap-1">
             <dt className="caption1-m text-grey07">신뢰도</dt>
-            <dd className="caption1-b text-grey07">{creator.trustScore}점</dd>
+            <dd className="caption1-b text-grey07">{trustScore}점</dd>
           </dl>
           <div
             className="flex gap-1"
-            aria-label={`태그: ${creator.tags.join(', ')}`}
+            aria-label={`태그: ${skinTypes.join(', ')}`}
           >
-            {creator.tags.map((tag) => (
+            {skinTypes.map((tag) => (
               <ChipBasic key={tag} label={tag} />
             ))}
           </div>
