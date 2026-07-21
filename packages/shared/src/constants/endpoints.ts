@@ -38,4 +38,8 @@ export const API_ENDPOINTS = {
     PRODUCTS: ':brandId/products',
     PRODUCT_SEARCH: ':brandId/products/search',
   },
+
+  /** Review **/
+  REVIEW_TIMELINKS: '/reviews/:reviewId/timelinks',
+  REVIEW_COMMENTS: '/reviews/:reviewId/comments',
 } as const;

@@ -35,6 +35,8 @@ export * from './constants/forbiddenWords.constants';
 export type {
   CreatorReviewType,
   CreatorReviewSummaryType,
+  TimeLinkType,
+  TimeLinksType,
 } from './domain/review/review.types';
 
 export * from './constants/user.constants';
@@ -87,6 +89,7 @@ export * from './api/product/fetchProductsByCategory.api';
 export * from './api/product/fetchProductDetail.api';
 export * from './api/product/fetchProductReviewOverview.api';
 export * from './api/product/fetchProductReviews.api';
+export * from './api/product/fetchSimilarProducts.api';
 
 //api - category
 export * from './api/category/fetchCategories.api';
@@ -95,6 +98,10 @@ export * from './api/category/fetchCategories.api';
 export * from './api/brand/fetchBrandDetail.api';
 export * from './api/brand/fetchBrandProducts.api';
 export * from './api/brand/fetchBrandProductSearch.api';
+
+//api - review
+export * from './api/review/fetchTimeLinks.api';
+export * from './api/review/fetchReviewComments.api';
 
 //query
 export * from './query/queryKeys';
