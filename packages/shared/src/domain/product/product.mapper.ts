@@ -27,11 +27,13 @@ export const mapProductDetailDto = (
   productName: item.productName,
   price: item.price,
   isHearted: item.userWish,
-  brandImageUrl: item.brandImgUrl,
+  brandId: item.brandId,
+  brandLogoUrl: item.brandLogoUrl,
   volume: item.volume,
   collabChannelUrl: item.collabChannelUrl,
   collabChannelName: item.collabChannelName,
   collabProfileImgUrl: item.collabProfileImgUrl,
+  productNotes: item.productNotes,
 });
 
 // ReviewOverviewDto를 CreatorReviewSummaryType으로 변환합니다.
@@ -42,6 +44,8 @@ export const mapCreatorReviewSummary = (
   avgRating: item.avgRating,
   reviewCount: item.reviewCount,
   aiSummary: item.aiSummary,
+  frequentMention: item.frequentMention,
+  consideration: item.consideration,
   productSkinTypes: item.productSkinTypes,
   productSkinExpectations: item.productSkinExpectations,
 });
@@ -96,11 +100,14 @@ export const mapProductPreviewPageDtoToCards = (
 // 백엔드 코멘트 DTO를 화면에서 사용하던 코멘트 타입으로 변환합니다.
 const mapCommentPreviewDto = (item: CommentPreviewDto): CommentPreviewType => ({
   commentId: item.commentId,
+  userId: item.userId,
   nickname: item.nickname,
   profileImageUrl: item.profileImgUrl,
   reactionType: item.reactionType,
   comment: item.content,
   createdAt: item.createdAt,
+  skinTypes: item.skinTypes,
+  skinExpectations: item.skinExpectations,
 });
 
 // 백엔드 상품 리뷰 DTO를 화면에서 사용하던 상품 리뷰 타입으로 변환합니다.
@@ -120,6 +127,8 @@ export const mapProductReviewDto = (
   disagreeCount: item.disagreeCount,
   agreeRatio: item.agreeRatio,
   youtubeUrl: item.youtubeUrl,
+  videoTitle: item.videoTitle,
+  viewCount: item.viewCount,
   timeLinkCount: item.timeLinkCount,
   totalCommentCount: item.totalCommentCount,
   previewComments: item.previewComments.map(mapCommentPreviewDto),
