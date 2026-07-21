@@ -1,5 +1,6 @@
 import type { CreatorReviewSummaryType } from '@somesay/shared';
-
+import { useAuth } from '@/features/auth';
+import { getSkinTypeLabel } from '@somesay/shared';
 import { ChipLarge, StarRating } from '@/shared/components';
 import { DotIcon, QuoteCloseIcon, QuoteOpenIcon } from '@/shared/icons';
 
@@ -8,9 +9,15 @@ export const CreatorReviewSummarySection = ({
   avgRating,
   reviewCount,
   aiSummary,
+  frequentMention,
+  consideration,
   productSkinTypes,
   productSkinExpectations,
 }: CreatorReviewSummaryType) => {
+  const { user } = useAuth();
+  const userSkinTypeLabels =
+    user?.skinTypes.map((id) => getSkinTypeLabel(id)).filter(Boolean) ?? [];
+
   return (
     <section className="flex flex-col gap-5 bg-white px-4 py-5">
       <h2 className="headline4">크리에이터 리뷰 요약</h2>
@@ -45,34 +52,92 @@ export const CreatorReviewSummarySection = ({
         </div>
       </div>
 
-      <div className="bg-grey02 p-5">
+      <div className="bg-grey01 p-4">
         <div className="flex self-start">
-          <QuoteOpenIcon />
           <QuoteOpenIcon />
         </div>
 
-        <p className="body1-sb py-2 text-center">{aiSummary}</p>
+        <p className="body2-sb px-1 py-3 text-center">{aiSummary}</p>
 
         <div className="flex w-full justify-end">
           <QuoteCloseIcon />
-          <QuoteCloseIcon />
         </div>
       </div>
+      {/* 자주 언급되는 점 */}
+      {frequentMention && (
+        <div className="flex flex-col gap-1 px-2">
+          <p className="body2-m text-grey06">자주 언급되는 점</p>
+          <ul>
+            <li className="body2-m flex list-none items-start gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="6"
+                height="6"
+                viewBox="0 0 6 6"
+                fill="none"
+                className="mt-2 shrink-0"
+              >
+                <circle
+                  cx="3"
+                  cy="3"
+                  r="2.1"
+                  stroke="#161616"
+                  strokeWidth="1.8"
+                />
+              </svg>
+              <span>{frequentMention}</span>
+            </li>
+          </ul>
+        </div>
+      )}
 
+      {/* 참고할 점 */}
+      {consideration && (
+        <div className="flex flex-col gap-1 px-2">
+          <p className="body2-m text-grey06">참고할 점</p>
+          <ul>
+            <li className="body2-m flex gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="6"
+                height="6"
+                viewBox="0 0 6 6"
+                fill="none"
+                className="mt-2 shrink-0"
+              >
+                <circle
+                  cx="3"
+                  cy="3"
+                  r="2.1"
+                  stroke="#161616"
+                  strokeWidth="1.8"
+                />
+              </svg>
+              <span>{consideration}</span>
+            </li>
+          </ul>
+        </div>
+      )}
+      <div className="bg-grey02 my-1 h-px w-full" />
       {/* 4. 태그 영역 */}
-      {/* TODO: 태그 색상 수정 필요 */}
       <div className="flex flex-col gap-5">
         <div>
-          <p className="body2-m mb-2">잘 맞는 피부 타입</p>
-          <div className="flex flex-wrap gap-1.5">
+          <p className="body2-m text-grey06 mb-1.5">잘 맞는 피부 타입</p>
+          <div className="flex flex-wrap gap-2.5">
             {productSkinTypes?.map((type) => (
-              <ChipLarge key={type} label={type} />
+              <ChipLarge
+                key={type}
+                label={type}
+                variant={
+                  userSkinTypeLabels.includes(type) ? 'highlight' : 'default'
+                }
+              />
             ))}
           </div>
         </div>
         <div>
-          <p className="body2-m mb-2">기대 효과</p>
-          <div className="flex flex-wrap gap-1.5">
+          <p className="body2-m text-grey06 mb-1.5">기대 효과</p>
+          <div className="flex flex-wrap gap-2.5">
             {productSkinExpectations?.map((effect) => (
               <ChipLarge
                 key={effect.productSkinExpectationId}
