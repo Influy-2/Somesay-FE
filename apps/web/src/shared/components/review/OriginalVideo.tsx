@@ -6,7 +6,7 @@ interface OriginalVideoProps {
   youtubeUrl: string;
   videoTitle: string;
   viewCount: number;
-  uploadDate: string;
+  uploadDate?: string;
   creatorName: string;
   creatorProfileImgUrl?: string;
 }

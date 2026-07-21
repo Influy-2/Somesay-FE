@@ -7,7 +7,7 @@ interface OriginalVideoCardProps {
   youtubeUrl: string;
   videoTitle: string;
   viewCount: number;
-  uploadDate: string;
+  uploadDate?: string;
   creatorName: string;
   creatorProfileImgUrl?: string;
   timeLinkCount: number;
@@ -49,7 +49,7 @@ export const OriginalVideoCard = ({
         creatorName={creatorName}
         videoTitle={videoTitle}
         viewCount={viewCount}
-        uploadDate={uploadDate}
+        {...(uploadDate ? { uploadDate } : {})}
         {...(creatorProfileImgUrl ? { creatorProfileImgUrl } : {})}
       />
     </div>
