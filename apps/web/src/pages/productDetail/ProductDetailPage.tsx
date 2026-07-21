@@ -4,6 +4,7 @@ import {
   PageHeader,
   CTAButton,
   FloatingButtonScrollToTop,
+  Tooltip,
 } from '@/shared/components';
 import { ArrowBackIcon, ShareIcon, HomeOffIcon } from '@/shared/icons';
 import {
@@ -11,11 +12,11 @@ import {
   CreatorReviewSummarySection,
   ReviewRankingList,
   SimilarProductsList,
-  MOCK_SIMILAR_PRODUCTS,
 } from '@/features/productDetail';
 import {
   useFetchProductDetail,
   useFetchProductReviewOverview,
+  useFetchSimilarProducts,
 } from '@/shared/hooks';
 import { useAuthGuard } from '@/features/auth';
 
@@ -68,6 +69,8 @@ export const ProductDetailPage = () => {
     }));
   });
   const handleReviewClick = () => navigate('/'); // TODO: 리뷰하기 페이지로 이동
+  const { data: similarProducts } = useFetchSimilarProducts(productId);
+  const [showEvalTooltip, setShowEvalTooltip] = useState(true);
 
   return (
     <div className="mt-13.5 flex flex-col bg-white pb-30">
@@ -124,13 +127,24 @@ export const ProductDetailPage = () => {
             {reviewOverview && (
               <CreatorReviewSummarySection {...reviewOverview} />
             )}
-            <ReviewRankingList />
-            <SimilarProductsList products={MOCK_SIMILAR_PRODUCTS} />
+            <ReviewRankingList {...(productId ? { productId } : {})} />
+            <SimilarProductsList products={similarProducts ?? []} />
           </>
         )}
 
         <div className="border-grey02 z-toast fixed bottom-0 left-1/2 w-full max-w-110 -translate-x-1/2 border bg-white px-4 pt-2 pb-7.5">
           <FloatingButtonScrollToTop className="z-toast absolute right-4 bottom-[calc(100%+12px)]" />
+          {showEvalTooltip && (
+            <Tooltip
+              label={`이 상품을 사용해봤다면,\n크리에이터들의 리뷰를 평가해보세요`}
+              isVisible={showEvalTooltip}
+              variant="withClose"
+              onClose={() => setShowEvalTooltip(false)}
+              className="bottom-full left-4 mb-2"
+              arrowPosition="top"
+              arrowClassName="left-4"
+            />
+          )}
           <CTAButton
             label="이 상품 리뷰 평가하기"
             onClick={handleReviewClick}
