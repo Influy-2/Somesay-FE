@@ -2,7 +2,7 @@
 import { YoutubeIcon } from '@/shared/icons';
 import { ChipBasic } from '@/shared/components';
 import type { BasicCreatorProfileType } from '@somesay/shared';
-
+import { formatSubscriberCount } from '@somesay/shared';
 type BasicCreatorProfileProps = BasicCreatorProfileType;
 
 export const BasicCreatorProfile = ({
@@ -23,7 +23,7 @@ export const BasicCreatorProfile = ({
     >
       {/* 프로필 사진 */}
       <div
-        className="flex aspect-square h-11 w-11 shrink-0 items-center justify-center rounded-full"
+        className="flex aspect-square h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full"
         aria-hidden="true"
       >
         <img
@@ -44,7 +44,7 @@ export const BasicCreatorProfile = ({
           {/* // TODO: ~만 수정 필요 */}
           <div className="text-grey08 caption2-m flex shrink-0 items-center gap-0.5">
             <YoutubeIcon />
-            {subscriberNum}만
+            {formatSubscriberCount(subscriberNum)}
           </div>
         </div>
 

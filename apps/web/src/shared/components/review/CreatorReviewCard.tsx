@@ -2,8 +2,7 @@
 // 글 길어지면 스크롤 가능한 버전(하단 블러)
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
-import { BasicCreatorProfile } from '@/shared/components';
-import { Star16Icon } from '@/shared/icons';
+import { BasicCreatorProfile, StarRating } from '@/shared/components';
 import { BasicCreatorProfileType } from '@somesay/shared';
 
 interface CreatorReviewCardProps {
@@ -67,9 +66,7 @@ export const CreatorReviewCard = ({
         {/* 리뷰 별점 */}
         <div className="flex items-center gap-1" aria-hidden="true">
           {/* TODO: 디자인 전달되는 대로 별 구현 */}
-          <div className="flex items-center gap-px">
-            <Star16Icon />
-          </div>
+          <StarRating rating={rating} />
           <span className="body2-sb text-[#1F2129]">{rating}</span>
         </div>
 
@@ -77,14 +74,14 @@ export const CreatorReviewCard = ({
         <div
           ref={contentContainerRef}
           onScroll={updateOverflowIndicator}
-          className="scrollbar-hide relative max-h-[6.875rem] w-full overflow-y-auto"
+          className="scrollbar-hide relative h-[6.875rem] w-full overflow-y-auto"
         >
           <p aria-hidden="true" className="body2-m text-[#1F2129]">
             {content}
           </p>
           {/* 추가 내용 안내 */}
           {showOverflowIndicator && (
-            <div className="from-grey01/0 to-grey01 pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-b" />
+            <div className="pointer-events-none sticky inset-x-0 bottom-0 h-9 bg-gradient-to-b from-white/0 to-white" />
           )}
         </div>
       </div>
