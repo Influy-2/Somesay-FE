@@ -8,6 +8,7 @@ export { useFetchSimilarProducts } from './product/useFetchSimilarProducts';
 // Home
 export { useFetchHomeCreatorRanking } from './home/useFetchHomeCreatorRanking';
 export { useFetchHomeProductRanking } from './home/useFetchHomeProductRanking';
+export { useFetchHomeCuration } from './home/useFetchHomeCuration';
 
 // Category
 export { useFetchCategories } from './category/useFetchCategories';

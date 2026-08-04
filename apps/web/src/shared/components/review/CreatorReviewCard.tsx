@@ -3,13 +3,16 @@
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
 import { BasicCreatorProfile, StarRating } from '@/shared/components';
+import cn from '@/utils/cn';
 import { BasicCreatorProfileType } from '@somesay/shared';
 
 interface CreatorReviewCardProps {
-  creator: BasicCreatorProfileType;
+  creator: BasicCreatorProfileType & { ranking?: number };
   rating: number;
   content: string;
   productName: string;
+  highlightedLabels?: readonly string[];
+  showFullContent?: boolean;
 }
 
 export const CreatorReviewCard = ({
@@ -17,6 +20,8 @@ export const CreatorReviewCard = ({
   content,
   productName,
   creator,
+  highlightedLabels = [],
+  showFullContent = false,
 }: CreatorReviewCardProps) => {
   const contentContainerRef = useRef<HTMLDivElement>(null);
   const [showOverflowIndicator, setShowOverflowIndicator] = useState(false);
@@ -58,30 +63,40 @@ export const CreatorReviewCard = ({
       className="border-grey03 flex w-full flex-col items-start gap-5 border border-solid bg-white p-5 px-4"
     >
       {/* 크리에이터 프로필 */}
-      <BasicCreatorProfile {...creator} />
+      <BasicCreatorProfile
+        {...creator}
+        highlightedLabels={highlightedLabels}
+        {...(creator.ranking === undefined
+          ? {}
+          : { trustRank: creator.ranking })}
+      />
       <div
         className="flex w-full flex-col items-start gap-1"
         aria-label={`별점 ${rating}점. ${content}`}
       >
         {/* 리뷰 별점 */}
         <div className="flex items-center gap-1" aria-hidden="true">
-          {/* TODO: 디자인 전달되는 대로 별 구현 */}
           <StarRating rating={rating} />
           <span className="body2-sb text-[#1F2129]">{rating}</span>
         </div>
 
         {/* 스크롤 리뷰 내용 */}
-        <div
-          ref={contentContainerRef}
-          onScroll={updateOverflowIndicator}
-          className="scrollbar-hide relative h-[6.875rem] w-full overflow-y-auto"
-        >
-          <p aria-hidden="true" className="body2-m text-[#1F2129]">
-            {content}
-          </p>
+        <div className="relative w-full">
+          <div
+            ref={contentContainerRef}
+            onScroll={updateOverflowIndicator}
+            className={cn(
+              'scrollbar-hide w-full',
+              !showFullContent && 'max-h-[6.875rem] overflow-y-auto'
+            )}
+          >
+            <p aria-hidden="true" className="body2-m text-[#1F2129]">
+              {content}
+            </p>
+          </div>
           {/* 추가 내용 안내 */}
-          {showOverflowIndicator && (
-            <div className="pointer-events-none sticky inset-x-0 bottom-0 h-9 bg-gradient-to-b from-white/0 to-white" />
+          {!showFullContent && showOverflowIndicator && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-b from-white/0 to-white" />
           )}
         </div>
       </div>

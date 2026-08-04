@@ -1,15 +1,35 @@
+import { Link } from 'react-router';
 import { ProductCardThumbnail, CreatorReviewCard } from '@/shared/components';
 import { SummaryBox } from './SummaryBox';
 import { useCarousel } from '@/shared/hooks/useCarousel';
 import { CarouselIndicator } from '@/shared/components/indicator/CarouselIndicator';
-
-//임시
-import { MOCK_REVIEWS } from './mockData';
-import { useFetchUserInfo } from '@/shared/hooks';
+import { PATH } from '@/routes/path';
+import { useFetchHomeCuration, useFetchUserInfo } from '@/shared/hooks';
+import { useAuthTokenStore } from '@/shared/stores/auth.store';
 
 export const BestReviewSection = () => {
   const { emblaRef, selectedIndex, slideCount } = useCarousel();
-  const { data: user } = useFetchUserInfo();
+  const accessToken = useAuthTokenStore((state) => state.accessToken);
+  const { data: userInfo, isFetched: isUserInfoFetched } = useFetchUserInfo();
+  const selectedSkinTypeId = userInfo?.skinTypes.at(0);
+  const canFetchCuration = !accessToken || isUserInfoFetched;
+  const {
+    data: curation,
+    isPending,
+    isError,
+  } = useFetchHomeCuration(selectedSkinTypeId, canFetchCuration);
+
+  if (
+    !canFetchCuration ||
+    isPending ||
+    isError ||
+    !curation ||
+    curation.reviews.length === 0
+  ) {
+    return null;
+  }
+
+  const { reviews, skinTypeName } = curation;
 
   return (
     <section
@@ -17,9 +37,18 @@ export const BestReviewSection = () => {
       className="flex w-full flex-col items-center justify-center gap-5 overflow-hidden px-4"
     >
       <h2 id="best-review-title" className="headline4 w-full">
-        {user?.skinTypes
-          ? `${user?.skinTypes} 유저들이 가장 많이 공감한 리뷰`
-          : '유저들이 가장 많이 공감한 리뷰'}
+        {skinTypeName ? (
+          <>
+            <span className="text-primary-400">{skinTypeName}</span> 유저들이
+            가장 많이 공감한 리뷰
+          </>
+        ) : (
+          <>
+            이 제품을 사용해본 사람들이
+            <br />
+            가장 많이 공감한 리뷰
+          </>
+        )}
       </h2>
 
       {/* 캐러셀 뷰포트 */}
@@ -34,22 +63,41 @@ export const BestReviewSection = () => {
           aria-live="polite" // 슬라이드 전환 시 읽어줌
           aria-atomic="false" // 변경된 슬라이드만 읽음
         >
-          {MOCK_REVIEWS.map((item, i) => (
+          {reviews.map((item, i) => (
             <div
-              key={i}
+              key={item.reviewId}
               aria-roledescription="slide" // "슬라이드"라고 읽어줌
-              aria-label={`슬라이드 ${i + 1} / ${MOCK_REVIEWS.length}`} // "슬라이드 1 / 5" 등으로 읽어줌
-              className="flex min-w-0 flex-[0_0_100%] flex-col gap-2 pl-2.5"
+              aria-label={`슬라이드 ${i + 1} / ${reviews.length}`} // "슬라이드 1 / 5" 등으로 읽어줌
+              className="flex min-w-0 flex-[0_0_95%] flex-col gap-2 pl-2.5"
             >
-              <ProductCardThumbnail {...item.product} />
-              <CreatorReviewCard {...item.review} />
+              <ProductCardThumbnail
+                productId={item.productId}
+                brandName={item.brandName}
+                productName={item.productName}
+                productImgUrl={item.productImgUrl}
+                price={item.price}
+                rating={item.rating}
+              />
+              <Link
+                to={`${PATH.PRODUCT.BASE}/${item.productId}?review=${item.reviewId}`}
+                aria-label={`${item.creator.nickname}의 리뷰 전문 보기`}
+                className="block"
+              >
+                <CreatorReviewCard
+                  creator={item.creator}
+                  rating={item.rating}
+                  content={item.content}
+                  productName={item.productName}
+                  highlightedLabels={skinTypeName ? [skinTypeName] : []}
+                />
+              </Link>
               <div className="flex items-start gap-2 self-stretch">
                 <SummaryBox
-                  boldText={item.agreePercent}
+                  boldText={String(item.agreeRatio) + '%'}
                   plainText=" 의 사용자가 공감했어요"
                 />
                 <SummaryBox
-                  boldText={item.skinType}
+                  boldText={item.mostAgreedSkinTypeName}
                   plainText=" 사용자가 가장 많이 공감했어요"
                 />
               </div>

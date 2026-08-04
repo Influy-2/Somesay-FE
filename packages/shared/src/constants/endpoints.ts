@@ -32,6 +32,8 @@ export const API_ENDPOINTS = {
   HOME_CREATOR_RANKING: '/home/creators',
   HOME_PRODUCT_RANKING: '/home/products',
   HOME_PRODUCT_LIST: '/home/products/list',
+  // 선택한 피부 타입에 맞는 홈 고평점 리뷰를 조회하기 위한 API URL입니다.
+  HOME_CURATION: '/home/curation',
 
   /** Category **/
   CATEGORY: '/categories',

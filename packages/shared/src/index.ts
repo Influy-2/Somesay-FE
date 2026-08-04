@@ -39,11 +39,15 @@ export type {
   CreatorReviewSummaryType,
   TimeLinkType,
   TimeLinksType,
+  HomeCurationReviewType,
+  HomeCurationType,
 } from './domain/review/review.types';
 
 export * from './constants/user.constants';
-export { formatSubscriberCount } from './utils';
 
+// UTILS
+export { formatSubscriberCount } from './utils/formatSubscriberCount';
+export { formatPrice } from './utils/formatPrice';
 //domain - auth
 export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
 export type {
@@ -89,6 +93,7 @@ export * from './api/ranking/fetchProductRanking.api';
 //api - home
 export * from './api/home/fetchHomeCreatorRanking.api';
 export * from './api/home/fetchHomeProductRanking.api';
+export * from './api/home/fetchHomeCuration.api';
 
 //api - product
 export * from './api/product/fetchHomeProductList.api';

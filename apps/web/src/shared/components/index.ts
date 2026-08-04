@@ -21,6 +21,9 @@ export { ChipAgreement } from './chips/ChipAgreement';
 /* thumbnail */
 export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 
+/* image */
+export { LoadingImage } from './image/LoadingImage';
+
 /* profile */
 export { BasicCreatorProfile } from './profile/BasicCreatorProfile';
 export { BrandProfile } from './profile/BrandProfile';

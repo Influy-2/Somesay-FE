@@ -13,6 +13,8 @@ const meta: Meta<typeof CreatorReviewCard> = {
     rating: { control: 'number' },
     content: { control: 'text' },
     productName: { control: 'text' },
+    highlightedLabels: { control: 'object' },
+    showFullContent: { control: 'boolean' },
   },
 };
 
@@ -25,6 +27,7 @@ const mockCreator = {
   profileImageUrl: mockProfile,
   subscriberNum: 124000,
   trustScore: 92,
+  ranking: 3,
   ageGroup: '20',
   skinTypes: ['건성'],
 };
@@ -36,6 +39,7 @@ export const Default: Story = {
     content:
       '촉촉하고 흡수가 빨라서 데일리로 쓰기 정말 좋아요. 자극 없이 순하게 스며드는 느낌이에요.',
     productName: '블랙티 유스 에센스 200ml',
+    highlightedLabels: ['건성'],
   },
 };
 
@@ -46,5 +50,12 @@ export const LongContent: Story = {
     content:
       '처음에는 반신반의하고 써봤는데 진짜 대박이에요. 아침에 세안 후 바르면 하루 종일 촉촉함이 유지되고, 메이크업 전에 발라도 밀리지 않아요. 향도 은은하고 자극이 없어서 민감한 피부에도 잘 맞는 것 같아요. 재구매 확정입니다.처음에는 반신반의하고 써봤는데 진짜 대박이에요. 아침에 세안 후 바르면 하루 종일 촉촉함이 유지되고, 메이크업 전에 발라도 밀리지 않아요. 향도 은은하고 자극이 없어서 민감한 피부에도 잘 맞는 것 같아요. 재구매 확정입니다.처음에는 반신반의하고 써봤는데 진짜 대박이에요. 아침에 세안 후 바르면 하루 종일 촉촉함이 유지되고, 메이크업 전에 발라도 밀리지 않아요. 향도 은은하고 자극이 없어서 민감한 피부에도 잘 맞는 것 같아요. 재구매 확정입니다.처음에는 반신반의하고 써봤는데 진짜 대박이에요. 아침에 세안 후 바르면 하루 종일 촉촉함이 유지되고, 메이크업 전에 발라도 밀리지 않아요. 향도 은은하고 자극이 없어서 민감한 피부에도 잘 맞는 것 같아요. 재구매 확정입니다.처음에는 반신반의하고 써봤는데 진짜 대박이에요. 아침에 세안 후 바르면 하루 종일 촉촉함이 유지되고, 메이크업 전에 발라도 밀리지 않아요. 향도 은은하고 자극이 없어서 민감한 피부에도 잘 맞는 것 같아요. 재구매 확정입니다.처음에는 반신반의하고 써봤는데 진짜 대박이에요. 아침에 세안 후 바르면 하루 종일 촉촉함이 유지되고, 메이크업 전에 발라도 밀리지 않아요. 향도 은은하고 자극이 없어서 민감한 피부에도 잘 맞는 것 같아요. 재구매 확정입니다.',
     productName: '블랙티 유스 에센스 200ml',
+  },
+};
+
+export const FullContent: Story = {
+  args: {
+    ...LongContent.args,
+    showFullContent: true,
   },
 };
