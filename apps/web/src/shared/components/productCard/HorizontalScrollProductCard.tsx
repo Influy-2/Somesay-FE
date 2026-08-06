@@ -6,7 +6,9 @@ import { ProductCardType } from '@somesay/shared';
 import { HeartButton, AvatarStack } from '@/shared/components';
 import { PATH } from '@/routes/path';
 
-export type HorizontalScrollProductCardProps = ProductCardType;
+export type HorizontalScrollProductCardProps = ProductCardType & {
+  onHeartToggle: () => void;
+};
 
 export const HorizontalScrollProductCard = ({
   productId,
@@ -18,14 +20,12 @@ export const HorizontalScrollProductCard = ({
   reviewCount,
   isHearted,
   creatorImageUrls,
+  onHeartToggle,
 }: HorizontalScrollProductCardProps) => {
   const formattedPrice = price
     ? price.toLocaleString('ko-KR') + '원'
     : '가격 정보 없음';
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
-  const onHeartToggle = () => {
-    console.log('하트클릭');
-  };
   const formattedRating =
     (String(rating).split('.')[1]?.length ?? 0) > 2
       ? rating.toFixed(2)

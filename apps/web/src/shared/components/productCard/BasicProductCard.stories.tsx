@@ -37,6 +37,7 @@ export const Default: Story = {
     rating: 4.5,
     reviewCount: 0,
     isHearted: false,
+    onHeartToggle: () => {},
     creatorImageUrls: [mockProfile1, mockProfile2, mockProfile3],
   },
 };

@@ -159,4 +159,7 @@ export const WISH_QUERY_PREFIXES = [
   QUERY_KEYS.RANKING.PRODUCTS_ALL(),
   QUERY_KEYS.PRODUCT.BY_CATEGORY_ALL(),
   QUERY_KEYS.PRODUCT.DETAIL_ALL(),
+  // 브랜드 상품 목록/검색은 brandId가 키 중간에 들어가 prefix를 좁힐 수 없습니다.
+  // 브랜드 상세에는 찜 상태가 없어 함께 순회해도 변경되지 않습니다.
+  QUERY_KEYS.BRAND.ALL,
 ] as const;

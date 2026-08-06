@@ -1,4 +1,5 @@
 import { HorizontalScrollProductCard } from '@/shared/components';
+import { useProductWish } from '@/shared/hooks';
 import { ProductCardType } from '@somesay/shared';
 
 interface SimilarProductsListProps {
@@ -6,6 +7,8 @@ interface SimilarProductsListProps {
 }
 
 export const SimilarProductsList = ({ products }: SimilarProductsListProps) => {
+  const { toggleWish } = useProductWish();
+
   return (
     <section className="flex flex-col gap-5 bg-white pt-5">
       <h2 className="headline4 px-4 whitespace-pre-line text-black">
@@ -15,7 +18,15 @@ export const SimilarProductsList = ({ products }: SimilarProductsListProps) => {
       <ul className="flex gap-2 overflow-x-auto px-4 [&::-webkit-scrollbar]:hidden">
         {products.map((product) => (
           <li key={product.productId}>
-            <HorizontalScrollProductCard {...product} />
+            <HorizontalScrollProductCard
+              {...product}
+              onHeartToggle={() =>
+                toggleWish({
+                  productId: product.productId,
+                  isHearted: product.isHearted,
+                })
+              }
+            />
           </li>
         ))}
       </ul>

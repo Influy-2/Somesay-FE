@@ -6,7 +6,9 @@ import { ProductCardType } from '@somesay/shared';
 import { HeartButton } from '@/shared/components';
 import { PATH } from '@/routes/path';
 import { AvatarStack } from '@/shared/components';
-type ProductRankingCardProps = ProductCardType;
+type ProductRankingCardProps = ProductCardType & {
+  onHeartToggle: () => void;
+};
 
 export const BasicProductCard = ({
   productId,
@@ -18,14 +20,11 @@ export const BasicProductCard = ({
   reviewCount,
   isHearted,
   creatorImageUrls,
+  onHeartToggle,
 }: ProductRankingCardProps) => {
   const formattedReviewCount = reviewCount
     ? reviewCount.toLocaleString('ko-KR')
     : 0;
-
-  const onHeartToggle = () => {
-    console.log('하트클릭');
-  };
 
   return (
     <article

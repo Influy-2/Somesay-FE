@@ -17,12 +17,12 @@ import {
   useFetchProductDetail,
   useFetchProductReviewOverview,
   useFetchSimilarProducts,
+  useProductWish,
 } from '@/shared/hooks';
-import { useAuthGuard } from '@/features/auth';
 
 export const ProductDetailPage = () => {
   const navigate = useNavigate();
-  const guardAction = useAuthGuard();
+  const { toggleWish } = useProductWish();
 
   // URL에서 productId 추출 및 유효성 검사
   const { productId: productIdParam } = useParams();
@@ -51,23 +51,14 @@ export const ProductDetailPage = () => {
   // 임시
   console.log(isReviewOverviewLoading, isReviewOverviewError); //삭제 예정
 
-  // TODO: 좋아요 상태 관리 (로컬 상태로 관리, 실제 구현에서는 API 연동 필요)
-  const [heartStateByProductId, setHeartStateByProductId] = useState<
-    Record<number, boolean>
-  >({});
-  const isHearted = productDetail
-    ? (heartStateByProductId[productDetail.productId] ??
-      productDetail.isHearted)
-    : false;
-
-  const handleLikeToggle = guardAction(() => {
+  const handleWishToggle = () => {
     if (!productDetail) return;
 
-    setHeartStateByProductId((prev) => ({
-      ...prev,
-      [productDetail.productId]: !isHearted,
-    }));
-  });
+    toggleWish({
+      productId: productDetail.productId,
+      isHearted: productDetail.isHearted,
+    });
+  };
   const handleReviewClick = () => navigate('/'); // TODO: 리뷰하기 페이지로 이동
   const { data: similarProducts } = useFetchSimilarProducts(productId);
   const [showEvalTooltip, setShowEvalTooltip] = useState(true);
@@ -119,11 +110,7 @@ export const ProductDetailPage = () => {
 
         {productDetail && (
           <>
-            <ProductHero
-              {...productDetail}
-              isHearted={isHearted}
-              onLikeClick={handleLikeToggle}
-            />
+            <ProductHero {...productDetail} onLikeClick={handleWishToggle} />
             {reviewOverview && (
               <CreatorReviewSummarySection {...reviewOverview} />
             )}

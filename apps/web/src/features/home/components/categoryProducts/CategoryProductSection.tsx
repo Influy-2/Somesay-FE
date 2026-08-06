@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { HorizontalCategoriesTab } from '@/shared/components/category/HorizontalCategoriesTab';
 import { BasicProductCard, MoreButton } from '@/shared/components';
-import { useFetchCategories, useFetchHomeProductList } from '@/shared/hooks';
+import {
+  useFetchCategories,
+  useFetchHomeProductList,
+  useProductWish,
+} from '@/shared/hooks';
 import { CategoryProductEmptyState } from './CategoryProductEmptyState';
 
 const ALL_CATEGORY = { id: 0, label: '전체' };
 
 export const CategoryProductSection = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
+  const { toggleWish } = useProductWish();
   const { data: mainCategories = [] } = useFetchCategories();
   const homeProductParams =
     selectedCategoryId === ALL_CATEGORY.id
@@ -60,7 +65,15 @@ export const CategoryProductSection = () => {
           >
             {products.map((product) => (
               <div key={product.productId} role="listitem">
-                <BasicProductCard {...product} />
+                <BasicProductCard
+                  {...product}
+                  onHeartToggle={() =>
+                    toggleWish({
+                      productId: product.productId,
+                      isHearted: product.isHearted,
+                    })
+                  }
+                />
               </div>
             ))}
           </div>
