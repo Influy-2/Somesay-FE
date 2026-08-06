@@ -6,7 +6,7 @@ import recommendedProductCardImg from '@/assets/recommended_product_card_img.png
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProfile2Img from '@/assets/mock_profile2_img.png';
 import mockProfile3Img from '@/assets/mock_profile3_img.png';
-import { AvatarStack, WhiteHeartButton } from '@/shared/components';
+import { AvatarStack, HeartButton } from '@/shared/components';
 import { Star16Icon as StarIcon } from '@/shared/icons';
 
 // TODO: API 연동 후 더미 데이터 제거
@@ -64,7 +64,7 @@ export const RecommendedProductCard = () => {
             </div>
 
             {/* 상품 찜 버튼 */}
-            <WhiteHeartButton
+            <HeartButton
               isHearted={isHearted}
               onHeartToggle={() => setIsHearted((prev) => !prev)}
               productName={PRODUCT.productName}

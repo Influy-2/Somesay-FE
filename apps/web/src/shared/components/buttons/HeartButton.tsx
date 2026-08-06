@@ -4,67 +4,53 @@ import {
   HeartBlackOffIcon,
 } from '@/shared/icons';
 
-interface WhiteHeartButtonProps {
-  isHearted: boolean;
-  onHeartToggle: () => void;
-  productName: string;
-}
-export const WhiteHeartButton = ({
-  isHearted,
-  onHeartToggle,
-  productName,
-}: WhiteHeartButtonProps) => {
-  return (
-    <button
-      type="button"
-      onClick={onHeartToggle}
-      className="flex cursor-pointer items-center justify-center"
-      aria-label={
-        isHearted ? `${productName} 찜 해제` : `${productName} 찜하기`
-      }
-      aria-pressed={isHearted}
-    >
-      {isHearted ? <HeartOnIcon /> : <HeartWhiteOffIcon />}
-    </button>
-  );
+type HeartColor = 'white' | 'black';
+
+const ON_ICON_COLOR: Record<HeartColor, string> = {
+  white: 'text-white',
+  black: 'text-black',
+};
+
+const OFF_ICON: Record<HeartColor, typeof HeartWhiteOffIcon> = {
+  white: HeartWhiteOffIcon,
+  black: HeartBlackOffIcon,
 };
 
 interface HeartButtonProps {
   isHearted: boolean;
   onHeartToggle: () => void;
   productName: string;
-  onColor: 'white' | 'black';
-  offColor: 'white' | 'black';
-  isPending?: boolean;
+  /** 찜한 상태의 하트 색 (기본: 이미지 위에 올리는 흰색) */
+  onColor?: HeartColor;
+  /** 찜하지 않은 상태의 하트 색 (기본: 이미지 위에 올리는 흰색) */
+  offColor?: HeartColor;
 }
+
 export const HeartButton = ({
   isHearted,
   onHeartToggle,
   productName,
   onColor = 'white',
-  offColor = 'black',
-  isPending,
+  offColor = 'white',
 }: HeartButtonProps) => {
+  const OffIcon = OFF_ICON[offColor];
+
   return (
     <button
       type="button"
       onClick={onHeartToggle}
-      disabled={isPending}
-      className="flex cursor-pointer items-center justify-center disabled:cursor-default"
+      // 아이콘이 작아 터치 영역만 넓히고, 음수 마진으로 레이아웃은 유지합니다.
+      className="-m-2 flex cursor-pointer items-center justify-center p-2"
       aria-label={
         isHearted ? `${productName} 찜 해제` : `${productName} 찜하기`
       }
       aria-pressed={isHearted}
-      aria-busy={isPending}
     >
-      {isHearted && onColor == 'white' && (
-        <HeartOnIcon className="text-white" />
+      {isHearted ? (
+        <HeartOnIcon className={ON_ICON_COLOR[onColor]} />
+      ) : (
+        <OffIcon />
       )}
-      {isHearted && onColor == 'black' && (
-        <HeartOnIcon className="text-black" />
-      )}
-      {!isHearted && offColor == 'white' && <HeartWhiteOffIcon />}
-      {!isHearted && offColor == 'black' && <HeartBlackOffIcon />}
     </button>
   );
 };

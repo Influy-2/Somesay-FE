@@ -1,4 +1,4 @@
-import { WhiteHeartButton } from '@/shared/components/buttons/HeartButton';
+import { HeartButton } from '@/shared/components/buttons/HeartButton';
 import type { ProductSearchResultType } from '@somesay/shared';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
@@ -35,7 +35,7 @@ export const SearchResultProductCard = ({
             className="h-full w-full object-cover"
           />
           <div className="absolute right-2 bottom-2 z-1">
-            <WhiteHeartButton
+            <HeartButton
               isHearted={product.isHearted}
               onHeartToggle={() => onHeartToggle(product.productId)}
               productName={product.productName}

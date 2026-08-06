@@ -3,7 +3,7 @@
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { ProductCardType } from '@somesay/shared';
-import { WhiteHeartButton } from '@/shared/components';
+import { HeartButton } from '@/shared/components';
 import { PATH } from '@/routes/path';
 import { AvatarStack } from '@/shared/components';
 type ProductRankingCardProps = ProductCardType;
@@ -47,7 +47,7 @@ export const BasicProductCard = ({
 
         {/* 찜 버튼 */}
         <div className="absolute right-2 bottom-2 z-1">
-          <WhiteHeartButton
+          <HeartButton
             isHearted={isHearted}
             onHeartToggle={onHeartToggle}
             productName={productName}

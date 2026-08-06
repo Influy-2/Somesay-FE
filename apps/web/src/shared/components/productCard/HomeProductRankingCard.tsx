@@ -9,7 +9,6 @@ import { HeartButton } from '../buttons/HeartButton';
 
 type HomeProductRankingCardProps = ProductCardType & {
   ranking: number;
-  isWishPending?: boolean;
   onHeartToggle: () => void;
 };
 
@@ -24,7 +23,6 @@ export const HomeProductRankingCard = ({
   ranking,
   isHearted,
   creatorImageUrls,
-  isWishPending,
   onHeartToggle,
 }: HomeProductRankingCardProps) => {
   const formattedReviewCount = reviewCount
@@ -63,9 +61,6 @@ export const HomeProductRankingCard = ({
             isHearted={isHearted}
             onHeartToggle={onHeartToggle}
             productName={productName}
-            onColor="white"
-            offColor="white"
-            isPending={isWishPending ?? false}
           />
         </div>
       </div>
