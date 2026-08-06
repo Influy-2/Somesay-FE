@@ -5,13 +5,23 @@ export interface TabItemProps {
   tabText: string;
   isActive: boolean;
   onClick: () => void;
+  id?: string;
+  controls?: string;
 }
 
-export const TabItem = ({ tabText, isActive, onClick }: TabItemProps) => {
+export const TabItem = ({
+  tabText,
+  isActive,
+  onClick,
+  id,
+  controls,
+}: TabItemProps) => {
   return (
     <button
       type="button"
       role="tab"
+      id={id}
+      aria-controls={controls}
       aria-selected={isActive}
       onClick={onClick}
       className={cn(

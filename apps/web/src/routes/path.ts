@@ -25,8 +25,6 @@ export const PATH = {
   },
   RANKING: {
     BASE: '/ranking',
-    PRODUCT: 'products',
-    CREATOR_CREDIBILITY: 'creator-credibility',
   },
   REVIEWS: {
     BASE: '/reviews',

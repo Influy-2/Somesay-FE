@@ -1,10 +1,10 @@
+import { getRankingTabPath } from '@/features/ranking';
 import {
   HomeProductRankingCard,
   LoadingBlock,
   MoreButton,
 } from '@/shared/components';
 import { useFetchHomeProductRanking, useProductWish } from '@/shared/hooks';
-import { PATH } from '@/routes/path';
 
 const PRODUCT_RANKING_LOADING_CARD_COUNT = 4;
 
@@ -61,7 +61,9 @@ export const ProductRankingSection = () => {
               ))}
         </div>
       </div>
-      {!isPending && <MoreButton to={PATH.RANKING.BASE} text="랭킹 더보기" />}
+      {!isPending && (
+        <MoreButton to={getRankingTabPath('products')} text="랭킹 더보기" />
+      )}
     </section>
   );
 };

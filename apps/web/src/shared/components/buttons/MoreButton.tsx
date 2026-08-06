@@ -5,10 +5,16 @@ interface MoreButtonProps {
   to?: string;
   text: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
-export const MoreButton = ({ to, text, onClick }: MoreButtonProps) => {
-  if (to) {
+export const MoreButton = ({
+  to,
+  text,
+  onClick,
+  disabled = false,
+}: MoreButtonProps) => {
+  if (to && !disabled) {
     return (
       <Link
         to={to}
@@ -22,7 +28,8 @@ export const MoreButton = ({ to, text, onClick }: MoreButtonProps) => {
     <button
       type="button"
       onClick={onClick}
-      className="border-grey03 body2-m text-grey-black flex h-10 w-full items-center justify-center border"
+      disabled={disabled}
+      className="border-grey03 body2-m text-grey-black flex h-10 w-full items-center justify-center border disabled:cursor-not-allowed disabled:opacity-60"
     >
       {text}
     </button>

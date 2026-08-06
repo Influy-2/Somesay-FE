@@ -1,12 +1,12 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
+import { getRankingTabPath } from '@/features/ranking';
 import {
   CreatorRankingUpDownRow,
   MoreButton,
   Tooltip,
 } from '@/shared/components';
 import { useFetchHomeCreatorRanking } from '@/shared/hooks';
-import { PATH } from '@/routes/path';
 import { QuestionIcon } from '@/shared/icons';
 
 const CREATOR_RANKING_TOOLTIP_ID = 'creator-ranking-guide';
@@ -107,7 +107,7 @@ export const CreatorRankingSection = () => {
             <CreatorRankingUpDownRow {...creator} key={creator.creatorId} />
           ))}
         </ol>
-        <MoreButton to={PATH.RANKING.CREATORS} text="순위 더보기" />
+        <MoreButton to={getRankingTabPath('creators')} text="순위 더보기" />
       </div>
     </section>
   );

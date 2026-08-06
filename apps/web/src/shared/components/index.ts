@@ -31,6 +31,7 @@ export { LoadingBlock } from './loading/LoadingBlock';
 export { BasicCreatorProfile } from './profile/BasicCreatorProfile';
 export { BrandProfile } from './profile/BrandProfile';
 export { CreatorRankingUpDownRow } from './profile/CreatorRankingUpDownRow';
+export { CreatorRankingCard } from './profile/CreatorRankingCard';
 export { CreatorHomeProfile } from './profile/CreatorHomeProfile';
 export { CreatorRankingProfile } from './profile/CreatorRankingProfile';
 export { EvaluationCardProfile } from './profile/EvaluationCardProfile';
@@ -78,6 +79,7 @@ export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
 export { AvatarStack } from './productCard/AvatarStack';
 export { BasicProductCard } from './productCard/BasicProductCard';
 export { HomeProductRankingCard } from './productCard/HomeProductRankingCard';
+export { ProductRankingCard } from './productCard/ProductRankingCard';
 export { SearchResultProductCard } from './productCard/SearchResultProductCard';
 export { HorizontalScrollProductCard } from './productCard/HorizontalScrollProductCard';
 
