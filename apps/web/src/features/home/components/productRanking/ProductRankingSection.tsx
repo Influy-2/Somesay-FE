@@ -1,36 +1,60 @@
-import { ProductRankingCard } from './ProductRankingCard';
-import { MoreButton } from '@/shared/components';
+import {
+  HomeProductRankingCard,
+  LoadingBlock,
+  MoreButton,
+} from '@/shared/components';
 import { useFetchHomeProductRanking } from '@/shared/hooks';
+import { PATH } from '@/routes/path';
+
+const PRODUCT_RANKING_LOADING_CARD_COUNT = 4;
+
 export const ProductRankingSection = () => {
   const {
-    data: productsRankingData,
-    // isLoading,
-    // isError,
-    // fetchNextPage,
-    // hasNextPage,
-    // isFetchingNextPage,
+    data: productsRankingData = [],
+    isPending,
+    isError,
   } = useFetchHomeProductRanking();
+
+  if (isError || (!isPending && productsRankingData.length === 0)) {
+    return null;
+  }
+
   return (
     <section
       aria-labelledby="product-ranking-title"
+      aria-busy={isPending}
       className="flex w-full flex-col items-center justify-center gap-6 px-4"
     >
       <div className="flex w-full flex-col items-center justify-center gap-5">
         <h2 id="product-ranking-title" className="headline4 w-full">
-          평점이 가장 좋은 제품 랭킹
+          평점이 가장 높은 제품 랭킹
         </h2>
-        <div className="grid grid-cols-2 grid-rows-2 content-start items-start gap-[1.5rem_.25rem] self-stretch">
-          {productsRankingData?.map((product, index) => (
-            <ProductRankingCard
-              {...product}
-              ranking={index + 1}
-              key={product.productId}
-            />
-          ))}
+        <div
+          className="grid grid-cols-2 grid-rows-2 content-start items-start gap-[1.5rem_.25rem] self-stretch"
+          {...(isPending && {
+            role: 'status',
+            'aria-label': '제품 랭킹을 불러오는 중',
+          })}
+        >
+          {isPending
+            ? Array.from({ length: PRODUCT_RANKING_LOADING_CARD_COUNT }).map(
+                (_, index) => (
+                  <LoadingBlock
+                    key={`product-ranking-loading-${index}`}
+                    className="h-[18.25rem] w-full"
+                  />
+                )
+              )
+            : productsRankingData.map((product, index) => (
+                <HomeProductRankingCard
+                  {...product}
+                  ranking={index + 1}
+                  key={product.productId}
+                />
+              ))}
         </div>
       </div>
-      {/* TODO: 경로 수정 */}
-      <MoreButton to={'/임시'} text="랭킹 더보기" />
+      {!isPending && <MoreButton to={PATH.RANKING.BASE} text="랭킹 더보기" />}
     </section>
   );
 };

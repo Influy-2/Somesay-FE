@@ -1,12 +1,15 @@
-import { Star16Icon as StarIcon } from '@/shared/icons';
+// Product/랭킹용/홈 컴포넌트
+import { formatPrice, type ProductCardType } from '@somesay/shared';
 import { Link } from 'react-router';
-import { ProductCardType } from '@somesay/shared';
-import { WhiteHeartButton, AvatarStack } from '@/shared/components';
+
 import { PATH } from '@/routes/path';
+import { Star16Icon as StarIcon } from '@/shared/icons';
+import { AvatarStack } from './AvatarStack';
+import { WhiteHeartButton } from '../buttons/HeartButton';
 
-type ProductRankingCardProps = ProductCardType & { ranking: number };
+type HomeProductRankingCardProps = ProductCardType & { ranking: number };
 
-export const ProductRankingCard = ({
+export const HomeProductRankingCard = ({
   productId,
   productImgUrl,
   brandName,
@@ -17,7 +20,7 @@ export const ProductRankingCard = ({
   ranking,
   isHearted,
   creatorImageUrls,
-}: ProductRankingCardProps) => {
+}: HomeProductRankingCardProps) => {
   const formattedReviewCount = reviewCount
     ? reviewCount.toLocaleString('ko-KR')
     : '0';
@@ -29,7 +32,7 @@ export const ProductRankingCard = ({
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${ranking}위 ${brandName} ${productName}, ${price ? price + '원' : '가격 정보 없음'}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(price)}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 이미지 영역 */}
       <div className="relative h-[12.5rem] w-full overflow-hidden">
@@ -71,14 +74,10 @@ export const ProductRankingCard = ({
         <p className="body2-m truncate text-black">{brandName}</p>
 
         {/* 상품명 */}
-        <p className="body2-m line-clamp-1 w-full truncate whitespace-pre-wrap text-black">
-          {productName}
-        </p>
+        <p className="body2-m w-full truncate text-black">{productName}</p>
 
         {/* 가격 */}
-        <p className="body2-m truncate text-black">
-          {price ? price.toLocaleString('ko-KR') + '원' : '가격 정보 없음'}
-        </p>
+        <p className="body2-m truncate text-black">{formatPrice(price)}</p>
 
         {/* 별점 + 리뷰수 + 크리에이터 프로필 */}
         <div className="flex items-center gap-1">

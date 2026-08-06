@@ -24,6 +24,9 @@ export { ProductCardThumbnail } from './thumbnail/ProductCardThumbnail';
 /* image */
 export { LoadingImage } from './image/LoadingImage';
 
+/* loading */
+export { LoadingBlock } from './loading/LoadingBlock';
+
 /* profile */
 export { BasicCreatorProfile } from './profile/BasicCreatorProfile';
 export { BrandProfile } from './profile/BrandProfile';
@@ -74,6 +77,7 @@ export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';
 /* product card */
 export { AvatarStack } from './productCard/AvatarStack';
 export { BasicProductCard } from './productCard/BasicProductCard';
+export { HomeProductRankingCard } from './productCard/HomeProductRankingCard';
 export { SearchResultProductCard } from './productCard/SearchResultProductCard';
 export { HorizontalScrollProductCard } from './productCard/HorizontalScrollProductCard';
 
