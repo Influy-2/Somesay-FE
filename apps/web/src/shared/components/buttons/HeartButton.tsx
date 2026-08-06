@@ -30,7 +30,7 @@ export const HeartButton = ({
   isHearted,
   onHeartToggle,
   productName,
-  onColor = 'white',
+  onColor = 'black',
   offColor = 'white',
 }: HeartButtonProps) => {
   const OffIcon = OFF_ICON[offColor];
