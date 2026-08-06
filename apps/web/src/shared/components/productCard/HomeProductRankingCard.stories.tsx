@@ -20,6 +20,7 @@ const meta: Meta<typeof HomeProductRankingCard> = {
     reviewCount: { control: 'number' },
     ranking: { control: 'number' },
     isHearted: { control: 'boolean' },
+    isWishPending: { control: 'boolean' },
     creatorImageUrls: { control: 'object' },
   },
 };
@@ -38,6 +39,8 @@ export const Default: Story = {
     reviewCount: 43,
     ranking: 1,
     isHearted: false,
+    isWishPending: false,
+    onHeartToggle: () => {},
     creatorImageUrls: [mockProfile1, mockProfile2, mockProfile3],
   },
 };

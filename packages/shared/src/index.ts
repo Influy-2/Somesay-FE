@@ -1,5 +1,7 @@
 export type {
   ProductWishType,
+  ProductWishResultType,
+  ProductWishStatusType,
   ProductCardType,
   ProductDetailType,
   ProductRankingCardType,
@@ -102,6 +104,7 @@ export * from './api/product/fetchProductDetail.api';
 export * from './api/product/fetchProductReviewOverview.api';
 export * from './api/product/fetchProductReviews.api';
 export * from './api/product/fetchSimilarProducts.api';
+export * from './api/product/patchProductWish.api';
 
 //api - category
 export * from './api/category/fetchCategories.api';
@@ -117,3 +120,4 @@ export * from './api/review/fetchReviewComments.api';
 
 //query
 export * from './query/queryKeys';
+export * from './query/productWishCache';

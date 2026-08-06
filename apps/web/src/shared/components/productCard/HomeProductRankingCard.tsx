@@ -5,9 +5,13 @@ import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { AvatarStack } from './AvatarStack';
-import { WhiteHeartButton } from '../buttons/HeartButton';
+import { HeartButton } from '../buttons/HeartButton';
 
-type HomeProductRankingCardProps = ProductCardType & { ranking: number };
+type HomeProductRankingCardProps = ProductCardType & {
+  ranking: number;
+  isWishPending?: boolean;
+  onHeartToggle: () => void;
+};
 
 export const HomeProductRankingCard = ({
   productId,
@@ -20,14 +24,12 @@ export const HomeProductRankingCard = ({
   ranking,
   isHearted,
   creatorImageUrls,
+  isWishPending,
+  onHeartToggle,
 }: HomeProductRankingCardProps) => {
   const formattedReviewCount = reviewCount
     ? reviewCount.toLocaleString('ko-KR')
     : '0';
-
-  const onHeartToggle = () => {
-    console.log('하트클릭');
-  };
 
   return (
     <article
@@ -57,10 +59,13 @@ export const HomeProductRankingCard = ({
 
         {/* 찜 버튼 */}
         <div className="absolute right-2 bottom-2 z-1">
-          <WhiteHeartButton
+          <HeartButton
             isHearted={isHearted}
             onHeartToggle={onHeartToggle}
             productName={productName}
+            onColor="white"
+            offColor="white"
+            isPending={isWishPending ?? false}
           />
         </div>
       </div>

@@ -17,6 +17,20 @@ export interface ProductWishDto extends ProductBasicDto {
   userWish: boolean;
 }
 
+export type ProductWishStatusDto = 'LIKE' | 'NONE';
+
+// 상품 찜 상태 변경 API에 전달하는 요청 데이터입니다.
+export interface PatchProductWishRequestDto {
+  status: ProductWishStatusDto;
+}
+
+// 상품 찜 상태 변경 API가 반환하는 응답 데이터입니다.
+export interface PatchProductWishResponseDto {
+  userId: number;
+  productId: number;
+  status: ProductWishStatusDto;
+}
+
 // 카테고리별 상품 목록 조회 응답의 products 아이템에 사용합니다.
 export interface ProductCardDto extends ProductWishDto {
   mainCategoryId: number;

@@ -12,6 +12,14 @@ export interface ProductWishType extends ProductBasicType {
   isHearted: boolean;
 }
 
+export type ProductWishStatusType = 'LIKE' | 'NONE';
+
+export interface ProductWishResultType {
+  userId: number;
+  productId: number;
+  isHearted: boolean;
+}
+
 export type ProductSkinType = string;
 
 export interface ProductSkinExpectationType {

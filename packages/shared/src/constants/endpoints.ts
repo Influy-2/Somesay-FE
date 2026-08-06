@@ -14,6 +14,8 @@ export const API_ENDPOINTS = {
   /** Product  **/
   PRODUCT: '/products',
   PRODUCT_DETAIL: '/products/:productId',
+  // 로그인한 사용자의 상품 찜 상태를 변경하기 위한 API URL입니다.
+  PRODUCT_WISH: '/products/:productId/wish',
   PRODUCT_PRODUCT_ID_REVIEW_OVERVIEW: '/products/:productId/review-overview',
   PRODUCT_REVIEWS: '/products/:productId/reviews',
   PRODUCT_SIMILAR: '/products/:productId/similar',

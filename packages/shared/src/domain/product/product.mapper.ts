@@ -6,17 +6,28 @@ import type {
   ProductListResponseDto,
   ProductReviewsPageDto,
   ProductReviewsDto,
+  PatchProductWishResponseDto,
 } from './product.dto';
 import type {
   ProductCardType,
   ProductDetailType,
   ProductReviewPageType,
   ProductReviewType,
+  ProductWishResultType,
 } from './product.types';
 import type { ReviewOverviewDto } from '../review/review.dto';
 import type { CreatorReviewSummaryType } from '../review/review.types';
 import type { CommentPreviewDto } from '../comment/comment.dto';
 import type { CommentPreviewType } from '../comment/comment.types';
+
+// 상품 찜 API 응답을 화면에서 사용하는 boolean 상태로 변환합니다.
+export const mapProductWishResponseDto = (
+  item: PatchProductWishResponseDto
+): ProductWishResultType => ({
+  userId: item.userId,
+  productId: item.productId,
+  isHearted: item.status === 'LIKE',
+});
 
 export const mapProductDetailDto = (
   item: ProductDetailDto

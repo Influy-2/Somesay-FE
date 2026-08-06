@@ -41,7 +41,7 @@ export { ConsumerReviewProfile } from './profile/ConsumerReviewProfile';
 export { ProfileNoImage } from './profile/ProfileNoImage';
 
 /* buttons */
-export { WhiteHeartButton } from './buttons/HeartButton';
+export { HeartButton, WhiteHeartButton } from './buttons/HeartButton';
 export { BlackHeartButton } from './buttons/BlackHeartButton';
 export { MoreButton } from './buttons/MoreButton';
 export { ReviewVoteButton } from './buttons/ReviewVoteButton';

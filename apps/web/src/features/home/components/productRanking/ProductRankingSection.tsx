@@ -3,12 +3,13 @@ import {
   LoadingBlock,
   MoreButton,
 } from '@/shared/components';
-import { useFetchHomeProductRanking } from '@/shared/hooks';
+import { useFetchHomeProductRanking, useProductWish } from '@/shared/hooks';
 import { PATH } from '@/routes/path';
 
 const PRODUCT_RANKING_LOADING_CARD_COUNT = 4;
 
 export const ProductRankingSection = () => {
+  const { toggleWish } = useProductWish();
   const {
     data: productsRankingData = [],
     isPending,
@@ -49,6 +50,12 @@ export const ProductRankingSection = () => {
                 <HomeProductRankingCard
                   {...product}
                   ranking={index + 1}
+                  onHeartToggle={() =>
+                    toggleWish({
+                      productId: product.productId,
+                      isHearted: product.isHearted,
+                    })
+                  }
                   key={product.productId}
                 />
               ))}
