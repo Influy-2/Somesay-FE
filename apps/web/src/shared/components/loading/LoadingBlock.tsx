@@ -7,6 +7,9 @@ interface LoadingBlockProps {
 export const LoadingBlock = ({ className }: LoadingBlockProps) => (
   <div
     aria-hidden="true"
-    className={cn('bg-grey01 animate-pulse', className)}
+    className={cn(
+      'bg-grey02 border-grey02 animate-pulse motion-reduce:animate-none',
+      className
+    )}
   />
 );

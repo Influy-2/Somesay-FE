@@ -60,7 +60,7 @@ export const CreatorReviewCard = ({
   return (
     <article
       aria-label={`${creator.nickname}의 ${productName} 리뷰`}
-      className="border-grey03 flex w-full flex-col items-start gap-5 border border-solid bg-white p-5 px-4"
+      className="border-grey03 flex h-[15.25rem] w-full flex-col items-start gap-5 border border-solid bg-white p-5 px-4"
     >
       {/* 크리에이터 프로필 */}
       <BasicCreatorProfile

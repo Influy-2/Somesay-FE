@@ -2,14 +2,12 @@ import { LoadingBlock } from '@/shared/components';
 
 const PRODUCT_RANKING_LOADING_COUNT = 10;
 
-/** 상품 랭킹 최초 조회 중 10개의 카드 골격을 표시합니다. */
 export const ProductRankingSkeleton = () => (
   <div
     className="grid grid-cols-2 gap-y-6"
     role="status"
     aria-label="상품 랭킹을 불러오는 중"
   >
-    {/* 실제 첫 페이지 개수와 같은 수의 골격 카드를 렌더링합니다. */}
     {Array.from({ length: PRODUCT_RANKING_LOADING_COUNT }).map((_, index) => (
       <div
         key={`product-ranking-loading-${index}`}

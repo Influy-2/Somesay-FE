@@ -7,7 +7,7 @@ export const SummaryBox = ({
   plainText: string;
 }) => {
   return (
-    <div className="border-grey03 bg-grey01 flex w-full items-start border border-solid p-5">
+    <div className="border-grey03 bg-grey01 flex h-[5.375rem] w-full items-start border border-solid p-5">
       <span className="text-grey08 body2-m">
         <strong className="text-[1rem] font-bold text-black">{boldText}</strong>
         {plainText}

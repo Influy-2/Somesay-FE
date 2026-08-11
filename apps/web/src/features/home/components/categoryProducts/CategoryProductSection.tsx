@@ -7,20 +7,23 @@ import {
   useProductWish,
 } from '@/shared/hooks';
 import { CategoryProductEmptyState } from './CategoryProductEmptyState';
+import { CategoryProductSkeleton } from './CategoryProductSkeleton';
+import { CategoryTabSkeleton } from './CategoryTabSkeleton';
 
 const ALL_CATEGORY = { id: 0, label: '전체' };
 
 export const CategoryProductSection = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
   const { toggleWish } = useProductWish();
-  const { data: mainCategories = [] } = useFetchCategories();
+  const { data: mainCategories = [], isPending: isCategoryPending } =
+    useFetchCategories();
   const homeProductParams =
     selectedCategoryId === ALL_CATEGORY.id
       ? {}
       : { mainCategoryId: selectedCategoryId };
-  const { data: products = [], isLoading } =
+  const { data: products = [], isPending } =
     useFetchHomeProductList(homeProductParams);
-  const isEmpty = !isLoading && products.length === 0;
+  const isEmpty = !isPending && products.length === 0;
 
   const categories = [
     ALL_CATEGORY,
@@ -37,6 +40,7 @@ export const CategoryProductSection = () => {
   return (
     <section
       aria-labelledby="category-product-title"
+      aria-busy={isPending}
       className="flex w-full flex-col gap-5 px-4"
     >
       {/* 타이틀 */}
@@ -48,14 +52,20 @@ export const CategoryProductSection = () => {
 
       {/* 카테고리 탭 + 상품 그리드 */}
       <div className="flex flex-col gap-5">
-        <HorizontalCategoriesTab
-          categories={categories}
-          selectedId={selectedCategoryId}
-          onSelect={setSelectedCategoryId}
-          ariaLabel="상품 카테고리"
-        />
+        {isCategoryPending ? (
+          <CategoryTabSkeleton />
+        ) : (
+          <HorizontalCategoriesTab
+            categories={categories}
+            selectedId={selectedCategoryId}
+            onSelect={setSelectedCategoryId}
+            ariaLabel="상품 카테고리"
+          />
+        )}
 
-        {isEmpty ? (
+        {isPending ? (
+          <CategoryProductSkeleton />
+        ) : isEmpty ? (
           <CategoryProductEmptyState />
         ) : (
           <div
