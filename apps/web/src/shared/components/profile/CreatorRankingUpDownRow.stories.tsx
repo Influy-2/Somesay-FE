@@ -34,7 +34,7 @@ export const Default: Story = {
     youtubeLink: 'https://youtube.com',
     subscriberNum: 2,
     trustScore: 90,
-    ageGroup: '20',
+    ageGroup: '20대',
     skinTypes: ['텍스트'],
     ranking: 2,
   },

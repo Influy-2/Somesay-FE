@@ -1,3 +1,4 @@
+import { formatAgeGroup } from '../../utils/formatAgeGroup';
 import type { ApiPage } from '../../api/types';
 import type { ProductCardType } from '../product/product.types';
 import type { PreviewInfoDto } from '../product/product.dto';
@@ -61,7 +62,7 @@ export const mapCreatorRanking = ({
     skinTypes,
     subscriberNum,
     ranking,
-    ageGroup,
+    ageGroup: formatAgeGroup(ageGroup),
     rankChange: Math.abs(rankingDiff),
     rankChangeDiff: getRankChangeDiff(ranking, oldRanking),
   };
@@ -114,7 +115,7 @@ export const mapHomeCreatorRanking = (
         skinTypes,
         subscriberNum,
         ranking,
-        ageGroup,
+        ageGroup: formatAgeGroup(ageGroup),
         rankChange: Math.abs(rankingDiff),
         rankChangeDiff: getRankChangeDiff(ranking, oldRanking),
       };

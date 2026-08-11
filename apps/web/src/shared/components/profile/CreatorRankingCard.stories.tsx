@@ -11,9 +11,9 @@ const meta: Meta<typeof CreatorRankingCard> = {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <ul className="w-[22.375rem]">
+        <div className="w-[22.375rem]">
           <Story />
-        </ul>
+        </div>
       </MemoryRouter>
     ),
   ],
@@ -44,7 +44,7 @@ const defaultArgs = {
   nickname: 'RISABAE',
   youtubeLink: 'https://www.youtube.com',
   subscriberNum: 1_300_000,
-  ageGroup: '20',
+  ageGroup: '20대',
   skinTypes: ['건성'],
   trustScore: 100,
 };
@@ -67,7 +67,6 @@ export const NoRankChange: Story = {
     ranking: 3,
     rankChange: 0,
     rankChangeDiff: 'same',
-    ageGroup: '20대',
   },
 };
 

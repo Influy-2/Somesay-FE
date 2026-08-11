@@ -1,6 +1,5 @@
 import { PATH } from '@/routes/path';
 
-// URL에서 허용하는 랭킹 탭 값과 기본 탭을 정의합니다.
 export const RANKING_TABS = ['products', 'creators'] as const;
 
 export type RankingTab = (typeof RANKING_TABS)[number];
@@ -11,15 +10,13 @@ export const DEFAULT_RANKING_TAB: RankingTab = 'products';
 export const getRankingTabPath = (tab: RankingTab) =>
   `${PATH.RANKING.BASE}?tab=${tab}`;
 
-/** URL 쿼리가 지원하는 랭킹 탭 값인지 확인합니다. */
 export const isRankingTab = (value: string | null): value is RankingTab =>
   value !== null && RANKING_TABS.includes(value as RankingTab);
 
-/** 누락되거나 잘못된 탭 값을 기본 상품 탭으로 정규화합니다. */
+/** 누락되거나 잘못된 탭 값을 기본 탭으로 정규화합니다. */
 export const getRankingTab = (value: string | null): RankingTab =>
   isRankingTab(value) ? value : DEFAULT_RANKING_TAB;
 
-// 무한 쿼리 페이지에서 목록을 펼치기 위해 필요한 최소 형태입니다.
 interface RankingPage<TItem> {
   content: TItem[];
 }

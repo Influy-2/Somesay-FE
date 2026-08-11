@@ -14,7 +14,8 @@ export const MoreButton = ({
   onClick,
   disabled = false,
 }: MoreButtonProps) => {
-  if (to && !disabled) {
+  // 링크형 더보기에는 로딩/비활성 상태가 없으므로 disabled는 버튼형에만 적용됩니다.
+  if (to) {
     return (
       <Link
         to={to}

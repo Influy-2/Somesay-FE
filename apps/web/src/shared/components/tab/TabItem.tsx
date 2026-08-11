@@ -6,7 +6,7 @@ export interface TabItemProps {
   isActive: boolean;
   onClick: () => void;
   id?: string;
-  controls?: string;
+  ariaControls?: string;
 }
 
 export const TabItem = ({
@@ -14,14 +14,14 @@ export const TabItem = ({
   isActive,
   onClick,
   id,
-  controls,
+  ariaControls,
 }: TabItemProps) => {
   return (
     <button
       type="button"
       role="tab"
       id={id}
-      aria-controls={controls}
+      aria-controls={ariaControls}
       aria-selected={isActive}
       onClick={onClick}
       className={cn(

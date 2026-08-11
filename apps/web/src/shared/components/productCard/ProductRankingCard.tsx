@@ -25,7 +25,6 @@ export const ProductRankingCard = ({
   onHeartToggle,
 }: ProductRankingCardProps) => {
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
-  const visibleCreatorImageUrls = creatorImageUrls.slice(0, 3);
 
   return (
     <article className="relative flex min-w-0 flex-col items-start gap-2">
@@ -70,8 +69,8 @@ export const ProductRankingCard = ({
             <span className="body2-sb">{rating.toFixed(1)}</span>
           </div>
           <span className="body2-m shrink-0">({formattedReviewCount})</span>
-          {visibleCreatorImageUrls.length > 0 && (
-            <AvatarStack creatorImageUrls={visibleCreatorImageUrls} />
+          {creatorImageUrls.length > 0 && (
+            <AvatarStack creatorImageUrls={creatorImageUrls} />
           )}
         </div>
       </div>

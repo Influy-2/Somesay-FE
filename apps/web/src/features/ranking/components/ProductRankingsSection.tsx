@@ -15,15 +15,13 @@ import {
 import { ProductRankingSkeleton } from './ProductRankingSkeleton';
 import { RankingFeedback } from './RankingFeedback';
 
-// 상품 랭킹의 페이지 크기와 화면별 최대 노출 개수를 정의합니다.
+// 전체는 30위, 카테고리 필터 시 10위까지만 노출합니다(기획 2.1.1).
 const PAGE_SIZE = 10;
 const ALL_CATEGORY_ID = 0;
 const ALL_RANKING_LIMIT = 30;
 const FILTERED_PRODUCT_RANKING_LIMIT = 10;
 
-/** 카테고리 필터와 상품 랭킹 목록, 추가 조회 상태를 관리합니다. */
 export const ProductRankingsSection = () => {
-  // 카테고리 필터는 URL과 분리된 페이지 로컬 상태로 관리합니다.
   const [selectedCategoryId, setSelectedCategoryId] = useState(ALL_CATEGORY_ID);
   const { data: categoryGroups = [] } = useFetchCategories();
   const isAllCategory = selectedCategoryId === ALL_CATEGORY_ID;
@@ -31,7 +29,7 @@ export const ProductRankingsSection = () => {
     ? ALL_RANKING_LIMIT
     : FILTERED_PRODUCT_RANKING_LIMIT;
 
-  // 서버 카테고리 앞에 전체 필터를 합성합니다.
+  // 서버 카테고리 앞에 '전체' 필터를 합성합니다.
   const categories = useMemo(
     () => [
       { id: ALL_CATEGORY_ID, label: '전체' },
@@ -43,7 +41,6 @@ export const ProductRankingsSection = () => {
     [categoryGroups]
   );
 
-  // 선택한 카테고리를 쿼리 키에 반영해 상품 랭킹을 조회합니다.
   const query = useFetchProductsRanking({
     size: PAGE_SIZE,
     ...(isAllCategory ? {} : { mainCategoryId: selectedCategoryId }),
@@ -51,7 +48,7 @@ export const ProductRankingsSection = () => {
   const products = flattenRankingPages(query.data?.pages, productLimit);
   const canLoadMore = products.length < productLimit && query.hasNextPage;
 
-  // 상품 찜과 추가 조회는 기존 로그인 가드 정책을 재사용합니다.
+  // 더보기는 로그인 사용자에게만 허용합니다(기획).
   const { toggleWish } = useProductWish();
   const guardAction = useAuthGuard();
   const loadMore = guardAction(() => {
@@ -60,10 +57,8 @@ export const ProductRankingsSection = () => {
   });
 
   const renderProducts = () => {
-    // 최초 조회 중에는 첫 페이지와 같은 개수의 골격을 보여줍니다.
     if (query.isPending) return <ProductRankingSkeleton />;
 
-    // 최초 페이지 조회 실패 시 같은 쿼리를 다시 실행할 수 있게 합니다.
     if (query.isError && products.length === 0) {
       return (
         <RankingFeedback
@@ -125,7 +120,6 @@ export const ProductRankingsSection = () => {
 
   return (
     <section aria-label="상품 랭킹">
-      {/* 좌우 스크롤이 가능한 상품 카테고리 필터입니다. */}
       <div className="px-4 py-5">
         <HorizontalCategoriesTab
           categories={categories}

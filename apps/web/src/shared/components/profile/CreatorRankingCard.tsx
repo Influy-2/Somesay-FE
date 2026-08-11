@@ -13,16 +13,6 @@ import {
   YoutubeIcon,
 } from '@/shared/icons';
 
-const normalizeAgeGroup = (ageGroup: string | null) => {
-  if (!ageGroup) return '연령 정보 없음';
-
-  const trimmedAgeGroup = ageGroup.trim();
-
-  return trimmedAgeGroup.endsWith('대')
-    ? trimmedAgeGroup
-    : `${trimmedAgeGroup}대`;
-};
-
 export const CreatorRankingCard = ({
   creatorId,
   ranking,
@@ -35,7 +25,6 @@ export const CreatorRankingCard = ({
   skinTypes,
   trustScore,
 }: CreatorRankingUpDownType) => {
-  const ageGroupLabel = normalizeAgeGroup(ageGroup);
   const subscriberLabel = formatSubscriberCount(subscriberNum);
   const skinTypeLabel =
     skinTypes.length > 0 ? skinTypes.join(', ') : '피부 타입 정보 없음';
@@ -47,73 +36,71 @@ export const CreatorRankingCard = ({
         : '순위 변동 없음';
 
   return (
-    <li className="w-full">
-      <Link
-        to={`${PATH.CREATOR.BASE}/${creatorId}`}
-        className="flex w-full items-center justify-between gap-3"
-        aria-label={`${ranking}위 ${nickname} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageGroupLabel}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel}`}
-      >
-        <div className="flex min-w-0 flex-1 items-center gap-3">
-          <div className="flex w-[1.4375rem] shrink-0 flex-col items-center gap-0.5">
-            <span className="subhead-sb text-center text-black">{ranking}</span>
-            <span
-              className={`caption1-m flex items-center gap-0.5 ${rankChangeDiff === 'up' ? 'text-primary-400' : 'text-black'}`}
-              aria-hidden="true"
-            >
-              {rankChangeDiff === 'up' ? (
-                <ArrowUpIcon className="size-3" />
-              ) : rankChangeDiff === 'down' ? (
-                <ArrowDownIcon className="size-3" />
-              ) : (
-                <NoRankChangeIcon className="size-3" />
-              )}
-              {rankChangeDiff !== 'same' && <span>{rankChange}</span>}
-            </span>
+    <Link
+      to={`${PATH.CREATOR.BASE}/${creatorId}`}
+      className="flex w-full items-center justify-between gap-3"
+      aria-label={`${ranking}위 ${nickname} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel}`}
+    >
+      <div className="flex min-w-0 flex-1 items-center gap-3">
+        <div className="flex w-[1.4375rem] shrink-0 flex-col items-center gap-0.5">
+          <span className="subhead-sb text-center text-black">{ranking}</span>
+          <span
+            className={`caption1-m flex items-center gap-0.5 ${rankChangeDiff === 'up' ? 'text-primary-400' : 'text-black'}`}
+            aria-hidden="true"
+          >
+            {rankChangeDiff === 'up' ? (
+              <ArrowUpIcon className="size-3" />
+            ) : rankChangeDiff === 'down' ? (
+              <ArrowDownIcon className="size-3" />
+            ) : (
+              <NoRankChangeIcon className="size-3" />
+            )}
+            {rankChangeDiff !== 'same' && <span>{rankChange}</span>}
+          </span>
+        </div>
+
+        <div className="flex min-w-0 flex-1 items-center gap-4">
+          <div className="bg-grey02 size-[3.375rem] shrink-0 overflow-hidden rounded-full">
+            {profileImageUrl && (
+              <img
+                src={profileImageUrl}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="size-full object-cover"
+              />
+            )}
           </div>
 
-          <div className="flex min-w-0 flex-1 items-center gap-4">
-            <div className="bg-grey02 size-[3.375rem] shrink-0 overflow-hidden rounded-full">
-              {profileImageUrl && (
-                <img
-                  src={profileImageUrl}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  className="size-full object-cover"
-                />
-              )}
+          <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+            <div className="flex min-w-0 items-center gap-2">
+              <span className="body1-sb min-w-0 truncate text-black">
+                {nickname}
+              </span>
+              <span className="flex shrink-0 items-center gap-0.5">
+                <YoutubeIcon className="size-3.5" aria-hidden="true" />
+                <span className="caption2-m text-grey08 whitespace-nowrap">
+                  {subscriberLabel}
+                </span>
+              </span>
             </div>
 
-            <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-              <div className="flex min-w-0 items-center gap-2">
-                <span className="body1-sb min-w-0 truncate text-black">
-                  {nickname}
-                </span>
-                <span className="flex shrink-0 items-center gap-0.5">
-                  <YoutubeIcon className="size-3.5" aria-hidden="true" />
-                  <span className="caption2-m text-grey08 whitespace-nowrap">
-                    {subscriberLabel}
-                  </span>
-                </span>
-              </div>
-
-              <div className="flex min-w-0 items-center gap-1 overflow-hidden">
-                <ChipBasic label={ageGroupLabel} />
-                {skinTypes.map((skinType, index) => (
-                  <ChipBasic key={`${skinType}-${index}`} label={skinType} />
-                ))}
-              </div>
+            <div className="flex min-w-0 items-center gap-1 overflow-hidden">
+              <ChipBasic label={ageGroup} />
+              {skinTypes.map((skinType, index) => (
+                <ChipBasic key={`${skinType}-${index}`} label={skinType} />
+              ))}
             </div>
           </div>
         </div>
+      </div>
 
-        <span
-          className="body1-sb shrink-0 whitespace-nowrap text-black"
-          aria-hidden="true"
-        >
-          {trustScore.toFixed(0)}점
-        </span>
-      </Link>
-    </li>
+      <span
+        className="body1-sb shrink-0 whitespace-nowrap text-black"
+        aria-hidden="true"
+      >
+        {trustScore.toFixed(0)}점
+      </span>
+    </Link>
   );
 };

@@ -32,7 +32,7 @@ export const CreatorRankingUpDownRow = ({
   return (
     <li
       className="flex w-full items-center justify-between"
-      aria-label={`${ranking}위 ${nickname}, 구독자 ${subscriberNum}만, ${ageGroup}대, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel}`}
+      aria-label={`${ranking}위 ${nickname}, 구독자 ${formatSubscriberCount(subscriberNum)}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel}`}
     >
       {/* 좌측: 순위 + 프로필 */}
       <div className="flex items-center gap-3" aria-hidden="true">
@@ -87,7 +87,7 @@ export const CreatorRankingUpDownRow = ({
 
           {/* 칩: 나이대 + 피부타입 */}
           <div className="flex items-center gap-1">
-            <ChipBasic label={`${ageGroup}`} />
+            <ChipBasic label={ageGroup} />
             {skinTypes.map((type) => (
               <ChipBasic key={type} label={type} />
             ))}

@@ -50,6 +50,7 @@ export * from './constants/user.constants';
 // UTILS
 export { formatSubscriberCount } from './utils/formatSubscriberCount';
 export { formatPrice } from './utils/formatPrice';
+export { formatAgeGroup } from './utils/formatAgeGroup';
 //domain - auth
 export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
 export type {
