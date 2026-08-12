@@ -12,7 +12,7 @@ export interface CreatorInfoReviewProps {
 }
 
 export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
-  const isEvaluated = review.agreeRatio > 0;
+  const isEvaluated = review.agreeCount + review.disagreeCount > 0;
   const participantCount = review.agreeCount + review.disagreeCount;
 
   return (

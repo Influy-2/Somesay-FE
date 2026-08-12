@@ -25,7 +25,6 @@ export const ReviewRankingItem = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const comments = review.previewComments;
   const remainingComments = review.totalCommentCount - COMMENTS_PREVIEW_COUNT;
-
   return (
     <div className="border-grey01 flex flex-col">
       <CreatorInfoReview review={review} />
@@ -60,14 +59,15 @@ export const ReviewRankingItem = ({
           ) : (
             <ol className="divide-grey03 flex flex-col divide-y px-4 pb-4">
               {comments.slice(0, COMMENTS_PREVIEW_COUNT).map((comment) => (
-                <li key={comment.commentId}>
+                <li key={comment.reactionId}>
                   <ReviewComment
-                    key={comment.commentId}
+                    key={comment.reactionId}
                     nickname={comment.nickname}
                     isAgree={comment.reactionType === 'AGREE'}
                     content={comment.comment}
                     skinTypes={comment.skinTypes}
                     skinExpectations={comment.skinExpectations}
+                    userId={comment.userId}
                   />
                 </li>
               ))}

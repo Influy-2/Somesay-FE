@@ -20,7 +20,7 @@ export const HorizontalScrollProductCard = ({
   creators,
 }: HorizontalScrollProductCardProps) => {
   const formattedPrice = price
-    ? price.toLocaleString('ko-KR')
+    ? price.toLocaleString('ko-KR') + '원'
     : '가격 정보 없음';
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
   const creatorNames = creators.map((c) => c.name).join(', ');
