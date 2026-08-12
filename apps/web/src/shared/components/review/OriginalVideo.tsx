@@ -1,7 +1,5 @@
 // OriginalVideo.tsx
 
-import { Link } from 'react-router';
-
 interface OriginalVideoProps {
   youtubeUrl: string;
   videoTitle: string;
@@ -13,11 +11,9 @@ interface OriginalVideoProps {
 
 const getYoutubeThumbnail = (url: string) => {
   const videoId = url.match(
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/
+    /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([^&\n?#]+)/
   )?.[1];
-  return videoId
-    ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
-    : null;
+  return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
 };
 
 const formatViewCount = (count: number): string => {
@@ -27,7 +23,10 @@ const formatViewCount = (count: number): string => {
   if (count >= 10000) {
     return `${(count / 10000).toFixed(1)}만`;
   }
-  return `${Math.floor(count / 1000)}천`;
+  if (count >= 1000) {
+    return `${Math.floor(count / 1000)}천`;
+  }
+  return `${count}`;
 };
 
 const formatUploadDate = (uploadAt: string): string => {
@@ -53,8 +52,8 @@ export const OriginalVideo = ({
   const thumbnail = getYoutubeThumbnail(youtubeUrl);
 
   return (
-    <Link
-      to={youtubeUrl}
+    <a
+      href={youtubeUrl}
       target="_blank"
       rel="noopener noreferrer"
       className="flex gap-2"
@@ -97,6 +96,6 @@ export const OriginalVideo = ({
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
