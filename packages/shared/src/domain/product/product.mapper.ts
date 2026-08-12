@@ -99,12 +99,12 @@ export const mapProductPreviewPageDtoToCards = (
 
 // 백엔드 코멘트 DTO를 화면에서 사용하던 코멘트 타입으로 변환합니다.
 const mapCommentPreviewDto = (item: CommentPreviewDto): CommentPreviewType => ({
-  commentId: item.commentId,
+  reactionId: item.reactionId,
   userId: item.userId,
   nickname: item.nickname,
   profileImageUrl: item.profileImgUrl,
   reactionType: item.reactionType,
-  comment: item.content,
+  comment: item.comment,
   createdAt: item.createdAt,
   skinTypes: item.skinTypes,
   skinExpectations: item.skinExpectations,
