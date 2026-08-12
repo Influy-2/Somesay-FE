@@ -14,29 +14,27 @@ import {
 } from '@/shared/components';
 
 const INITIAL_DISPLAY_COUNT = 3;
-const LOAD_MORE_COUNT = 10;
 
 interface ReviewRankingListProps {
   productId?: number;
 }
 
 export const ReviewRankingList = ({ productId }: ReviewRankingListProps) => {
-  const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
   const [isMySkinTypeOnly, setIsMySkinTypeOnly] = useState(false);
-
-  const { data, fetchNextPage, hasNextPage } = useFetchProductReviews(
-    productId,
-    { filterByMySkin: isMySkinTypeOnly }
-  );
-
-  const reviews = data?.pages.flatMap((page) => page.content) ?? [];
-  const displayedReviews = reviews.slice(0, displayCount);
-  const remainingCount = reviews.length - displayCount;
-
   const [timeLinkReviewId, setTimeLinkReviewId] = useState<number | null>(null);
   const { data: timeLinks } = useFetchTimeLinks(timeLinkReviewId ?? undefined);
+
+  const { data, fetchNextPage } = useFetchProductReviews(productId, {
+    filterByMySkin: isMySkinTypeOnly,
+  });
+  const reviews = data?.pages.flatMap((page) => page.content) ?? [];
   const currentReview = reviews.find((r) => r.reviewId === timeLinkReviewId);
 
+  const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
+  const displayedReviews = reviews.slice(0, displayCount);
+  const totalCount = data?.pages[0]?.totalElements ?? 0;
+  const remainingCount = totalCount - displayCount;
+  const hasMoreToShow = remainingCount > 0;
   const [commentReviewId, setCommentReviewId] = useState<number | null>(null);
   const {
     data: commentData,
@@ -82,20 +80,18 @@ export const ReviewRankingList = ({ productId }: ReviewRankingListProps) => {
           </li>
         ))}
 
-        {(remainingCount > 0 || hasNextPage) && (
+        {hasMoreToShow && (
           <div className="px-4 pt-1">
             <button
               onClick={() => {
-                if (remainingCount <= 0 && hasNextPage) {
-                  fetchNextPage();
-                }
-                setDisplayCount((prev) => prev + LOAD_MORE_COUNT);
+                setDisplayCount((prev) => prev + 10);
+                fetchNextPage();
               }}
-              aria-label="크리에이터 리뷰 더 불러오기"
+              aria-label={`크리에이터 리뷰 ${remainingCount}개 더보기`}
               className="border-grey03 body2-m flex h-10 w-full items-center justify-center border"
               type="button"
             >
-              크리에이터 리뷰 더보기
+              크리에이터 리뷰 {remainingCount}개 더보기{' '}
             </button>
           </div>
         )}
@@ -135,19 +131,23 @@ export const ReviewRankingList = ({ productId }: ReviewRankingListProps) => {
         ariaLabel="코멘트 전체보기"
         header={
           <div className="body1-sb px-4 text-center">
-            이 리뷰에 대한 코멘트 ({comments.length})
+            이 리뷰에 대한 코멘트 (
+            {reviews.find((r) => r.reviewId === commentReviewId)
+              ?.totalCommentCount ?? 0}
+            )
           </div>
         }
       >
         <ol className="divide-grey03 flex flex-col divide-y px-4">
           {comments.map((comment) => (
-            <li key={comment.commentId}>
+            <li key={comment.reactionId}>
               <ReviewComment
                 nickname={comment.nickname}
                 isAgree={comment.reactionType === 'AGREE'}
-                content={comment.content}
+                content={comment.comment}
                 skinTypes={comment.skinTypes}
                 skinExpectations={comment.skinExpectations}
+                userId={comment.userId}
               />
             </li>
           ))}
