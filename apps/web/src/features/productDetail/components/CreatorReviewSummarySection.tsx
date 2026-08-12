@@ -2,7 +2,12 @@ import type { CreatorReviewSummaryType } from '@somesay/shared';
 import { useAuth } from '@/features/auth';
 import { getSkinTypeLabel } from '@somesay/shared';
 import { ChipLarge, StarRating } from '@/shared/components';
-import { DotIcon, QuoteCloseIcon, QuoteOpenIcon } from '@/shared/icons';
+import {
+  BulletDotIcon,
+  DotIcon,
+  QuoteCloseIcon,
+  QuoteOpenIcon,
+} from '@/shared/icons';
 
 // 크리에이터 리뷰 요약 정보를 표시하는 섹션입니다.
 export const CreatorReviewSummarySection = ({
@@ -17,7 +22,10 @@ export const CreatorReviewSummarySection = ({
   const { user } = useAuth();
   const userSkinTypeLabels =
     user?.skinTypes.map((id) => getSkinTypeLabel(id)).filter(Boolean) ?? [];
-
+  const mentionItems = [
+    { label: '자주 언급되는 점', text: frequentMention },
+    { label: '참고할 점', text: consideration },
+  ];
   return (
     <section className="flex flex-col gap-5 bg-white px-4 py-5">
       <h2 className="headline4">크리에이터 리뷰 요약</h2>
@@ -63,60 +71,22 @@ export const CreatorReviewSummarySection = ({
           <QuoteCloseIcon />
         </div>
       </div>
-      {/* 자주 언급되는 점 */}
-      {frequentMention && (
-        <div className="flex flex-col gap-1 px-2">
-          <p className="body2-m text-grey06">자주 언급되는 점</p>
-          <ul>
-            <li className="body2-m flex list-none items-start gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="6"
-                height="6"
-                viewBox="0 0 6 6"
-                fill="none"
-                className="mt-2 shrink-0"
-              >
-                <circle
-                  cx="3"
-                  cy="3"
-                  r="2.1"
-                  stroke="#161616"
-                  strokeWidth="1.8"
-                />
-              </svg>
-              <span>{frequentMention}</span>
-            </li>
-          </ul>
-        </div>
-      )}
-
-      {/* 참고할 점 */}
-      {consideration && (
-        <div className="flex flex-col gap-1 px-2">
-          <p className="body2-m text-grey06">참고할 점</p>
-          <ul>
-            <li className="body2-m flex gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="6"
-                height="6"
-                viewBox="0 0 6 6"
-                fill="none"
-                className="mt-2 shrink-0"
-              >
-                <circle
-                  cx="3"
-                  cy="3"
-                  r="2.1"
-                  stroke="#161616"
-                  strokeWidth="1.8"
-                />
-              </svg>
-              <span>{consideration}</span>
-            </li>
-          </ul>
-        </div>
+      {mentionItems.map(
+        ({ label, text }) =>
+          text && (
+            <div key={label} className="flex flex-col gap-1 px-2">
+              <p className="body2-m text-grey06">{label}</p>
+              <ul>
+                <li className="body2-m flex list-none items-start gap-2">
+                  <BulletDotIcon
+                    className="text-grey08 mt-2 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>{text}</span>
+                </li>
+              </ul>
+            </div>
+          )
       )}
       <div className="bg-grey02 my-1 h-px w-full" />
       {/* 4. 태그 영역 */}
