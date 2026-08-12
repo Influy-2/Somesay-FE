@@ -107,4 +107,11 @@ export const QUERY_KEYS = {
         { keyword, subCategoryId, sortType, size },
       ] as const,
   },
+  REVIEW: {
+    ALL: ['review'] as const,
+    TIMELINKS: (reviewId: number) =>
+      [...QUERY_KEYS.REVIEW.ALL, reviewId, 'timelinks'] as const,
+    COMMENTS: (reviewId: number) =>
+      [...QUERY_KEYS.REVIEW.ALL, reviewId, 'comments'] as const,
+  },
 };

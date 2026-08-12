@@ -1,4 +1,4 @@
-import { fetchTimeLinks } from '@somesay/shared';
+import { fetchTimeLinks, QUERY_KEYS } from '@somesay/shared';
 import { useQuery } from '@tanstack/react-query';
 
 export const useFetchTimeLinks = (reviewId?: number) => {
@@ -6,7 +6,7 @@ export const useFetchTimeLinks = (reviewId?: number) => {
     typeof reviewId === 'number' && Number.isFinite(reviewId);
 
   return useQuery({
-    queryKey: ['review', reviewId, 'timelinks'],
+    queryKey: QUERY_KEYS.REVIEW.TIMELINKS(reviewId ?? 0),
     queryFn: () => fetchTimeLinks(reviewId ?? 0),
     enabled: isValidReviewId,
   });
