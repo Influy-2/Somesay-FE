@@ -1,10 +1,12 @@
 // Profile/소비자리뷰
+import { ProfileNoImage } from '@/shared/components';
 
 interface ConsumerReviewProfileProps {
   nickname: string;
   profileImageUrl?: string | null;
   skinTypes?: string[];
   skinExpectations?: string[];
+  userId: number;
 }
 
 export const ConsumerReviewProfile = ({
@@ -12,17 +14,20 @@ export const ConsumerReviewProfile = ({
   profileImageUrl,
   skinTypes,
   skinExpectations,
+  userId,
 }: ConsumerReviewProfileProps) => {
   return (
     <div className="flex items-center gap-2.5">
       {/* 프로필 이미지 */}
-      <div className="bg-grey02 size-8 shrink-0 self-center overflow-hidden rounded-full">
-        {profileImageUrl && (
+      <div className="size-8 shrink-0 self-center overflow-hidden rounded-full">
+        {profileImageUrl ? (
           <img
             src={profileImageUrl}
             alt=""
             className="h-full w-full object-cover"
           />
+        ) : (
+          <ProfileNoImage userId={userId} className="h-full w-full" />
         )}
       </div>
 

@@ -31,6 +31,7 @@ export { RecommendedCreatorProfile } from './profile/RecommendedCreatorProfile';
 export { EvaluatedCreatorItemVertical } from './profile/EvaluatedCreatorItemVertical';
 export { EvaluatedCreatorItemHorizontal } from './profile/EvaluatedCreatorItemHorizontal';
 export { ConsumerReviewProfile } from './profile/ConsumerReviewProfile';
+export { ProfileNoImage } from './profile/ProfileNoImage';
 
 /* buttons */
 export { WhiteHeartButton } from './buttons/HeartButton';
