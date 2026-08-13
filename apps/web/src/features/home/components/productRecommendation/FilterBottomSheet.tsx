@@ -1,4 +1,5 @@
 import {
+  ALL_SUBCATEGORY_OPTION,
   FILTER_CATEGORIES,
   MAX_SELECTIONS,
   SKIN_CONCERN_OPTIONS,
@@ -17,11 +18,6 @@ import type {
 } from './filter.types';
 import { type CategoryGroupType, type SubcategoryType } from '@somesay/shared';
 import { useFetchCategories } from '@/shared/hooks';
-
-const ALL_SUBCATEGORY_OPTION: SubcategoryType = {
-  subCategoryId: 0,
-  subCategoryName: '전체',
-};
 
 interface FilterBottomSheetProps {
   isOpen: boolean;

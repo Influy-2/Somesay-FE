@@ -1,22 +1,32 @@
-import { ChipLarge } from '@/shared/components';
+import { ChipLarge, getPastelChipColor } from '@/shared/components';
 import { MainArrowIcon } from '@/shared/icons';
-import type { GuestPreviewChip } from './useGuestPreviewChips';
+
+// 위 행부터 차례로, 한 행 안에서도 왼쪽 칩부터 튀어오르도록 시간차를 둡니다.
+// Tailwind는 클래스 문자열을 정적으로 수집하므로 조합을 미리 적어 둡니다.
+const CHIP_POP_DELAY_CLASSES = [
+  ['[animation-delay:0ms]', '[animation-delay:60ms]'],
+  ['[animation-delay:140ms]', '[animation-delay:200ms]'],
+  ['[animation-delay:280ms]', '[animation-delay:340ms]'],
+];
 
 interface TypeRowProps {
   rowTitle: string;
   selectedFilters: string[];
-  previewChips?: GuestPreviewChip[];
   onPress: () => void;
+  /** 파스텔 팔레트 순환의 시작 인덱스 (행을 넘어 이어지는 색 순서) */
+  paletteStartIndex?: number;
+  /** 등장 애니메이션 시간차를 정하는 행 순서 */
+  rowIndex?: number;
 }
 
 export const TypeRow = ({
   rowTitle,
   selectedFilters,
-  previewChips = [],
   onPress,
+  paletteStartIndex = 0,
+  rowIndex = 0,
 }: TypeRowProps) => {
   const hasSelection = selectedFilters.length > 0;
-  const visiblePreviewChips = hasSelection ? [] : previewChips;
   const selectionText = hasSelection
     ? selectedFilters.join(', ')
     : '선택 안 됨';
@@ -34,21 +44,16 @@ export const TypeRow = ({
       </span>
       <div className="flex flex-1 items-center gap-3">
         <div className="flex h-7.25 flex-1 flex-wrap items-center justify-end gap-2">
-          {/* 칩 미선택시 */}
-          <div
-            aria-hidden="true"
-            className="flex items-center justify-end gap-2"
-          >
-            {visiblePreviewChips.map(({ id, label, color }) => (
-              <div key={id} className="guest-preview-chip">
-                <ChipLarge label={label} color={color} />
-              </div>
-            ))}
-          </div>
-
-          {/* 칩 선택시 */}
-          {selectedFilters.map((item) => (
-            <ChipLarge key={item} label={item} color={'gray02'} />
+          {selectedFilters.map((item, index) => (
+            <div
+              key={item}
+              className={`animate-chip-pop ${CHIP_POP_DELAY_CLASSES[rowIndex]?.[index] ?? ''}`}
+            >
+              <ChipLarge
+                label={item}
+                color={getPastelChipColor(paletteStartIndex + index)}
+              />
+            </div>
           ))}
         </div>
 

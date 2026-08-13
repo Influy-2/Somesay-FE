@@ -13,3 +13,5 @@ export { ReviewVoteSection } from './components/reviewVote/ReviewVoteSection';
 export { CategoryProductSection } from './components/categoryProducts/CategoryProductSection';
 
 export { ProductRecommendationHeader } from './components/productRecommendation/ProductRecommendationHeader';
+export { getSelectedKeywords } from './components/productRecommendation/recommendation.utils';
+export { useRecommendationFilterStore } from './stores/recommendationFilter.store';

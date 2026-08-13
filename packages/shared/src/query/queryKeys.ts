@@ -1,5 +1,6 @@
 import { SortOptionsType } from '../domain/product/product.types';
 import type { BrandProductSortType } from '../domain/brand/brand.types';
+import type { HomeRecommendationParamsType } from '../domain/recommendation/recommendation.types';
 
 /**
  * 쿼리키 규칙
@@ -71,6 +72,16 @@ export const QUERY_KEYS = {
       [
         ...QUERY_KEYS.HOME.PRODUCT_LIST_ALL(),
         { mainCategoryId, subCategoryId },
+      ] as const,
+    RECOMMEND_ALL: () => [...QUERY_KEYS.HOME.ALL, 'recommend'] as const,
+    RECOMMEND: ({
+      effects,
+      skinTypeId,
+      subCategoryId,
+    }: HomeRecommendationParamsType) =>
+      [
+        ...QUERY_KEYS.HOME.RECOMMEND_ALL(),
+        { effects, skinTypeId, subCategoryId },
       ] as const,
   },
   RANKING: {
@@ -156,6 +167,7 @@ export const QUERY_KEYS = {
 export const WISH_QUERY_PREFIXES = [
   QUERY_KEYS.HOME.PRODUCT_RANKING(),
   QUERY_KEYS.HOME.PRODUCT_LIST_ALL(),
+  QUERY_KEYS.HOME.RECOMMEND_ALL(),
   QUERY_KEYS.RANKING.PRODUCTS_ALL(),
   QUERY_KEYS.PRODUCT.BY_CATEGORY_ALL(),
   QUERY_KEYS.PRODUCT.DETAIL_ALL(),

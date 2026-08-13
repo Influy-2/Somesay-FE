@@ -1,6 +1,6 @@
 import type { ProductDetailType } from '@somesay/shared';
 import { BlackHeartButton, BrandProfile } from '@/shared/components';
-
+import { formatPrice } from '@somesay/shared';
 interface ProductHeroProps extends ProductDetailType {
   onLikeClick: () => void;
 }
@@ -60,12 +60,8 @@ export const ProductHero = ({
         <div className="flex items-center justify-between">
           <dl className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <dt className="body2-b">정가</dt>{' '}
-              <dd className="body2-m">
-                {price
-                  ? price.toLocaleString('ko-KR') + '원'
-                  : '가격 정보 없음'}
-              </dd>
+              <dt className="body2-b">정가</dt>
+              <dd className="body2-m">{formatPrice(price)}</dd>
             </div>
             <div className="flex items-center gap-1">
               <dt className="body2-b">용량</dt>

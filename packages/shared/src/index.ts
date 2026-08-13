@@ -45,6 +45,14 @@ export type {
   HomeCurationType,
 } from './domain/review/review.types';
 
+export type {
+  HomeRecommendationParamsType,
+  RecommendedProductsWishResultType,
+  RecommendedProductType,
+  RecommendedTopReviewType,
+  SelectedFiltersType,
+} from './domain/recommendation/recommendation.types';
+
 export * from './constants/user.constants';
 
 // UTILS
@@ -97,6 +105,8 @@ export * from './api/ranking/fetchProductRanking.api';
 export * from './api/home/fetchHomeCreatorRanking.api';
 export * from './api/home/fetchHomeProductRanking.api';
 export * from './api/home/fetchHomeCuration.api';
+export * from './api/home/fetchHomeRecommendations.api';
+export * from './api/home/postRecommendProductsWish.api';
 
 //api - product
 export * from './api/product/fetchHomeProductList.api';
