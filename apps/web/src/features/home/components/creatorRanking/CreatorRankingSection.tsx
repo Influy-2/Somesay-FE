@@ -6,7 +6,7 @@ import {
   MoreButton,
   Tooltip,
 } from '@/shared/components';
-import { useFetchHomeCreatorRanking } from '@/shared/hooks';
+import { useFetchHomeCreatorRanking, useMySkinProfile } from '@/shared/hooks';
 import { QuestionIcon } from '@/shared/icons';
 import { CreatorRankingSectionSkeleton } from './CreatorRankingSectionSkeleton';
 
@@ -15,6 +15,7 @@ const CREATOR_RANKING_TOOLTIP_DURATION_MS = 5000;
 
 export const CreatorRankingSection = () => {
   const { data: creatorRankingData, isPending } = useFetchHomeCreatorRanking();
+  const { isMyCondition } = useMySkinProfile();
   const [isTooltipVisible, setIsTooltipVisible] = useState(true);
   const [tooltipArrowOffset, setTooltipArrowOffset] = useState(0);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -109,7 +110,11 @@ export const CreatorRankingSection = () => {
         ) : (
           <ol className="flex flex-col items-start gap-6 self-stretch py-0">
             {creatorRankingData?.map((creator) => (
-              <CreatorRankingUpDownRow {...creator} key={creator.creatorId} />
+              <CreatorRankingUpDownRow
+                {...creator}
+                isMyCondition={isMyCondition}
+                key={creator.creatorId}
+              />
             ))}
           </ol>
         )}

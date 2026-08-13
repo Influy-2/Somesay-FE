@@ -35,7 +35,15 @@ export const Default: Story = {
     subscriberNum: 2,
     trustScore: 90,
     ageGroup: '20대',
-    skinTypes: ['텍스트'],
+    skinTypes: ['건성', '민감성'],
     ranking: 2,
+  },
+};
+
+// 내 조건(20대·건성)과 일치하는 칩만 강조된 상태
+export const MyConditionHighlighted: Story = {
+  args: {
+    ...Default.args,
+    isMyCondition: (label) => ['20대', '건성'].includes(label),
   },
 };
