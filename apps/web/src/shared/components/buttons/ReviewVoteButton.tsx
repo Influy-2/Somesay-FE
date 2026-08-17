@@ -28,8 +28,10 @@ export const ReviewVoteButton = ({
       className={cn(
         'body2-m flex w-full cursor-pointer items-center justify-center gap-1 px-2.5 py-3',
         {
-          'bg-grey03 text-black': !isActive,
+          'bg-grey02 text-black': !isActive,
           'bg-black text-white': isActive,
+          // 투표 후 선택하지 않은 쪽 버튼은 글자를 흐리게 둔다
+          'text-grey04': disabled && !isActive,
         }
       )}
     >

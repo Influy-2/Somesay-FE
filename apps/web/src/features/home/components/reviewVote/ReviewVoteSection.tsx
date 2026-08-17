@@ -28,9 +28,9 @@ export const ReviewVoteSection = () => {
       className="flex w-full flex-col items-center justify-center gap-5 px-4"
     >
       <h2 className="headline4 w-full" id="review-vote-title">
-        이 제품을 써보셨다면
+        이 제품을 사용해봤다면
         <br />
-        리뷰에 한 표 남겨주세요
+        공감/반대를 남겨주세요
       </h2>
       <div className="flex w-full flex-col items-start gap-2">
         <ProductCardThumbnail {...MOCK_PRODUCT_THUMBNAILS} />
