@@ -16,7 +16,9 @@ export const ChipAgreement = ({ type }: ChipAgreementProps) => {
       ) : (
         <DisagreeIcon className="size-3 [&_path]:fill-current" />
       )}
-      <span className="caption1-m">{isAgree ? '공감해요' : '반대해요'}</span>
+      <span className="caption1-m text-grey08">
+        {isAgree ? '공감해요' : '반대해요'}
+      </span>
     </div>
   );
 };

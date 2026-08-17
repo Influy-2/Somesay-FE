@@ -34,11 +34,13 @@ export interface PreviewInfoDto extends ProductBasicDto {
 
 // 상품 상세 페이지의 기본 정보 영역 조회 응답에 사용합니다.
 export interface ProductDetailDto extends ProductBasicDto {
-  volume: number;
-  brandImgUrl: string;
+  brandId: number;
+  brandLogoUrl: string | null;
+  volume: string | null;
   collabChannelUrl: string | null;
   collabChannelName: string | null;
   collabProfileImgUrl: string | null;
+  productNotes: string | null;
 }
 
 export interface ProductListResponseDto {
@@ -64,6 +66,8 @@ export interface ProductReviewsDto extends ProductReviewCreatorDto {
   disagreeCount: number;
   agreeRatio: number;
   youtubeUrl: string;
+  videoTitle: string;
+  viewCount: number;
   timeLinkCount: number;
   totalCommentCount: number;
   previewComments: CommentPreviewDto[];

@@ -19,18 +19,24 @@ export const HorizontalScrollProductCard = ({
   isHearted,
   creators,
 }: HorizontalScrollProductCardProps) => {
-  const formattedPrice = price.toLocaleString('ko-KR');
+  const formattedPrice = price
+    ? price.toLocaleString('ko-KR') + '원'
+    : '가격 정보 없음';
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
   const creatorNames = creators.map((c) => c.name).join(', ');
 
   const onHeartToggle = () => {
     console.log('하트클릭');
   };
+  const formattedRating =
+    (String(rating).split('.')[1]?.length ?? 0) > 2
+      ? rating.toFixed(2)
+      : rating;
 
   return (
     <article
       className="relative flex w-39 shrink-0 flex-col items-start gap-2"
-      aria-label={`${brandName} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creatorNames}`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creatorNames}`}
     >
       <div className="bg-grey02 relative aspect-39/44 h-44 self-stretch overflow-hidden">
         <div aria-hidden="true" className="h-full w-full">
@@ -57,13 +63,13 @@ export const HorizontalScrollProductCard = ({
         <p className="body2-m line-clamp-1 w-full truncate text-black">
           {productName}
         </p>
-        <p className="body2-m truncate text-black">{formattedPrice}원</p>
+        <p className="body2-m truncate text-black">{formattedPrice}</p>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
             <div className="flex items-center">
               <StarIcon className="size-4 text-black" aria-hidden="true" />
-              <span className="body2-sb text-black">{rating}</span>
+              <span className="body2-sb text-black">{formattedRating}</span>
             </div>
             <span className="body2-m text-black">({formattedReviewCount})</span>
           </div>

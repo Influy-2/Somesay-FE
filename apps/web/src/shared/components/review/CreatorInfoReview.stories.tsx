@@ -15,23 +15,28 @@ const meta: Meta<typeof CreatorInfoReview> = {
 
 export default meta;
 type Story = StoryObj<typeof CreatorInfoReview>;
-
 export const Default: Story = {
   args: {
     review: {
+      reviewId: 1,
+      nickname: '글로우픽',
       ranking: 1,
-      creator: {
-        name: '글로우픽',
-        profileImg: mockProfile,
-        subscriberCount: '12.4만',
-        trustScore: 92,
-        tags: ['건성', '보습'],
-      },
-      rating: 4.5,
+      subscriberNum: 124000,
+      profileImageUrl: mockProfile,
+      trustScore: 92,
+      skinTypes: ['건성', '보습'],
       content:
         '촉촉하고 흡수가 빨라서 데일리로 쓰기 정말 좋아요. 자극 없이 순하게 스며드는 느낌이에요.',
-      agreedPercentage: 78,
-      participantCount: 31243,
+      rating: 4.5,
+      agreeCount: 24370,
+      disagreeCount: 6873,
+      agreeRatio: 78,
+      youtubeUrl: '',
+      videoTitle: '',
+      viewCount: 0,
+      timeLinkCount: 0,
+      totalCommentCount: 0,
+      previewComments: [],
     },
   },
 };
@@ -39,18 +44,24 @@ export const Default: Story = {
 export const NoEvaluation: Story = {
   args: {
     review: {
+      reviewId: 2,
+      nickname: '뷰티인사이더',
       ranking: 2,
-      creator: {
-        name: '뷰티인사이더',
-        profileImg: mockProfile,
-        subscriberCount: '3.2만',
-        trustScore: 85,
-        tags: ['복합성'],
-      },
-      rating: 4,
+      subscriberNum: 32000,
+      profileImageUrl: mockProfile,
+      trustScore: 85,
+      skinTypes: ['복합성'],
       content: '향이 은은하고 발림성이 좋아요.',
-      agreedPercentage: 0,
-      participantCount: 0,
+      rating: 4,
+      agreeCount: 0,
+      disagreeCount: 0,
+      agreeRatio: 0,
+      youtubeUrl: '',
+      videoTitle: '',
+      viewCount: 0,
+      timeLinkCount: 0,
+      totalCommentCount: 0,
+      previewComments: [],
     },
   },
 };

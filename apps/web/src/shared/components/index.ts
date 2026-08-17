@@ -30,6 +30,8 @@ export { EvaluationCardProfile } from './profile/EvaluationCardProfile';
 export { RecommendedCreatorProfile } from './profile/RecommendedCreatorProfile';
 export { EvaluatedCreatorItemVertical } from './profile/EvaluatedCreatorItemVertical';
 export { EvaluatedCreatorItemHorizontal } from './profile/EvaluatedCreatorItemHorizontal';
+export { ConsumerReviewProfile } from './profile/ConsumerReviewProfile';
+export { ProfileNoImage } from './profile/ProfileNoImage';
 
 /* buttons */
 export { WhiteHeartButton } from './buttons/HeartButton';
@@ -59,6 +61,8 @@ export { CreatorInfoReview } from './review/CreatorInfoReview';
 export { CreatorReviewExpandedCard } from './review/CreatorReviewExpandedCard';
 export { Preview } from './review/Preview';
 export { EvaluatedReviewCard } from './review/EvaluatedReviewCard';
+export { OriginalVideoCard } from './review/OriginalVideoCard';
+export { OriginalVideo } from './review/OriginalVideo';
 
 /* category */
 export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';

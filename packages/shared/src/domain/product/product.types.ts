@@ -28,11 +28,13 @@ interface CreatorProfile {
 }
 
 export interface ProductDetailType extends ProductBasicType {
-  brandImageUrl?: string | undefined;
-  volume: number;
+  brandId: number;
+  brandLogoUrl: string | null;
+  volume: string | null;
   collabChannelUrl: string | null;
   collabChannelName: string | null;
   collabProfileImgUrl: string | null;
+  productNotes: string | null;
 }
 
 export interface ProductReviewType {
@@ -49,6 +51,8 @@ export interface ProductReviewType {
   disagreeCount: number;
   agreeRatio: number;
   youtubeUrl: string;
+  videoTitle: string;
+  viewCount: number;
   timeLinkCount: number;
   totalCommentCount: number;
   previewComments: CommentPreviewType[];

@@ -21,6 +21,21 @@ export interface CreatorReviewSummaryType {
   avgRating: number;
   reviewCount: number;
   aiSummary: string;
+  frequentMention: string;
+  consideration: string;
   productSkinTypes: ProductSkinType[];
   productSkinExpectations: ProductSkinExpectationType[];
+}
+
+export interface TimeLinkType {
+  timeLinkId: number;
+  youtubeUrl: string;
+  videoTitle: string;
+  viewCount: number;
+  uploadAt: string;
+}
+
+export interface TimeLinksType {
+  reviewId: number;
+  timeLinks: TimeLinkType[];
 }

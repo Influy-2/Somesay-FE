@@ -10,5 +10,20 @@ export interface ReviewOverviewDto {
   reviewCount: number;
   aiSummary: string;
   productSkinTypes: ProductSkinType[];
+  frequentMention: string;
+  consideration: string;
   productSkinExpectations: ProductSkinExpectationType[];
+}
+
+export interface TimeLinkDto {
+  timeLinkId: number;
+  youtubeUrl: string;
+  videoTitle: string;
+  viewCount: number;
+  uploadAt: string;
+}
+
+export interface TimeLinksResponseDto {
+  reviewId: number;
+  timeLinks: TimeLinkDto[];
 }

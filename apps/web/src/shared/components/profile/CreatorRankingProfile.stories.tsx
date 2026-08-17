@@ -10,7 +10,10 @@ const meta: Meta<typeof CreatorRankingProfile> = {
   tags: ['autodocs'],
   argTypes: {
     ranking: { control: 'number' },
-    creator: { control: 'object' },
+    nickname: { control: 'text' },
+    subscriberNum: { control: 'number' },
+    trustScore: { control: 'number' },
+    skinTypes: { control: 'object' },
   },
 };
 
@@ -20,12 +23,10 @@ type Story = StoryObj<typeof CreatorRankingProfile>;
 export const Default: Story = {
   args: {
     ranking: 1,
-    creator: {
-      name: '글로우픽',
-      profileImg: mockProfile,
-      subscriberCount: '12.4만',
-      trustScore: 92,
-      tags: ['건성', '보습'],
-    },
+    nickname: '글로우픽',
+    profileImageUrl: mockProfile,
+    subscriberNum: 124000,
+    trustScore: 92,
+    skinTypes: ['건성', '보습'],
   },
 };

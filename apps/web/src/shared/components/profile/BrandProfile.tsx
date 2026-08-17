@@ -1,14 +1,17 @@
 // Profile/브랜드
-
+import { Link } from 'react-router';
 import { MainArrowIcon } from '@/shared/icons';
+import { PATH } from '@/routes/path';
 
 export interface BrandProfileProps {
   brandName: string;
-  brandImageUrl?: string | undefined;
+  brandImageUrl: string | null;
+  brandId: number;
 }
 
 export const BrandProfile = ({
   brandName,
+  brandId,
   brandImageUrl,
 }: BrandProfileProps) => {
   return (
@@ -24,15 +27,12 @@ export const BrandProfile = ({
         )}
         <span className="body1-m text-grey08">{brandName}</span>
       </div>
-      {/* TODO: 브랜드 홈페이지 연결 */}
-      <a
-        href="/"
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        to={`${PATH.BRAND.BASE}/${brandId}`}
         aria-label={`${brandName} 브랜드 홈페이지로 이동`}
       >
         <MainArrowIcon aria-hidden="true" />
-      </a>
+      </Link>
     </div>
   );
 };

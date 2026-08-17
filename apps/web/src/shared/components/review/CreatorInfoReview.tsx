@@ -1,46 +1,34 @@
 // Review/상세페이지용
 
-import { Star16Icon } from '@/shared/icons';
-import { CreatorRankingProfile, RateBar } from '@/shared/components';
+import {
+  CreatorRankingProfile,
+  RateBar,
+  StarRating,
+} from '@/shared/components';
+import type { ProductReviewType } from '@somesay/shared';
 
 export interface CreatorInfoReviewProps {
-  review: {
-    ranking: number;
-    creator: {
-      name: string;
-      profileImg: string;
-      subscriberCount: string;
-      trustScore: number;
-      tags: string[];
-    };
-    rating: number;
-    content: string;
-    agreedPercentage: number;
-    participantCount: number;
-  };
+  review: ProductReviewType;
 }
 
 export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
-  const isEvaluated = review.agreedPercentage > 0;
+  const isEvaluated = review.agreeCount + review.disagreeCount > 0;
+  const participantCount = review.agreeCount + review.disagreeCount;
 
   return (
     <div className="flex flex-col px-4 pt-5">
       <CreatorRankingProfile
         ranking={review.ranking}
-        creator={review.creator}
+        nickname={review.nickname}
+        profileImageUrl={review.profileImageUrl}
+        subscriberNum={review.subscriberNum}
+        trustScore={review.trustScore}
+        skinTypes={review.skinTypes}
       />
 
       <div className="mb-5">
         <div className="flex items-center gap-1">
-          <div
-            role="img"
-            aria-label={`5점 만점에 ${review.rating}점`}
-            className="flex"
-          >
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star16Icon key={i} aria-hidden="true" />
-            ))}
-          </div>
+          <StarRating rating={review.rating} />
           <span className="body2-sb" aria-hidden="true">
             {review.rating}
           </span>
@@ -53,13 +41,15 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
           {isEvaluated ? (
             <div className="flex items-center justify-between">
               <div>
-                <span className="body2-b">{review.agreedPercentage}%</span>
+                <span className="body2-b">
+                  {Math.round(review.agreeRatio)}%
+                </span>
                 <span className="body2-m text-grey08">
                   의 사용자가 이 리뷰에 공감했어요
                 </span>
               </div>
               <span className="body2-m text-grey06">
-                {review.participantCount.toLocaleString()}명 참여
+                {participantCount.toLocaleString()}명 참여
               </span>
             </div>
           ) : (
@@ -69,7 +59,7 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
           )}
         </div>
         {isEvaluated ? (
-          <RateBar percentage={review.agreedPercentage} />
+          <RateBar percentage={review.agreeRatio} />
         ) : (
           <div className="bg-grey01 mr-2 h-1.5 w-full" aria-hidden="true" />
         )}
