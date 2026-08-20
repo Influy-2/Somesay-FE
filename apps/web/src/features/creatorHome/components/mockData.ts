@@ -27,8 +27,8 @@ interface MockReviewType {
 // 크리에이터
 export const MOCK_CREATOR: MockCreatorType = {
   creatorId: 1,
-  nickname: '레오제이',
-  profileImageUrl: mockProfileImg,
+  creatorName: '레오제이',
+  profileImgUrl: mockProfileImg,
   subscriberNum: 300000,
   trustScore: 0.99,
   ageGroup: '20',
@@ -55,7 +55,7 @@ const MOCK_PRODUCT_BASE: Omit<MockProductCardType, 'productId' | 'categoryId'> =
     brandName: '토리든',
     productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
     price: 10000,
-    rating: 4.9,
+    avgRating: 4.9,
     reviewCount: 43,
     isHearted: false,
     creatorImageUrls: [mockProfileImg, mockProfile2Img, mockProfile3Img],

@@ -28,7 +28,7 @@ export interface ProductSkinExpectationType {
   isPrimary: boolean;
 }
 export interface ProductCardType extends ProductWishType {
-  rating: number;
+  avgRating: number;
   reviewCount: number;
   creatorImageUrls: string[];
 }
@@ -44,10 +44,10 @@ export interface ProductDetailType extends ProductWishType {
 }
 
 export interface ProductReviewType {
-  nickname: string;
+  creatorName: string;
   ranking: number;
   subscriberNum: number;
-  profileImageUrl: string;
+  profileImgUrl: string;
   trustScore: number;
   skinTypes: string[];
   reviewId: number;

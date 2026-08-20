@@ -18,8 +18,8 @@ const TRUST_RANK_LIMIT = 10;
 
 export const BasicCreatorProfile = ({
   creatorId,
-  nickname,
-  profileImageUrl,
+  creatorName,
+  profileImgUrl,
   subscriberNum,
   ageGroup,
   skinTypes = [],
@@ -35,7 +35,7 @@ export const BasicCreatorProfile = ({
   return (
     <div
       className="flex w-full items-center gap-2.5"
-      aria-label={`크리에이터: ${nickname}, 유튜브 구독자 ${formatSubscriberCount(subscriberNum)}${showTrustRank ? `, 신뢰도 ${trustRank}위` : ''}, ${ageLabel}, ${skinTypeLabel}`}
+      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${formatSubscriberCount(subscriberNum)}${showTrustRank ? `, 신뢰도 ${trustRank}위` : ''}, ${ageLabel}, ${skinTypeLabel}`}
       key={creatorId}
     >
       {/* 프로필 사진 */}
@@ -47,7 +47,7 @@ export const BasicCreatorProfile = ({
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover"
-          src={profileImageUrl}
+          src={profileImgUrl}
           alt=""
         />
       </div>
@@ -59,7 +59,7 @@ export const BasicCreatorProfile = ({
       >
         {/* 이름 + 유튜브 구독자 */}
         <div className="flex items-center gap-2">
-          <span className="body1-sb shrink-0 text-black">{nickname}</span>
+          <span className="body1-sb shrink-0 text-black">{creatorName}</span>
           <div className="text-grey08 caption2-m flex shrink-0 items-center gap-0.5">
             <YoutubeIcon />
             {formatSubscriberCount(subscriberNum)}

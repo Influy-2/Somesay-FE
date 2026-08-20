@@ -26,8 +26,8 @@ export default meta;
 type Story = StoryObj<typeof EvaluationReviewCard>;
 
 const mockCreator = {
-  nickname: '김점례',
-  profileImageUrl: mockProfile as string,
+  creatorName: '김점례',
+  profileImgUrl: mockProfile as string,
   subscriberNum: 300000,
   trustScore: 100,
   ranking: 1,

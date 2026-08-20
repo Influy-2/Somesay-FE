@@ -24,7 +24,7 @@ export const SearchResultProductCard = ({
   return (
     <article
       className="border-grey02 relative mx-4 flex flex-col gap-5 border-b pb-6"
-      aria-label={`${product.brandName} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.rating}점`}
+      aria-label={`${product.brandName} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.avgRating}점`}
     >
       <div className="flex gap-3">
         {/* 이미지 */}
@@ -61,10 +61,10 @@ export const SearchResultProductCard = ({
               {/* 별점 */}
               <div
                 className="flex items-center"
-                aria-label={`별점 ${product.rating}점`}
+                aria-label={`별점 ${product.avgRating}점`}
               >
                 <StarIcon className="text-primary-300 size-4" />
-                <span className="body2-sb">{product.rating}</span>
+                <span className="body2-sb">{product.avgRating}</span>
               </div>
               {/* 리뷰수 */}
               <span

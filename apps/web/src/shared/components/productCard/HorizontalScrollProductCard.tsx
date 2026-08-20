@@ -16,7 +16,7 @@ export const HorizontalScrollProductCard = ({
   brandName,
   productName,
   price,
-  rating,
+  avgRating,
   reviewCount,
   isHearted,
   creatorImageUrls,
@@ -27,14 +27,14 @@ export const HorizontalScrollProductCard = ({
     : '가격 정보 없음';
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
   const formattedRating =
-    (String(rating).split('.')[1]?.length ?? 0) > 2
-      ? rating.toFixed(2)
-      : rating;
+    (String(avgRating).split('.')[1]?.length ?? 0) > 2
+      ? avgRating.toFixed(2)
+      : avgRating;
 
   return (
     <article
       className="relative flex w-39 shrink-0 flex-col items-start gap-2"
-      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${avgRating}점, 리뷰 ${formattedReviewCount}개`}
     >
       <div className="bg-grey02 relative aspect-39/44 h-44 self-stretch overflow-hidden">
         <div aria-hidden="true" className="h-full w-full">

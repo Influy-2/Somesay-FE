@@ -19,10 +19,10 @@ export const Default: Story = {
   args: {
     review: {
       reviewId: 1,
-      nickname: '글로우픽',
+      creatorName: '글로우픽',
       ranking: 1,
       subscriberNum: 124000,
-      profileImageUrl: mockProfile,
+      profileImgUrl: mockProfile,
       trustScore: 92,
       skinTypes: ['건성', '보습'],
       content:
@@ -45,10 +45,10 @@ export const NoEvaluation: Story = {
   args: {
     review: {
       reviewId: 2,
-      nickname: '뷰티인사이더',
+      creatorName: '뷰티인사이더',
       ranking: 2,
       subscriberNum: 32000,
-      profileImageUrl: mockProfile,
+      profileImgUrl: mockProfile,
       trustScore: 85,
       skinTypes: ['복합성'],
       content: '향이 은은하고 발림성이 좋아요.',

@@ -23,8 +23,8 @@ type Story = StoryObj<typeof CreatorReviewCard>;
 
 const mockCreator = {
   creatorId: 1,
-  nickname: '글로우픽',
-  profileImageUrl: mockProfile,
+  creatorName: '글로우픽',
+  profileImgUrl: mockProfile,
   subscriberNum: 124000,
   trustScore: 92,
   ranking: 3,

@@ -8,8 +8,8 @@ const meta: Meta<typeof BasicCreatorProfile> = {
   tags: ['autodocs'],
   argTypes: {
     creatorId: { control: 'number' },
-    nickname: { control: 'text' },
-    profileImageUrl: { control: 'text' },
+    creatorName: { control: 'text' },
+    profileImgUrl: { control: 'text' },
     subscriberNum: { control: 'number' },
     trustRank: { control: 'number' },
     highlightedLabels: { control: 'object' },
@@ -24,8 +24,8 @@ type Story = StoryObj<typeof BasicCreatorProfile>;
 export const Default: Story = {
   args: {
     creatorId: 1,
-    nickname: '이름',
-    profileImageUrl: 'https://placehold.co/100',
+    creatorName: '이름',
+    profileImgUrl: 'https://placehold.co/100',
     subscriberNum: 0,
     trustRank: 3,
     ageGroup: '20',

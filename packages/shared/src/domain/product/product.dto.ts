@@ -1,19 +1,12 @@
 import type {
+  ProductBasicType,
   ProductSkinExpectationType,
   ProductSkinType,
 } from './product.types';
 import type { CommentPreviewDto } from '../comment/comment.dto';
 
-// 여러 상품 응답 DTO에서 공통으로 사용하는 최소 상품 정보입니다.
-export interface ProductBasicDto {
-  productId: number;
-  brandName: string;
-  productName: string;
-  productImgUrl: string;
-  price: number;
-}
-
-export interface ProductWishDto extends ProductBasicDto {
+// 서버가 주는 최소 상품 정보는 프론트 타입과 필드가 동일해 ProductBasicType을 그대로 쓴다.
+export interface ProductWishDto extends ProductBasicType {
   userWish: boolean;
 }
 

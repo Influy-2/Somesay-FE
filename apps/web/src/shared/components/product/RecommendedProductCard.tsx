@@ -19,7 +19,7 @@ export const RecommendedProductCard = ({
   productName,
   productImgUrl,
   price,
-  rating,
+  avgRating,
   reviewCount,
   creatorImageUrls,
   isHearted,
@@ -57,7 +57,7 @@ export const RecommendedProductCard = ({
             <div className="flex min-w-0 items-center gap-1" aria-hidden="true">
               <div className="flex shrink-0 items-center">
                 <StarIcon className="size-4 text-white" />
-                <span className="body2-sb">{rating.toFixed(1)}</span>
+                <span className="body2-sb">{avgRating.toFixed(1)}</span>
               </div>
               <span className="body2-m shrink-0">({formattedReviewCount})</span>
               {creatorImageUrls?.length > 0 && (
@@ -91,7 +91,7 @@ export const RecommendedProductCard = ({
       <Link
         to={`${PATH.PRODUCT.BASE}/${productId}`}
         className="absolute inset-0"
-        aria-label={`${order}번째 추천 제품 ${brandName} ${productName}, ${formattedPrice}, 별점 ${rating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개 상세 페이지로 이동`}
+        aria-label={`${order}번째 추천 제품 ${brandName} ${productName}, ${formattedPrice}, 별점 ${avgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개 상세 페이지로 이동`}
       />
     </article>
   );

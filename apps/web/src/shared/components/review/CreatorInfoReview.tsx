@@ -19,8 +19,8 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
     <div className="flex flex-col px-4 pt-5">
       <CreatorRankingProfile
         ranking={review.ranking}
-        nickname={review.nickname}
-        profileImageUrl={review.profileImageUrl}
+        nickname={review.creatorName}
+        profileImageUrl={review.profileImgUrl}
         subscriberNum={review.subscriberNum}
         trustScore={review.trustScore}
         skinTypes={review.skinTypes}

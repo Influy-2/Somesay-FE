@@ -114,9 +114,9 @@ export const ReviewRankingList = ({ productId }: ReviewRankingListProps) => {
             <OriginalVideo
               key={link.timeLinkId}
               youtubeUrl={link.youtubeUrl}
-              creatorName={currentReview?.nickname ?? ''}
-              {...(currentReview?.profileImageUrl
-                ? { creatorProfileImgUrl: currentReview.profileImageUrl }
+              creatorName={currentReview?.creatorName ?? ''}
+              {...(currentReview?.profileImgUrl
+                ? { creatorProfileImgUrl: currentReview.profileImgUrl }
                 : {})}
               videoTitle={link.videoTitle}
               viewCount={link.viewCount}

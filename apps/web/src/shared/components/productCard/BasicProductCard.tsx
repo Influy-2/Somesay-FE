@@ -16,7 +16,7 @@ export const BasicProductCard = ({
   brandName,
   productName,
   price,
-  rating,
+  avgRating,
   reviewCount,
   isHearted,
   creatorImageUrls,
@@ -29,7 +29,7 @@ export const BasicProductCard = ({
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${brandName} ${productName}, ${price ? price + '원' : '가격 정보 없음'}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${brandName} ${productName}, ${price ? price + '원' : '가격 정보 없음'}, 별점 ${avgRating}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 이미지 영역 */}
       <div className="relative h-50 w-full overflow-hidden border-none">
@@ -77,7 +77,7 @@ export const BasicProductCard = ({
           {/* 별점 */}
           <div className="flex items-center">
             <StarIcon className="text-primary-300 size-4" />
-            <span className="body2-sb">{rating.toFixed(1)}</span>
+            <span className="body2-sb">{avgRating.toFixed(1)}</span>
           </div>
           {/* 리뷰수 */}
           <span className="body2-m">({formattedReviewCount})</span>

@@ -81,7 +81,7 @@ export const BestReviewSection = () => {
                 />
                 <Link
                   to={`${PATH.PRODUCT.BASE}/${item.productId}?review=${item.reviewId}`}
-                  aria-label={`${item.creator.nickname}의 리뷰 전문 보기`}
+                  aria-label={`${item.creator.creatorName}의 리뷰 전문 보기`}
                   className="block"
                 >
                   <CreatorReviewCard

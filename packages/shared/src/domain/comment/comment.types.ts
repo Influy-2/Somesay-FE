@@ -4,7 +4,7 @@ export interface CommentPreviewType {
   reactionId: number;
   userId: number;
   nickname: string;
-  profileImageUrl: string;
+  profileImgUrl: string;
   reactionType: CommentReactionType;
   comment: string;
   createdAt: string;

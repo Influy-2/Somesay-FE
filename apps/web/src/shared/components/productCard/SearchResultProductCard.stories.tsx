@@ -30,7 +30,7 @@ const MOCK_PRODUCT = {
   brandName: '이니스프리',
   productName: '블랙티 유스 에센스 200ml 인기 베스트 세럼',
   price: 38000,
-  rating: 4.5,
+  avgRating: 4.5,
   reviewCount: 1240,
   isHearted: false,
   creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
@@ -86,7 +86,7 @@ export const HighPrice: Story = {
       brandName: '설화수',
       productName: '자음 생크림 진설',
       price: 289000,
-      rating: 4.8,
+      avgRating: 4.8,
       reviewCount: 3420,
       reviewSummary:
         '고가이지만 그만한 가치가 있어요. 민감 피부에도 트러블 없이 사용 가능합니다.',

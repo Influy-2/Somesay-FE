@@ -12,8 +12,8 @@ const mapHomeCurationReviewDto = (
   price: review.price,
   creator: {
     creatorId: review.creatorId,
-    nickname: review.creatorName,
-    profileImageUrl: review.profileImgUrl,
+    creatorName: review.creatorName,
+    profileImgUrl: review.profileImgUrl,
     ageGroup: review.ageGroup,
     skinTypes: review.skinTypes,
     subscriberNum: review.subscriberNum,

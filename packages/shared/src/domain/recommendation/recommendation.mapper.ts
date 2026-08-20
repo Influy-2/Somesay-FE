@@ -18,8 +18,8 @@ const mapRecommendedProductDto = (
     ? {
         creator: {
           creatorId: topReview.creator.creatorId,
-          nickname: topReview.creator.creatorName,
-          profileImageUrl: topReview.creator.profileImgUrl,
+          creatorName: topReview.creator.creatorName,
+          profileImgUrl: topReview.creator.profileImgUrl,
           ageGroup: topReview.creator.ageGroup,
           skinTypes: topReview.creator.skinTypes,
           subscriberNum: topReview.creator.subscriberNum,

@@ -2,7 +2,7 @@ import { formatAgeGroup } from '../../utils/formatAgeGroup';
 import type { ApiPage } from '../../api/types';
 import type { ProductCardType } from '../product/product.types';
 import type { PreviewInfoDto } from '../product/product.dto';
-import { mapPreviewInfoDtoToCard } from '../product/product.mapper';
+import { mapProductCardDtoToCard } from '../product/product.mapper';
 import type { CreatorRankingDto } from '../creator/creator.dto';
 import type { CreatorRankingUpDownType } from '../creator/creator.types';
 import type {
@@ -15,14 +15,14 @@ export const mapProductRankingPageDtoToCards = (
   page: ApiPage<PreviewInfoDto>
 ): ApiPage<ProductCardType> => ({
   ...page,
-  content: page.content.map(mapPreviewInfoDtoToCard),
+  content: page.content.map(mapProductCardDtoToCard),
 });
 
 export const mapProductPreviewRankingPageDtoToCards = (
   page: ApiPage<PreviewInfoDto>
 ): ApiPage<ProductCardType> => ({
   ...page,
-  content: page.content.map(mapPreviewInfoDtoToCard),
+  content: page.content.map(mapProductCardDtoToCard),
 });
 
 export const rankingMapper = <T>(data: T): T => data;
@@ -55,8 +55,8 @@ export const mapCreatorRanking = ({
 
   return {
     creatorId,
-    nickname: creatorName,
-    profileImageUrl: profileImgUrl,
+    creatorName,
+    profileImgUrl,
     youtubeLink,
     trustScore,
     skinTypes,
@@ -80,7 +80,7 @@ export const mapHomeProductRanking = (
   data: HomeProductRankingResponseDto
 ): ProductCardType[] =>
   data.products.map((product) =>
-    mapPreviewInfoDtoToCard({
+    mapProductCardDtoToCard({
       ...product,
       productImgUrl: product.productImgUrl ?? '',
       price: product.price ?? 0,
@@ -108,8 +108,8 @@ export const mapHomeCreatorRanking = (
 
       return {
         creatorId,
-        nickname: creatorName,
-        profileImageUrl: profileImgUrl,
+        creatorName,
+        profileImgUrl,
         youtubeLink,
         trustScore,
         skinTypes,

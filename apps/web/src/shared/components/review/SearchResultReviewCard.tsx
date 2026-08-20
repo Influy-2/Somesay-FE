@@ -15,7 +15,7 @@ export const SearchResultReviewCard = ({
   return (
     <article
       className="border-grey02 flex flex-col gap-5 border-b px-4 pb-6"
-      aria-label={`${creator.nickname}의 리뷰, 별점 ${rating}점`}
+      aria-label={`${creator.creatorName}의 리뷰, 별점 ${rating}점`}
     >
       {/* 크리에이터 프로필 */}
       <BasicCreatorProfile {...creator} />

@@ -25,7 +25,7 @@ const MOCK_SUBCATEGORY_PRODUCT: SubcategoryProductType = {
   productName:
     '캐롯 카터 패드 (200매)캐롯 카밍 워터 패드 캐롯 카터 패드 (200매)캐롯 카밍 워터 패...',
   price: 10000,
-  rating: 4.9,
+  avgRating: 4.9,
   reviewCount: 43,
   isHearted: false,
   creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,

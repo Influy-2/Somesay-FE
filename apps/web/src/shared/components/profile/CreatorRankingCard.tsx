@@ -18,8 +18,8 @@ export const CreatorRankingCard = ({
   ranking,
   rankChange,
   rankChangeDiff,
-  profileImageUrl,
-  nickname,
+  profileImgUrl,
+  creatorName,
   subscriberNum,
   ageGroup,
   skinTypes,
@@ -39,7 +39,7 @@ export const CreatorRankingCard = ({
     <Link
       to={`${PATH.CREATOR.BASE}/${creatorId}`}
       className="flex w-full items-center justify-between gap-3"
-      aria-label={`${ranking}위 ${nickname} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel}`}
+      aria-label={`${ranking}위 ${creatorName} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel}`}
     >
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <div className="flex w-[1.4375rem] shrink-0 flex-col items-center gap-0.5">
@@ -61,9 +61,9 @@ export const CreatorRankingCard = ({
 
         <div className="flex min-w-0 flex-1 items-center gap-4">
           <div className="bg-grey02 size-[3.375rem] shrink-0 overflow-hidden rounded-full">
-            {profileImageUrl && (
+            {profileImgUrl && (
               <img
-                src={profileImageUrl}
+                src={profileImgUrl}
                 alt=""
                 loading="lazy"
                 decoding="async"
@@ -75,7 +75,7 @@ export const CreatorRankingCard = ({
           <div className="flex min-w-0 flex-1 flex-col gap-1.5">
             <div className="flex min-w-0 items-center gap-2">
               <span className="body1-sb min-w-0 truncate text-black">
-                {nickname}
+                {creatorName}
               </span>
               <span className="flex shrink-0 items-center gap-0.5">
                 <YoutubeIcon className="size-3.5" aria-hidden="true" />

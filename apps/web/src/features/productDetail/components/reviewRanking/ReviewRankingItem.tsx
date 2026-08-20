@@ -87,8 +87,8 @@ export const ReviewRankingItem = ({
             {review.youtubeUrl && (
               <OriginalVideoCard
                 youtubeUrl={review.youtubeUrl}
-                creatorName={review.nickname}
-                creatorProfileImgUrl={review.profileImageUrl}
+                creatorName={review.creatorName}
+                creatorProfileImgUrl={review.profileImgUrl}
                 timeLinkCount={review.timeLinkCount}
                 reviewId={review.reviewId}
                 videoTitle={review.videoTitle}

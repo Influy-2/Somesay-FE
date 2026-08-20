@@ -11,8 +11,8 @@ export interface BrandSummaryType {
   brandId: number;
   brandName: string;
   brandLogoUrl: string;
-  brandImageUrl: string;
-  rating: number;
+  brandImgUrl: string;
+  avgRating: number;
   reviewCount: number;
   ranking: number;
   availableSubCategories: BrandAvailableSubCategoryType[];

@@ -1,7 +1,7 @@
 export interface CreatorType {
   creatorId: number;
-  nickname: string;
-  profileImageUrl: string;
+  creatorName: string;
+  profileImgUrl: string;
   youtubeLink: string;
   trustScore: number;
   skinTypes: string[];
@@ -24,8 +24,8 @@ export interface CreatorRankingUpDownType extends Omit<
 export type BasicCreatorProfileType = Pick<
   CreatorType,
   | 'creatorId'
-  | 'nickname'
-  | 'profileImageUrl'
+  | 'creatorName'
+  | 'profileImgUrl'
   | 'subscriberNum'
   | 'trustScore'
   | 'ageGroup'

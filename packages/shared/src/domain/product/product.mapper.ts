@@ -1,7 +1,6 @@
 import type { ApiPage } from '../../api/types';
 import type {
   PreviewInfoDto,
-  ProductCardDto,
   ProductDetailDto,
   ProductListResponseDto,
   ProductReviewsPageDto,
@@ -15,8 +14,6 @@ import type {
   ProductReviewType,
   ProductWishResultType,
 } from './product.types';
-import type { ReviewOverviewDto } from '../review/review.dto';
-import type { CreatorReviewSummaryType } from '../review/review.types';
 import type { CommentPreviewDto } from '../comment/comment.dto';
 import type { CommentPreviewType } from '../comment/comment.types';
 
@@ -47,36 +44,9 @@ export const mapProductDetailDto = (
   productNotes: item.productNotes,
 });
 
-// ReviewOverviewDto를 CreatorReviewSummaryType으로 변환합니다.
-export const mapCreatorReviewSummary = (
-  item: ReviewOverviewDto
-): CreatorReviewSummaryType => ({
-  productId: item.productId,
-  avgRating: item.avgRating,
-  reviewCount: item.reviewCount,
-  aiSummary: item.aiSummary,
-  frequentMention: item.frequentMention,
-  consideration: item.consideration,
-  productSkinTypes: item.productSkinTypes,
-  productSkinExpectations: item.productSkinExpectations,
-});
-
+// 상품 카드/미리보기 DTO를 화면용 상품 카드 타입으로 변환합니다.
+// 남는 변환은 userWish → isHearted 뿐이라 카드/미리보기용을 하나로 합쳤습니다.
 export const mapProductCardDtoToCard = (
-  item: ProductCardDto
-): ProductCardType => ({
-  productId: item.productId,
-  productImgUrl: item.productImgUrl,
-  brandName: item.brandName,
-  productName: item.productName,
-  price: item.price,
-  rating: item.avgRating,
-  reviewCount: item.reviewCount ?? 0,
-  isHearted: item.userWish,
-  creatorImageUrls: item.creatorImageUrls,
-});
-
-// 상품 카드에 사용.
-export const mapPreviewInfoDtoToCard = (
   item: PreviewInfoDto
 ): ProductCardType => ({
   productId: item.productId,
@@ -84,8 +54,8 @@ export const mapPreviewInfoDtoToCard = (
   brandName: item.brandName,
   productName: item.productName,
   price: item.price,
-  rating: item.avgRating,
-  reviewCount: item.reviewCount,
+  avgRating: item.avgRating,
+  reviewCount: item.reviewCount ?? 0,
   isHearted: item.userWish,
   creatorImageUrls: item.creatorImageUrls,
 });
@@ -99,7 +69,7 @@ export const mapProductPreviewPageDtoToCards = (
   page: ApiPage<PreviewInfoDto>
 ): ApiPage<ProductCardType> => ({
   ...page,
-  content: page.content.map(mapPreviewInfoDtoToCard),
+  content: page.content.map(mapProductCardDtoToCard),
 });
 
 // 백엔드 코멘트 DTO를 화면에서 사용하던 코멘트 타입으로 변환합니다.
@@ -107,7 +77,7 @@ const mapCommentPreviewDto = (item: CommentPreviewDto): CommentPreviewType => ({
   reactionId: item.reactionId,
   userId: item.userId,
   nickname: item.nickname,
-  profileImageUrl: item.profileImgUrl,
+  profileImgUrl: item.profileImgUrl,
   reactionType: item.reactionType,
   comment: item.comment,
   createdAt: item.createdAt,
@@ -119,10 +89,10 @@ const mapCommentPreviewDto = (item: CommentPreviewDto): CommentPreviewType => ({
 export const mapProductReviewDto = (
   item: ProductReviewsDto
 ): ProductReviewType => ({
-  nickname: item.creatorName,
+  creatorName: item.creatorName,
   ranking: item.ranking,
   subscriberNum: item.subscriberNum,
-  profileImageUrl: item.profileImgUrl,
+  profileImgUrl: item.profileImgUrl,
   trustScore: item.trustScore,
   skinTypes: item.skinTypes,
   reviewId: item.reviewId,

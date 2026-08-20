@@ -22,8 +22,8 @@ export const CreatorRankingUpDownRow = ({
   ranking,
   rankChange,
   rankChangeDiff,
-  profileImageUrl,
-  nickname,
+  profileImgUrl,
+  creatorName,
   subscriberNum,
   ageGroup,
   skinTypes,
@@ -71,11 +71,7 @@ export const CreatorRankingUpDownRow = ({
 
         {/* 프로필 이미지 */}
         <div className="size-[3.375rem] shrink-0 overflow-hidden rounded-full">
-          <img
-            src={profileImageUrl}
-            alt=""
-            className="size-full object-cover"
-          />
+          <img src={profileImgUrl} alt="" className="size-full object-cover" />
         </div>
 
         {/* 이름 + 채널 + 칩 */}
@@ -83,7 +79,7 @@ export const CreatorRankingUpDownRow = ({
           {/* 이름 + 유튜브 구독자 */}
           <div className="flex items-center gap-2">
             <span className="body1-sb whitespace-nowrap text-black">
-              {nickname}
+              {creatorName}
             </span>
             <div className="flex items-center gap-0.5">
               <YoutubeIcon className="text-grey08 size-3.5" />
@@ -122,7 +118,7 @@ export const CreatorRankingUpDownRow = ({
       <Link
         to={`${PATH.CREATOR.BASE}/${creatorId}`}
         className="absolute inset-0"
-        aria-label={`${ranking}위 ${nickname}, 구독자 ${formatSubscriberCount(subscriberNum)}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel} 상세 페이지로 이동`}
+        aria-label={`${ranking}위 ${creatorName}, 구독자 ${formatSubscriberCount(subscriberNum)}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel} 상세 페이지로 이동`}
       />
     </li>
   );

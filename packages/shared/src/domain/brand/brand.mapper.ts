@@ -25,8 +25,8 @@ export const mapBrandDetailDto = (item: BrandDetailDto): BrandSummaryType => ({
   brandId: item.brandId,
   brandName: item.brandName,
   brandLogoUrl: item.brandLogoUrl,
-  brandImageUrl: item.brandImgUrl,
-  rating: item.avgRating,
+  brandImgUrl: item.brandImgUrl,
+  avgRating: item.avgRating,
   reviewCount: item.totalReviewCount,
   ranking: item.ranking,
   availableSubCategories: item.availableSubCategories.map(

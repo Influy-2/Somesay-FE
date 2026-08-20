@@ -16,7 +16,7 @@ const MOCK_PRODUCT: ProductCardType = {
   brandName: '토리든',
   productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
   price: 10000,
-  rating: 4.9,
+  avgRating: 4.9,
   reviewCount: 43,
   isHearted: false,
   creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
