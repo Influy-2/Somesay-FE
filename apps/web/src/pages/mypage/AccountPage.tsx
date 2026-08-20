@@ -2,11 +2,13 @@ import { useNavigate } from 'react-router';
 import { PATH } from '@/routes/path';
 import { PageHeader } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { InfoSection } from '@/features/myPage/components/InfoSection';
-import { InfoRow } from '@/features/myPage/components/InfoRow';
-import { MOCK_ACCOUNT } from '@/features/myPage/components/mockData';
-import { AccountProfileImage } from '@/features/myPage/components/AccountProfileImage';
-import { ProductFitSection } from '@/features/myPage/components/ProductFitSection';
+import {
+  InfoSection,
+  InfoRow,
+  MOCK_ACCOUNT,
+  AccountProfileImage,
+  ProductFitSection,
+} from '@/features/myPage';
 
 export const AccountPage = () => {
   const navigate = useNavigate();

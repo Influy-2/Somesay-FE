@@ -1,4 +1,4 @@
-import { CategoryAccordion } from '@/features/category/components/CategoryAccordion';
+import { CategoryAccordion } from '@/features/category';
 import { Link } from 'react-router';
 import { PageHeader } from '@/shared/components';
 import { useFetchCategories } from '@/shared/hooks';

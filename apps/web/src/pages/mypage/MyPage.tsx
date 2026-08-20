@@ -2,10 +2,12 @@ import { Link } from 'react-router';
 import { useState } from 'react';
 import { PATH } from '@/routes/path';
 import { MainArrow20Icon } from '@/shared/icons';
-import { InfoRow } from '@/features/myPage/components/InfoRow';
-import { InfoSection } from '@/features/myPage/components/InfoSection';
-import { MyPageDashboard } from '@/features/myPage/components/MyPageDashboard';
-import { RecommendedCreators } from '@/features/myPage/components/RecommendedCreators';
+import {
+  InfoRow,
+  InfoSection,
+  MyPageDashboard,
+  RecommendedCreators,
+} from '@/features/myPage';
 import { PageHeader, ChipBasic, Tooltip } from '@/shared/components';
 
 const MOCK_USER = {

@@ -1,5 +1,5 @@
 import { useAuthGuard } from '@/features/auth';
-import { flattenRankingPages } from '@/features/ranking/ranking.utils';
+import { flattenRankingPages } from '../ranking.utils';
 import { CreatorRankingCard, MoreButton } from '@/shared/components';
 import { useFetchCreatorRanking } from '@/shared/hooks';
 import { CreatorRankingSkeleton } from './CreatorRankingSkeleton';

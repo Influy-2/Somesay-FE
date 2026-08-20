@@ -10,7 +10,7 @@ import {
   SelectedItem,
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { MOCK_PRODUCTS } from '@/features/myPage/components/mockData';
+import { MOCK_PRODUCTS } from '@/features/myPage';
 import { useFetchCategories } from '@/shared/hooks';
 import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';

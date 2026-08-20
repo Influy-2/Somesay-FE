@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { RadioProductItem } from '@/shared/components';
-import type { SelectableProduct } from '../model/productSelection.types';
+import type { SelectableProduct } from '../types/productSelection.types';
 
 interface SelectableProductListProps {
   products: SelectableProduct[];

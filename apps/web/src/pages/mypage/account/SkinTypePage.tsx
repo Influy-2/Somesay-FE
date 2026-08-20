@@ -4,7 +4,7 @@ import cn from '@/utils/cn';
 import { PageHeader, FilterChip } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { SKIN_TYPE_OPTIONS } from '@somesay/shared';
-import { MOCK_ACCOUNT } from '@/features/myPage/components/mockData';
+import { MOCK_ACCOUNT } from '@/features/myPage';
 
 export const SkinTypePage = () => {
   const navigate = useNavigate();

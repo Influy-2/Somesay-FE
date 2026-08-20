@@ -1,4 +1,4 @@
-import type { SelectableProduct } from './productSelection.types';
+import type { SelectableProduct } from '../types/productSelection.types';
 
 const normalizeSearchText = (value: string) =>
   value.replace(/\s/g, '').toLocaleLowerCase();

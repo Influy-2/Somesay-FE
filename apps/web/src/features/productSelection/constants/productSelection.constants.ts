@@ -1,4 +1,4 @@
-import type { ProductCategory } from './productSelection.types';
+import type { ProductCategory } from '../types/productSelection.types';
 
 export const MAX_PRODUCT_SELECTION = 15;
 // TODO: 카테고리 api로 수정 필요

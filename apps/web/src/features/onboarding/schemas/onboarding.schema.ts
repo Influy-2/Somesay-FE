@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MAX_PRODUCT_SELECTION } from '@/features/productSelection/model/productSelection.constants';
+import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
 import { REQUIRED_AGREEMENT_IDS } from '../constants/onboarding.constants';
 import type { OnboardingStep } from '../types/onboarding.types';
 

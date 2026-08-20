@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { SelectableProduct } from './productSelection.types';
+import type { SelectableProduct } from '../types/productSelection.types';
 import {
   filterSelectableProducts,
   getProductsByIds,

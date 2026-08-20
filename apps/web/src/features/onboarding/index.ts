@@ -1,5 +1,6 @@
 export { OnboardingLayout } from './components/OnboardingLayout';
 export { OnboardingCompleteDialog } from './components/OnboardingCompleteDialog';
+export { OnboardingCompleteBottomSheet } from './components/OnboardingCompleteBottomSheet';
 export { OnboardingOptionGroup } from './components/OnboardingOptionGroup';
 export { OnboardingProgressBar } from './components/OnboardingProgressBar';
 export { OnboardingProductSearch } from './components/OnboardingProductSearch';
@@ -26,7 +27,7 @@ export {
 export type { OnboardingProgressStep } from './constants/onboarding.constants';
 export { useCompleteOnboarding } from './hooks/useCompleteOnboarding';
 export { useEmailVerification } from './hooks/useEmailVerification';
-export { useOnboardingStore } from './store/onboarding.store';
+export { useOnboardingStore } from './stores/onboarding.store';
 export type {
   OnboardingAge,
   OnboardingDraft,

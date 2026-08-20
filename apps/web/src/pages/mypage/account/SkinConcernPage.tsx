@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { PageHeader, FilterChip } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { USER_SKIN_CONCERN_OPTIONS } from '@somesay/shared';
-import { MOCK_ACCOUNT } from '@/features/myPage/components/mockData';
+import { MOCK_ACCOUNT } from '@/features/myPage';
 
 export const SkinConcernPage = () => {
   const navigate = useNavigate();

@@ -8,7 +8,7 @@ import {
 import {
   MOCK_RECOMMENDED_CREATORS,
   MOCK_EVALUATED_REVIEWS,
-} from '@/features/myPage/components/mockData';
+} from '@/features/myPage';
 import { PATH } from '@/routes/path';
 
 type SheetState =

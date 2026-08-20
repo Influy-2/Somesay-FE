@@ -15,7 +15,7 @@ import { HorizontalCategoriesTab } from '@/shared/components';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 import { useCompleteOnboarding } from '../hooks/useCompleteOnboarding';
 import { productIdsSchema } from '../schemas/onboarding.schema';
-import { useOnboardingStore } from '../store/onboarding.store';
+import { useOnboardingStore } from '../stores/onboarding.store';
 import type {
   OnboardingStep,
   ProductFitStatus,

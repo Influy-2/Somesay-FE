@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { SocialProvider } from '@/features/auth';
-import { MAX_PRODUCT_SELECTION } from '@/features/productSelection/model/productSelection.constants';
+import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
 import {
   INITIAL_ONBOARDING_DRAFT,
   ONBOARDING_STEP_ORDER,

@@ -4,7 +4,7 @@ import {
   useFetchTimeLinks,
   useFetchReviewComments,
 } from '@/shared/hooks';
-import { useInfiniteScroll } from '@/features/brandHome';
+import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
 import { ReviewRankingItem } from './ReviewRankingItem';
 import {
   OnOffButton,

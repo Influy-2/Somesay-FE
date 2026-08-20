@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
-import { SubcategoryProductList } from '@/features/subcategory';
-import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
-import { SearchFilterBottomSheet } from '@/features/search/components/SearchFilterBottomSheet';
+import {
+  SubcategoryProductList,
+  MOCK_SUBCATEGORY_PRODUCTS,
+} from '@/features/subcategory';
+import { SearchFilterBottomSheet } from '@/features/search';
 import { SearchFilter } from '@/shared/components';
 import {
   HorizontalCategoriesTab,
@@ -14,7 +16,7 @@ import { useFetchCategories } from '@/shared/hooks';
 import type {
   SearchFilterGroupType,
   SelectedFiltersType,
-} from '@/features/search/types/search.types';
+} from '@/features/search';
 
 const SORT_OPTIONS = [
   { value: 'rating', label: '평점순' },

@@ -135,5 +135,3 @@ export const ProductDetailPage = () => {
     </div>
   );
 };
-
-export default ProductDetailPage;

@@ -4,7 +4,7 @@ import {
   EvaluatedCreatorItemHorizontal,
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { MOCK_EVALUATED_CREATORS_LIST } from '@/features/myPage/components/mockData';
+import { MOCK_EVALUATED_CREATORS_LIST } from '@/features/myPage';
 
 export const MyReviewEvaluationCreatorListPage = () => {
   const navigate = useNavigate();

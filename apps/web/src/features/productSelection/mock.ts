@@ -1,5 +1,5 @@
 import mockProductImage from '@/assets/mock_product_img.png';
-import type { SelectableProduct } from '../model/productSelection.types';
+import type { SelectableProduct } from './types/productSelection.types';
 
 export const MOCK_PRODUCT_CATALOG: SelectableProduct[] = [
   {

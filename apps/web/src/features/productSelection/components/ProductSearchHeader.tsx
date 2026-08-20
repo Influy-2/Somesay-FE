@@ -5,7 +5,7 @@ import {
   SearchBar,
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import type { ProductCategory } from '../model/productSelection.types';
+import type { ProductCategory } from '../types/productSelection.types';
 
 interface ProductSearchHeaderBaseProps {
   value: string;

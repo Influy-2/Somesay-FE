@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { PageHeader, TabBar, CommentInput, Modal } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { ReviewEvaluationBottomSheet } from '@/features/myPage/myReviewEvaluation/components/ReviewEvaluationBottomSheet';
-import { MOCK_EVALUATED_REVIEWS } from '@/features/myPage/components/mockData';
-
-import { ProductsTab } from '@/features/myPage/myReviewEvaluation/components/ProductsTab';
-import { CreatorsTab } from '@/features/myPage/myReviewEvaluation/components/Creatorstab';
+import {
+  ReviewEvaluationBottomSheet,
+  ProductsTab,
+  CreatorsTab,
+} from '@/features/myReviewEvaluation';
+import { MOCK_EVALUATED_REVIEWS } from '@/features/myPage';
 
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 

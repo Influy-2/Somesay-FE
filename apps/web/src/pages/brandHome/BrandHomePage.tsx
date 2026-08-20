@@ -6,8 +6,8 @@ import {
   BrandProductFilters,
   BrandProductList,
   useDebouncedSearchKeyword,
-  useInfiniteScroll,
 } from '@/features/brandHome';
+import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
 import {
   useFetchBrandDetail,
   useFetchBrandProducts,
@@ -166,5 +166,3 @@ export const BrandHomePage = () => {
     </div>
   );
 };
-
-export default BrandHomePage;

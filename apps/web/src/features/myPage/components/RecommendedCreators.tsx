@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 
 import { RecommendedCreatorProfile, Preview } from '@/shared/components';
-import { MOCK_RECOMMENDED_CREATORS } from '@/features/myPage/components/mockData';
+import { MOCK_RECOMMENDED_CREATORS } from './mock';
 
 export const RecommendedCreators = () => {
   const [activeIndex, setActiveIndex] = useState(0);
