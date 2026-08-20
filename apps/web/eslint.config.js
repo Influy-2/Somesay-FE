@@ -20,4 +20,16 @@ export default defineConfig([globalIgnores(['dist']), {
     ecmaVersion: 2020,
     globals: globals.browser,
   },
+  rules: {
+    // feature는 공개 barrel(index.ts)로만 접근한다. 내부 파일을 직접 참조하면
+    // 공개 API가 흐려지고 barrel↔모듈 순환이 다시 생긴다.
+    'no-restricted-imports': ['error', {
+      patterns: [
+        {
+          group: ['@/features/*/*', '@/features/*/**'],
+          message: 'feature는 공개 barrel로만 접근한다. @/features/{name} 을 사용하라.',
+        },
+      ],
+    }],
+  },
 }, ...storybook.configs["flat/recommended"]])
