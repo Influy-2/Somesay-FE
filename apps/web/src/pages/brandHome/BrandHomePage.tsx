@@ -1,106 +1,19 @@
-import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import type { BrandProductSortType } from '@somesay/shared';
 import {
   BrandHomeHero,
   BrandProductFilters,
   BrandProductList,
-  useDebouncedSearchKeyword,
+  useBrandHome,
 } from '@/features/brandHome';
-import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
-import {
-  useFetchBrandDetail,
-  useFetchBrandProducts,
-  useFetchBrandProductSearch,
-  useProductWish,
-} from '@/shared/hooks';
 
-const ALL_CATEGORY_ID = 0;
 export const BrandHomePage = () => {
   const navigate = useNavigate();
-  const { toggleWish } = useProductWish();
   const { brandId: brandIdParam } = useParams();
   const parsedBrandId = Number(brandIdParam);
   const isValidBrandId = Number.isInteger(parsedBrandId) && parsedBrandId > 0;
-  const brandId = isValidBrandId ? parsedBrandId : undefined;
 
-  const [searchValue, setSearchValue] = useState('');
-  const [selectedSubCategoryId, setSelectedSubCategoryId] =
-    useState(ALL_CATEGORY_ID);
-  const [sortType, setSortType] = useState<BrandProductSortType>('RATING');
-  const { debouncedKeyword, updateDebouncedKeyword } =
-    useDebouncedSearchKeyword();
-  const hasSearchInput = searchValue.trim().length > 0;
-  const hasDebouncedKeyword = debouncedKeyword.length > 0;
-  const isSearchMode = hasSearchInput;
-
-  const brandQuery = useFetchBrandDetail(brandId);
-  const productsQuery = useFetchBrandProducts({
-    ...(brandId !== undefined ? { brandId } : {}),
-    ...(selectedSubCategoryId !== ALL_CATEGORY_ID
-      ? { subCategoryId: selectedSubCategoryId }
-      : {}),
-    sortType,
-    enabled: !hasSearchInput,
-  });
-  const searchQuery = useFetchBrandProductSearch({
-    ...(brandId !== undefined ? { brandId } : {}),
-    keyword: debouncedKeyword,
-    ...(selectedSubCategoryId !== ALL_CATEGORY_ID
-      ? { subCategoryId: selectedSubCategoryId }
-      : {}),
-    sortType,
-    enabled: hasDebouncedKeyword,
-  });
-  const activeProductQuery = hasSearchInput ? searchQuery : productsQuery;
-
-  const categories = useMemo(
-    () => [
-      { id: ALL_CATEGORY_ID, label: '전체' },
-      ...(brandQuery.data?.availableSubCategories.map(
-        ({ subCategoryId, subName }) => ({
-          id: subCategoryId,
-          label: subName,
-        })
-      ) ?? []),
-    ],
-    [brandQuery.data?.availableSubCategories]
-  );
-
-  const products = useMemo(
-    () => activeProductQuery.data?.pages.flatMap((page) => page.products) ?? [],
-    [activeProductQuery.data?.pages]
-  );
-  const productCount = activeProductQuery.data?.pages[0]?.totalCount ?? 0;
-  const loadMoreRef = useInfiniteScroll({
-    hasNextPage: activeProductQuery.hasNextPage ?? false,
-    isFetchingNextPage: activeProductQuery.isFetchingNextPage,
-    fetchNextPage: activeProductQuery.fetchNextPage,
-  });
-
-  const handleSearchChange = (value: string) => {
-    setSearchValue(value);
-    updateDebouncedKeyword(value);
-  };
-
-  const handleSearchClear = () => {
-    setSearchValue('');
-    updateDebouncedKeyword('');
-  };
-
-  const handleSelectCategory = (subCategoryId: number) => {
-    setSelectedSubCategoryId(subCategoryId);
-  };
-
-  const handleHeartToggle = (productId: number) => {
-    const product = products.find((item) => item.productId === productId);
-
-    if (!product) {
-      return;
-    }
-
-    toggleWish({ productId, isHearted: product.isHearted });
-  };
+  const { brand, isBrandPending, isBrandError, filterProps, listProps } =
+    useBrandHome(isValidBrandId ? parsedBrandId : undefined);
 
   if (!isValidBrandId) {
     return (
@@ -110,7 +23,7 @@ export const BrandHomePage = () => {
     );
   }
 
-  if (brandQuery.isPending) {
+  if (isBrandPending) {
     return (
       <div className="body2-m flex min-h-dvh items-center justify-center px-4 text-center">
         브랜드 정보를 불러오는 중이에요.
@@ -118,7 +31,7 @@ export const BrandHomePage = () => {
     );
   }
 
-  if (brandQuery.isError || !brandQuery.data) {
+  if (isBrandError || !brand) {
     return (
       <div className="body2-m flex min-h-dvh items-center justify-center px-4 text-center">
         브랜드 정보를 불러오지 못했어요.
@@ -126,43 +39,11 @@ export const BrandHomePage = () => {
     );
   }
 
-  const brand = brandQuery.data;
-
   return (
     <div className="flex min-h-dvh flex-col bg-white">
       <BrandHomeHero brand={brand} onBack={() => navigate(-1)} />
-      <BrandProductFilters
-        brandName={brand.brandName}
-        searchValue={searchValue}
-        onSearchChange={handleSearchChange}
-        onSearchClear={handleSearchClear}
-        categories={categories}
-        selectedCategoryId={selectedSubCategoryId}
-        onSelectCategory={handleSelectCategory}
-        productCount={productCount}
-        sortType={sortType}
-        onSelectSort={setSortType}
-      />
-      <BrandProductList
-        products={products}
-        onHeartToggle={handleHeartToggle}
-        isLoading={activeProductQuery.isPending}
-        isError={activeProductQuery.isError}
-        emptyMessage={
-          isSearchMode
-            ? '검색 결과가 없어요.'
-            : '해당 카테고리에 등록된 상품이 없어요.'
-        }
-        isFetchingNextPage={activeProductQuery.isFetchingNextPage}
-        isFetchNextPageError={activeProductQuery.isFetchNextPageError}
-        onRetry={() => {
-          void activeProductQuery.refetch();
-        }}
-        onRetryNextPage={() => {
-          void activeProductQuery.fetchNextPage();
-        }}
-        loadMoreRef={loadMoreRef}
-      />
+      <BrandProductFilters brandName={brand.brandName} {...filterProps} />
+      <BrandProductList {...listProps} />
     </div>
   );
 };

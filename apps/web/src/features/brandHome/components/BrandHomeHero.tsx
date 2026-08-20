@@ -54,11 +54,11 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
           <div className="caption1-m text-grey01 flex flex-wrap items-center gap-2">
             <span className="caption1-b flex items-center">
               <Star16Icon aria-hidden="true" className="size-4" />
-              {brand.avgRating}
+              {brand.avgRating.toFixed(1)}
             </span>
             <span className="bg-grey06 h-3 w-px" aria-hidden="true" />
             <span>
-              리뷰{' '}
+              리뷰
               <strong className="caption1-b">
                 {brand.reviewCount.toLocaleString()}
               </strong>
