@@ -32,7 +32,7 @@ export const HomeProductRankingCard = ({
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(price)}, 별점 ${avgRating}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(price)}, 별점 ${avgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 이미지 영역 */}
       <div className="relative h-[12.5rem] w-full overflow-hidden">

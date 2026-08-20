@@ -35,7 +35,7 @@ export const HorizontalScrollProductCard = ({
   return (
     <article
       className="relative flex w-39 shrink-0 flex-col items-start gap-2"
-      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${avgRating}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${avgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개`}
     >
       <div className="bg-grey02 relative aspect-39/44 h-44 self-stretch overflow-hidden">
         <div aria-hidden="true" className="h-full w-full">

@@ -2,7 +2,7 @@
 
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
-import { ProductCardType } from '@somesay/shared';
+import { ProductCardType, formatPrice } from '@somesay/shared';
 import { HeartButton } from '../buttons/HeartButton';
 import { PATH } from '@/routes/path';
 import { AvatarStack } from './AvatarStack';
@@ -29,7 +29,7 @@ export const BasicProductCard = ({
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${brandName} ${productName}, ${price ? price + '원' : '가격 정보 없음'}, 별점 ${avgRating}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${brandName} ${productName}, ${formatPrice(price)}, 별점 ${avgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 이미지 영역 */}
       <div className="relative h-50 w-full overflow-hidden border-none">
@@ -68,9 +68,7 @@ export const BasicProductCard = ({
         </p>
 
         {/* 가격 */}
-        <p className="body2-m text-grey-black truncate">
-          {price ? price.toLocaleString('ko-KR') + '원' : '가격 정보 없음'}
-        </p>
+        <p className="body2-m text-grey-black truncate">{formatPrice(price)}</p>
 
         {/* 별점 + 리뷰수 + 크리에이터 프로필 */}
         <div className="flex items-center gap-1">

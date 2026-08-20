@@ -1,11 +1,10 @@
 import { HeartButton } from '@/shared/components/buttons/HeartButton';
-import type { ProductSearchResultType } from '@somesay/shared';
+import { ProductSearchResultType, formatPrice } from '@somesay/shared';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
-
 interface SearchResultProductCardProps {
   product: ProductSearchResultType;
   onHeartToggle: (productId: number) => void;
@@ -24,7 +23,7 @@ export const SearchResultProductCard = ({
   return (
     <article
       className="border-grey02 relative mx-4 flex flex-col gap-5 border-b pb-6"
-      aria-label={`${product.brandName} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.avgRating}점`}
+      aria-label={`${product.brandName} ${product.productName}, ${formatPrice(product.price)}, 별점 ${product.avgRating.toFixed(1)}점`}
     >
       <div className="flex gap-3">
         {/* 이미지 */}
@@ -55,16 +54,16 @@ export const SearchResultProductCard = ({
               </span>
             </div>
             <span className="body2-m leading-[155%] text-black">
-              {product.price.toLocaleString()}원
+              {formatPrice(product.price)}
             </span>
             <div className="flex items-center gap-1">
               {/* 별점 */}
               <div
                 className="flex items-center"
-                aria-label={`별점 ${product.avgRating}점`}
+                aria-label={`별점 ${product.avgRating.toFixed(1)}점`}
               >
                 <StarIcon className="text-primary-300 size-4" />
-                <span className="body2-sb">{product.avgRating}</span>
+                <span className="body2-sb">{product.avgRating.toFixed(1)}</span>
               </div>
               {/* 리뷰수 */}
               <span
