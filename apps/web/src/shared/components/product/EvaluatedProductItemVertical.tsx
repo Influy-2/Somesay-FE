@@ -4,7 +4,7 @@ import cn from '@/utils/cn';
 
 interface EvaluatedProductItemVerticalProps {
   productId: number;
-  productImageUrl: string;
+  productImgUrl: string;
   productName: string;
   isSelected: boolean;
   onClick: (productId: number) => void;
@@ -12,7 +12,7 @@ interface EvaluatedProductItemVerticalProps {
 
 export const EvaluatedProductItemVertical = ({
   productId,
-  productImageUrl,
+  productImgUrl,
   productName,
   isSelected,
   onClick,
@@ -29,9 +29,9 @@ export const EvaluatedProductItemVertical = ({
           isSelected ? 'border-[1.8px] border-black' : 'opacity-50'
         )}
       >
-        {productImageUrl && (
+        {productImgUrl && (
           <img
-            src={productImageUrl}
+            src={productImgUrl}
             alt={productName}
             className="h-full w-full object-cover"
           />

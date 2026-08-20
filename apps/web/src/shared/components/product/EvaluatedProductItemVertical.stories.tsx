@@ -18,7 +18,7 @@ type Story = StoryObj<typeof EvaluatedProductItemVertical>;
 export const Selected: Story = {
   args: {
     productId: 1,
-    productImageUrl: '',
+    productImgUrl: '',
     productName: '아토베리어 365 크림아토베리어 365크림',
     isSelected: true,
     onClick: () => {},
@@ -28,7 +28,7 @@ export const Selected: Story = {
 export const Unselected: Story = {
   args: {
     productId: 1,
-    productImageUrl: '',
+    productImgUrl: '',
     productName: '아토베리어 365 크림아토베리어 365크림',
     isSelected: false,
     onClick: () => {},

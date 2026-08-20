@@ -59,7 +59,7 @@ export const MyReviewEvaluationProductListPage = () => {
           <li key={product.productId}>
             <EvaluatedProductItemHorizontal
               productId={product.productId}
-              productImageUrl={product.productImageUrl}
+              productImgUrl={product.productImgUrl}
               productName={product.productName}
               brandName={product.brandName}
               reviewCount={product.reviewCount}

@@ -1,4 +1,5 @@
 export type {
+  ProductBasicType,
   ProductWishType,
   ProductWishResultType,
   ProductWishStatusType,
