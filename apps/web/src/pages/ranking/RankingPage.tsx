@@ -49,7 +49,7 @@ export const RankingPage = () => {
 
   return (
     // 하단 여백은 고정 하단 탭 바(91px)에 가리지 않도록 확보합니다.
-    <div className="flex min-h-full flex-col bg-white pt-13.5 pb-40">
+    <div className="mb-40 flex h-fit flex-1 flex-col bg-white pt-13.5">
       <PageHeader
         title="랭킹"
         right={[
