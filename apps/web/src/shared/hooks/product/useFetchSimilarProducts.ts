@@ -11,5 +11,8 @@ export const useFetchSimilarProducts = (productId?: number) => {
       : [...QUERY_KEYS.PRODUCT.ALL, productId, 'similar'],
     queryFn: () => fetchSimilarProducts(productId ?? 0),
     enabled: isValidProductId,
+    // TODO: 에러 처리
+    throwOnError: false,
+    retry: 2,
   });
 };
