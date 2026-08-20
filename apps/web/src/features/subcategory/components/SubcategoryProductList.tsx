@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SearchResultProductCard } from '@/shared/components';
-import { MOCK_SUBCATEGORY_PRODUCTS } from '@/features/subcategory';
+import { MOCK_SUBCATEGORY_PRODUCTS } from './mock';
 
 interface SubcategoryProductListProps {
   categoryId: number;
