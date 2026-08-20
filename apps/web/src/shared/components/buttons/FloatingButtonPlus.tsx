@@ -2,7 +2,7 @@ import { Plus24Icon } from '@/shared/icons';
 import {
   FLOATING_PLACEMENT_CLASS,
   type FloatingPlacement,
-} from '@/shared/constants/floating.constants';
+} from '@/shared/constants';
 import cn from '@/utils/cn';
 
 type FloatingButtonPlusProps = {

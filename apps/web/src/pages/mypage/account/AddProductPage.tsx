@@ -13,7 +13,7 @@ import { ArrowBackIcon } from '@/shared/icons';
 import { MOCK_PRODUCTS } from '@/features/myPage';
 import { useFetchCategories } from '@/shared/hooks';
 import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 import cn from '@/utils/cn';
 
 type FitProduct = {

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { PATH } from '@/routes/path';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 import { useAuth } from './useAuth';
 
 // 공개 화면의 로그인 필요 행동을 동일한 UX로 보호합니다.

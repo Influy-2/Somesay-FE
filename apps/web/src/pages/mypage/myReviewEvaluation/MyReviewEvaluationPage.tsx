@@ -9,7 +9,7 @@ import {
 } from '@/features/myReviewEvaluation';
 import { MOCK_EVALUATED_REVIEWS } from '@/features/myPage';
 
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 
 type TabType = 'products' | 'creators';
 type SheetState =

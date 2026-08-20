@@ -12,7 +12,7 @@ import {
   useProductCatalog,
 } from '@/features/productSelection';
 import { HorizontalCategoriesTab } from '@/shared/components';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 import { useCompleteOnboarding } from '../hooks/useCompleteOnboarding';
 import { productIdsSchema } from '../schemas/onboarding.schema';
 import { useOnboardingStore } from '../stores/onboarding.store';

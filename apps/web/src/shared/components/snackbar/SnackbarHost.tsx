@@ -1,5 +1,5 @@
 import { Snackbar } from './Snackbar';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 
 export const SnackbarHost = () => {
   const current = useSnackbarStore((state) => state.current);

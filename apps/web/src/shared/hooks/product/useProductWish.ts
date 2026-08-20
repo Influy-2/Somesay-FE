@@ -7,7 +7,7 @@ import {
 } from '@somesay/shared';
 
 import { useAuthGuard } from '../auth/useAuthGuard';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 
 interface ToggleProductWishParams {
   productId: number;

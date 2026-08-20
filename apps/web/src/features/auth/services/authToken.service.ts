@@ -1,4 +1,4 @@
-import { useAuthTokenStore } from '@/shared/stores/auth.store';
+import { useAuthTokenStore } from '@/shared/stores';
 
 interface AuthTokens {
   accessToken: string;

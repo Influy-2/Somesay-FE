@@ -5,7 +5,7 @@ import { useCarousel } from '@/shared/hooks/useCarousel';
 import { CarouselIndicator } from '@/shared/components/indicator/CarouselIndicator';
 import { PATH } from '@/routes/path';
 import { useFetchHomeCuration, useFetchUserInfo } from '@/shared/hooks';
-import { useAuthTokenStore } from '@/shared/stores/auth.store';
+import { useAuthTokenStore } from '@/shared/stores';
 import { BestReviewSkeleton } from './BestReviewSkeleton';
 
 export const BestReviewSection = () => {

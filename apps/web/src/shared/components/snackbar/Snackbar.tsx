@@ -4,11 +4,8 @@ import { createPortal } from 'react-dom';
 import {
   FLOATING_PLACEMENT_CLASS,
   type SnackbarPlacement,
-} from '@/shared/constants/floating.constants';
-import type {
-  SnackbarAction,
-  SnackbarVariant,
-} from '@/shared/stores/snackbar.store';
+} from '@/shared/constants';
+import type { SnackbarAction, SnackbarVariant } from '@/shared/stores';
 import cn from '@/utils/cn';
 
 const FADE_OUT_DURATION = 300;

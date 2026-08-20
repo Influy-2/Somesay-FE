@@ -8,7 +8,7 @@ import {
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { usePostUserProduct } from '@/shared/hooks';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 import { useOnboardingStore } from '../stores/onboarding.store';
 import { finalizeOnboarding } from '../utils/onboarding.completion';
 import { buildProductFitPayloads } from '../utils/onboarding.mapper';
