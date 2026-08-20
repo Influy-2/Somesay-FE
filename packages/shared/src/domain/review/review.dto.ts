@@ -36,7 +36,7 @@ export interface CurationReviewDto extends BasicCreatorDto, ProductBasicDto {
   content: string;
   rating: number;
   agreeRatio: number;
-  mostAgreedSkinTypeName: string;
+  mostAgreedSkinTypeNames: string;
 }
 
 // 홈 큐레이션 API의 data 응답 DTO입니다.

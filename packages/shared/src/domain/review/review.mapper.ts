@@ -23,7 +23,7 @@ const mapHomeCurationReviewDto = (
   content: review.content,
   rating: review.rating,
   agreeRatio: review.agreeRatio,
-  mostAgreedSkinTypeName: review.mostAgreedSkinTypeName,
+  mostAgreedSkinTypeName: review.mostAgreedSkinTypeNames,
 });
 
 // 홈 큐레이션 응답 DTO 전체를 화면용 데이터로 변환합니다.
