@@ -5,7 +5,7 @@ import {
 } from '@somesay/shared';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useAuthGuard } from '@/features/auth';
+import { useAuthGuard } from '../auth/useAuthGuard';
 import { useSnackbarStore } from '@/shared/stores/snackbar.store';
 
 /**

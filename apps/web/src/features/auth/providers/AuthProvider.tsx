@@ -7,7 +7,7 @@ import {
   AuthContext,
   type AuthContextValue,
   type AuthStatus,
-} from '../contexts/auth.context';
+} from '@/shared/context';
 
 interface AuthProviderProps {
   children: ReactNode;

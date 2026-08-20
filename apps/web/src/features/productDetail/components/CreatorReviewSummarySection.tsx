@@ -1,5 +1,5 @@
 import type { CreatorReviewSummaryType } from '@somesay/shared';
-import { useAuth } from '@/features/auth';
+import { useAuth } from '@/shared/hooks';
 import { getSkinTypeLabel } from '@somesay/shared';
 import { ChipLarge, StarRating } from '@/shared/components';
 import {

@@ -1,9 +1,6 @@
 export { SocialLoginButton } from './components/SocialLoginButton';
 export { ProtectedRoute } from './components/ProtectedRoute';
 export { AuthProvider } from './providers/AuthProvider';
-export { useAuth } from './hooks/useAuth';
-export { useAuthGuard } from './hooks/useAuthGuard';
-export type { AuthContextValue, AuthStatus } from './contexts/auth.context';
 export {
   SOCIAL_PROVIDERS,
   SOCIAL_PROVIDER_LABELS,
