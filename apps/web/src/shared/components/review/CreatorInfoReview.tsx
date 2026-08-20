@@ -1,10 +1,8 @@
 // Review/상세페이지용
 
-import {
-  CreatorRankingProfile,
-  RateBar,
-  StarRating,
-} from '@/shared/components';
+import { CreatorRankingProfile } from '../profile/CreatorRankingProfile';
+import { RateBar } from '../ratebar/RateBar';
+import { StarRating } from '../rating/StarRating';
 import type { ProductReviewType } from '@somesay/shared';
 
 export interface CreatorInfoReviewProps {

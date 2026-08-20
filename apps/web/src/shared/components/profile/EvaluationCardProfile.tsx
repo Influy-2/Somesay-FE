@@ -1,7 +1,7 @@
 // Profile/리뷰카드 컴포넌트
 
 import { SomesaySmIcon, YoutubeIcon } from '@/shared/icons';
-import { ChipBasic } from '@/shared/components';
+import { ChipBasic } from '../chips/ChipBasic';
 import { formatSubscriberCount } from '@somesay/shared';
 import type { CreatorType } from '@somesay/shared';
 

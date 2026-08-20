@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToggleDownIcon } from '@/shared/icons';
-import { BottomSheet } from '@/shared/components';
+import { BottomSheet } from '../bottomSheet/BottomSheet';
 import cn from '@/utils/cn';
 //이 수 넘기면 9999+로 표현
 const COUNT_OVERFLOW_THRESHOLD = 9999;

@@ -3,8 +3,7 @@
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
 import { ArrowRightIcon } from '@/shared/icons';
-import { ChipBasic } from '@/shared/components';
-
+import { ChipBasic } from '../chips/ChipBasic';
 interface EvaluatedCreatorItemHorizontalProps {
   creatorId: number;
   profileImageUrl: string;

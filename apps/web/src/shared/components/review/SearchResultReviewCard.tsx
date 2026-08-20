@@ -1,5 +1,6 @@
 // Review/Search Results 컴포넌트
-import { BasicCreatorProfile, ReviewProductLink } from '@/shared/components';
+import { BasicCreatorProfile } from '../profile/BasicCreatorProfile';
+import { ReviewProductLink } from '../product/ReviewProductLink';
 import { StarRating } from '../rating/StarRating';
 import type { ReviewSearchResultType } from '@somesay/shared';
 

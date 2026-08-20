@@ -1,6 +1,7 @@
 // Review/크리에이터 프로필 공개 컴포넌트
 // 글 길어지면 더보기 버전
-import { BasicCreatorProfile, StarRating } from '@/shared/components';
+import { BasicCreatorProfile } from '../profile/BasicCreatorProfile';
+import { StarRating } from '../rating/StarRating';
 import { BasicCreatorProfileType } from '@somesay/shared';
 
 interface CreatorReviewCardProps {

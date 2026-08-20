@@ -1,8 +1,7 @@
 // OriginalVideoCard.tsx
 
 import { Move12Icon } from '@/shared/icons';
-import { OriginalVideo } from '@/shared/components';
-
+import { OriginalVideo } from './OriginalVideo';
 interface OriginalVideoCardProps {
   youtubeUrl: string;
   videoTitle: string;

@@ -1,7 +1,7 @@
 // comment
 
-import { ChipAgreement, ConsumerReviewProfile } from '@/shared/components';
-
+import { ChipAgreement } from '../chips/ChipAgreement';
+import { ConsumerReviewProfile } from '../profile/ConsumerReviewProfile';
 export interface ReviewCommentProps {
   nickname: string;
   isAgree: boolean;

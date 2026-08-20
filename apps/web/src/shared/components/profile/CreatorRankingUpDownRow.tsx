@@ -4,7 +4,7 @@ import { CreatorRankingUpDownType } from '@somesay/shared';
 import { formatSubscriberCount } from '@somesay/shared';
 
 import { PATH } from '@/routes/path';
-import { ChipBasic } from '@/shared/components';
+import { ChipBasic } from '../chips/ChipBasic';
 import {
   YoutubeIcon,
   ArrowUpIcon,

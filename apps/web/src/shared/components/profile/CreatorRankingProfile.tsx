@@ -1,7 +1,7 @@
 // Profile/크리에이터/순위형
 
 import { YoutubeIcon } from '@/shared/icons';
-import { ChipBasic } from '@/shared/components';
+import { ChipBasic } from '../chips/ChipBasic';
 import { formatSubscriberCount } from '@somesay/shared';
 
 export interface CreatorRankingProfileProps {

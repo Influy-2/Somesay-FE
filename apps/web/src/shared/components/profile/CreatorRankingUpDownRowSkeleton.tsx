@@ -1,5 +1,4 @@
-import { LoadingBlock } from '@/shared/components';
-
+import { LoadingBlock } from '../loading/LoadingBlock';
 /** 크리에이터 랭킹 행 1개의 골격입니다. */
 export const CreatorRankingUpDownRowSkeleton = () => (
   <li className="flex w-full items-center justify-between gap-3">

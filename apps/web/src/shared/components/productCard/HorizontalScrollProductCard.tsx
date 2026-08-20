@@ -3,7 +3,8 @@
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { ProductCardType } from '@somesay/shared';
-import { HeartButton, AvatarStack } from '@/shared/components';
+import { HeartButton } from '../buttons/HeartButton';
+import { AvatarStack } from './AvatarStack';
 import { PATH } from '@/routes/path';
 
 export type HorizontalScrollProductCardProps = ProductCardType & {

@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { YoutubeIcon } from '@/shared/icons';
 import { Move12Icon } from '@/shared/icons';
-import { ChipBasic } from '@/shared/components';
+import { ChipBasic } from '../chips/ChipBasic';
 import {
   BasicCreatorProfileType,
   formatSubscriberCount,
 } from '@somesay/shared';
-import { BlackHeartButton } from '@/shared/components';
-
+import { BlackHeartButton } from '../buttons/BlackHeartButton';
 interface CreatorHomeProfileProps extends BasicCreatorProfileType {
   likeCount: number;
   isLiked?: boolean;

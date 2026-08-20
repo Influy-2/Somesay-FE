@@ -1,6 +1,5 @@
 // Profile/소비자리뷰
-import { ProfileNoImage } from '@/shared/components';
-
+import { ProfileNoImage } from './ProfileNoImage';
 interface ConsumerReviewProfileProps {
   nickname: string;
   profileImageUrl?: string | null;

@@ -2,7 +2,8 @@
 // 글 길어지면 스크롤 가능한 버전(하단 블러)
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
-import { BasicCreatorProfile, StarRating } from '@/shared/components';
+import { BasicCreatorProfile } from '../profile/BasicCreatorProfile';
+import { StarRating } from '../rating/StarRating';
 import cn from '@/utils/cn';
 import { BasicCreatorProfileType } from '@somesay/shared';
 

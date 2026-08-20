@@ -2,8 +2,8 @@
 
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
-import { ReviewProductLink, StarRating } from '@/shared/components';
-
+import { ReviewProductLink } from '../product/ReviewProductLink';
+import { StarRating } from '../rating/StarRating';
 interface PreviewProps {
   rating: number;
   content: string;

@@ -2,8 +2,7 @@
 
 import { AgreeIcon, DisagreeIcon } from '@/shared/icons';
 import { useState } from 'react';
-import { Tooltip } from '@/shared/components';
-
+import { Tooltip } from '../tooltip/Tooltip';
 interface ReviewVoteStatusButtonProps {
   type: 'agree' | 'disagree';
   profileImageUrl?: string;

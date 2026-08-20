@@ -3,9 +3,9 @@
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { ProductCardType } from '@somesay/shared';
-import { HeartButton } from '@/shared/components';
+import { HeartButton } from '../buttons/HeartButton';
 import { PATH } from '@/routes/path';
-import { AvatarStack } from '@/shared/components';
+import { AvatarStack } from './AvatarStack';
 type ProductRankingCardProps = ProductCardType & {
   onHeartToggle: () => void;
 };

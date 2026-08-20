@@ -4,7 +4,8 @@ import { formatPrice, type ProductCardType } from '@somesay/shared';
 import { Link } from 'react-router';
 
 import { PATH } from '@/routes/path';
-import { AvatarStack, HeartButton } from '@/shared/components';
+import { AvatarStack } from '../productCard/AvatarStack';
+import { HeartButton } from '../buttons/HeartButton';
 import { Star16Icon as StarIcon } from '@/shared/icons';
 
 export type RecommendedProductCardProps = ProductCardType & {

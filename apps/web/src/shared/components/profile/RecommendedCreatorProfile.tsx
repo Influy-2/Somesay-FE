@@ -2,8 +2,7 @@
 
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
-import { ChipBasic } from '@/shared/components';
-
+import { ChipBasic } from '../chips/ChipBasic';
 interface RecommendedCreatorProfileProps {
   creatorId: number;
   name: string;
