@@ -1,7 +1,6 @@
 // Review/크리에이터 프로필 공개 컴포넌트
 // 글 길어지면 더보기 버전
-import { BasicCreatorProfile } from '@/shared/components';
-import { Star16Icon } from '@/shared/icons';
+import { BasicCreatorProfile, StarRating } from '@/shared/components';
 import { BasicCreatorProfileType } from '@somesay/shared';
 
 interface CreatorReviewCardProps {
@@ -20,7 +19,7 @@ export const CreatorReviewExpandedCard = ({
   return (
     <article
       aria-label={`${creator.nickname}의 ${productName} 리뷰`}
-      className="border-grey03 bg-grey01 flex w-full flex-col items-start gap-5 border border-solid p-5 px-4"
+      className="border-grey03 flex w-full flex-col items-start gap-5 border border-solid bg-white p-5 px-4"
     >
       {/* 크리에이터 프로필 */}
       <BasicCreatorProfile {...creator} />
@@ -30,10 +29,7 @@ export const CreatorReviewExpandedCard = ({
       >
         {/* 리뷰 별점 */}
         <div className="flex items-center gap-1" aria-hidden="true">
-          {/* TODO: 디자인 전달되는 대로 별 구현 */}
-          <div className="flex items-center gap-px">
-            <Star16Icon />
-          </div>
+          <StarRating rating={rating} />
           <span className="body2-sb text-[#1F2129]">{rating}</span>
         </div>
 
