@@ -76,7 +76,7 @@ export const BasicProductCard = ({
         <div className="flex items-center gap-1">
           {/* 별점 */}
           <div className="flex items-center">
-            <StarIcon className="size-4" />
+            <StarIcon className="text-primary-300 size-4" />
             <span className="body2-sb">{rating.toFixed(1)}</span>
           </div>
           {/* 리뷰수 */}

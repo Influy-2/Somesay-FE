@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { PATH } from '@/routes/path';
 import { HorizontalCategoriesTab } from '@/shared/components/category/HorizontalCategoriesTab';
 import { BasicProductCard, MoreButton } from '@/shared/components';
 import {
@@ -71,7 +72,7 @@ export const CategoryProductSection = () => {
           <div
             role="list"
             aria-label="추천 상품 목록"
-            className="grid grid-cols-2 gap-x-1 gap-y-6 pb-2"
+            className="grid grid-cols-2 gap-x-1 gap-y-6 pb-1"
           >
             {products.map((product) => (
               <div key={product.productId} role="listitem">
@@ -89,11 +90,19 @@ export const CategoryProductSection = () => {
           </div>
         )}
 
-        {/* 더보기 버튼 */}
+        {/* 더보기 — 전체는 카테고리 목록으로, 대분류를 고르면 그 카테고리 상세로 */}
         {!isEmpty && (
           <MoreButton
-            to={'/임시'}
-            text={`${selectedCategoryLabel === ALL_CATEGORY.label ? '' : selectedCategoryLabel} 상품 더보기`}
+            to={
+              selectedCategoryId === ALL_CATEGORY.id
+                ? PATH.CATEGORIES.BASE
+                : `${PATH.CATEGORIES.BASE}/${selectedCategoryId}`
+            }
+            text={
+              selectedCategoryId === ALL_CATEGORY.id
+                ? '상품 더보기'
+                : `${selectedCategoryLabel} 상품 더보기`
+            }
           />
         )}
       </div>
