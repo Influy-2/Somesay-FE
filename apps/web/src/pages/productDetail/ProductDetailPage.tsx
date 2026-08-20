@@ -43,13 +43,7 @@ export const ProductDetailPage = () => {
 
   // 상품 리뷰 개요 정보 API 호출
   // TODO: Loading, Error 상태 UI 개선 (현재는 상품 정보 로딩/에러와 동일하게 처리)
-  const {
-    data: reviewOverview,
-    isLoading: isReviewOverviewLoading,
-    isError: isReviewOverviewError,
-  } = useFetchProductReviewOverview(productId);
-  // 임시
-  console.log(isReviewOverviewLoading, isReviewOverviewError); //삭제 예정
+  const { data: reviewOverview } = useFetchProductReviewOverview(productId);
 
   const handleWishToggle = () => {
     if (!productDetail) return;
