@@ -35,7 +35,7 @@ export const MyReviewEvaluationCreatorListPage = () => {
               creatorId={creator.creatorId}
               profileImageUrl={creator.profileImageUrl}
               name={creator.name}
-              ageGroup={creator.ageGroup}
+              age={creator.age}
               skinType={creator.skinType}
               reviewCount={creator.reviewCount}
             />

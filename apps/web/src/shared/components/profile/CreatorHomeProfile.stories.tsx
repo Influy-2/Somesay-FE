@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { AGE_TYPES } from '@somesay/shared';
+
 import { CreatorHomeProfile } from './CreatorHomeProfile';
 
 const meta: Meta<typeof CreatorHomeProfile> = {
@@ -15,7 +17,7 @@ const meta: Meta<typeof CreatorHomeProfile> = {
     profileImgUrl: { control: 'text' },
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
-    ageGroup: { control: 'text' },
+    age: { control: 'select', options: AGE_TYPES },
     skinTypes: { control: 'object' },
   },
 };
@@ -32,7 +34,7 @@ export const Default: Story = {
     profileImgUrl: 'https://placehold.co/100',
     subscriberNum: 0,
     trustScore: 4.5,
-    ageGroup: '0',
+    age: 'TWENTIES',
     skinTypes: ['텍스트'],
   },
 };

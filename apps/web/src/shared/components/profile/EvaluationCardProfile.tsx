@@ -2,7 +2,7 @@
 
 import { SomesaySmIcon, YoutubeIcon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
-import { formatSubscriberCount } from '@somesay/shared';
+import { formatSubscriberCount, getAgeLabel } from '@somesay/shared';
 import type { CreatorType } from '@somesay/shared';
 
 type EvaluationCardProfileProps = Pick<
@@ -12,7 +12,7 @@ type EvaluationCardProfileProps = Pick<
   | 'subscriberNum'
   | 'trustScore'
   | 'ranking'
-  | 'ageGroup'
+  | 'age'
   | 'skinTypes'
 > & {
   evaluated: boolean;
@@ -25,7 +25,7 @@ export const EvaluationCardProfile = ({
   subscriberNum,
   trustScore,
   ranking,
-  ageGroup,
+  age,
   skinTypes,
 }: EvaluationCardProfileProps) => {
   const showRank = ranking > 0 && ranking <= 30;
@@ -90,7 +90,7 @@ export const EvaluationCardProfile = ({
           </div>
           {evaluated && (
             <div className="flex items-center gap-1">
-              <ChipBasic label={`${ageGroup}대`} />
+              <ChipBasic label={getAgeLabel(age)} />
               {skinTypes.map((skinType) => (
                 <ChipBasic key={skinType} label={skinType} />
               ))}

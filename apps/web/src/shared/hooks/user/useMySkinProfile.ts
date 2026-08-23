@@ -1,21 +1,10 @@
 import {
-  AGE_OPTIONS,
+  getAgeLabel,
   getSkinTypeLabel,
   USER_SKIN_EXPECTATION_OPTIONS,
-  type AgeType,
 } from '@somesay/shared';
 
 import { useFetchUserInfo } from './useFetchUserInfo';
-
-// 사용자 정보의 age enum을 선택지 라벨(20대 등)로 잇습니다.
-const AGE_LABEL_BY_TYPE: Record<AgeType, string> = {
-  TEENS: '10',
-  TWENTIES: '20',
-  THIRTIES: '30',
-  FORTIES: '40',
-  FIFTIES: '50',
-  SIXTIES_PLUS: '60',
-};
 
 /**
  * 로그인 사용자가 회원가입에서 저장한 피부 조건을 화면용 라벨로 변환합니다.
@@ -47,10 +36,7 @@ export const useMySkinProfile = () => {
     ({ productEffect }) => productEffect
   );
 
-  const ageLabel = userInfo
-    ? AGE_OPTIONS.find(({ value }) => value === AGE_LABEL_BY_TYPE[userInfo.age])
-        ?.label
-    : undefined;
+  const ageLabel = userInfo ? getAgeLabel(userInfo.age) : undefined;
 
   const myLabels = new Set([
     ...skinTypeLabels,

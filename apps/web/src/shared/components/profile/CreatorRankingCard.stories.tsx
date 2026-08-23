@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+
+import { AGE_TYPES } from '@somesay/shared';
 import { MemoryRouter } from 'react-router';
 
 import mockCreator from '@/assets/mock_creator.png';
@@ -26,7 +28,7 @@ const meta: Meta<typeof CreatorRankingCard> = {
     creatorName: { control: 'text' },
     youtubeLink: { control: 'text' },
     subscriberNum: { control: 'number' },
-    ageGroup: { control: 'text' },
+    age: { control: 'select', options: AGE_TYPES },
     skinTypes: { control: 'object' },
     trustScore: { control: 'number' },
   },
@@ -44,7 +46,7 @@ const defaultArgs = {
   creatorName: 'RISABAE',
   youtubeLink: 'https://www.youtube.com',
   subscriberNum: 1_300_000,
-  ageGroup: '20대',
+  age: 'TWENTIES' as const,
   skinTypes: ['건성'],
   trustScore: 100,
 };

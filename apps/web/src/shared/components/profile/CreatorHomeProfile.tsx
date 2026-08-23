@@ -5,6 +5,7 @@ import { ChipBasic } from '../chips/ChipBasic';
 import {
   BasicCreatorProfileType,
   formatSubscriberCount,
+  getAgeLabel,
 } from '@somesay/shared';
 import { BlackHeartButton } from '../buttons/BlackHeartButton';
 interface CreatorHomeProfileProps extends BasicCreatorProfileType {
@@ -18,7 +19,7 @@ export const CreatorHomeProfile = ({
   creatorName,
   profileImgUrl,
   subscriberNum,
-  ageGroup,
+  age,
   skinTypes,
   likeCount: initialLikeCount,
   isLiked: initialLiked = false,
@@ -26,6 +27,7 @@ export const CreatorHomeProfile = ({
   youtubeUrl,
 }: CreatorHomeProfileProps) => {
   const skinTypeLabel = skinTypes.join(', ');
+  const ageLabel = getAgeLabel(age);
   const [liked, setLiked] = useState(initialLiked);
   const [currentLikeCount, setCurrentLikeCount] = useState(initialLikeCount);
 
@@ -38,7 +40,7 @@ export const CreatorHomeProfile = ({
   return (
     <div
       className="flex w-full items-center gap-2"
-      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${subscriberNum}만, ${ageGroup}대, ${skinTypeLabel}`}
+      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${subscriberNum}만, ${ageLabel}, ${skinTypeLabel}`}
     >
       {/* 프로필 사진 */}
       <div
@@ -77,7 +79,7 @@ export const CreatorHomeProfile = ({
 
         {/* 피부/나이 칩 */}
         <div className="flex items-center gap-1 p-0">
-          <ChipBasic label={`${ageGroup}대`} />
+          <ChipBasic label={ageLabel} />
           {skinTypes.map((skinType) => (
             <ChipBasic key={skinType} label={skinType} />
           ))}

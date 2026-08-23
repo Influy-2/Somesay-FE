@@ -1,5 +1,7 @@
 import { Link } from 'react-router';
 import { useState } from 'react';
+import { getAgeLabel } from '@somesay/shared';
+
 import { PATH } from '@/routes/path';
 import { MainArrow20Icon } from '@/shared/icons';
 import {
@@ -12,7 +14,7 @@ import { PageHeader, ChipBasic, Tooltip } from '@/shared/components';
 
 const MOCK_USER = {
   nickname: '닉네임',
-  ageGroup: '20대',
+  age: 'TWENTIES' as const,
   skinType: '건성',
   stats: {
     agreedReviews: 9,
@@ -39,7 +41,7 @@ export const MyPage = () => {
               {MOCK_USER.nickname}
             </span>
             <div className="flex gap-1">
-              <ChipBasic label={MOCK_USER.ageGroup} />
+              <ChipBasic label={getAgeLabel(MOCK_USER.age)} />
               <ChipBasic label={MOCK_USER.skinType} />
             </div>
           </div>

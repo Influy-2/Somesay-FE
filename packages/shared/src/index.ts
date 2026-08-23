@@ -59,7 +59,6 @@ export * from './constants/user.constants';
 // UTILS
 export { formatSubscriberCount } from './utils/formatSubscriberCount';
 export { formatPrice } from './utils/formatPrice';
-export { formatAgeGroup } from './utils/formatAgeGroup';
 //domain - auth
 export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
 export type {
@@ -76,6 +75,7 @@ export type {
   UserInfoType,
   UserType,
 } from './domain/user/user.types';
+export { AGE_TYPES } from './domain/user/user.types';
 
 //domain - user product
 export type {

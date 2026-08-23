@@ -45,7 +45,7 @@ export const RecommendedCreators = () => {
             creatorId={activeCreator.creatorId}
             name={activeCreator.name}
             profileImageUrl={activeCreator.profileImageUrl}
-            ageGroup={activeCreator.ageGroup}
+            age={activeCreator.age}
             skinType={activeCreator.skinType}
           />
         </div>

@@ -15,7 +15,7 @@ type EvaluationReviewCardProps = {
     | 'subscriberNum'
     | 'trustScore'
     | 'ranking'
-    | 'ageGroup'
+    | 'age'
     | 'skinTypes'
   >;
   rating: number;

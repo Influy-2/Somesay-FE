@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 
 import { CreatorRankingUpDownType } from '@somesay/shared';
-import { formatSubscriberCount } from '@somesay/shared';
+import { formatSubscriberCount, getAgeLabel } from '@somesay/shared';
 
 import { PATH } from '@/routes/path';
 import { ChipBasic } from '../chips/ChipBasic';
@@ -25,13 +25,14 @@ export const CreatorRankingUpDownRow = ({
   profileImgUrl,
   creatorName,
   subscriberNum,
-  ageGroup,
+  age,
   skinTypes,
   trustScore,
   isMyCondition = () => false,
 }: CreatorRankingUpDownRowProps) => {
   // aria-label을 위한 문자열 생성
   const skinTypeLabel = skinTypes.join(', ');
+  const ageLabel = getAgeLabel(age);
 
   const rankChangeLabel =
     rankChangeDiff === 'up'
@@ -92,8 +93,8 @@ export const CreatorRankingUpDownRow = ({
           {/* 칩: 나이대 + 피부타입 (내 조건과 일치하면 강조) */}
           <div className="flex items-center gap-1">
             <ChipBasic
-              label={ageGroup}
-              variant={isMyCondition(ageGroup) ? 'blue' : 'default'}
+              label={ageLabel}
+              variant={isMyCondition(ageLabel) ? 'blue' : 'default'}
             />
             {skinTypes.map((type) => (
               <ChipBasic
@@ -118,7 +119,7 @@ export const CreatorRankingUpDownRow = ({
       <Link
         to={`${PATH.CREATOR.BASE}/${creatorId}`}
         className="absolute inset-0"
-        aria-label={`${ranking}위 ${creatorName}, 구독자 ${formatSubscriberCount(subscriberNum)}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel} 상세 페이지로 이동`}
+        aria-label={`${ranking}위 ${creatorName}, 구독자 ${formatSubscriberCount(subscriberNum)}, ${ageLabel}, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel} 상세 페이지로 이동`}
       />
     </li>
   );

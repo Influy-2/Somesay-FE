@@ -1,3 +1,5 @@
+import type { AgeType } from '@somesay/shared';
+
 type FitProduct = {
   productId: number;
   productImgUrl: string;
@@ -22,7 +24,7 @@ export type RecommendedCreator = {
   creatorId: number;
   name: string;
   profileImageUrl: string;
-  ageGroup: string;
+  age: AgeType | null;
   skinType: string;
   review: {
     reviewId: number;
@@ -43,7 +45,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
     creatorId: 1,
     name: '김크리스탈김크리스탈김트리스탈',
     profileImageUrl: '',
-    ageGroup: '20대',
+    age: 'TWENTIES',
     skinType: '지성',
     review: {
       reviewId: 1,
@@ -63,7 +65,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
     creatorId: 2,
     name: '뷰티인사이더',
     profileImageUrl: '',
-    ageGroup: '30대',
+    age: 'THIRTIES',
     skinType: '건성',
     review: {
       reviewId: 2,
@@ -83,7 +85,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
     creatorId: 3,
     name: '글로우픽',
     profileImageUrl: '',
-    ageGroup: '20대',
+    age: 'TWENTIES',
     skinType: '복합성',
     review: {
       reviewId: 3,
@@ -102,7 +104,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
     creatorId: 4,
     name: '스킨로그',
     profileImageUrl: '',
-    ageGroup: '30대',
+    age: 'THIRTIES',
     skinType: '민감성',
     review: {
       reviewId: 4,
@@ -121,7 +123,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
     creatorId: 5,
     name: '뷰티블로거',
     profileImageUrl: '',
-    ageGroup: '20대',
+    age: 'TWENTIES',
     skinType: '건성',
     review: {
       reviewId: 5,
@@ -143,7 +145,7 @@ export const MOCK_EVALUATED_CREATORS_LIST = MOCK_RECOMMENDED_CREATORS.map(
     creatorId: c.creatorId,
     profileImageUrl: c.profileImageUrl,
     name: c.name,
-    ageGroup: c.ageGroup,
+    age: c.age,
     skinType: c.skinType,
     reviewCount: 3,
   })

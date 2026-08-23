@@ -2,6 +2,7 @@
 import { YoutubeIcon } from '@/shared/icons';
 import {
   formatSubscriberCount,
+  getAgeLabel,
   type BasicCreatorProfileType,
 } from '@somesay/shared';
 import { ChipBasic } from '../chips/ChipBasic';
@@ -21,13 +22,13 @@ export const BasicCreatorProfile = ({
   creatorName,
   profileImgUrl,
   subscriberNum,
-  ageGroup,
+  age,
   skinTypes = [],
   trustRank,
   highlightedLabels = [],
 }: BasicCreatorProfileProps) => {
   const skinTypeLabel = skinTypes.join(', '); // 여러 피부 타입을 쉼표로 구분하여 표시
-  const ageLabel = `${ageGroup}대`;
+  const ageLabel = getAgeLabel(age);
   const highlightedLabelSet = new Set(highlightedLabels);
   const showTrustRank =
     trustRank !== undefined && trustRank > 0 && trustRank <= TRUST_RANK_LIMIT;

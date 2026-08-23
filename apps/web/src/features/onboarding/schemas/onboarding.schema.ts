@@ -1,17 +1,13 @@
 import { z } from 'zod';
+
+import { AGE_TYPES } from '@somesay/shared';
+
 import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
 import { REQUIRED_AGREEMENT_IDS } from '../constants/onboarding.constants';
 import type { OnboardingStep } from '../types/onboarding.types';
 
 export const onboardingGenderSchema = z.enum(['MALE', 'FEMALE', 'NONE']);
-export const onboardingAgeSchema = z.enum([
-  'TEENS',
-  'TWENTIES',
-  'THIRTIES',
-  'FORTIES',
-  'FIFTIES',
-  'SIXTIES_PLUS',
-]);
+export const onboardingAgeSchema = z.enum(AGE_TYPES);
 export const productFitStatusSchema = z.enum(['MATCHED', 'MISMATCHED']);
 
 export const onboardingStepSchema = z.enum([

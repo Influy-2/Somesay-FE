@@ -1,5 +1,4 @@
 import type {
-  OnboardingAge,
   OnboardingDraft,
   OnboardingGender,
   OnboardingStep,
@@ -79,15 +78,6 @@ export const GENDER_LABELS: Record<OnboardingGender, string> = {
   MALE: '남성',
   FEMALE: '여성',
   NONE: '해당없음',
-};
-
-export const AGE_LABELS: Record<OnboardingAge, string> = {
-  TEENS: '10대',
-  TWENTIES: '20대',
-  THIRTIES: '30대',
-  FORTIES: '40대',
-  FIFTIES: '50대',
-  SIXTIES_PLUS: '60대 이상',
 };
 
 export const INITIAL_ONBOARDING_DRAFT: OnboardingDraft = {

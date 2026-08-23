@@ -1,6 +1,9 @@
 // Profile/내리뷰평가화면/가로형
 
 import { Link } from 'react-router';
+
+import { getAgeLabel, type AgeType } from '@somesay/shared';
+
 import { PATH } from '@/routes/path';
 import { ArrowRightIcon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
@@ -8,7 +11,7 @@ interface EvaluatedCreatorItemHorizontalProps {
   creatorId: number;
   profileImageUrl: string;
   name: string;
-  ageGroup: string;
+  age: AgeType | null;
   skinType: string;
   reviewCount: number;
 }
@@ -17,7 +20,7 @@ export const EvaluatedCreatorItemHorizontal = ({
   creatorId,
   profileImageUrl,
   name,
-  ageGroup,
+  age,
   skinType,
   reviewCount,
 }: EvaluatedCreatorItemHorizontalProps) => {
@@ -40,7 +43,7 @@ export const EvaluatedCreatorItemHorizontal = ({
       <div className="flex flex-col gap-1">
         <span className="body1-sb line-clamp-1">{name}</span>
         <div className="flex gap-1">
-          <ChipBasic label={ageGroup} />
+          <ChipBasic label={getAgeLabel(age)} />
           <ChipBasic label={skinType} />
         </div>
       </div>

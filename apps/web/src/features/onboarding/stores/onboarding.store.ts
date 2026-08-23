@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import type { AgeType } from '@somesay/shared';
+
 import type { SocialProvider } from '@/features/auth';
 import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
 import {
@@ -9,7 +11,6 @@ import {
   type OnboardingProgressStep,
 } from '../constants/onboarding.constants';
 import type {
-  OnboardingAge,
   OnboardingDraft,
   OnboardingGender,
   OnboardingStep,
@@ -31,7 +32,7 @@ interface OnboardingActions {
   setProfile: (
     //두 데이터가 같은 페이지에서 입력되는 구조라 하나의 액션으로 묶었습니다.
     gender: OnboardingGender | null,
-    age: OnboardingAge | null
+    age: AgeType | null
   ) => void;
   toggleSkinTypeName: (skinTypeName: string) => void;
   toggleConcern: (concern: string) => void;

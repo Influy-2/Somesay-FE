@@ -1,6 +1,7 @@
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
 import type {
+  BasicCreatorProfileType,
   ProductSearchResultType,
   ReviewSearchResultType,
 } from '@somesay/shared';
@@ -45,13 +46,13 @@ export const MOCK_SEARCH_PRODUCTS: ProductSearchResultType[] = [
   { ...MOCK_SEARCH_PRODUCT, productId: 8 },
 ];
 
-const MOCK_CREATOR_PROFILE = {
+const MOCK_CREATOR_PROFILE: BasicCreatorProfileType = {
   creatorId: 1,
   creatorName: '크리에이터닉네임',
   profileImgUrl: mockProfileImg,
   subscriberNum: 12000,
   trustScore: 4.7,
-  ageGroup: '20',
+  age: 'TWENTIES',
   skinTypes: ['건성'],
 };
 

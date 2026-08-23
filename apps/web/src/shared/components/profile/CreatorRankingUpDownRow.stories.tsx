@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { AGE_TYPES } from '@somesay/shared';
+
 import { CreatorRankingUpDownRow } from './CreatorRankingUpDownRow';
 
 const meta: Meta<typeof CreatorRankingUpDownRow> = {
@@ -14,7 +16,7 @@ const meta: Meta<typeof CreatorRankingUpDownRow> = {
     profileImgUrl: { control: 'text' },
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
-    ageGroup: { control: 'text' },
+    age: { control: 'select', options: AGE_TYPES },
     skinTypes: { control: 'object' },
     ranking: { control: 'number' },
     youtubeLink: { control: 'text' },
@@ -34,7 +36,7 @@ export const Default: Story = {
     youtubeLink: 'https://youtube.com',
     subscriberNum: 2,
     trustScore: 90,
-    ageGroup: '20대',
+    age: 'TWENTIES',
     skinTypes: ['건성', '민감성'],
     ranking: 2,
   },

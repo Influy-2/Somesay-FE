@@ -1,5 +1,6 @@
 import {
   formatSubscriberCount,
+  getAgeLabel,
   type CreatorRankingUpDownType,
 } from '@somesay/shared';
 import { Link } from 'react-router';
@@ -21,11 +22,12 @@ export const CreatorRankingCard = ({
   profileImgUrl,
   creatorName,
   subscriberNum,
-  ageGroup,
+  age,
   skinTypes,
   trustScore,
 }: CreatorRankingUpDownType) => {
   const subscriberLabel = formatSubscriberCount(subscriberNum);
+  const ageLabel = getAgeLabel(age);
   const skinTypeLabel =
     skinTypes.length > 0 ? skinTypes.join(', ') : '피부 타입 정보 없음';
   const rankChangeLabel =
@@ -39,7 +41,7 @@ export const CreatorRankingCard = ({
     <Link
       to={`${PATH.CREATOR.BASE}/${creatorId}`}
       className="flex w-full items-center justify-between gap-3"
-      aria-label={`${ranking}위 ${creatorName} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel}`}
+      aria-label={`${ranking}위 ${creatorName} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageLabel}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel}`}
     >
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <div className="flex w-[1.4375rem] shrink-0 flex-col items-center gap-0.5">
@@ -86,7 +88,7 @@ export const CreatorRankingCard = ({
             </div>
 
             <div className="flex min-w-0 items-center gap-1 overflow-hidden">
-              <ChipBasic label={ageGroup} />
+              <ChipBasic label={ageLabel} />
               {skinTypes.map((skinType, index) => (
                 <ChipBasic key={`${skinType}-${index}`} label={skinType} />
               ))}

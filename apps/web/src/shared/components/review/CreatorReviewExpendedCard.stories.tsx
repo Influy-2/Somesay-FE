@@ -25,7 +25,7 @@ const mockCreator = {
   profileImgUrl: mockProfile,
   subscriberNum: 124000,
   trustScore: 92,
-  ageGroup: '20',
+  age: 'TWENTIES' as const,
   skinTypes: ['건성'],
 };
 

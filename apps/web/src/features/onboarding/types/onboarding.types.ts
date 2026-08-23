@@ -1,14 +1,8 @@
+import type { AgeType } from '@somesay/shared';
+
 import type { SocialProvider } from '@/features/auth';
 
 export type OnboardingGender = 'MALE' | 'FEMALE' | 'NONE';
-
-export type OnboardingAge =
-  | 'TEENS'
-  | 'TWENTIES'
-  | 'THIRTIES'
-  | 'FORTIES'
-  | 'FIFTIES'
-  | 'SIXTIES_PLUS';
 
 export type ProductFitStatus = 'MATCHED' | 'MISMATCHED';
 
@@ -32,7 +26,7 @@ export interface OnboardingDraft {
   emailVerified: boolean;
   nickname: string;
   gender: OnboardingGender | null;
-  age: OnboardingAge | null;
+  age: AgeType | null;
   skinTypeNames: string[];
   concerns: string[];
   matchedProductIds: number[];

@@ -1,3 +1,5 @@
+import type { AgeType } from '../user/user.types';
+
 export interface CreatorType {
   creatorId: number;
   creatorName: string;
@@ -8,7 +10,7 @@ export interface CreatorType {
   personalColor: string;
   subscriberNum: number;
   ranking: number;
-  ageGroup: string;
+  age: AgeType | null;
 }
 
 type RankChangeDirection = 'up' | 'down' | 'same';
@@ -28,6 +30,6 @@ export type BasicCreatorProfileType = Pick<
   | 'profileImgUrl'
   | 'subscriberNum'
   | 'trustScore'
-  | 'ageGroup'
+  | 'age'
   | 'skinTypes'
 >;

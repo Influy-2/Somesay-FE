@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { AGE_TYPES } from '@somesay/shared';
+
 import mockProfile from '@/assets/mock_profile_img.svg';
 
 import { EvaluationCardProfile } from './EvaluationCardProfile';
@@ -15,7 +17,7 @@ const meta: Meta<typeof EvaluationCardProfile> = {
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
     ranking: { control: 'number' },
-    ageGroup: { control: 'text' },
+    age: { control: 'select', options: AGE_TYPES },
     skinTypes: { control: 'object' },
   },
 };
@@ -31,7 +33,7 @@ export const Evaluated: Story = {
     subscriberNum: 1240000,
     trustScore: 4.5,
     ranking: 5,
-    ageGroup: '20',
+    age: 'TWENTIES',
     skinTypes: ['복합성'],
   },
 };
@@ -44,7 +46,7 @@ export const EvaluatedNoRank: Story = {
     subscriberNum: 1010,
     trustScore: 4.5,
     ranking: 0,
-    ageGroup: '30',
+    age: 'THIRTIES',
     skinTypes: ['지성'],
   },
 };
@@ -57,7 +59,7 @@ export const NotEvaluated: Story = {
     subscriberNum: 1240000,
     trustScore: 4.5,
     ranking: 5,
-    ageGroup: '20',
+    age: 'TWENTIES',
     skinTypes: ['복합성'],
   },
 };

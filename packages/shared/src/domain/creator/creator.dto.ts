@@ -1,3 +1,5 @@
+import type { AgeType } from '../user/user.types';
+
 // 크리에이터 랭킹 리스트 조회 API의 응답으로 사용되는 DTO입니다.
 export interface CreatorRankingDto extends BasicCreatorDto {
   youtubeLink: string;
@@ -9,7 +11,7 @@ export interface BasicCreatorDto {
   creatorId: number;
   creatorName: string;
   profileImgUrl: string;
-  ageGroup: string; //TODO: enum으로 교체
+  age: AgeType | null;
   skinTypes: string[];
   subscriberNum: number;
   trustScore: number;

@@ -5,6 +5,7 @@ import type {
   UserSkinConcernOption,
   UserSkinExpectationOption,
 } from '../types/user.types';
+import type { AgeType } from '../domain/user/user.types';
 
 export const GENDER_OPTIONS: GenderOption[] = [
   { value: 'male', label: '남성' },
@@ -20,6 +21,17 @@ export const AGE_OPTIONS: AgeOption[] = [
   { value: '50', label: '50대' },
   { value: '60', label: '60대 이상' },
 ];
+
+// 서버 age enum의 한글 표기입니다.
+// Record<AgeType, _>라 enum에 값이 늘면 라벨 누락을 컴파일러가 잡습니다.
+export const AGE_LABELS: Record<AgeType, string> = {
+  TEENS: '10대',
+  TWENTIES: '20대',
+  THIRTIES: '30대',
+  FORTIES: '40대',
+  FIFTIES: '50대',
+  SIXTIES_PLUS: '60대 이상',
+};
 
 export const SKIN_TYPE_OPTIONS: UserSkinTypeOption[] = [
   { value: 1, label: '건성' },
@@ -64,3 +76,7 @@ export const getConcernLabel = (id: number) =>
 export const getProductEffectLabel = (id: number) =>
   USER_SKIN_EXPECTATION_OPTIONS.find(({ value }) => value === id)
     ?.productEffect;
+
+// 서버가 연령을 내려주지 않는 크리에이터가 있어 없는 경우까지 이 함수가 흡수합니다.
+export const getAgeLabel = (age?: AgeType | null) =>
+  age ? AGE_LABELS[age] : '연령 정보 없음';

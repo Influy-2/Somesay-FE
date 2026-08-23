@@ -31,7 +31,7 @@ export const MOCK_CREATOR: MockCreatorType = {
   profileImgUrl: mockProfileImg,
   subscriberNum: 300000,
   trustScore: 0.99,
-  ageGroup: '20',
+  age: 'TWENTIES',
   skinTypes: ['건성'],
   likeCount: 10000,
   youtubeUrl: 'https://www.youtube.com',

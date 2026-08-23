@@ -15,7 +15,7 @@ export const Default: Story = {
     creatorId: 1,
     profileImageUrl: '',
     name: '김크리스탈',
-    ageGroup: '20대',
+    age: 'TWENTIES',
     skinType: '지성',
     reviewCount: 3,
   },

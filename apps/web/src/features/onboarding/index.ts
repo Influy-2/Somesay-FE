@@ -11,7 +11,6 @@ export {
   OnboardingRouteGuard,
 } from './components/OnboardingRouteGuard';
 export {
-  AGE_LABELS,
   EMAIL_VERIFICATION_CODE_LENGTH,
   EMAIL_VERIFICATION_DURATION_SECONDS,
   EMAIL_VERIFICATION_MAX_ATTEMPTS,
@@ -29,7 +28,6 @@ export { useCompleteOnboarding } from './hooks/useCompleteOnboarding';
 export { useEmailVerification } from './hooks/useEmailVerification';
 export { useOnboardingStore } from './stores/onboarding.store';
 export type {
-  OnboardingAge,
   OnboardingDraft,
   OnboardingGender,
   OnboardingStep,

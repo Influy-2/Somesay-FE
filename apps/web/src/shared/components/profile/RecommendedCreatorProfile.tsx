@@ -1,13 +1,16 @@
 // Profile/내가 좋아할 만한 크리에이터
 
 import { Link } from 'react-router';
+
+import { getAgeLabel, type AgeType } from '@somesay/shared';
+
 import { PATH } from '@/routes/path';
 import { ChipBasic } from '../chips/ChipBasic';
 interface RecommendedCreatorProfileProps {
   creatorId: number;
   name: string;
   profileImageUrl: string;
-  ageGroup: string;
+  age: AgeType | null;
   skinType: string;
 }
 
@@ -15,7 +18,7 @@ export const RecommendedCreatorProfile = ({
   creatorId,
   name,
   profileImageUrl,
-  ageGroup,
+  age,
   skinType,
 }: RecommendedCreatorProfileProps) => {
   return (
@@ -36,7 +39,7 @@ export const RecommendedCreatorProfile = ({
       <div className="flex flex-col gap-1">
         <span className="body2-sb line-clamp-1">{name}</span>
         <div className="flex gap-1">
-          <ChipBasic label={ageGroup} />
+          <ChipBasic label={getAgeLabel(age)} />
           <ChipBasic label={skinType} />
         </div>
       </div>
