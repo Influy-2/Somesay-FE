@@ -5,6 +5,7 @@ import {
   getAgeLabel,
   getSkinTypeLabel,
   getSkinTypeLabels,
+  type AgeType,
   type CreatorRankingUpDownType,
 } from '@somesay/shared';
 
@@ -18,9 +19,8 @@ import {
 } from '@/shared/icons';
 
 type CreatorRankingUpDownRowProps = CreatorRankingUpDownType & {
-  // 내 연령과 일치하는 칩을 강조할지 판단합니다. 연령은 id가 아니라 enum이라 라벨로 비교합니다.
-  isMyCondition?: (label: string) => boolean;
-  // 피부 타입은 서버와 사용자 양쪽 다 id를 갖고 있어 id로 비교합니다.
+  // 내 조건과 일치하는 칩을 강조할지 판단합니다. 기본은 강조 없음.
+  isMyAge?: (age?: AgeType | null) => boolean;
   isMySkinTypeId?: (id: number) => boolean;
 };
 
@@ -35,7 +35,7 @@ export const CreatorRankingUpDownRow = ({
   age,
   skinTypeIds,
   trustScore,
-  isMyCondition = () => false,
+  isMyAge = () => false,
   isMySkinTypeId = () => false,
 }: CreatorRankingUpDownRowProps) => {
   // aria-label을 위한 문자열 생성
@@ -102,7 +102,7 @@ export const CreatorRankingUpDownRow = ({
           <div className="flex items-center gap-1">
             <ChipBasic
               label={ageLabel}
-              variant={isMyCondition(ageLabel) ? 'blue' : 'default'}
+              variant={isMyAge(age) ? 'blue' : 'default'}
             />
             {skinTypeIds.map((skinTypeId) => {
               const label = getSkinTypeLabel(skinTypeId);

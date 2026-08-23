@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
+import { getConcernLabels, getSkinTypeLabels } from '@somesay/shared';
+
 import { YoutubeIcon } from '@/shared/icons';
-import { useMySkinProfile } from '@/shared/hooks';
+import { useFetchUserInfo } from '@/shared/hooks';
 
 import { FilterBottomSheet } from './FilterBottomSheet';
 import {
@@ -37,10 +39,16 @@ export const RecommendationSection = () => {
   const { requestRecommendations, isRequesting } = useRequestRecommendations();
 
   // 회원가입에서 저장한 조건은 순환 중에도 내용을 고정합니다. (색과 등장 모션은 함께 순환)
-  const { skinTypeLabels, concernLabels } = useMySkinProfile();
+  const { data: userInfo } = useFetchUserInfo();
   const savedFilters: SelectedFiltersType = {
-    skinConcern: concernLabels.slice(0, MAX_SELECTIONS.skinConcern),
-    skinType: skinTypeLabels.slice(0, MAX_SELECTIONS.skinType),
+    skinConcern: getConcernLabels(userInfo?.skinExpectationIds ?? []).slice(
+      0,
+      MAX_SELECTIONS.skinConcern
+    ),
+    skinType: getSkinTypeLabels(userInfo?.skinTypeIds ?? []).slice(
+      0,
+      MAX_SELECTIONS.skinType
+    ),
     category: [],
   };
 
