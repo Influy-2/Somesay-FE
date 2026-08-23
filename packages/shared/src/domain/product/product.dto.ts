@@ -2,7 +2,6 @@ import type {
   ProductBasicType,
   ProductSkinExpectationType,
 } from './product.types';
-import type { CommentPreviewDto } from '../comment/comment.dto';
 
 // 서버가 주는 최소 상품 정보는 프론트 타입과 필드가 동일해 ProductBasicType을 그대로 쓴다.
 export interface ProductWishDto extends ProductBasicType {
@@ -55,37 +54,5 @@ export interface ProductDetailDto extends ProductWishDto {
 export interface ProductListResponseDto {
   products: ProductCardDto[];
   totalCount: number;
-  hasNext: boolean;
-}
-
-interface ProductReviewCreatorDto {
-  creatorName: string;
-  ranking: number;
-  subscriberNum: number;
-  profileImgUrl: string;
-  trustScore: number;
-  skinTypeIds: number[];
-}
-
-export interface ProductReviewsDto extends ProductReviewCreatorDto {
-  reviewId: number;
-  content: string;
-  rating: number;
-  agreeCount: number;
-  disagreeCount: number;
-  agreeRatio: number;
-  youtubeUrl: string;
-  videoTitle: string;
-  viewCount: number;
-  timeLinkCount: number;
-  totalCommentCount: number;
-  previewComments: CommentPreviewDto[];
-}
-
-// 상품 리뷰 목록 API의 페이지 응답 DTO입니다.
-export interface ProductReviewsPageDto {
-  content: ProductReviewsDto[];
-  totalElements: number;
-  totalPages: number;
   hasNext: boolean;
 }

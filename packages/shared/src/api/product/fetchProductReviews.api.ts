@@ -1,8 +1,7 @@
 import { apiClient } from '../client';
 import { API_ENDPOINTS } from '../../constants/endpoints';
 import type { ApiPageParams, ApiResponse } from '../types';
-import type { ProductReviewsPageDto } from '../../domain/product/product.dto';
-import { mapProductReviewPageDto } from '../../domain/product/product.mapper';
+import type { ProductReviewPageType } from '../../domain/product/product.types';
 import { buildPath } from '../buildApi';
 
 interface FetchProductReviewsParamsDto extends ApiPageParams {
@@ -16,12 +15,12 @@ export const fetchProductReviews = async (
   productId: number,
   params: FetchProductReviewsParamsDto
 ) => {
-  const response = await apiClient.get<ApiResponse<ProductReviewsPageDto>>(
+  const response = await apiClient.get<ApiResponse<ProductReviewPageType>>(
     buildPath(API_ENDPOINTS.PRODUCT_REVIEWS, {
       productId,
     }),
     { params }
   );
 
-  return mapProductReviewPageDto(response.data.data);
+  return response.data.data;
 };

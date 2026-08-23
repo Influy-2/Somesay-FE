@@ -1,4 +1,5 @@
 import type { CommentPreviewType } from '../comment/comment.types';
+import type { AgeType } from '../user/user.types';
 
 export interface ProductBasicType {
   productId: number;
@@ -42,6 +43,8 @@ export interface ProductDetailType extends ProductWishType {
 }
 
 export interface ProductReviewType {
+  creatorId: number;
+  age: AgeType | null;
   creatorName: string;
   ranking: number;
   subscriberNum: number;

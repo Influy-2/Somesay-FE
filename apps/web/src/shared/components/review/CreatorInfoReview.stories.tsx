@@ -18,6 +18,8 @@ type Story = StoryObj<typeof CreatorInfoReview>;
 export const Default: Story = {
   args: {
     review: {
+      creatorId: 1,
+      age: 'TWENTIES',
       reviewId: 1,
       creatorName: '글로우픽',
       ranking: 1,
@@ -44,6 +46,8 @@ export const Default: Story = {
 export const NoEvaluation: Story = {
   args: {
     review: {
+      creatorId: 1,
+      age: 'TEENS',
       reviewId: 2,
       creatorName: '뷰티인사이더',
       ranking: 2,

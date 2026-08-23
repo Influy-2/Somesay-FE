@@ -3,19 +3,13 @@ import type {
   PreviewInfoDto,
   ProductDetailDto,
   ProductListResponseDto,
-  ProductReviewsPageDto,
-  ProductReviewsDto,
   PatchProductWishResponseDto,
 } from './product.dto';
 import type {
   ProductCardType,
   ProductDetailType,
-  ProductReviewPageType,
-  ProductReviewType,
   ProductWishResultType,
 } from './product.types';
-import type { CommentPreviewDto } from '../comment/comment.dto';
-import type { CommentPreviewType } from '../comment/comment.types';
 
 // 상품 찜 API 응답을 화면에서 사용하는 boolean 상태로 변환합니다.
 export const mapProductWishResponseDto = (
@@ -70,48 +64,4 @@ export const mapProductPreviewPageDtoToCards = (
 ): ApiPage<ProductCardType> => ({
   ...page,
   content: page.content.map(mapProductCardDtoToCard),
-});
-
-// 백엔드 코멘트 DTO를 화면에서 사용하던 코멘트 타입으로 변환합니다.
-const mapCommentPreviewDto = (item: CommentPreviewDto): CommentPreviewType => ({
-  reactionId: item.reactionId,
-  userId: item.userId,
-  nickname: item.nickname,
-  profileImgUrl: item.profileImgUrl,
-  reactionType: item.reactionType,
-  comment: item.comment,
-  createdAt: item.createdAt,
-  skinTypeIds: item.skinTypeIds,
-  skinExpectationIds: item.skinExpectationIds,
-});
-
-// 백엔드 상품 리뷰 DTO를 화면에서 사용하던 상품 리뷰 타입으로 변환합니다.
-export const mapProductReviewDto = (
-  item: ProductReviewsDto
-): ProductReviewType => ({
-  creatorName: item.creatorName,
-  ranking: item.ranking,
-  subscriberNum: item.subscriberNum,
-  profileImgUrl: item.profileImgUrl,
-  trustScore: item.trustScore,
-  skinTypeIds: item.skinTypeIds,
-  reviewId: item.reviewId,
-  content: item.content,
-  rating: item.rating,
-  agreeCount: item.agreeCount,
-  disagreeCount: item.disagreeCount,
-  agreeRatio: item.agreeRatio,
-  youtubeUrl: item.youtubeUrl,
-  videoTitle: item.videoTitle,
-  viewCount: item.viewCount,
-  timeLinkCount: item.timeLinkCount,
-  totalCommentCount: item.totalCommentCount,
-  previewComments: item.previewComments.map(mapCommentPreviewDto),
-});
-
-export const mapProductReviewPageDto = (
-  page: ProductReviewsPageDto
-): ProductReviewPageType => ({
-  ...page,
-  content: page.content.map(mapProductReviewDto),
 });
