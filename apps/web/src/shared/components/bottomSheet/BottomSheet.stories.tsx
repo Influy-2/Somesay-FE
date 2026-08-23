@@ -10,7 +10,7 @@ const meta: Meta<typeof BottomSheet> = {
     docs: {
       story: {
         inline: false,
-        height: '400px',
+        height: '800px',
       },
     },
   },
@@ -20,7 +20,10 @@ const meta: Meta<typeof BottomSheet> = {
     header: { control: 'object' },
     footer: { control: 'object' },
     ariaLabel: { control: 'text' },
-    height: { control: 'text' },
+    size: {
+      control: 'select',
+      options: ['large', 'medium', 'small', 'compact'],
+    },
   },
 };
 
@@ -32,17 +35,36 @@ export const Default: Story = {
     isOpen: true,
     onClose: () => {},
     ariaLabel: '바텀시트',
-    height: 'h-[60vh]',
     children: '바텀시트 내용',
   },
 };
+
+export const Large: Story = {
+  args: {
+    isOpen: true,
+    onClose: () => {},
+    ariaLabel: '바텀시트',
+    size: 'large',
+    children: '바텀시트 내용',
+  },
+};
+
 export const Small: Story = {
   args: {
     isOpen: true,
     onClose: () => {},
     ariaLabel: '바텀시트',
-    height: 'h-[40vh]',
+    size: 'small',
+    children: '바텀시트 내용',
+  },
+};
 
+export const Compact: Story = {
+  args: {
+    isOpen: true,
+    onClose: () => {},
+    ariaLabel: '바텀시트',
+    size: 'compact',
     children: '바텀시트 내용',
   },
 };

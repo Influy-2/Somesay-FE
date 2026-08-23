@@ -2,7 +2,7 @@ import type { ProductBasicType } from '@somesay/shared';
 
 export type SelectableProduct = Pick<
   ProductBasicType,
-  'productId' | 'productImageUrl' | 'brandName' | 'productName'
+  'productId' | 'productImgUrl' | 'brandName' | 'productName'
 > & {
   categoryId: number;
 };

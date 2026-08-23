@@ -1,14 +1,24 @@
+import { Link } from 'react-router';
+
+import { CreatorRankingUpDownType } from '@somesay/shared';
+import { formatSubscriberCount } from '@somesay/shared';
+
+import { PATH } from '@/routes/path';
+import { ChipBasic } from '@/shared/components';
 import {
   YoutubeIcon,
   ArrowUpIcon,
   ArrowDownIcon,
   NoRankChangeIcon,
 } from '@/shared/icons';
-import { ChipBasic } from '@/shared/components';
-import { CreatorRankingUpDownType } from '@somesay/shared';
-import { formatSubscriberCount } from '@somesay/shared';
+
+type CreatorRankingUpDownRowProps = CreatorRankingUpDownType & {
+  // 내 조건과 일치하는 칩(연령·피부 타입)을 강조할지 판단합니다. 기본은 강조 없음.
+  isMyCondition?: (label: string) => boolean;
+};
 
 export const CreatorRankingUpDownRow = ({
+  creatorId,
   ranking,
   rankChange,
   rankChangeDiff,
@@ -18,7 +28,8 @@ export const CreatorRankingUpDownRow = ({
   ageGroup,
   skinTypes,
   trustScore,
-}: CreatorRankingUpDownType) => {
+  isMyCondition = () => false,
+}: CreatorRankingUpDownRowProps) => {
   // aria-label을 위한 문자열 생성
   const skinTypeLabel = skinTypes.join(', ');
 
@@ -30,20 +41,20 @@ export const CreatorRankingUpDownRow = ({
         : '순위 변동 없음';
 
   return (
-    <li
-      className="flex w-full items-center justify-between"
-      aria-label={`${ranking}위 ${nickname}, 구독자 ${subscriberNum}만, ${ageGroup}대, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel}`}
-    >
+    <li className="relative flex w-full items-center justify-between">
       {/* 좌측: 순위 + 프로필 */}
       <div className="flex items-center gap-3" aria-hidden="true">
         {/* 순위 번호 + 변동 */}
         <div className="flex w-[1.4375rem] flex-col items-center gap-0.5">
           <span className="subhead-sb text-center text-black">{ranking}</span>
+          {/* 업다운 화살표 */}
           <div className="flex items-center gap-0.5">
             {rankChangeDiff === 'up' ? (
               <>
-                <ArrowUpIcon className="size-3" />
-                <span className="caption1-m">{rankChange}</span>
+                <ArrowUpIcon className="text-primary-400" />
+                <span className="caption1-m text-primary-400">
+                  {rankChange}
+                </span>
               </>
             ) : rankChangeDiff === 'down' ? (
               <>
@@ -70,7 +81,7 @@ export const CreatorRankingUpDownRow = ({
         {/* 이름 + 채널 + 칩 */}
         <div className="flex flex-col gap-1.5">
           {/* 이름 + 유튜브 구독자 */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <span className="body1-sb whitespace-nowrap text-black">
               {nickname}
             </span>
@@ -82,11 +93,18 @@ export const CreatorRankingUpDownRow = ({
             </div>
           </div>
 
-          {/* 칩: 나이대 + 피부타입 */}
+          {/* 칩: 나이대 + 피부타입 (내 조건과 일치하면 강조) */}
           <div className="flex items-center gap-1">
-            <ChipBasic label={`${ageGroup}`} />
+            <ChipBasic
+              label={ageGroup}
+              variant={isMyCondition(ageGroup) ? 'blue' : 'default'}
+            />
             {skinTypes.map((type) => (
-              <ChipBasic key={type} label={type} />
+              <ChipBasic
+                key={type}
+                label={type}
+                variant={isMyCondition(type) ? 'blue' : 'default'}
+              />
             ))}
           </div>
         </div>
@@ -99,6 +117,13 @@ export const CreatorRankingUpDownRow = ({
       >
         {trustScore.toFixed(0)}점
       </span>
+
+      {/* 행 전체를 크리에이터 상세로 잇는 링크 오버레이 */}
+      <Link
+        to={`${PATH.CREATOR.BASE}/${creatorId}`}
+        className="absolute inset-0"
+        aria-label={`${ranking}위 ${nickname}, 구독자 ${formatSubscriberCount(subscriberNum)}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel} 상세 페이지로 이동`}
+      />
     </li>
   );
 };

@@ -1,16 +1,30 @@
 import { useState } from 'react';
+import { PATH } from '@/routes/path';
 import { HorizontalCategoriesTab } from '@/shared/components/category/HorizontalCategoriesTab';
 import { BasicProductCard, MoreButton } from '@/shared/components';
-import { MOCK_CATEGORY_PRODUCTS } from './mockData';
-import { useFetchCategories } from '@/shared/hooks';
+import {
+  useFetchCategories,
+  useFetchHomeProductList,
+  useProductWish,
+} from '@/shared/hooks';
+import { CategoryProductEmptyState } from './CategoryProductEmptyState';
+import { CategoryProductSkeleton } from './CategoryProductSkeleton';
+import { CategoryTabSkeleton } from './CategoryTabSkeleton';
 
 const ALL_CATEGORY = { id: 0, label: '전체' };
 
 export const CategoryProductSection = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
-  const { data: mainCategories = [] } = useFetchCategories();
-
-  // const { data: products = [] } = useCategoryProducts(selectedCategoryId);
+  const { toggleWish } = useProductWish();
+  const { data: mainCategories = [], isPending: isCategoryPending } =
+    useFetchCategories();
+  const homeProductParams =
+    selectedCategoryId === ALL_CATEGORY.id
+      ? {}
+      : { mainCategoryId: selectedCategoryId };
+  const { data: products = [], isPending } =
+    useFetchHomeProductList(homeProductParams);
+  const isEmpty = !isPending && products.length === 0;
 
   const categories = [
     ALL_CATEGORY,
@@ -20,13 +34,6 @@ export const CategoryProductSection = () => {
     })),
   ];
 
-  const products =
-    selectedCategoryId === ALL_CATEGORY.id
-      ? (MOCK_CATEGORY_PRODUCTS[0]?.products ?? [])
-      : MOCK_CATEGORY_PRODUCTS.find(
-          (category) => category.categoryId === selectedCategoryId
-        )?.products || [];
-
   const selectedCategoryLabel =
     categories.find((category) => category.id === selectedCategoryId)?.label ??
     '';
@@ -34,6 +41,7 @@ export const CategoryProductSection = () => {
   return (
     <section
       aria-labelledby="category-product-title"
+      aria-busy={isPending}
       className="flex w-full flex-col gap-5 px-4"
     >
       {/* 타이틀 */}
@@ -45,31 +53,58 @@ export const CategoryProductSection = () => {
 
       {/* 카테고리 탭 + 상품 그리드 */}
       <div className="flex flex-col gap-5">
-        <HorizontalCategoriesTab
-          categories={categories}
-          selectedId={selectedCategoryId}
-          onSelect={setSelectedCategoryId}
-          ariaLabel="상품 카테고리"
-        />
+        {isCategoryPending ? (
+          <CategoryTabSkeleton />
+        ) : (
+          <HorizontalCategoriesTab
+            categories={categories}
+            selectedId={selectedCategoryId}
+            onSelect={setSelectedCategoryId}
+            ariaLabel="상품 카테고리"
+          />
+        )}
 
-        {/* 2열 상품 그리드 */}
-        <div
-          role="list"
-          aria-label="추천 상품 목록"
-          className="grid grid-cols-2 gap-x-1 gap-y-6 pb-2"
-        >
-          {products.map((product) => (
-            <div key={product.productId} role="listitem">
-              <BasicProductCard {...product} />
-            </div>
-          ))}
-        </div>
+        {isPending ? (
+          <CategoryProductSkeleton />
+        ) : isEmpty ? (
+          <CategoryProductEmptyState />
+        ) : (
+          <div
+            role="list"
+            aria-label="추천 상품 목록"
+            className="grid grid-cols-2 gap-x-1 gap-y-6 pb-1"
+          >
+            {products.map((product) => (
+              <div key={product.productId} role="listitem">
+                <BasicProductCard
+                  {...product}
+                  onHeartToggle={() =>
+                    toggleWish({
+                      productId: product.productId,
+                      isHearted: product.isHearted,
+                    })
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
-        {/* 더보기 버튼 */}
-        <MoreButton
-          to={'/임시'}
-          text={`${selectedCategoryLabel === ALL_CATEGORY.label ? '' : selectedCategoryLabel} 상품 더보기`}
-        />
+        {/* 더보기 — 전체는 카테고리 목록으로, 대분류를 고르면 그 카테고리 상세로 */}
+        {!isEmpty && (
+          <MoreButton
+            to={
+              selectedCategoryId === ALL_CATEGORY.id
+                ? PATH.CATEGORIES.BASE
+                : `${PATH.CATEGORIES.BASE}/${selectedCategoryId}`
+            }
+            text={
+              selectedCategoryId === ALL_CATEGORY.id
+                ? '상품 더보기'
+                : `${selectedCategoryLabel} 상품 더보기`
+            }
+          />
+        )}
       </div>
     </section>
   );

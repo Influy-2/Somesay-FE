@@ -14,6 +14,8 @@ export const API_ENDPOINTS = {
   /** Product  **/
   PRODUCT: '/products',
   PRODUCT_DETAIL: '/products/:productId',
+  // 로그인한 사용자의 상품 찜 상태를 변경하기 위한 API URL입니다.
+  PRODUCT_WISH: '/products/:productId/wish',
   PRODUCT_PRODUCT_ID_REVIEW_OVERVIEW: '/products/:productId/review-overview',
   PRODUCT_REVIEWS: '/products/:productId/reviews',
   PRODUCT_SIMILAR: '/products/:productId/similar',
@@ -27,6 +29,17 @@ export const API_ENDPOINTS = {
     // 로그인한 사용자의 서비스 공통 정보를 조회하기 위한 API URL입니다.
     INFO: '/users/info',
   },
+
+  /** home ranking controller **/
+  HOME_CREATOR_RANKING: '/home/creators',
+  HOME_PRODUCT_RANKING: '/home/products',
+  HOME_PRODUCT_LIST: '/home/products/list',
+  // 선택한 피부 타입에 맞는 홈 고평점 리뷰를 조회하기 위한 API URL입니다.
+  HOME_CURATION: '/home/curation',
+  // 홈에서 고른 피부 조건에 맞는 추천 상품을 조회하기 위한 API URL입니다.
+  HOME_RECOMMEND: '/home/recommend',
+  // 추천 상품을 한 번에 모두 찜하기 위한 API URL입니다.
+  HOME_RECOMMEND_WISH: '/home/recommend/wish',
 
   /** Category **/
   CATEGORY: '/categories',

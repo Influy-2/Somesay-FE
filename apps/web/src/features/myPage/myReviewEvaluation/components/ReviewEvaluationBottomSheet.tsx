@@ -29,7 +29,7 @@ export const ReviewEvaluationBottomSheet = ({
       isOpen={state !== null}
       onClose={onClose}
       ariaLabel={state?.type === 'vote' ? '평가 옵션' : '코멘트 옵션'}
-      height="h-fit"
+      size="compact"
     >
       {state?.type === 'vote' && (
         <ul className="flex flex-col px-4 pt-2 pb-8">

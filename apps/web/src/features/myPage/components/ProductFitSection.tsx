@@ -5,7 +5,7 @@ import { MainArrow20Icon } from '@/shared/icons';
 
 type FitProduct = {
   productId: number;
-  productImageUrl: string;
+  productImgUrl: string;
   productName: string;
   brandName: string;
 };
@@ -46,9 +46,9 @@ const FitProductRow = ({
                 to={`${PATH.PRODUCT.BASE}/${product.productId}`}
                 className="bg-grey02 size-15 overflow-hidden rounded-full"
               >
-                {product.productImageUrl && (
+                {product.productImgUrl && (
                   <img
-                    src={product.productImageUrl}
+                    src={product.productImgUrl}
                     alt={product.productName}
                     className="size-full object-cover"
                   />

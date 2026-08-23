@@ -11,8 +11,9 @@ const meta: Meta<typeof BasicCreatorProfile> = {
     nickname: { control: 'text' },
     profileImageUrl: { control: 'text' },
     subscriberNum: { control: 'number' },
-    trustScore: { control: 'number' },
-    ageGroup: { control: 'number' },
+    trustRank: { control: 'number' },
+    highlightedLabels: { control: 'object' },
+    ageGroup: { control: 'text' },
     skinTypes: { control: 'object' },
   },
 };
@@ -26,8 +27,17 @@ export const Default: Story = {
     nickname: '이름',
     profileImageUrl: 'https://placehold.co/100',
     subscriberNum: 0,
-    trustScore: 4.5,
-    ageGroup: 0,
-    skinTypes: ['텍스트'],
+    trustRank: 3,
+    ageGroup: '20',
+    skinTypes: ['건성'],
+    highlightedLabels: ['건성'],
+  },
+};
+
+export const WithoutVisibleTrustRank: Story = {
+  args: {
+    ...Default.args,
+    trustRank: 11,
+    highlightedLabels: [],
   },
 };

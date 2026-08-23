@@ -1,9 +1,15 @@
+import { formatAgeGroup } from '../../utils/formatAgeGroup';
 import type { ApiPage } from '../../api/types';
 import type { ProductCardType } from '../product/product.types';
 import type { PreviewInfoDto } from '../product/product.dto';
 import { mapPreviewInfoDtoToCard } from '../product/product.mapper';
 import type { CreatorRankingDto } from '../creator/creator.dto';
 import type { CreatorRankingUpDownType } from '../creator/creator.types';
+import type {
+  HomeCreatorRankingDto,
+  HomeProductRankingResponseDto,
+} from './ranking.dto';
+import type { HomeCreatorRankingType } from './ranking.types';
 
 export const mapProductRankingPageDtoToCards = (
   page: ApiPage<PreviewInfoDto>
@@ -56,7 +62,7 @@ export const mapCreatorRanking = ({
     skinTypes,
     subscriberNum,
     ranking,
-    ageGroup,
+    ageGroup: formatAgeGroup(ageGroup),
     rankChange: Math.abs(rankingDiff),
     rankChangeDiff: getRankChangeDiff(ranking, oldRanking),
   };
@@ -68,3 +74,50 @@ export const mapCreatorRankingPage = (
   ...page,
   content: page.content.map(mapCreatorRanking),
 });
+
+// 홈 상품 랭킹 응답을 기존 상품 카드 타입으로 변환합니다.
+export const mapHomeProductRanking = (
+  data: HomeProductRankingResponseDto
+): ProductCardType[] =>
+  data.products.map((product) =>
+    mapPreviewInfoDtoToCard({
+      ...product,
+      productImgUrl: product.productImgUrl ?? '',
+      price: product.price ?? 0,
+    })
+  );
+
+// 홈 크리에이터 랭킹 응답의 잘못된 0위 값을 목록 순서로 보정합니다.
+export const mapHomeCreatorRanking = (
+  data: HomeCreatorRankingDto[]
+): HomeCreatorRankingType[] =>
+  data.map(
+    ({
+      oldRanking,
+      creatorName,
+      profileImgUrl,
+      creatorId,
+      youtubeLink,
+      trustScore,
+      skinTypes,
+      subscriberNum,
+      ranking,
+      ageGroup,
+    }) => {
+      const rankingDiff = ranking - oldRanking;
+
+      return {
+        creatorId,
+        nickname: creatorName,
+        profileImageUrl: profileImgUrl,
+        youtubeLink,
+        trustScore,
+        skinTypes,
+        subscriberNum,
+        ranking,
+        ageGroup: formatAgeGroup(ageGroup),
+        rankChange: Math.abs(rankingDiff),
+        rankChangeDiff: getRankChangeDiff(ranking, oldRanking),
+      };
+    }
+  );

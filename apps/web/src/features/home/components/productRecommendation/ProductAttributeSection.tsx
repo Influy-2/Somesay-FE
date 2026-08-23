@@ -23,7 +23,7 @@ export const ProductAttributeSection = ({
           <ChipLarge
             key={item.label}
             label={item.label}
-            variant={item.isHighlighted ? 'highlight' : 'default'}
+            color={item.isHighlighted ? 'blue100' : 'gray02'}
           />
         ))}
       </div>

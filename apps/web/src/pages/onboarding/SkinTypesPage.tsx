@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { USER_SKIN_TYPE_OPTIONS } from '@somesay/shared';
+import { SKIN_TYPE_OPTIONS } from '@somesay/shared';
 import {
   getNextOnboardingPath,
   OnboardingLayout,
@@ -8,7 +8,7 @@ import {
   useOnboardingStore,
 } from '@/features/onboarding';
 
-const SKIN_TYPE_OPTIONS = USER_SKIN_TYPE_OPTIONS.map(
+const SKIN_TYPE_LABELS = SKIN_TYPE_OPTIONS.map(
   ({ label }) => [label, label] as const
 );
 
@@ -44,7 +44,7 @@ export const SkinTypesPage = () => {
 
         <OnboardingOptionGroup
           helperText="최대 2개 선택"
-          options={SKIN_TYPE_OPTIONS}
+          options={SKIN_TYPE_LABELS}
           selectedValue={skinTypeNames}
           onSelect={toggleSkinTypeName}
         />

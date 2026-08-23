@@ -17,7 +17,7 @@ const mapBrandAvailableSubCategoryDto = (
   item: BrandAvailableSubCategoryDto
 ): BrandAvailableSubCategoryType => ({
   subCategoryId: item.subCategoryId,
-  subCategoryName: item.subName,
+  subName: item.subName,
 });
 
 // 브랜드 상세 DTO를 브랜드 홈 UI 타입으로 변환합니다.

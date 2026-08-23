@@ -1,4 +1,4 @@
-import { WhiteHeartButton } from '@/shared/components/buttons/HeartButton';
+import { HeartButton } from '@/shared/components/buttons/HeartButton';
 import type { ProductSearchResultType } from '@somesay/shared';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
@@ -30,12 +30,12 @@ export const SearchResultProductCard = ({
         {/* 이미지 */}
         <div className="border-grey02 relative h-[117.5px] w-26 shrink-0 overflow-hidden border-[0.7px]">
           <img
-            src={product.productImageUrl}
+            src={product.productImgUrl}
             alt=""
             className="h-full w-full object-cover"
           />
           <div className="absolute right-2 bottom-2 z-1">
-            <WhiteHeartButton
+            <HeartButton
               isHearted={product.isHearted}
               onHeartToggle={() => onHeartToggle(product.productId)}
               productName={product.productName}
@@ -74,7 +74,7 @@ export const SearchResultProductCard = ({
                 ({product.reviewCount.toLocaleString()})
               </span>
               {/* 크리에이터 프로필 스택 */}
-              <AvatarStack creators={product.creators} />
+              <AvatarStack creatorImageUrls={product.creatorImageUrls} />
             </div>
           </div>
         </div>

@@ -1,3 +1,5 @@
+export type BottomSheetSize = 'large' | 'medium' | 'small' | 'compact';
+
 export interface BottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
@@ -5,7 +7,7 @@ export interface BottomSheetProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   ariaLabel?: string;
-  height?: string; // Tailwind height class (예: 'h-[60vh]')
+  size?: BottomSheetSize;
 }
 
 export interface DragState {

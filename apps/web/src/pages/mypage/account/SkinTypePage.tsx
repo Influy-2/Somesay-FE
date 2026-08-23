@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import cn from '@/utils/cn';
 import { PageHeader, FilterChip } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { USER_SKIN_TYPE_OPTIONS } from '@somesay/shared';
+import { SKIN_TYPE_OPTIONS } from '@somesay/shared';
 import { MOCK_ACCOUNT } from '@/features/myPage/components/mockData';
 
 export const SkinTypePage = () => {
@@ -62,7 +62,7 @@ export const SkinTypePage = () => {
       <div className="flex flex-col gap-4 px-4 pt-10">
         <p className="caption1-m text-grey05">최대 2개 선택</p>
         <div className="flex flex-wrap gap-3">
-          {USER_SKIN_TYPE_OPTIONS.map((option) => (
+          {SKIN_TYPE_OPTIONS.map((option) => (
             <FilterChip
               key={option.value}
               label={option.label}

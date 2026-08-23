@@ -1,35 +1,32 @@
 // apps/web/src/shared/components/productCard/AvatarStack.tsx
 import cn from '@/utils/cn';
-interface AvatarItem {
-  name: string;
-  profileImageUrl: string;
-}
+
+// 디자인상 프로필은 최대 3개까지만 노출합니다.
+const MAX_VISIBLE_AVATARS = 3;
 
 interface AvatarStackProps {
-  creators: AvatarItem[];
+  creatorImageUrls: string[];
   borderColor?: string;
 }
 
 export const AvatarStack = ({
-  creators,
+  creatorImageUrls,
   borderColor = 'border-white',
 }: AvatarStackProps) => {
+  const visibleImageUrls = creatorImageUrls.slice(0, MAX_VISIBLE_AVATARS);
+
   return (
     <div className="flex flex-row-reverse items-center">
-      {[...creators].reverse().map((creator, index, arr) => (
+      {[...visibleImageUrls].reverse().map((imageUrl, index, arr) => (
         <div
-          key={creator.name}
+          key={`${imageUrl}-${index}`}
           className={cn(
             `relative size-5.5 overflow-hidden rounded-full border`,
             borderColor
           )}
           style={{ marginLeft: index === arr.length - 1 ? 0 : -6 }}
         >
-          <img
-            src={creator.profileImageUrl}
-            alt=""
-            className="size-full object-cover"
-          />
+          <img src={imageUrl} alt="" className="size-full object-cover" />
         </div>
       ))}
     </div>

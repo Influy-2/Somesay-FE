@@ -12,7 +12,8 @@ const meta: Meta<typeof ProductCardThumbnail> = {
     price: { control: 'number' },
     rating: { control: 'number' },
     reviewCount: { control: 'number' },
-    productImageUrl: { control: 'text' },
+    productImgUrl: { control: 'text' },
+    productId: { control: 'number' },
   },
 };
 
@@ -26,6 +27,20 @@ export const Default: Story = {
     price: 10000,
     rating: 4.5,
     reviewCount: 0,
-    productImageUrl: 'https://placehold.co/100',
+    productImgUrl: 'https://placehold.co/100',
+  },
+};
+
+export const Linked: Story = {
+  args: {
+    ...Default.args,
+    productId: 1,
+  },
+};
+
+export const ImageError: Story = {
+  args: {
+    ...Default.args,
+    productImgUrl: '/not-found-product-image.png',
   },
 };

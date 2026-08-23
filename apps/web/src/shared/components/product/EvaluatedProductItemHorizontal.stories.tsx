@@ -13,7 +13,7 @@ type Story = StoryObj<typeof EvaluatedProductItemHorizontal>;
 export const Default: Story = {
   args: {
     productId: 1,
-    productImageUrl: '',
+    productImgUrl: '',
     productName: '아토베리어 365 크림아토베리어 365크림',
     brandName: '에스트라',
     reviewCount: 3,

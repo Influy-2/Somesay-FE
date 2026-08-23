@@ -2,6 +2,7 @@ import { createBrowserRouter, Outlet } from 'react-router';
 import { PATH } from '@/routes/path';
 
 import { GlobalLayout } from '@/shared/components';
+import { GlobalError } from '@/shared/components/error/GlobalError';
 import { BottomTabLayout } from '@/shared/components/layout/BottomTabLayout';
 
 import { HomePage } from '@/pages/home/HomePage';
@@ -14,19 +15,19 @@ import { CreatorHomePage } from '@/pages/creatorHome/CreatorHomePage';
 import { SearchPage } from '@/pages/search/SearchPage';
 import { RankingPage } from '@/pages/ranking/RankingPage';
 import { ReviewsPage } from '@/pages/reviews/ReviewsPage';
-import { MyPage } from '@/pages/myPage/MyPage';
+import { MyPage } from '@/pages/mypage/MyPage';
 import { ProductDetailPage } from '@/pages/productDetail/ProductDetailPage';
 import { BrandHomePage } from '@/pages/brandHome/BrandHomePage';
 
 import { ReviewEvaluationPage } from '@/pages/reviewEvaluation/ReviewEvaluationPage';
-import { AccountPage } from '@/pages/myPage/AccountPage';
-import { NicknamePage } from '@/pages/myPage/account/NicknamePage';
-import { GenderPage } from '@/pages/myPage/account/GenderPage';
-import { AgePage } from '@/pages/myPage/account/AgePage';
-import { SkinTypePage } from '@/pages/myPage/account/SkinTypePage';
-import { SkinConcernPage } from '@/pages/myPage/account/SkinConcernPage';
-import { ProductFitPage } from '@/pages/myPage/account/ProductFitPage';
-import { AddProductPage } from '@/pages/myPage/account/AddProductPage';
+import { AccountPage } from '@/pages/mypage/AccountPage';
+import { NicknamePage } from '@/pages/mypage/account/NicknamePage';
+import { GenderPage } from '@/pages/mypage/account/GenderPage';
+import { AgePage } from '@/pages/mypage/account/AgePage';
+import { SkinTypePage } from '@/pages/mypage/account/SkinTypePage';
+import { SkinConcernPage } from '@/pages/mypage/account/SkinConcernPage';
+import { ProductFitPage } from '@/pages/mypage/account/ProductFitPage';
+import { AddProductPage } from '@/pages/mypage/account/AddProductPage';
 import { LoginPage } from '@/pages/login/LoginPage';
 import { KakaoCallbackPage } from '@/pages/login/KakaoCallbackPage';
 import { EmailPage } from '@/pages/onboarding/EmailPage';
@@ -46,15 +47,15 @@ import {
   OnboardingRouteGuard,
 } from '@/features/onboarding';
 import { ProtectedRoute } from '@/features/auth';
-import { MyReviewEvaluationPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationPage';
-import { MyReviewEvaluationProductListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationProductListPage';
-import { MyReviewEvaluationCreatorListPage } from '@/pages/myPage/myReviewEvaluation/MyReviewEvaluationCreatorListPage';
+import { MyReviewEvaluationPage } from '@/pages/mypage/myReviewEvaluation/MyReviewEvaluationPage';
+import { MyReviewEvaluationProductListPage } from '@/pages/mypage/myReviewEvaluation/MyReviewEvaluationProductListPage';
+import { MyReviewEvaluationCreatorListPage } from '@/pages/mypage/myReviewEvaluation/MyReviewEvaluationCreatorListPage';
 
 export const appRouter = createBrowserRouter([
   {
     path: PATH.ROOT,
     element: <GlobalLayout />,
-    // errorElement: <GlobalError />,
+    errorElement: <GlobalError />,
     children: [
       {
         //바텀바 있는 페이지
@@ -68,11 +69,6 @@ export const appRouter = createBrowserRouter([
           { path: PATH.REVIEWS.BASE, element: <ReviewsPage /> },
           //카테고리
           { path: PATH.CATEGORIES.BASE, element: <CategoriesPage /> },
-          //마이페이지
-          {
-            path: PATH.MY_PAGE.BASE,
-            element: <MyPage />,
-          },
         ],
       },
       // 바텀바 없는 페이지
@@ -243,107 +239,9 @@ export const appRouter = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           {
-            index: true,
-            element: <OnboardingIndexRedirect />,
+            element: <BottomTabLayout />,
+            children: [{ index: true, element: <MyPage /> }],
           },
-          {
-            path: PATH.ONBOARDING.TERMS,
-            element: (
-              <OnboardingRouteGuard step="terms">
-                <TermsAgreementPage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.EMAIL,
-            element: (
-              <OnboardingRouteGuard step="email">
-                <EmailPage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.EMAIL_VERIFICATION,
-            element: (
-              <OnboardingRouteGuard step="emailVerification">
-                <EmailVerificationPage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.NICKNAME,
-            element: (
-              <OnboardingRouteGuard step="nickname">
-                <OnboardingNicknamePage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.PROFILE,
-            element: (
-              <OnboardingRouteGuard step="profile">
-                <ProfilePage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.SKIN_TYPES,
-            element: (
-              <OnboardingRouteGuard step="skinTypes">
-                <SkinTypesPage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.SKIN_CONCERNS,
-            element: (
-              <OnboardingRouteGuard step="skinConcerns">
-                <SkinConcernsPage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.MATCHED_PRODUCTS,
-            element: (
-              <OnboardingRouteGuard step="matchedProducts">
-                <MatchedProductsPage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.MATCHED_PRODUCTS_SEARCH,
-            element: (
-              <OnboardingRouteGuard step="matchedProducts">
-                <MatchedProductSearchPage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS,
-            element: (
-              <OnboardingRouteGuard step="mismatchedProducts">
-                <MismatchedProductsPage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.MISMATCHED_PRODUCTS_SEARCH,
-            element: (
-              <OnboardingRouteGuard step="mismatchedProducts">
-                <MismatchedProductSearchPage />
-              </OnboardingRouteGuard>
-            ),
-          },
-          {
-            path: PATH.ONBOARDING.COMPLETE,
-            element: <CompletePage />,
-          },
-        ],
-      },
-      {
-        path: PATH.MY_PAGE.BASE,
-        element: <ProtectedRoute />,
-        children: [
           {
             path: PATH.MY_PAGE.REVIEW_EVALUATION.BASE,
             element: <Outlet />,
