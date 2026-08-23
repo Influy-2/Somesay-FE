@@ -1,4 +1,3 @@
-import type { ApiPage } from '../../api/types';
 import type {
   PreviewInfoDto,
   ProductDetailDto,
@@ -57,11 +56,4 @@ export const mapProductCardDtoToCard = (
 export const mapProductListDtoToCards = (data: ProductListResponseDto) => ({
   ...data,
   products: data.products.map(mapProductCardDtoToCard),
-});
-
-export const mapProductPreviewPageDtoToCards = (
-  page: ApiPage<PreviewInfoDto>
-): ApiPage<ProductCardType> => ({
-  ...page,
-  content: page.content.map(mapProductCardDtoToCard),
 });

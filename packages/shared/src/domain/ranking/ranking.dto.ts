@@ -1,10 +1,5 @@
-import type { ApiPage } from '../../api/types';
 import type { CreatorRankingDto } from '../creator/creator.dto';
 import type { PreviewInfoDto } from '../product/product.dto';
-
-export type CreatorRankingPageDto = ApiPage<CreatorRankingDto>;
-
-export type ProductRankingPreviewPageDto = ApiPage<PreviewInfoDto>;
 
 // 홈 크리에이터 신뢰도 랭킹 API의 응답 아이템입니다.
 export type HomeCreatorRankingDto = CreatorRankingDto;

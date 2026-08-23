@@ -17,15 +17,6 @@ export const mapProductRankingPageDtoToCards = (
   content: page.content.map(mapProductCardDtoToCard),
 });
 
-export const mapProductPreviewRankingPageDtoToCards = (
-  page: ApiPage<PreviewInfoDto>
-): ApiPage<ProductCardType> => ({
-  ...page,
-  content: page.content.map(mapProductCardDtoToCard),
-});
-
-export const rankingMapper = <T>(data: T): T => data;
-
 // 크리에이터 랭킹 변동 방향 계산 함수
 const getRankChangeDiff = (
   ranking: number,
@@ -86,37 +77,7 @@ export const mapHomeProductRanking = (
     })
   );
 
-// 홈 크리에이터 랭킹 응답의 잘못된 0위 값을 목록 순서로 보정합니다.
+// 홈 크리에이터 랭킹은 랭킹 목록과 응답 모양이 같아 같은 변환을 재사용합니다.
 export const mapHomeCreatorRanking = (
   data: HomeCreatorRankingDto[]
-): HomeCreatorRankingType[] =>
-  data.map(
-    ({
-      oldRanking,
-      creatorName,
-      profileImgUrl,
-      creatorId,
-      youtubeLink,
-      trustScore,
-      skinTypeIds,
-      subscriberNum,
-      ranking,
-      age,
-    }) => {
-      const rankingDiff = ranking - oldRanking;
-
-      return {
-        creatorId,
-        creatorName,
-        profileImgUrl,
-        youtubeLink,
-        trustScore,
-        skinTypeIds,
-        subscriberNum,
-        ranking,
-        age,
-        rankChange: Math.abs(rankingDiff),
-        rankChangeDiff: getRankChangeDiff(ranking, oldRanking),
-      };
-    }
-  );
+): HomeCreatorRankingType[] => data.map(mapCreatorRanking);
