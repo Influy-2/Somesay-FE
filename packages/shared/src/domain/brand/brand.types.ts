@@ -13,7 +13,7 @@ export interface BrandSummaryType {
   brandLogoUrl: string;
   brandImgUrl: string;
   avgRating: number;
-  reviewCount: number;
+  totalReviewCount: number;
   ranking: number;
   availableSubCategories: BrandAvailableSubCategoryType[];
 }

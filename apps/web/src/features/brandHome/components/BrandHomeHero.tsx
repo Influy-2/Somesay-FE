@@ -60,7 +60,7 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
             <span>
               리뷰
               <strong className="caption1-b">
-                {brand.reviewCount.toLocaleString()}
+                {brand.totalReviewCount.toLocaleString()}
               </strong>
             </span>
             <span className="bg-grey06 h-3 w-px" aria-hidden="true" />
