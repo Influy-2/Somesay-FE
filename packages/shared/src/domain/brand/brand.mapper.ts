@@ -1,24 +1,14 @@
 import type {
-  BrandAvailableSubCategoryDto,
   BrandDetailDto,
   BrandProductDto,
   BrandProductListDto,
 } from './brand.dto';
 import type {
-  BrandAvailableSubCategoryType,
   BrandSummaryType,
   BrandProductType,
   BrandProductPageType,
 } from './brand.types';
 import { mapProductCardDtoToCard } from '../product/product.mapper';
-
-// 백엔드 브랜드 소분류 DTO를 프론트엔드 소분류 타입으로 변환합니다.
-const mapBrandAvailableSubCategoryDto = (
-  item: BrandAvailableSubCategoryDto
-): BrandAvailableSubCategoryType => ({
-  subCategoryId: item.subCategoryId,
-  subName: item.subName,
-});
 
 // 브랜드 상세 DTO를 브랜드 홈 UI 타입으로 변환합니다.
 export const mapBrandDetailDto = (item: BrandDetailDto): BrandSummaryType => ({
@@ -29,9 +19,7 @@ export const mapBrandDetailDto = (item: BrandDetailDto): BrandSummaryType => ({
   avgRating: item.avgRating,
   reviewCount: item.totalReviewCount,
   ranking: item.ranking,
-  availableSubCategories: item.availableSubCategories.map(
-    mapBrandAvailableSubCategoryDto
-  ),
+  availableSubCategories: item.availableSubCategories,
 });
 
 // 기존 상품 카드 mapper를 재사용해 브랜드 상품 UI 타입으로 변환합니다.
