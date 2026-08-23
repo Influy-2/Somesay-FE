@@ -1,8 +1,8 @@
+import type { BrandDetailDto } from './brand.dto';
 import type {
-  BrandDetailDto,
-  BrandProductDto,
-  BrandProductListDto,
-} from './brand.dto';
+  ProductCardDto,
+  ProductListResponseDto,
+} from '../product/product.dto';
 import type {
   BrandSummaryType,
   BrandProductType,
@@ -23,9 +23,7 @@ export const mapBrandDetailDto = (item: BrandDetailDto): BrandSummaryType => ({
 });
 
 // 기존 상품 카드 mapper를 재사용해 브랜드 상품 UI 타입으로 변환합니다.
-export const mapBrandProductDto = (
-  item: BrandProductDto
-): BrandProductType => ({
+export const mapBrandProductDto = (item: ProductCardDto): BrandProductType => ({
   ...mapProductCardDtoToCard(item),
   mainCategoryId: item.mainCategoryId,
   subCategoryId: item.subCategoryId,
@@ -38,7 +36,7 @@ export const mapBrandProductDto = (
 
 // 브랜드 상품 목록의 페이지 메타데이터와 상품을 함께 변환합니다.
 export const mapBrandProductListDto = (
-  data: BrandProductListDto
+  data: ProductListResponseDto
 ): BrandProductPageType => ({
   ...data,
   products: data.products.map(mapBrandProductDto),

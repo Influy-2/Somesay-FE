@@ -4,10 +4,7 @@ import type { PreviewInfoDto } from '../product/product.dto';
 import { mapProductCardDtoToCard } from '../product/product.mapper';
 import type { CreatorRankingDto } from '../creator/creator.dto';
 import type { CreatorRankingUpDownType } from '../creator/creator.types';
-import type {
-  HomeCreatorRankingDto,
-  HomeProductRankingResponseDto,
-} from './ranking.dto';
+import type { HomeProductRankingResponseDto } from './ranking.dto';
 import type { HomeCreatorRankingType } from './ranking.types';
 
 export const mapProductRankingPageDtoToCards = (
@@ -79,5 +76,5 @@ export const mapHomeProductRanking = (
 
 // 홈 크리에이터 랭킹은 랭킹 목록과 응답 모양이 같아 같은 변환을 재사용합니다.
 export const mapHomeCreatorRanking = (
-  data: HomeCreatorRankingDto[]
+  data: CreatorRankingDto[]
 ): HomeCreatorRankingType[] => data.map(mapCreatorRanking);
