@@ -1,7 +1,12 @@
 import { Link } from 'react-router';
 
-import { CreatorRankingUpDownType } from '@somesay/shared';
-import { formatSubscriberCount, getAgeLabel } from '@somesay/shared';
+import {
+  formatSubscriberCount,
+  getAgeLabel,
+  getSkinTypeLabel,
+  getSkinTypeLabels,
+  type CreatorRankingUpDownType,
+} from '@somesay/shared';
 
 import { PATH } from '@/routes/path';
 import { ChipBasic } from '../chips/ChipBasic';
@@ -13,8 +18,10 @@ import {
 } from '@/shared/icons';
 
 type CreatorRankingUpDownRowProps = CreatorRankingUpDownType & {
-  // 내 조건과 일치하는 칩(연령·피부 타입)을 강조할지 판단합니다. 기본은 강조 없음.
+  // 내 연령과 일치하는 칩을 강조할지 판단합니다. 연령은 id가 아니라 enum이라 라벨로 비교합니다.
   isMyCondition?: (label: string) => boolean;
+  // 피부 타입은 서버와 사용자 양쪽 다 id를 갖고 있어 id로 비교합니다.
+  isMySkinTypeId?: (id: number) => boolean;
 };
 
 export const CreatorRankingUpDownRow = ({
@@ -26,12 +33,13 @@ export const CreatorRankingUpDownRow = ({
   creatorName,
   subscriberNum,
   age,
-  skinTypes,
+  skinTypeIds,
   trustScore,
   isMyCondition = () => false,
+  isMySkinTypeId = () => false,
 }: CreatorRankingUpDownRowProps) => {
   // aria-label을 위한 문자열 생성
-  const skinTypeLabel = skinTypes.join(', ');
+  const skinTypeLabel = getSkinTypeLabels(skinTypeIds).join(', ');
   const ageLabel = getAgeLabel(age);
 
   const rankChangeLabel =
@@ -96,13 +104,18 @@ export const CreatorRankingUpDownRow = ({
               label={ageLabel}
               variant={isMyCondition(ageLabel) ? 'blue' : 'default'}
             />
-            {skinTypes.map((type) => (
-              <ChipBasic
-                key={type}
-                label={type}
-                variant={isMyCondition(type) ? 'blue' : 'default'}
-              />
-            ))}
+            {skinTypeIds.map((skinTypeId) => {
+              const label = getSkinTypeLabel(skinTypeId);
+              if (!label) return null;
+
+              return (
+                <ChipBasic
+                  key={skinTypeId}
+                  label={label}
+                  variant={isMySkinTypeId(skinTypeId) ? 'blue' : 'default'}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

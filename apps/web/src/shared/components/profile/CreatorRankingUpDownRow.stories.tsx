@@ -17,7 +17,7 @@ const meta: Meta<typeof CreatorRankingUpDownRow> = {
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
     age: { control: 'select', options: AGE_TYPES },
-    skinTypes: { control: 'object' },
+    skinTypeIds: { control: 'object' },
     ranking: { control: 'number' },
     youtubeLink: { control: 'text' },
   },
@@ -37,15 +37,17 @@ export const Default: Story = {
     subscriberNum: 2,
     trustScore: 90,
     age: 'TWENTIES',
-    skinTypes: ['건성', '민감성'],
+    skinTypeIds: [1, 6],
     ranking: 2,
   },
 };
 
-// 내 조건(20대·건성)과 일치하는 칩만 강조된 상태
+// 내 조건(20대·건성)과 일치하는 칩만 강조된 상태.
+// 연령은 enum이라 라벨로, 피부 타입은 id로 비교합니다.
 export const MyConditionHighlighted: Story = {
   args: {
     ...Default.args,
-    isMyCondition: (label) => ['20대', '건성'].includes(label),
+    isMyCondition: (label) => label === '20대',
+    isMySkinTypeId: (id) => id === 1,
   },
 };

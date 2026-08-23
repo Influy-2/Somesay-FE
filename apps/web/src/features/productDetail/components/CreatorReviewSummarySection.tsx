@@ -1,6 +1,8 @@
-import type { CreatorReviewSummaryType } from '@somesay/shared';
-import { useAuth } from '@/shared/hooks';
-import { getSkinTypeLabel } from '@somesay/shared';
+import {
+  getSkinTypeLabel,
+  type CreatorReviewSummaryType,
+} from '@somesay/shared';
+import { useMySkinProfile } from '@/shared/hooks';
 import { ChipLarge, StarRating } from '@/shared/components';
 import {
   BulletDotIcon,
@@ -16,12 +18,10 @@ export const CreatorReviewSummarySection = ({
   aiSummary,
   frequentMention,
   consideration,
-  productSkinTypes,
+  productSkinTypeIds,
   productSkinExpectations,
 }: CreatorReviewSummaryType) => {
-  const { user } = useAuth();
-  const userSkinTypeLabels =
-    user?.skinTypes.map((id) => getSkinTypeLabel(id)).filter(Boolean) ?? [];
+  const { isMySkinTypeId } = useMySkinProfile();
   const mentionItems = [
     { label: '자주 언급되는 점', text: frequentMention },
     { label: '참고할 점', text: consideration },
@@ -94,13 +94,18 @@ export const CreatorReviewSummarySection = ({
         <div>
           <p className="body2-m text-grey06 mb-1.5">잘 맞는 피부 타입</p>
           <div className="flex flex-wrap gap-2.5">
-            {productSkinTypes?.map((type) => (
-              <ChipLarge
-                key={type}
-                label={type}
-                color={userSkinTypeLabels.includes(type) ? 'blue100' : 'white'}
-              />
-            ))}
+            {productSkinTypeIds?.map((skinTypeId) => {
+              const label = getSkinTypeLabel(skinTypeId);
+              if (!label) return null;
+
+              return (
+                <ChipLarge
+                  key={skinTypeId}
+                  label={label}
+                  color={isMySkinTypeId(skinTypeId) ? 'blue100' : 'white'}
+                />
+              );
+            })}
           </div>
         </div>
         <div>
@@ -108,7 +113,7 @@ export const CreatorReviewSummarySection = ({
           <div className="flex flex-wrap gap-2.5">
             {productSkinExpectations?.map((effect) => (
               <ChipLarge
-                key={effect.productSkinExpectationId}
+                key={effect.skinExpectationId}
                 label={effect.concern}
                 color="white"
               />

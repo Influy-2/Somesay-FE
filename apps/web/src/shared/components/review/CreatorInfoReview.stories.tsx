@@ -24,7 +24,7 @@ export const Default: Story = {
       subscriberNum: 124000,
       profileImgUrl: mockProfile,
       trustScore: 92,
-      skinTypes: ['건성', '보습'],
+      skinTypeIds: [1, 6],
       content:
         '촉촉하고 흡수가 빨라서 데일리로 쓰기 정말 좋아요. 자극 없이 순하게 스며드는 느낌이에요.',
       rating: 4.5,
@@ -50,7 +50,7 @@ export const NoEvaluation: Story = {
       subscriberNum: 32000,
       profileImgUrl: mockProfile,
       trustScore: 85,
-      skinTypes: ['복합성'],
+      skinTypeIds: [3],
       content: '향이 은은하고 발림성이 좋아요.',
       rating: 4,
       agreeCount: 0,

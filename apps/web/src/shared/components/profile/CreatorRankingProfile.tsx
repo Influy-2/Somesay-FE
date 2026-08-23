@@ -2,7 +2,7 @@
 
 import { YoutubeIcon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
-import { formatSubscriberCount } from '@somesay/shared';
+import { formatSubscriberCount, getSkinTypeLabels } from '@somesay/shared';
 
 export interface CreatorRankingProfileProps {
   ranking: number;
@@ -10,7 +10,7 @@ export interface CreatorRankingProfileProps {
   profileImageUrl: string;
   subscriberNum: number;
   trustScore: number;
-  skinTypes: string[];
+  skinTypeIds: number[];
 }
 
 export const CreatorRankingProfile = ({
@@ -19,8 +19,10 @@ export const CreatorRankingProfile = ({
   profileImageUrl,
   subscriberNum,
   trustScore,
-  skinTypes,
+  skinTypeIds,
 }: CreatorRankingProfileProps) => {
+  const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
+
   return (
     <div className="mb-4 flex gap-2.5">
       {ranking <= 30 && (
@@ -58,9 +60,9 @@ export const CreatorRankingProfile = ({
           </dl>
           <div
             className="flex gap-1"
-            aria-label={`태그: ${skinTypes.join(', ')}`}
+            aria-label={`태그: ${skinTypeLabels.join(', ')}`}
           >
-            {skinTypes.map((tag) => (
+            {skinTypeLabels.map((tag) => (
               <ChipBasic key={tag} label={tag} />
             ))}
           </div>

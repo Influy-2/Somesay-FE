@@ -1,7 +1,6 @@
 import type {
   ProductBasicType,
   ProductSkinExpectationType,
-  ProductSkinType,
 } from './product.types';
 import type { CommentPreviewDto } from '../comment/comment.dto';
 
@@ -32,7 +31,7 @@ export interface ProductCardDto extends ProductWishDto {
   reviewCount: number;
   creatorImageUrls: string[];
   shortSummary: string;
-  productSkinTypes: ProductSkinType[];
+  productSkinTypeIds: number[];
   productSkinExpectations: ProductSkinExpectationType[];
 }
 // 상품 랭킹/비슷한 기대효과 상품의 미리보기 카드 응답에 사용합니다.
@@ -65,7 +64,7 @@ interface ProductReviewCreatorDto {
   subscriberNum: number;
   profileImgUrl: string;
   trustScore: number;
-  skinTypes: string[];
+  skinTypeIds: number[];
 }
 
 export interface ProductReviewsDto extends ProductReviewCreatorDto {

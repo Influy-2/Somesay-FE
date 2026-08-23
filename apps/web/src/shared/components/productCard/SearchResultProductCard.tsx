@@ -1,5 +1,10 @@
 import { HeartButton } from '@/shared/components/buttons/HeartButton';
-import { ProductSearchResultType, formatPrice } from '@somesay/shared';
+import {
+  ProductSearchResultType,
+  formatPrice,
+  getSkinTypeLabel,
+  getSkinTypeLabels,
+} from '@somesay/shared';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
 import { Star16Icon as StarIcon } from '@/shared/icons';
@@ -12,7 +17,7 @@ interface SearchResultProductCardProps {
 
 // TODO: 로그인 연동 후 실제 사용자 피부 프로필 데이터로 교체합니다.
 const MOCK_USER_SKIN_PROFILE = {
-  skinTypes: ['건성'],
+  skinTypeIds: [1],
   expectedEffects: ['보습'],
 };
 
@@ -90,15 +95,19 @@ export const SearchResultProductCard = ({
         <span className="caption1-m text-grey06 self-center">잘 맞는 타입</span>
         <div
           className="flex flex-wrap gap-x-1 gap-y-2"
-          aria-label={`잘 맞는 타입: ${product.skinTypes.join(', ')}`}
+          aria-label={`잘 맞는 타입: ${getSkinTypeLabels(product.skinTypeIds).join(', ')}`}
         >
-          {product.skinTypes.map((type) => {
-            const isMatched = MOCK_USER_SKIN_PROFILE.skinTypes.includes(type);
+          {product.skinTypeIds.map((skinTypeId) => {
+            const label = getSkinTypeLabel(skinTypeId);
+            if (!label) return null;
+
+            const isMatched =
+              MOCK_USER_SKIN_PROFILE.skinTypeIds.includes(skinTypeId);
 
             return (
               <ChipBasic
-                key={type}
-                label={type}
+                key={skinTypeId}
+                label={label}
                 variant={isMatched ? 'blue' : 'default'}
               />
             );

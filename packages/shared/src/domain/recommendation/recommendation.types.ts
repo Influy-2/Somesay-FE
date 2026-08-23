@@ -3,7 +3,6 @@ import type { BasicCreatorProfileType } from '../creator/creator.types';
 import type {
   ProductCardType,
   ProductSkinExpectationType,
-  ProductSkinType,
 } from '../product/product.types';
 
 // 화면에서 고른 추천 조건입니다. 라벨(사람이 읽는 값)로 다루고, id 변환은 요청 직전에만 합니다.
@@ -36,7 +35,7 @@ export interface RecommendedProductType extends ProductCardType {
   mainCategoryId: number;
   subCategoryId: number;
   shortSummary: string;
-  productSkinTypes: ProductSkinType[];
+  productSkinTypeIds: number[];
   productSkinExpectations: ProductSkinExpectationType[];
   topReview: RecommendedTopReviewType | null;
   recommendationScore: number;

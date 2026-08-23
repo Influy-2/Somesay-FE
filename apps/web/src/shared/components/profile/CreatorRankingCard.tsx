@@ -1,6 +1,7 @@
 import {
   formatSubscriberCount,
   getAgeLabel,
+  getSkinTypeLabels,
   type CreatorRankingUpDownType,
 } from '@somesay/shared';
 import { Link } from 'react-router';
@@ -23,13 +24,16 @@ export const CreatorRankingCard = ({
   creatorName,
   subscriberNum,
   age,
-  skinTypes,
+  skinTypeIds,
   trustScore,
 }: CreatorRankingUpDownType) => {
   const subscriberLabel = formatSubscriberCount(subscriberNum);
   const ageLabel = getAgeLabel(age);
+  const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
   const skinTypeLabel =
-    skinTypes.length > 0 ? skinTypes.join(', ') : '피부 타입 정보 없음';
+    skinTypeLabels.length > 0
+      ? skinTypeLabels.join(', ')
+      : '피부 타입 정보 없음';
   const rankChangeLabel =
     rankChangeDiff === 'up'
       ? `${rankChange}단계 상승`
@@ -89,8 +93,8 @@ export const CreatorRankingCard = ({
 
             <div className="flex min-w-0 items-center gap-1 overflow-hidden">
               <ChipBasic label={ageLabel} />
-              {skinTypes.map((skinType, index) => (
-                <ChipBasic key={`${skinType}-${index}`} label={skinType} />
+              {skinTypeLabels.map((label) => (
+                <ChipBasic key={label} label={label} />
               ))}
             </div>
           </div>

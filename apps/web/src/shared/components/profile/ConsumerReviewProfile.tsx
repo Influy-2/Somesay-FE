@@ -1,20 +1,26 @@
 // Profile/소비자리뷰
+import { getConcernLabels, getSkinTypeLabels } from '@somesay/shared';
+
 import { ProfileNoImage } from './ProfileNoImage';
 interface ConsumerReviewProfileProps {
   nickname: string;
   profileImageUrl?: string | null;
-  skinTypes?: string[];
-  skinExpectations?: string[];
+  skinTypeIds?: number[];
+  skinExpectationIds?: number[];
   userId: number;
 }
 
 export const ConsumerReviewProfile = ({
   nickname,
   profileImageUrl,
-  skinTypes,
-  skinExpectations,
+  skinTypeIds = [],
+  skinExpectationIds = [],
   userId,
 }: ConsumerReviewProfileProps) => {
+  // 이 자리는 사용자 본인의 피부 조건이라 기대효과명("속건조 완화")이 아닌 고민명("속건조")으로 적습니다.
+  const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
+  const concernLabels = getConcernLabels(skinExpectationIds);
+
   return (
     <div className="flex items-center gap-2.5">
       {/* 프로필 이미지 */}
@@ -36,15 +42,15 @@ export const ConsumerReviewProfile = ({
         <div className="flex items-center gap-1">
           {/* 피부타입 */}
           <span className="caption1-m text-primary-300">
-            {skinTypes?.join(' · ')}
+            {skinTypeLabels.join(' · ')}
           </span>
           {/* 구분선 */}
-          {skinTypes?.length && skinExpectations?.length ? (
+          {skinTypeLabels.length && concernLabels.length ? (
             <div className="bg-grey03 mx-1 h-2 w-px" />
           ) : null}
           {/* 기대효과 */}
           <span className="caption1-m text-grey06">
-            {skinExpectations?.join(' · ')}
+            {concernLabels.join(' · ')}
           </span>
         </div>
       </div>

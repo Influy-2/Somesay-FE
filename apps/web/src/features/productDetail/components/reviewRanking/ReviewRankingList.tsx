@@ -145,8 +145,8 @@ export const ReviewRankingList = ({ productId }: ReviewRankingListProps) => {
                 nickname={comment.nickname}
                 isAgree={comment.reactionType === 'AGREE'}
                 content={comment.comment}
-                skinTypes={comment.skinTypes}
-                skinExpectations={comment.skinExpectations}
+                skinTypeIds={comment.skinTypeIds}
+                skinExpectationIds={comment.skinExpectationIds}
                 userId={comment.userId}
               />
             </li>

@@ -8,6 +8,6 @@ export interface CommentPreviewType {
   reactionType: CommentReactionType;
   comment: string;
   createdAt: string;
-  skinTypes: string[];
-  skinExpectations: string[];
+  skinTypeIds: number[];
+  skinExpectationIds: number[];
 }

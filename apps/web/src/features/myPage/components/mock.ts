@@ -14,8 +14,8 @@ type AccountInfo = {
   nickname: string;
   gender: string;
   age: AgeType;
-  skinTypes: string[];
-  skinConcerns: string[];
+  skinTypeIds: number[];
+  skinExpectationIds: number[];
   goodProducts: FitProduct[];
   badProducts: FitProduct[];
 };
@@ -347,8 +347,8 @@ export const MOCK_ACCOUNT: AccountInfo = {
   nickname: 'sobi22',
   gender: '여성',
   age: 'TWENTIES',
-  skinTypes: ['건성', '복합성'],
-  skinConcerns: ['주름/탄력', '속건조'],
+  skinTypeIds: [1, 3],
+  skinExpectationIds: [7, 2],
   goodProducts: [
     {
       productId: 1,

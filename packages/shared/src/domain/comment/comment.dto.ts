@@ -9,8 +9,8 @@ export interface CommentPreviewDto {
   reactionType: CommentReactionType;
   comment: string;
   createdAt: string;
-  skinTypes: string[];
-  skinExpectations: string[];
+  skinTypeIds: number[];
+  skinExpectationIds: number[];
 }
 
 export interface CommentPageDto {

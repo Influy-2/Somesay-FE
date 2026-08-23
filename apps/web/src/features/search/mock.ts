@@ -25,7 +25,7 @@ const MOCK_SEARCH_PRODUCT: ProductSearchResultType = {
   creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
   reviewSummary:
     '"세럼이 끈적임 없이 촉촉하고, 수분감이 많아서 특히 건성 피부인 분들에게 추천해요."',
-  skinTypes: ['건성', '민감성'],
+  skinTypeIds: [1, 6],
   expectedEffects: [
     '각질제거',
     '여드름 진정',
@@ -53,7 +53,7 @@ const MOCK_CREATOR_PROFILE: BasicCreatorProfileType = {
   subscriberNum: 12000,
   trustScore: 4.7,
   age: 'TWENTIES',
-  skinTypes: ['건성'],
+  skinTypeIds: [1],
 };
 
 const MOCK_REVIEW_PRODUCT: ProductSearchResultType = {

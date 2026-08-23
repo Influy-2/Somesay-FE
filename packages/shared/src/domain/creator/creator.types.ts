@@ -6,7 +6,7 @@ export interface CreatorType {
   profileImgUrl: string;
   youtubeLink: string;
   trustScore: number;
-  skinTypes: string[];
+  skinTypeIds: number[];
   personalColor: string;
   subscriberNum: number;
   ranking: number;
@@ -31,5 +31,5 @@ export type BasicCreatorProfileType = Pick<
   | 'subscriberNum'
   | 'trustScore'
   | 'age'
-  | 'skinTypes'
+  | 'skinTypeIds'
 >;

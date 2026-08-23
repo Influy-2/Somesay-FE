@@ -6,19 +6,24 @@ import { ArrowBackIcon } from '@/shared/icons';
 import { USER_SKIN_CONCERN_OPTIONS } from '@somesay/shared';
 import { MOCK_ACCOUNT } from '@/features/myPage';
 
+const MAX_SELECTIONS = 2;
+
 export const SkinConcernPage = () => {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState<string[]>(MOCK_ACCOUNT.skinConcerns);
+  const [selected, setSelected] = useState<number[]>(
+    MOCK_ACCOUNT.skinExpectationIds
+  );
 
   const isChanged =
-    JSON.stringify(selected) !== JSON.stringify(MOCK_ACCOUNT.skinConcerns);
+    JSON.stringify(selected) !==
+    JSON.stringify(MOCK_ACCOUNT.skinExpectationIds);
 
-  const handleSelect = (label: string) => {
+  const handleSelect = (id: number) => {
     setSelected((prev) =>
-      prev.includes(label)
-        ? prev.filter((s) => s !== label)
-        : prev.length < 2
-          ? [...prev, label]
+      prev.includes(id)
+        ? prev.filter((v) => v !== id)
+        : prev.length < MAX_SELECTIONS
+          ? [...prev, id]
           : prev
     );
   };
@@ -51,14 +56,14 @@ export const SkinConcernPage = () => {
         ]}
       />
       <div className="flex flex-col gap-4 px-4 pt-10">
-        <p className="caption1-m text-grey05">최대 2개 선택</p>
+        <p className="caption1-m text-grey05">최대 {MAX_SELECTIONS}개 선택</p>
         <div className="flex flex-wrap gap-3">
           {USER_SKIN_CONCERN_OPTIONS.map((option) => (
             <FilterChip
               key={option.value}
               label={option.label}
-              isSelected={selected.includes(option.label)}
-              onClick={() => handleSelect(option.label)}
+              isSelected={selected.includes(option.value)}
+              onClick={() => handleSelect(option.value)}
             />
           ))}
         </div>

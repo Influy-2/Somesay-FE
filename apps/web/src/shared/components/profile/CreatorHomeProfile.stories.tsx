@@ -18,7 +18,7 @@ const meta: Meta<typeof CreatorHomeProfile> = {
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
     age: { control: 'select', options: AGE_TYPES },
-    skinTypes: { control: 'object' },
+    skinTypeIds: { control: 'object' },
   },
 };
 
@@ -35,6 +35,6 @@ export const Default: Story = {
     subscriberNum: 0,
     trustScore: 4.5,
     age: 'TWENTIES',
-    skinTypes: ['텍스트'],
+    skinTypeIds: [1],
   },
 };

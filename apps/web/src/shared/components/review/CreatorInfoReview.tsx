@@ -21,7 +21,7 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
         profileImageUrl={review.profileImgUrl}
         subscriberNum={review.subscriberNum}
         trustScore={review.trustScore}
-        skinTypes={review.skinTypes}
+        skinTypeIds={review.skinTypeIds}
       />
 
       <div className="mb-5">

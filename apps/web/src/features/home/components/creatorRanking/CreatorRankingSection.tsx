@@ -15,7 +15,7 @@ const CREATOR_RANKING_TOOLTIP_DURATION_MS = 5000;
 
 export const CreatorRankingSection = () => {
   const { data: creatorRankingData, isPending } = useFetchHomeCreatorRanking();
-  const { isMyCondition } = useMySkinProfile();
+  const { isMyCondition, isMySkinTypeId } = useMySkinProfile();
   const [isTooltipVisible, setIsTooltipVisible] = useState(true);
   const [tooltipArrowOffset, setTooltipArrowOffset] = useState(0);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -113,6 +113,7 @@ export const CreatorRankingSection = () => {
               <CreatorRankingUpDownRow
                 {...creator}
                 isMyCondition={isMyCondition}
+                isMySkinTypeId={isMySkinTypeId}
                 key={creator.creatorId}
               />
             ))}

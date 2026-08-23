@@ -20,12 +20,12 @@ export interface CurationReviewDto extends BasicCreatorDto, ProductBasicType {
   content: string;
   rating: number;
   agreeRatio: number;
-  mostAgreedSkinTypeNames: string;
+  mostAgreedSkinTypeIds: number[];
 }
 
 // 홈 큐레이션 API의 data 응답 DTO입니다.
 export interface HomeCurationResponseDto {
-  userSkinTypeId: number;
+  skinTypeId: number;
   skinTypeName: string;
   reviews: CurationReviewDto[];
 }

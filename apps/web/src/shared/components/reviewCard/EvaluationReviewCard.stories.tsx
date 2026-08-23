@@ -32,7 +32,7 @@ const mockCreator = {
   trustScore: 100,
   ranking: 1,
   age: 'TWENTIES' as const,
-  skinTypes: ['건성'],
+  skinTypeIds: [1],
 };
 
 const reviewContent =

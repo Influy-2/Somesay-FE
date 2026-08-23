@@ -21,7 +21,7 @@ const MOCK_CREATOR = {
   subscriberNum: 128000,
   trustScore: 92.4,
   age: 'TWENTIES' as const,
-  skinTypes: ['건성'],
+  skinTypeIds: [1],
 };
 
 const MOCK_PRODUCT = {
@@ -68,7 +68,7 @@ export const MidRating: Story = {
         ...MOCK_CREATOR,
         creatorId: 2,
         creatorName: '뷰티러버',
-        skinTypes: ['지성'],
+        skinTypeIds: [2],
         trustScore: 78.1,
         subscriberNum: 45000,
       },
@@ -92,7 +92,7 @@ export const LongContent: Story = {
         ...MOCK_CREATOR,
         creatorId: 3,
         creatorName: '피부고민러',
-        skinTypes: ['건성'],
+        skinTypeIds: [1],
         trustScore: 85.7,
         subscriberNum: 65000,
       },
@@ -116,7 +116,7 @@ export const LuxuryProduct: Story = {
         ...MOCK_CREATOR,
         creatorId: 4,
         creatorName: '럭셔리뷰티',
-        skinTypes: ['민감성'],
+        skinTypeIds: [6],
         subscriberNum: 320000,
         trustScore: 96.2,
       },

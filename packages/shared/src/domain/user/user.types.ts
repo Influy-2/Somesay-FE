@@ -20,8 +20,8 @@ export interface UserType {
   nickname: string;
   gender: GenderType;
   age: AgeType;
-  skinTypes: number[];
-  skinExpectations: number[];
+  skinTypeIds: number[];
+  skinExpectationIds: number[];
 }
 
 // 서비스 전역에서 사용하는 로그인 사용자 정보입니다.

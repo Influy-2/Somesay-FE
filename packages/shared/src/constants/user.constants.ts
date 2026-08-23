@@ -70,3 +70,11 @@ export const getProductEffectLabel = (id: number) =>
 // 서버가 연령을 내려주지 않는 크리에이터가 있어 없는 경우까지 이 함수가 흡수합니다.
 export const getAgeLabel = (age?: AgeType | null) =>
   age ? AGE_LABELS[age] : '연령 정보 없음';
+
+// 서버가 피부 조건을 id 배열로 내려주므로 화면용 라벨 배열로 한 번에 바꿉니다.
+// 표에 없는 id는 빈 칩이 그려지지 않도록 버립니다.
+export const getSkinTypeLabels = (ids: number[]) =>
+  ids.map(getSkinTypeLabel).filter((label): label is string => Boolean(label));
+
+export const getConcernLabels = (ids: number[]) =>
+  ids.map(getConcernLabel).filter((label): label is string => Boolean(label));

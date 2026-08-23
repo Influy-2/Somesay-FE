@@ -32,7 +32,7 @@ export const MOCK_CREATOR: MockCreatorType = {
   subscriberNum: 300000,
   trustScore: 0.99,
   age: 'TWENTIES',
-  skinTypes: ['건성'],
+  skinTypeIds: [1],
   likeCount: 10000,
   youtubeUrl: 'https://www.youtube.com',
 };

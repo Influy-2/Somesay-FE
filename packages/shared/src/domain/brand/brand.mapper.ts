@@ -42,7 +42,7 @@ export const mapBrandProductDto = (
   mainCategoryId: item.mainCategoryId,
   subCategoryId: item.subCategoryId,
   reviewSummary: item.shortSummary,
-  skinTypes: item.productSkinTypes,
+  skinTypeIds: item.productSkinTypeIds,
   expectedEffects: item.productSkinExpectations.map(
     (expectation) => expectation.concern
   ),

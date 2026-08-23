@@ -20,10 +20,8 @@ export interface ProductWishResultType {
   isHearted: boolean;
 }
 
-export type ProductSkinType = string;
-
 export interface ProductSkinExpectationType {
-  productSkinExpectationId: number;
+  skinExpectationId: number;
   concern: string;
   isPrimary: boolean;
 }
@@ -49,7 +47,7 @@ export interface ProductReviewType {
   subscriberNum: number;
   profileImgUrl: string;
   trustScore: number;
-  skinTypes: string[];
+  skinTypeIds: number[];
   reviewId: number;
   content: string;
   rating: number;

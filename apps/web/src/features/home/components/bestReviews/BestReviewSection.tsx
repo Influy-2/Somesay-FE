@@ -1,4 +1,6 @@
 import { Link } from 'react-router';
+
+import { getSkinTypeLabels } from '@somesay/shared';
 import { ProductCardThumbnail, CreatorReviewCard } from '@/shared/components';
 import { SummaryBox } from './SummaryBox';
 import { useCarousel } from '@/shared/hooks/useCarousel';
@@ -12,7 +14,7 @@ export const BestReviewSection = () => {
   const { emblaRef, selectedIndex, slideCount } = useCarousel();
   const accessToken = useAuthTokenStore((state) => state.accessToken);
   const { data: userInfo, isFetched: isUserInfoFetched } = useFetchUserInfo();
-  const selectedSkinTypeId = userInfo?.skinTypes.at(0);
+  const selectedSkinTypeId = userInfo?.skinTypeIds.at(0);
   const canFetchCuration = !accessToken || isUserInfoFetched;
   const {
     data: curation,
@@ -98,7 +100,9 @@ export const BestReviewSection = () => {
                     plainText=" 의 사용자가 공감했어요"
                   />
                   <SummaryBox
-                    boldText={item.mostAgreedSkinTypeName}
+                    boldText={getSkinTypeLabels(
+                      item.mostAgreedSkinTypeIds
+                    ).join(', ')}
                     plainText=" 사용자가 가장 많이 공감했어요"
                   />
                 </div>

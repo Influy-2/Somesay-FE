@@ -81,8 +81,8 @@ const mapCommentPreviewDto = (item: CommentPreviewDto): CommentPreviewType => ({
   reactionType: item.reactionType,
   comment: item.comment,
   createdAt: item.createdAt,
-  skinTypes: item.skinTypes,
-  skinExpectations: item.skinExpectations,
+  skinTypeIds: item.skinTypeIds,
+  skinExpectationIds: item.skinExpectationIds,
 });
 
 // 백엔드 상품 리뷰 DTO를 화면에서 사용하던 상품 리뷰 타입으로 변환합니다.
@@ -94,7 +94,7 @@ export const mapProductReviewDto = (
   subscriberNum: item.subscriberNum,
   profileImgUrl: item.profileImgUrl,
   trustScore: item.trustScore,
-  skinTypes: item.skinTypes,
+  skinTypeIds: item.skinTypeIds,
   reviewId: item.reviewId,
   content: item.content,
   rating: item.rating,

@@ -12,7 +12,7 @@ export interface BasicCreatorDto {
   creatorName: string;
   profileImgUrl: string;
   age: AgeType | null;
-  skinTypes: string[];
+  skinTypeIds: number[];
   subscriberNum: number;
   trustScore: number;
 }

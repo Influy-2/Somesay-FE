@@ -8,7 +8,6 @@ export type {
   ProductRankingCardType,
   ProductReviewType,
   ProductSkinExpectationType,
-  ProductSkinType,
   ProductsByCategory,
   SortOptionsType,
 } from './domain/product/product.types';
