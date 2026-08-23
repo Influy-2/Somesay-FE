@@ -1,6 +1,5 @@
 import type {
   GenderOption,
-  AgeOption,
   UserSkinTypeOption,
   UserSkinConcernOption,
   UserSkinExpectationOption,
@@ -11,15 +10,6 @@ export const GENDER_OPTIONS: GenderOption[] = [
   { value: 'male', label: '남성' },
   { value: 'female', label: '여성' },
   { value: 'none', label: '해당없음' },
-];
-
-export const AGE_OPTIONS: AgeOption[] = [
-  { value: '10', label: '10대' },
-  { value: '20', label: '20대' },
-  { value: '30', label: '30대' },
-  { value: '40', label: '40대' },
-  { value: '50', label: '50대' },
-  { value: '60', label: '60대 이상' },
 ];
 
 // 서버 age enum의 한글 표기입니다.

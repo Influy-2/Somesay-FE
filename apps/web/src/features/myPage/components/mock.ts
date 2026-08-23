@@ -13,7 +13,7 @@ type AccountInfo = {
   profileImageUrl: string | null;
   nickname: string;
   gender: string;
-  age: string;
+  age: AgeType;
   skinTypes: string[];
   skinConcerns: string[];
   goodProducts: FitProduct[];
@@ -346,7 +346,7 @@ export const MOCK_ACCOUNT: AccountInfo = {
   profileImageUrl: null,
   nickname: 'sobi22',
   gender: '여성',
-  age: '20대',
+  age: 'TWENTIES',
   skinTypes: ['건성', '복합성'],
   skinConcerns: ['주름/탄력', '속건조'],
   goodProducts: [

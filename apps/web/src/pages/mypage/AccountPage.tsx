@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router';
 import { PATH } from '@/routes/path';
+import { getAgeLabel } from '@somesay/shared';
+
 import { PageHeader } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import {
@@ -38,7 +40,7 @@ export const AccountPage = () => {
     },
     {
       label: '연령',
-      value: age,
+      value: getAgeLabel(age),
       to: `${ACCOUNT_BASE}/${PATH.MY_PAGE.ACCOUNT.AGE}`,
     },
   ];
