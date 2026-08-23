@@ -6,7 +6,9 @@ export const useFetchProductDetail = (productId?: number) => {
     typeof productId === 'number' && Number.isFinite(productId);
 
   const query = useQuery({
-    queryKey: QUERY_KEYS.PRODUCT.DETAIL(productId),
+    queryKey: isValidProductId
+      ? QUERY_KEYS.PRODUCT.DETAIL(productId)
+      : [...QUERY_KEYS.PRODUCT.ALL, productId],
     queryFn: () => fetchProductDetail(productId ?? 0),
     enabled: isValidProductId,
   });

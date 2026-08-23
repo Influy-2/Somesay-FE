@@ -1,12 +1,12 @@
 import type { ProductDetailType } from '@somesay/shared';
 import { BlackHeartButton, BrandProfile } from '@/shared/components';
-import { formatPrice } from '@somesay/shared';
+
 interface ProductHeroProps extends ProductDetailType {
   onLikeClick: () => void;
 }
 
 export const ProductHero = ({
-  productImgUrl,
+  productImageUrl,
   brandName,
   brandId,
   brandLogoUrl,
@@ -25,9 +25,9 @@ export const ProductHero = ({
       aria-label={`${brandName} ${productName} 상품 정보`}
     >
       <div className="bg-grey01 aspect-square w-full overflow-hidden">
-        {productImgUrl && (
+        {productImageUrl && (
           <img
-            src={productImgUrl}
+            src={productImageUrl}
             alt={productName}
             className="h-full w-full object-cover"
           />
@@ -60,8 +60,12 @@ export const ProductHero = ({
         <div className="flex items-center justify-between">
           <dl className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <dt className="body2-b">정가</dt>
-              <dd className="body2-m">{formatPrice(price)}</dd>
+              <dt className="body2-b">정가</dt>{' '}
+              <dd className="body2-m">
+                {price
+                  ? price.toLocaleString('ko-KR') + '원'
+                  : '가격 정보 없음'}
+              </dd>
             </div>
             <div className="flex items-center gap-1">
               <dt className="body2-b">용량</dt>

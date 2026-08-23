@@ -2,21 +2,10 @@ import type { CommentPreviewType } from '../comment/comment.types';
 
 export interface ProductBasicType {
   productId: number;
-  productImgUrl: string;
+  productImageUrl: string;
   brandName: string;
   productName: string;
   price: number;
-}
-
-export interface ProductWishType extends ProductBasicType {
-  isHearted: boolean;
-}
-
-export type ProductWishStatusType = 'LIKE' | 'NONE';
-
-export interface ProductWishResultType {
-  userId: number;
-  productId: number;
   isHearted: boolean;
 }
 
@@ -27,13 +16,18 @@ export interface ProductSkinExpectationType {
   concern: string;
   isPrimary: boolean;
 }
-export interface ProductCardType extends ProductWishType {
+export interface ProductCardType extends ProductBasicType {
   rating: number;
   reviewCount: number;
-  creatorImageUrls: string[];
+  creators: CreatorProfile[];
 }
 
-export interface ProductDetailType extends ProductWishType {
+interface CreatorProfile {
+  name: string;
+  profileImageUrl: string;
+}
+
+export interface ProductDetailType extends ProductBasicType {
   brandId: number;
   brandLogoUrl: string | null;
   volume: string | null;

@@ -17,10 +17,7 @@ export const StarRating = ({ rating }: StarRatingProps) => {
       {Array.from({ length: 5 }).map((_, i) => (
         <Star16Icon
           key={i}
-          className={cn(
-            'size-4',
-            i < filled ? 'text-primary-300' : 'text-grey03'
-          )}
+          className={cn('size-4', i < filled ? 'text-black' : 'text-grey03')}
         />
       ))}
     </div>

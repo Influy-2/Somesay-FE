@@ -4,7 +4,7 @@ import { CircleX20Icon } from '@/shared/icons';
 
 type SelectedItemProps = {
   productId: number;
-  productImgUrl: string;
+  productImageUrl: string;
   brandName: string;
   productName: string;
   onRemove: (productId: number) => void;
@@ -12,7 +12,7 @@ type SelectedItemProps = {
 
 export const SelectedItem = ({
   productId,
-  productImgUrl,
+  productImageUrl,
   brandName,
   productName,
   onRemove,
@@ -21,9 +21,9 @@ export const SelectedItem = ({
     <div className="flex shrink-0 flex-col items-center">
       <div className="relative w-20">
         <div className="bg-grey02 aspect-8/9 w-full overflow-hidden">
-          {productImgUrl && (
+          {productImageUrl && (
             <img
-              src={productImgUrl}
+              src={productImageUrl}
               alt={productName}
               className="size-full object-cover"
             />

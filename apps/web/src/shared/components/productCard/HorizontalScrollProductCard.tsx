@@ -3,29 +3,31 @@
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { ProductCardType } from '@somesay/shared';
-import { HeartButton, AvatarStack } from '@/shared/components';
+import { WhiteHeartButton, AvatarStack } from '@/shared/components';
 import { PATH } from '@/routes/path';
 
-export type HorizontalScrollProductCardProps = ProductCardType & {
-  onHeartToggle: () => void;
-};
+export type HorizontalScrollProductCardProps = ProductCardType;
 
 export const HorizontalScrollProductCard = ({
   productId,
-  productImgUrl,
+  productImageUrl,
   brandName,
   productName,
   price,
   rating,
   reviewCount,
   isHearted,
-  creatorImageUrls,
-  onHeartToggle,
+  creators,
 }: HorizontalScrollProductCardProps) => {
   const formattedPrice = price
     ? price.toLocaleString('ko-KR') + '원'
     : '가격 정보 없음';
   const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
+  const creatorNames = creators.map((c) => c.name).join(', ');
+
+  const onHeartToggle = () => {
+    console.log('하트클릭');
+  };
   const formattedRating =
     (String(rating).split('.')[1]?.length ?? 0) > 2
       ? rating.toFixed(2)
@@ -34,13 +36,13 @@ export const HorizontalScrollProductCard = ({
   return (
     <article
       className="relative flex w-39 shrink-0 flex-col items-start gap-2"
-      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creatorNames}`}
     >
       <div className="bg-grey02 relative aspect-39/44 h-44 self-stretch overflow-hidden">
         <div aria-hidden="true" className="h-full w-full">
-          {productImgUrl && productImgUrl.length > 0 && (
+          {productImageUrl && productImageUrl.length > 0 && (
             <img
-              src={productImgUrl}
+              src={productImageUrl}
               alt=""
               className="size-full object-cover"
             />
@@ -48,7 +50,7 @@ export const HorizontalScrollProductCard = ({
         </div>
 
         <div className="absolute right-2 bottom-2 z-1">
-          <HeartButton
+          <WhiteHeartButton
             isHearted={isHearted}
             onHeartToggle={onHeartToggle}
             productName={productName}
@@ -71,7 +73,7 @@ export const HorizontalScrollProductCard = ({
             </div>
             <span className="body2-m text-black">({formattedReviewCount})</span>
           </div>
-          <AvatarStack creatorImageUrls={creatorImageUrls} />
+          <AvatarStack creators={creators} />
         </div>
       </div>
 

@@ -1,8 +1,5 @@
 export type {
   ProductBasicType,
-  ProductWishType,
-  ProductWishResultType,
-  ProductWishStatusType,
   ProductCardType,
   ProductDetailType,
   ProductRankingCardType,
@@ -19,7 +16,6 @@ export type {
 } from './domain/search/search.types';
 
 export type {
-  BrandAvailableSubCategoryType,
   BrandSummaryType,
   BrandProductSortType,
   BrandProductType,
@@ -31,7 +27,6 @@ export type {
   CreatorRankingUpDownType,
   BasicCreatorProfileType,
 } from './domain/creator/creator.types';
-export type { HomeCreatorRankingType } from './domain/ranking/ranking.types';
 
 export * from './domain/category/category.types';
 export * from './domain/filter/filter.types';
@@ -42,24 +37,11 @@ export type {
   CreatorReviewSummaryType,
   TimeLinkType,
   TimeLinksType,
-  HomeCurationReviewType,
-  HomeCurationType,
 } from './domain/review/review.types';
 
-export type {
-  HomeRecommendationParamsType,
-  RecommendedProductsWishResultType,
-  RecommendedProductType,
-  RecommendedTopReviewType,
-  SelectedFiltersType,
-} from './domain/recommendation/recommendation.types';
-
 export * from './constants/user.constants';
+export { formatSubscriberCount } from './utils';
 
-// UTILS
-export { formatSubscriberCount } from './utils/formatSubscriberCount';
-export { formatPrice } from './utils/formatPrice';
-export { formatAgeGroup } from './utils/formatAgeGroup';
 //domain - auth
 export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
 export type {
@@ -102,21 +84,12 @@ export * from './api/user/fetchUserInfo.api';
 export * from './api/ranking/fetchCreatorRanking.api';
 export * from './api/ranking/fetchProductRanking.api';
 
-//api - home
-export * from './api/home/fetchHomeCreatorRanking.api';
-export * from './api/home/fetchHomeProductRanking.api';
-export * from './api/home/fetchHomeCuration.api';
-export * from './api/home/fetchHomeRecommendations.api';
-export * from './api/home/postRecommendProductsWish.api';
-
 //api - product
-export * from './api/product/fetchHomeProductList.api';
 export * from './api/product/fetchProductsByCategory.api';
 export * from './api/product/fetchProductDetail.api';
 export * from './api/product/fetchProductReviewOverview.api';
 export * from './api/product/fetchProductReviews.api';
 export * from './api/product/fetchSimilarProducts.api';
-export * from './api/product/patchProductWish.api';
 
 //api - category
 export * from './api/category/fetchCategories.api';
@@ -132,4 +105,3 @@ export * from './api/review/fetchReviewComments.api';
 
 //query
 export * from './query/queryKeys';
-export * from './query/productWishCache';

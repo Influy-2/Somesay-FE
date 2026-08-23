@@ -5,7 +5,7 @@ import type { ProductCardType } from '@somesay/shared';
 interface ReviewProductLinkProps {
   product: Pick<
     ProductCardType,
-    'productId' | 'brandName' | 'productName' | 'productImgUrl' | 'price'
+    'productId' | 'brandName' | 'productName' | 'productImageUrl' | 'price'
   >;
   showArrow?: boolean;
 }
@@ -20,7 +20,7 @@ export const ReviewProductLink = ({ product }: ReviewProductLinkProps) => {
       {/* 사진 */}
       <div className="border-grey02 h-[3.6875rem] w-[3.25rem] shrink-0 overflow-hidden border">
         <img
-          src={product.productImgUrl}
+          src={product.productImageUrl}
           alt=""
           className="h-full w-full object-cover"
         />

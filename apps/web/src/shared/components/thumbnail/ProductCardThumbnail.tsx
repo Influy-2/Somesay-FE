@@ -1,18 +1,12 @@
 // 컴포넌트 Thumbnail/기본형
-import { Link } from 'react-router';
-
 import { Star16Icon } from '@/shared/icons';
-import { PATH } from '@/routes/path';
-import { LoadingImage } from '../image/LoadingImage';
-import { formatPrice } from '@somesay/shared';
 interface ProductCardThumbnailProps {
   brandName: string;
   productName: string;
   price: number;
   rating: number;
-  reviewCount?: number;
-  productImgUrl: string;
-  productId?: number;
+  reviewCount: number;
+  productImageUrl: string;
 }
 
 export const ProductCardThumbnail = ({
@@ -21,19 +15,14 @@ export const ProductCardThumbnail = ({
   price,
   rating,
   reviewCount,
-  productImgUrl,
-  productId,
+  productImageUrl,
 }: ProductCardThumbnailProps) => {
-  const formattedReviewCount = reviewCount?.toLocaleString('ko-KR');
-  const formattedRating = rating.toFixed(2);
-  const reviewCountLabel =
-    formattedReviewCount === undefined
-      ? ''
-      : `, 리뷰 ${formattedReviewCount}개`;
+  const formattedPrice = price.toLocaleString('ko-KR');
+  const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
   return (
     <div
       className="border-grey03 relative flex w-full items-center overflow-hidden border bg-white p-5"
-      aria-label={`${brandName} ${productName}, ${formatPrice(price)}원, 별점 ${formattedRating}점${reviewCountLabel}`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 좌측 텍스트 */}
       <div
@@ -42,16 +31,14 @@ export const ProductCardThumbnail = ({
       >
         <p className="truncate">{brandName} </p>
         <p className="truncate tracking-[-0.014px]">{productName} </p>
-        <p className="truncate">{formatPrice(price)}</p>
+        <p className="truncate">{formattedPrice}원</p>
         <div className="flex items-center gap-1">
           {/* 별점 */}
           <div className="flex items-center">
-            <Star16Icon className="text-primary-300" />
-            <span>{formattedRating}</span>
+            <Star16Icon className="text-grey07" />
+            <span>{rating}</span>
           </div>
-          {formattedReviewCount !== undefined && (
-            <span className="truncate">({formattedReviewCount})</span>
-          )}
+          <span className="truncate">({formattedReviewCount})</span>
         </div>
       </div>
 
@@ -60,10 +47,9 @@ export const ProductCardThumbnail = ({
         className="absolute top-0 right-0 flex h-full w-1/2 shrink-0"
         aria-hidden="true"
       >
-        <LoadingImage
-          src={productImgUrl}
-          alt=""
-          wrapperClassName="h-full w-full"
+        <img
+          src={productImageUrl}
+          alt={`${brandName} ${productName} 제품 이미지`}
           className="h-full w-full object-cover"
         />
         <div
@@ -74,14 +60,6 @@ export const ProductCardThumbnail = ({
           }}
         />
       </div>
-
-      {productId !== undefined && (
-        <Link
-          to={`${PATH.PRODUCT.BASE}/${productId}`}
-          className="absolute inset-0 z-10"
-          aria-label={`${brandName} ${productName} 상세 보기`}
-        />
-      )}
     </div>
   );
 };

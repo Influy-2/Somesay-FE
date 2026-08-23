@@ -2,17 +2,15 @@
 // 글 길어지면 스크롤 가능한 버전(하단 블러)
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
-import { BasicCreatorProfile, StarRating } from '@/shared/components';
-import cn from '@/utils/cn';
+import { BasicCreatorProfile } from '@/shared/components';
+import { Star16Icon } from '@/shared/icons';
 import { BasicCreatorProfileType } from '@somesay/shared';
 
 interface CreatorReviewCardProps {
-  creator: BasicCreatorProfileType & { ranking?: number };
+  creator: BasicCreatorProfileType;
   rating: number;
   content: string;
   productName: string;
-  highlightedLabels?: readonly string[];
-  showFullContent?: boolean;
 }
 
 export const CreatorReviewCard = ({
@@ -20,8 +18,6 @@ export const CreatorReviewCard = ({
   content,
   productName,
   creator,
-  highlightedLabels = [],
-  showFullContent = false,
 }: CreatorReviewCardProps) => {
   const contentContainerRef = useRef<HTMLDivElement>(null);
   const [showOverflowIndicator, setShowOverflowIndicator] = useState(false);
@@ -60,43 +56,35 @@ export const CreatorReviewCard = ({
   return (
     <article
       aria-label={`${creator.nickname}의 ${productName} 리뷰`}
-      className="border-grey03 flex h-[15.25rem] w-full flex-col items-start gap-5 border border-solid bg-white p-5 px-4"
+      className="border-grey03 bg-grey01 flex w-full flex-col items-start gap-5 border border-solid p-5 px-4"
     >
       {/* 크리에이터 프로필 */}
-      <BasicCreatorProfile
-        {...creator}
-        highlightedLabels={highlightedLabels}
-        {...(creator.ranking === undefined
-          ? {}
-          : { trustRank: creator.ranking })}
-      />
+      <BasicCreatorProfile {...creator} />
       <div
         className="flex w-full flex-col items-start gap-1"
         aria-label={`별점 ${rating}점. ${content}`}
       >
         {/* 리뷰 별점 */}
         <div className="flex items-center gap-1" aria-hidden="true">
-          <StarRating rating={rating} />
+          {/* TODO: 디자인 전달되는 대로 별 구현 */}
+          <div className="flex items-center gap-px">
+            <Star16Icon />
+          </div>
           <span className="body2-sb text-[#1F2129]">{rating}</span>
         </div>
 
         {/* 스크롤 리뷰 내용 */}
-        <div className="relative w-full">
-          <div
-            ref={contentContainerRef}
-            onScroll={updateOverflowIndicator}
-            className={cn(
-              'scrollbar-hide w-full',
-              !showFullContent && 'max-h-[6.875rem] overflow-y-auto'
-            )}
-          >
-            <p aria-hidden="true" className="body2-m text-[#1F2129]">
-              {content}
-            </p>
-          </div>
+        <div
+          ref={contentContainerRef}
+          onScroll={updateOverflowIndicator}
+          className="scrollbar-hide relative max-h-[6.875rem] w-full overflow-y-auto"
+        >
+          <p aria-hidden="true" className="body2-m text-[#1F2129]">
+            {content}
+          </p>
           {/* 추가 내용 안내 */}
-          {!showFullContent && showOverflowIndicator && (
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-b from-white/0 to-white" />
+          {showOverflowIndicator && (
+            <div className="from-grey01/0 to-grey01 pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-b" />
           )}
         </div>
       </div>

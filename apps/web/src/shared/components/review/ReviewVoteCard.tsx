@@ -15,7 +15,7 @@ export const ReviewVoteCard = ({
   return (
     <article
       aria-label="리뷰 및 리뷰 평가"
-      className="border-grey03 flex w-full flex-col items-start gap-5 border border-solid bg-white p-5"
+      className="border-grey03 bg-grey01 flex w-full flex-col items-start gap-5 border border-solid p-5"
     >
       {/* 리뷰 글 */}
       <p className="body2-m text-[#1F2129]">{content}</p>

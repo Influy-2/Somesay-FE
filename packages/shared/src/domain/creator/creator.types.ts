@@ -8,7 +8,7 @@ export interface CreatorType {
   personalColor: string;
   subscriberNum: number;
   ranking: number;
-  ageGroup: string;
+  ageGroup: number;
 }
 
 type RankChangeDirection = 'up' | 'down' | 'same';

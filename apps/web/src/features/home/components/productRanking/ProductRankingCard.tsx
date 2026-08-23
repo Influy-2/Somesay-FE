@@ -1,12 +1,11 @@
-// Product/기본 컴포넌트
-
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { ProductCardType } from '@somesay/shared';
 import { WhiteHeartButton } from '@/shared/components';
-type ProductRankingCardProps = ProductCardType;
 
-export const BasicProductCard = ({
+type ProductRankingCardProps = ProductCardType & { ranking: number };
+
+export const ProductRankingCard = ({
   productId,
   productImageUrl,
   brandName,
@@ -14,11 +13,15 @@ export const BasicProductCard = ({
   price,
   rating,
   reviewCount,
+  ranking,
   isHearted,
   creators,
 }: ProductRankingCardProps) => {
-  const formattedPrice = price.toLocaleString('ko-KR');
-  const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
+  //TODO: 임시 null처리
+
+  const formattedReviewCount = reviewCount
+    ? reviewCount.toLocaleString('ko-KR')
+    : '0';
 
   const onHeartToggle = () => {
     console.log('하트클릭');
@@ -27,19 +30,27 @@ export const BasicProductCard = ({
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${brandName} ${productName}, ${formattedPrice}원, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creators.map((c) => c.name).join(', ')}`}
+      aria-label={`${ranking}위 ${brandName} ${productName}, ${price ? price + '원' : '가격 정보 없음'}, 별점 ${rating}점, 리뷰 ${formattedReviewCount}개, 리뷰한 크리에이터: ${creators.map((c) => c.name).join(', ')}`}
     >
       {/* 이미지 영역 */}
-      <div className="relative h-50 w-full overflow-hidden border-none">
+      <div className="relative h-[12.5rem] w-full overflow-hidden">
         {/* 상품 이미지 */}
         <div aria-hidden="true" className="border-grey02 h-full w-full border">
           {productImageUrl && productImageUrl.length > 0 && (
             <img
               src={productImageUrl}
               alt=""
-              className="size-full border border-none object-cover"
+              className="size-full object-cover"
             />
           )}
+        </div>
+
+        {/* 랭킹 배지 */}
+        <div
+          aria-hidden="true"
+          className="absolute top-0 left-0 flex size-8 items-center justify-center bg-black"
+        >
+          <span className="body2-m text-white">{ranking}</span>
         </div>
 
         {/* 찜 버튼 */}
@@ -66,14 +77,16 @@ export const BasicProductCard = ({
         </p>
 
         {/* 가격 */}
-        <p className="body2-m text-grey-black truncate">{formattedPrice}원</p>
+        <p className="body2-m text-grey-black truncate">
+          {price ? price.toLocaleString('ko-KR') + '원' : '가격 정보 없음'}
+        </p>
 
         {/* 별점 + 리뷰수 + 크리에이터 프로필 */}
         <div className="flex items-center gap-1">
           {/* 별점 */}
           <div className="flex items-center">
             <StarIcon className="size-4" />
-            <span className="body2-sb">{rating}</span>
+            <span className="body2-sb">{rating.toFixed(1)}</span>
           </div>
           {/* 리뷰수 */}
           <span className="body2-m">({formattedReviewCount})</span>
@@ -82,7 +95,7 @@ export const BasicProductCard = ({
             {[...creators].reverse().map((creator, index, arr) => (
               <div
                 key={creator.name}
-                className="relative size-5.5 overflow-hidden rounded-full border border-white"
+                className="relative size-[1.375rem] overflow-hidden rounded-full border border-white"
                 style={{ marginLeft: index === arr.length - 1 ? 0 : -6 }}
               >
                 <img

@@ -11,7 +11,7 @@ interface PreviewProps {
     productId: number;
     productName: string;
     brandName: string;
-    productImgUrl: string;
+    productImageUrl: string;
     price: number;
   };
 }

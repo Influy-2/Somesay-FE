@@ -13,14 +13,14 @@ const meta: Meta<typeof BasicProductCard> = {
 
   argTypes: {
     productId: { control: 'number' },
-    productImgUrl: { control: 'text' },
+    productImageUrl: { control: 'text' },
     brandName: { control: 'text' },
     productName: { control: 'text' },
     price: { control: 'number' },
     rating: { control: 'number' },
     reviewCount: { control: 'number' },
     isHearted: { control: 'boolean' },
-    creatorImageUrls: { control: 'object' },
+    creators: { control: 'object' },
   },
 };
 
@@ -30,14 +30,17 @@ type Story = StoryObj<typeof BasicProductCard>;
 export const Default: Story = {
   args: {
     productId: 1,
-    productImgUrl: mockItem,
+    productImageUrl: mockItem,
     brandName: '브랜드명',
     productName: '이름',
     price: 10000,
     rating: 4.5,
     reviewCount: 0,
     isHearted: false,
-    onHeartToggle: () => {},
-    creatorImageUrls: [mockProfile1, mockProfile2, mockProfile3],
+    creators: [
+      { name: '크리에이터1', profileImageUrl: mockProfile1 },
+      { name: '크리에이터2', profileImageUrl: mockProfile2 },
+      { name: '크리에이터3', profileImageUrl: mockProfile3 },
+    ],
   },
 };

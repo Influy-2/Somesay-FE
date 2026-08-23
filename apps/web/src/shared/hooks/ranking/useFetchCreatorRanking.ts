@@ -7,7 +7,7 @@ interface UseFetchCreatorRankingOptions {
 
 // 크리에이터 신뢰도 랭킹을 페이지 단위로 조회하는 React Query hook입니다.
 export const useFetchCreatorRanking = ({
-  size = 10,
+  size = 5,
 }: UseFetchCreatorRankingOptions = {}) => {
   const rankingParams = { size };
 
@@ -18,8 +18,8 @@ export const useFetchCreatorRanking = ({
       fetchCreatorRanking({ page: pageParam, ...rankingParams }),
     getNextPageParam: (lastPage) =>
       lastPage.hasNext ? lastPage.pageNumber + 1 : undefined,
-    // 전역 기본값과 달리 섹션 내부에서 재시도 UI를 직접 보여주므로 에러를 던지지 않습니다.
-    throwOnError: false,
+    staleTime: 1000 * 60 * 5, // 5분
+    gcTime: 1000 * 60 * 30, // 30분
   });
 
   return query;

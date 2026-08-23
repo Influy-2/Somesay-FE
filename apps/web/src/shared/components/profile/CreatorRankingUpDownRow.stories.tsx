@@ -14,7 +14,7 @@ const meta: Meta<typeof CreatorRankingUpDownRow> = {
     profileImageUrl: { control: 'text' },
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
-    ageGroup: { control: 'text' },
+    ageGroup: { control: 'number' },
     skinTypes: { control: 'object' },
     ranking: { control: 'number' },
     youtubeLink: { control: 'text' },
@@ -34,16 +34,8 @@ export const Default: Story = {
     youtubeLink: 'https://youtube.com',
     subscriberNum: 2,
     trustScore: 90,
-    ageGroup: '20대',
-    skinTypes: ['건성', '민감성'],
+    ageGroup: 20,
+    skinTypes: ['텍스트'],
     ranking: 2,
-  },
-};
-
-// 내 조건(20대·건성)과 일치하는 칩만 강조된 상태
-export const MyConditionHighlighted: Story = {
-  args: {
-    ...Default.args,
-    isMyCondition: (label) => ['20대', '건성'].includes(label),
   },
 };

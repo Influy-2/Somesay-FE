@@ -1,10 +1,4 @@
-import {
-  ALL_SUBCATEGORY_OPTION,
-  FILTER_CATEGORIES,
-  MAX_SELECTIONS,
-  SKIN_CONCERN_OPTIONS,
-  SKIN_TYPE_OPTIONS,
-} from './filter.constants';
+import { FILTER_CATEGORIES, MAX_SELECTIONS } from './filter.constants';
 import {
   BottomSheet,
   FilterChip,
@@ -18,6 +12,38 @@ import type {
 } from './filter.types';
 import { type CategoryGroupType, type SubcategoryType } from '@somesay/shared';
 import { useFetchCategories } from '@/shared/hooks';
+
+const ALL_SUBCATEGORY_OPTION: SubcategoryType = {
+  subCategoryId: 0,
+  subCategoryName: '전체',
+};
+
+// TODO: 피부 고민 선택지 API가 생기면 백엔드 응답값으로 교체
+const SKIN_CONCERN_OPTIONS = [
+  '보습',
+  '속건조',
+  '진정',
+  '여드름',
+  '붉은기',
+  '미백/잡티',
+  '주름/탄력',
+  '모공',
+  '피부결',
+  '각질',
+  '피부 장벽',
+  '흔적',
+];
+
+// TODO: 피부 타입 선택지 API가 생기면 백엔드 응답값으로 교체
+const SKIN_TYPE_OPTIONS = [
+  '건성',
+  '지성',
+  '복합성',
+  '수부지',
+  '민감성',
+  '여드름성',
+  '모르겠음',
+];
 
 interface FilterBottomSheetProps {
   isOpen: boolean;

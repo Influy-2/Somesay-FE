@@ -26,14 +26,14 @@ export const Default: Story = {
       '촉촉하고 흡수가 빨라서 데일리로 쓰기 정말 좋아요. 자극 없이 순하게 스며드는 느낌이에요.',
     product: {
       productId: 1,
-      productImgUrl: mockProductImg,
+      productImageUrl: mockProductImg,
       brandName: '이니스프리',
       productName: '블랙티 유스 에센스 200ml',
       price: 38000,
       rating: 4.5,
       reviewCount: 1240,
       isHearted: false,
-      creatorImageUrls: [mockProfile],
+      creators: [{ name: '크리에이터1', profileImageUrl: mockProfile }],
     },
   },
 };

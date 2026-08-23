@@ -4,22 +4,31 @@ import mockProfile3Img from '@/assets/mock_profile3_img.png';
 import mockProductImg from '@/assets/mock_product_img.png';
 import { ProductCardType, ProductsByCategory } from '@somesay/shared';
 
-const MOCK_CREATOR_IMAGE_URLS = [
-  mockProfileImg,
-  mockProfile2Img,
-  mockProfile3Img,
+const MOCK_CREATORS = [
+  {
+    name: '크리에이터1',
+    profileImageUrl: mockProfileImg,
+  },
+  {
+    name: '크리에이터2',
+    profileImageUrl: mockProfile2Img,
+  },
+  {
+    name: '크리에이터3',
+    profileImageUrl: mockProfile3Img,
+  },
 ];
 
 const MOCK_PRODUCT: ProductCardType = {
   productId: 1,
-  productImgUrl: mockProductImg,
+  productImageUrl: mockProductImg,
   brandName: '토리든',
   productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
   price: 10000,
   rating: 4.9,
   reviewCount: 43,
   isHearted: false,
-  creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
+  creators: MOCK_CREATORS,
 };
 
 // categoryId를 key로 하는 Map 구조

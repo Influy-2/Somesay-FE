@@ -21,7 +21,7 @@ export const AGE_OPTIONS: AgeOption[] = [
   { value: '60', label: '60대 이상' },
 ];
 
-export const SKIN_TYPE_OPTIONS: UserSkinTypeOption[] = [
+export const USER_SKIN_TYPE_OPTIONS: UserSkinTypeOption[] = [
   { value: 1, label: '건성' },
   { value: 2, label: '지성' },
   { value: 3, label: '복합성' },
@@ -56,7 +56,7 @@ export const USER_SKIN_CONCERN_OPTIONS: UserSkinConcernOption[] =
 
 // 아이디 가지고 한글 라벨 찾기
 export const getSkinTypeLabel = (id: number) =>
-  SKIN_TYPE_OPTIONS.find(({ value }) => value === id)?.label;
+  USER_SKIN_TYPE_OPTIONS.find(({ value }) => value === id)?.label;
 
 export const getConcernLabel = (id: number) =>
   USER_SKIN_EXPECTATION_OPTIONS.find(({ value }) => value === id)?.concern;

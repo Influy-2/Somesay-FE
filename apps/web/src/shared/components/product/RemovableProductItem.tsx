@@ -6,7 +6,7 @@ import { Modal } from '@/shared/components';
 
 type RemovableProductItemProps = {
   productId: number;
-  productImgUrl: string;
+  productImageUrl: string;
   brandName: string;
   productName: string;
   onDelete: (productId: number) => void;
@@ -15,7 +15,7 @@ type RemovableProductItemProps = {
 
 export const RemovableProductItem = ({
   productId,
-  productImgUrl,
+  productImageUrl,
   brandName,
   productName,
   onDelete,
@@ -33,9 +33,9 @@ export const RemovableProductItem = ({
       <li className="flex items-center px-4 py-5">
         <div className="flex flex-1 items-start gap-3">
           <div className="bg-grey02 h-20 w-18 overflow-hidden">
-            {productImgUrl && (
+            {productImageUrl && (
               <img
-                src={productImgUrl}
+                src={productImageUrl}
                 alt={productName}
                 className="size-full object-cover"
               />

@@ -1,11 +1,5 @@
 import type { ProductSearchResultType } from '../search/search.types';
-
-// 브랜드 상세의 이용 가능한 소분류 정보입니다.
-export interface BrandAvailableSubCategoryType {
-  subCategoryId: number;
-  subName: string;
-}
-
+import type { SubcategoryType } from '../category/category.types';
 // 브랜드 홈 상단에 표시하는 브랜드 요약 정보입니다.
 export interface BrandSummaryType {
   brandId: number;
@@ -15,7 +9,7 @@ export interface BrandSummaryType {
   rating: number;
   reviewCount: number;
   ranking: number;
-  availableSubCategories: BrandAvailableSubCategoryType[];
+  availableSubCategories: SubcategoryType[];
 }
 
 export type BrandProductSortType = 'RATING' | 'REVIEW' | 'PRICE';

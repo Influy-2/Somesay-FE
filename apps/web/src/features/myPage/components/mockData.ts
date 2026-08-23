@@ -1,6 +1,6 @@
 type FitProduct = {
   productId: number;
-  productImgUrl: string;
+  productImageUrl: string;
   productName: string;
   brandName: string;
 };
@@ -32,7 +32,7 @@ export type RecommendedCreator = {
       productId: number;
       productName: string;
       brandName: string;
-      productImgUrl: string;
+      productImageUrl: string;
       price: number;
     };
   };
@@ -54,7 +54,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productId: 1,
         productName: '당근 패드당근 패드',
         brandName: '스킨푸드',
-        productImgUrl: '',
+        productImageUrl: '',
         price: 10000,
       },
     },
@@ -74,7 +74,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productId: 2,
         productName: '녹두 약산성 클렌징폼 160ml',
         brandName: '이니스프리',
-        productImgUrl: '',
+        productImageUrl: '',
         price: 12000,
       },
     },
@@ -93,7 +93,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productId: 3,
         productName: '세라마이드 아토 로션',
         brandName: '시드물',
-        productImgUrl: '',
+        productImageUrl: '',
         price: 15000,
       },
     },
@@ -112,7 +112,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productId: 4,
         productName: '시카플러스트 밤 B5+ 100ml',
         brandName: '닥터자르트',
-        productImgUrl: '',
+        productImageUrl: '',
         price: 28000,
       },
     },
@@ -131,7 +131,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productId: 5,
         productName: '시카플러스트 밤 2x B5+ 100ml',
         brandName: '닥터자르트',
-        productImgUrl: '',
+        productImageUrl: '',
         price: 35000,
       },
     },
@@ -152,27 +152,27 @@ export const MOCK_EVALUATED_CREATORS_LIST = MOCK_RECOMMENDED_CREATORS.map(
 export const MOCK_EVALUATED_PRODUCTS = [
   {
     productId: 1,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '아토베리어 365 크림아토베리어 365크림',
   },
   {
     productId: 2,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '캐롯 패드 카로팅 카밍워터 패드 200매',
   },
   {
     productId: 3,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '아토베리어 365 선크림 SPF50+ PA+++',
   },
   {
     productId: 4,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '아토베리어 365 토너 200ml 대용량',
   },
   {
     productId: 5,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '아이오페 레티놀 엑스퍼트 0.1 크림',
   },
 ];
@@ -180,7 +180,7 @@ export const MOCK_EVALUATED_PRODUCTS = [
 export const MOCK_EVALUATED_PRODUCTS_LIST = [
   {
     productId: 1,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '아토베리어 365 크림아토베리어 365크림',
     brandName: '에스트라',
     reviewCount: 3,
@@ -188,7 +188,7 @@ export const MOCK_EVALUATED_PRODUCTS_LIST = [
   },
   {
     productId: 2,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '캐롯 패드 카로팅 카밍워터 패드 200매',
     brandName: '에스트라',
     reviewCount: 3,
@@ -196,7 +196,7 @@ export const MOCK_EVALUATED_PRODUCTS_LIST = [
   },
   {
     productId: 3,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '아토베리어 365 선크림 SPF50+ PA+++',
     brandName: '에스트라',
     reviewCount: 3,
@@ -204,7 +204,7 @@ export const MOCK_EVALUATED_PRODUCTS_LIST = [
   },
   {
     productId: 4,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '아토베리어 365 토너 200ml 대용량',
     brandName: '에스트라',
     reviewCount: 3,
@@ -212,7 +212,7 @@ export const MOCK_EVALUATED_PRODUCTS_LIST = [
   },
   {
     productId: 5,
-    productImgUrl: '',
+    productImageUrl: '',
     productName: '아이오페 레티놀 엑스퍼트 0.1 크림',
     brandName: '아이오페',
     reviewCount: 3,
@@ -233,7 +233,7 @@ export const MOCK_EVALUATED_REVIEWS = [
       productId: 1,
       productName: '[캐롯] 카로팅 카밍밍밍ㅁ이밍밍밍밍...',
       brandName: '토리든',
-      productImgUrl: '',
+      productImageUrl: '',
       price: 10000,
     },
     myComment: {
@@ -255,7 +255,7 @@ export const MOCK_EVALUATED_REVIEWS = [
       productId: 1,
       productName: '[캐롯] 카로팅 카밍밍밍ㅁ이밍밍밍밍...',
       brandName: '토리든',
-      productImgUrl: '',
+      productImageUrl: '',
       price: 10000,
     },
   },
@@ -264,70 +264,70 @@ export const MOCK_EVALUATED_REVIEWS = [
 export const MOCK_PRODUCTS: MockProduct[] = [
   {
     productId: 1,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '스킨푸드',
     productName: '당근 패드당근 패드',
     categoryId: 1,
   },
   {
     productId: 2,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '이니스프리',
     productName: '녹두 약산성 클렌징폼 160ml',
     categoryId: 3,
   },
   {
     productId: 3,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '시드물',
     productName: '세라마이드 아토 로션',
     categoryId: 1,
   },
   {
     productId: 4,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '닥터자르트',
     productName: '시카플러스트 밤 B5+ 100ml',
     categoryId: 1,
   },
   {
     productId: 5,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '닥터자르트',
     productName: '시카플러스트 밤 2x B5+ 100ml',
     categoryId: 1,
   },
   {
     productId: 6,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '바이오더마',
     productName: '센시비오 H2O 85ml',
     categoryId: 3,
   },
   {
     productId: 7,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '아비브',
     productName: '약산성 pH 폼 클렌저 180ml',
     categoryId: 3,
   },
   {
     productId: 8,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '라로슈포제',
     productName: '에파클라 모이스처라이저',
     categoryId: 1,
   },
   {
     productId: 9,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '이니스프리',
     productName: '그린티 씨드 세럼',
     categoryId: 1,
   },
   {
     productId: 10,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '코스알엑스',
     productName: '어드밴스드 달팽이 96 뮤신 파워 에센스',
     categoryId: 1,
@@ -350,19 +350,19 @@ export const MOCK_ACCOUNT: AccountInfo = {
   goodProducts: [
     {
       productId: 1,
-      productImgUrl: '',
+      productImageUrl: '',
       productName: '당근 패드당근 패드',
       brandName: '스킨푸드',
     },
     {
       productId: 2,
-      productImgUrl: '',
+      productImageUrl: '',
       productName: '녹두 약산성 클렌징폼 160ml',
       brandName: '이니스프리',
     },
     {
       productId: 3,
-      productImgUrl: '',
+      productImageUrl: '',
       productName: '세라마이드 아토 로션',
       brandName: '시드물',
     },
@@ -370,13 +370,13 @@ export const MOCK_ACCOUNT: AccountInfo = {
   badProducts: [
     {
       productId: 4,
-      productImgUrl: '',
+      productImageUrl: '',
       productName: '시카플러스트 밤 B5+ 100ml',
       brandName: '닥터자르트',
     },
     {
       productId: 5,
-      productImgUrl: '',
+      productImageUrl: '',
       productName: '시카플러스트 밤 2x B5+ 100ml',
       brandName: '닥터자르트',
     },

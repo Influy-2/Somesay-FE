@@ -9,14 +9,14 @@ import {
 const PRODUCTS: SelectableProduct[] = [
   {
     productId: 1,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '스킨푸드',
     productName: '캐롯 카로틴 Water 패드',
     categoryId: 1,
   },
   {
     productId: 2,
-    productImgUrl: '',
+    productImageUrl: '',
     brandName: '이니스프리',
     productName: '화산송이 클렌징폼',
     categoryId: 2,

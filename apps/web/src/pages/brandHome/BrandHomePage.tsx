@@ -12,13 +12,13 @@ import {
   useFetchBrandDetail,
   useFetchBrandProducts,
   useFetchBrandProductSearch,
-  useProductWish,
 } from '@/shared/hooks';
+import { useAuthGuard } from '@/features/auth';
 
 const ALL_CATEGORY_ID = 0;
 export const BrandHomePage = () => {
   const navigate = useNavigate();
-  const { toggleWish } = useProductWish();
+  const guardAction = useAuthGuard();
   const { brandId: brandIdParam } = useParams();
   const parsedBrandId = Number(brandIdParam);
   const isValidBrandId = Number.isInteger(parsedBrandId) && parsedBrandId > 0;
@@ -28,6 +28,9 @@ export const BrandHomePage = () => {
   const [selectedSubCategoryId, setSelectedSubCategoryId] =
     useState(ALL_CATEGORY_ID);
   const [sortType, setSortType] = useState<BrandProductSortType>('RATING');
+  const [wishOverrides, setWishOverrides] = useState<Record<number, boolean>>(
+    {}
+  );
   const { debouncedKeyword, updateDebouncedKeyword } =
     useDebouncedSearchKeyword();
   const hasSearchInput = searchValue.trim().length > 0;
@@ -58,9 +61,9 @@ export const BrandHomePage = () => {
     () => [
       { id: ALL_CATEGORY_ID, label: '전체' },
       ...(brandQuery.data?.availableSubCategories.map(
-        ({ subCategoryId, subName }) => ({
+        ({ subCategoryId, subCategoryName }) => ({
           id: subCategoryId,
-          label: subName,
+          label: subCategoryName,
         })
       ) ?? []),
     ],
@@ -68,8 +71,14 @@ export const BrandHomePage = () => {
   );
 
   const products = useMemo(
-    () => activeProductQuery.data?.pages.flatMap((page) => page.products) ?? [],
-    [activeProductQuery.data?.pages]
+    () =>
+      (
+        activeProductQuery.data?.pages.flatMap((page) => page.products) ?? []
+      ).map((product) => ({
+        ...product,
+        isHearted: wishOverrides[product.productId] ?? product.isHearted,
+      })),
+    [activeProductQuery.data?.pages, wishOverrides]
   );
   const productCount = activeProductQuery.data?.pages[0]?.totalCount ?? 0;
   const loadMoreRef = useInfiniteScroll({
@@ -92,15 +101,18 @@ export const BrandHomePage = () => {
     setSelectedSubCategoryId(subCategoryId);
   };
 
-  const handleHeartToggle = (productId: number) => {
+  const handleHeartToggle = guardAction((productId: number) => {
     const product = products.find((item) => item.productId === productId);
 
     if (!product) {
       return;
     }
 
-    toggleWish({ productId, isHearted: product.isHearted });
-  };
+    setWishOverrides((currentOverrides) => ({
+      ...currentOverrides,
+      [productId]: !product.isHearted,
+    }));
+  });
 
   if (!isValidBrandId) {
     return (

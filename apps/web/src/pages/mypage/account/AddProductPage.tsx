@@ -18,7 +18,7 @@ import cn from '@/utils/cn';
 
 type FitProduct = {
   productId: number;
-  productImgUrl: string;
+  productImageUrl: string;
   productName: string;
   brandName: string;
 };

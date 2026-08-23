@@ -6,34 +6,23 @@ import type {
   ProductListResponseDto,
   ProductReviewsPageDto,
   ProductReviewsDto,
-  PatchProductWishResponseDto,
 } from './product.dto';
 import type {
   ProductCardType,
   ProductDetailType,
   ProductReviewPageType,
   ProductReviewType,
-  ProductWishResultType,
 } from './product.types';
 import type { ReviewOverviewDto } from '../review/review.dto';
 import type { CreatorReviewSummaryType } from '../review/review.types';
 import type { CommentPreviewDto } from '../comment/comment.dto';
 import type { CommentPreviewType } from '../comment/comment.types';
 
-// 상품 찜 API 응답을 화면에서 사용하는 boolean 상태로 변환합니다.
-export const mapProductWishResponseDto = (
-  item: PatchProductWishResponseDto
-): ProductWishResultType => ({
-  userId: item.userId,
-  productId: item.productId,
-  isHearted: item.status === 'LIKE',
-});
-
 export const mapProductDetailDto = (
   item: ProductDetailDto
 ): ProductDetailType => ({
   productId: item.productId,
-  productImgUrl: item.productImgUrl,
+  productImageUrl: item.productImgUrl,
   brandName: item.brandName,
   productName: item.productName,
   price: item.price,
@@ -61,18 +50,24 @@ export const mapCreatorReviewSummary = (
   productSkinExpectations: item.productSkinExpectations,
 });
 
+const mapCreatorUrls = (urls: string[]) =>
+  urls.map((url) => ({
+    name: '',
+    profileImageUrl: url,
+  }));
+
 export const mapProductCardDtoToCard = (
   item: ProductCardDto
 ): ProductCardType => ({
   productId: item.productId,
-  productImgUrl: item.productImgUrl,
+  productImageUrl: item.productImgUrl,
   brandName: item.brandName,
   productName: item.productName,
   price: item.price,
   rating: item.avgRating,
   reviewCount: item.reviewCount ?? 0,
   isHearted: item.userWish,
-  creatorImageUrls: item.creatorImageUrls,
+  creators: mapCreatorUrls(item.creatorImageUrls),
 });
 
 // 상품 카드에 사용.
@@ -80,14 +75,14 @@ export const mapPreviewInfoDtoToCard = (
   item: PreviewInfoDto
 ): ProductCardType => ({
   productId: item.productId,
-  productImgUrl: item.productImgUrl,
+  productImageUrl: item.productImgUrl,
   brandName: item.brandName,
   productName: item.productName,
   price: item.price,
   rating: item.avgRating,
   reviewCount: item.reviewCount,
   isHearted: item.userWish,
-  creatorImageUrls: item.creatorImageUrls,
+  creators: mapCreatorUrls(item.creatorImageUrls),
 });
 
 export const mapProductListDtoToCards = (data: ProductListResponseDto) => ({

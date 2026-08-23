@@ -65,7 +65,7 @@ export const ProductsTab = ({
             <EvaluatedProductItemVertical
               key={product.productId}
               productId={product.productId}
-              productImgUrl={product.productImgUrl}
+              productImageUrl={product.productImageUrl}
               productName={product.productName}
               isSelected={selectedProductId === product.productId}
               onClick={setSelectedProductId}

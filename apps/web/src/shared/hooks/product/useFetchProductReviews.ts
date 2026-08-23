@@ -16,7 +16,9 @@ export const useFetchProductReviews = (
     typeof filterByMySkin === 'boolean' ? { filterByMySkin } : {};
 
   const query = useInfiniteQuery({
-    queryKey: QUERY_KEYS.PRODUCT.REVIEWS(productId, reviewParams),
+    queryKey: isValidProductId
+      ? QUERY_KEYS.PRODUCT.REVIEWS(productId, reviewParams)
+      : [...QUERY_KEYS.PRODUCT.ALL, productId, 'reviews', reviewParams],
     initialPageParam: 0,
     queryFn: ({ pageParam }) =>
       fetchProductReviews(productId ?? 0, {

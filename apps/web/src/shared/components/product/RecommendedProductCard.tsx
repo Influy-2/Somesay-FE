@@ -1,54 +1,55 @@
 // Product/상품추천화면
 
-import { formatPrice, type ProductCardType } from '@somesay/shared';
-import { Link } from 'react-router';
+import { useState } from 'react';
 
-import { PATH } from '@/routes/path';
-import { AvatarStack, HeartButton } from '@/shared/components';
+import recommendedProductCardImg from '@/assets/recommended_product_card_img.png';
+import mockProfileImg from '@/assets/mock_profile_img.svg';
+import mockProfile2Img from '@/assets/mock_profile2_img.png';
+import mockProfile3Img from '@/assets/mock_profile3_img.png';
+import { AvatarStack, WhiteHeartButton } from '@/shared/components';
 import { Star16Icon as StarIcon } from '@/shared/icons';
 
-export type RecommendedProductCardProps = ProductCardType & {
-  /** 추천 순서 (카드 왼쪽 위 숫자) */
-  order: number;
-  onHeartToggle: () => void;
+// TODO: API 연동 후 더미 데이터 제거
+const PRODUCT = {
+  order: 1,
+  brandName: '토리든',
+  productName: '캐롯 카로팅 카밍 워터 패드 50p',
+  price: '10,000원',
+  rating: 4.9,
+  reviewCount: 43,
+  productImageUrl: recommendedProductCardImg,
+  creators: [
+    { name: 'creator1', profileImageUrl: mockProfileImg },
+    { name: 'creator2', profileImageUrl: mockProfile2Img },
+    { name: 'creator3', profileImageUrl: mockProfile3Img },
+  ],
 };
 
-export const RecommendedProductCard = ({
-  productId,
-  brandName,
-  productName,
-  productImgUrl,
-  price,
-  rating,
-  reviewCount,
-  creatorImageUrls,
-  isHearted,
-  order,
-  onHeartToggle,
-}: RecommendedProductCardProps) => {
-  const formattedPrice = formatPrice(price);
-  const formattedReviewCount = reviewCount?.toLocaleString('ko-KR') || 0;
+export const RecommendedProductCard = () => {
+  const [isHearted, setIsHearted] = useState(false);
+
+  const formattedReviewCount = PRODUCT.reviewCount.toLocaleString('ko-KR');
 
   return (
-    <article className="bg-grey02 relative aspect-100/105 w-full overflow-hidden">
-      {productImgUrl && (
-        <img
-          src={productImgUrl}
-          alt=""
-          decoding="async"
-          className="absolute inset-0 size-full object-cover"
-          aria-hidden="true"
-        />
-      )}
+    <article
+      className="bg-grey02 relative aspect-[358/341] w-full overflow-hidden"
+      aria-label={`${PRODUCT.brandName} ${PRODUCT.productName}, ${PRODUCT.price}, 별점 ${PRODUCT.rating}점, 리뷰 ${formattedReviewCount}개`}
+    >
+      <img
+        src={PRODUCT.productImageUrl}
+        alt=""
+        className="absolute inset-0 size-full object-cover"
+        aria-hidden="true"
+      />
 
       {/* 하단 제품 정보 및 하트 */}
       <div className="absolute inset-x-0 bottom-0 flex items-end bg-linear-to-t from-black to-black/0 p-5">
         <div className="flex min-w-0 flex-1 flex-col gap-1 text-white">
           {/* 상품 기본 정보 */}
           <div aria-hidden="true">
-            <p className="body2-m truncate">{brandName}</p>
-            <p className="body2-m line-clamp-1">{productName}</p>
-            <p className="body2-m truncate">{formattedPrice}</p>
+            <p className="body2-m truncate">{PRODUCT.brandName}</p>
+            <p className="body2-m line-clamp-1">{PRODUCT.productName}</p>
+            <p className="body2-m truncate">{PRODUCT.price}</p>
           </div>
 
           {/* 상품 평가와 찜 */}
@@ -57,25 +58,21 @@ export const RecommendedProductCard = ({
             <div className="flex min-w-0 items-center gap-1" aria-hidden="true">
               <div className="flex shrink-0 items-center">
                 <StarIcon className="size-4 text-white" />
-                <span className="body2-sb">{rating.toFixed(1)}</span>
+                <span className="body2-sb">{PRODUCT.rating}</span>
               </div>
               <span className="body2-m shrink-0">({formattedReviewCount})</span>
-              {creatorImageUrls?.length > 0 && (
-                <AvatarStack
-                  creatorImageUrls={creatorImageUrls}
-                  borderColor="border-grey09"
-                />
-              )}
+              <AvatarStack
+                creators={PRODUCT.creators}
+                borderColor="border-grey09"
+              />
             </div>
 
             {/* 상품 찜 버튼 */}
-            <div className="z-1">
-              <HeartButton
-                isHearted={isHearted}
-                onHeartToggle={onHeartToggle}
-                productName={productName}
-              />
-            </div>
+            <WhiteHeartButton
+              isHearted={isHearted}
+              onHeartToggle={() => setIsHearted((prev) => !prev)}
+              productName={PRODUCT.productName}
+            />
           </div>
         </div>
       </div>
@@ -85,14 +82,8 @@ export const RecommendedProductCard = ({
         className="body2-m absolute top-0 left-0 flex size-9 items-center justify-center bg-black text-white"
         aria-hidden="true"
       >
-        {order}
+        {PRODUCT.order}
       </div>
-
-      <Link
-        to={`${PATH.PRODUCT.BASE}/${productId}`}
-        className="absolute inset-0"
-        aria-label={`${order}번째 추천 제품 ${brandName} ${productName}, ${formattedPrice}, 별점 ${rating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개 상세 페이지로 이동`}
-      />
     </article>
   );
 };

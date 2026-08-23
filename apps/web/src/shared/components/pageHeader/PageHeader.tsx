@@ -27,7 +27,7 @@ export const PageHeader = ({
           {title}
         </h1>
       )}
-      <div className="ml-auto flex items-center gap-3">
+      <div className="flex items-center justify-end gap-3">
         {right?.map((icon, idx) => (
           <React.Fragment key={idx}>{icon}</React.Fragment>
         ))}

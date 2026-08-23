@@ -6,7 +6,7 @@ import { ArrowRightIcon } from '@/shared/icons';
 
 interface EvaluatedProductItemHorizontalProps {
   productId: number;
-  productImgUrl: string;
+  productImageUrl: string;
   productName: string;
   brandName: string;
   reviewCount: number;
@@ -14,7 +14,7 @@ interface EvaluatedProductItemHorizontalProps {
 
 export const EvaluatedProductItemHorizontal = ({
   productId,
-  productImgUrl,
+  productImageUrl,
   productName,
   brandName,
   reviewCount,
@@ -27,9 +27,9 @@ export const EvaluatedProductItemHorizontal = ({
       aria-label={`${brandName} ${productName} 리뷰 평가 보기`}
     >
       <div className="bg-grey02 size-15 shrink-0 overflow-hidden rounded-full">
-        {productImgUrl && (
+        {productImageUrl && (
           <img
-            src={productImgUrl}
+            src={productImageUrl}
             alt={productName}
             className="h-full w-full object-cover"
           />

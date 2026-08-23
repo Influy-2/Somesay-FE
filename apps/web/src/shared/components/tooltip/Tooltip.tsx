@@ -4,7 +4,6 @@ import cn from '@/utils/cn';
 import { X16Icon } from '@/shared/icons';
 
 interface TooltipProps {
-  id?: string;
   label: string;
   isVisible: boolean;
   variant?: 'default' | 'withClose';
@@ -12,12 +11,9 @@ interface TooltipProps {
   className?: string;
   arrowClassName?: string;
   arrowPosition?: 'top' | 'bottom';
-  arrowOffset?: number;
-  size?: 'default' | 'compact';
 }
 
 export const Tooltip = ({
-  id,
   label,
   isVisible,
   variant = 'default',
@@ -25,21 +21,13 @@ export const Tooltip = ({
   className,
   arrowClassName,
   arrowPosition,
-  arrowOffset,
-  size = 'default',
 }: TooltipProps) => {
   if (!isVisible) return null;
 
   return (
     <div
-      id={id}
-      role={variant === 'withClose' ? 'dialog' : 'tooltip'}
-      {...(variant === 'withClose' ? { 'aria-label': label } : {})}
       className={cn(
-        'absolute z-10 flex w-max items-center bg-black text-white',
-        size === 'compact'
-          ? 'caption1-m gap-1.5 px-2 py-1.5'
-          : 'body2-m gap-2 px-2.5 py-2',
+        'body2-m absolute z-10 flex w-max items-center gap-2 bg-black px-2.5 py-2 text-white',
         className
       )}
     >
@@ -51,9 +39,6 @@ export const Tooltip = ({
             : 'bottom-full border-b-[#222222]',
           arrowClassName
         )}
-        {...(arrowOffset === undefined
-          ? {}
-          : { style: { left: `${arrowOffset}px` } })}
       />
       <div className="whitespace-pre-line">{label}</div>
       {variant === 'withClose' && onClose && (
