@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { AGE_TYPES } from '@somesay/shared';
-import { MemoryRouter } from 'react-router';
 
 import mockCreator from '@/assets/mock_creator.png';
 import { CreatorRankingCard } from './CreatorRankingCard';
@@ -12,11 +11,9 @@ const meta: Meta<typeof CreatorRankingCard> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <MemoryRouter>
-        <div className="w-[22.375rem]">
-          <Story />
-        </div>
-      </MemoryRouter>
+      <div className="w-[22.375rem]">
+        <Story />
+      </div>
     ),
   ],
   argTypes: {

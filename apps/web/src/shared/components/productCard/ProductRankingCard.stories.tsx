@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { MemoryRouter } from 'react-router';
 
 import mockProduct from '@/assets/mock_product_img.png';
 import mockProfile1 from '@/assets/mock_profile_img.svg';
@@ -13,11 +12,9 @@ const meta: Meta<typeof ProductRankingCard> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <MemoryRouter>
-        <div className="w-[12.1875rem]">
-          <Story />
-        </div>
-      </MemoryRouter>
+      <div className="w-[12.1875rem]">
+        <Story />
+      </div>
     ),
   ],
   argTypes: {
