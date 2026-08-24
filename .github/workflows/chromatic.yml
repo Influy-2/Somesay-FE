@@ -6,7 +6,7 @@ on:
       - develop
   push:
     branches:
-      - develop
+      - feat/59-code-refactor
 
 jobs:
   chromatic:
