@@ -9,12 +9,10 @@
     "lint": "eslint src --ext ts,tsx",
     "type-check": "tsc --noEmit",
     "test": "vitest run --project unit",
+    "test:storybook": "vitest run --project storybook",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "generate-stories": "node scripts/generate-stories.mjs",
-    "generate-stories:dry": "node scripts/generate-stories.mjs --dry-run",
-    "generate-stories:force": "node scripts/generate-stories.mjs --force"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@somesay/shared": "workspace:*",

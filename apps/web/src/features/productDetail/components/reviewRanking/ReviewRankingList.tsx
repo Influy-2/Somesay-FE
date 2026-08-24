@@ -108,6 +108,7 @@ export const ReviewRankingList = ({ productId }: ReviewRankingListProps) => {
             </p>
           </div>
         }
+        size="medium"
       >
         <div className="flex flex-col gap-5 px-4 pt-2 pb-5">
           {timeLinks?.timeLinks.map((link) => (
