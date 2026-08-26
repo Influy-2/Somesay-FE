@@ -1,24 +1,27 @@
-import type { ProductDetailType } from '@somesay/shared';
-import { BlackHeartButton, BrandProfile } from '@/shared/components';
 import { formatPrice } from '@somesay/shared';
-interface ProductHeroProps extends ProductDetailType {
-  onLikeClick: () => void;
+import { BlackHeartButton, BrandProfile } from '@/shared/components';
+import type { ProductDetailType } from '@somesay/shared';
+
+interface ProductHeroProps {
+  product: ProductDetailType;
+  onHeartToggle: () => void;
 }
 
-export const ProductHero = ({
-  productImgUrl,
-  brandName,
-  brandId,
-  brandLogoUrl,
-  productName,
-  price,
-  volume,
-  isHearted,
-  onLikeClick,
-  collabChannelName,
-  collabProfileImgUrl,
-  productNotes,
-}: ProductHeroProps) => {
+export const ProductHero = ({ product, onHeartToggle }: ProductHeroProps) => {
+  const {
+    productImgUrl,
+    brandName,
+    brandId,
+    brandLogoUrl,
+    productName,
+    price,
+    volume,
+    isHearted,
+    collabChannelName,
+    collabProfileImgUrl,
+    productNotes,
+  } = product;
+
   return (
     <section
       className="flex flex-col bg-white"
@@ -70,7 +73,7 @@ export const ProductHero = ({
               </dd>
             </div>
           </dl>
-          <BlackHeartButton isLiked={isHearted} onLikeToggle={onLikeClick} />
+          <BlackHeartButton isLiked={isHearted} onLikeToggle={onHeartToggle} />
         </div>
       </div>
     </section>

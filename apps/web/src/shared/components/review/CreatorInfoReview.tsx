@@ -10,8 +10,8 @@ export interface CreatorInfoReviewProps {
 }
 
 export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
-  const isEvaluated = review.agreeCount + review.disagreeCount > 0;
   const participantCount = review.agreeCount + review.disagreeCount;
+  const isEvaluated = participantCount > 0;
 
   return (
     <div className="flex flex-col px-4 pt-5">

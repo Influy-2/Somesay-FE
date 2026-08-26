@@ -53,9 +53,9 @@ export const CreatorReviewSummarySection = ({
 
           <span
             className="body1-b"
-            aria-label={`리뷰 ${reviewCount?.toLocaleString() ?? '0'}개`}
+            aria-label={`리뷰 ${reviewCount.toLocaleString()}개`}
           >
-            리뷰 {reviewCount?.toLocaleString() ?? '0'}
+            리뷰 {reviewCount.toLocaleString()}
           </span>
         </div>
       </div>
@@ -94,7 +94,7 @@ export const CreatorReviewSummarySection = ({
         <div>
           <p className="body2-m text-grey06 mb-1.5">잘 맞는 피부 타입</p>
           <div className="flex flex-wrap gap-2.5">
-            {productSkinTypeIds?.map((skinTypeId) => {
+            {productSkinTypeIds.map((skinTypeId) => {
               const label = getSkinTypeLabel(skinTypeId);
               if (!label) return null;
 
@@ -111,7 +111,7 @@ export const CreatorReviewSummarySection = ({
         <div>
           <p className="body2-m text-grey06 mb-1.5">기대 효과</p>
           <div className="flex flex-wrap gap-2.5">
-            {productSkinExpectations?.map((effect) => (
+            {productSkinExpectations.map((effect) => (
               <ChipLarge
                 key={effect.skinExpectationId}
                 label={effect.concern}

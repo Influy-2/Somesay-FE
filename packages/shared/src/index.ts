@@ -46,6 +46,11 @@ export type {
 } from './domain/review/review.types';
 
 export type {
+  CommentPreviewType,
+  CommentReactionType,
+} from './domain/comment/comment.types';
+
+export type {
   HomeRecommendationParamsType,
   RecommendedProductsWishResultType,
   RecommendedProductType,
