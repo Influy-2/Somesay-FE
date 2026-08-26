@@ -1,4 +1,4 @@
-import { cn } from '@/utils/cn';
+import cn from '@/utils/cn';
 import { InputFieldBase, type InputFieldBaseProps } from './InputFieldBase';
 
 export interface VerificationCodeInputProps extends Omit<

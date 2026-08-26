@@ -69,6 +69,7 @@ export const SortBar = ({
           {sortOptions.map((option) => (
             <li key={option.value}>
               <button
+                type="button"
                 className={cn(
                   'body1-sb w-full cursor-pointer pb-5 text-left',
                   currentSortValue === option.value

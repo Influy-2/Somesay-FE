@@ -4,7 +4,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
-import { cn } from '@/utils/cn';
+import cn from '@/utils/cn';
 
 type InputFieldState = 'empty' | 'filled' | 'error';
 

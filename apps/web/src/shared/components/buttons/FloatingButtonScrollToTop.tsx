@@ -1,6 +1,6 @@
 // shared/components/buttons/상단으로 바로 가기 플로팅 버튼
 import { ScrollTopIcon } from '@/shared/icons';
-import { cn } from '@/utils/cn';
+import cn from '@/utils/cn';
 
 interface FloatingButtonScrollToTopProps {
   className?: string;
