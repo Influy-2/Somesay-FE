@@ -1,4 +1,4 @@
-import { SortOptionsType } from '../domain/product/product.types';
+import type { ProductSortType } from '../domain/product/product.types';
 import type { BrandProductSortType } from '../domain/brand/brand.types';
 import type { HomeRecommendationParamsType } from '../domain/recommendation/recommendation.types';
 
@@ -28,7 +28,7 @@ export const QUERY_KEYS = {
     }: {
       mainCategoryId?: number;
       subCategoryId?: number;
-      sortType?: SortOptionsType['sortType'];
+      sortType?: ProductSortType;
     }) =>
       [
         ...QUERY_KEYS.PRODUCT.BY_CATEGORY_ALL(),

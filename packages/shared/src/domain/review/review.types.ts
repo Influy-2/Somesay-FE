@@ -1,6 +1,6 @@
 import type {
   ProductBasicType,
-  ProductSkinExpectationType,
+  ProductSkinFitType,
 } from '../product/product.types';
 import type { BasicCreatorProfileType } from '../creator/creator.types';
 
@@ -17,15 +17,13 @@ export interface CreatorReviewType {
   productId: number;
 }
 
-export interface CreatorReviewSummaryType {
+export interface CreatorReviewSummaryType extends ProductSkinFitType {
   productId: number;
   avgRating: number;
   reviewCount: number;
   aiSummary: string;
   frequentMention: string;
   consideration: string;
-  productSkinTypeIds: number[];
-  productSkinExpectations: ProductSkinExpectationType[];
 }
 
 export interface TimeLinkType {

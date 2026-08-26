@@ -1,6 +1,6 @@
 import {
   BasicCreatorProfileType,
-  ProductsByCategory,
+  ProductsByCategoryType,
   ProductCardType,
 } from '@somesay/shared';
 import mockProfileImg from '@/assets/mock_profile_img.svg';
@@ -62,7 +62,7 @@ const MOCK_PRODUCT_BASE: Omit<MockProductCardType, 'productId' | 'categoryId'> =
   };
 
 // 카테고리별 상품 목록
-export const MOCK_CATEGORY_PRODUCTS: ProductsByCategory[] = [
+export const MOCK_CATEGORY_PRODUCTS: ProductsByCategoryType[] = [
   {
     categoryId: 1,
     categoryTitle: '전체',

@@ -1,15 +1,15 @@
 export type {
   ProductBasicType,
-  ProductWishType,
+  ProductWishStateType,
   ProductWishResultType,
-  ProductWishStatusType,
+  ProductCategoryRefType,
+  ProductSkinExpectationType,
+  ProductSkinFitType,
   ProductCardType,
   ProductDetailType,
-  ProductRankingCardType,
   ProductReviewType,
-  ProductSkinExpectationType,
-  ProductsByCategory,
-  SortOptionsType,
+  ProductsByCategoryType,
+  ProductSortType,
 } from './domain/product/product.types';
 
 export type {

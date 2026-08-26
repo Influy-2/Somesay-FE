@@ -2,7 +2,8 @@ import type { SubcategoryType } from '../category/category.types';
 import type { BasicCreatorProfileType } from '../creator/creator.types';
 import type {
   ProductCardType,
-  ProductSkinExpectationType,
+  ProductCategoryRefType,
+  ProductSkinFitType,
 } from '../product/product.types';
 
 // 화면에서 고른 추천 조건입니다. 라벨(사람이 읽는 값)로 다루고, id 변환은 요청 직전에만 합니다.
@@ -31,12 +32,9 @@ export interface RecommendedTopReviewType {
 }
 
 // 추천 화면의 상품 카드 + 상세 속성 + 대표 리뷰를 한 항목으로 담습니다.
-export interface RecommendedProductType extends ProductCardType {
-  mainCategoryId: number;
-  subCategoryId: number;
+export interface RecommendedProductType
+  extends ProductCardType, ProductCategoryRefType, ProductSkinFitType {
   shortSummary: string;
-  productSkinTypeIds: number[];
-  productSkinExpectations: ProductSkinExpectationType[];
   topReview: RecommendedTopReviewType | null;
   recommendationScore: number;
 }

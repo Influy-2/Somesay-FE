@@ -2,7 +2,7 @@ import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProfile2Img from '@/assets/mock_profile2_img.png';
 import mockProfile3Img from '@/assets/mock_profile3_img.png';
 import mockProductImg from '@/assets/mock_product_img.png';
-import { ProductCardType, ProductsByCategory } from '@somesay/shared';
+import { ProductCardType, ProductsByCategoryType } from '@somesay/shared';
 
 const MOCK_CREATOR_IMAGE_URLS = [
   mockProfileImg,
@@ -24,7 +24,7 @@ const MOCK_PRODUCT: ProductCardType = {
 
 // categoryId를 key로 하는 Map 구조
 
-export const MOCK_CATEGORY_PRODUCTS: ProductsByCategory[] = [
+export const MOCK_CATEGORY_PRODUCTS: ProductsByCategoryType[] = [
   {
     categoryId: 1,
     categoryTitle: '전체',

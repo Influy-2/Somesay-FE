@@ -1,11 +1,11 @@
 import { fetchProductsByCategory, QUERY_KEYS } from '@somesay/shared';
-import type { SortOptionsType } from '@somesay/shared';
+import type { ProductSortType } from '@somesay/shared';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 interface UseFetchProductsOptions {
   mainCategoryId: number;
   subCategoryId?: number;
-  sortType?: SortOptionsType['sortType'];
+  sortType?: ProductSortType;
   size?: number;
 }
 
