@@ -34,8 +34,13 @@ export const RecommendedCreators = () => {
   if (!activeCreator) return null;
 
   return (
-    <div className="flex flex-col gap-4 pb-6">
-      <p className="body2-sb text-grey06">내가 좋아할 만한 크리에이터</p>
+    <section
+      aria-labelledby="recommended-creators-heading"
+      className="flex flex-col gap-4 pb-6"
+    >
+      <h2 id="recommended-creators-heading" className="body2-sb text-grey06">
+        내가 좋아할 만한 크리에이터
+      </h2>
 
       {/* 프로필 영역 */}
       <div className="scrollbar-hide flex min-w-0 items-center gap-3 overflow-x-auto">
@@ -104,6 +109,6 @@ export const RecommendedCreators = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };

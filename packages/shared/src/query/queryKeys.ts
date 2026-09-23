@@ -17,6 +17,7 @@ export const QUERY_KEYS = {
   USER: {
     ALL: ['user'] as const,
     INFO: () => [...QUERY_KEYS.USER.ALL, 'info'] as const,
+    MYPAGE: () => [...QUERY_KEYS.USER.ALL, 'mypage'] as const,
   },
   PRODUCT: {
     ALL: ['product'] as const,

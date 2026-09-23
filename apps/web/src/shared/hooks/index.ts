@@ -33,6 +33,7 @@ export { usePostUserProduct } from './userProduct/usePostUserProduct';
 
 // User
 export { useFetchUserInfo } from './user/useFetchUserInfo';
+export { useFetchUserMyPage } from './user/useFetchUserMyPage';
 export { useMySkinProfile } from './user/useMySkinProfile';
 
 // Review

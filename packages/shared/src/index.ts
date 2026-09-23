@@ -77,6 +77,8 @@ export type {
   AgeType,
   GenderType,
   UserInfoType,
+  UserMyPageStatisticsType,
+  UserMyPageType,
   UserType,
 } from './domain/user/user.types';
 export { AGE_TYPES } from './domain/user/user.types';
@@ -101,6 +103,7 @@ export * from './api/userProduct/postUserProduct.api';
 
 //api - user
 export * from './api/user/fetchUserInfo.api';
+export * from './api/user/fetchUserMyPage.api';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';

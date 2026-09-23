@@ -2,7 +2,10 @@
 export { AccountProfileImage } from './components/AccountProfileImage';
 export { InfoRow } from './components/InfoRow';
 export { InfoSection } from './components/InfoSection';
-export { MyPageDashboard } from './components/MyPageDashboard';
+export { MyActivityStatistics } from './components/MyActivityStatistics';
+export { MyPageFeedback } from './components/MyPageFeedback';
+export { MyPageSummarySkeleton } from './components/MyPageSummarySkeleton';
+export { MyProfile } from './components/MyProfile';
 export { ProductFitSection } from './components/ProductFitSection';
 export { RecommendedCreators } from './components/RecommendedCreators';
 
