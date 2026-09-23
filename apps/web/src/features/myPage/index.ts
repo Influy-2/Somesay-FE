@@ -8,6 +8,7 @@ export { MyPageSummarySkeleton } from './components/MyPageSummarySkeleton';
 export { MyProfile } from './components/MyProfile';
 export { ProductFitSection } from './components/ProductFitSection';
 export { RecommendedCreators } from './components/RecommendedCreators';
+export { RecommendedCreatorsTooltip } from './components/RecommendedCreatorsTooltip';
 
 // 미연동 화면용 mock 데이터입니다. API 연동 시 함께 정리합니다.
 export {
