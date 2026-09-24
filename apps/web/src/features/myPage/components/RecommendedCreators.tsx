@@ -1,92 +1,94 @@
-import { useCallback, useEffect, useState } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
+import { useCallback, useMemo } from 'react';
+import Autoplay from 'embla-carousel-autoplay';
 
-import { RecommendedCreatorProfile, Preview } from '@/shared/components';
+import { CarouselIndicator, ReviewPreviewCard } from '@/shared/components';
+import { useCarousel } from '@/shared/hooks/useCarousel';
 import { MOCK_RECOMMENDED_CREATORS } from './mock';
+import { RecommendedCreatorProfileRow } from './RecommendedCreatorProfileRow';
+
+/** 자동 넘김 간격. 반응을 보고 조정할 값이라 상수로 둡니다. */
+const CREATOR_ROTATION_MS = 5000;
 
 export const RecommendedCreators = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: 'start',
-  });
+  const creators = MOCK_RECOMMENDED_CREATORS;
 
-  const handleProfileClick = useCallback(
+  const options = useMemo(() => ({ loop: true, align: () => 16 }), []);
+
+  // 모션을 줄이도록 설정한 사용자에게는 자동 넘김을 걸지 않습니다.
+  const plugins = useMemo(() => {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    return prefersReducedMotion
+      ? []
+      : [
+          Autoplay({
+            delay: CREATOR_ROTATION_MS,
+            stopOnInteraction: false, // 조작하면 멈췄다가 다시 돕니다
+          }),
+        ];
+  }, []);
+
+  const { emblaRef, emblaApi, selectedIndex, slideCount, scrollTo } =
+    useCarousel({
+      options,
+      plugins,
+    });
+
+  const handleSelectCreator = useCallback(
     (index: number) => {
-      setActiveIndex(index);
-      emblaApi?.scrollTo(index);
+      scrollTo(index);
+      // 직접 고른 카드를 5초 온전히 볼 수 있도록 자동 넘김 타이머를 다시 시작합니다.
+      emblaApi?.plugins().autoplay?.reset();
     },
-    [emblaApi]
+    [emblaApi, scrollTo]
   );
 
-  useEffect(() => {
-    if (!emblaApi) return;
-    const onSelect = () => {
-      setActiveIndex(emblaApi.selectedScrollSnap());
-    };
-    emblaApi.on('select', onSelect);
-    return () => {
-      emblaApi.off('select', onSelect);
-    };
-  }, [emblaApi]);
-
-  const activeCreator = MOCK_RECOMMENDED_CREATORS[activeIndex];
-  if (!activeCreator) return null;
+  if (creators.length === 0) return null;
 
   return (
     <section
       aria-labelledby="recommended-creators-heading"
-      className="flex flex-col gap-4 pb-6"
+      className="flex flex-col gap-5 pb-6"
     >
-      <h2 id="recommended-creators-heading" className="body2-sb text-grey06">
+      <h2
+        id="recommended-creators-heading"
+        className="body1-sb px-4 text-black"
+      >
         내가 좋아할 만한 크리에이터
       </h2>
 
-      {/* 프로필 영역 */}
-      <div className="scrollbar-hide flex min-w-0 items-center gap-3 overflow-x-auto">
-        {/* 선택된 크리에이터: 프로필 풀로 */}
-        <div className="shrink-0">
-          <RecommendedCreatorProfile
-            creatorId={activeCreator.creatorId}
-            name={activeCreator.name}
-            profileImageUrl={activeCreator.profileImageUrl}
-            age={activeCreator.age}
-            skinType={activeCreator.skinType}
-          />
-        </div>
-        {/* 나머지 크리에이터: 이미지만 */}
-        {MOCK_RECOMMENDED_CREATORS.filter((_, i) => i !== activeIndex).map(
-          (creator) => {
-            const originalIndex = MOCK_RECOMMENDED_CREATORS.indexOf(creator);
-            return (
-              <button
-                key={creator.creatorId}
-                type="button"
-                onClick={() => handleProfileClick(originalIndex)}
-                className="shrink-0"
-              >
-                <div className="bg-grey02 size-15 overflow-hidden rounded-full opacity-50">
-                  {creator.profileImageUrl && (
-                    <img
-                      src={creator.profileImageUrl}
-                      alt={creator.name}
-                      className="h-full w-full object-cover"
-                    />
-                  )}
-                </div>
-              </button>
-            );
-          }
-        )}
-      </div>
+      {/* 프로필 줄 — 캐러셀을 따라 활성 크리에이터가 왼쪽 끝으로 옵니다 */}
+      <RecommendedCreatorProfileRow
+        creators={creators}
+        selectedIndex={selectedIndex}
+        onSelect={handleSelectCreator}
+      />
 
-      {/* 리뷰 카드 캐러셀 */}
-      <div className="overflow-visible">
-        <div ref={emblaRef} className="overflow-visible">
-          <div className="flex gap-3">
-            {MOCK_RECOMMENDED_CREATORS.map((creator) => (
-              <div key={creator.creatorId} className="min-w-0 shrink-0">
-                <Preview
+      {/* 리뷰 카드 + 인디케이터 */}
+      <div className="flex flex-col items-center gap-4">
+        {/* 리뷰 카드 */}
+        <div
+          ref={emblaRef}
+          className="w-full overflow-hidden"
+          role="region"
+          aria-label="추천 크리에이터 리뷰 캐러셀"
+        >
+          <div
+            className="flex gap-3 px-4"
+            aria-live="polite"
+            aria-atomic="false"
+          >
+            {creators.map((creator, index) => (
+              <div
+                key={creator.creatorId}
+                className="min-w-0 shrink-0"
+                aria-roledescription="slide"
+                aria-label={`슬라이드 ${index + 1} / ${creators.length}`}
+              >
+                <ReviewPreviewCard
+                  reviewId={creator.review.reviewId}
                   rating={creator.review.rating}
                   content={creator.review.content}
                   product={creator.review.product}
@@ -95,19 +97,8 @@ export const RecommendedCreators = () => {
             ))}
           </div>
         </div>
-        {/* 페이지네이션 */}
-        <div className="flex items-center justify-center gap-1 pt-4">
-          {MOCK_RECOMMENDED_CREATORS.map((_, i) => (
-            <div
-              key={i}
-              className={
-                i === activeIndex
-                  ? 'bg-grey08 h-2.5 w-1'
-                  : 'bg-grey03 h-1.5 w-1'
-              }
-            />
-          ))}
-        </div>
+
+        <CarouselIndicator count={slideCount} selectedIndex={selectedIndex} />
       </div>
     </section>
   );

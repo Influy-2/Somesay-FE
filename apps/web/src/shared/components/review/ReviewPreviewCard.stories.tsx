@@ -1,17 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Preview } from './Preview';
+import { ReviewPreviewCard } from './ReviewPreviewCard';
 
-const meta: Meta<typeof Preview> = {
-  title: 'Shared/Review/Preview',
-  component: Preview,
+const meta: Meta<typeof ReviewPreviewCard> = {
+  title: 'Shared/Review/ReviewPreviewCard',
+  component: ReviewPreviewCard,
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof Preview>;
+type Story = StoryObj<typeof ReviewPreviewCard>;
 
 export const Default: Story = {
   args: {
+    reviewId: 1,
     rating: 4.5,
     content:
       '패드가 얇고 에센스가 흥건해서 얼굴에 올리면 시원하게 진정되는 느낌이에요. 특히 세안 후에 볼 부분이 따갑거나 붉을 때 3분만 올려놔도 금방 가라앉아요.',
@@ -27,6 +28,7 @@ export const Default: Story = {
 
 export const ShortContent: Story = {
   args: {
+    reviewId: 2,
     rating: 4.0,
     content: '향이 은은하고 발림성이 좋아요.',
     product: {

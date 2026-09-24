@@ -51,7 +51,8 @@ export const MyPage = () => {
 
       <hr className="bg-grey01 my-7 h-1.75 border-0" />
 
-      <div className="relative px-4">
+      {/* 좌우 여백은 섹션이 직접 다룹니다 — 캐러셀이 화면 끝까지 흘러야 해서요. */}
+      <div className="relative">
         <RecommendedCreatorsTooltip />
         <RecommendedCreators />
       </div>
