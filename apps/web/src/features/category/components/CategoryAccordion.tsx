@@ -29,9 +29,14 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
           className="flex w-full cursor-pointer items-center justify-between"
         >
           <div className="flex items-center gap-3">
-            {/* TODO: 나중에 실제 카테고리 아이콘으로 교체 */}
-            <div className="bg-grey04 h-9 w-9 rounded-full" />
-            <span className="body1-sb">{category.mainCategoryName}</span>
+            <img
+              src={category.imageUrl}
+              alt=""
+              className="bg-grey04 size-9 rounded-full object-cover"
+            />
+            <span className={isOpen ? 'subhead-b' : 'subhead-sb'}>
+              {category.mainCategoryName}
+            </span>
           </div>
         </button>
         <Link
@@ -60,7 +65,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
           </li>
         ))}
       </ul>
-      <hr className="border-grey03 mx-4 my-7 border-t" aria-hidden="true" />
+      <hr className="border-grey02 mx-4 my-7 border-t" aria-hidden="true" />
     </li>
   );
 };

@@ -1,5 +1,8 @@
-import { CategoryAccordion } from '@/features/category';
-import { Link } from 'react-router';
+import {
+  CATEGORY_BANNER,
+  CategoryAccordion,
+  CategoryBanner,
+} from '@/features/category';
 import { PageHeader } from '@/shared/components';
 import { useFetchCategories } from '@/shared/hooks';
 
@@ -9,11 +12,7 @@ export const CategoriesPage = () => {
   return (
     <div className="mt-13.5 flex flex-col">
       <PageHeader title="카테고리" />
-      <Link to="/categories/daiso">
-        <div className="bg-grey03 mt-5 flex h-29.5 items-center justify-center">
-          <span className="body2-m">임시 배너</span>
-        </div>
-      </Link>
+      <CategoryBanner {...CATEGORY_BANNER} />
       <div className="pt-7">
         <ul className="flex flex-col">
           {categoryGroups.map((category) => (
