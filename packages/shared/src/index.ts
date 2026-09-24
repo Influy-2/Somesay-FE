@@ -6,6 +6,7 @@ export type {
   ProductSkinExpectationType,
   ProductSkinFitType,
   ProductCardType,
+  CategoryProductType,
   ProductDetailType,
   ProductReviewType,
   ProductsByCategoryType,

@@ -2,6 +2,7 @@ import {
   SearchFilterGroupType,
   SelectedFiltersType,
 } from '../types/search.types';
+import { EMPTY_FILTERS } from '../constants/search.constants';
 import {
   BottomSheet,
   FilterGroupTab,
@@ -21,12 +22,6 @@ const FILTER_GROUP: {
   { category: 'effect', label: '기대효과' },
   { category: 'category', label: '카테고리' },
 ];
-
-const EMPTY_FILTERS: SelectedFiltersType = {
-  skinType: [],
-  effect: [],
-  category: [],
-};
 
 // TODO: 피부 타입 선택지 API가 생기면 백엔드 응답값으로 교체
 const SKIN_TYPE_OPTIONS = [

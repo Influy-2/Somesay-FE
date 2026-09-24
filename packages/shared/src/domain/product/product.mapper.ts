@@ -1,10 +1,12 @@
 import type {
   PreviewInfoDto,
+  ProductCardDto,
   ProductDetailDto,
   ProductListResponseDto,
   PatchProductWishResponseDto,
 } from './product.dto';
 import type {
+  CategoryProductType,
   ProductCardType,
   ProductDetailType,
   ProductWishResultType,
@@ -53,7 +55,21 @@ export const mapProductCardDtoToCard = (
   creatorImageUrls: item.creatorImageUrls,
 });
 
+// 카테고리 상품 카드 DTO를 요약·피부 적합도까지 담은 화면용 타입으로 변환합니다.
+export const mapCategoryProductDto = (
+  item: ProductCardDto
+): CategoryProductType => ({
+  ...mapProductCardDtoToCard(item),
+  mainCategoryId: item.mainCategoryId,
+  subCategoryId: item.subCategoryId,
+  reviewSummary: item.shortSummary,
+  skinTypeIds: item.productSkinTypeIds,
+  expectedEffects: item.productSkinExpectations.map(
+    (expectation) => expectation.concern
+  ),
+});
+
 export const mapProductListDtoToCards = (data: ProductListResponseDto) => ({
   ...data,
-  products: data.products.map(mapProductCardDtoToCard),
+  products: data.products.map(mapCategoryProductDto),
 });

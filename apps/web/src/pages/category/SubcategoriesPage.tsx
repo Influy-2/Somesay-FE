@@ -1,79 +1,129 @@
 import { useState } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import {
+  SUBCATEGORY_SORT_OPTIONS,
+  SubcategoryLoadMore,
   SubcategoryProductList,
-  MOCK_SUBCATEGORY_PRODUCTS,
-} from '@/features/subcategory';
-import { SearchFilterBottomSheet } from '@/features/search';
-import { SearchFilter } from '@/shared/components';
+  useSubcategoryProducts,
+} from '@/features/category';
 import {
   HorizontalCategoriesTab,
   PageHeader,
+  SearchFilter,
   SortBar,
 } from '@/shared/components';
 import { ArrowBackIcon, SearchIcon } from '@/shared/icons';
-import { useFetchCategories } from '@/shared/hooks';
+import { PATH } from '@/routes/path';
+
 import type {
   SearchFilterGroupType,
   SelectedFiltersType,
 } from '@/features/search';
-
-const SORT_OPTIONS = [
-  { value: 'rating', label: '평점순' },
-  { value: 'review', label: '리뷰 많은 순' },
-  { value: 'price_low', label: '가격 낮은 순' },
-];
-
-const EMPTY_FILTERS: SelectedFiltersType = {
-  skinType: [],
-  effect: [],
-  category: [],
-};
+import { EMPTY_FILTERS, SearchFilterBottomSheet } from '@/features/search';
 
 export const SubcategoriesPage = () => {
   const navigate = useNavigate();
   const { categoryId: categoryIdParam } = useParams();
-  const categoryId = Number(categoryIdParam);
-  const [currentSortValue, setCurrentSortValue] = useState('rating');
-  const { data: categoryGroups = [] } = useFetchCategories();
+  const parsedCategoryId = Number(categoryIdParam);
+  const isValidCategoryId =
+    Number.isInteger(parsedCategoryId) && parsedCategoryId > 0;
 
+  const {
+    category,
+    isCategoryPending,
+    isCategoryError,
+    tabProps,
+    sortProps,
+    listProps,
+    loadMoreProps,
+  } = useSubcategoryProducts(isValidCategoryId ? parsedCategoryId : undefined);
+
+  // TODO: 카테고리 상품 API가 피부타입·기대효과 파라미터를 지원하면 목록 조회에 반영
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [activeCategory, setActiveCategory] =
+  const [activeFilterGroup, setActiveFilterGroup] =
     useState<SearchFilterGroupType>('skinType');
   const [selectedFilters, setSelectedFilters] =
     useState<SelectedFiltersType>(EMPTY_FILTERS);
   const [draftFilters, setDraftFilters] =
     useState<SelectedFiltersType>(EMPTY_FILTERS);
 
-  const currentCategory = categoryGroups.find(
-    (c) => c.mainCategoryId === categoryId
-  );
-  const categoryTitle = currentCategory?.mainCategoryName ?? '';
+  // 적용하지 않고 닫은 선택은 버리고, 적용된 값에서 다시 시작합니다.
+  const openFilter = (filterGroup: SearchFilterGroupType) => {
+    setDraftFilters(selectedFilters);
+    setActiveFilterGroup(filterGroup);
+    setIsFilterOpen(true);
+  };
 
-  const tabSubcategories = [
-    { id: 0, label: '전체' },
-    ...(currentCategory?.subCategories.map((sub) => ({
-      id: sub.subCategoryId,
-      label: sub.subCategoryName,
-    })) ?? []),
-  ];
+  const renderContent = () => {
+    // TODO: 카테고리 헤더·탭 스켈레톤으로 교체
+    if (isValidCategoryId && isCategoryPending) {
+      return (
+        <p role="status" className="body2-m text-grey06 px-4 py-16 text-center">
+          카테고리를 불러오는 중이에요.
+        </p>
+      );
+    }
 
-  const location = useLocation();
-  const initialSubId =
-    (location.state as { selectedSubCategoryId?: number } | null)
-      ?.selectedSubCategoryId ?? 0;
-  const [selectedId, setSelectedId] = useState(initialSubId);
+    // TODO: 재시도 버튼이 있는 에러 안내 UI로 교체
+    if (isCategoryError) {
+      return (
+        <p role="alert" className="body2-m text-grey06 px-4 py-16 text-center">
+          카테고리를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.
+        </p>
+      );
+    }
 
-  const filteredCount =
-    selectedId === 0
-      ? MOCK_SUBCATEGORY_PRODUCTS.filter((p) => p.categoryId === categoryId)
-          .length
-      : MOCK_SUBCATEGORY_PRODUCTS.filter((p) => p.subCategoryId === selectedId)
-          .length;
+    if (!category) {
+      return (
+        <p className="body2-m text-grey06 px-4 py-16 text-center">
+          카테고리를 찾을 수 없어요.
+        </p>
+      );
+    }
+
+    return (
+      <>
+        <div className="px-4 pt-5 pb-3.5">
+          <HorizontalCategoriesTab
+            {...tabProps}
+            ariaLabel={`${category.mainCategoryName} 소분류 카테고리`}
+          />
+        </div>
+        <div className="border-grey02 flex gap-3 border-y px-4 py-3.5">
+          <SearchFilter
+            placeholder="피부타입"
+            selectedLabel={selectedFilters.skinType}
+            onClick={() => openFilter('skinType')}
+          />
+          <SearchFilter
+            placeholder="기대효과"
+            selectedLabel={selectedFilters.effect}
+            onClick={() => openFilter('effect')}
+          />
+        </div>
+        <div className="pb-2.5">
+          <SortBar sortOptions={SUBCATEGORY_SORT_OPTIONS} {...sortProps} />
+        </div>
+        <SubcategoryProductList {...listProps} />
+        <SubcategoryLoadMore {...loadMoreProps} />
+        <SearchFilterBottomSheet
+          isOpen={isFilterOpen}
+          onClose={() => setIsFilterOpen(false)}
+          selectedFilters={selectedFilters}
+          activeCategory={activeFilterGroup}
+          onCategoryChange={setActiveFilterGroup}
+          onSubmit={setSelectedFilters}
+          onReset={() => setSelectedFilters(EMPTY_FILTERS)}
+          visibleCategories={['skinType', 'effect']}
+          draftFilters={draftFilters}
+          onDraftFiltersChange={setDraftFilters}
+        />
+      </>
+    );
+  };
 
   return (
-    <div className="mt-18.5 flex min-h-dvh flex-col bg-white">
-      {' '}
+    <div className="mt-13.5 flex flex-col bg-white">
       <PageHeader
         left={
           <button
@@ -84,65 +134,18 @@ export const SubcategoriesPage = () => {
             <ArrowBackIcon aria-hidden="true" />
           </button>
         }
-        title={currentCategory?.mainCategoryName ?? ''}
+        {...(category ? { title: category.mainCategoryName } : {})}
         right={[
-          <button type="button" aria-label="검색">
+          <Link
+            key="search"
+            to={PATH.SEARCH.BASE}
+            aria-label="검색 페이지로 이동"
+          >
             <SearchIcon aria-hidden="true" />
-          </button>,
+          </Link>,
         ]}
       />
-      <div className="px-4 pb-3.5">
-        <HorizontalCategoriesTab
-          categories={tabSubcategories}
-          selectedId={selectedId}
-          onSelect={setSelectedId}
-          ariaLabel={`${categoryTitle} 소분류 카테고리`}
-        />
-      </div>
-      <div className="border-grey02 flex gap-3 border-y px-4 py-3.5">
-        <SearchFilter
-          placeholder="피부타입"
-          selectedLabel={selectedFilters.skinType as string[]}
-          onClick={() => {
-            setDraftFilters(selectedFilters);
-            setActiveCategory('skinType');
-            setIsFilterOpen(true);
-          }}
-        />
-        <SearchFilter
-          placeholder="기대효과"
-          selectedLabel={selectedFilters.effect as string[]}
-          onClick={() => {
-            setDraftFilters(selectedFilters);
-            setActiveCategory('effect');
-            setIsFilterOpen(true);
-          }}
-        />
-      </div>
-      <div className="pb-2.5">
-        <SortBar
-          count={filteredCount}
-          sortOptions={SORT_OPTIONS}
-          currentSortValue={currentSortValue}
-          onSelectSort={setCurrentSortValue}
-        />
-      </div>
-      <SubcategoryProductList
-        categoryId={categoryId}
-        selectedSubcategoryId={selectedId}
-      />
-      <SearchFilterBottomSheet
-        isOpen={isFilterOpen}
-        onClose={() => setIsFilterOpen(false)}
-        selectedFilters={selectedFilters}
-        activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
-        onSubmit={(filters) => setSelectedFilters(filters)}
-        onReset={() => setSelectedFilters(EMPTY_FILTERS)}
-        visibleCategories={['skinType', 'effect']}
-        draftFilters={draftFilters}
-        onDraftFiltersChange={setDraftFilters}
-      />
+      {renderContent()}
     </div>
   );
 };

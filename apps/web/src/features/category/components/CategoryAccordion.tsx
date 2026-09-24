@@ -56,8 +56,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
         {category.subCategories.map((sub) => (
           <li key={sub.subCategoryId}>
             <Link
-              to={`${PATH.CATEGORIES.BASE}/${category.mainCategoryId}`}
-              state={{ selectedSubCategoryId: sub.subCategoryId }}
+              to={`${PATH.CATEGORIES.BASE}/${category.mainCategoryId}?subcategory=${sub.subCategoryId}`}
               className="body2-m cursor-pointer"
             >
               {sub.subCategoryName}

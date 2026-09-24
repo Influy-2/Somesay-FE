@@ -47,6 +47,15 @@ export interface ProductCardType
   creatorImageUrls: string[];
 }
 
+// 카테고리별 상품 목록 카드에 사용합니다.
+// BrandProductType과 모양이 같지만 사용처가 2곳이라 복제해 둡니다. 3번째가 생기면 조각으로 합칩니다.
+export interface CategoryProductType
+  extends ProductCardType, ProductCategoryRefType {
+  reviewSummary: string;
+  skinTypeIds: number[];
+  expectedEffects: string[];
+}
+
 export interface ProductDetailType
   extends ProductBasicType, ProductWishStateType {
   brandId: number;

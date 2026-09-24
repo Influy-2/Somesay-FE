@@ -1,5 +1,16 @@
 import categoryDaisoBanner from '@/assets/banner_category_daiso.svg';
 import { PATH } from '@/routes/path';
+import type { ProductSortType } from '@somesay/shared';
+
+// 소분류 상품 목록의 정렬 선택지입니다. 노출 순서가 곧 바텀시트 순서입니다.
+export const SUBCATEGORY_SORT_OPTIONS: {
+  value: ProductSortType;
+  label: string;
+}[] = [
+  { value: 'RATING', label: '평점순' },
+  { value: 'REVIEW', label: '리뷰 많은 순' },
+  { value: 'PRICE', label: '가격 낮은 순' },
+];
 
 /**
  * 카테고리 상단 배너.

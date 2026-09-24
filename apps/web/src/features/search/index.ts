@@ -1,5 +1,6 @@
 export { SearchBeforeSection } from './components/SearchBeforeSection';
 export { SearchFilterBottomSheet } from './components/SearchFilterBottomSheet';
+export { EMPTY_FILTERS } from './constants/search.constants';
 export { SearchHeader } from './components/SearchHeader';
 export { SearchResultSection } from './components/SearchResultSection';
 export { useRecentSearch } from './hooks/useRecentSearch';

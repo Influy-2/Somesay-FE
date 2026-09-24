@@ -4,6 +4,7 @@ export { useFetchProductDetail } from './product/useFetchProductDetail';
 export { useFetchProductReviewOverview } from './product/useFetchProductReviewOverview';
 export { useFetchProductReviews } from './product/useFetchProductReviews';
 export { useFetchSimilarProducts } from './product/useFetchSimilarProducts';
+export { useFetchProductsByCategory } from './product/useFetchProductsByCategory';
 export { useProductWish } from './product/useProductWish';
 
 // Home
