@@ -1,6 +1,10 @@
 import type { ProductSortType } from '../domain/product/product.types';
 import type { BrandProductSortType } from '../domain/brand/brand.types';
 import type { HomeRecommendationParamsType } from '../domain/recommendation/recommendation.types';
+import type {
+  FetchUserProductSearchParams,
+  UserProductStatusType,
+} from '../domain/userProduct/userProduct.types';
 
 /**
  * 쿼리키 규칙
@@ -18,6 +22,22 @@ export const QUERY_KEYS = {
     ALL: ['user'] as const,
     INFO: () => [...QUERY_KEYS.USER.ALL, 'info'] as const,
     MYPAGE: () => [...QUERY_KEYS.USER.ALL, 'mypage'] as const,
+  },
+  USER_PRODUCT: {
+    ALL: ['user-product'] as const,
+    LIST_ALL: () => [...QUERY_KEYS.USER_PRODUCT.ALL, 'list'] as const,
+    LIST: (status: UserProductStatusType) =>
+      [...QUERY_KEYS.USER_PRODUCT.LIST_ALL(), status] as const,
+    SEARCH_ALL: () => [...QUERY_KEYS.USER_PRODUCT.ALL, 'search'] as const,
+    SEARCH: ({
+      keyword,
+      sortType,
+      mainCategoryId,
+    }: FetchUserProductSearchParams) =>
+      [
+        ...QUERY_KEYS.USER_PRODUCT.SEARCH_ALL(),
+        { keyword, sortType, mainCategoryId },
+      ] as const,
   },
   PRODUCT: {
     ALL: ['product'] as const,

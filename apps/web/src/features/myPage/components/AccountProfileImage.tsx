@@ -1,22 +1,22 @@
 import { useRef } from 'react';
 import { CameraIcon } from '@/shared/icons';
+import { usePatchUserProfileImage } from '@/shared/hooks';
 
 type AccountProfileImageProps = {
-  profileImageUrl: string | null;
+  profileImgUrl: string | null;
 };
 
 export const AccountProfileImage = ({
-  profileImageUrl,
+  profileImgUrl,
 }: AccountProfileImageProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { uploadProfileImage, isPending } = usePatchUserProfileImage();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      // TODO: API 연결 후 업로드 로직 추가
-      console.log(url);
-    }
+    // 같은 파일을 다시 골라도 change 이벤트가 나도록 입력값을 비웁니다.
+    e.target.value = '';
+    if (file) uploadProfileImage(file);
   };
 
   return (
@@ -32,11 +32,13 @@ export const AccountProfileImage = ({
         type="button"
         className="relative"
         onClick={() => fileInputRef.current?.click()}
+        disabled={isPending}
+        aria-label="프로필 이미지 변경"
       >
         <div className="bg-grey02 size-20 overflow-hidden rounded-full">
-          {profileImageUrl ? (
+          {profileImgUrl ? (
             <img
-              src={profileImageUrl}
+              src={profileImgUrl}
               alt="프로필 이미지"
               className="size-full object-cover"
             />

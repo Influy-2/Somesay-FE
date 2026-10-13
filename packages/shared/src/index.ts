@@ -77,18 +77,24 @@ export { mapJwtLoginResponseDto } from './domain/auth/auth.mapper';
 export type {
   AgeType,
   GenderType,
+  UserBasicInfoType,
   UserInfoType,
   UserMyPageStatisticsType,
   UserMyPageType,
+  UserSkinInfoType,
   UserType,
 } from './domain/user/user.types';
 export { AGE_TYPES } from './domain/user/user.types';
 
 //domain - user product
 export type {
+  FetchUserProductSearchParams,
   UserProductDetailType,
   UserProductRequestType,
   UserProductResponseType,
+  UserProductSearchItemType,
+  UserProductSearchResultType,
+  UserProductSearchSortType,
   UserProductStatusType,
 } from './domain/userProduct/userProduct.types';
 
@@ -101,10 +107,16 @@ export * from './api/auth/postLoginInfo.api';
 
 //api - user product
 export * from './api/userProduct/postUserProduct.api';
+export * from './api/userProduct/fetchUserProducts.api';
+export * from './api/userProduct/fetchUserProductSearch.api';
+export * from './api/userProduct/deleteUserProduct.api';
 
 //api - user
 export * from './api/user/fetchUserInfo.api';
 export * from './api/user/fetchUserMyPage.api';
+export * from './api/user/patchUserBasicInfo.api';
+export * from './api/user/patchUserSkinInfo.api';
+export * from './api/user/patchUserProfileImage.api';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';

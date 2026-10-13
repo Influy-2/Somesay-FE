@@ -2,17 +2,11 @@ import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
 import { InfoSection } from './InfoSection';
 import { MainArrow20Icon } from '@/shared/icons';
-
-type FitProduct = {
-  productId: number;
-  productImgUrl: string;
-  productName: string;
-  brandName: string;
-};
+import type { UserProductDetailType } from '@somesay/shared';
 
 type ProductFitSectionProps = {
-  matches: FitProduct[];
-  mismatches: FitProduct[];
+  matches: UserProductDetailType[];
+  mismatches: UserProductDetailType[];
 };
 
 const ACCOUNT_BASE = `${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.ACCOUNT.BASE}`;
@@ -24,7 +18,7 @@ const FitProductRow = ({
   to,
 }: {
   label: string;
-  products: FitProduct[];
+  products: UserProductDetailType[];
   to: string;
 }) => {
   return (

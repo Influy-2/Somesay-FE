@@ -31,11 +31,17 @@ export { useFetchBrandProductSearch } from './brand/useFetchBrandProductSearch';
 
 // User Product
 export { usePostUserProduct } from './userProduct/usePostUserProduct';
+export { useFetchUserProducts } from './userProduct/useFetchUserProducts';
+export { useFetchUserProductSearch } from './userProduct/useFetchUserProductSearch';
+export { useDeleteUserProduct } from './userProduct/useDeleteUserProduct';
 
 // User
 export { useFetchUserInfo } from './user/useFetchUserInfo';
 export { useFetchUserMyPage } from './user/useFetchUserMyPage';
 export { useMySkinProfile } from './user/useMySkinProfile';
+export { usePatchUserBasicInfo } from './user/usePatchUserBasicInfo';
+export { usePatchUserSkinInfo } from './user/usePatchUserSkinInfo';
+export { usePatchUserProfileImage } from './user/usePatchUserProfileImage';
 
 // Review
 export { useFetchTimeLinks } from './review/useFetchTimeLinks';

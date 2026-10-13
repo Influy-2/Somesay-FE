@@ -11,7 +11,7 @@ import type { ApiResponse } from '../types';
 // JWT 인증을 사용해 사용자에게 잘 맞거나 맞지 않는 상품을 저장합니다.
 export const postUserProduct = async (body: UserProductRequestType) => {
   const response = await apiClient.post<ApiResponse<UserProductResponseDto>>(
-    API_ENDPOINTS.USER_PRODUCT,
+    API_ENDPOINTS.USER_PRODUCT.BASE,
     mapUserProductRequestToDto(body)
   );
 

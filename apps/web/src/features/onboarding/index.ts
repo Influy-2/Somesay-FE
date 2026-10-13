@@ -37,7 +37,6 @@ export {
   agreementsSchema,
   concernsSchema,
   emailSchema,
-  nicknameSchema,
   onboardingAgeSchema,
   onboardingGenderSchema,
   onboardingStepSchema,
