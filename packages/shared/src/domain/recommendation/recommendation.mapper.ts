@@ -18,10 +18,10 @@ const mapRecommendedProductDto = (
     ? {
         creator: {
           creatorId: topReview.creator.creatorId,
-          nickname: topReview.creator.creatorName,
-          profileImageUrl: topReview.creator.profileImgUrl,
-          ageGroup: topReview.creator.ageGroup,
-          skinTypes: topReview.creator.skinTypes,
+          creatorName: topReview.creator.creatorName,
+          profileImgUrl: topReview.creator.profileImgUrl,
+          age: topReview.creator.age,
+          skinTypeIds: topReview.creator.skinTypeIds,
           subscriberNum: topReview.creator.subscriberNum,
           trustScore: topReview.creator.trustScore,
         },
@@ -39,7 +39,7 @@ const mapRecommendedProductDto = (
     mainCategoryId: productCard.mainCategoryId,
     subCategoryId: productCard.subCategoryId,
     shortSummary: productCard.shortSummary,
-    productSkinTypes: productCard.productSkinTypes ?? [],
+    productSkinTypeIds: productCard.productSkinTypeIds ?? [],
     productSkinExpectations: productCard.productSkinExpectations ?? [],
     topReview: mappedTopReview,
     recommendationScore,

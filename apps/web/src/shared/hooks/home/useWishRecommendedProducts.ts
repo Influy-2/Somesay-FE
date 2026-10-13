@@ -5,8 +5,8 @@ import {
 } from '@somesay/shared';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useAuthGuard } from '@/features/auth';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useAuthGuard } from '../auth/useAuthGuard';
+import { useSnackbarStore } from '@/shared/stores';
 
 /**
  * 추천 화면의 상품을 한 번에 모두 찜합니다.

@@ -1,10 +1,8 @@
 // Review/상세페이지용
 
-import {
-  CreatorRankingProfile,
-  RateBar,
-  StarRating,
-} from '@/shared/components';
+import { CreatorRankingProfile } from '../profile/CreatorRankingProfile';
+import { RateBar } from '../ratebar/RateBar';
+import { StarRating } from '../rating/StarRating';
 import type { ProductReviewType } from '@somesay/shared';
 
 export interface CreatorInfoReviewProps {
@@ -12,18 +10,18 @@ export interface CreatorInfoReviewProps {
 }
 
 export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
-  const isEvaluated = review.agreeCount + review.disagreeCount > 0;
   const participantCount = review.agreeCount + review.disagreeCount;
+  const isEvaluated = participantCount > 0;
 
   return (
     <div className="flex flex-col px-4 pt-5">
       <CreatorRankingProfile
         ranking={review.ranking}
-        nickname={review.nickname}
-        profileImageUrl={review.profileImageUrl}
+        nickname={review.creatorName}
+        profileImageUrl={review.profileImgUrl}
         subscriberNum={review.subscriberNum}
         trustScore={review.trustScore}
-        skinTypes={review.skinTypes}
+        skinTypeIds={review.skinTypeIds}
       />
 
       <div className="mb-5">

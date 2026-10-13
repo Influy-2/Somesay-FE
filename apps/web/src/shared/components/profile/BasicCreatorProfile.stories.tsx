@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { AGE_TYPES } from '@somesay/shared';
+
 import { BasicCreatorProfile } from './BasicCreatorProfile';
 
 const meta: Meta<typeof BasicCreatorProfile> = {
@@ -8,13 +10,13 @@ const meta: Meta<typeof BasicCreatorProfile> = {
   tags: ['autodocs'],
   argTypes: {
     creatorId: { control: 'number' },
-    nickname: { control: 'text' },
-    profileImageUrl: { control: 'text' },
+    creatorName: { control: 'text' },
+    profileImgUrl: { control: 'text' },
     subscriberNum: { control: 'number' },
     trustRank: { control: 'number' },
     highlightedLabels: { control: 'object' },
-    ageGroup: { control: 'text' },
-    skinTypes: { control: 'object' },
+    age: { control: 'select', options: AGE_TYPES },
+    skinTypeIds: { control: 'object' },
   },
 };
 
@@ -24,12 +26,12 @@ type Story = StoryObj<typeof BasicCreatorProfile>;
 export const Default: Story = {
   args: {
     creatorId: 1,
-    nickname: '이름',
-    profileImageUrl: 'https://placehold.co/100',
+    creatorName: '이름',
+    profileImgUrl: 'https://placehold.co/100',
     subscriberNum: 0,
     trustRank: 3,
-    ageGroup: '20',
-    skinTypes: ['건성'],
+    age: 'TWENTIES',
+    skinTypeIds: [1],
     highlightedLabels: ['건성'],
   },
 };
@@ -39,5 +41,13 @@ export const WithoutVisibleTrustRank: Story = {
     ...Default.args,
     trustRank: 11,
     highlightedLabels: [],
+  },
+};
+
+// 서버가 연령을 내려주지 않는 크리에이터가 있어 폴백 문구를 스토리로 남깁니다.
+export const WithoutAge: Story = {
+  args: {
+    ...Default.args,
+    age: null,
   },
 };

@@ -1,19 +1,11 @@
 import type {
-  ProductSkinExpectationType,
-  ProductSkinType,
+  ProductBasicType,
+  ProductCategoryRefType,
+  ProductSkinFitType,
 } from './product.types';
-import type { CommentPreviewDto } from '../comment/comment.dto';
 
-// 여러 상품 응답 DTO에서 공통으로 사용하는 최소 상품 정보입니다.
-export interface ProductBasicDto {
-  productId: number;
-  brandName: string;
-  productName: string;
-  productImgUrl: string;
-  price: number;
-}
-
-export interface ProductWishDto extends ProductBasicDto {
+// 서버가 주는 최소 상품 정보는 프론트 타입과 필드가 동일해 ProductBasicType을 그대로 쓴다.
+export interface ProductWishDto extends ProductBasicType {
   userWish: boolean;
 }
 
@@ -32,16 +24,14 @@ export interface PatchProductWishResponseDto {
 }
 
 // 카테고리별 상품 목록 조회 응답의 products 아이템에 사용합니다.
-export interface ProductCardDto extends ProductWishDto {
-  mainCategoryId: number;
-  subCategoryId: number;
+export interface ProductCardDto
+  extends ProductWishDto, ProductCategoryRefType, ProductSkinFitType {
   avgRating: number;
   reviewCount: number;
   creatorImageUrls: string[];
   shortSummary: string;
-  productSkinTypes: ProductSkinType[];
-  productSkinExpectations: ProductSkinExpectationType[];
 }
+
 // 상품 랭킹/비슷한 기대효과 상품의 미리보기 카드 응답에 사용합니다.
 export interface PreviewInfoDto extends ProductWishDto {
   avgRating: number;
@@ -63,37 +53,5 @@ export interface ProductDetailDto extends ProductWishDto {
 export interface ProductListResponseDto {
   products: ProductCardDto[];
   totalCount: number;
-  hasNext: boolean;
-}
-
-interface ProductReviewCreatorDto {
-  creatorName: string;
-  ranking: number;
-  subscriberNum: number;
-  profileImgUrl: string;
-  trustScore: number;
-  skinTypes: string[];
-}
-
-export interface ProductReviewsDto extends ProductReviewCreatorDto {
-  reviewId: number;
-  content: string;
-  rating: number;
-  agreeCount: number;
-  disagreeCount: number;
-  agreeRatio: number;
-  youtubeUrl: string;
-  videoTitle: string;
-  viewCount: number;
-  timeLinkCount: number;
-  totalCommentCount: number;
-  previewComments: CommentPreviewDto[];
-}
-
-// 상품 리뷰 목록 API의 페이지 응답 DTO입니다.
-export interface ProductReviewsPageDto {
-  content: ProductReviewsDto[];
-  totalElements: number;
-  totalPages: number;
   hasNext: boolean;
 }

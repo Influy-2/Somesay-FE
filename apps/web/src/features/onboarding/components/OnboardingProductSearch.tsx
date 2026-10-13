@@ -11,9 +11,9 @@ import {
   SelectedProductDock,
   useProductCatalog,
 } from '@/features/productSelection';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 import cn from '@/utils/cn';
-import { useOnboardingStore } from '../store/onboarding.store';
+import { useOnboardingStore } from '../stores/onboarding.store';
 import type { ProductFitStatus } from '../types/onboarding.types';
 
 interface OnboardingProductSearchProps {

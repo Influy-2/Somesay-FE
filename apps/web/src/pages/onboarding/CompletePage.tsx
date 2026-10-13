@@ -6,7 +6,7 @@ import {
   useNavigate,
   useNavigationType,
 } from 'react-router';
-import { OnboardingCompleteBottomSheet } from '@/features/onboarding/components/OnboardingCompleteBottomSheet';
+import { OnboardingCompleteBottomSheet } from '@/features/onboarding';
 import {
   isOnboardingCompleteEntry,
   useOnboardingStore,

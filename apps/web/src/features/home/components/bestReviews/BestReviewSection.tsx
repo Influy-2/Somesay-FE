@@ -1,18 +1,20 @@
 import { Link } from 'react-router';
+
+import { getSkinTypeLabels } from '@somesay/shared';
 import { ProductCardThumbnail, CreatorReviewCard } from '@/shared/components';
 import { SummaryBox } from './SummaryBox';
 import { useCarousel } from '@/shared/hooks/useCarousel';
 import { CarouselIndicator } from '@/shared/components/indicator/CarouselIndicator';
 import { PATH } from '@/routes/path';
 import { useFetchHomeCuration, useFetchUserInfo } from '@/shared/hooks';
-import { useAuthTokenStore } from '@/shared/stores/auth.store';
+import { useAuthTokenStore } from '@/shared/stores';
 import { BestReviewSkeleton } from './BestReviewSkeleton';
 
 export const BestReviewSection = () => {
   const { emblaRef, selectedIndex, slideCount } = useCarousel();
   const accessToken = useAuthTokenStore((state) => state.accessToken);
   const { data: userInfo, isFetched: isUserInfoFetched } = useFetchUserInfo();
-  const selectedSkinTypeId = userInfo?.skinTypes.at(0);
+  const selectedSkinTypeId = userInfo?.skinTypeIds.at(0);
   const canFetchCuration = !accessToken || isUserInfoFetched;
   const {
     data: curation,
@@ -81,7 +83,7 @@ export const BestReviewSection = () => {
                 />
                 <Link
                   to={`${PATH.PRODUCT.BASE}/${item.productId}?review=${item.reviewId}`}
-                  aria-label={`${item.creator.nickname}의 리뷰 전문 보기`}
+                  aria-label={`${item.creator.creatorName}의 리뷰 전문 보기`}
                   className="block"
                 >
                   <CreatorReviewCard
@@ -98,7 +100,9 @@ export const BestReviewSection = () => {
                     plainText=" 의 사용자가 공감했어요"
                   />
                   <SummaryBox
-                    boldText={item.mostAgreedSkinTypeName}
+                    boldText={getSkinTypeLabels(
+                      item.mostAgreedSkinTypeIds
+                    ).join(', ')}
                     plainText=" 사용자가 가장 많이 공감했어요"
                   />
                 </div>

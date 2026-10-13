@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { CharacterCountInput, PageHeader } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import {
-  MOCK_ACCOUNT,
-  MOCK_USERS,
-} from '@/features/myPage/components/mockData';
+import { MOCK_ACCOUNT, MOCK_USERS } from '@/features/myPage';
 
 export const NicknamePage = () => {
   const navigate = useNavigate();

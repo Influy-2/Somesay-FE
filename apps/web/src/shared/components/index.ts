@@ -69,10 +69,13 @@ export { SearchResultReviewCard } from './review/SearchResultReviewCard';
 export { StarRating } from './rating/StarRating';
 export { CreatorInfoReview } from './review/CreatorInfoReview';
 export { CreatorReviewExpandedCard } from './review/CreatorReviewExpandedCard';
-export { Preview } from './review/Preview';
+export { ReviewPreviewCard } from './review/ReviewPreviewCard';
 export { EvaluatedReviewCard } from './review/EvaluatedReviewCard';
 export { OriginalVideoCard } from './review/OriginalVideoCard';
 export { OriginalVideo } from './review/OriginalVideo';
+
+/* indicator */
+export { CarouselIndicator } from './indicator/CarouselIndicator';
 
 /* category */
 export { HorizontalCategoriesTab } from './category/HorizontalCategoriesTab';

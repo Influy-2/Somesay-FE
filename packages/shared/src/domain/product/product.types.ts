@@ -1,5 +1,7 @@
 import type { CommentPreviewType } from '../comment/comment.types';
+import type { BasicCreatorProfileType } from '../creator/creator.types';
 
+// 상품이라면 반드시 있는 것만 담는 코어 타입입니다. 화면용 필드는 여기에 더하지 않습니다.
 export interface ProductBasicType {
   productId: number;
   productImgUrl: string;
@@ -8,32 +10,54 @@ export interface ProductBasicType {
   price: number;
 }
 
-export interface ProductWishType extends ProductBasicType {
+// 찜 상태 조각입니다.
+// query/productWishCache.ts의 patchWishNode가 `{ productId, isHearted }` 모양으로
+// 캐시 노드를 찾으므로, 이 조각을 쓰는 타입은 자동으로 낙관적 갱신 대상이 됩니다.
+export interface ProductWishStateType {
   isHearted: boolean;
 }
 
-export type ProductWishStatusType = 'LIKE' | 'NONE';
-
-export interface ProductWishResultType {
-  userId: number;
-  productId: number;
-  isHearted: boolean;
+// 상품이 속한 카테고리 조각입니다.
+export interface ProductCategoryRefType {
+  mainCategoryId: number;
+  subCategoryId: number;
 }
-
-export type ProductSkinType = string;
 
 export interface ProductSkinExpectationType {
-  productSkinExpectationId: number;
+  skinExpectationId: number;
   concern: string;
   isPrimary: boolean;
 }
-export interface ProductCardType extends ProductWishType {
-  rating: number;
+
+// 상품의 피부 적합도 조각입니다. 두 필드가 항상 짝으로 다닙니다.
+export interface ProductSkinFitType {
+  productSkinTypeIds: number[];
+  productSkinExpectations: ProductSkinExpectationType[];
+}
+
+export interface ProductWishResultType extends ProductWishStateType {
+  userId: number;
+  productId: number;
+}
+
+export interface ProductCardType
+  extends ProductBasicType, ProductWishStateType {
+  avgRating: number;
   reviewCount: number;
   creatorImageUrls: string[];
 }
 
-export interface ProductDetailType extends ProductWishType {
+// 카테고리별 상품 목록 카드에 사용합니다.
+// BrandProductType과 모양이 같지만 사용처가 2곳이라 복제해 둡니다. 3번째가 생기면 조각으로 합칩니다.
+export interface CategoryProductType
+  extends ProductCardType, ProductCategoryRefType {
+  reviewSummary: string;
+  skinTypeIds: number[];
+  expectedEffects: string[];
+}
+
+export interface ProductDetailType
+  extends ProductBasicType, ProductWishStateType {
   brandId: number;
   brandLogoUrl: string | null;
   volume: string | null;
@@ -43,13 +67,9 @@ export interface ProductDetailType extends ProductWishType {
   productNotes: string | null;
 }
 
-export interface ProductReviewType {
-  nickname: string;
+// 서버가 크리에이터 필드를 평탄하게 주므로 구조는 유지하되 상속으로 중복만 없앱니다.
+export interface ProductReviewType extends BasicCreatorProfileType {
   ranking: number;
-  subscriberNum: number;
-  profileImageUrl: string;
-  trustScore: number;
-  skinTypes: string[];
   reviewId: number;
   content: string;
   rating: number;
@@ -71,11 +91,7 @@ export interface ProductReviewPageType {
   hasNext: boolean;
 }
 
-export interface ProductRankingCardType extends ProductCardType {
-  rank: number;
-}
-
-export interface ProductsByCategory {
+export interface ProductsByCategoryType {
   categoryId: number;
   categoryTitle: string;
   moreLinkPath: string;
@@ -83,6 +99,4 @@ export interface ProductsByCategory {
   products: ProductCardType[];
 }
 
-export interface SortOptionsType {
-  sortType: 'RATING' | 'REVIEW' | 'PRICE' | 'RECOMMEND';
-}
+export type ProductSortType = 'RATING' | 'REVIEW' | 'PRICE' | 'RECOMMEND';

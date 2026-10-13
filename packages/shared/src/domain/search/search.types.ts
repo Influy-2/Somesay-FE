@@ -4,7 +4,7 @@ import type { CreatorReviewType } from '../review/review.types';
 
 export interface ProductSearchResultType extends ProductCardType {
   reviewSummary: string;
-  skinTypes: string[];
+  skinTypeIds: number[];
   expectedEffects: string[];
 }
 

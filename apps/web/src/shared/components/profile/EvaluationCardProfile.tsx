@@ -1,32 +1,36 @@
 // Profile/리뷰카드 컴포넌트
 
 import { SomesaySmIcon, YoutubeIcon } from '@/shared/icons';
-import { ChipBasic } from '@/shared/components';
-import { formatSubscriberCount } from '@somesay/shared';
+import { ChipBasic } from '../chips/ChipBasic';
+import {
+  formatSubscriberCount,
+  getAgeLabel,
+  getSkinTypeLabels,
+} from '@somesay/shared';
 import type { CreatorType } from '@somesay/shared';
 
 type EvaluationCardProfileProps = Pick<
   CreatorType,
-  | 'nickname'
-  | 'profileImageUrl'
+  | 'creatorName'
+  | 'profileImgUrl'
   | 'subscriberNum'
   | 'trustScore'
   | 'ranking'
-  | 'ageGroup'
-  | 'skinTypes'
+  | 'age'
+  | 'skinTypeIds'
 > & {
   evaluated: boolean;
 };
 
 export const EvaluationCardProfile = ({
   evaluated,
-  nickname,
-  profileImageUrl,
+  creatorName,
+  profileImgUrl,
   subscriberNum,
   trustScore,
   ranking,
-  ageGroup,
-  skinTypes,
+  age,
+  skinTypeIds,
 }: EvaluationCardProfileProps) => {
   const showRank = ranking > 0 && ranking <= 30;
 
@@ -34,7 +38,7 @@ export const EvaluationCardProfile = ({
     <div
       className="flex w-full items-center gap-2.5"
       aria-label={
-        evaluated ? `크리에이터: ${nickname}, 신뢰도 ${trustScore}점` : ''
+        evaluated ? `크리에이터: ${creatorName}, 신뢰도 ${trustScore}점` : ''
       }
     >
       {/* 프로필 이미지 */}
@@ -44,8 +48,8 @@ export const EvaluationCardProfile = ({
           aria-hidden="true"
         >
           <img
-            src={profileImageUrl}
-            alt={`${nickname} 프로필`}
+            src={profileImgUrl}
+            alt={`${creatorName} 프로필`}
             className="size-full object-cover"
           />
         </div>
@@ -61,7 +65,7 @@ export const EvaluationCardProfile = ({
         {/* 닉네임 + 구독자수 */}
         <div className="flex h-6 items-center gap-2">
           {evaluated ? (
-            <span className="body1-sb shrink-0 text-black">{nickname}</span>
+            <span className="body1-sb shrink-0 text-black">{creatorName}</span>
           ) : (
             <SomesaySmIcon className="shrink-0" aria-hidden="true" />
           )}
@@ -90,9 +94,9 @@ export const EvaluationCardProfile = ({
           </div>
           {evaluated && (
             <div className="flex items-center gap-1">
-              <ChipBasic label={`${ageGroup}대`} />
-              {skinTypes.map((skinType) => (
-                <ChipBasic key={skinType} label={skinType} />
+              <ChipBasic label={getAgeLabel(age)} />
+              {getSkinTypeLabels(skinTypeIds).map((label) => (
+                <ChipBasic key={label} label={label} />
               ))}
             </div>
           )}

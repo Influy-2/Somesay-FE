@@ -18,7 +18,7 @@ const meta: Meta<typeof RecommendedProductCard> = {
     productName: '캐롯 카로팅 카밍 워터 패드 50p',
     productImgUrl: recommendedProductCardImg,
     price: 10000,
-    rating: 4.9,
+    avgRating: 4.9,
     reviewCount: 43,
     creatorImageUrls: [mockProfileImg, mockProfile2Img, mockProfile3Img],
     isHearted: false,

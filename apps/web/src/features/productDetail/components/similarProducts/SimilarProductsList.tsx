@@ -1,6 +1,6 @@
 import { HorizontalScrollProductCard } from '@/shared/components';
 import { useProductWish } from '@/shared/hooks';
-import { ProductCardType } from '@somesay/shared';
+import type { ProductCardType } from '@somesay/shared';
 
 interface SimilarProductsListProps {
   products: ProductCardType[];
@@ -8,6 +8,11 @@ interface SimilarProductsListProps {
 
 export const SimilarProductsList = ({ products }: SimilarProductsListProps) => {
   const { toggleWish } = useProductWish();
+
+  // 유사 상품이 없으면 제목만 남으므로 섹션째 그리지 않습니다.
+  if (products.length === 0) {
+    return null;
+  }
 
   return (
     <section className="flex flex-col gap-5 bg-white pt-5">

@@ -1,5 +1,4 @@
-import { LoadingBlock } from '@/shared/components';
-
+import { LoadingBlock } from '../loading/LoadingBlock';
 /** 기본 상품 카드 1개의 골격입니다. */
 export const BasicProductCardSkeleton = () => (
   <div className="flex flex-1 shrink-0 flex-col items-start">

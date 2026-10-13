@@ -4,6 +4,7 @@ export { useFetchProductDetail } from './product/useFetchProductDetail';
 export { useFetchProductReviewOverview } from './product/useFetchProductReviewOverview';
 export { useFetchProductReviews } from './product/useFetchProductReviews';
 export { useFetchSimilarProducts } from './product/useFetchSimilarProducts';
+export { useFetchProductsByCategory } from './product/useFetchProductsByCategory';
 export { useProductWish } from './product/useProductWish';
 
 // Home
@@ -33,8 +34,13 @@ export { usePostUserProduct } from './userProduct/usePostUserProduct';
 
 // User
 export { useFetchUserInfo } from './user/useFetchUserInfo';
+export { useFetchUserMyPage } from './user/useFetchUserMyPage';
 export { useMySkinProfile } from './user/useMySkinProfile';
 
 // Review
 export { useFetchTimeLinks } from './review/useFetchTimeLinks';
 export { useFetchReviewComments } from './review/useFetchReviewComments';
+
+// Auth
+export { useAuth } from './auth/useAuth';
+export { useAuthGuard } from './auth/useAuthGuard';

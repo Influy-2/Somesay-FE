@@ -1,11 +1,15 @@
 import { HeartButton } from '@/shared/components/buttons/HeartButton';
-import type { ProductSearchResultType } from '@somesay/shared';
+import {
+  ProductSearchResultType,
+  formatPrice,
+  getSkinTypeLabel,
+  getSkinTypeLabels,
+} from '@somesay/shared';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
-
 interface SearchResultProductCardProps {
   product: ProductSearchResultType;
   onHeartToggle: (productId: number) => void;
@@ -13,7 +17,7 @@ interface SearchResultProductCardProps {
 
 // TODO: 로그인 연동 후 실제 사용자 피부 프로필 데이터로 교체합니다.
 const MOCK_USER_SKIN_PROFILE = {
-  skinTypes: ['건성'],
+  skinTypeIds: [1],
   expectedEffects: ['보습'],
 };
 
@@ -24,7 +28,7 @@ export const SearchResultProductCard = ({
   return (
     <article
       className="border-grey02 relative mx-4 flex flex-col gap-5 border-b pb-6"
-      aria-label={`${product.brandName} ${product.productName}, ${product.price.toLocaleString()}원, 별점 ${product.rating}점`}
+      aria-label={`${product.brandName} ${product.productName}, ${formatPrice(product.price)}, 별점 ${product.avgRating.toFixed(1)}점`}
     >
       <div className="flex gap-3">
         {/* 이미지 */}
@@ -55,16 +59,16 @@ export const SearchResultProductCard = ({
               </span>
             </div>
             <span className="body2-m leading-[155%] text-black">
-              {product.price.toLocaleString()}원
+              {formatPrice(product.price)}
             </span>
             <div className="flex items-center gap-1">
               {/* 별점 */}
               <div
                 className="flex items-center"
-                aria-label={`별점 ${product.rating}점`}
+                aria-label={`별점 ${product.avgRating.toFixed(1)}점`}
               >
                 <StarIcon className="text-primary-300 size-4" />
-                <span className="body2-sb">{product.rating}</span>
+                <span className="body2-sb">{product.avgRating.toFixed(1)}</span>
               </div>
               {/* 리뷰수 */}
               <span
@@ -91,15 +95,19 @@ export const SearchResultProductCard = ({
         <span className="caption1-m text-grey06 self-center">잘 맞는 타입</span>
         <div
           className="flex flex-wrap gap-x-1 gap-y-2"
-          aria-label={`잘 맞는 타입: ${product.skinTypes.join(', ')}`}
+          aria-label={`잘 맞는 타입: ${getSkinTypeLabels(product.skinTypeIds).join(', ')}`}
         >
-          {product.skinTypes.map((type) => {
-            const isMatched = MOCK_USER_SKIN_PROFILE.skinTypes.includes(type);
+          {product.skinTypeIds.map((skinTypeId) => {
+            const label = getSkinTypeLabel(skinTypeId);
+            if (!label) return null;
+
+            const isMatched =
+              MOCK_USER_SKIN_PROFILE.skinTypeIds.includes(skinTypeId);
 
             return (
               <ChipBasic
-                key={type}
-                label={type}
+                key={skinTypeId}
+                label={label}
                 variant={isMatched ? 'blue' : 'default'}
               />
             );

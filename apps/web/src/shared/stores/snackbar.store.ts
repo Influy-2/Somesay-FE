@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import type { SnackbarPlacement } from '@/shared/constants/floating.constants';
+import type { SnackbarPlacement } from '@/shared/constants';
 
 export type SnackbarVariant = 'default' | 'error';
 

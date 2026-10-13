@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { AGE_LABELS, type AgeType } from '@somesay/shared';
+
 import {
-  AGE_LABELS,
   GENDER_LABELS,
   getNextOnboardingPath,
   OnboardingLayout,
   OnboardingOptionGroup,
   useOnboardingStore,
-  type OnboardingAge,
   type OnboardingGender,
 } from '@/features/onboarding';
 
@@ -15,7 +15,7 @@ const GENDER_OPTIONS = Object.entries(GENDER_LABELS) as [
   OnboardingGender,
   string,
 ][];
-const AGE_OPTIONS = Object.entries(AGE_LABELS) as [OnboardingAge, string][];
+const AGE_OPTIONS = Object.entries(AGE_LABELS) as [AgeType, string][];
 
 export const ProfilePage = () => {
   const navigate = useNavigate();

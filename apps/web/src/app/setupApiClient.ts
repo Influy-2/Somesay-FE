@@ -1,6 +1,6 @@
 import { configureApiClient } from '@somesay/shared';
 import { clearAuthTokens, getAccessToken } from '@/features/auth';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 
 const DEFAULT_API_BASE_URL = 'http://localhost:8080';
 

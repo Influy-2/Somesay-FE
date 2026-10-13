@@ -1,7 +1,6 @@
 import type {
   ProductBasicType,
-  ProductSkinExpectationType,
-  ProductSkinType,
+  ProductSkinFitType,
 } from '../product/product.types';
 import type { BasicCreatorProfileType } from '../creator/creator.types';
 
@@ -18,15 +17,13 @@ export interface CreatorReviewType {
   productId: number;
 }
 
-export interface CreatorReviewSummaryType {
+export interface CreatorReviewSummaryType extends ProductSkinFitType {
   productId: number;
   avgRating: number;
   reviewCount: number;
   aiSummary: string;
   frequentMention: string;
   consideration: string;
-  productSkinTypes: ProductSkinType[];
-  productSkinExpectations: ProductSkinExpectationType[];
 }
 
 export interface TimeLinkType {
@@ -49,12 +46,12 @@ export interface HomeCurationReviewType extends ProductBasicType {
   content: string;
   rating: number;
   agreeRatio: number;
-  mostAgreedSkinTypeName: string;
+  mostAgreedSkinTypeIds: number[];
 }
 
 // 홈 큐레이션 화면에서 사용하는 피부 타입과 리뷰 목록입니다.
 export interface HomeCurationType {
-  userSkinTypeId: number;
+  skinTypeId: number;
   skinTypeName: string;
   reviews: HomeCurationReviewType[];
 }

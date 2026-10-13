@@ -10,13 +10,13 @@ import type { ReviewVoteType } from '../buttons/ReviewVoteButton';
 type EvaluationReviewCardProps = {
   creator: Pick<
     CreatorType,
-    | 'nickname'
-    | 'profileImageUrl'
+    | 'creatorName'
+    | 'profileImgUrl'
     | 'subscriberNum'
     | 'trustScore'
     | 'ranking'
-    | 'ageGroup'
-    | 'skinTypes'
+    | 'age'
+    | 'skinTypeIds'
   >;
   rating: number;
   content: string;

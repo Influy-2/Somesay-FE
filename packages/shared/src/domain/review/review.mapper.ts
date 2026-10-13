@@ -12,10 +12,10 @@ const mapHomeCurationReviewDto = (
   price: review.price,
   creator: {
     creatorId: review.creatorId,
-    nickname: review.creatorName,
-    profileImageUrl: review.profileImgUrl,
-    ageGroup: review.ageGroup,
-    skinTypes: review.skinTypes,
+    creatorName: review.creatorName,
+    profileImgUrl: review.profileImgUrl,
+    age: review.age,
+    skinTypeIds: review.skinTypeIds,
     subscriberNum: review.subscriberNum,
     trustScore: review.trustScore,
   },
@@ -23,14 +23,14 @@ const mapHomeCurationReviewDto = (
   content: review.content,
   rating: review.rating,
   agreeRatio: review.agreeRatio,
-  mostAgreedSkinTypeName: review.mostAgreedSkinTypeNames,
+  mostAgreedSkinTypeIds: review.mostAgreedSkinTypeIds,
 });
 
 // 홈 큐레이션 응답 DTO 전체를 화면용 데이터로 변환합니다.
 export const mapHomeCurationDto = (
   data: HomeCurationResponseDto
 ): HomeCurationType => ({
-  userSkinTypeId: data.userSkinTypeId,
+  skinTypeId: data.skinTypeId,
   skinTypeName: data.skinTypeName,
   reviews: data.reviews.map(mapHomeCurationReviewDto),
 });

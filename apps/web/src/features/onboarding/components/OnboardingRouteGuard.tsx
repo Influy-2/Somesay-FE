@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Navigate } from 'react-router';
-import { useOnboardingStore } from '../store/onboarding.store';
+import { useOnboardingStore } from '../stores/onboarding.store';
 import type { OnboardingStep } from '../types/onboarding.types';
 import {
   getOnboardingEntryPath,

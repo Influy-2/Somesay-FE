@@ -1,6 +1,6 @@
 import { fetchUserInfo, QUERY_KEYS } from '@somesay/shared';
 import { useQuery } from '@tanstack/react-query';
-import { useAuthTokenStore } from '@/shared/stores/auth.store';
+import { useAuthTokenStore } from '@/shared/stores';
 
 const USER_INFO_STALE_TIME = 5 * 60 * 1000;
 

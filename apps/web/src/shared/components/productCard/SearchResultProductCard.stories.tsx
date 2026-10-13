@@ -30,12 +30,12 @@ const MOCK_PRODUCT = {
   brandName: '이니스프리',
   productName: '블랙티 유스 에센스 200ml 인기 베스트 세럼',
   price: 38000,
-  rating: 4.5,
+  avgRating: 4.5,
   reviewCount: 1240,
   isHearted: false,
   creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
   reviewSummary: '촉촉하고 흡수가 빨라서 데일리로 쓰기 좋아요.',
-  skinTypes: ['건성', '복합성'],
+  skinTypeIds: [1, 3],
   expectedEffects: ['보습', '탄력', '미백'],
 };
 
@@ -86,11 +86,11 @@ export const HighPrice: Story = {
       brandName: '설화수',
       productName: '자음 생크림 진설',
       price: 289000,
-      rating: 4.8,
+      avgRating: 4.8,
       reviewCount: 3420,
       reviewSummary:
         '고가이지만 그만한 가치가 있어요. 민감 피부에도 트러블 없이 사용 가능합니다.',
-      skinTypes: ['민감성', '건성'],
+      skinTypeIds: [6, 1],
       expectedEffects: ['보습', '진정', '미백', '탄력'],
     },
     onHeartToggle: () => {},
@@ -110,7 +110,7 @@ export const FewTags: Story = {
   args: {
     product: {
       ...MOCK_PRODUCT,
-      skinTypes: ['지성'],
+      skinTypeIds: [2],
       expectedEffects: ['모공'],
     },
     onHeartToggle: () => {},

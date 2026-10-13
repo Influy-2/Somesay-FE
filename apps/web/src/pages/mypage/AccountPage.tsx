@@ -1,12 +1,20 @@
 import { useNavigate } from 'react-router';
 import { PATH } from '@/routes/path';
+import {
+  getAgeLabel,
+  getConcernLabels,
+  getSkinTypeLabels,
+} from '@somesay/shared';
+
 import { PageHeader } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { InfoSection } from '@/features/myPage/components/InfoSection';
-import { InfoRow } from '@/features/myPage/components/InfoRow';
-import { MOCK_ACCOUNT } from '@/features/myPage/components/mockData';
-import { AccountProfileImage } from '@/features/myPage/components/AccountProfileImage';
-import { ProductFitSection } from '@/features/myPage/components/ProductFitSection';
+import {
+  InfoSection,
+  InfoRow,
+  MOCK_ACCOUNT,
+  AccountProfileImage,
+  ProductFitSection,
+} from '@/features/myPage';
 
 export const AccountPage = () => {
   const navigate = useNavigate();
@@ -16,8 +24,8 @@ export const AccountPage = () => {
     nickname,
     gender,
     age,
-    skinTypes,
-    skinConcerns,
+    skinTypeIds,
+    skinExpectationIds,
     goodProducts,
     badProducts,
   } = MOCK_ACCOUNT;
@@ -36,19 +44,19 @@ export const AccountPage = () => {
     },
     {
       label: '연령',
-      value: age,
+      value: getAgeLabel(age),
       to: `${ACCOUNT_BASE}/${PATH.MY_PAGE.ACCOUNT.AGE}`,
     },
   ];
   const SKIN_INFO_ROWS = [
     {
       label: '피부 타입',
-      value: skinTypes.join(', '),
+      value: getSkinTypeLabels(skinTypeIds).join(', '),
       to: `${ACCOUNT_BASE}/${PATH.MY_PAGE.ACCOUNT.SKIN_TYPE}`,
     },
     {
       label: '피부 고민',
-      value: skinConcerns.join(', '),
+      value: getConcernLabels(skinExpectationIds).join(', '),
       to: `${ACCOUNT_BASE}/${PATH.MY_PAGE.ACCOUNT.SKIN_CONCERN}`,
     },
   ];

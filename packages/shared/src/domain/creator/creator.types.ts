@@ -1,14 +1,16 @@
+import type { AgeType } from '../user/user.types';
+
 export interface CreatorType {
   creatorId: number;
-  nickname: string;
-  profileImageUrl: string;
+  creatorName: string;
+  profileImgUrl: string;
   youtubeLink: string;
   trustScore: number;
-  skinTypes: string[];
+  skinTypeIds: number[];
   personalColor: string;
   subscriberNum: number;
   ranking: number;
-  ageGroup: string;
+  age: AgeType | null;
 }
 
 type RankChangeDirection = 'up' | 'down' | 'same';
@@ -24,10 +26,10 @@ export interface CreatorRankingUpDownType extends Omit<
 export type BasicCreatorProfileType = Pick<
   CreatorType,
   | 'creatorId'
-  | 'nickname'
-  | 'profileImageUrl'
+  | 'creatorName'
+  | 'profileImgUrl'
   | 'subscriberNum'
   | 'trustScore'
-  | 'ageGroup'
-  | 'skinTypes'
+  | 'age'
+  | 'skinTypeIds'
 >;

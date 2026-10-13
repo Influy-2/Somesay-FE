@@ -16,12 +16,12 @@ type Story = StoryObj<typeof SearchResultReviewCard>;
 
 const MOCK_CREATOR = {
   creatorId: 1,
-  nickname: '올리브영언니',
-  profileImageUrl: mockProfile1,
+  creatorName: '올리브영언니',
+  profileImgUrl: mockProfile1,
   subscriberNum: 128000,
   trustScore: 92.4,
-  ageGroup: '20',
-  skinTypes: ['건성'],
+  age: 'TWENTIES' as const,
+  skinTypeIds: [1],
 };
 
 const MOCK_PRODUCT = {
@@ -30,7 +30,7 @@ const MOCK_PRODUCT = {
   productName: '그린티 씨드 세럼 80ml',
   productImgUrl: mockProductImg,
   price: 35000,
-  rating: 4.5,
+  avgRating: 4.5,
   reviewCount: 1280,
   isHearted: false,
   creatorImageUrls: [mockProfile1],
@@ -67,8 +67,8 @@ export const MidRating: Story = {
       creator: {
         ...MOCK_CREATOR,
         creatorId: 2,
-        nickname: '뷰티러버',
-        skinTypes: ['지성'],
+        creatorName: '뷰티러버',
+        skinTypeIds: [2],
         trustScore: 78.1,
         subscriberNum: 45000,
       },
@@ -91,8 +91,8 @@ export const LongContent: Story = {
       creator: {
         ...MOCK_CREATOR,
         creatorId: 3,
-        nickname: '피부고민러',
-        skinTypes: ['건성'],
+        creatorName: '피부고민러',
+        skinTypeIds: [1],
         trustScore: 85.7,
         subscriberNum: 65000,
       },
@@ -115,8 +115,8 @@ export const LuxuryProduct: Story = {
       creator: {
         ...MOCK_CREATOR,
         creatorId: 4,
-        nickname: '럭셔리뷰티',
-        skinTypes: ['민감성'],
+        creatorName: '럭셔리뷰티',
+        skinTypeIds: [6],
         subscriberNum: 320000,
         trustScore: 96.2,
       },

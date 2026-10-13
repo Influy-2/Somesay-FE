@@ -2,7 +2,7 @@ import { apiClient } from '../client';
 import { buildPath } from '../buildApi';
 import type { ApiPageParams, ApiResponse } from '../types';
 import { API_ENDPOINTS } from '../../constants/endpoints';
-import type { BrandProductListDto } from '../../domain/brand/brand.dto';
+import type { ProductListResponseDto } from '../../domain/product/product.dto';
 import type { BrandProductSortType } from '../../domain/brand/brand.types';
 import { mapBrandProductListDto } from '../../domain/brand/brand.mapper';
 
@@ -17,7 +17,7 @@ export const fetchBrandProductSearch = async (
   brandId: number,
   params: FetchBrandProductSearchParams
 ) => {
-  const response = await apiClient.get<ApiResponse<BrandProductListDto>>(
+  const response = await apiClient.get<ApiResponse<ProductListResponseDto>>(
     buildPath(
       `${API_ENDPOINTS.BRAND.BASE}/${API_ENDPOINTS.BRAND.PRODUCT_SEARCH}`,
       { brandId }

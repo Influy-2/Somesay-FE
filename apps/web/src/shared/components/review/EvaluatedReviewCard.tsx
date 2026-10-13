@@ -3,14 +3,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { MoreIcon, ToggleDown10Icon, ToggleUp10Icon } from '@/shared/icons';
 import cn from '@/utils/cn';
-import {
-  ChipAgreement,
-  ReviewVoteStatusButton,
-  Tooltip,
-  ReviewProductLink,
-  StarRating,
-} from '@/shared/components';
-
+import { ChipAgreement } from '../chips/ChipAgreement';
+import { ReviewVoteStatusButton } from '../buttons/ReviewVoteStatusButton';
+import { Tooltip } from '../tooltip/Tooltip';
+import { ReviewProductLink } from '../product/ReviewProductLink';
+import { StarRating } from '../rating/StarRating';
 interface EvaluatedReviewCardProps {
   review: {
     reviewId: number;

@@ -1,5 +1,6 @@
 export { OnboardingLayout } from './components/OnboardingLayout';
 export { OnboardingCompleteDialog } from './components/OnboardingCompleteDialog';
+export { OnboardingCompleteBottomSheet } from './components/OnboardingCompleteBottomSheet';
 export { OnboardingOptionGroup } from './components/OnboardingOptionGroup';
 export { OnboardingProgressBar } from './components/OnboardingProgressBar';
 export { OnboardingProductSearch } from './components/OnboardingProductSearch';
@@ -10,7 +11,6 @@ export {
   OnboardingRouteGuard,
 } from './components/OnboardingRouteGuard';
 export {
-  AGE_LABELS,
   EMAIL_VERIFICATION_CODE_LENGTH,
   EMAIL_VERIFICATION_DURATION_SECONDS,
   EMAIL_VERIFICATION_MAX_ATTEMPTS,
@@ -26,9 +26,8 @@ export {
 export type { OnboardingProgressStep } from './constants/onboarding.constants';
 export { useCompleteOnboarding } from './hooks/useCompleteOnboarding';
 export { useEmailVerification } from './hooks/useEmailVerification';
-export { useOnboardingStore } from './store/onboarding.store';
+export { useOnboardingStore } from './stores/onboarding.store';
 export type {
-  OnboardingAge,
   OnboardingDraft,
   OnboardingGender,
   OnboardingStep,

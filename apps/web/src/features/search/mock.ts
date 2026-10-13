@@ -1,6 +1,7 @@
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
 import type {
+  BasicCreatorProfileType,
   ProductSearchResultType,
   ReviewSearchResultType,
 } from '@somesay/shared';
@@ -18,13 +19,13 @@ const MOCK_SEARCH_PRODUCT: ProductSearchResultType = {
   productName:
     '캐롯 카터 패드 (200매)캐롯 카밍 워터 패드 캐롯 카터 패드 (200매)캐롯 카밍 워터 패...',
   price: 10000,
-  rating: 4.9,
+  avgRating: 4.9,
   reviewCount: 43,
   isHearted: false,
   creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
   reviewSummary:
     '"세럼이 끈적임 없이 촉촉하고, 수분감이 많아서 특히 건성 피부인 분들에게 추천해요."',
-  skinTypes: ['건성', '민감성'],
+  skinTypeIds: [1, 6],
   expectedEffects: [
     '각질제거',
     '여드름 진정',
@@ -45,14 +46,14 @@ export const MOCK_SEARCH_PRODUCTS: ProductSearchResultType[] = [
   { ...MOCK_SEARCH_PRODUCT, productId: 8 },
 ];
 
-const MOCK_CREATOR_PROFILE = {
+const MOCK_CREATOR_PROFILE: BasicCreatorProfileType = {
   creatorId: 1,
-  nickname: '크리에이터닉네임',
-  profileImageUrl: mockProfileImg,
+  creatorName: '크리에이터닉네임',
+  profileImgUrl: mockProfileImg,
   subscriberNum: 12000,
   trustScore: 4.7,
-  ageGroup: '20',
-  skinTypes: ['건성'],
+  age: 'TWENTIES',
+  skinTypeIds: [1],
 };
 
 const MOCK_REVIEW_PRODUCT: ProductSearchResultType = {

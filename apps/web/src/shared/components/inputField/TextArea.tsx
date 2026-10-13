@@ -3,7 +3,7 @@ import {
   type ChangeEventHandler,
   type TextareaHTMLAttributes,
 } from 'react';
-import { cn } from '@/utils/cn';
+import cn from '@/utils/cn';
 
 export interface TextAreaProps extends Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,

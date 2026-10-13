@@ -13,7 +13,7 @@ import {
   useOnboardingStore,
 } from '@/features/onboarding';
 import { PATH } from '@/routes/path';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 
 const kakaoLoginRequests = new Map<string, ReturnType<typeof postKakaoLogin>>();
 
