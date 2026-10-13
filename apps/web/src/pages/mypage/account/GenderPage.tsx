@@ -2,19 +2,27 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { PageHeader, FilterChip } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { GENDER_OPTIONS } from '@somesay/shared';
-import { MOCK_ACCOUNT } from '@/features/myPage';
+import type { GenderType } from '@somesay/shared';
+import { GENDER_LABELS } from '@/features/myPage';
+import { useAuth, usePatchUserBasicInfo } from '@/shared/hooks';
+
+// 선택지는 라벨 테이블에서 파생한다. 값은 서버 enum 그대로 두고 표시만 한글로 한다.
+const GENDER_OPTIONS = Object.entries(GENDER_LABELS) as [GenderType, string][];
 
 export const GenderPage = () => {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState(MOCK_ACCOUNT.gender);
+  const { user } = useAuth();
+  const { updateBasicInfo, isPending } = usePatchUserBasicInfo();
+  const [selected, setSelected] = useState<GenderType | null>(
+    user?.gender ?? null
+  );
 
-  const isChanged = selected !== MOCK_ACCOUNT.gender;
+  const isChanged = selected !== null && selected !== user?.gender;
+  const canComplete = isChanged && !isPending;
 
   const handleComplete = () => {
-    if (!isChanged) return;
-    // TODO: API 연결 후 성별 변경 로직 추가
-    navigate(-1);
+    if (!canComplete || selected === null) return;
+    updateBasicInfo({ gender: selected }, { onSuccess: () => navigate(-1) });
   };
 
   return (
@@ -31,20 +39,20 @@ export const GenderPage = () => {
             key="complete"
             type="button"
             onClick={handleComplete}
-            disabled={!isChanged}
-            className={`body1-sb ${isChanged ? 'text-black' : 'text-grey04'}`}
+            disabled={!canComplete}
+            className={`body1-sb ${canComplete ? 'text-black' : 'text-grey04'}`}
           >
             완료
           </button>,
         ]}
       />
       <div className="flex flex-wrap gap-3 px-4 pt-10">
-        {GENDER_OPTIONS.map((option) => (
+        {GENDER_OPTIONS.map(([value, label]) => (
           <FilterChip
-            key={option.value}
-            label={option.label}
-            isSelected={selected === option.label}
-            onClick={() => setSelected(option.label)}
+            key={value}
+            label={label}
+            isSelected={selected === value}
+            onClick={() => setSelected(value)}
           />
         ))}
       </div>

@@ -45,3 +45,12 @@ export interface UserMyPageType extends Pick<
 > {
   statistics: UserMyPageStatisticsType;
 }
+
+// 기본 정보 수정 API의 요청 본문입니다. 프로필 필드와 같은 개념이라 UserType에서 파생합니다.
+export type UserBasicInfoType = Pick<UserType, 'nickname' | 'gender' | 'age'>;
+
+// 피부 정보 수정 API의 요청 본문입니다.
+export type UserSkinInfoType = Pick<
+  UserType,
+  'skinTypeIds' | 'skinExpectationIds'
+>;

@@ -21,8 +21,14 @@ export const API_ENDPOINTS = {
   PRODUCT_SIMILAR: '/products/:productId/similar',
 
   /** User Product **/
-  // 사용자에게 잘 맞거나 맞지 않는 상품을 저장하기 위한 API URL입니다.
-  USER_PRODUCT: '/users/product',
+  USER_PRODUCT: {
+    // 사용자에게 잘 맞거나 맞지 않는 상품을 조회·저장하기 위한 API URL입니다.
+    BASE: '/users/product',
+    // 저장해 둔 잘 맞거나 맞지 않는 상품 하나를 삭제하기 위한 API URL입니다.
+    DETAIL: '/users/product/:productId',
+    // 잘 맞거나 맞지 않는 상품으로 추가할 상품을 검색하기 위한 API URL입니다.
+    SEARCH: '/users/product/search',
+  },
 
   /** User **/
   USER: {
@@ -30,6 +36,12 @@ export const API_ENDPOINTS = {
     INFO: '/users/info',
     // 마이페이지 첫 화면의 프로필과 활동 통계를 조회하기 위한 API URL입니다.
     MYPAGE: '/users/mypage',
+    // 닉네임·성별·연령을 수정하기 위한 API URL입니다.
+    BASIC_INFO: '/users/basic-info',
+    // 피부 타입·피부 고민을 수정하기 위한 API URL입니다.
+    SKIN_INFO: '/users/skin-info',
+    // 프로필 이미지를 변경하기 위한 API URL입니다.
+    PROFILE_IMAGE: '/users/user/profile',
   },
 
   /** home ranking controller **/

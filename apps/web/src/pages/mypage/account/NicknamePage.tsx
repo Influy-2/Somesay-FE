@@ -2,47 +2,40 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { CharacterCountInput, PageHeader } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { MOCK_ACCOUNT, MOCK_USERS } from '@/features/myPage';
+import { useAuth, usePatchUserBasicInfo } from '@/shared/hooks';
+import { NICKNAME_MAX_LENGTH, nicknameSchema } from '@/shared/schemas';
 
 export const NicknamePage = () => {
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState(MOCK_ACCOUNT.nickname);
-  const [errorMessage, setErrorMessage] = useState('');
+  const { user } = useAuth();
+  const { updateBasicInfo, isPending } = usePatchUserBasicInfo();
+  const currentNickname = user?.nickname ?? '';
+  const [nickname, setNickname] = useState(currentNickname);
 
-  const isDuplicate = MOCK_USERS.some(
-    (user) => user.nickname === nickname && nickname !== MOCK_ACCOUNT.nickname
-  );
-  const isChanged = nickname !== MOCK_ACCOUNT.nickname;
+  const nicknameResult = nicknameSchema.safeParse(nickname);
+  const errorMessage =
+    nickname.length > 0 && !nicknameResult.success
+      ? (nicknameResult.error.issues[0]?.message ?? '')
+      : '';
   const isValid =
-    isChanged &&
-    !isDuplicate &&
-    nickname.length >= 1 &&
-    /^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]*$/.test(nickname);
+    nicknameResult.success &&
+    nicknameResult.data !== currentNickname &&
+    !isPending;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (value.length > 12) return;
+    if (value.length > NICKNAME_MAX_LENGTH) return;
 
     setNickname(value);
-
-    if (value && !/^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]*$/.test(value)) {
-      setErrorMessage('닉네임은 한글, 영문, 숫자만 입력할 수 있어요.');
-    } else if (
-      MOCK_USERS.some(
-        (user) => user.nickname === value && value !== MOCK_ACCOUNT.nickname
-      )
-    ) {
-      setErrorMessage('이미 사용 중인 닉네임입니다.');
-    } else {
-      setErrorMessage('');
-    }
   };
 
   const handleComplete = () => {
-    if (!isValid) return;
-    // TODO: API 연결 후 닉네임 변경 로직 추가
-    navigate(-1);
+    if (!nicknameResult.success || !isValid) return;
+    updateBasicInfo(
+      { nickname: nicknameResult.data },
+      { onSuccess: () => navigate(-1) }
+    );
   };
 
   return (
@@ -71,7 +64,7 @@ export const NicknamePage = () => {
           value={nickname}
           onChange={handleChange}
           placeholder="닉네임을 입력해주세요"
-          maxLength={12}
+          maxLength={NICKNAME_MAX_LENGTH}
           errorMessage={errorMessage}
         />
       </div>

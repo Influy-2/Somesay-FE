@@ -1,6 +1,7 @@
 import {
   apiClient,
   configureApiClient,
+  fetchUserProducts,
   postUserProduct,
   type UserProductRequestType,
   type UserProductResponseType,
@@ -98,5 +99,18 @@ describe('user product API', () => {
         }),
       })
     );
+  });
+
+  it('목록 조회 시 프론트엔드 상태를 DTO 상태로 변환해 쿼리로 보낸다', async () => {
+    const get = vi.spyOn(apiClient, 'get').mockResolvedValue({
+      data: { code: 'SUCCESS', message: '', data: response.details },
+    });
+
+    await expect(fetchUserProducts('MISMATCHED')).resolves.toEqual(
+      response.details
+    );
+    expect(get).toHaveBeenCalledWith('/users/product', {
+      params: { status: 'UNMATCHED' },
+    });
   });
 });

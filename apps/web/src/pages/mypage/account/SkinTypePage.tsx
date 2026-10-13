@@ -4,7 +4,7 @@ import cn from '@/utils/cn';
 import { PageHeader, FilterChip } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { SKIN_TYPE_OPTIONS } from '@somesay/shared';
-import { MOCK_ACCOUNT } from '@/features/myPage';
+import { useAuth, usePatchUserSkinInfo } from '@/shared/hooks';
 
 // '모르겠음'은 다른 피부 타입과 함께 고를 수 없어 id를 따로 둡니다.
 const UNKNOWN_SKIN_TYPE_ID = 8;
@@ -12,11 +12,15 @@ const MAX_SELECTIONS = 2;
 
 export const SkinTypePage = () => {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState<number[]>(MOCK_ACCOUNT.skinTypeIds);
+  const { user } = useAuth();
+  const { updateSkinInfo, isPending } = usePatchUserSkinInfo();
+  const currentSkinTypeIds = user?.skinTypeIds ?? [];
+  const [selected, setSelected] = useState<number[]>(currentSkinTypeIds);
 
   const isCompleted = selected.length > 0;
   const isChanged =
-    JSON.stringify(selected) !== JSON.stringify(MOCK_ACCOUNT.skinTypeIds);
+    JSON.stringify(selected) !== JSON.stringify(currentSkinTypeIds);
+  const canComplete = isChanged && isCompleted && !isPending;
 
   const handleSelect = (id: number) => {
     if (id === UNKNOWN_SKIN_TYPE_ID) {
@@ -36,9 +40,11 @@ export const SkinTypePage = () => {
   };
 
   const handleComplete = () => {
-    if (!isChanged) return;
-    // TODO: API 연결 후 피부타입 변경 로직 추가
-    navigate(-1);
+    if (!canComplete) return;
+    updateSkinInfo(
+      { skinTypeIds: selected },
+      { onSuccess: () => navigate(-1) }
+    );
   };
 
   return (
@@ -55,10 +61,10 @@ export const SkinTypePage = () => {
             key="complete"
             type="button"
             onClick={handleComplete}
-            disabled={!isChanged || !isCompleted}
+            disabled={!canComplete}
             className={cn(
               'body1-sb',
-              isChanged && isCompleted ? 'text-black' : 'text-grey04'
+              canComplete ? 'text-black' : 'text-grey04'
             )}
           >
             완료

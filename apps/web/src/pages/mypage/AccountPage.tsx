@@ -11,24 +11,30 @@ import { ArrowBackIcon } from '@/shared/icons';
 import {
   InfoSection,
   InfoRow,
-  MOCK_ACCOUNT,
+  GENDER_LABELS,
   AccountProfileImage,
   ProductFitSection,
 } from '@/features/myPage';
+import { useAuth, useFetchUserProducts } from '@/shared/hooks';
 
 export const AccountPage = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  // 목록 조회가 실패해도 계정 화면은 쓸 수 있어야 해서 빈 목록으로 둡니다.
+  const { data: matchedProducts = [] } = useFetchUserProducts('MATCHED');
+  const { data: mismatchedProducts = [] } = useFetchUserProducts('MISMATCHED');
+
+  // ProtectedRoute가 인증된 뒤에만 렌더하므로 실제로는 항상 값이 있습니다.
+  if (!user) return null;
 
   const {
-    profileImageUrl,
+    profileImgUrl,
     nickname,
     gender,
     age,
     skinTypeIds,
     skinExpectationIds,
-    goodProducts,
-    badProducts,
-  } = MOCK_ACCOUNT;
+  } = user;
 
   const ACCOUNT_BASE = `${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.ACCOUNT.BASE}`;
   const BASIC_INFO_ROWS = [
@@ -39,7 +45,7 @@ export const AccountPage = () => {
     },
     {
       label: '성별',
-      value: gender,
+      value: GENDER_LABELS[gender],
       to: `${ACCOUNT_BASE}/${PATH.MY_PAGE.ACCOUNT.GENDER}`,
     },
     {
@@ -73,7 +79,7 @@ export const AccountPage = () => {
       />
       <div className="mt-13.5 flex flex-1 flex-col px-4 pb-4">
         {/* 프로필 이미지 */}
-        <AccountProfileImage profileImageUrl={profileImageUrl} />
+        <AccountProfileImage profileImgUrl={profileImgUrl} />
 
         <div className="divide-grey03 flex flex-col divide-y">
           {/* 기본 정보 수정 */}
@@ -89,7 +95,10 @@ export const AccountPage = () => {
             ))}
           </InfoSection>
           {/* 제품 적합도 */}
-          <ProductFitSection matches={goodProducts} mismatches={badProducts} />
+          <ProductFitSection
+            matches={matchedProducts}
+            mismatches={mismatchedProducts}
+          />
           {/* 계정 설정 */}
           <InfoSection title="계정 설정">
             <InfoRow label="로그아웃" onClick={() => {}} />

@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
   getNextOnboardingPath,
-  nicknameSchema,
   OnboardingLayout,
   useOnboardingStore,
 } from '@/features/onboarding';
 import { CharacterCountInput } from '@/shared/components';
+import { nicknameSchema } from '@/shared/schemas';
 
 export const NicknamePage = () => {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ export const NicknamePage = () => {
           value={nickname}
           onChange={(event) => setLocalNickname(event.target.value)}
           {...(errorMessage ? { errorMessage } : {})}
-          helperText="한글, 영어 소문자, 숫자로 구성된 닉네임을 입력해 주세요."
+          helperText="한글, 영문, 숫자로 구성된 닉네임을 입력해 주세요."
           autoComplete="nickname"
           allowLengthOverflow
           autoFocus

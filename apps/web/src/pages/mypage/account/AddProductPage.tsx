@@ -10,23 +10,28 @@ import {
   SelectedItem,
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { MOCK_PRODUCTS } from '@/features/myPage';
-import { useFetchCategories } from '@/shared/hooks';
+import {
+  useFetchCategories,
+  useFetchUserProductSearch,
+  usePostUserProduct,
+} from '@/shared/hooks';
 import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
 import { useSnackbarStore } from '@/shared/stores';
 import cn from '@/utils/cn';
 
-type FitProduct = {
-  productId: number;
-  productImgUrl: string;
-  productName: string;
-  brandName: string;
-};
+import type {
+  UserProductDetailType,
+  UserProductSearchSortType,
+  UserProductStatusType,
+} from '@somesay/shared';
 
-const SORT_OPTIONS = [
-  { value: 'popular', label: '인기순' },
-  { value: 'latest', label: '최신순' },
+// 서버가 받는 정렬 기준만 노출합니다. 라벨은 디자인 확정 시 여기만 고치면 됩니다.
+const SORT_OPTIONS: { value: UserProductSearchSortType; label: string }[] = [
+  { value: 'RATING_DESC', label: '평점순' },
+  { value: 'PRICE_ASC', label: '낮은 가격순' },
+  { value: 'PRICE_DESC', label: '높은 가격순' },
 ];
+const DEFAULT_SORT_TYPE: UserProductSearchSortType = 'RATING_DESC';
 
 const ALL_CATEGORY = { id: 0, label: '전체' };
 
@@ -35,13 +40,17 @@ export const AddProductPage = () => {
   const location = useLocation();
   const state = location.state as {
     type: 'matches' | 'mismatches';
-    currentProducts: FitProduct[];
+    currentProducts: UserProductDetailType[];
   } | null;
 
   const [selectedCategoryId, setSelectedCategoryId] = useState(ALL_CATEGORY.id);
   const [searchValue, setSearchValue] = useState('');
-  const [selectedProducts, setSelectedProducts] = useState<FitProduct[]>([]);
-  const [currentSortValue, setCurrentSortValue] = useState('popular');
+  const [selectedProducts, setSelectedProducts] = useState<
+    UserProductDetailType[]
+  >([]);
+  const [sortType, setSortType] =
+    useState<UserProductSearchSortType>(DEFAULT_SORT_TYPE);
+  const [submittedKeyword, setSubmittedKeyword] = useState('');
   const showSnackbar = useSnackbarStore((store) => store.showSnackbar);
   const { data: categoryGroups = [] } = useFetchCategories();
 
@@ -58,13 +67,24 @@ export const AddProductPage = () => {
     currentProducts: [],
   };
 
-  const filteredProducts = useMemo(
-    () =>
-      selectedCategoryId === ALL_CATEGORY.id
-        ? MOCK_PRODUCTS
-        : MOCK_PRODUCTS.filter((p) => p.categoryId === selectedCategoryId),
-    [selectedCategoryId]
-  );
+  // 서버 검색이 keyword를 필수로 받아, 검색어를 제출하기 전에는 목록을 조회하지 않습니다.
+  // TODO: 검색 전 기본 목록은 백엔드 지원이 정해질 때까지 보류 (.claude/docs/refactor-todo.md)
+  const {
+    data: searchResult,
+    isPending: isSearchPending,
+    isError: isSearchError,
+  } = useFetchUserProductSearch({
+    keyword: submittedKeyword,
+    sortType,
+    ...(selectedCategoryId === ALL_CATEGORY.id
+      ? {}
+      : { mainCategoryId: selectedCategoryId }),
+  });
+  const { mutate: addUserProducts, isPending: isAdding } = usePostUserProduct();
+
+  const isSearchMode = submittedKeyword.length > 0;
+
+  const products = useMemo(() => searchResult?.details ?? [], [searchResult]);
 
   const currentProductIds = useMemo(
     () => new Set(currentProducts.map((p) => p.productId)),
@@ -78,7 +98,7 @@ export const AddProductPage = () => {
 
   const handleSelect = useCallback(
     (productId: number) => {
-      const product = MOCK_PRODUCTS.find((p) => p.productId === productId);
+      const product = products.find((p) => p.productId === productId);
       if (!product || currentProductIds.has(productId)) return;
 
       const isSelected = selectedProductIds.has(productId);
@@ -98,6 +118,7 @@ export const AddProductPage = () => {
       );
     },
     [
+      products,
       currentProductIds,
       currentProducts.length,
       selectedProductIds,
@@ -125,14 +146,91 @@ export const AddProductPage = () => {
     );
   }
 
-  const title = type === 'matches' ? '잘 맞았던 제품' : '안 맞았던 제품';
+  const handleSubmitSearch = () => setSubmittedKeyword(searchValue.trim());
 
-  const handleAdd = () => {
-    // TODO: API 연결 후 추가 로직 교체
-    navigate(-1);
+  const handleClearSearch = () => {
+    setSearchValue('');
+    setSubmittedKeyword('');
   };
 
-  const isAddable = selectedProducts.length > 0;
+  const handleSelectSort = (value: string) => {
+    const option = SORT_OPTIONS.find(
+      (sortOption) => sortOption.value === value
+    );
+    if (option) setSortType(option.value);
+  };
+
+  const title = type === 'matches' ? '잘 맞았던 제품' : '안 맞았던 제품';
+  const status: UserProductStatusType =
+    type === 'matches' ? 'MATCHED' : 'MISMATCHED';
+
+  const isAddable = selectedProducts.length > 0 && !isAdding;
+
+  const handleAdd = () => {
+    if (!isAddable) return;
+
+    addUserProducts(
+      { status, productIds: selectedProducts.map((p) => p.productId) },
+      {
+        onSuccess: () => navigate(-1),
+        onError: () =>
+          showSnackbar(
+            '상품을 추가하지 못했어요. 잠시 후 다시 시도해 주세요.',
+            {
+              variant: 'error',
+            }
+          ),
+      }
+    );
+  };
+
+  const renderProducts = () => {
+    if (!isSearchMode) {
+      return (
+        <p className="body2-m text-grey05 px-4 py-20 text-center">
+          제품명 또는 브랜드를 검색해 주세요.
+        </p>
+      );
+    }
+    if (isSearchPending) {
+      return (
+        <div
+          role="status"
+          aria-busy="true"
+          aria-label="검색 결과를 불러오는 중"
+          className="py-20"
+        />
+      );
+    }
+    if (isSearchError) {
+      return (
+        <p className="body2-m text-grey05 px-4 py-20 text-center">
+          검색 결과를 불러오지 못했어요.
+        </p>
+      );
+    }
+    if (products.length === 0) {
+      return (
+        <p className="body2-m text-grey05 px-4 py-20 text-center">
+          검색 결과가 없어요.
+        </p>
+      );
+    }
+    return (
+      <ul className="divide-grey02 divide-y">
+        {products.map((product) => (
+          <RadioProductItem
+            key={product.productId}
+            {...product}
+            isSelected={selectedProductIds.has(product.productId)}
+            isAlreadyAdded={currentProductIds.has(product.productId)}
+            onClick={handleSelect}
+            onAlreadyAdded={handleAlreadyAdded}
+          />
+        ))}
+      </ul>
+    );
+  };
 
   return (
     <div
@@ -166,8 +264,8 @@ export const AddProductPage = () => {
             placeholder="제품명 또는 브랜드 검색"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            onSubmit={() => {}}
-            onClear={() => setSearchValue('')}
+            onSubmit={handleSubmitSearch}
+            onClear={handleClearSearch}
           />
         </div>
 
@@ -182,26 +280,17 @@ export const AddProductPage = () => {
         </div>
 
         {/* 정렬바 */}
-        <SortBar
-          count={filteredProducts.length}
-          sortOptions={SORT_OPTIONS}
-          currentSortValue={currentSortValue}
-          onSelectSort={setCurrentSortValue}
-        />
+        {isSearchMode && (
+          <SortBar
+            count={searchResult?.totalCount ?? 0}
+            sortOptions={SORT_OPTIONS}
+            currentSortValue={sortType}
+            onSelectSort={handleSelectSort}
+          />
+        )}
       </div>
       {/* 제품 리스트 */}
-      <ul className="divide-grey02 divide-y">
-        {filteredProducts.map((product) => (
-          <RadioProductItem
-            key={product.productId}
-            {...product}
-            isSelected={selectedProductIds.has(product.productId)}
-            isAlreadyAdded={currentProductIds.has(product.productId)}
-            onClick={handleSelect}
-            onAlreadyAdded={handleAlreadyAdded}
-          />
-        ))}
-      </ul>
+      {renderProducts()}
 
       {/* 하단 바텀시트 */}
       <div className="fixed bottom-0 left-1/2 w-full max-w-110 -translate-x-1/2 rounded-t-[1.25rem] bg-white px-4 pt-10 pb-10 shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">

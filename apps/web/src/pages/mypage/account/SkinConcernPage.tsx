@@ -4,19 +4,20 @@ import { useNavigate } from 'react-router';
 import { PageHeader, FilterChip } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { USER_SKIN_CONCERN_OPTIONS } from '@somesay/shared';
-import { MOCK_ACCOUNT } from '@/features/myPage';
+import { useAuth, usePatchUserSkinInfo } from '@/shared/hooks';
 
 const MAX_SELECTIONS = 2;
 
 export const SkinConcernPage = () => {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState<number[]>(
-    MOCK_ACCOUNT.skinExpectationIds
-  );
+  const { user } = useAuth();
+  const { updateSkinInfo, isPending } = usePatchUserSkinInfo();
+  const currentSkinExpectationIds = user?.skinExpectationIds ?? [];
+  const [selected, setSelected] = useState<number[]>(currentSkinExpectationIds);
 
   const isChanged =
-    JSON.stringify(selected) !==
-    JSON.stringify(MOCK_ACCOUNT.skinExpectationIds);
+    JSON.stringify(selected) !== JSON.stringify(currentSkinExpectationIds);
+  const canComplete = isChanged && !isPending;
 
   const handleSelect = (id: number) => {
     setSelected((prev) =>
@@ -29,9 +30,11 @@ export const SkinConcernPage = () => {
   };
 
   const handleComplete = () => {
-    if (!isChanged) return;
-    // TODO: API 연결 후 피부고민 변경 로직 추가
-    navigate(-1);
+    if (!canComplete) return;
+    updateSkinInfo(
+      { skinExpectationIds: selected },
+      { onSuccess: () => navigate(-1) }
+    );
   };
 
   return (
@@ -48,8 +51,11 @@ export const SkinConcernPage = () => {
             key="complete"
             type="button"
             onClick={handleComplete}
-            disabled={!isChanged}
-            className={cn('body1-sb', isChanged ? 'text-black' : 'text-grey04')}
+            disabled={!canComplete}
+            className={cn(
+              'body1-sb',
+              canComplete ? 'text-black' : 'text-grey04'
+            )}
           >
             완료
           </button>,

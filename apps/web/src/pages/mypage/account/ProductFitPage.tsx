@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import {
   PageHeader,
@@ -6,10 +5,10 @@ import {
   FloatingButtonPlus,
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { MOCK_ACCOUNT } from '@/features/myPage';
 import { PATH } from '@/routes/path';
 import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
 import { useSnackbarStore } from '@/shared/stores';
+import { useDeleteUserProduct, useFetchUserProducts } from '@/shared/hooks';
 
 type FitType = 'matches' | 'mismatches';
 
@@ -22,9 +21,12 @@ export const ProductFitPage = () => {
   const isMatches = lastSegment === PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.MATCHES;
   const fitType: FitType = isMatches ? 'matches' : 'mismatches';
 
-  const [products, setProducts] = useState(
-    isMatches ? MOCK_ACCOUNT.goodProducts : MOCK_ACCOUNT.badProducts
-  );
+  const {
+    data: products = [],
+    isPending,
+    isError,
+  } = useFetchUserProducts(isMatches ? 'MATCHED' : 'MISMATCHED');
+  const { removeUserProduct } = useDeleteUserProduct();
   const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
 
   const title = isMatches ? '잘 맞았던 제품' : '안 맞았던 제품';
@@ -32,9 +34,7 @@ export const ProductFitPage = () => {
     ? '가장 잘 맞았던 제품을 최대 15개 저장할 수 있어요.'
     : '안 맞았던 제품을 최대 15개 저장할 수 있어요.';
 
-  const handleDelete = (productId: number) => {
-    setProducts((prev) => prev.filter((p) => p.productId !== productId));
-  };
+  const handleDelete = (productId: number) => removeUserProduct(productId);
 
   const handleAdd = () => {
     if (products.length >= MAX_PRODUCT_SELECTION) {
@@ -46,6 +46,45 @@ export const ProductFitPage = () => {
       {
         state: { type: fitType, currentProducts: products },
       }
+    );
+  };
+
+  const renderProducts = () => {
+    if (isPending) {
+      return (
+        <div
+          role="status"
+          aria-busy="true"
+          aria-label="상품 목록을 불러오는 중"
+          className="flex flex-1"
+        />
+      );
+    }
+    if (isError) {
+      return (
+        <div className="flex flex-1 items-center justify-center">
+          <p className="body2-m text-grey05">상품 목록을 불러오지 못했어요.</p>
+        </div>
+      );
+    }
+    if (products.length === 0) {
+      return (
+        <div className="flex flex-1 items-center justify-center">
+          <p className="body2-m text-grey05">아직 추가된 상품이 없어요.</p>
+        </div>
+      );
+    }
+    return (
+      <ul className="divide-grey02 divide-y">
+        {products.map((product) => (
+          <RemovableProductItem
+            key={product.productId}
+            {...product}
+            type={isMatches ? 'good' : 'bad'}
+            onDelete={handleDelete}
+          />
+        ))}
+      </ul>
     );
   };
 
@@ -61,22 +100,7 @@ export const ProductFitPage = () => {
       />
       <div className="flex flex-1 flex-col">
         <p className="body1-sb p-4 text-black">{description}</p>
-        {products.length === 0 ? (
-          <div className="flex flex-1 items-center justify-center">
-            <p className="body2-m text-grey05">아직 추가된 상품이 없어요.</p>
-          </div>
-        ) : (
-          <ul className="divide-grey02 divide-y">
-            {products.map((product) => (
-              <RemovableProductItem
-                key={product.productId}
-                {...product}
-                type={isMatches ? 'good' : 'bad'}
-                onDelete={handleDelete}
-              />
-            ))}
-          </ul>
-        )}
+        {renderProducts()}
       </div>
       <FloatingButtonPlus onClick={handleAdd} />
     </div>

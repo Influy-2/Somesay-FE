@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { AGE_TYPES } from '@somesay/shared';
 
 import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
+import { nicknameSchema } from '@/shared/schemas';
 import { REQUIRED_AGREEMENT_IDS } from '../constants/onboarding.constants';
 import type { OnboardingStep } from '../types/onboarding.types';
 
@@ -28,16 +29,6 @@ export const emailSchema = z
   .trim()
   .min(1, '이메일을 입력해주세요.')
   .email('올바른 이메일 형식으로 입력해주세요.');
-
-export const nicknameSchema = z
-  .string()
-  .trim()
-  .regex(
-    /^[가-힣ㄱ-ㅎㅏ-ㅣa-z0-9]+$/,
-    '아이디는 한글, 영어 소문자, 숫자만 사용할 수 있습니다.'
-  )
-  .min(3, '아이디는 최소 3자, 최대 12자까지 입력할 수 있습니다.')
-  .max(12, '아이디는 최소 3자, 최대 12자까지 입력할 수 있습니다.');
 
 export const agreementsSchema = z
   .record(z.string(), z.boolean())

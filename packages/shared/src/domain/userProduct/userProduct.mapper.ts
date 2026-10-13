@@ -25,6 +25,11 @@ const USER_PRODUCT_STATUS_FROM_DTO: Record<
   UNMATCHED: 'MISMATCHED',
 };
 
+// 조회 쿼리 파라미터처럼 상태 값만 단독으로 서버에 보낼 때 사용합니다.
+export const mapUserProductStatusToDto = (
+  status: UserProductStatusType
+): UserProductStatusDto => USER_PRODUCT_STATUS_TO_DTO[status];
+
 // 프론트엔드의 상품 적합 상태를 백엔드 DTO 상태로 변환합니다.
 export const mapUserProductRequestToDto = ({
   status,
