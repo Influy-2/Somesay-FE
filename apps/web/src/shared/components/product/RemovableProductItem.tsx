@@ -5,7 +5,7 @@ import { CircleMinus24Icon } from '@/shared/icons';
 import { Modal } from '../modal/Modal';
 type RemovableProductItemProps = {
   productId: number;
-  productImgUrl: string;
+  productImgUrl: string | null;
   brandName: string;
   productName: string;
   onDelete: (productId: number) => void;

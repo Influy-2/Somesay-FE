@@ -26,6 +26,10 @@ export type InfoResponse = Schemas['InfoResponse'];
 export type MyPageResponse = Schemas['MyPageResponse'];
 export type UserProductRequest = Schemas['UserProductRequest'];
 export type UserProductItemResponse = Schemas['UserProductItemResponse'];
+export type UserProductSearchItemResponse =
+  Schemas['UserProductSearchItemResponse'];
+export type BasicInfoRequest = Schemas['BasicInfoRequest'];
+export type SkinInfoRequest = Schemas['SkinInfoRequest'];
 
 // 상품·찜·브랜드
 // ProductPreviewCard = 작은 카드(랭킹·비슷한 상품), ProductCard = 큰 카드(카테고리·브랜드·검색·홈 목록)
