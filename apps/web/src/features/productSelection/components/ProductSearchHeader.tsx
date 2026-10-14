@@ -1,4 +1,4 @@
-import type { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler, ReactNode } from 'react';
 import {
   HorizontalCategoriesTab,
   PageHeader,
@@ -25,6 +25,10 @@ type ProductSearchHeaderProps =
       categories: ProductCategory[];
       selectedCategoryId: number;
       onSelectCategory: (categoryId: number) => void;
+      /** 결과 화면 제목입니다. 지정하지 않으면 '검색 결과'를 씁니다. */
+      title?: string;
+      /** 헤더 오른쪽에 둘 버튼들입니다(예: 마이페이지의 '추가'). */
+      right?: ReactNode[];
     });
 
 const BackButton = ({
@@ -63,8 +67,9 @@ export const ProductSearchHeader = (props: ProductSearchHeaderProps) => {
   return (
     <div className="flex flex-col gap-4 pb-3.5">
       <PageHeader
-        title="검색 결과"
+        title={props.title ?? '검색 결과'}
         left={<BackButton label={props.backLabel} onClick={props.onBack} />}
+        {...(props.right ? { right: props.right } : {})}
       />
       <div className="flex flex-col gap-4 px-4">
         {searchBar}

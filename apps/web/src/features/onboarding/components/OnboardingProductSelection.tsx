@@ -32,6 +32,7 @@ interface OnboardingProductSelectionProps {
   ctaLabel: string;
 }
 
+// TODO: 온보딩의 상품 목록은 아직 mock(MOCK_PRODUCT_CATALOG)입니다. 실제 API 전환 조건은 OnboardingProductSearch 상단 주석을 참고하세요.
 export const OnboardingProductSelection = ({
   status,
   step,

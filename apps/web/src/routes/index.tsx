@@ -28,6 +28,7 @@ import { SkinTypePage } from '@/pages/mypage/account/SkinTypePage';
 import { SkinConcernPage } from '@/pages/mypage/account/SkinConcernPage';
 import { ProductFitPage } from '@/pages/mypage/account/ProductFitPage';
 import { AddProductPage } from '@/pages/mypage/account/AddProductPage';
+import { AddProductSearchPage } from '@/pages/mypage/account/AddProductSearchPage';
 import { LoginPage } from '@/pages/login/LoginPage';
 import { KakaoCallbackPage } from '@/pages/login/KakaoCallbackPage';
 import { EmailPage } from '@/pages/onboarding/EmailPage';
@@ -306,6 +307,10 @@ export const appRouter = createBrowserRouter([
                   {
                     path: PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.ADD_PRODUCTS,
                     element: <AddProductPage />,
+                  },
+                  {
+                    path: PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.ADD_PRODUCTS_SEARCH,
+                    element: <AddProductSearchPage />,
                   },
                 ],
               },

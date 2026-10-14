@@ -1,4 +1,6 @@
 // 마이페이지 feature의 공개 API입니다.
+export { AddProductList } from './components/productFit/AddProductList';
+export { AddProductSearch } from './components/productFit/AddProductSearch';
 export { AccountProfileImage } from './components/AccountProfileImage';
 export { InfoRow } from './components/InfoRow';
 export { InfoSection } from './components/InfoSection';
@@ -9,6 +11,8 @@ export { MyProfile } from './components/MyProfile';
 export { ProductFitSection } from './components/ProductFitSection';
 export { RecommendedCreators } from './components/RecommendedCreators';
 export { RecommendedCreatorsTooltip } from './components/RecommendedCreatorsTooltip';
+
+export { useProductFitDraftStore } from './stores/productFitDraft.store';
 
 export { GENDER_LABELS } from './constants/myPage.constants';
 
