@@ -60,6 +60,7 @@ export const PATH = {
         MATCHES: 'matches',
         MISMATCHES: 'mismatches',
         ADD_PRODUCTS: 'add-products',
+        ADD_PRODUCTS_SEARCH: 'add-products/search',
       },
     },
   },

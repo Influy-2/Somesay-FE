@@ -6,11 +6,10 @@ import {
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { PATH } from '@/routes/path';
+import { useProductFitDraftStore } from '@/features/myPage';
 import { MAX_PRODUCT_SELECTION } from '@/features/productSelection';
 import { useSnackbarStore } from '@/shared/stores';
 import { useDeleteUserProduct, useFetchUserProducts } from '@/shared/hooks';
-
-type FitType = 'matches' | 'mismatches';
 
 export const ProductFitPage = () => {
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ export const ProductFitPage = () => {
   const segments = pathname.split('/');
   const lastSegment = segments[segments.length - 1];
   const isMatches = lastSegment === PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.MATCHES;
-  const fitType: FitType = isMatches ? 'matches' : 'mismatches';
 
   const {
     data: products = [],
@@ -28,6 +26,7 @@ export const ProductFitPage = () => {
   } = useFetchUserProducts(isMatches ? 'MATCHED' : 'MISMATCHED');
   const { removeUserProduct } = useDeleteUserProduct();
   const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
+  const startDraft = useProductFitDraftStore((state) => state.startDraft);
 
   const title = isMatches ? '잘 맞았던 제품' : '안 맞았던 제품';
   const description = isMatches
@@ -41,11 +40,10 @@ export const ProductFitPage = () => {
       showSnackbar('최대 15개까지 저장 가능해요.');
       return;
     }
+    // 추가 화면이 두 라우트로 나뉘어 라우터 이동 state 대신 스토어로 넘긴다.
+    startDraft(isMatches ? 'MATCHED' : 'MISMATCHED');
     navigate(
-      `${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.ACCOUNT.BASE}/${PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.BASE}/${PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.ADD_PRODUCTS}`,
-      {
-        state: { type: fitType, currentProducts: products },
-      }
+      `${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.ACCOUNT.BASE}/${PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.BASE}/${PATH.MY_PAGE.ACCOUNT.PRODUCT_FIT.ADD_PRODUCTS}`
     );
   };
 
