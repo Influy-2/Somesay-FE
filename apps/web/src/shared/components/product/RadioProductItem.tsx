@@ -47,6 +47,9 @@ export const RadioProductItem = memo(
                   src={productImgUrl}
                   alt={productName}
                   className="size-full object-cover"
+                  // 무한 스크롤 목록이라 화면 밖 이미지까지 한 번에 받지 않고, 디코딩이 스크롤을 막지 않게 합니다.
+                  loading="lazy"
+                  decoding="async"
                 />
               )}
             </div>
