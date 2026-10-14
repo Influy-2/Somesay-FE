@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { useFetchCategories, useFetchProductsByCategory } from '@/shared/hooks';
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
+import type { SelectableProductListStatus } from '@/shared/components';
 
 /**
  * 상품 추가 목록 화면의 카테고리 선택과 상품 목록(무한 스크롤)을 다룹니다.
@@ -48,16 +49,27 @@ export const useAddProductList = () => {
     fetchNextPage: productsQuery.fetchNextPage,
   });
 
+  // 카테고리 실패 시 상품 쿼리가 계속 pending이라 에러를 로딩보다 먼저 봅니다.
+  // 카테고리가 성공했는데 비어 있으면 상품 쿼리가 disabled라 pending이 계속되므로, 로딩이 아닌 'ready'로 빈 문구를 보여줍니다.
+  const isEmptyCategory = categoriesQuery.isSuccess && categories.length === 0;
+  const isError = categoriesQuery.isError || productsQuery.isError;
+  const isLoading = categoriesQuery.isPending || productsQuery.isPending;
+  const listStatus: SelectableProductListStatus = isError
+    ? 'error'
+    : isEmptyCategory
+      ? 'ready'
+      : isLoading
+        ? 'loading'
+        : 'ready';
+
   return {
     categories,
-    selectedCategoryId,
+    // 탭이 number를 받으므로 카테고리가 아직 없을 때의 undefined를 0으로 채웁니다.
+    selectedCategoryId: selectedCategoryId ?? 0,
     selectCategory: setPickedCategoryId,
     products,
     productCount,
-    // 카테고리가 성공했는데 비어 있으면 상품 쿼리가 disabled라 isPending이 계속 true이므로 따로 알립니다.
-    isEmptyCategory: categoriesQuery.isSuccess && categories.length === 0,
-    isLoading: categoriesQuery.isPending || productsQuery.isPending,
-    isError: categoriesQuery.isError || productsQuery.isError,
+    listStatus,
     loadMoreRef,
   };
 };
