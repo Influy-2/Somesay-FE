@@ -47,3 +47,4 @@ export { useAuth } from './auth/useAuth';
 export { useAuthGuard } from './auth/useAuthGuard';
 export { usePostKakaoLogin } from './auth/usePostKakaoLogin';
 export { usePostSignUp } from './auth/usePostSignUp';
+export { useLogout } from './auth/useLogout';
