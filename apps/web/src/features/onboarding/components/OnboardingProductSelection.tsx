@@ -6,12 +6,15 @@ import {
   MAX_PRODUCT_SELECTION,
   MOCK_PRODUCT_CATALOG,
   PRODUCT_CATEGORIES,
-  ProductSearchTrigger,
-  SelectableProductList,
-  SelectedProductDock,
   useProductCatalog,
 } from '@/features/productSelection';
-import { HorizontalCategoriesTab } from '@/shared/components';
+import {
+  ProductSearchTrigger,
+  ProductSelectionBrowser,
+  SelectableProductCardList,
+  SelectedProductDock,
+  type SelectableProductItem,
+} from '@/shared/components';
 import { useSnackbarStore } from '@/shared/stores';
 import { useCompleteOnboarding } from '../hooks/useCompleteOnboarding';
 import { productIdsSchema } from '../schemas/onboarding.schema';
@@ -50,6 +53,7 @@ export const OnboardingProductSelection = ({
   );
   const toggleProduct = useOnboardingStore((state) => state.toggleProduct);
   const products = useProductCatalog(selectedCategoryId);
+  // productIds 구독은 dock·CTA 활성화에 필요해 화면 껍데기는 다시 그려지지만, 카드는 memo라 바뀐 카드만 갱신됩니다.
   const selectedProductIds = useMemo(() => new Set(productIds), [productIds]);
   const selectedProducts = useMemo(
     () => getProductsByIds(MOCK_PRODUCT_CATALOG, productIds),
@@ -58,10 +62,16 @@ export const OnboardingProductSelection = ({
   const canProceed =
     productIds.length > 0 && productIdsSchema.safeParse(productIds).success;
 
+  // 선택 id를 클로저로 잡지 않고 getState()로 최신값을 읽어, 선택이 바뀌어도 콜백 참조가 유지됩니다(카드 memo 유지).
   const handleToggleProduct = useCallback(
-    (productId: number) => {
+    ({ productId }: SelectableProductItem) => {
+      const state = useOnboardingStore.getState();
+      const currentIds =
+        status === 'MATCHED'
+          ? state.matchedProductIds
+          : state.mismatchedProductIds;
       if (
-        hasReachedProductLimit(productIds, productId, MAX_PRODUCT_SELECTION)
+        hasReachedProductLimit(currentIds, productId, MAX_PRODUCT_SELECTION)
       ) {
         showSnackbar('최대 15개까지 저장 가능해요.', {
           placement: 'onboardingBottom72',
@@ -71,7 +81,13 @@ export const OnboardingProductSelection = ({
 
       toggleProduct(status, productId);
     },
-    [productIds, showSnackbar, status, toggleProduct]
+    [showSnackbar, status, toggleProduct]
+  );
+
+  // dock의 제거는 상한 검사가 필요 없어 상품 id만 받아 바로 토글합니다.
+  const handleRemoveProduct = useCallback(
+    (productId: number) => toggleProduct(status, productId),
+    [status, toggleProduct]
   );
 
   const moveToNextStep = () => {
@@ -96,7 +112,7 @@ export const OnboardingProductSelection = ({
         selectedProducts.length > 0 ? (
           <SelectedProductDock
             products={selectedProducts}
-            onRemove={handleToggleProduct}
+            onRemove={handleRemoveProduct}
           />
         ) : undefined
       }
@@ -115,19 +131,23 @@ export const OnboardingProductSelection = ({
 
         <div className="flex min-h-0 flex-1 flex-col gap-4">
           <ProductSearchTrigger onClick={() => navigate(searchPath)} />
-          <HorizontalCategoriesTab
+          {/* 콘텐츠가 이미 px-4라, Browser와 카드의 px-4가 겹치지 않도록 -mx-4로 바깥까지 넓힙니다. */}
+          <ProductSelectionBrowser
             categories={PRODUCT_CATEGORIES}
-            selectedId={selectedCategoryId}
-            onSelect={setSelectedCategoryId}
-            ariaLabel="상품 카테고리"
-          />
-          <div className="-mx-4 min-h-0 flex-1 overflow-y-auto pb-70">
-            <SelectableProductList
-              products={products}
-              selectedProductIds={selectedProductIds}
-              onToggle={handleToggleProduct}
-            />
-          </div>
+            selectedCategoryId={selectedCategoryId}
+            onSelectCategory={setSelectedCategoryId}
+            className="-mx-4 min-h-0 flex-1"
+          >
+            {/* 기존 탭-목록 간격(gap-4)에 맞추려고 Browser의 pb-3.5에 pt-0.5를 더합니다. */}
+            <div className="min-h-0 flex-1 overflow-y-auto pt-0.5 pb-70">
+              <SelectableProductCardList
+                products={products}
+                selectedProductIds={selectedProductIds}
+                onToggle={handleToggleProduct}
+                emptyMessage="검색 결과가 없습니다."
+              />
+            </div>
+          </ProductSelectionBrowser>
         </div>
       </div>
     </OnboardingLayout>

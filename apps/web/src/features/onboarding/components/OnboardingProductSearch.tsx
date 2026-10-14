@@ -1,4 +1,4 @@
-import { useMemo, useState, type ChangeEventHandler } from 'react';
+import { useCallback, useMemo, useState, type ChangeEventHandler } from 'react';
 import { useNavigate } from 'react-router';
 import {
   getProductsByIds,
@@ -6,13 +6,17 @@ import {
   MAX_PRODUCT_SELECTION,
   MOCK_PRODUCT_CATALOG,
   PRODUCT_CATEGORIES,
-  ProductSearchHeader,
-  RecentProductSearchList,
-  SelectableProductList,
-  SelectedProductDock,
   useProductCatalog,
   useRecentProductSearchStore,
 } from '@/features/productSelection';
+import {
+  ProductSearchHeader,
+  ProductSelectionBrowser,
+  RecentProductSearchList,
+  SelectableProductCardList,
+  SelectedProductDock,
+  type SelectableProductItem,
+} from '@/shared/components';
 import { useSnackbarStore } from '@/shared/stores';
 import cn from '@/utils/cn';
 import { useOnboardingStore } from '../stores/onboarding.store';
@@ -94,17 +98,33 @@ export const OnboardingProductSearch = ({
     setSelectedCategoryId(0);
   };
 
-  // 상품 선택을 토글하되, 최대 개수에 도달하면 막고 안내합니다.
-  const handleToggleProduct = (productId: number) => {
-    if (hasReachedProductLimit(productIds, productId, MAX_PRODUCT_SELECTION)) {
-      showSnackbar('최대 15개까지 저장 가능해요.', {
-        placement: 'onboardingBottom48',
-      });
-      return;
-    }
+  // 선택 id를 클로저로 잡지 않고 getState()로 최신값을 읽어, 선택이 바뀌어도 콜백 참조가 유지됩니다(카드 memo 유지).
+  const handleToggleProduct = useCallback(
+    ({ productId }: SelectableProductItem) => {
+      const state = useOnboardingStore.getState();
+      const currentIds =
+        status === 'MATCHED'
+          ? state.matchedProductIds
+          : state.mismatchedProductIds;
+      if (
+        hasReachedProductLimit(currentIds, productId, MAX_PRODUCT_SELECTION)
+      ) {
+        showSnackbar('최대 15개까지 저장 가능해요.', {
+          placement: 'onboardingBottom48',
+        });
+        return;
+      }
 
-    toggleProduct(status, productId);
-  };
+      toggleProduct(status, productId);
+    },
+    [showSnackbar, status, toggleProduct]
+  );
+
+  // dock의 제거는 상한 검사가 필요 없어 상품 id만 받아 바로 토글합니다.
+  const handleRemoveProduct = useCallback(
+    (productId: number) => toggleProduct(status, productId),
+    [status, toggleProduct]
+  );
 
   // 뒤로가기는 히스토리를 쌓지 않고 상위 선택 화면으로 교체 이동합니다.
   const handleBack = () => navigate(parentPath, { replace: true });
@@ -116,19 +136,16 @@ export const OnboardingProductSearch = ({
         isResultMode && selectedProducts.length > 0 && 'pb-48'
       )}
     >
-      {/* 헤더 영역: 결과 모드는 카테고리 탭까지, 입력 모드는 검색창만 보여줍니다. */}
+      {/* 헤더 영역: 결과 모드·입력 모드 모두 검색창만 그리고, 카테고리 탭은 결과 본문의 Browser가 그립니다. */}
       {isResultMode ? (
         <ProductSearchHeader
           mode="result"
           value={query}
-          categories={PRODUCT_CATEGORIES}
-          selectedCategoryId={selectedCategoryId}
           onChange={handleChange}
           onSubmit={handleSubmit}
           onClear={handleClear}
           onBack={handleBack}
           backLabel={`${parentLabel}으로 이동`}
-          onSelectCategory={setSelectedCategoryId}
         />
       ) : (
         <ProductSearchHeader
@@ -144,11 +161,19 @@ export const OnboardingProductSearch = ({
 
       {/* 본문 영역: 결과 모드는 상품 목록, 입력 모드는 최근 검색어를 보여줍니다. */}
       {isResultMode ? (
-        <SelectableProductList
-          products={products}
-          selectedProductIds={selectedProductIds}
-          onToggle={handleToggleProduct}
-        />
+        // 탭과 카드 목록을 공통 Browser로 묶어 헤더 아래에 둡니다(탭 위치는 기존 결과 헤더와 같습니다).
+        <ProductSelectionBrowser
+          categories={PRODUCT_CATEGORIES}
+          selectedCategoryId={selectedCategoryId}
+          onSelectCategory={setSelectedCategoryId}
+        >
+          <SelectableProductCardList
+            products={products}
+            selectedProductIds={selectedProductIds}
+            onToggle={handleToggleProduct}
+            emptyMessage="검색 결과가 없습니다."
+          />
+        </ProductSelectionBrowser>
       ) : (
         <RecentProductSearchList
           items={recentSearches}
@@ -163,7 +188,7 @@ export const OnboardingProductSearch = ({
         <div className="z-header fixed bottom-0 left-1/2 w-full max-w-110 min-w-[20rem] -translate-x-1/2">
           <SelectedProductDock
             products={selectedProducts}
-            onRemove={handleToggleProduct}
+            onRemove={handleRemoveProduct}
           />
         </div>
       )}
