@@ -5,6 +5,8 @@ export const API_ENDPOINTS = {
     KAKAO_LOGIN: '/auth/login/kakao',
     // 회원가입 후 기본 정보를 저장하기 위한 API URL입니다.
     LOGIN_INFO: '/auth/login/info',
+    // 서버에 로그아웃을 알리기 위한 API URL입니다.
+    LOGOUT: '/auth/logout',
   },
 
   /** Ranking  **/

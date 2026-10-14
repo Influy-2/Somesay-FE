@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { PATH } from '@/routes/path';
 import {
@@ -6,7 +7,7 @@ import {
   getSkinTypeLabels,
 } from '@somesay/shared';
 
-import { PageHeader } from '@/shared/components';
+import { Modal, PageHeader } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import {
   InfoSection,
@@ -15,7 +16,7 @@ import {
   AccountProfileImage,
   ProductFitSection,
 } from '@/features/myPage';
-import { useAuth, useFetchUserProducts } from '@/shared/hooks';
+import { useAuth, useFetchUserProducts, useLogout } from '@/shared/hooks';
 
 export const AccountPage = () => {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ export const AccountPage = () => {
   // 목록 조회가 실패해도 계정 화면은 쓸 수 있어야 해서 빈 목록으로 둡니다.
   const { data: matchedProducts = [] } = useFetchUserProducts('MATCHED');
   const { data: mismatchedProducts = [] } = useFetchUserProducts('MISMATCHED');
+  const { logout, isPending: isLoggingOut } = useLogout();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   // ProtectedRoute가 인증된 뒤에만 렌더하므로 실제로는 항상 값이 있습니다.
   if (!user) return null;
@@ -101,11 +104,31 @@ export const AccountPage = () => {
           />
           {/* 계정 설정 */}
           <InfoSection title="계정 설정">
-            <InfoRow label="로그아웃" onClick={() => {}} />
+            <InfoRow
+              label="로그아웃"
+              onClick={() => setIsLogoutModalOpen(true)}
+            />
             <InfoRow label="회원탈퇴" onClick={() => {}} />
           </InfoSection>
         </div>
       </div>
+
+      {/* 로그아웃 확인 모달 */}
+      <Modal
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+        title="로그아웃 하시겠어요?"
+        description={null}
+        leftButton={{
+          label: '취소',
+          onClick: () => setIsLogoutModalOpen(false),
+        }}
+        rightButton={{
+          label: '로그아웃',
+          onClick: logout,
+          disabled: isLoggingOut,
+        }}
+      />
     </div>
   );
 };

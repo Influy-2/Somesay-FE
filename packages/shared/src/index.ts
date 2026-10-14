@@ -104,6 +104,7 @@ export { apiClient, configureApiClient } from './api/client';
 //api - auth
 export * from './api/auth/postKakaoLogin.api';
 export * from './api/auth/postLoginInfo.api';
+export * from './api/auth/postLogout.api';
 
 //api - user product
 export * from './api/userProduct/postUserProduct.api';
