@@ -2,6 +2,7 @@ import { useMemo, useState, type ChangeEventHandler } from 'react';
 
 import { useFetchCategories, useFetchUserProductSearch } from '@/shared/hooks';
 import { useRecentProductSearchStore } from '@/features/productSelection';
+import type { SelectableProductListStatus } from '@/shared/components';
 import type { UserProductSearchSortType } from '@somesay/shared';
 
 import { PRODUCT_FIT_SEARCH_SORT_OPTIONS } from '../constants/myPage.constants';
@@ -95,6 +96,13 @@ export const useAddProductSearch = () => {
     if (option) setSortType(option.value);
   };
 
+  // 실패·로딩·완료를 카드 목록이 받는 한 값으로 합칩니다.
+  const listStatus: SelectableProductListStatus = searchQuery.isError
+    ? 'error'
+    : searchQuery.isPending
+      ? 'loading'
+      : 'ready';
+
   return {
     query,
     isResultMode,
@@ -106,8 +114,7 @@ export const useAddProductSearch = () => {
     products,
     // 검색 응답은 페이지 없는 전체 목록이라 길이가 곧 전체 개수입니다.
     productCount: products.length,
-    isLoading: searchQuery.isPending,
-    isError: searchQuery.isError,
+    listStatus,
     recentSearches,
     runSearch,
     removeRecentSearch,
