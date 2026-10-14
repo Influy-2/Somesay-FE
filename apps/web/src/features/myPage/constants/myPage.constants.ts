@@ -27,3 +27,10 @@ export const PRODUCT_FIT_TITLES: Record<UserProductStatusType, string> = {
   MATCHED: '잘 맞았던 제품',
   MISMATCHED: '안 맞았던 제품',
 };
+
+// 프로필 이미지는 지름 80px 원으로만 보이므로, 고해상도 화면(3배)을 감안해도 이 크기면 충분합니다.
+export const PROFILE_IMAGE_MAX_SIZE_PX = 512;
+// 축소 후 JPEG 품질입니다. 용량과 화질의 균형값이라 반응을 보고 조정합니다.
+export const PROFILE_IMAGE_QUALITY = 0.85;
+// 축소 전 원본 허용 용량입니다. 이보다 크면 브라우저가 디코딩하다 멈출 수 있어 막습니다.
+export const PROFILE_IMAGE_MAX_FILE_BYTES = 20 * 1024 * 1024;
