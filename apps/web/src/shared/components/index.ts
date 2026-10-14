@@ -136,3 +136,6 @@ export { CharacterCountInput } from './inputField/CharacterCountInput';
 export { TextArea } from './inputField/TextArea';
 export { VerificationCodeInput } from './inputField/VerificationCodeInput';
 export { EmailInput } from './inputField/EmailInput';
+
+/* product selection */
+export * from './productSelection';
