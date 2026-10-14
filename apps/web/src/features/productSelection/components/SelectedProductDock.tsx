@@ -1,8 +1,8 @@
 import { SelectedItem } from '@/shared/components';
-import type { SelectableProduct } from '../types/productSelection.types';
+import type { SelectableProductItem } from '../types/productSelection.types';
 
 interface SelectedProductDockProps {
-  products: SelectableProduct[];
+  products: SelectableProductItem[];
   onRemove: (productId: number) => void;
 }
 

@@ -22,6 +22,7 @@ export type {
   BrandResponse,
   ProductSortType,
   BrandProductSortType,
+  UserProductSearchSortType,
   ProductReviewResponse,
   ProductReviewOverviewResponse,
   CommentItemResponse,

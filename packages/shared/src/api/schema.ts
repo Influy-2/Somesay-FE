@@ -66,6 +66,8 @@ export type ReactedProductResponse = Schemas['ReactedProductResponse'];
 export type ProductSortType = NonNullable<
   paths['/api/v1/products']['get']['parameters']['query']['sortType']
 >;
+export type UserProductSearchSortType =
+  paths['/api/v1/users/products/search']['get']['parameters']['query']['sortType'];
 export type BrandProductSortType = NonNullable<
   NonNullable<
     paths['/api/v1/brands/{brandId}/products']['get']['parameters']['query']
