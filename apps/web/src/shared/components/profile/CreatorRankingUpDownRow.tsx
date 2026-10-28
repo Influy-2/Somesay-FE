@@ -132,7 +132,7 @@ export const CreatorRankingUpDownRow = ({
       <Link
         to={`${PATH.CREATOR.BASE}/${creatorId}`}
         className="absolute inset-0"
-        aria-label={`${ranking}위 ${creatorName}, 구독자 ${formatSubscriberCount(subscriberNum)}, ${ageLabel}, ${skinTypeLabel}, 신뢰도 ${trustScore}점, ${rankChangeLabel} 상세 페이지로 이동`}
+        aria-label={`${ranking}위 ${creatorName}, 구독자 ${formatSubscriberCount(subscriberNum)}, ${ageLabel}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel} 상세 페이지로 이동`}
       />
     </li>
   );
