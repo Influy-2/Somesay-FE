@@ -6,16 +6,16 @@ import {
   SortBar,
   PageHeader,
 } from '@/shared/components';
-import { CreatorHomeTrustScore } from '@/features/creatorHome';
+import {
+  CreatorHomeTrustScore,
+  MOCK_CREATOR,
+  MOCK_TRUST_SCORE,
+  MOCK_CREATOR_REVIEWS,
+} from '@/features/creatorHome';
 import { HorizontalCategoriesTab } from '@/shared/components';
 import { CreatorHomeReviewCard } from '@/shared/components';
 import { ArrowBackIcon, ShareIcon } from '@/shared/icons';
 import { useFetchCategories } from '@/shared/hooks';
-import {
-  MOCK_CREATOR,
-  MOCK_TRUST_SCORE,
-  MOCK_CREATOR_REVIEWS,
-} from '../../features/creatorHome/components/mockData';
 
 const SORT_OPTIONS = [
   { value: 'popular', label: '인기순' },
@@ -119,5 +119,3 @@ export const CreatorHomePage = () => {
     </div>
   );
 };
-
-export default CreatorHomePage;

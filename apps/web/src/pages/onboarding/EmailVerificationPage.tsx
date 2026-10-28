@@ -8,7 +8,7 @@ import {
 } from '@/features/onboarding';
 import { VerificationCodeInput } from '@/shared/components';
 import { CheckOnIcon } from '@/shared/icons';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useSnackbarStore } from '@/shared/stores';
 
 const VERIFICATION_SUCCESS_DELAY_MS = 1000;
 

@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router';
 
-import { BottomTabBar } from '@/shared/components';
-
+import { BottomTabBar } from '../navigation/BottomTabBar';
 export const BottomTabLayout = () => {
   return (
     <>

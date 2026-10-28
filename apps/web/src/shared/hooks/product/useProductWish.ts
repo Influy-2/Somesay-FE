@@ -6,8 +6,8 @@ import {
   setProductWishInCaches,
 } from '@somesay/shared';
 
-import { useAuthGuard } from '@/features/auth';
-import { useSnackbarStore } from '@/shared/stores/snackbar.store';
+import { useAuthGuard } from '../auth/useAuthGuard';
+import { useSnackbarStore } from '@/shared/stores';
 
 interface ToggleProductWishParams {
   productId: number;

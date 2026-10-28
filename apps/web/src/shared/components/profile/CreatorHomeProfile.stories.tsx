@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { AGE_TYPES } from '@somesay/shared';
+
 import { CreatorHomeProfile } from './CreatorHomeProfile';
 
 const meta: Meta<typeof CreatorHomeProfile> = {
@@ -11,12 +13,12 @@ const meta: Meta<typeof CreatorHomeProfile> = {
     isLiked: { control: 'boolean' },
     youtubeUrl: { control: 'text' },
     creatorId: { control: 'number' },
-    nickname: { control: 'text' },
-    profileImageUrl: { control: 'text' },
+    creatorName: { control: 'text' },
+    profileImgUrl: { control: 'text' },
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
-    ageGroup: { control: 'text' },
-    skinTypes: { control: 'object' },
+    age: { control: 'select', options: AGE_TYPES },
+    skinTypeIds: { control: 'object' },
   },
 };
 
@@ -28,11 +30,11 @@ export const Default: Story = {
     likeCount: 0,
     youtubeUrl: 'https://placehold.co/100',
     creatorId: 1,
-    nickname: '이름',
-    profileImageUrl: 'https://placehold.co/100',
+    creatorName: '이름',
+    profileImgUrl: 'https://placehold.co/100',
     subscriberNum: 0,
     trustScore: 4.5,
-    ageGroup: '0',
-    skinTypes: ['텍스트'],
+    age: 'TWENTIES',
+    skinTypeIds: [1],
   },
 };

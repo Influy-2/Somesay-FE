@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
-import { useAuthGuard } from '@/features/auth';
-import { flattenRankingPages } from '@/features/ranking/ranking.utils';
+import { useAuthGuard } from '@/shared/hooks';
+import { flattenRankingPages } from '../ranking.utils';
 import {
   HorizontalCategoriesTab,
   MoreButton,

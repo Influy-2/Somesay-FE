@@ -13,7 +13,7 @@ const meta: Meta<typeof CreatorRankingProfile> = {
     nickname: { control: 'text' },
     subscriberNum: { control: 'number' },
     trustScore: { control: 'number' },
-    skinTypes: { control: 'object' },
+    skinTypeIds: { control: 'object' },
   },
 };
 
@@ -27,6 +27,6 @@ export const Default: Story = {
     profileImageUrl: mockProfile,
     subscriberNum: 124000,
     trustScore: 92,
-    skinTypes: ['건성', '보습'],
+    skinTypeIds: [1, 6],
   },
 };

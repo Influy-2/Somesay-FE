@@ -4,7 +4,7 @@ import {
   ONBOARDING_PROGRESS_STEPS,
   type OnboardingProgressStep,
 } from '../constants/onboarding.constants';
-import { useOnboardingStore } from '../store/onboarding.store';
+import { useOnboardingStore } from '../stores/onboarding.store';
 
 interface OnboardingProgressBarProps {
   currentStep: OnboardingProgressStep;

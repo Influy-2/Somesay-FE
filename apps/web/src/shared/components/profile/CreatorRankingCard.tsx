@@ -1,5 +1,7 @@
 import {
   formatSubscriberCount,
+  getAgeLabel,
+  getSkinTypeLabels,
   type CreatorRankingUpDownType,
 } from '@somesay/shared';
 import { Link } from 'react-router';
@@ -18,16 +20,20 @@ export const CreatorRankingCard = ({
   ranking,
   rankChange,
   rankChangeDiff,
-  profileImageUrl,
-  nickname,
+  profileImgUrl,
+  creatorName,
   subscriberNum,
-  ageGroup,
-  skinTypes,
+  age,
+  skinTypeIds,
   trustScore,
 }: CreatorRankingUpDownType) => {
   const subscriberLabel = formatSubscriberCount(subscriberNum);
+  const ageLabel = getAgeLabel(age);
+  const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
   const skinTypeLabel =
-    skinTypes.length > 0 ? skinTypes.join(', ') : '피부 타입 정보 없음';
+    skinTypeLabels.length > 0
+      ? skinTypeLabels.join(', ')
+      : '피부 타입 정보 없음';
   const rankChangeLabel =
     rankChangeDiff === 'up'
       ? `${rankChange}단계 상승`
@@ -39,7 +45,7 @@ export const CreatorRankingCard = ({
     <Link
       to={`${PATH.CREATOR.BASE}/${creatorId}`}
       className="flex w-full items-center justify-between gap-3"
-      aria-label={`${ranking}위 ${nickname} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageGroup}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel}`}
+      aria-label={`${ranking}위 ${creatorName} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageLabel}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel}`}
     >
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <div className="flex w-[1.4375rem] shrink-0 flex-col items-center gap-0.5">
@@ -61,9 +67,9 @@ export const CreatorRankingCard = ({
 
         <div className="flex min-w-0 flex-1 items-center gap-4">
           <div className="bg-grey02 size-[3.375rem] shrink-0 overflow-hidden rounded-full">
-            {profileImageUrl && (
+            {profileImgUrl && (
               <img
-                src={profileImageUrl}
+                src={profileImgUrl}
                 alt=""
                 loading="lazy"
                 decoding="async"
@@ -75,7 +81,7 @@ export const CreatorRankingCard = ({
           <div className="flex min-w-0 flex-1 flex-col gap-1.5">
             <div className="flex min-w-0 items-center gap-2">
               <span className="body1-sb min-w-0 truncate text-black">
-                {nickname}
+                {creatorName}
               </span>
               <span className="flex shrink-0 items-center gap-0.5">
                 <YoutubeIcon className="size-3.5" aria-hidden="true" />
@@ -86,9 +92,9 @@ export const CreatorRankingCard = ({
             </div>
 
             <div className="flex min-w-0 items-center gap-1 overflow-hidden">
-              <ChipBasic label={ageGroup} />
-              {skinTypes.map((skinType, index) => (
-                <ChipBasic key={`${skinType}-${index}`} label={skinType} />
+              <ChipBasic label={ageLabel} />
+              {skinTypeLabels.map((label) => (
+                <ChipBasic key={label} label={label} />
               ))}
             </div>
           </div>

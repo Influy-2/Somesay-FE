@@ -3,11 +3,6 @@ export interface GenderOption {
   label: string;
 }
 
-export interface AgeOption {
-  value: string;
-  label: string;
-}
-
 export interface UserSkinTypeOption {
   value: number;
   label: string;

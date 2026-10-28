@@ -18,13 +18,15 @@ type Story = StoryObj<typeof CreatorInfoReview>;
 export const Default: Story = {
   args: {
     review: {
+      creatorId: 1,
+      age: 'TWENTIES',
       reviewId: 1,
-      nickname: '글로우픽',
+      creatorName: '글로우픽',
       ranking: 1,
       subscriberNum: 124000,
-      profileImageUrl: mockProfile,
+      profileImgUrl: mockProfile,
       trustScore: 92,
-      skinTypes: ['건성', '보습'],
+      skinTypeIds: [1, 6],
       content:
         '촉촉하고 흡수가 빨라서 데일리로 쓰기 정말 좋아요. 자극 없이 순하게 스며드는 느낌이에요.',
       rating: 4.5,
@@ -44,13 +46,15 @@ export const Default: Story = {
 export const NoEvaluation: Story = {
   args: {
     review: {
+      creatorId: 1,
+      age: 'TEENS',
       reviewId: 2,
-      nickname: '뷰티인사이더',
+      creatorName: '뷰티인사이더',
       ranking: 2,
       subscriberNum: 32000,
-      profileImageUrl: mockProfile,
+      profileImgUrl: mockProfile,
       trustScore: 85,
-      skinTypes: ['복합성'],
+      skinTypeIds: [3],
       content: '향이 은은하고 발림성이 좋아요.',
       rating: 4,
       agreeCount: 0,

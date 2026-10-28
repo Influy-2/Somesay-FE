@@ -2,6 +2,9 @@
 import { YoutubeIcon } from '@/shared/icons';
 import {
   formatSubscriberCount,
+  getAgeLabel,
+  getSkinTypeLabel,
+  getSkinTypeLabels,
   type BasicCreatorProfileType,
 } from '@somesay/shared';
 import { ChipBasic } from '../chips/ChipBasic';
@@ -18,16 +21,17 @@ const TRUST_RANK_LIMIT = 10;
 
 export const BasicCreatorProfile = ({
   creatorId,
-  nickname,
-  profileImageUrl,
+  creatorName,
+  profileImgUrl,
   subscriberNum,
-  ageGroup,
-  skinTypes = [],
+  age,
+  skinTypeIds = [],
   trustRank,
   highlightedLabels = [],
 }: BasicCreatorProfileProps) => {
-  const skinTypeLabel = skinTypes.join(', '); // 여러 피부 타입을 쉼표로 구분하여 표시
-  const ageLabel = `${ageGroup}대`;
+  // 여러 피부 타입을 쉼표로 구분하여 표시
+  const skinTypeLabel = getSkinTypeLabels(skinTypeIds).join(', ');
+  const ageLabel = getAgeLabel(age);
   const highlightedLabelSet = new Set(highlightedLabels);
   const showTrustRank =
     trustRank !== undefined && trustRank > 0 && trustRank <= TRUST_RANK_LIMIT;
@@ -35,7 +39,7 @@ export const BasicCreatorProfile = ({
   return (
     <div
       className="flex w-full items-center gap-2.5"
-      aria-label={`크리에이터: ${nickname}, 유튜브 구독자 ${formatSubscriberCount(subscriberNum)}${showTrustRank ? `, 신뢰도 ${trustRank}위` : ''}, ${ageLabel}, ${skinTypeLabel}`}
+      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${formatSubscriberCount(subscriberNum)}${showTrustRank ? `, 신뢰도 ${trustRank}위` : ''}, ${ageLabel}, ${skinTypeLabel}`}
       key={creatorId}
     >
       {/* 프로필 사진 */}
@@ -47,7 +51,7 @@ export const BasicCreatorProfile = ({
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover"
-          src={profileImageUrl}
+          src={profileImgUrl}
           alt=""
         />
       </div>
@@ -59,7 +63,7 @@ export const BasicCreatorProfile = ({
       >
         {/* 이름 + 유튜브 구독자 */}
         <div className="flex items-center gap-2">
-          <span className="body1-sb shrink-0 text-black">{nickname}</span>
+          <span className="body1-sb shrink-0 text-black">{creatorName}</span>
           <div className="text-grey08 caption2-m flex shrink-0 items-center gap-0.5">
             <YoutubeIcon />
             {formatSubscriberCount(subscriberNum)}
@@ -82,13 +86,18 @@ export const BasicCreatorProfile = ({
               label={ageLabel}
               variant={highlightedLabelSet.has(ageLabel) ? 'blue' : 'default'}
             />
-            {skinTypes.map((skinType) => (
-              <ChipBasic
-                key={skinType}
-                label={skinType}
-                variant={highlightedLabelSet.has(skinType) ? 'blue' : 'default'}
-              />
-            ))}
+            {skinTypeIds.map((skinTypeId) => {
+              const label = getSkinTypeLabel(skinTypeId);
+              if (!label) return null;
+
+              return (
+                <ChipBasic
+                  key={skinTypeId}
+                  label={label}
+                  variant={highlightedLabelSet.has(label) ? 'blue' : 'default'}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

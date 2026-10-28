@@ -1,72 +1,29 @@
-import {
-  AGE_OPTIONS,
-  getSkinTypeLabel,
-  USER_SKIN_EXPECTATION_OPTIONS,
-  type AgeType,
-} from '@somesay/shared';
+import type { AgeType } from '@somesay/shared';
 
 import { useFetchUserInfo } from './useFetchUserInfo';
 
-// 사용자 정보의 age enum을 선택지 라벨(20대 등)로 잇습니다.
-const AGE_LABEL_BY_TYPE: Record<AgeType, string> = {
-  TEENS: '10',
-  TWENTIES: '20',
-  THIRTIES: '30',
-  FORTIES: '40',
-  FIFTIES: '50',
-  SIXTIES_PLUS: '60',
-};
-
 /**
- * 로그인 사용자가 회원가입에서 저장한 피부 조건을 화면용 라벨로 변환합니다.
+ * 크리에이터·상품의 조건이 로그인 사용자의 조건과 일치하는지 판단합니다.
  *
- * 사용자 정보는 id 배열(skinTypes, skinExpectations)로 내려오는데
- * 화면의 칩과 필터는 라벨 문자열로 다루기 때문에 이 계층에서 한 번만 변환합니다.
- * 비로그인이면 모든 배열이 비어 있고 isMyCondition은 항상 false입니다.
+ * 화면에서 "내 조건과 일치하는 칩만 강조"할 때 쓰는 매처만 제공합니다.
+ * id·enum을 한글로 바꾸는 일은 화면이 `@somesay/shared`의 `get*Label(s)`로 직접 합니다.
+ * 비로그인이면 두 매처 모두 항상 false입니다.
  */
 export const useMySkinProfile = () => {
   const { data: userInfo } = useFetchUserInfo();
 
-  const skinTypeLabels = (userInfo?.skinTypes ?? [])
-    .map(getSkinTypeLabel)
-    .filter((label): label is string => Boolean(label));
+  // 피부 타입은 서버와 사용자 양쪽 다 id를 갖고 있어, 표기 차이에 흔들리지 않게 id로 비교합니다.
+  const mySkinTypeIdSet = new Set(userInfo?.skinTypeIds ?? []);
 
-  const selectedExpectations = (userInfo?.skinExpectations ?? []).flatMap(
-    (id) => {
-      const option = USER_SKIN_EXPECTATION_OPTIONS.find(
-        ({ value }) => value === id
-      );
+  const isMySkinTypeId = (id: number) => mySkinTypeIdSet.has(id);
 
-      return option ? [option] : [];
-    }
-  );
-
-  // 피부 고민은 고민명(속건조)과 기대효과명(속건조 완화) 표기가 화면마다 달라 둘 다 제공합니다.
-  const concernLabels = selectedExpectations.map(({ concern }) => concern);
-  const productEffectLabels = selectedExpectations.map(
-    ({ productEffect }) => productEffect
-  );
-
-  const ageLabel = userInfo
-    ? AGE_OPTIONS.find(({ value }) => value === AGE_LABEL_BY_TYPE[userInfo.age])
-        ?.label
-    : undefined;
-
-  const myLabels = new Set([
-    ...skinTypeLabels,
-    ...concernLabels,
-    ...productEffectLabels,
-    ...(ageLabel ? [ageLabel] : []),
-  ]);
-
-  // 내 조건과 일치하는 칩만 강조할 때 사용합니다.
-  const isMyCondition = (label: string) => myLabels.has(label);
+  // 연령은 id가 없어 enum끼리 비교합니다.
+  // 연령을 모르는 크리에이터끼리 '연령 정보 없음'으로 매칭되지 않도록 값이 있을 때만 봅니다.
+  const isMyAge = (age?: AgeType | null) =>
+    age != null && age === userInfo?.age;
 
   return {
-    skinTypeLabels,
-    concernLabels,
-    productEffectLabels,
-    ageLabel,
-    isMyCondition,
+    isMyAge,
+    isMySkinTypeId,
   };
 };

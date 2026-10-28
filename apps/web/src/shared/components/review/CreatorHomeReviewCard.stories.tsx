@@ -30,7 +30,7 @@ export const Default: Story = {
       brandName: '이니스프리',
       productName: '블랙티 유스 에센스 200ml',
       price: 38000,
-      rating: 4.5,
+      avgRating: 4.5,
       reviewCount: 1240,
       isHearted: false,
       creatorImageUrls: [mockProfile],

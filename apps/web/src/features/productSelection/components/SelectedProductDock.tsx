@@ -1,5 +1,5 @@
 import { SelectedItem } from '@/shared/components';
-import type { SelectableProduct } from '../model/productSelection.types';
+import type { SelectableProduct } from '../types/productSelection.types';
 
 interface SelectedProductDockProps {
   products: SelectableProduct[];

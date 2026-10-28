@@ -5,7 +5,7 @@ import { CTAButton } from '@/shared/components';
 import { PATH } from '@/routes/path';
 import cn from '@/utils/cn';
 import { useCompleteOnboarding } from '../hooks/useCompleteOnboarding';
-import { useOnboardingStore } from '../store/onboarding.store';
+import { useOnboardingStore } from '../stores/onboarding.store';
 import { isOnboardingCompletionAvailable } from '../utils/onboarding.completion';
 import { OnboardingCompleteDialog } from './OnboardingCompleteDialog';
 import { OnboardingExitDialog } from './OnboardingExitDialog';

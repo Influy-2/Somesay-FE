@@ -1,4 +1,4 @@
-import { SortOptionsType } from '../domain/product/product.types';
+import type { ProductSortType } from '../domain/product/product.types';
 import type { BrandProductSortType } from '../domain/brand/brand.types';
 import type { HomeRecommendationParamsType } from '../domain/recommendation/recommendation.types';
 
@@ -17,6 +17,7 @@ export const QUERY_KEYS = {
   USER: {
     ALL: ['user'] as const,
     INFO: () => [...QUERY_KEYS.USER.ALL, 'info'] as const,
+    MYPAGE: () => [...QUERY_KEYS.USER.ALL, 'mypage'] as const,
   },
   PRODUCT: {
     ALL: ['product'] as const,
@@ -28,7 +29,7 @@ export const QUERY_KEYS = {
     }: {
       mainCategoryId?: number;
       subCategoryId?: number;
-      sortType?: SortOptionsType['sortType'];
+      sortType?: ProductSortType;
     }) =>
       [
         ...QUERY_KEYS.PRODUCT.BY_CATEGORY_ALL(),

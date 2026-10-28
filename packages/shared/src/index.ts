@@ -1,16 +1,16 @@
 export type {
   ProductBasicType,
-  ProductWishType,
+  ProductWishStateType,
   ProductWishResultType,
-  ProductWishStatusType,
-  ProductCardType,
-  ProductDetailType,
-  ProductRankingCardType,
-  ProductReviewType,
+  ProductCategoryRefType,
   ProductSkinExpectationType,
-  ProductSkinType,
-  ProductsByCategory,
-  SortOptionsType,
+  ProductSkinFitType,
+  ProductCardType,
+  CategoryProductType,
+  ProductDetailType,
+  ProductReviewType,
+  ProductsByCategoryType,
+  ProductSortType,
 } from './domain/product/product.types';
 
 export type {
@@ -47,6 +47,11 @@ export type {
 } from './domain/review/review.types';
 
 export type {
+  CommentPreviewType,
+  CommentReactionType,
+} from './domain/comment/comment.types';
+
+export type {
   HomeRecommendationParamsType,
   RecommendedProductsWishResultType,
   RecommendedProductType,
@@ -59,7 +64,6 @@ export * from './constants/user.constants';
 // UTILS
 export { formatSubscriberCount } from './utils/formatSubscriberCount';
 export { formatPrice } from './utils/formatPrice';
-export { formatAgeGroup } from './utils/formatAgeGroup';
 //domain - auth
 export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
 export type {
@@ -74,8 +78,11 @@ export type {
   AgeType,
   GenderType,
   UserInfoType,
+  UserMyPageStatisticsType,
+  UserMyPageType,
   UserType,
 } from './domain/user/user.types';
+export { AGE_TYPES } from './domain/user/user.types';
 
 //domain - user product
 export type {
@@ -97,6 +104,7 @@ export * from './api/userProduct/postUserProduct.api';
 
 //api - user
 export * from './api/user/fetchUserInfo.api';
+export * from './api/user/fetchUserMyPage.api';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';

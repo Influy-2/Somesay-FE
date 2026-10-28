@@ -36,7 +36,7 @@ export const Tooltip = ({
       role={variant === 'withClose' ? 'dialog' : 'tooltip'}
       {...(variant === 'withClose' ? { 'aria-label': label } : {})}
       className={cn(
-        'absolute z-10 flex w-max items-center bg-black text-white',
+        'absolute z-1 flex w-max items-center bg-black text-white',
         size === 'compact'
           ? 'caption1-m gap-1.5 px-2 py-1.5'
           : 'body2-m gap-2 px-2.5 py-2',

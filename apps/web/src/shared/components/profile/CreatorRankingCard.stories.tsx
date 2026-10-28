@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { MemoryRouter } from 'react-router';
+
+import { AGE_TYPES } from '@somesay/shared';
 
 import mockCreator from '@/assets/mock_creator.png';
 import { CreatorRankingCard } from './CreatorRankingCard';
@@ -10,11 +11,9 @@ const meta: Meta<typeof CreatorRankingCard> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <MemoryRouter>
-        <div className="w-[22.375rem]">
-          <Story />
-        </div>
-      </MemoryRouter>
+      <div className="w-[22.375rem]">
+        <Story />
+      </div>
     ),
   ],
   argTypes: {
@@ -22,12 +21,12 @@ const meta: Meta<typeof CreatorRankingCard> = {
     ranking: { control: 'number' },
     rankChange: { control: 'number' },
     rankChangeDiff: { control: 'select', options: ['up', 'down', 'same'] },
-    profileImageUrl: { control: 'text' },
-    nickname: { control: 'text' },
+    profileImgUrl: { control: 'text' },
+    creatorName: { control: 'text' },
     youtubeLink: { control: 'text' },
     subscriberNum: { control: 'number' },
-    ageGroup: { control: 'text' },
-    skinTypes: { control: 'object' },
+    age: { control: 'select', options: AGE_TYPES },
+    skinTypeIds: { control: 'object' },
     trustScore: { control: 'number' },
   },
 };
@@ -40,12 +39,12 @@ const defaultArgs = {
   ranking: 1,
   rankChange: 2,
   rankChangeDiff: 'up' as const,
-  profileImageUrl: mockCreator,
-  nickname: 'RISABAE',
+  profileImgUrl: mockCreator,
+  creatorName: 'RISABAE',
   youtubeLink: 'https://www.youtube.com',
   subscriberNum: 1_300_000,
-  ageGroup: '20대',
-  skinTypes: ['건성'],
+  age: 'TWENTIES' as const,
+  skinTypeIds: [1],
   trustScore: 100,
 };
 
@@ -74,9 +73,9 @@ export const LongContent: Story = {
   args: {
     ...defaultArgs,
     ranking: 30,
-    nickname: '아주 긴 이름을 가진 뷰티 크리에이터 채널',
+    creatorName: '아주 긴 이름을 가진 뷰티 크리에이터 채널',
     subscriberNum: 12_345_678,
-    skinTypes: ['건성', '민감성', '수부지', '복합성'],
+    skinTypeIds: [1, 6, 5, 3],
     trustScore: 87.6,
   },
 };

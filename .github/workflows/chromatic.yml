@@ -1,6 +1,9 @@
 name: Chromatic
 
 on:
+  pull_request:
+    branches:
+      - develop
   push:
     branches:
       - develop
@@ -24,11 +27,12 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Storybook
-        run: pnpm --filter web build-storybook
+        run: pnpm --filter web build-storybook --stats-json
 
       - name: Deploy to Chromatic
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           storybookBuildDir: apps/web/storybook-static
+          storybookBaseDir: apps/web
           onlyChanged: true

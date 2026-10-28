@@ -2,12 +2,12 @@ import { useCallback, useEffect, useMemo, type ReactNode } from 'react';
 import { QUERY_KEYS } from '@somesay/shared';
 import { useQueryClient } from '@tanstack/react-query';
 import { useFetchUserInfo } from '@/shared/hooks';
-import { useAuthTokenStore } from '@/shared/stores/auth.store';
+import { useAuthTokenStore } from '@/shared/stores';
 import {
   AuthContext,
   type AuthContextValue,
   type AuthStatus,
-} from '../contexts/auth.context';
+} from '@/shared/context';
 
 interface AuthProviderProps {
   children: ReactNode;

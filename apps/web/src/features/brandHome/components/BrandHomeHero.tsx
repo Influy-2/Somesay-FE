@@ -14,7 +14,7 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
       aria-labelledby="brand-home-title"
     >
       <img
-        src={brand.brandImageUrl}
+        src={brand.brandImgUrl}
         alt=""
         className="absolute inset-0 size-full object-cover"
         aria-hidden="true"
@@ -54,13 +54,13 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
           <div className="caption1-m text-grey01 flex flex-wrap items-center gap-2">
             <span className="caption1-b flex items-center">
               <Star16Icon aria-hidden="true" className="size-4" />
-              {brand.rating}
+              {brand.avgRating.toFixed(1)}
             </span>
             <span className="bg-grey06 h-3 w-px" aria-hidden="true" />
             <span>
-              리뷰{' '}
+              리뷰
               <strong className="caption1-b">
-                {brand.reviewCount.toLocaleString()}
+                {brand.totalReviewCount.toLocaleString()}
               </strong>
             </span>
             <span className="bg-grey06 h-3 w-px" aria-hidden="true" />

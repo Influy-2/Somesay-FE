@@ -7,7 +7,7 @@ import {
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { useFetchCategories } from '@/shared/hooks';
-import { MOCK_EVALUATED_PRODUCTS_LIST } from '@/features/myPage/components/mockData';
+import { MOCK_EVALUATED_PRODUCTS_LIST } from '@/features/myPage';
 
 export const MyReviewEvaluationProductListPage = () => {
   const navigate = useNavigate();

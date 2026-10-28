@@ -1,14 +1,14 @@
 // comment
 
-import { ChipAgreement, ConsumerReviewProfile } from '@/shared/components';
-
+import { ChipAgreement } from '../chips/ChipAgreement';
+import { ConsumerReviewProfile } from '../profile/ConsumerReviewProfile';
 export interface ReviewCommentProps {
   nickname: string;
   isAgree: boolean;
   content: string;
   profileImg?: string;
-  skinTypes?: string[];
-  skinExpectations?: string[];
+  skinTypeIds?: number[];
+  skinExpectationIds?: number[];
   userId: number;
 }
 
@@ -17,8 +17,8 @@ export const ReviewComment = ({
   isAgree,
   content,
   profileImg,
-  skinTypes,
-  skinExpectations,
+  skinTypeIds,
+  skinExpectationIds,
   userId,
 }: ReviewCommentProps) => {
   return (
@@ -27,8 +27,8 @@ export const ReviewComment = ({
         nickname={nickname}
         userId={userId}
         {...(profileImg ? { profileImageUrl: profileImg } : {})}
-        {...(skinTypes ? { skinTypes } : {})}
-        {...(skinExpectations ? { skinExpectations } : {})}
+        {...(skinTypeIds ? { skinTypeIds } : {})}
+        {...(skinExpectationIds ? { skinExpectationIds } : {})}
       />
       <div className="flex flex-col items-start gap-2 pl-8">
         <ChipAgreement type={isAgree ? 'agree' : 'disagree'} />

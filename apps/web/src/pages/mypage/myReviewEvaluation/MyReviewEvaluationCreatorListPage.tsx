@@ -4,7 +4,7 @@ import {
   EvaluatedCreatorItemHorizontal,
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { MOCK_EVALUATED_CREATORS_LIST } from '@/features/myPage/components/mockData';
+import { MOCK_EVALUATED_CREATORS_LIST } from '@/features/myPage';
 
 export const MyReviewEvaluationCreatorListPage = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export const MyReviewEvaluationCreatorListPage = () => {
               creatorId={creator.creatorId}
               profileImageUrl={creator.profileImageUrl}
               name={creator.name}
-              ageGroup={creator.ageGroup}
+              age={creator.age}
               skinType={creator.skinType}
               reviewCount={creator.reviewCount}
             />

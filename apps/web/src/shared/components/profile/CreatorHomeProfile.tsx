@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { YoutubeIcon } from '@/shared/icons';
 import { Move12Icon } from '@/shared/icons';
-import { ChipBasic } from '@/shared/components';
+import { ChipBasic } from '../chips/ChipBasic';
 import {
   BasicCreatorProfileType,
   formatSubscriberCount,
+  getAgeLabel,
+  getSkinTypeLabels,
 } from '@somesay/shared';
-import { BlackHeartButton } from '@/shared/components';
-
+import { BlackHeartButton } from '../buttons/BlackHeartButton';
 interface CreatorHomeProfileProps extends BasicCreatorProfileType {
   likeCount: number;
   isLiked?: boolean;
@@ -16,17 +17,19 @@ interface CreatorHomeProfileProps extends BasicCreatorProfileType {
 }
 
 export const CreatorHomeProfile = ({
-  nickname,
-  profileImageUrl,
+  creatorName,
+  profileImgUrl,
   subscriberNum,
-  ageGroup,
-  skinTypes,
+  age,
+  skinTypeIds,
   likeCount: initialLikeCount,
   isLiked: initialLiked = false,
   onLikeClick,
   youtubeUrl,
 }: CreatorHomeProfileProps) => {
-  const skinTypeLabel = skinTypes.join(', ');
+  const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
+  const skinTypeLabel = skinTypeLabels.join(', ');
+  const ageLabel = getAgeLabel(age);
   const [liked, setLiked] = useState(initialLiked);
   const [currentLikeCount, setCurrentLikeCount] = useState(initialLikeCount);
 
@@ -39,7 +42,7 @@ export const CreatorHomeProfile = ({
   return (
     <div
       className="flex w-full items-center gap-2"
-      aria-label={`크리에이터: ${nickname}, 유튜브 구독자 ${subscriberNum}만, ${ageGroup}대, ${skinTypeLabel}`}
+      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${subscriberNum}만, ${ageLabel}, ${skinTypeLabel}`}
     >
       {/* 프로필 사진 */}
       <div
@@ -48,8 +51,8 @@ export const CreatorHomeProfile = ({
       >
         <img
           className="h-full w-full object-cover"
-          src={profileImageUrl}
-          alt={`${nickname} 프로필 사진`}
+          src={profileImgUrl}
+          alt={`${creatorName} 프로필 사진`}
         />
       </div>
 
@@ -61,14 +64,14 @@ export const CreatorHomeProfile = ({
         {/* 이름 + 유튜브 구독자 */}
         <div className="flex items-center gap-2">
           <span className="font-pretendard shrink-0 text-[1.25rem] leading-[150%] font-semibold">
-            {nickname}
+            {creatorName}
           </span>
           <a
             href={youtubeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="caption-m text-grey08 flex shrink-0 items-center gap-0.5"
-            aria-label={`${nickname} 유튜브 채널로 이동`}
+            aria-label={`${creatorName} 유튜브 채널로 이동`}
           >
             <YoutubeIcon />
             {formatSubscriberCount(subscriberNum)}
@@ -78,9 +81,9 @@ export const CreatorHomeProfile = ({
 
         {/* 피부/나이 칩 */}
         <div className="flex items-center gap-1 p-0">
-          <ChipBasic label={`${ageGroup}대`} />
-          {skinTypes.map((skinType) => (
-            <ChipBasic key={skinType} label={skinType} />
+          <ChipBasic label={ageLabel} />
+          {skinTypeLabels.map((label) => (
+            <ChipBasic key={label} label={label} />
           ))}
         </div>
       </div>

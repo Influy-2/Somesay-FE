@@ -2,7 +2,7 @@ import { apiClient } from '../client';
 import { API_ENDPOINTS } from '../../constants/endpoints';
 import type { ApiPageParams, ApiResponse } from '../types';
 import type { ProductListResponseDto } from '../../domain/product/product.dto';
-import type { SortOptionsType } from '../../domain/product/product.types';
+import type { ProductSortType } from '../../domain/product/product.types';
 import { mapProductListDtoToCards } from '../../domain/product/product.mapper';
 
 /**
@@ -12,7 +12,7 @@ import { mapProductListDtoToCards } from '../../domain/product/product.mapper';
 interface FetchProductsByCategoryParamsDto extends ApiPageParams {
   mainCategoryId: number;
   subCategoryId?: number;
-  sortType?: SortOptionsType['sortType'];
+  sortType?: ProductSortType;
 }
 
 export const fetchProductsByCategory = async (
