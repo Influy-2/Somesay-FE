@@ -28,10 +28,10 @@ dist-ssr
 node_modules
 
 **/.vite/
-CLAUDE.md
-.claude/
 .vscode/
 *storybook.log
 storybook-static
 AGENTS.md
 .codex/
+
+.personal/
