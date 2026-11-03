@@ -98,6 +98,20 @@ export type {
   UserProductStatusType,
 } from './domain/userProduct/userProduct.types';
 
+//domain - wish
+export type {
+  WishProductSortType,
+  FetchUserWishProductsParams,
+  FetchUserWishCreatorsParams,
+  WishProductType,
+  WishProductPageType,
+  WishCreatorType,
+  WishCreatorReviewType,
+  WishCreatorPageType,
+  CreatorWishResultType,
+} from './domain/wish/wish.types';
+export type { CreatorWishStatusDto } from './domain/wish/wish.dto';
+
 //api
 export { apiClient, configureApiClient } from './api/client';
 
@@ -118,6 +132,11 @@ export * from './api/user/fetchUserMyPage.api';
 export * from './api/user/patchUserBasicInfo.api';
 export * from './api/user/patchUserSkinInfo.api';
 export * from './api/user/patchUserProfileImage.api';
+export * from './api/user/fetchUserWishProducts.api';
+export * from './api/user/fetchUserWishCreators.api';
+
+//api - creator
+export * from './api/creator/patchCreatorWish.api';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';

@@ -69,8 +69,14 @@ export const MyPage = () => {
             label="리뷰 관리"
             to={`${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.REVIEW_EVALUATION.BASE}`}
           />
-          <InfoRow label="찜한 상품" />
-          <InfoRow label="찜한 크리에이터" />
+          <InfoRow
+            label="찜한 상품"
+            to={`${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.WISH.BASE}/${PATH.MY_PAGE.WISH.PRODUCTS}`}
+          />
+          <InfoRow
+            label="찜한 크리에이터"
+            to={`${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.WISH.BASE}/${PATH.MY_PAGE.WISH.CREATORS}`}
+          />
         </InfoSection>
 
         {/* @spec 5.4.1, 5.4.2, 5.4.3, 5.4.4, 5.4.5 */}

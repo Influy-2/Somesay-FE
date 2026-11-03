@@ -1,4 +1,5 @@
 import type { ProductSortType } from '../domain/product/product.types';
+import type { FetchUserWishProductsParams } from '../domain/wish/wish.types';
 import type { BrandProductSortType } from '../domain/brand/brand.types';
 import type { HomeRecommendationParamsType } from '../domain/recommendation/recommendation.types';
 import type {
@@ -22,6 +23,13 @@ export const QUERY_KEYS = {
     ALL: ['user'] as const,
     INFO: () => [...QUERY_KEYS.USER.ALL, 'info'] as const,
     MYPAGE: () => [...QUERY_KEYS.USER.ALL, 'mypage'] as const,
+    WISH_PRODUCTS_ALL: () => [...QUERY_KEYS.USER.ALL, 'wish-products'] as const,
+    // page는 무한 쿼리가 관리하므로 키에서 뺍니다.
+    WISH_PRODUCTS: (
+      params: Omit<FetchUserWishProductsParams, 'page' | 'size'>
+    ) => [...QUERY_KEYS.USER.WISH_PRODUCTS_ALL(), params] as const,
+    // 크리에이터는 파라미터가 page/size뿐이고 page는 무한 쿼리가 관리해 _ALL 하나로 충분합니다.
+    WISH_CREATORS_ALL: () => [...QUERY_KEYS.USER.ALL, 'wish-creators'] as const,
   },
   USER_PRODUCT: {
     ALL: ['user-product'] as const,
@@ -192,6 +200,8 @@ export const WISH_QUERY_PREFIXES = [
   QUERY_KEYS.RANKING.PRODUCTS_ALL(),
   QUERY_KEYS.PRODUCT.BY_CATEGORY_ALL(),
   QUERY_KEYS.PRODUCT.DETAIL_ALL(),
+  // 다른 화면에서 찜을 바꿔도 찜 목록 하트가 맞게 보이도록 합니다.
+  QUERY_KEYS.USER.WISH_PRODUCTS_ALL(),
   // 브랜드 상품 목록/검색은 brandId가 키 중간에 들어가 prefix를 좁힐 수 없습니다.
   // 브랜드 상세에는 찜 상태가 없어 함께 순회해도 변경되지 않습니다.
   QUERY_KEYS.BRAND.ALL,

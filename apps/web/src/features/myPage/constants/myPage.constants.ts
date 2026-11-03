@@ -2,6 +2,7 @@ import type {
   GenderType,
   UserProductSearchSortType,
   UserProductStatusType,
+  WishProductSortType,
 } from '@somesay/shared';
 
 // 서버 gender enum의 한글 표기입니다.
@@ -34,3 +35,14 @@ export const PROFILE_IMAGE_MAX_SIZE_PX = 512;
 export const PROFILE_IMAGE_QUALITY = 0.85;
 // 축소 전 원본 허용 용량입니다. 이보다 크면 브라우저가 디코딩하다 멈출 수 있어 막습니다.
 export const PROFILE_IMAGE_MAX_FILE_BYTES = 20 * 1024 * 1024;
+
+// 찜 목록 정렬. 기획상 담은순이 기본이다.
+export const WISH_PRODUCT_SORT_OPTIONS: {
+  value: WishProductSortType;
+  label: string;
+}[] = [
+  { value: 'WISHED_AT', label: '담은순' },
+  { value: 'RATING', label: '평점순' },
+  { value: 'REVIEW', label: '리뷰 많은 순' },
+  { value: 'PRICE', label: '가격 낮은 순' },
+];

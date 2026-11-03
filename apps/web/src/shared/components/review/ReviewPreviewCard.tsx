@@ -14,7 +14,8 @@ interface ReviewPreviewCardProps {
     productName: string;
     brandName: string;
     productImgUrl: string;
-    price: number;
+    // 찜 크리에이터 응답처럼 가격을 주지 않는 곳이 있어 선택값입니다.
+    price?: number;
   };
 }
 
@@ -58,9 +59,11 @@ export const ReviewPreviewCard = ({
           <span className="caption1-m line-clamp-1 text-black">
             {product.productName}
           </span>
-          <span className="caption1-m text-black">
-            {formatPrice(product.price)}
-          </span>
+          {product.price !== undefined && (
+            <span className="caption1-m text-black">
+              {formatPrice(product.price)}
+            </span>
+          )}
         </div>
       </div>
     </Link>
