@@ -33,6 +33,7 @@ export const CategoriesPage = () => {
     }
 
     return (
+      /* @spec 4.1.1, 4.1.2 */
       <ul aria-label="카테고리 목록" className="flex flex-col">
         {categoryGroups.map((category) => (
           <CategoryAccordion
