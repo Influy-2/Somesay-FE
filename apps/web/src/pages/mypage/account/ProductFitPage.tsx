@@ -13,6 +13,7 @@ import { useSnackbarStore } from '@/shared/stores';
 
 type FitType = 'matches' | 'mismatches';
 
+/** @spec 5.5.3 */
 export const ProductFitPage = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();

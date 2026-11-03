@@ -8,6 +8,7 @@ import { MOCK_ACCOUNT } from '@/features/myPage';
 
 const MAX_SELECTIONS = 2;
 
+/** @spec 5.5.2 */
 export const SkinConcernPage = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<number[]>(

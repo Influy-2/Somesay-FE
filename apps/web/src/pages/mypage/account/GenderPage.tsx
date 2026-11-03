@@ -5,6 +5,7 @@ import { ArrowBackIcon } from '@/shared/icons';
 import { GENDER_OPTIONS } from '@somesay/shared';
 import { MOCK_ACCOUNT } from '@/features/myPage';
 
+/** @spec 5.5.1 */
 export const GenderPage = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState(MOCK_ACCOUNT.gender);

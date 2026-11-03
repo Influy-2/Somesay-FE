@@ -77,20 +77,24 @@ export const AccountPage = () => {
 
         <div className="divide-grey03 flex flex-col divide-y">
           {/* 기본 정보 수정 */}
+          {/* @spec 5.5.1 */}
           <InfoSection title="기본 정보 수정">
             {BASIC_INFO_ROWS.map((row) => (
               <InfoRow key={row.label} {...row} />
             ))}
           </InfoSection>
           {/* 피부 정보 수정 */}
+          {/* @spec 5.5.2 */}
           <InfoSection title="피부 정보 수정">
             {SKIN_INFO_ROWS.map((row) => (
               <InfoRow key={row.label} {...row} />
             ))}
           </InfoSection>
           {/* 제품 적합도 */}
+          {/* @spec 5.5.3 */}
           <ProductFitSection matches={goodProducts} mismatches={badProducts} />
           {/* 계정 설정 */}
+          {/* @spec 5.5.4 */}
           <InfoSection title="계정 설정">
             <InfoRow label="로그아웃" onClick={() => {}} />
             <InfoRow label="회원탈퇴" onClick={() => {}} />

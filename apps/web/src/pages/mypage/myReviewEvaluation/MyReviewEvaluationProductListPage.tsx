@@ -9,6 +9,7 @@ import { ArrowBackIcon } from '@/shared/icons';
 import { useFetchCategories } from '@/shared/hooks';
 import { MOCK_EVALUATED_PRODUCTS_LIST } from '@/features/myPage';
 
+/** @spec 5.6.1 */
 export const MyReviewEvaluationProductListPage = () => {
   const navigate = useNavigate();
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);

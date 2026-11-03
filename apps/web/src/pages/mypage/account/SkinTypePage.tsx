@@ -10,6 +10,7 @@ import { MOCK_ACCOUNT } from '@/features/myPage';
 const UNKNOWN_SKIN_TYPE_ID = 8;
 const MAX_SELECTIONS = 2;
 
+/** @spec 5.5.2 */
 export const SkinTypePage = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<number[]>(MOCK_ACCOUNT.skinTypeIds);
