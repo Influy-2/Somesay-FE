@@ -42,6 +42,11 @@ export { useMySkinProfile } from './user/useMySkinProfile';
 export { usePatchUserBasicInfo } from './user/usePatchUserBasicInfo';
 export { usePatchUserSkinInfo } from './user/usePatchUserSkinInfo';
 export { usePatchUserProfileImage } from './user/usePatchUserProfileImage';
+export { useFetchWishProducts } from './user/useFetchWishProducts';
+export { useFetchWishCreators } from './user/useFetchWishCreators';
+
+// Creator
+export { useCreatorWish } from './creator/useCreatorWish';
 
 // Review
 export { useFetchTimeLinks } from './review/useFetchTimeLinks';

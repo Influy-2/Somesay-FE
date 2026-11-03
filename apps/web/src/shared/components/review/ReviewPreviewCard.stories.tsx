@@ -40,3 +40,18 @@ export const ShortContent: Story = {
     },
   },
 };
+
+export const WithoutPrice: Story = {
+  args: {
+    reviewId: 3,
+    rating: 4.5,
+    content:
+      '패드가 얇고 에센스가 흥건해서 얼굴에 올리면 시원하게 진정되는 느낌이에요.',
+    product: {
+      productId: 1,
+      productName: '당근 패드당근 패드',
+      brandName: '스킨푸드',
+      productImgUrl: '',
+    },
+  },
+};

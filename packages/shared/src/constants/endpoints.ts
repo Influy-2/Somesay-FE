@@ -44,6 +44,16 @@ export const API_ENDPOINTS = {
     SKIN_INFO: '/users/skin-info',
     // 프로필 이미지를 변경하기 위한 API URL입니다.
     PROFILE_IMAGE: '/users/user/profile',
+    // 찜한 상품 목록을 조회하기 위한 API URL입니다.
+    WISH_PRODUCTS: '/users/wish/product',
+    // 찜한 크리에이터 목록을 조회하기 위한 API URL입니다.
+    WISH_CREATORS: '/users/wish/creator',
+  },
+
+  /** Creator **/
+  CREATOR: {
+    // 크리에이터 찜 상태를 변경하기 위한 API URL입니다.
+    WISH: '/creators/:creatorId/wish',
   },
 
   /** home ranking controller **/
