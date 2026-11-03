@@ -62,12 +62,20 @@ export type CreatorReviewResponse = Schemas['CreatorReviewResponse'];
 export type ReactedCreatorResponse = Schemas['ReactedCreatorResponse'];
 export type ReactedProductResponse = Schemas['ReactedProductResponse'];
 
+// 마이페이지 찜 목록
+export type WishedCreatorResponse = Schemas['WishedCreatorResponse'];
+
 // 정렬 값은 스키마가 아니라 쿼리 파라미터 enum 이라 경로에서 꺼냅니다.
 export type ProductSortType = NonNullable<
   paths['/api/v1/products']['get']['parameters']['query']['sortType']
 >;
 export type UserProductSearchSortType =
   paths['/api/v1/users/products/search']['get']['parameters']['query']['sortType'];
+export type WishProductSortType = NonNullable<
+  NonNullable<
+    paths['/api/v1/users/wishes/products']['get']['parameters']['query']
+  >['sortType']
+>;
 export type BrandProductSortType = NonNullable<
   NonNullable<
     paths['/api/v1/brands/{brandId}/products']['get']['parameters']['query']

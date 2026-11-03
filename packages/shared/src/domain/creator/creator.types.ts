@@ -1,4 +1,7 @@
-import type { CreatorRankingResponse } from '../../api/schema';
+import type {
+  CreatorRankingResponse,
+  WishedCreatorResponse,
+} from '../../api/schema';
 
 /**
  * 크리에이터 프로필 묶음입니다.
@@ -21,4 +24,10 @@ type RankChangeDirection = 'up' | 'down' | 'same';
 export type CreatorRankingUpDownType = CreatorRankingResponse & {
   rankChange: number;
   rankChangeDiff: RankChangeDirection;
+};
+
+// 찜 크리에이터 응답에는 찜 여부가 없습니다. 목록에 있다는 것 자체가 찜 상태라 조회 훅의 select 에서 true 로 채우고,
+// 목록 안에서 찜을 풀면 항목을 지우지 않고 이 값만 바꿔 다시 찜할 수 있게 둡니다.
+export type WishCreatorType = WishedCreatorResponse & {
+  isWished: boolean;
 };

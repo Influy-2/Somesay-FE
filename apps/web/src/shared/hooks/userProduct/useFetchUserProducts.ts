@@ -1,4 +1,7 @@
-import type { UserProductRequest, UserProductStatusType } from '@somesay/shared';
+import type {
+  UserProductRequest,
+  UserProductStatusType,
+} from '@somesay/shared';
 
 import { useApiQuery } from '@/shared/api';
 

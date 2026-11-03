@@ -9,10 +9,12 @@ interface ReviewPreviewCardProps {
   reviewId: number;
   rating: number | null;
   content: string | null;
+  // 찜 크리에이터 응답처럼 가격을 주지 않는 곳이 있어 가격은 선택값입니다.
   product: Pick<
     ProductPreviewCard,
-    'productId' | 'productName' | 'brandName' | 'productImgUrl' | 'productPrice'
-  >;
+    'productId' | 'productName' | 'brandName' | 'productImgUrl'
+  > &
+    Partial<Pick<ProductPreviewCard, 'productPrice'>>;
 }
 
 export const ReviewPreviewCard = ({
@@ -59,9 +61,11 @@ export const ReviewPreviewCard = ({
           <span className="caption1-m line-clamp-1 text-black">
             {product.productName}
           </span>
-          <span className="caption1-m text-black">
-            {formatPrice(product.productPrice)}
-          </span>
+          {product.productPrice !== undefined && (
+            <span className="caption1-m text-black">
+              {formatPrice(product.productPrice)}
+            </span>
+          )}
         </div>
       </div>
     </Link>

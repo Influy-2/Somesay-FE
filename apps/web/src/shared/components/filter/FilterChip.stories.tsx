@@ -9,7 +9,6 @@ const meta: Meta<typeof FilterChip> = {
   argTypes: {
     label: { control: 'text' },
     isSelected: { control: 'boolean' },
-
   },
 };
 

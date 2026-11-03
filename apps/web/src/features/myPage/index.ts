@@ -12,9 +12,18 @@ export { ProductFitSection } from './components/ProductFitSection';
 export { RecommendedCreators } from './components/RecommendedCreators';
 export { RecommendedCreatorsTooltip } from './components/RecommendedCreatorsTooltip';
 
+export { WishCreatorList } from './components/wishList/WishCreatorList';
+export { WishLoadMore } from './components/wishList/WishLoadMore';
+export { WishProductList } from './components/wishList/WishProductList';
+
+export { useWishCreators } from './hooks/useWishCreators';
+export { useWishProducts } from './hooks/useWishProducts';
 export { useProductFitDraftStore } from './stores/productFitDraft.store';
 
-export { GENDER_LABELS } from './constants/myPage.constants';
+export {
+  GENDER_LABELS,
+  WISH_PRODUCT_SORT_OPTIONS,
+} from './constants/myPage.constants';
 
 // 미연동 화면용 mock 데이터입니다. API 연동 시 함께 정리합니다.
 export {

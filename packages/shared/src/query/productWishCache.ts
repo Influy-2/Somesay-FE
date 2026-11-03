@@ -24,6 +24,8 @@ export const WISH_QUERY_PREFIXES = [
   getQueryPrefix('/api/v1/products/{productId}/similar'),
   getQueryPrefix('/api/v1/brands/{brandId}/products'),
   getQueryPrefix('/api/v1/brands/{brandId}/products/search'),
+  // 다른 화면에서 찜을 바꿔도 찜 목록 하트가 맞게 보이도록 합니다.
+  getQueryPrefix('/api/v1/users/wishes/products'),
 ] as const;
 
 interface WishNode {

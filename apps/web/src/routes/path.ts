@@ -36,7 +36,11 @@ export const PATH = {
   },
   MY_PAGE: {
     BASE: '/my-page',
-    LIKED_PRODUCTS: 'liked-products',
+    WISH: {
+      BASE: 'wish',
+      PRODUCTS: 'products',
+      CREATORS: 'creators',
+    },
     REVIEW_EVALUATION: {
       BASE: 'review-evaluation',
       PRODUCTS: {

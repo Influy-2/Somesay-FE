@@ -23,6 +23,8 @@ export type {
   ProductSortType,
   BrandProductSortType,
   UserProductSearchSortType,
+  WishProductSortType,
+  WishedCreatorResponse,
   ProductReviewResponse,
   ProductReviewOverviewResponse,
   CommentItemResponse,
@@ -44,6 +46,7 @@ export type { ApiErrorResponse } from './api/types';
 export type {
   BasicCreatorProfileType,
   CreatorRankingUpDownType,
+  WishCreatorType,
 } from './domain/creator/creator.types';
 export * from './domain/filter/filter.types';
 export type {

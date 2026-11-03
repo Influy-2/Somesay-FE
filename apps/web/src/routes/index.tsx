@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from 'react-router';
+import { createBrowserRouter, Navigate, Outlet } from 'react-router';
 import { PATH } from '@/routes/path';
 
 import { GlobalLayout } from '@/shared/components';
@@ -51,6 +51,9 @@ import { ProtectedRoute } from '@/features/auth';
 import { MyReviewEvaluationPage } from '@/pages/mypage/myReviewEvaluation/MyReviewEvaluationPage';
 import { MyReviewEvaluationProductListPage } from '@/pages/mypage/myReviewEvaluation/MyReviewEvaluationProductListPage';
 import { MyReviewEvaluationCreatorListPage } from '@/pages/mypage/myReviewEvaluation/MyReviewEvaluationCreatorListPage';
+import { WishListPage } from '@/pages/mypage/wish/WishListPage';
+import { WishProductsTab } from '@/pages/mypage/wish/WishProductsTab';
+import { WishCreatorsTab } from '@/pages/mypage/wish/WishCreatorsTab';
 
 export const appRouter = createBrowserRouter([
   {
@@ -267,6 +270,24 @@ export const appRouter = createBrowserRouter([
                     element: <MyReviewEvaluationCreatorListPage />,
                   },
                 ],
+              },
+            ],
+          },
+          {
+            path: PATH.MY_PAGE.WISH.BASE,
+            element: <WishListPage />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to={PATH.MY_PAGE.WISH.PRODUCTS} replace />,
+              },
+              {
+                path: PATH.MY_PAGE.WISH.PRODUCTS,
+                element: <WishProductsTab />,
+              },
+              {
+                path: PATH.MY_PAGE.WISH.CREATORS,
+                element: <WishCreatorsTab />,
               },
             ],
           },
