@@ -3,6 +3,7 @@ import { PATH } from '@/routes/path';
 
 const MATCHED_PRODUCTS_PATH = `${PATH.ONBOARDING.BASE}/${PATH.ONBOARDING.MATCHED_PRODUCTS}`;
 
+/** @spec 11.2.2 */
 export const MatchedProductSearchPage = () => (
   <OnboardingProductSearch
     status="MATCHED"

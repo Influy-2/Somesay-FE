@@ -8,6 +8,7 @@ import {
 } from '@/features/onboarding';
 import { CharacterCountInput } from '@/shared/components';
 
+/** @spec 11.1.3, 11.3.1, 11.3.2, 11.3.3, 11.3.5 */
 export const NicknamePage = () => {
   const navigate = useNavigate();
   const savedNickname = useOnboardingStore((state) => state.nickname);

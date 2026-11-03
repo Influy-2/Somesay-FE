@@ -57,6 +57,7 @@ export const CreatorHomePage = () => {
 
   return (
     <div className="mt-13.5 flex flex-col bg-white">
+      {/* @spec 7.6.1, 7.6.2 */}
       <PageHeader
         left={
           <button
@@ -74,11 +75,14 @@ export const CreatorHomePage = () => {
         ]}
       />
       <div className="mb-7.5 flex flex-col gap-5 px-4 pt-2">
+        {/* @spec 7.1.1, 7.1.2, 7.1.3 */}
         <CreatorHomeProfile {...MOCK_CREATOR} />
+        {/* @spec 7.2.1, 7.2.2, 7.3.1 */}
         <CreatorHomeTrustScore {...MOCK_TRUST_SCORE} isLoggedIn={true} />
       </div>
       {/* 검색 + 정렬 */}
       <div className="mb-6 flex flex-col gap-4 px-4">
+        {/* @spec 7.4.1 */}
         <SearchBar
           placeholder="레오제이에서의 검색"
           value={searchValue}
@@ -86,12 +90,14 @@ export const CreatorHomePage = () => {
           onSubmit={() => {}}
           onClear={() => setSearchValue('')}
         />
+        {/* @spec 7.5.1 */}
         <HorizontalCategoriesTab
           categories={categories}
           selectedId={selectedCategoryId}
           onSelect={handleSelectCategory}
           ariaLabel="상품 카테고리"
         />
+        {/* @spec 7.5.3 */}
         <SortBar
           count={filteredReviews.length}
           sortOptions={SORT_OPTIONS}
@@ -99,6 +105,7 @@ export const CreatorHomePage = () => {
           onSelectSort={setCurrentSortValue}
         />
       </div>
+      {/* @spec 7.5.1, 7.5.2, 7.5.4 */}
       <div className="flex flex-col gap-6 px-4 pb-10">
         {/* 리뷰 목록 */}
         {visibleReviews.map((review) => (

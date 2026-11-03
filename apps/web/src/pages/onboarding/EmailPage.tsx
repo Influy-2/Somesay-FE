@@ -17,6 +17,7 @@ const createEmailSuggestions = (value: string) => {
   return EMAIL_DOMAINS.map((domain) => `${trimmedValue}@${domain}`);
 };
 
+/** @spec 11.1.1, 11.3.1, 11.3.2, 11.3.3 */
 export const EmailPage = () => {
   const navigate = useNavigate();
   const savedEmail = useOnboardingStore((state) => state.email);
