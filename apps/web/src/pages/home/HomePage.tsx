@@ -22,31 +22,39 @@ export const HomePage = () => {
         }
         right={[
           <Link to={PATH.SEARCH.BASE}>
+            {/* @spec 1.1.1 */}
             <SearchIcon />
           </Link>,
         ]}
       />
       {/* 요즘 나의 피부 고민에 딱 맞는 제품을 추천해 드려요 섹션 */}
+      {/* @spec 1.2.1 */}
       <RecommendationSection />
 
       {/* 1.1.2 배너 */}
+      {/* @spec 1.1.2 */}
       <div className="flex h-[7.3125rem] w-full items-center justify-center gap-2.5 p-2.5 text-black [background:var(--grey-03,#E4E2DF)]">
         베너 임시
       </div>
 
       {/* 1.2.2 유저가 선택한 고평점 리뷰 */}
+      {/* @spec 1.2.2 */}
       <BestReviewSection />
 
       {/* 1.3.1 상품 랭킹 */}
+      {/* @spec 1.3.1 */}
       <ProductRankingSection />
 
       {/* 1.3.2 크리에이터 랭킹 */}
+      {/* @spec 1.3.2 */}
       <CreatorRankingSection />
 
       {/* 1.4 리뷰 평가 유도 */}
+      {/* @spec 1.4.1 */}
       <ReviewVoteSection />
 
       {/* 1.5 상품 목록 */}
+      {/* @spec 1.5.1 */}
       <CategoryProductSection />
     </div>
   );

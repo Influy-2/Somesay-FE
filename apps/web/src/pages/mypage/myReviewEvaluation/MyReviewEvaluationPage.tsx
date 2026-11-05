@@ -97,6 +97,7 @@ export const MyReviewEvaluationPage = () => {
       </div>
 
       {activeTab === 'products' && (
+        /* @spec 5.6.1, 5.6.3 */
         <ProductsTab
           selectedProductId={selectedProductId}
           setSelectedProductId={setSelectedProductId}
@@ -115,6 +116,7 @@ export const MyReviewEvaluationPage = () => {
       )}
 
       {activeTab === 'creators' && (
+        /* @spec 5.6.2, 5.6.3 */
         <CreatorsTab
           selectedCreatorId={selectedCreatorId}
           setSelectedCreatorId={setSelectedCreatorId}

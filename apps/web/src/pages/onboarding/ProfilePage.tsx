@@ -17,6 +17,7 @@ const GENDER_OPTIONS = Object.entries(GENDER_LABELS) as [
 ][];
 const AGE_OPTIONS = Object.entries(AGE_LABELS) as [AgeType, string][];
 
+/** @spec 11.1.3, 11.3.1, 11.3.2, 11.3.3, 11.3.5 */
 export const ProfilePage = () => {
   const navigate = useNavigate();
   const savedGender = useOnboardingStore((state) => state.gender);

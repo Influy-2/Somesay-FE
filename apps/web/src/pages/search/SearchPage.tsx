@@ -57,6 +57,7 @@ export const SearchPage = () => {
 
   return (
     <div className="flex h-dvh flex-col bg-white">
+      {/* @spec 8.1.1, 8.1.3 */}
       <SearchHeader
         value={inputValue}
         onQueryChange={(e) => setInputValue(e.target.value)}
@@ -78,6 +79,7 @@ export const SearchPage = () => {
         />
       )}
       {isSearched && (
+        /* @spec 8.2.1, 8.2.2, 8.2.3, 8.2.4, 8.2.5, 8.2.7 */
         <SearchResultSection
           activeTab={activeTab}
           products={products}

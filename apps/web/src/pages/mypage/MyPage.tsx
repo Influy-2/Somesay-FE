@@ -32,12 +32,14 @@ export const MyPage = () => {
 
     return (
       <>
+        {/* @spec 5.1.1 */}
         <MyProfile
           profileImgUrl={data.profileImgUrl}
           nickname={data.nickname}
           skinTypeIds={data.skinTypeIds}
           age={user?.age ?? null}
         />
+        {/* @spec 5.1.2 */}
         <MyActivityStatistics {...data.statistics} />
       </>
     );
@@ -52,6 +54,7 @@ export const MyPage = () => {
       <hr className="bg-grey01 my-7 h-1.75 border-0" />
 
       {/* 좌우 여백은 섹션이 직접 다룹니다 — 캐러셀이 화면 끝까지 흘러야 해서요. */}
+      {/* @spec 5.2.1, 5.2.2 */}
       <div className="relative">
         <RecommendedCreatorsTooltip />
         <RecommendedCreators />
@@ -60,6 +63,7 @@ export const MyPage = () => {
       <hr className="bg-grey01 h-1.75 border-0" />
 
       <div className="divide-grey03 flex flex-col divide-y px-4 pb-10">
+        {/* @spec 5.3.2, 5.3.3 */}
         <InfoSection title="나의 활동">
           <InfoRow
             label="리뷰 관리"
@@ -69,6 +73,7 @@ export const MyPage = () => {
           <InfoRow label="찜한 크리에이터" />
         </InfoSection>
 
+        {/* @spec 5.4.1, 5.4.2, 5.4.3, 5.4.4, 5.4.5 */}
         <InfoSection title="고객센터">
           <InfoRow label="1:1 문의" />
           <InfoRow label="제품 추가 요청" />

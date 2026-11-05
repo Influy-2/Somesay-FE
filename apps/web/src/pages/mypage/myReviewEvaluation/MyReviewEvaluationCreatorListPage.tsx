@@ -6,6 +6,7 @@ import {
 import { ArrowBackIcon } from '@/shared/icons';
 import { MOCK_EVALUATED_CREATORS_LIST } from '@/features/myPage';
 
+/** @spec 5.6.2 */
 export const MyReviewEvaluationCreatorListPage = () => {
   const navigate = useNavigate();
 

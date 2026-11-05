@@ -41,8 +41,11 @@ export const BrandHomePage = () => {
 
   return (
     <div className="flex min-h-dvh flex-col bg-white">
+      {/* @spec 10.1.1, 10.1.2, 10.1.5 */}
       <BrandHomeHero brand={brand} onBack={() => navigate(-1)} />
+      {/* @spec 10.1.3, 10.1.4 */}
       <BrandProductFilters brandName={brand.brandName} {...filterProps} />
+      {/* @spec 10.1.4 */}
       <BrandProductList {...listProps} />
     </div>
   );
