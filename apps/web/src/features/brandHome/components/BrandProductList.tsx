@@ -1,9 +1,9 @@
-import type { BrandProductType } from '@somesay/shared';
+import type { ProductCard } from '@somesay/shared';
 import { SearchResultProductCard } from '@/shared/components';
 import type { Ref } from 'react';
 
 interface BrandProductListProps {
-  products: BrandProductType[];
+  products: ProductCard[];
   onHeartToggle: (productId: number) => void;
   isLoading: boolean;
   isError: boolean;

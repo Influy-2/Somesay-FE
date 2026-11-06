@@ -29,7 +29,7 @@ export const useProductDetail = (productId?: number) => {
 
     toggleWish({
       productId: product.productId,
-      isHearted: product.isHearted,
+      isWished: product.isWished,
     });
   };
 

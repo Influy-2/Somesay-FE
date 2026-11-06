@@ -1,11 +1,11 @@
 // product/리뷰용 컴포넌트
 import { Link } from 'react-router';
-import type { ProductCardType } from '@somesay/shared';
+import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
 
 interface ReviewProductLinkProps {
   product: Pick<
-    ProductCardType,
-    'productId' | 'brandName' | 'productName' | 'productImgUrl' | 'price'
+    ProductPreviewCard,
+    'productId' | 'brandName' | 'productName' | 'productImgUrl' | 'productPrice'
   >;
   showArrow?: boolean;
 }
@@ -31,8 +31,9 @@ export const ReviewProductLink = ({ product }: ReviewProductLinkProps) => {
         <span className="caption1-m line-clamp-1 text-black">
           {product.productName}
         </span>
+        {/* 운영에서 가격이 null 로 오는 상품이 있어 formatPrice 로 안전하게 표시합니다. */}
         <span className="caption1-m text-black">
-          {product.price.toLocaleString()}원
+          {formatPrice(product.productPrice)}
         </span>
       </div>
     </Link>

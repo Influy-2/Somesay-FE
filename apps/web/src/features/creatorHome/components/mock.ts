@@ -1,7 +1,6 @@
-import {
+import type {
   BasicCreatorProfileType,
-  ProductsByCategoryType,
-  ProductCardType,
+  ProductPreviewCard,
 } from '@somesay/shared';
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProfile2Img from '@/assets/mock_profile2_img.png';
@@ -14,7 +13,7 @@ interface MockCreatorType extends BasicCreatorProfileType {
   youtubeUrl: string;
 }
 
-interface MockProductCardType extends ProductCardType {
+interface MockProductCardType extends ProductPreviewCard {
   categoryId: number;
 }
 
@@ -54,71 +53,12 @@ const MOCK_PRODUCT_BASE: Omit<MockProductCardType, 'productId' | 'categoryId'> =
     productImgUrl: mockProductImg,
     brandName: '토리든',
     productName: '[스킨푸드] 캐롯 카로팅 카밍 세럼',
-    price: 10000,
-    avgRating: 4.9,
-    reviewCount: 43,
-    isHearted: false,
-    creatorImageUrls: [mockProfileImg, mockProfile2Img, mockProfile3Img],
+    productPrice: 10000,
+    productAvgRating: 4.9,
+    productReviewCount: 43,
+    isWished: false,
+    creatorProfileImgUrls: [mockProfileImg, mockProfile2Img, mockProfile3Img],
   };
-
-// 카테고리별 상품 목록
-export const MOCK_CATEGORY_PRODUCTS: ProductsByCategoryType[] = [
-  {
-    categoryId: 1,
-    categoryTitle: '전체',
-    moreLinkPath: '/category',
-    moreLinkLabel: '스킨케어 상품 더보기',
-    products: [1, 2, 3, 4].map((id) => ({
-      ...MOCK_PRODUCT_BASE,
-      productId: id,
-      categoryId: 1,
-    })),
-  },
-  {
-    categoryId: 2,
-    categoryTitle: '클렌징/필링',
-    moreLinkPath: '/category/cleansing',
-    moreLinkLabel: '클렌징/필링 상품 더보기',
-    products: [5, 6].map((id) => ({
-      ...MOCK_PRODUCT_BASE,
-      productId: id,
-      categoryId: 2,
-    })),
-  },
-  {
-    categoryId: 3,
-    categoryTitle: '마스크/팩',
-    moreLinkPath: '/category/mask',
-    moreLinkLabel: '마스크/팩 상품 더보기',
-    products: [7, 8].map((id) => ({
-      ...MOCK_PRODUCT_BASE,
-      productId: id,
-      categoryId: 3,
-    })),
-  },
-  {
-    categoryId: 4,
-    categoryTitle: '선케어',
-    moreLinkPath: '/category/suncare',
-    moreLinkLabel: '선케어 상품 더보기',
-    products: [9, 10].map((id) => ({
-      ...MOCK_PRODUCT_BASE,
-      productId: id,
-      categoryId: 4,
-    })),
-  },
-  {
-    categoryId: 5,
-    categoryTitle: '베이스',
-    moreLinkPath: '/category/base',
-    moreLinkLabel: '베이스 상품 더보기',
-    products: [11, 12].map((id) => ({
-      ...MOCK_PRODUCT_BASE,
-      productId: id,
-      categoryId: 5,
-    })),
-  },
-];
 
 // 공통 리뷰 내용
 const MOCK_REVIEW_CONTENT =

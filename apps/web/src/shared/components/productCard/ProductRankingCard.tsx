@@ -1,4 +1,4 @@
-import { formatPrice, type ProductCardType } from '@somesay/shared';
+import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
 import { Link } from 'react-router';
 
 import { PATH } from '@/routes/path';
@@ -6,7 +6,7 @@ import { HeartButton } from '@/shared/components/buttons/HeartButton';
 import { Star16Icon } from '@/shared/icons';
 import { AvatarStack } from './AvatarStack';
 
-export type ProductRankingCardProps = ProductCardType & {
+export type ProductRankingCardProps = ProductPreviewCard & {
   ranking: number;
   onHeartToggle: () => void;
 };
@@ -16,15 +16,18 @@ export const ProductRankingCard = ({
   productImgUrl,
   brandName,
   productName,
-  price,
-  avgRating,
-  reviewCount,
-  creatorImageUrls,
-  isHearted,
+  productPrice,
+  productAvgRating,
+  productReviewCount,
+  creatorProfileImgUrls,
+  isWished,
   ranking,
   onHeartToggle,
 }: ProductRankingCardProps) => {
-  const formattedReviewCount = reviewCount.toLocaleString('ko-KR');
+  // 이전 mapper 의 `reviewCount ?? 0` 방어를 옮겨 둡니다. (스펙상 non-null 이지만 null 이 올 수 있음)
+  const formattedReviewCount = (productReviewCount ?? 0).toLocaleString(
+    'ko-KR'
+  );
 
   return (
     <article className="relative flex min-w-0 flex-col items-start gap-2">
@@ -48,7 +51,7 @@ export const ProductRankingCard = ({
 
         <div className="absolute right-2 bottom-2 z-1">
           <HeartButton
-            isHearted={isHearted}
+            isHearted={isWished}
             onHeartToggle={onHeartToggle}
             productName={productName}
           />
@@ -61,16 +64,16 @@ export const ProductRankingCard = ({
       >
         <p className="body2-m w-full truncate">{brandName}</p>
         <p className="body2-m w-full truncate">{productName}</p>
-        <p className="body2-m w-full truncate">{formatPrice(price)}</p>
+        <p className="body2-m w-full truncate">{formatPrice(productPrice)}</p>
 
         <div className="flex max-w-full items-center gap-1 overflow-hidden">
           <div className="flex shrink-0 items-center">
             <Star16Icon className="text-primary-300 size-4" />
-            <span className="body2-sb">{avgRating.toFixed(1)}</span>
+            <span className="body2-sb">{productAvgRating.toFixed(1)}</span>
           </div>
           <span className="body2-m shrink-0">({formattedReviewCount})</span>
-          {creatorImageUrls.length > 0 && (
-            <AvatarStack creatorImageUrls={creatorImageUrls} />
+          {creatorProfileImgUrls.length > 0 && (
+            <AvatarStack creatorImageUrls={creatorProfileImgUrls} />
           )}
         </div>
       </div>
@@ -78,7 +81,7 @@ export const ProductRankingCard = ({
       <Link
         to={`${PATH.PRODUCT.BASE}/${productId}`}
         className="absolute inset-0"
-        aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(price)}, 별점 ${avgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개 상세 페이지로 이동`}
+        aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(productPrice)}, 별점 ${productAvgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개 상세 페이지로 이동`}
       />
     </article>
   );

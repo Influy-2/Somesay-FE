@@ -1,5 +1,4 @@
-import { fetchProductRanking, QUERY_KEYS } from '@somesay/shared';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useApiInfiniteQuery } from '@/shared/api';
 
 interface UseFetchProductsRankingOptions {
   size?: number;
@@ -10,20 +9,17 @@ interface UseFetchProductsRankingOptions {
 export const useFetchProductsRanking = ({
   size = 10,
   mainCategoryId,
-}: UseFetchProductsRankingOptions = {}) => {
-  const rankingParams =
-    mainCategoryId === undefined ? { size } : { size, mainCategoryId };
-
-  const query = useInfiniteQuery({
-    queryKey: QUERY_KEYS.RANKING.PRODUCTS(rankingParams),
-    initialPageParam: 0,
-    queryFn: ({ pageParam }) =>
-      fetchProductRanking({ page: pageParam, ...rankingParams }),
-    getNextPageParam: (lastPage) =>
-      lastPage.hasNext ? lastPage.pageNumber + 1 : undefined,
-    // 전역 기본값과 달리 섹션 내부에서 재시도 UI를 직접 보여주므로 에러를 던지지 않습니다.
-    throwOnError: false,
-  });
-
-  return query;
-};
+}: UseFetchProductsRankingOptions = {}) =>
+  useApiInfiniteQuery(
+    '/api/v1/rankings/products',
+    {
+      params: {
+        query:
+          mainCategoryId === undefined ? { size } : { size, mainCategoryId },
+      },
+    },
+    {
+      // 전역 기본값과 달리 섹션 내부에서 재시도 UI를 직접 보여주므로 에러를 던지지 않습니다.
+      throwOnError: false,
+    }
+  );

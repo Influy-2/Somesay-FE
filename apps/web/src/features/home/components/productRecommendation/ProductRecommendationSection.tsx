@@ -63,12 +63,12 @@ export const ProductRecommendationSection = ({
                 />
               )}
 
-              {product.productSkinExpectations.length > 0 && (
+              {product.productEffectChips.length > 0 && (
                 <ProductAttributeSection
                   title="기대 효과"
-                  items={product.productSkinExpectations.map(({ concern }) => ({
-                    label: concern,
-                    isHighlighted: isSelectedKeyword(concern),
+                  items={product.productEffectChips.map(({ chipName }) => ({
+                    label: chipName,
+                    isHighlighted: isSelectedKeyword(chipName),
                   }))}
                 />
               )}

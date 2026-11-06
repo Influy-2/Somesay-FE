@@ -1,5 +1,4 @@
-import { fetchBrandDetail, QUERY_KEYS } from '@somesay/shared';
-import { useQuery } from '@tanstack/react-query';
+import { useApiQuery } from '@/shared/api';
 
 const BRAND_DETAIL_STALE_TIME = 1000 * 60 * 5;
 
@@ -8,14 +7,12 @@ export const useFetchBrandDetail = (brandId?: number) => {
   const isValidBrandId =
     typeof brandId === 'number' && Number.isInteger(brandId) && brandId > 0;
 
-  const query = useQuery({
-    queryKey: isValidBrandId
-      ? QUERY_KEYS.BRAND.DETAIL(brandId)
-      : [...QUERY_KEYS.BRAND.ALL, 'detail', brandId],
-    queryFn: () => fetchBrandDetail(brandId ?? 0),
-    enabled: isValidBrandId,
-    staleTime: BRAND_DETAIL_STALE_TIME,
-  });
-
-  return query;
+  return useApiQuery(
+    '/api/v1/brands/{brandId}',
+    { params: { path: { brandId: brandId ?? 0 } } },
+    {
+      enabled: isValidBrandId,
+      staleTime: BRAND_DETAIL_STALE_TIME,
+    }
+  );
 };

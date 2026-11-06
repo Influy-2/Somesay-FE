@@ -26,3 +26,23 @@ export type InfoResponse = Schemas['InfoResponse'];
 export type MyPageResponse = Schemas['MyPageResponse'];
 export type UserProductRequest = Schemas['UserProductRequest'];
 export type UserProductItemResponse = Schemas['UserProductItemResponse'];
+
+// 상품·찜·브랜드
+// ProductPreviewCard = 작은 카드(랭킹·비슷한 상품), ProductCard = 큰 카드(카테고리·브랜드·검색·홈 목록)
+export type ProductPreviewCard = Schemas['ProductPreviewCard'];
+export type ProductCard = Schemas['ProductCard'];
+export type EffectChip = Schemas['EffectChip'];
+export type ProductDetailResponse = Schemas['ProductDetailResponse'];
+export type WishRequest = Schemas['WishRequest'];
+export type ProductWishResponse = Schemas['ProductWishResponse'];
+export type BrandResponse = Schemas['BrandResponse'];
+
+// 정렬 값은 스키마가 아니라 쿼리 파라미터 enum 이라 경로에서 꺼냅니다.
+export type ProductSortType = NonNullable<
+  paths['/api/v1/products']['get']['parameters']['query']['sortType']
+>;
+export type BrandProductSortType = NonNullable<
+  NonNullable<
+    paths['/api/v1/brands/{brandId}/products']['get']['parameters']['query']
+  >['sortType']
+>;

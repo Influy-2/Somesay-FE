@@ -83,7 +83,7 @@ export const ProductRankingsSection = () => {
                 onHeartToggle={() =>
                   toggleWish({
                     productId: product.productId,
-                    isHearted: product.isHearted,
+                    isWished: product.isWished,
                   })
                 }
               />

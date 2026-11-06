@@ -80,7 +80,7 @@ export const useSubcategoryProducts = (mainCategoryId?: number) => {
   );
 
   const products = useMemo(
-    () => productsQuery.data?.pages.flatMap((page) => page.products) ?? [],
+    () => productsQuery.data?.pages.flatMap((page) => page.content) ?? [],
     [productsQuery.data?.pages]
   );
   const productCount = productsQuery.data?.pages[0]?.totalCount ?? 0;
@@ -109,7 +109,7 @@ export const useSubcategoryProducts = (mainCategoryId?: number) => {
       return;
     }
 
-    toggleWish({ productId, isHearted: product.isHearted });
+    toggleWish({ productId, isWished: product.isWished });
   };
 
   return {

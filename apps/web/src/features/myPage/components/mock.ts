@@ -236,7 +236,7 @@ export const MOCK_EVALUATED_REVIEWS = [
       productName: '[캐롯] 카로팅 카밍밍밍ㅁ이밍밍밍밍...',
       brandName: '토리든',
       productImgUrl: '',
-      price: 10000,
+      productPrice: 10000,
     },
     myComment: {
       commentId: 1,
@@ -258,7 +258,7 @@ export const MOCK_EVALUATED_REVIEWS = [
       productName: '[캐롯] 카로팅 카밍밍밍ㅁ이밍밍밍밍...',
       brandName: '토리든',
       productImgUrl: '',
-      price: 10000,
+      productPrice: 10000,
     },
   },
 ];

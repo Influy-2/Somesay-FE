@@ -85,18 +85,18 @@ export const useBrandHome = (brandId?: number) => {
   const categories = useMemo(
     () => [
       { id: ALL_SUB_CATEGORY_ID, label: '전체' },
-      ...(brandQuery.data?.availableSubCategories.map(
-        ({ subCategoryId, subName }) => ({
+      ...(brandQuery.data?.subCategories.map(
+        ({ subCategoryId, subCategoryName }) => ({
           id: subCategoryId,
-          label: subName,
+          label: subCategoryName,
         })
       ) ?? []),
     ],
-    [brandQuery.data?.availableSubCategories]
+    [brandQuery.data?.subCategories]
   );
 
   const products = useMemo(
-    () => activeProductQuery.data?.pages.flatMap((page) => page.products) ?? [],
+    () => activeProductQuery.data?.pages.flatMap((page) => page.content) ?? [],
     [activeProductQuery.data?.pages]
   );
   const productCount = activeProductQuery.data?.pages[0]?.totalCount ?? 0;
@@ -135,7 +135,7 @@ export const useBrandHome = (brandId?: number) => {
       return;
     }
 
-    toggleWish({ productId, isHearted: product.isHearted });
+    toggleWish({ productId, isWished: product.isWished });
   };
 
   return {

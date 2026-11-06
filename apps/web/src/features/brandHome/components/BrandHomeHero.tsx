@@ -1,9 +1,9 @@
-import type { BrandSummaryType } from '@somesay/shared';
+import type { BrandResponse } from '@somesay/shared';
 import { ArrowBackIcon, Star16Icon } from '@/shared/icons';
 import { ShareButton } from '@/shared/components';
 
 interface BrandHomeHeroProps {
-  brand: BrandSummaryType;
+  brand: BrandResponse;
   onBack: () => void;
 }
 
@@ -40,7 +40,7 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
 
       <div className="absolute bottom-5 left-4 flex items-center gap-3">
         <img
-          src={brand.brandLogoUrl}
+          src={brand.brandLogoImgUrl}
           alt={`${brand.brandName} 로고`}
           className="size-15 shrink-0 rounded-full object-cover"
         />
@@ -54,19 +54,19 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
           <div className="caption1-m text-grey01 flex flex-wrap items-center gap-2">
             <span className="caption1-b flex items-center">
               <Star16Icon aria-hidden="true" className="size-4" />
-              {brand.avgRating.toFixed(1)}
+              {brand.brandAvgRating.toFixed(1)}
             </span>
             <span className="bg-grey06 h-3 w-px" aria-hidden="true" />
             <span>
               리뷰
               <strong className="caption1-b">
-                {brand.totalReviewCount.toLocaleString()}
+                {brand.brandReviewCount.toLocaleString()}
               </strong>
             </span>
             <span className="bg-grey06 h-3 w-px" aria-hidden="true" />
             <span>
               SOMESAY 브랜드 평점{' '}
-              <strong className="caption1-b">{brand.ranking}위</strong>
+              <strong className="caption1-b">{brand.brandRanking}위</strong>
             </span>
           </div>
         </div>

@@ -2,7 +2,7 @@ import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
 import type {
   BasicCreatorProfileType,
-  ProductSearchResultType,
+  ProductCard,
   ReviewSearchResultType,
 } from '@somesay/shared';
 
@@ -12,30 +12,32 @@ const MOCK_CREATOR_IMAGE_URLS = [
   mockProfileImg,
 ];
 
-const MOCK_SEARCH_PRODUCT: ProductSearchResultType = {
+const MOCK_SEARCH_PRODUCT: ProductCard = {
   productId: 1,
+  mainCategoryId: 1,
+  subCategoryId: 1,
   productImgUrl: mockProductImg,
   brandName: '브랜드명',
   productName:
     '캐롯 카터 패드 (200매)캐롯 카밍 워터 패드 캐롯 카터 패드 (200매)캐롯 카밍 워터 패...',
-  price: 10000,
-  avgRating: 4.9,
-  reviewCount: 43,
-  isHearted: false,
-  creatorImageUrls: MOCK_CREATOR_IMAGE_URLS,
-  reviewSummary:
+  productPrice: 10000,
+  productAvgRating: 4.9,
+  productReviewCount: 43,
+  isWished: false,
+  creatorProfileImgUrls: MOCK_CREATOR_IMAGE_URLS,
+  productShortSummary:
     '"세럼이 끈적임 없이 촉촉하고, 수분감이 많아서 특히 건성 피부인 분들에게 추천해요."',
-  skinTypeIds: [1, 6],
-  expectedEffects: [
+  productSkinTypeIds: [1, 6],
+  productEffectChips: [
     '각질제거',
     '여드름 진정',
     '각질제거각질제거',
     '여드름 진정',
     '줄 띄움 확인용 기대 효과 기대기대',
-  ],
+  ].map((chipName, index) => ({ chipId: index + 1, chipName })),
 };
 
-export const MOCK_SEARCH_PRODUCTS: ProductSearchResultType[] = [
+export const MOCK_SEARCH_PRODUCTS: ProductCard[] = [
   { ...MOCK_SEARCH_PRODUCT, productId: 1 },
   { ...MOCK_SEARCH_PRODUCT, productId: 2 },
   { ...MOCK_SEARCH_PRODUCT, productId: 3 },
@@ -56,7 +58,7 @@ const MOCK_CREATOR_PROFILE: BasicCreatorProfileType = {
   skinTypeIds: [1],
 };
 
-const MOCK_REVIEW_PRODUCT: ProductSearchResultType = {
+const MOCK_REVIEW_PRODUCT: ProductCard = {
   ...MOCK_SEARCH_PRODUCT,
   productId: 1,
 };

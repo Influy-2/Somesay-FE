@@ -2,10 +2,7 @@
 // - query, filters, sortBy를 받아서 실제
 // 결과(products, reviews) 반환
 // - API 연결 시 TanStack Query로 교체될 레이어
-import type {
-  ProductSearchResultType,
-  ReviewSearchResultType,
-} from '@somesay/shared';
+import type { ProductCard, ReviewSearchResultType } from '@somesay/shared';
 
 import { MOCK_SEARCH_PRODUCTS, MOCK_SEARCH_REVIEWS } from '../mock';
 import type {
@@ -15,7 +12,7 @@ import type {
 } from '../types/search.types';
 
 interface UseSearchResultsReturn {
-  products: ProductSearchResultType[];
+  products: ProductCard[];
   reviews: ReviewSearchResultType[];
   isLoading: boolean;
   isError: boolean;
@@ -36,7 +33,7 @@ export const useSearchResults = (
 
   //unused var 에러 해제를 위한 임시
   const isError = !!query || !!filters || !!productSortBy || !!reviewSortBy;
-  let products: ProductSearchResultType[] = [];
+  let products: ProductCard[] = [];
   let reviews: ReviewSearchResultType[] = [];
 
   if (query.length > 0) {

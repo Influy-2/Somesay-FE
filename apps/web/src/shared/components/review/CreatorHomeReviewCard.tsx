@@ -1,11 +1,11 @@
 import { Star16Icon } from '@/shared/icons';
 import { Move12Icon } from '@/shared/icons';
-import { ProductCardType } from '@somesay/shared';
+import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
 
 interface CreatorHomeReviewCardProps {
   rating: number;
   content: string;
-  product: ProductCardType;
+  product: ProductPreviewCard;
 }
 
 export const CreatorHomeReviewCard = ({
@@ -28,7 +28,7 @@ export const CreatorHomeReviewCard = ({
         <div className="caption1-m flex flex-1 flex-col gap-1">
           <span>{product.brandName}</span>
           <span className="line-clamp-1">{product.productName}</span>
-          <span>{product.price.toLocaleString()}원</span>
+          <span>{formatPrice(product.productPrice)}</span>
         </div>
         <Move12Icon aria-hidden="true" />
       </div>

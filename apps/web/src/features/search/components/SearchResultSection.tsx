@@ -1,7 +1,4 @@
-import type {
-  ProductSearchResultType,
-  ReviewSearchResultType,
-} from '@somesay/shared';
+import type { ProductCard, ReviewSearchResultType } from '@somesay/shared';
 
 import { SearchProductSection } from './SearchProductSection';
 import { SearchReviewSection } from './SearchReviewSection';
@@ -14,7 +11,7 @@ import type {
 
 interface SearchResultSectionProps {
   activeTab: SearchTabType;
-  products: ProductSearchResultType[];
+  products: ProductCard[];
   reviews: ReviewSearchResultType[];
   onHeartToggle: (productId: number) => void;
   productSortBy: ProductSearchSortOptionType;

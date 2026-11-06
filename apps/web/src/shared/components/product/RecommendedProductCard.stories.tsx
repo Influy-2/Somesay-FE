@@ -17,11 +17,11 @@ const meta: Meta<typeof RecommendedProductCard> = {
     brandName: '토리든',
     productName: '캐롯 카로팅 카밍 워터 패드 50p',
     productImgUrl: recommendedProductCardImg,
-    price: 10000,
-    avgRating: 4.9,
-    reviewCount: 43,
-    creatorImageUrls: [mockProfileImg, mockProfile2Img, mockProfile3Img],
-    isHearted: false,
+    productPrice: 10000,
+    productAvgRating: 4.9,
+    productReviewCount: 43,
+    creatorProfileImgUrls: [mockProfileImg, mockProfile2Img, mockProfile3Img],
+    isWished: false,
   },
   decorators: [
     (Story) => (
@@ -38,5 +38,5 @@ type Story = StoryObj<typeof RecommendedProductCard>;
 export const Default: Story = {};
 
 export const Hearted: Story = {
-  args: { isHearted: true },
+  args: { isWished: true },
 };
