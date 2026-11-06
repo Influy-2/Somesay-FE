@@ -1,4 +1,4 @@
-import type { SubcategoryType } from '../category/category.types';
+import type { SubCategoryItemResponse } from '../../api/schema';
 import type { BasicCreatorProfileType } from '../creator/creator.types';
 import type {
   ProductCardType,
@@ -10,7 +10,7 @@ import type {
 export interface SelectedFiltersType {
   skinConcern: string[];
   skinType: string[];
-  category: SubcategoryType[];
+  category: SubCategoryItemResponse[];
 }
 
 // 홈 추천 API 조회 조건입니다. 값이 없는 항목은 서버에 보내지 않습니다.

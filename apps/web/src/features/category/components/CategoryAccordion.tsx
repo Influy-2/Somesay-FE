@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import type { CategoryGroupType } from '@somesay/shared';
+import type { MainCategoryResponse } from '@somesay/shared';
 import { MainArrowIcon } from '@/shared/icons';
 import cn from '@/utils/cn';
 import { PATH } from '@/routes/path';
 
 interface CategoryAccordionProps {
-  category: CategoryGroupType;
+  category: MainCategoryResponse;
 }
 
 export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
@@ -30,7 +30,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
         >
           <div className="flex items-center gap-3">
             <img
-              src={category.imageUrl}
+              src={category.mainCategoryImgUrl}
               alt=""
               className="bg-grey04 size-9 rounded-full object-cover"
             />

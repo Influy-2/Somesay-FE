@@ -43,9 +43,6 @@ export const API_ENDPOINTS = {
   // 추천 상품을 한 번에 모두 찜하기 위한 API URL입니다.
   HOME_RECOMMEND_WISH: '/home/recommend/wish',
 
-  /** Category **/
-  CATEGORY: '/categories',
-
   /** Brand **/
   BRAND: {
     BASE: '/brands',

@@ -33,7 +33,14 @@ export type {
 } from './domain/creator/creator.types';
 export type { HomeCreatorRankingType } from './domain/ranking/ranking.types';
 
-export * from './domain/category/category.types';
+// 서버 타입 (Swagger 생성물 별칭)
+export type {
+  paths,
+  components,
+  ApiGetPath,
+  MainCategoryResponse,
+  SubCategoryItemResponse,
+} from './api/schema';
 export * from './domain/filter/filter.types';
 
 export * from './constants/forbiddenWords.constants';
@@ -94,6 +101,7 @@ export type {
 
 //api
 export { apiClient, configureApiClient } from './api/client';
+export type { ApiErrorResponse } from './api/types';
 
 //api - auth
 export * from './api/auth/postKakaoLogin.api';
@@ -125,9 +133,6 @@ export * from './api/product/fetchProductReviewOverview.api';
 export * from './api/product/fetchProductReviews.api';
 export * from './api/product/fetchSimilarProducts.api';
 export * from './api/product/patchProductWish.api';
-
-//api - category
-export * from './api/category/fetchCategories.api';
 
 //api - brand
 export * from './api/brand/fetchBrandDetail.api';

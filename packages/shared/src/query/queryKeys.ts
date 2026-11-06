@@ -100,10 +100,6 @@ export const QUERY_KEYS = {
     CREATORS: ({ size }: { size?: number }) =>
       [...QUERY_KEYS.RANKING.CREATORS_ALL(), { size }] as const,
   },
-  CATEGORY: {
-    ALL: ['category'] as const,
-    LIST: () => [...QUERY_KEYS.CATEGORY.ALL, 'list'] as const,
-  },
   BRAND: {
     ALL: ['brand'] as const,
     DETAIL: (brandId: number) =>
