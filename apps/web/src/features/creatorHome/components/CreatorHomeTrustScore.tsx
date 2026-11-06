@@ -3,34 +3,41 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { QuestionIcon } from '@/shared/icons';
 import { MainArrowIcon } from '@/shared/icons';
+import type { CreatorDetailResponse } from '@somesay/shared';
 
-interface CreatorHomeTrustScoreProps {
-  trustScore: number;
-  trustRank: number;
-  totalReviews: number;
-  highEmpathyReviews: number;
-  myEmpathyReviews: number;
-  myOpposedReviews: number;
+type CreatorHomeTrustScoreProps = Pick<
+  CreatorDetailResponse,
+  | 'creatorTrustScore'
+  | 'creatorRanking'
+  | 'creatorReviewCount'
+  | 'creatorHighApprovalReviewCount'
+  | 'myAgreedReviewCount'
+  | 'myDisagreedReviewCount'
+> & {
   isLoggedIn?: boolean;
-}
+};
 
 export const CreatorHomeTrustScore = ({
-  trustScore,
-  trustRank,
-  totalReviews,
-  highEmpathyReviews,
-  myEmpathyReviews,
-  myOpposedReviews,
+  creatorTrustScore,
+  creatorRanking,
+  creatorReviewCount,
+  creatorHighApprovalReviewCount,
+  myAgreedReviewCount,
+  myDisagreedReviewCount,
   isLoggedIn = false,
 }: CreatorHomeTrustScoreProps) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   // 순위 밖 크리에이터는 순위가 null 로 올 수 있습니다. `null <= 30` 은 true 라 값부터 확인합니다.
-  const showTrustRank = trustRank != null && trustRank > 0 && trustRank <= 30;
+  const showTrustRank =
+    creatorRanking != null && creatorRanking > 0 && creatorRanking <= 30;
 
   const progressPercent =
-    totalReviews === 0
+    creatorReviewCount === 0
       ? 0
-      : Math.min((highEmpathyReviews / totalReviews) * 100, 100);
+      : Math.min(
+          (creatorHighApprovalReviewCount / creatorReviewCount) * 100,
+          100
+        );
 
   return (
     <div className="grid grid-cols-2 grid-rows-[109px_91px_91px] gap-1">
@@ -39,7 +46,9 @@ export const CreatorHomeTrustScore = ({
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-1">
             <span className="body2-m">신뢰도</span>
-            {showTrustRank && <span className="body2-sb">{trustRank}위</span>}
+            {showTrustRank && (
+              <span className="body2-sb">{creatorRanking}위</span>
+            )}
             <div className="relative flex items-center">
               <button
                 type="button"
@@ -60,7 +69,7 @@ export const CreatorHomeTrustScore = ({
           </div>
           <div className="flex items-end gap-0.5">
             <span className="font-pretendard text-[2rem] leading-[124%] font-normal text-[#17171B]">
-              {trustScore}
+              {creatorTrustScore}
             </span>
             <span className="body2-m text-grey08">점</span>
           </div>
@@ -71,8 +80,10 @@ export const CreatorHomeTrustScore = ({
           <div className="flex h-4.25 items-center justify-end gap-1">
             <span className="caption1-m">공감률 90% 이상 리뷰</span>
             <div className="caption1-m">
-              <span className="text-black">{highEmpathyReviews}</span>
-              <span className="text-grey05">/{totalReviews}개</span>
+              <span className="text-black">
+                {creatorHighApprovalReviewCount}
+              </span>
+              <span className="text-grey05">/{creatorReviewCount}개</span>
             </div>
           </div>
 
@@ -90,7 +101,7 @@ export const CreatorHomeTrustScore = ({
       <div className="bg-grey02 col-span-1 row-span-2 flex flex-col items-start justify-end px-5 py-5">
         <span className="body2-m">전체 리뷰</span>
         <span className="font-pretendard text-[2rem] leading-[124%] font-normal text-[#17171B]">
-          {totalReviews}
+          {creatorReviewCount}
         </span>
       </div>
 
@@ -103,7 +114,7 @@ export const CreatorHomeTrustScore = ({
               <span className="body2-m">내가 공감한 리뷰</span>
               <div className="flex items-center justify-between">
                 <span className="headline2 font-normal!">
-                  {myEmpathyReviews}
+                  {myAgreedReviewCount}
                 </span>
                 <Link to="/">
                   <MainArrowIcon />
@@ -118,7 +129,7 @@ export const CreatorHomeTrustScore = ({
               <span className="body2-m">내가 반대한 리뷰</span>
               <div className="flex items-center justify-between">
                 <span className="headline2 font-normal!">
-                  {myOpposedReviews}
+                  {myDisagreedReviewCount}
                 </span>
                 <Link to="/">
                   <MainArrowIcon />

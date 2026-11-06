@@ -3,18 +3,27 @@ import { YoutubeIcon } from '@/shared/icons';
 import { Move12Icon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
 import {
-  BasicCreatorProfileType,
   formatSubscriberCount,
   getAgeLabel,
   getSkinTypeLabels,
+  type CreatorDetailResponse,
 } from '@somesay/shared';
 import { BlackHeartButton } from '../buttons/BlackHeartButton';
-interface CreatorHomeProfileProps extends BasicCreatorProfileType {
+
+type CreatorHomeProfileProps = Pick<
+  CreatorDetailResponse,
+  | 'creatorName'
+  | 'creatorProfileImgUrl'
+  | 'creatorSubscriberNum'
+  | 'creatorAge'
+  | 'creatorSkinTypeIds'
+  | 'creatorYoutubeLink'
+> & {
+  // 찜 수·찜 여부는 UI 값입니다. (크리에이터 상세 응답에 해당 필드 없음)
   likeCount: number;
   isLiked?: boolean;
   onLikeClick?: () => void;
-  youtubeUrl: string;
-}
+};
 
 export const CreatorHomeProfile = ({
   creatorName,
@@ -25,7 +34,7 @@ export const CreatorHomeProfile = ({
   likeCount: initialLikeCount,
   isLiked: initialLiked = false,
   onLikeClick,
-  youtubeUrl,
+  creatorYoutubeLink,
 }: CreatorHomeProfileProps) => {
   const skinTypeLabels = getSkinTypeLabels(creatorSkinTypeIds);
   const skinTypeLabel = skinTypeLabels.join(', ');
@@ -67,7 +76,7 @@ export const CreatorHomeProfile = ({
             {creatorName}
           </span>
           <a
-            href={youtubeUrl}
+            href={creatorYoutubeLink}
             target="_blank"
             rel="noopener noreferrer"
             className="caption-m text-grey08 flex shrink-0 items-center gap-0.5"

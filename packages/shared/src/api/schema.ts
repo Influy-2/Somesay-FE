@@ -7,7 +7,7 @@ import type { components, paths } from './generated/openapi';
  * - 원본은 백엔드 Swagger 입니다. `generated/openapi.ts` 는 `pnpm --filter @somesay/shared api:sync` 로만 갱신합니다.
  * - 별칭 이름은 Swagger 스키마 이름과 똑같이 둡니다. 접미사가 없으면 서버 모양, `…Type` 이면 프론트가 만든 타입입니다.
  * - 필드 이름을 프론트에서 바꾸지 않습니다. 필요한 필드는 컴포넌트가 이 타입에서 한 번만 Pick 해 선언합니다.
- * - 별칭은 실제로 쓰는 스키마만 추가합니다. (구역별 이관 중)
+ * - 별칭은 실제로 쓰는 스키마만 추가합니다. (목업 화면이 응답 모양을 흉내 낼 때도 여기 별칭을 씁니다)
  */
 export type { components, paths };
 
@@ -49,6 +49,14 @@ export type ReviewSearchItemResponse = Schemas['ReviewSearchItemResponse'];
 export type CreatorRankingResponse = Schemas['CreatorRankingResponse'];
 export type HomeCurationResponse = Schemas['HomeCurationResponse'];
 export type ReviewCardResponse = Schemas['ReviewCardResponse'];
+
+// 크리에이터 홈 (화면은 아직 목업. 목업·props 가 이 모양을 따릅니다)
+export type CreatorDetailResponse = Schemas['CreatorDetailResponse'];
+export type CreatorReviewResponse = Schemas['CreatorReviewResponse'];
+
+// 마이페이지 리뷰 평가 목록 (화면은 아직 목업)
+export type ReactedCreatorResponse = Schemas['ReactedCreatorResponse'];
+export type ReactedProductResponse = Schemas['ReactedProductResponse'];
 
 // 정렬 값은 스키마가 아니라 쿼리 파라미터 enum 이라 경로에서 꺼냅니다.
 export type ProductSortType = NonNullable<

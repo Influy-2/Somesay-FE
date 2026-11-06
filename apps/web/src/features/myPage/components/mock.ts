@@ -1,4 +1,10 @@
-import type { AgeType } from '@somesay/shared';
+import type {
+  AgeType,
+  BasicCreatorProfileType,
+  ReactedCreatorResponse,
+  ReactedProductResponse,
+  ReviewSearchItemResponse,
+} from '@somesay/shared';
 
 type FitProduct = {
   productId: number;
@@ -9,6 +15,8 @@ type FitProduct = {
 
 type MockProduct = FitProduct & { categoryId: number };
 
+// TODO: 계정 화면 연동 시 InfoResponse(userNickname·userGender·userAge…)로 교체.
+// 성별은 서버 enum(MALE·FEMALE·NONE)과 GENDER_OPTIONS 값(male…)·라벨 비교 방식이 달라 함께 정리해야 합니다.
 type AccountInfo = {
   profileImageUrl: string | null;
   nickname: string;
@@ -20,138 +28,142 @@ type AccountInfo = {
   badProducts: FitProduct[];
 };
 
-export type RecommendedCreator = {
-  creatorId: number;
-  name: string;
-  profileImageUrl: string;
-  age: AgeType | null;
-  skinType: string;
-  review: {
-    reviewId: number;
-    rating: number;
-    content: string;
-    product: {
-      productId: number;
-      productName: string;
-      brandName: string;
-      productImgUrl: string;
-      productPrice: number;
-    };
-  };
+// 추천 크리에이터 API 는 아직 없습니다. 크리에이터·리뷰 필드는 다른 응답과 같은 서버 이름을 씁니다.
+// 리뷰는 리뷰 검색 응답(ReviewSearchItemResponse)처럼 리뷰·상품 필드가 평탄하게 실린 모양입니다.
+export type RecommendedCreatorMockType = BasicCreatorProfileType & {
+  review: Pick<
+    ReviewSearchItemResponse,
+    | 'reviewId'
+    | 'reviewRating'
+    | 'reviewContent'
+    | 'productId'
+    | 'productName'
+    | 'brandName'
+    | 'productImgUrl'
+    | 'productPrice'
+  >;
 };
 
-export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
+export const MOCK_RECOMMENDED_CREATORS: RecommendedCreatorMockType[] = [
   {
     creatorId: 1,
-    name: '김크리스탈김크리스탈김트리스탈',
-    profileImageUrl: '',
-    age: 'TWENTIES',
-    skinType: '지성',
+    creatorName: '김크리스탈김크리스탈김트리스탈',
+    creatorProfileImgUrl: '',
+    creatorAge: 'TWENTIES',
+    creatorSkinTypeIds: [2],
+    creatorSubscriberNum: 100000,
     review: {
       reviewId: 1,
-      rating: 4.5,
-      content:
+      reviewRating: 4.5,
+      reviewContent:
         '패드가 얇고 에센스가 흥건해서 얼굴에 올리면 시원하게 진정되는 느낌이에요. 특히 세안 후에 볼 부분이 따갑거나 붉을 때 3분만 올려놔도 금방 가라앉아요. 패드가 얇고 에센스가 흥건해서 얼굴에 올리면 시원하게 진정되는 느낌이에요. 특히 세안 후에 볼 부분이 따갑거나 붉을 때 3분만 올려놔도 금방 가라앉아요.',
-      product: {
-        productId: 1,
-        productName: '당근 패드당근 패드',
-        brandName: '스킨푸드',
-        productImgUrl: '',
-        productPrice: 10000,
-      },
+      productId: 1,
+      productName: '당근 패드당근 패드',
+      brandName: '스킨푸드',
+      productImgUrl: '',
+      productPrice: 10000,
     },
   },
   {
     creatorId: 2,
-    name: '뷰티인사이더',
-    profileImageUrl: '',
-    age: 'THIRTIES',
-    skinType: '건성',
+    creatorName: '뷰티인사이더',
+    creatorProfileImgUrl: '',
+    creatorAge: 'THIRTIES',
+    creatorSkinTypeIds: [1],
+    creatorSubscriberNum: 100000,
     review: {
       reviewId: 2,
-      rating: 4.0,
-      content:
+      reviewRating: 4.0,
+      reviewContent:
         '향이 은은하고 발림성이 좋아요. 피부에 자극 없이 순하게 스며드는 느낌이에요.',
-      product: {
-        productId: 2,
-        productName: '녹두 약산성 클렌징폼 160ml',
-        brandName: '이니스프리',
-        productImgUrl: '',
-        productPrice: 12000,
-      },
+      productId: 2,
+      productName: '녹두 약산성 클렌징폼 160ml',
+      brandName: '이니스프리',
+      productImgUrl: '',
+      productPrice: 12000,
     },
   },
   {
     creatorId: 3,
-    name: '글로우픽',
-    profileImageUrl: '',
-    age: 'TWENTIES',
-    skinType: '복합성',
+    creatorName: '글로우픽',
+    creatorProfileImgUrl: '',
+    creatorAge: 'TWENTIES',
+    creatorSkinTypeIds: [3],
+    creatorSubscriberNum: 100000,
     review: {
       reviewId: 3,
-      rating: 4.8,
-      content: '촉촉하고 흡수가 빨라서 데일리로 쓰기 정말 좋아요.',
-      product: {
-        productId: 3,
-        productName: '세라마이드 아토 로션',
-        brandName: '시드물',
-        productImgUrl: '',
-        productPrice: 15000,
-      },
+      reviewRating: 4.8,
+      reviewContent: '촉촉하고 흡수가 빨라서 데일리로 쓰기 정말 좋아요.',
+      productId: 3,
+      productName: '세라마이드 아토 로션',
+      brandName: '시드물',
+      productImgUrl: '',
+      productPrice: 15000,
     },
   },
   {
     creatorId: 4,
-    name: '스킨로그',
-    profileImageUrl: '',
-    age: 'THIRTIES',
-    skinType: '민감성',
+    creatorName: '스킨로그',
+    creatorProfileImgUrl: '',
+    creatorAge: 'THIRTIES',
+    creatorSkinTypeIds: [6],
+    creatorSubscriberNum: 100000,
     review: {
       reviewId: 4,
-      rating: 4.3,
-      content: '민감한 피부에도 자극 없이 잘 맞아요.',
-      product: {
-        productId: 4,
-        productName: '시카플러스트 밤 B5+ 100ml',
-        brandName: '닥터자르트',
-        productImgUrl: '',
-        productPrice: 28000,
-      },
+      reviewRating: 4.3,
+      reviewContent: '민감한 피부에도 자극 없이 잘 맞아요.',
+      productId: 4,
+      productName: '시카플러스트 밤 B5+ 100ml',
+      brandName: '닥터자르트',
+      productImgUrl: '',
+      productPrice: 28000,
     },
   },
   {
     creatorId: 5,
-    name: '뷰티블로거',
-    profileImageUrl: '',
-    age: 'TWENTIES',
-    skinType: '건성',
+    creatorName: '뷰티블로거',
+    creatorProfileImgUrl: '',
+    creatorAge: 'TWENTIES',
+    creatorSkinTypeIds: [1],
+    creatorSubscriberNum: 100000,
     review: {
       reviewId: 5,
-      rating: 4.6,
-      content: '보습력이 정말 좋아요. 겨울에도 촉촉하게 유지돼요.',
-      product: {
-        productId: 5,
-        productName: '시카플러스트 밤 2x B5+ 100ml',
-        brandName: '닥터자르트',
-        productImgUrl: '',
-        productPrice: 35000,
-      },
+      reviewRating: 4.6,
+      reviewContent: '보습력이 정말 좋아요. 겨울에도 촉촉하게 유지돼요.',
+      productId: 5,
+      productName: '시카플러스트 밤 2x B5+ 100ml',
+      brandName: '닥터자르트',
+      productImgUrl: '',
+      productPrice: 35000,
     },
   },
 ];
 
-export const MOCK_EVALUATED_CREATORS_LIST = MOCK_RECOMMENDED_CREATORS.map(
-  (c) => ({
-    creatorId: c.creatorId,
-    profileImageUrl: c.profileImageUrl,
-    name: c.name,
-    age: c.age,
-    skinType: c.skinType,
-    reviewCount: 3,
-  })
-);
+// 리뷰 평가한 크리에이터 (GET /api/v1/users/reactions/creators 의 항목 모양)
+export const MOCK_EVALUATED_CREATORS_LIST: ReactedCreatorResponse[] =
+  MOCK_RECOMMENDED_CREATORS.map(
+    ({
+      creatorId,
+      creatorName,
+      creatorProfileImgUrl,
+      creatorAge,
+      creatorSkinTypeIds,
+      creatorSubscriberNum,
+    }) => ({
+      creatorId,
+      creatorName,
+      creatorProfileImgUrl,
+      creatorAge,
+      creatorSkinTypeIds,
+      creatorSubscriberNum,
+      myReactionCount: 3,
+    })
+  );
 
-export const MOCK_EVALUATED_PRODUCTS = [
+export const MOCK_EVALUATED_PRODUCTS: Pick<
+  ReactedProductResponse,
+  'productId' | 'productImgUrl' | 'productName'
+>[] = [
   {
     productId: 1,
     productImgUrl: '',
@@ -179,13 +191,18 @@ export const MOCK_EVALUATED_PRODUCTS = [
   },
 ];
 
-export const MOCK_EVALUATED_PRODUCTS_LIST = [
+// 리뷰 평가한 상품 (GET /api/v1/users/reactions/products 의 항목 모양)
+// categoryId 는 목업 화면의 카테고리 탭 필터용입니다. 응답에는 카테고리가 없습니다.
+// TODO: 연동 시 카테고리 탭을 어떻게 거를지 확인 (API 쿼리 또는 응답 필드)
+export const MOCK_EVALUATED_PRODUCTS_LIST: (ReactedProductResponse & {
+  categoryId: number;
+})[] = [
   {
     productId: 1,
     productImgUrl: '',
     productName: '아토베리어 365 크림아토베리어 365크림',
     brandName: '에스트라',
-    reviewCount: 3,
+    myReactionCount: 3,
     categoryId: 1,
   },
   {
@@ -193,7 +210,7 @@ export const MOCK_EVALUATED_PRODUCTS_LIST = [
     productImgUrl: '',
     productName: '캐롯 패드 카로팅 카밍워터 패드 200매',
     brandName: '에스트라',
-    reviewCount: 3,
+    myReactionCount: 3,
     categoryId: 2,
   },
   {
@@ -201,7 +218,7 @@ export const MOCK_EVALUATED_PRODUCTS_LIST = [
     productImgUrl: '',
     productName: '아토베리어 365 선크림 SPF50+ PA+++',
     brandName: '에스트라',
-    reviewCount: 3,
+    myReactionCount: 3,
     categoryId: 1,
   },
   {
@@ -209,7 +226,7 @@ export const MOCK_EVALUATED_PRODUCTS_LIST = [
     productImgUrl: '',
     productName: '아토베리어 365 토너 200ml 대용량',
     brandName: '에스트라',
-    reviewCount: 3,
+    myReactionCount: 3,
     categoryId: 2,
   },
   {
@@ -217,11 +234,13 @@ export const MOCK_EVALUATED_PRODUCTS_LIST = [
     productImgUrl: '',
     productName: '아이오페 레티놀 엑스퍼트 0.1 크림',
     brandName: '아이오페',
-    reviewCount: 3,
+    myReactionCount: 3,
     categoryId: 1,
   },
 ];
 
+// TODO: 내 평가 목록 연동 시 MyReactionResponse(평탄, reactionType·commentContent)로 교체.
+// 지금 화면은 리뷰마다 isAgreed·myComment 묶음을 쓰고 있어 화면 구조와 함께 바꿔야 합니다.
 export const MOCK_EVALUATED_REVIEWS = [
   {
     reviewId: 1,
