@@ -6,7 +6,8 @@ const DEFAULT_API_ORIGIN = 'http://localhost:8080';
 const REQUEST_TIMEOUT_MS = 10000;
 
 // 스펙 경로에 /api/v1 이 이미 들어 있어 origin 만 씁니다.
-// (axios 용 VITE_API_BASE_URL 은 …/api/v1 까지라, 공존 기간에는 같은 값에서 origin 만 꺼냅니다)
+// VITE_API_BASE_URL 은 예전 axios 클라이언트 시절 값(…/api/v1 까지)을 배포 설정에 그대로 두고 있어,
+// 같은 값에서 origin 만 꺼냅니다. 경로 부분(/api/v1)은 쓰지 않습니다.
 const apiOrigin = import.meta.env.VITE_API_BASE_URL
   ? new URL(import.meta.env.VITE_API_BASE_URL).origin
   : DEFAULT_API_ORIGIN;
@@ -18,7 +19,7 @@ const apiOrigin = import.meta.env.VITE_API_BASE_URL
  */
 export const fetchClient = createFetchClient<paths>({
   baseUrl: apiOrigin,
-  // axios 의 timeout 을 대신합니다. React Query 의 취소 신호(request.signal)는 그대로 살립니다.
+  // 요청마다 10초 timeout 을 겁니다. React Query 의 취소 신호(request.signal)는 그대로 살립니다.
   fetch: (request) =>
     fetch(request, {
       signal: AbortSignal.any([

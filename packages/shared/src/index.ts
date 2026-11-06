@@ -58,7 +58,6 @@ export type {
 } from './domain/userProduct/userProduct.types';
 
 //api
-export { apiClient, configureApiClient } from './api/client';
 export type { ApiErrorResponse } from './api/types';
 
 //query
