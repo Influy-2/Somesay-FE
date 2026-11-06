@@ -14,11 +14,6 @@ import type { HomeRecommendationParamsType } from '../domain/recommendation/reco
  *   (`['product', 5]`처럼 값을 바로 붙이면 다른 키와 prefix가 충돌합니다)
  */
 export const QUERY_KEYS = {
-  USER: {
-    ALL: ['user'] as const,
-    INFO: () => [...QUERY_KEYS.USER.ALL, 'info'] as const,
-    MYPAGE: () => [...QUERY_KEYS.USER.ALL, 'mypage'] as const,
-  },
   PRODUCT: {
     ALL: ['product'] as const,
     BY_CATEGORY_ALL: () => [...QUERY_KEYS.PRODUCT.ALL, 'by-category'] as const,

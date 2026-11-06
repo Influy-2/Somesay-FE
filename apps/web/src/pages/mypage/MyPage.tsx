@@ -34,13 +34,19 @@ export const MyPage = () => {
       <>
         {/* @spec 5.1.1 */}
         <MyProfile
-          profileImgUrl={data.profileImgUrl}
-          nickname={data.nickname}
-          skinTypeIds={data.skinTypeIds}
-          age={user?.age ?? null}
+          userProfileImgUrl={data.userProfileImgUrl}
+          userNickname={data.userNickname}
+          userSkinTypeIds={data.userSkinTypeIds}
+          userAge={user?.userAge ?? null}
         />
         {/* @spec 5.1.2 */}
-        <MyActivityStatistics {...data.statistics} />
+        <MyActivityStatistics
+          userReactedProductCount={data.userReactedProductCount}
+          userReactedCreatorCount={data.userReactedCreatorCount}
+          userAgreeCount={data.userAgreeCount}
+          userDisagreeCount={data.userDisagreeCount}
+          userCommentCount={data.userCommentCount}
+        />
       </>
     );
   };

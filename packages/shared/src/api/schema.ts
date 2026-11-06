@@ -19,3 +19,10 @@ export type ApiGetPath = PathsWithMethod<paths, 'get'>;
 // 카테고리
 export type MainCategoryResponse = Schemas['MainCategoryResponse'];
 export type SubCategoryItemResponse = Schemas['SubCategoryItemResponse'];
+
+// 인증·온보딩·유저
+export type SignUpInfoRequest = Schemas['SignUpInfoRequest'];
+export type InfoResponse = Schemas['InfoResponse'];
+export type MyPageResponse = Schemas['MyPageResponse'];
+export type UserProductRequest = Schemas['UserProductRequest'];
+export type UserProductItemResponse = Schemas['UserProductItemResponse'];

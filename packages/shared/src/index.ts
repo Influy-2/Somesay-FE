@@ -40,6 +40,11 @@ export type {
   ApiGetPath,
   MainCategoryResponse,
   SubCategoryItemResponse,
+  InfoResponse,
+  MyPageResponse,
+  SignUpInfoRequest,
+  UserProductRequest,
+  UserProductItemResponse,
 } from './api/schema';
 export * from './domain/filter/filter.types';
 
@@ -71,48 +76,19 @@ export * from './constants/user.constants';
 // UTILS
 export { formatSubscriberCount } from './utils/formatSubscriberCount';
 export { formatPrice } from './utils/formatPrice';
-//domain - auth
-export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
-export type {
-  AuthTokenType,
-  KakaoLoginResultType,
-  LoginInfoType,
-} from './domain/auth/auth.types';
-export { mapJwtLoginResponseDto } from './domain/auth/auth.mapper';
-
 //domain - user
-export type {
-  AgeType,
-  GenderType,
-  UserInfoType,
-  UserMyPageStatisticsType,
-  UserMyPageType,
-  UserType,
-} from './domain/user/user.types';
+export type { AgeType } from './domain/user/user.types';
 export { AGE_TYPES } from './domain/user/user.types';
 
 //domain - user product
 export type {
-  UserProductDetailType,
   UserProductRequestType,
-  UserProductResponseType,
   UserProductStatusType,
 } from './domain/userProduct/userProduct.types';
 
 //api
 export { apiClient, configureApiClient } from './api/client';
 export type { ApiErrorResponse } from './api/types';
-
-//api - auth
-export * from './api/auth/postKakaoLogin.api';
-export * from './api/auth/postLoginInfo.api';
-
-//api - user product
-export * from './api/userProduct/postUserProduct.api';
-
-//api - user
-export * from './api/user/fetchUserInfo.api';
-export * from './api/user/fetchUserMyPage.api';
 
 //api - ranking
 export * from './api/ranking/fetchCreatorRanking.api';

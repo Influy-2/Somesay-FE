@@ -1,12 +1,4 @@
 export const API_ENDPOINTS = {
-  /** Auth **/
-  AUTH: {
-    // 카카오 인가 코드로 로그인하기 위한 API URL입니다.
-    KAKAO_LOGIN: '/auth/login/kakao',
-    // 회원가입 후 기본 정보를 저장하기 위한 API URL입니다.
-    LOGIN_INFO: '/auth/login/info',
-  },
-
   /** Ranking  **/
   PRODUCT_RANKING: '/rankings/product-ranking',
   CREATOR_RANKING: '/rankings/creator-ranking',
@@ -19,18 +11,6 @@ export const API_ENDPOINTS = {
   PRODUCT_PRODUCT_ID_REVIEW_OVERVIEW: '/products/:productId/review-overview',
   PRODUCT_REVIEWS: '/products/:productId/reviews',
   PRODUCT_SIMILAR: '/products/:productId/similar',
-
-  /** User Product **/
-  // 사용자에게 잘 맞거나 맞지 않는 상품을 저장하기 위한 API URL입니다.
-  USER_PRODUCT: '/users/product',
-
-  /** User **/
-  USER: {
-    // 로그인한 사용자의 서비스 공통 정보를 조회하기 위한 API URL입니다.
-    INFO: '/users/info',
-    // 마이페이지 첫 화면의 프로필과 활동 통계를 조회하기 위한 API URL입니다.
-    MYPAGE: '/users/mypage',
-  },
 
   /** home ranking controller **/
   HOME_CREATOR_RANKING: '/home/creators',

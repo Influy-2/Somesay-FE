@@ -14,7 +14,7 @@ export const BestReviewSection = () => {
   const { emblaRef, selectedIndex, slideCount } = useCarousel();
   const accessToken = useAuthTokenStore((state) => state.accessToken);
   const { data: userInfo, isFetched: isUserInfoFetched } = useFetchUserInfo();
-  const selectedSkinTypeId = userInfo?.skinTypeIds.at(0);
+  const selectedSkinTypeId = userInfo?.userSkinTypeIds.at(0);
   const canFetchCuration = !accessToken || isUserInfoFetched;
   const {
     data: curation,

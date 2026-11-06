@@ -41,11 +41,11 @@ export const RecommendationSection = () => {
   // 회원가입에서 저장한 조건은 순환 중에도 내용을 고정합니다. (색과 등장 모션은 함께 순환)
   const { data: userInfo } = useFetchUserInfo();
   const savedFilters: SelectedFiltersType = {
-    skinConcern: getConcernLabels(userInfo?.skinExpectationIds ?? []).slice(
+    skinConcern: getConcernLabels(userInfo?.userSkinExpectationIds ?? []).slice(
       0,
       MAX_SELECTIONS.skinConcern
     ),
-    skinType: getSkinTypeLabels(userInfo?.skinTypeIds ?? []).slice(
+    skinType: getSkinTypeLabels(userInfo?.userSkinTypeIds ?? []).slice(
       0,
       MAX_SELECTIONS.skinType
     ),

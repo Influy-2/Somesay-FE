@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { postKakaoLogin } from '@somesay/shared';
 import { useNavigate, useSearchParams } from 'react-router';
 import {
   clearAuthTokens,
@@ -13,7 +12,17 @@ import {
   useOnboardingStore,
 } from '@/features/onboarding';
 import { PATH } from '@/routes/path';
+import { fetchClient, unwrapApiData } from '@/shared/api';
 import { useSnackbarStore } from '@/shared/stores';
+
+// 카카오 인가 코드를 백엔드에 전달해 로그인 결과(JwtLoginResponse)를 받아옵니다.
+// 응답은 { code, message, data } 래퍼로 오므로 data 를 벗겨 씁니다.
+const postKakaoLogin = (code: string) =>
+  unwrapApiData(
+    fetchClient.POST('/api/v1/auth/login/kakao', {
+      params: { query: { code } },
+    })
+  );
 
 const kakaoLoginRequests = new Map<string, ReturnType<typeof postKakaoLogin>>();
 
@@ -64,19 +73,20 @@ export const useKakaoCallback = () => {
       }
 
       try {
-        const { accessToken, refreshToken, newUser, nickname } =
+        const { jwtAccessToken, refreshToken, isNewUser, userNickname } =
           await getKakaoLoginRequest(code);
 
         if (ignore) return;
 
-        if (!accessToken || !refreshToken) {
+        // 타입상 항상 있지만 서버 응답이 어긋나면 빈 토큰을 저장하지 않도록 남겨 둡니다.
+        if (!jwtAccessToken || !refreshToken) {
           throw new Error('Kakao login response does not contain JWT tokens');
         }
 
         clearKakaoAuthorizationState();
-        saveAuthTokens({ accessToken, refreshToken });
+        saveAuthTokens({ accessToken: jwtAccessToken, refreshToken });
 
-        if (newUser || !nickname) {
+        if (isNewUser || !userNickname) {
           startOnboarding('KAKAO');
           navigate(ONBOARDING_PATH_BY_STEP.terms, { replace: true });
           return;
