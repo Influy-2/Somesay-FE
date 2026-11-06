@@ -1,6 +1,6 @@
 import {
   getSkinTypeLabel,
-  type CreatorReviewSummaryType,
+  type ProductReviewOverviewResponse,
 } from '@somesay/shared';
 import { useMySkinProfile } from '@/shared/hooks';
 import { ChipLarge, StarRating } from '@/shared/components';
@@ -13,18 +13,19 @@ import {
 
 // 크리에이터 리뷰 요약 정보를 표시하는 섹션입니다.
 export const CreatorReviewSummarySection = ({
-  avgRating,
-  reviewCount,
-  aiSummary,
-  frequentMention,
-  consideration,
+  productAvgRating,
+  productReviewCount,
+  productAiSummary,
+  productFrequentMention,
+  productConsideration,
   productSkinTypeIds,
-  productSkinExpectations,
-}: CreatorReviewSummaryType) => {
+  productEffectChips,
+}: ProductReviewOverviewResponse) => {
   const { isMySkinTypeId } = useMySkinProfile();
+  // 자주 언급되는 점·참고할 점은 운영에서 null 이 와서(타입은 non-null) 아래 `text &&` 로 숨깁니다.
   const mentionItems = [
-    { label: '자주 언급되는 점', text: frequentMention },
-    { label: '참고할 점', text: consideration },
+    { label: '자주 언급되는 점', text: productFrequentMention },
+    { label: '참고할 점', text: productConsideration },
   ];
   return (
     <section className="flex flex-col gap-5 bg-white px-4 py-5">
@@ -35,11 +36,11 @@ export const CreatorReviewSummarySection = ({
           <div
             className="flex items-center gap-1"
             role="img"
-            aria-label={`5점 만점에 ${avgRating.toFixed(1)}점`}
+            aria-label={`5점 만점에 ${productAvgRating.toFixed(1)}점`}
           >
-            <StarRating rating={avgRating} />
+            <StarRating rating={productAvgRating} />
             <span className="body1-b" aria-hidden="true">
-              {avgRating.toFixed(1)}
+              {productAvgRating.toFixed(1)}
             </span>
             <span className="body1-b text-grey06" aria-hidden="true">
               /
@@ -53,9 +54,9 @@ export const CreatorReviewSummarySection = ({
 
           <span
             className="body1-b"
-            aria-label={`리뷰 ${reviewCount.toLocaleString()}개`}
+            aria-label={`리뷰 ${productReviewCount.toLocaleString()}개`}
           >
-            리뷰 {reviewCount.toLocaleString()}
+            리뷰 {productReviewCount.toLocaleString()}
           </span>
         </div>
       </div>
@@ -65,7 +66,7 @@ export const CreatorReviewSummarySection = ({
           <QuoteOpenIcon />
         </div>
 
-        <p className="body2-sb px-1 py-3 text-center">{aiSummary}</p>
+        <p className="body2-sb px-1 py-3 text-center">{productAiSummary}</p>
 
         <div className="flex w-full justify-end">
           <QuoteCloseIcon />
@@ -111,10 +112,10 @@ export const CreatorReviewSummarySection = ({
         <div>
           <p className="body2-m text-grey06 mb-1.5">기대 효과</p>
           <div className="flex flex-wrap gap-2.5">
-            {productSkinExpectations.map((effect) => (
+            {productEffectChips.map((effect) => (
               <ChipLarge
-                key={effect.skinExpectationId}
-                label={effect.concern}
+                key={effect.chipId}
+                label={effect.chipName}
                 color="white"
               />
             ))}

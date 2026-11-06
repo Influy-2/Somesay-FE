@@ -23,11 +23,11 @@ export type ApiInfiniteData<Path extends ApiGetPath> = InfiniteData<
   PageParam
 >;
 
-type ApiInfiniteQueryOptions<Path extends ApiGetPath> = Omit<
+type ApiInfiniteQueryOptions<Path extends ApiGetPath, TSelected> = Omit<
   UseInfiniteQueryOptions<
     unknown,
     ApiQueryError,
-    ApiInfiniteData<Path>,
+    TSelected,
     readonly unknown[],
     PageParam
   >,
@@ -51,13 +51,24 @@ type ApiInfiniteQueryOptions<Path extends ApiGetPath> = Omit<
     allPages: ApiData<Path>[],
     lastPageParam: PageParam
   ) => PageParam | undefined;
+  /**
+   * 래퍼를 벗긴 `{ pages, pageParams }` 를 받아 한 번 더 가공할 때만 씁니다. (예: 순위 변동 계산)
+   * 렌더마다 다시 돌지 않도록 모듈 수준 함수처럼 참조가 고정된 함수를 넘기세요.
+   */
+  select?: (data: ApiInfiniteData<Path>) => TSelected;
 };
 
 // path 파라미터·필수 쿼리가 있는 경로만 init 을 필수로 받습니다.
-type ApiInfiniteQueryArgs<Path extends ApiGetPath> =
+type ApiInfiniteQueryArgs<Path extends ApiGetPath, TSelected> =
   undefined extends ApiGetInit<Path>
-    ? [init?: ApiGetInit<Path>, options?: ApiInfiniteQueryOptions<Path>]
-    : [init: ApiGetInit<Path>, options?: ApiInfiniteQueryOptions<Path>];
+    ? [
+        init?: ApiGetInit<Path>,
+        options?: ApiInfiniteQueryOptions<Path, TSelected>,
+      ]
+    : [
+        init: ApiGetInit<Path>,
+        options?: ApiInfiniteQueryOptions<Path, TSelected>,
+      ];
 
 const hasNextPage = (page: unknown) =>
   typeof page === 'object' &&
@@ -79,14 +90,18 @@ const unwrap = (body: unknown) => (body as { data: unknown }).data;
  * });
  * // data.pages: SliceResponseProductPreviewCard[]
  */
-export const useApiInfiniteQuery = <Path extends ApiGetPath>(
+export const useApiInfiniteQuery = <
+  Path extends ApiGetPath,
+  TSelected = ApiInfiniteData<Path>,
+>(
   path: Path,
-  ...[init, options]: ApiInfiniteQueryArgs<Path>
-): UseInfiniteQueryResult<ApiInfiniteData<Path>, ApiQueryError> => {
+  ...[init, options]: ApiInfiniteQueryArgs<Path, TSelected>
+): UseInfiniteQueryResult<TSelected, ApiQueryError> => {
   const {
     pageParamName = 'page',
     initialPageParam = 0,
     getNextPageParam,
+    select,
     ...restOptions
   } = options ?? {};
 
@@ -113,12 +128,16 @@ export const useApiInfiniteQuery = <Path extends ApiGetPath>(
 
         return hasNextPage(lastData) ? lastPageParam + 1 : undefined;
       },
-      select: (data) => ({
-        pages: data.pages.map(unwrap),
-        pageParams: data.pageParams,
-      }),
+      select: (data) => {
+        const unwrapped = {
+          pages: data.pages.map(unwrap),
+          pageParams: data.pageParams,
+        } as ApiInfiniteData<Path>;
+
+        return select ? select(unwrapped) : unwrapped;
+      },
     }
-  ) as UseInfiniteQueryResult<ApiInfiniteData<Path>, ApiQueryError>;
+  ) as UseInfiniteQueryResult<TSelected, ApiQueryError>;
 };
 
 type LooseUseInfiniteQuery = (
@@ -129,10 +148,10 @@ type LooseUseInfiniteQuery = (
     UseInfiniteQueryOptions<
       unknown,
       ApiQueryError,
-      InfiniteData<unknown, PageParam>,
+      unknown,
       readonly unknown[],
       PageParam
     >,
     'queryKey' | 'queryFn'
   > & { pageParamName: string }
-) => UseInfiniteQueryResult<InfiniteData<unknown, PageParam>, ApiQueryError>;
+) => UseInfiniteQueryResult<unknown, ApiQueryError>;

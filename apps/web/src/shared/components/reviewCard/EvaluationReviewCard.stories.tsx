@@ -27,12 +27,12 @@ type Story = StoryObj<typeof EvaluationReviewCard>;
 
 const mockCreator = {
   creatorName: '김점례',
-  profileImgUrl: mockProfile as string,
-  subscriberNum: 300000,
-  trustScore: 100,
-  ranking: 1,
-  age: 'TWENTIES' as const,
-  skinTypeIds: [1],
+  creatorProfileImgUrl: mockProfile as string,
+  creatorSubscriberNum: 300000,
+  creatorTrustScore: 100,
+  creatorRanking: 1,
+  creatorAge: 'TWENTIES' as const,
+  creatorSkinTypeIds: [1],
 };
 
 const reviewContent =

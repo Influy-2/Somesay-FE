@@ -1,23 +1,16 @@
 // Review card/평가전 평가후
 
-import type { CreatorType } from '@somesay/shared';
-import { EvaluationCardProfile } from '../profile/EvaluationCardProfile';
+import {
+  EvaluationCardProfile,
+  type EvaluationCardCreator,
+} from '../profile/EvaluationCardProfile';
 import { StarRating } from '../rating/StarRating';
 import { ReviewVoteButton } from '../buttons/ReviewVoteButton';
 import { RateBar } from '../ratebar/RateBar';
 import type { ReviewVoteType } from '../buttons/ReviewVoteButton';
 
 type EvaluationReviewCardProps = {
-  creator: Pick<
-    CreatorType,
-    | 'creatorName'
-    | 'profileImgUrl'
-    | 'subscriberNum'
-    | 'trustScore'
-    | 'ranking'
-    | 'age'
-    | 'skinTypeIds'
-  >;
+  creator: EvaluationCardCreator;
   rating: number;
   content: string;
   evaluated: boolean;

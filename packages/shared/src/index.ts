@@ -1,19 +1,3 @@
-export type {
-  ProductBasicType,
-  ProductSkinExpectationType,
-  ProductSkinFitType,
-  ProductReviewType,
-} from './domain/product/product.types';
-
-export type { ReviewSearchResultType } from './domain/search/search.types';
-
-export type {
-  CreatorType,
-  CreatorRankingUpDownType,
-  BasicCreatorProfileType,
-} from './domain/creator/creator.types';
-export type { HomeCreatorRankingType } from './domain/ranking/ranking.types';
-
 // 서버 타입 (Swagger 생성물 별칭)
 export type {
   paths,
@@ -35,30 +19,29 @@ export type {
   BrandResponse,
   ProductSortType,
   BrandProductSortType,
+  ProductReviewResponse,
+  ProductReviewOverviewResponse,
+  CommentItemResponse,
+  TimeLinkItem,
+  ReviewSearchItemResponse,
+  CreatorRankingResponse,
+  HomeCurationResponse,
+  ReviewCardResponse,
 } from './api/schema';
+
+// 프론트 전용 타입
+export type {
+  BasicCreatorProfileType,
+  CreatorRankingUpDownType,
+} from './domain/creator/creator.types';
 export * from './domain/filter/filter.types';
-
-export * from './constants/forbiddenWords.constants';
-export type {
-  CreatorReviewType,
-  CreatorReviewSummaryType,
-  TimeLinkType,
-  TimeLinksType,
-  HomeCurationReviewType,
-  HomeCurationType,
-} from './domain/review/review.types';
-
-export type {
-  CommentPreviewType,
-  CommentReactionType,
-} from './domain/comment/comment.types';
-
 export type {
   RecommendedProductType,
   RecommendedTopReviewType,
   SelectedFiltersType,
 } from './domain/recommendation/recommendation.types';
 
+export * from './constants/forbiddenWords.constants';
 export * from './constants/user.constants';
 
 // UTILS
@@ -78,21 +61,5 @@ export type {
 export { apiClient, configureApiClient } from './api/client';
 export type { ApiErrorResponse } from './api/types';
 
-//api - ranking
-export * from './api/ranking/fetchCreatorRanking.api';
-
-//api - home
-export * from './api/home/fetchHomeCreatorRanking.api';
-export * from './api/home/fetchHomeCuration.api';
-
-//api - product
-export * from './api/product/fetchProductReviewOverview.api';
-export * from './api/product/fetchProductReviews.api';
-
-//api - review
-export * from './api/review/fetchTimeLinks.api';
-export * from './api/review/fetchReviewComments.api';
-
 //query
-export * from './query/queryKeys';
 export * from './query/productWishCache';

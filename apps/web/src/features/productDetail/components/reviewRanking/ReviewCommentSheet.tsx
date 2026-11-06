@@ -2,11 +2,11 @@ import { BottomSheet } from '@/shared/components';
 import { useFetchReviewComments } from '@/shared/hooks';
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
 import { ReviewCommentList } from './ReviewCommentList';
-import type { ProductReviewType } from '@somesay/shared';
+import type { ProductReviewResponse } from '@somesay/shared';
 
 interface ReviewCommentSheetProps {
   /** 열려 있을 때만 리뷰가 담기고, 닫히면 null이다. */
-  review: ProductReviewType | null;
+  review: ProductReviewResponse | null;
   onClose: () => void;
 }
 
@@ -34,7 +34,7 @@ export const ReviewCommentSheet = ({
       ariaLabel="코멘트 전체보기"
       header={
         <div className="body1-sb px-4 text-center">
-          이 리뷰에 대한 코멘트 ({review?.totalCommentCount ?? 0})
+          이 리뷰에 대한 코멘트 ({review?.reviewCommentCount ?? 0})
         </div>
       }
     >

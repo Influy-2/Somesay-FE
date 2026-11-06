@@ -18,16 +18,16 @@ const meta: Meta<typeof CreatorRankingCard> = {
   ],
   argTypes: {
     creatorId: { control: 'number' },
-    ranking: { control: 'number' },
+    creatorRanking: { control: 'number' },
     rankChange: { control: 'number' },
     rankChangeDiff: { control: 'select', options: ['up', 'down', 'same'] },
-    profileImgUrl: { control: 'text' },
+    creatorProfileImgUrl: { control: 'text' },
     creatorName: { control: 'text' },
-    youtubeLink: { control: 'text' },
-    subscriberNum: { control: 'number' },
-    age: { control: 'select', options: AGE_TYPES },
-    skinTypeIds: { control: 'object' },
-    trustScore: { control: 'number' },
+    creatorYoutubeLink: { control: 'text' },
+    creatorSubscriberNum: { control: 'number' },
+    creatorAge: { control: 'select', options: AGE_TYPES },
+    creatorSkinTypeIds: { control: 'object' },
+    creatorTrustScore: { control: 'number' },
   },
 };
 
@@ -36,16 +36,16 @@ type Story = StoryObj<typeof CreatorRankingCard>;
 
 const defaultArgs = {
   creatorId: 1,
-  ranking: 1,
+  creatorRanking: 1,
   rankChange: 2,
   rankChangeDiff: 'up' as const,
-  profileImgUrl: mockCreator,
+  creatorProfileImgUrl: mockCreator,
   creatorName: 'RISABAE',
-  youtubeLink: 'https://www.youtube.com',
-  subscriberNum: 1_300_000,
-  age: 'TWENTIES' as const,
-  skinTypeIds: [1],
-  trustScore: 100,
+  creatorYoutubeLink: 'https://www.youtube.com',
+  creatorSubscriberNum: 1_300_000,
+  creatorAge: 'TWENTIES' as const,
+  creatorSkinTypeIds: [1],
+  creatorTrustScore: 100,
 };
 
 export const RankUp: Story = {
@@ -55,7 +55,7 @@ export const RankUp: Story = {
 export const RankDown: Story = {
   args: {
     ...defaultArgs,
-    ranking: 2,
+    creatorRanking: 2,
     rankChangeDiff: 'down',
   },
 };
@@ -63,7 +63,7 @@ export const RankDown: Story = {
 export const NoRankChange: Story = {
   args: {
     ...defaultArgs,
-    ranking: 3,
+    creatorRanking: 3,
     rankChange: 0,
     rankChangeDiff: 'same',
   },
@@ -72,10 +72,10 @@ export const NoRankChange: Story = {
 export const LongContent: Story = {
   args: {
     ...defaultArgs,
-    ranking: 30,
+    creatorRanking: 30,
     creatorName: '아주 긴 이름을 가진 뷰티 크리에이터 채널',
-    subscriberNum: 12_345_678,
-    skinTypeIds: [1, 6, 5, 3],
-    trustScore: 87.6,
+    creatorSubscriberNum: 12_345_678,
+    creatorSkinTypeIds: [1, 6, 5, 3],
+    creatorTrustScore: 87.6,
   },
 };

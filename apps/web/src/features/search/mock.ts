@@ -1,10 +1,6 @@
 import mockProfileImg from '@/assets/mock_profile_img.svg';
 import mockProductImg from '@/assets/mock_product_img.png';
-import type {
-  BasicCreatorProfileType,
-  ProductCard,
-  ReviewSearchResultType,
-} from '@somesay/shared';
+import type { ProductCard, ReviewSearchItemResponse } from '@somesay/shared';
 
 const MOCK_CREATOR_IMAGE_URLS = [
   mockProfileImg,
@@ -48,42 +44,39 @@ export const MOCK_SEARCH_PRODUCTS: ProductCard[] = [
   { ...MOCK_SEARCH_PRODUCT, productId: 8 },
 ];
 
-const MOCK_CREATOR_PROFILE: BasicCreatorProfileType = {
+// 리뷰 검색 응답(ReviewSearchItemResponse)은 리뷰·크리에이터·상품 필드가 평탄하게 실립니다.
+const MOCK_SEARCH_REVIEW_BASE: Omit<
+  ReviewSearchItemResponse,
+  'reviewId' | 'reviewContent' | 'reviewRating'
+> = {
+  reviewChips: { positive: [], negative: [] },
   creatorId: 1,
   creatorName: '크리에이터닉네임',
-  profileImgUrl: mockProfileImg,
-  subscriberNum: 12000,
-  trustScore: 4.7,
-  age: 'TWENTIES',
-  skinTypeIds: [1],
+  creatorProfileImgUrl: mockProfileImg,
+  creatorAge: 'TWENTIES',
+  creatorSkinTypeIds: [1],
+  creatorSubscriberNum: 12000,
+  creatorRanking: 5,
+  productId: MOCK_SEARCH_PRODUCT.productId,
+  brandName: MOCK_SEARCH_PRODUCT.brandName,
+  productName: MOCK_SEARCH_PRODUCT.productName,
+  productImgUrl: MOCK_SEARCH_PRODUCT.productImgUrl,
+  productPrice: MOCK_SEARCH_PRODUCT.productPrice,
 };
 
-const MOCK_REVIEW_PRODUCT: ProductCard = {
-  ...MOCK_SEARCH_PRODUCT,
-  productId: 1,
-};
-
-export const MOCK_SEARCH_REVIEWS: ReviewSearchResultType[] = [
+export const MOCK_SEARCH_REVIEWS: ReviewSearchItemResponse[] = [
   {
+    ...MOCK_SEARCH_REVIEW_BASE,
     reviewId: 1,
-    content:
+    reviewContent:
       '세럼이 끈적임 없이 촉촉하고, 수분감이 많아서 특히 건성 피부인 분들에게 추천해요. 향도 은은하고 좋아요.',
-    rating: 4.5,
-    agreeCount: 12,
-    disagreeCount: 1,
-    createdAt: '2024-03-01',
-    creator: MOCK_CREATOR_PROFILE,
-    product: MOCK_REVIEW_PRODUCT,
+    reviewRating: 4.5,
   },
   {
+    ...MOCK_SEARCH_REVIEW_BASE,
     reviewId: 2,
-    content:
+    reviewContent:
       '발림성이 좋고 흡수가 빠릅니다. 민감한 피부에도 자극이 없어서 만족해요.',
-    rating: 4.0,
-    agreeCount: 8,
-    disagreeCount: 0,
-    createdAt: '2024-02-15',
-    creator: MOCK_CREATOR_PROFILE,
-    product: MOCK_REVIEW_PRODUCT,
+    reviewRating: 4.0,
   },
 ];

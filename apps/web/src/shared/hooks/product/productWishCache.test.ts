@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 import { describe, expect, it } from 'vitest';
 
-import { QUERY_KEYS, setProductWishInCaches } from '@somesay/shared';
+import { setProductWishInCaches } from '@somesay/shared';
 
 import { apiKey } from '@/shared/api';
 
@@ -124,15 +124,22 @@ describe('setProductWishInCaches', () => {
     const queryClient = new QueryClient();
     const reviews = {
       pageParams: [0],
-      pages: [{ content: [{ reviewId: 1, productId: 1, content: '좋아요' }] }],
+      pages: [
+        {
+          data: {
+            content: [{ reviewId: 1, productId: 1, reviewContent: '좋아요' }],
+          },
+        },
+      ],
     };
-    queryClient.setQueryData(QUERY_KEYS.PRODUCT.REVIEWS(1), reviews);
+    const reviewsKey = apiKey('/api/v1/products/{productId}/reviews', {
+      path: { productId: 1 },
+    });
+    queryClient.setQueryData(reviewsKey, reviews);
 
     setProductWishInCaches(queryClient, 1, true);
 
-    expect(queryClient.getQueryData(QUERY_KEYS.PRODUCT.REVIEWS(1))).toBe(
-      reviews
-    );
+    expect(queryClient.getQueryData(reviewsKey)).toBe(reviews);
   });
 
   it('찜 목록에 없는 경로의 캐시는 같은 상품이어도 건드리지 않는다', () => {

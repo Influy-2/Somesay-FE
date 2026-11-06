@@ -18,18 +18,18 @@ interface CreatorHomeProfileProps extends BasicCreatorProfileType {
 
 export const CreatorHomeProfile = ({
   creatorName,
-  profileImgUrl,
-  subscriberNum,
-  age,
-  skinTypeIds,
+  creatorProfileImgUrl,
+  creatorSubscriberNum,
+  creatorAge,
+  creatorSkinTypeIds,
   likeCount: initialLikeCount,
   isLiked: initialLiked = false,
   onLikeClick,
   youtubeUrl,
 }: CreatorHomeProfileProps) => {
-  const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
+  const skinTypeLabels = getSkinTypeLabels(creatorSkinTypeIds);
   const skinTypeLabel = skinTypeLabels.join(', ');
-  const ageLabel = getAgeLabel(age);
+  const ageLabel = getAgeLabel(creatorAge);
   const [liked, setLiked] = useState(initialLiked);
   const [currentLikeCount, setCurrentLikeCount] = useState(initialLikeCount);
 
@@ -42,7 +42,7 @@ export const CreatorHomeProfile = ({
   return (
     <div
       className="flex w-full items-center gap-2"
-      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${subscriberNum}만, ${ageLabel}, ${skinTypeLabel}`}
+      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${creatorSubscriberNum}만, ${ageLabel}, ${skinTypeLabel}`}
     >
       {/* 프로필 사진 */}
       <div
@@ -51,7 +51,7 @@ export const CreatorHomeProfile = ({
       >
         <img
           className="h-full w-full object-cover"
-          src={profileImgUrl}
+          src={creatorProfileImgUrl}
           alt={`${creatorName} 프로필 사진`}
         />
       </div>
@@ -74,7 +74,7 @@ export const CreatorHomeProfile = ({
             aria-label={`${creatorName} 유튜브 채널로 이동`}
           >
             <YoutubeIcon />
-            {formatSubscriberCount(subscriberNum)}
+            {formatSubscriberCount(creatorSubscriberNum)}
             <Move12Icon />
           </a>
         </div>

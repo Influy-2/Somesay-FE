@@ -35,7 +35,7 @@ export type RecommendedCreator = {
       productName: string;
       brandName: string;
       productImgUrl: string;
-      price: number;
+      productPrice: number;
     };
   };
 };
@@ -57,7 +57,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productName: '당근 패드당근 패드',
         brandName: '스킨푸드',
         productImgUrl: '',
-        price: 10000,
+        productPrice: 10000,
       },
     },
   },
@@ -77,7 +77,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productName: '녹두 약산성 클렌징폼 160ml',
         brandName: '이니스프리',
         productImgUrl: '',
-        price: 12000,
+        productPrice: 12000,
       },
     },
   },
@@ -96,7 +96,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productName: '세라마이드 아토 로션',
         brandName: '시드물',
         productImgUrl: '',
-        price: 15000,
+        productPrice: 15000,
       },
     },
   },
@@ -115,7 +115,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productName: '시카플러스트 밤 B5+ 100ml',
         brandName: '닥터자르트',
         productImgUrl: '',
-        price: 28000,
+        productPrice: 28000,
       },
     },
   },
@@ -134,7 +134,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreator[] = [
         productName: '시카플러스트 밤 2x B5+ 100ml',
         brandName: '닥터자르트',
         productImgUrl: '',
-        price: 35000,
+        productPrice: 35000,
       },
     },
   },

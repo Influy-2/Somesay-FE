@@ -37,6 +37,19 @@ export type WishRequest = Schemas['WishRequest'];
 export type ProductWishResponse = Schemas['ProductWishResponse'];
 export type BrandResponse = Schemas['BrandResponse'];
 
+// 리뷰·리뷰 개요·코멘트·타임링크
+export type ProductReviewResponse = Schemas['ProductReviewResponse'];
+export type ProductReviewOverviewResponse =
+  Schemas['ProductReviewOverviewResponse'];
+export type CommentItemResponse = Schemas['CommentItemResponse'];
+export type TimeLinkItem = Schemas['TimeLinkItem'];
+export type ReviewSearchItemResponse = Schemas['ReviewSearchItemResponse'];
+
+// 크리에이터 랭킹·홈 큐레이션
+export type CreatorRankingResponse = Schemas['CreatorRankingResponse'];
+export type HomeCurationResponse = Schemas['HomeCurationResponse'];
+export type ReviewCardResponse = Schemas['ReviewCardResponse'];
+
 // 정렬 값은 스키마가 아니라 쿼리 파라미터 enum 이라 경로에서 꺼냅니다.
 export type ProductSortType = NonNullable<
   paths['/api/v1/products']['get']['parameters']['query']['sortType']

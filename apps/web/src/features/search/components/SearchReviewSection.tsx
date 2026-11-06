@@ -1,4 +1,4 @@
-import type { ReviewSearchResultType } from '@somesay/shared';
+import type { ReviewSearchItemResponse } from '@somesay/shared';
 
 import { SortBar, SearchResultReviewCard } from '@/shared/components';
 
@@ -15,7 +15,7 @@ const REVIEW_SORT_OPTIONS: {
 ];
 
 interface SearchReviewSectionProps {
-  reviews: ReviewSearchResultType[];
+  reviews: ReviewSearchItemResponse[];
   sortBy: ReviewSearchSortOptionType;
   onSortChange: (value: ReviewSearchSortOptionType) => void;
 }

@@ -22,10 +22,13 @@ export const CreatorRankingProfile = ({
   skinTypeIds,
 }: CreatorRankingProfileProps) => {
   const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
+  // 순위 밖 크리에이터는 운영에서 순위가 null 로 옵니다(타입은 non-null).
+  // `null <= 30` 은 JS 에서 true 라 "null위"가 보이지 않도록 값부터 확인합니다.
+  const showRanking = ranking != null && ranking > 0 && ranking <= 30;
 
   return (
     <div className="mb-4 flex gap-2.5">
-      {ranking <= 30 && (
+      {showRanking && (
         <span
           className="headline4 flex h-11 shrink-0 items-center"
           aria-label={`순위 ${ranking}위`}

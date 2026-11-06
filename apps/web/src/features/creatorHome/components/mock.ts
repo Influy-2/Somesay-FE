@@ -27,11 +27,10 @@ interface MockReviewType {
 export const MOCK_CREATOR: MockCreatorType = {
   creatorId: 1,
   creatorName: '레오제이',
-  profileImgUrl: mockProfileImg,
-  subscriberNum: 300000,
-  trustScore: 0.99,
-  age: 'TWENTIES',
-  skinTypeIds: [1],
+  creatorProfileImgUrl: mockProfileImg,
+  creatorSubscriberNum: 300000,
+  creatorAge: 'TWENTIES',
+  creatorSkinTypeIds: [1],
   likeCount: 10000,
   youtubeUrl: 'https://www.youtube.com',
 };

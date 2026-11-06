@@ -5,10 +5,15 @@ import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { BasicCreatorProfile } from '../profile/BasicCreatorProfile';
 import { StarRating } from '../rating/StarRating';
 import cn from '@/utils/cn';
-import { BasicCreatorProfileType } from '@somesay/shared';
+import type {
+  BasicCreatorProfileType,
+  ProductReviewResponse,
+} from '@somesay/shared';
 
 interface CreatorReviewCardProps {
-  creator: BasicCreatorProfileType & { ranking?: number };
+  // 응답 객체(리뷰 카드 등)를 그대로 넘깁니다. 순위가 실린 응답이면 신뢰도 순위를 함께 보여줍니다.
+  creator: BasicCreatorProfileType &
+    Partial<Pick<ProductReviewResponse, 'creatorRanking'>>;
   rating: number;
   content: string;
   productName: string;
@@ -67,9 +72,9 @@ export const CreatorReviewCard = ({
       <BasicCreatorProfile
         {...creator}
         highlightedLabels={highlightedLabels}
-        {...(creator.ranking === undefined
+        {...(creator.creatorRanking == null
           ? {}
-          : { trustRank: creator.ranking })}
+          : { trustRank: creator.creatorRanking })}
       />
       <div
         className="flex w-full flex-col items-start gap-1"

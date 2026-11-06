@@ -24,12 +24,12 @@ type Story = StoryObj<typeof CreatorReviewCard>;
 const mockCreator = {
   creatorId: 1,
   creatorName: '글로우픽',
-  profileImgUrl: mockProfile,
-  subscriberNum: 124000,
-  trustScore: 92,
-  ranking: 3,
-  age: 'TWENTIES' as const,
-  skinTypeIds: [1],
+  creatorProfileImgUrl: mockProfile,
+  creatorSubscriberNum: 124000,
+  creatorTrustScore: 92,
+  creatorRanking: 3,
+  creatorAge: 'TWENTIES' as const,
+  creatorSkinTypeIds: [1],
 };
 
 export const Default: Story = {

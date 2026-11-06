@@ -24,6 +24,8 @@ export const CreatorHomeTrustScore = ({
   isLoggedIn = false,
 }: CreatorHomeTrustScoreProps) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  // 순위 밖 크리에이터는 순위가 null 로 올 수 있습니다. `null <= 30` 은 true 라 값부터 확인합니다.
+  const showTrustRank = trustRank != null && trustRank > 0 && trustRank <= 30;
 
   const progressPercent =
     totalReviews === 0
@@ -37,7 +39,7 @@ export const CreatorHomeTrustScore = ({
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-1">
             <span className="body2-m">신뢰도</span>
-            {trustRank <= 30 && <span className="body2-sb">{trustRank}위</span>}
+            {showTrustRank && <span className="body2-sb">{trustRank}위</span>}
             <div className="relative flex items-center">
               <button
                 type="button"

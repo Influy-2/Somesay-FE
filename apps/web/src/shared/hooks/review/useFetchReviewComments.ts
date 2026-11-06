@@ -1,17 +1,20 @@
-import { fetchReviewComments, QUERY_KEYS } from '@somesay/shared';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useApiInfiniteQuery } from '@/shared/api';
 
+const COMMENT_PAGE_SIZE = 10;
+
+// 리뷰 코멘트를 페이지 단위로 조회하는 React Query hook입니다.
 export const useFetchReviewComments = (reviewId?: number) => {
   const isValidReviewId =
     typeof reviewId === 'number' && Number.isFinite(reviewId);
 
-  return useInfiniteQuery({
-    queryKey: QUERY_KEYS.REVIEW.COMMENTS(reviewId ?? 0),
-    initialPageParam: 0,
-    queryFn: ({ pageParam }) =>
-      fetchReviewComments(reviewId ?? 0, { page: pageParam, size: 10 }),
-    getNextPageParam: (lastPage, pages) =>
-      lastPage.hasNext ? pages.length : undefined,
-    enabled: isValidReviewId,
-  });
+  return useApiInfiniteQuery(
+    '/api/v1/reviews/{reviewId}/comments',
+    {
+      params: {
+        path: { reviewId: reviewId ?? 0 },
+        query: { size: COMMENT_PAGE_SIZE },
+      },
+    },
+    { enabled: isValidReviewId }
+  );
 };

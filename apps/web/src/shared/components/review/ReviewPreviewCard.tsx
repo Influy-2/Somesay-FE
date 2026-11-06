@@ -3,19 +3,16 @@
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
 import { StarRating } from '../rating/StarRating';
-import { formatPrice } from '@somesay/shared';
+import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
 
 interface ReviewPreviewCardProps {
   reviewId: number;
   rating: number;
   content: string;
-  product: {
-    productId: number;
-    productName: string;
-    brandName: string;
-    productImgUrl: string;
-    price: number;
-  };
+  product: Pick<
+    ProductPreviewCard,
+    'productId' | 'productName' | 'brandName' | 'productImgUrl' | 'productPrice'
+  >;
 }
 
 export const ReviewPreviewCard = ({
@@ -58,8 +55,9 @@ export const ReviewPreviewCard = ({
           <span className="caption1-m line-clamp-1 text-black">
             {product.productName}
           </span>
+          {/* 운영에서 가격이 null 로 오는 상품이 있어 formatPrice 로 안전하게 표시합니다. */}
           <span className="caption1-m text-black">
-            {formatPrice(product.price)}
+            {formatPrice(product.productPrice)}
           </span>
         </div>
       </div>
