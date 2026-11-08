@@ -15,5 +15,16 @@ if (!response.ok) {
 }
 
 const spec = await response.json();
+
+// 관리자 API(/api/v1/admin/...)는 앱에서 호출하지 않으므로 스냅샷에서 뺍니다.
+// 이렇게 하면 생성 타입(openapi.ts)에도 관리자 경로가 들어가지 않습니다.
+// (관리자 전용 스키마는 components 에 남을 수 있지만, 경로가 없어 사용할 일이 없습니다.)
+const ADMIN_PATH_PREFIX = '/api/v1/admin';
+spec.paths = Object.fromEntries(
+  Object.entries(spec.paths).filter(
+    ([path]) => !path.startsWith(ADMIN_PATH_PREFIX)
+  )
+);
+
 await writeFile(OUTPUT_PATH, `${JSON.stringify(spec, null, 2)}\n`);
 console.log(`저장 완료: ${OPENAPI_URL} → openapi/openapi.json`);
