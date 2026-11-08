@@ -4,7 +4,7 @@ import cn from '@/utils/cn';
 
 interface EvaluatedCreatorItemVerticalProps {
   creatorId: number;
-  profileImageUrl: string;
+  creatorProfileImgUrl: string;
   name: string;
   isSelected: boolean;
   onClick: (creatorId: number) => void;
@@ -12,7 +12,7 @@ interface EvaluatedCreatorItemVerticalProps {
 
 export const EvaluatedCreatorItemVertical = ({
   creatorId,
-  profileImageUrl,
+  creatorProfileImgUrl,
   name,
   isSelected,
   onClick,
@@ -29,9 +29,9 @@ export const EvaluatedCreatorItemVertical = ({
           isSelected ? 'border-[1.8px] border-black' : 'opacity-50'
         )}
       >
-        {profileImageUrl && (
+        {creatorProfileImgUrl && (
           <img
-            src={profileImageUrl}
+            src={creatorProfileImgUrl}
             alt={name}
             className="h-full w-full object-cover"
           />

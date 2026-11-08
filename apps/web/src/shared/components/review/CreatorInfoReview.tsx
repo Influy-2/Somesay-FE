@@ -4,6 +4,7 @@ import { CreatorRankingProfile } from '../profile/CreatorRankingProfile';
 import { RateBar } from '../ratebar/RateBar';
 import { StarRating } from '../rating/StarRating';
 import type { ProductReviewResponse } from '@somesay/shared';
+import { formatCount } from '@somesay/shared';
 
 export interface CreatorInfoReviewProps {
   review: Pick<
@@ -31,7 +32,7 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
       <CreatorRankingProfile
         ranking={review.creatorRanking}
         nickname={review.creatorName}
-        profileImageUrl={review.creatorProfileImgUrl}
+        creatorProfileImgUrl={review.creatorProfileImgUrl}
         subscriberNum={review.creatorSubscriberNum}
         trustScore={review.creatorTrustScore}
         skinTypeIds={review.creatorSkinTypeIds}
@@ -60,7 +61,7 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
                 </span>
               </div>
               <span className="body2-m text-grey06">
-                {participantCount.toLocaleString()}명 참여
+                {formatCount(participantCount)}명 참여
               </span>
             </div>
           ) : (

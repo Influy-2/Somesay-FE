@@ -18,7 +18,7 @@ type MockProduct = FitProduct & { categoryId: number };
 // TODO: 계정 화면 연동 시 InfoResponse(userNickname·userGender·userAge…)로 교체.
 // 성별은 서버 enum(MALE·FEMALE·NONE)과 GENDER_OPTIONS 값(male…)·라벨 비교 방식이 달라 함께 정리해야 합니다.
 type AccountInfo = {
-  profileImageUrl: string | null;
+  userProfileImgUrl: string | null;
   nickname: string;
   gender: string;
   age: AgeType;
@@ -362,7 +362,7 @@ export const MOCK_USERS = [
 ];
 
 export const MOCK_ACCOUNT: AccountInfo = {
-  profileImageUrl: null,
+  userProfileImgUrl: null,
   nickname: 'sobi22',
   gender: '여성',
   age: 'TWENTIES',

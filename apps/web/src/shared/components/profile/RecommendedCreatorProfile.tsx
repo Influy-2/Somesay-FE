@@ -9,7 +9,7 @@ import { ChipBasic } from '../chips/ChipBasic';
 interface RecommendedCreatorProfileProps {
   creatorId: number;
   name: string;
-  profileImageUrl: string;
+  creatorProfileImgUrl: string;
   age: AgeType | null;
   skinType: string;
 }
@@ -17,7 +17,7 @@ interface RecommendedCreatorProfileProps {
 export const RecommendedCreatorProfile = ({
   creatorId,
   name,
-  profileImageUrl,
+  creatorProfileImgUrl,
   age,
   skinType,
 }: RecommendedCreatorProfileProps) => {
@@ -28,9 +28,9 @@ export const RecommendedCreatorProfile = ({
       aria-label={`${name} 크리에이터 홈으로 이동`}
     >
       <div className="bg-grey02 size-15 shrink-0 overflow-hidden rounded-full">
-        {profileImageUrl && (
+        {creatorProfileImgUrl && (
           <img
-            src={profileImageUrl}
+            src={creatorProfileImgUrl}
             alt={name}
             className="h-full w-full object-cover"
           />

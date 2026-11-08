@@ -1,6 +1,7 @@
 import type { BrandResponse } from '@somesay/shared';
 import { ArrowBackIcon, Star16Icon } from '@/shared/icons';
 import { ShareButton } from '@/shared/components';
+import { formatCount, formatRating } from '@somesay/shared';
 
 interface BrandHomeHeroProps {
   brand: BrandResponse;
@@ -54,13 +55,13 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
           <div className="caption1-m text-grey01 flex flex-wrap items-center gap-2">
             <span className="caption1-b flex items-center">
               <Star16Icon aria-hidden="true" className="size-4" />
-              {brand.brandAvgRating.toFixed(1)}
+              {formatRating(brand.brandAvgRating)}
             </span>
             <span className="bg-grey06 h-3 w-px" aria-hidden="true" />
             <span>
               리뷰
               <strong className="caption1-b">
-                {brand.brandReviewCount.toLocaleString()}
+                {formatCount(brand.brandReviewCount)}
               </strong>
             </span>
             <span className="bg-grey06 h-3 w-px" aria-hidden="true" />

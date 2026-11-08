@@ -4,7 +4,7 @@ import { getConcernLabels, getSkinTypeLabels } from '@somesay/shared';
 import { ProfileNoImage } from './ProfileNoImage';
 interface ConsumerReviewProfileProps {
   nickname: string;
-  profileImageUrl?: string | null;
+  userProfileImgUrl?: string | null;
   skinTypeIds?: number[];
   skinExpectationIds?: number[];
   userId: number;
@@ -12,7 +12,7 @@ interface ConsumerReviewProfileProps {
 
 export const ConsumerReviewProfile = ({
   nickname,
-  profileImageUrl,
+  userProfileImgUrl,
   skinTypeIds = [],
   skinExpectationIds = [],
   userId,
@@ -25,9 +25,9 @@ export const ConsumerReviewProfile = ({
     <div className="flex items-center gap-2.5">
       {/* 프로필 이미지 */}
       <div className="size-8 shrink-0 self-center overflow-hidden rounded-full">
-        {profileImageUrl ? (
+        {userProfileImgUrl ? (
           <img
-            src={profileImageUrl}
+            src={userProfileImgUrl}
             alt=""
             className="h-full w-full object-cover"
           />

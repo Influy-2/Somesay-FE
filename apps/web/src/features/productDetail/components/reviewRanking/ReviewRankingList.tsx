@@ -6,6 +6,7 @@ import { ReviewRankingItem } from './ReviewRankingItem';
 import { ReviewCommentSheet } from './ReviewCommentSheet';
 import { ReviewTimeLinkSheet } from './ReviewTimeLinkSheet';
 import type { ProductReviewResponse } from '@somesay/shared';
+import { flattenPages, getTotalCount } from '@somesay/shared';
 
 const INITIAL_DISPLAY_COUNT = 3;
 const LOAD_MORE_COUNT = 10;
@@ -26,8 +27,8 @@ export const ReviewRankingList = ({ productId }: ReviewRankingListProps) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useFetchProductReviews(productId, { filterByMySkin: isMySkinTypeOnly });
 
-  const reviews = data?.pages.flatMap((page) => page.content) ?? [];
-  const totalCount = data?.pages[0]?.totalElements ?? 0;
+  const reviews = flattenPages(data);
+  const totalCount = getTotalCount(data);
   const displayedReviews = reviews.slice(0, displayCount);
   const remainingCount = Math.max(totalCount - displayedReviews.length, 0);
 

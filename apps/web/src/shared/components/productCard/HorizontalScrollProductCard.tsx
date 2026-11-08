@@ -2,7 +2,12 @@
 
 import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
-import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
+import {
+  formatRating,
+  formatCount,
+  formatPrice,
+  type ProductPreviewCard,
+} from '@somesay/shared';
 import { HeartButton } from '../buttons/HeartButton';
 import { AvatarStack } from './AvatarStack';
 import { PATH } from '@/routes/path';
@@ -24,19 +29,13 @@ export const HorizontalScrollProductCard = ({
   onHeartToggle,
 }: HorizontalScrollProductCardProps) => {
   const formattedPrice = formatPrice(productPrice);
-  // 이전 mapper 의 `reviewCount ?? 0` 방어를 옮겨 둡니다. (스펙상 non-null 이지만 null 이 올 수 있음)
-  const formattedReviewCount = (productReviewCount ?? 0).toLocaleString(
-    'ko-KR'
-  );
-  const formattedRating =
-    (String(productAvgRating).split('.')[1]?.length ?? 0) > 2
-      ? productAvgRating.toFixed(2)
-      : productAvgRating;
+  const formattedReviewCount = formatCount(productReviewCount);
+  const formattedRating = formatRating(productAvgRating);
 
   return (
     <article
       className="relative flex w-39 shrink-0 flex-col items-start gap-2"
-      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${productAvgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${brandName} ${productName}, ${formattedPrice}, 별점 ${formatRating(productAvgRating)}점, 리뷰 ${formattedReviewCount}개`}
     >
       <div className="bg-grey02 relative aspect-39/44 h-44 self-stretch overflow-hidden">
         <div aria-hidden="true" className="h-full w-full">
@@ -73,7 +72,7 @@ export const HorizontalScrollProductCard = ({
             </div>
             <span className="body2-m text-black">({formattedReviewCount})</span>
           </div>
-          <AvatarStack creatorImageUrls={creatorProfileImgUrls} />
+          <AvatarStack creatorProfileImgUrls={creatorProfileImgUrls} />
         </div>
       </div>
 

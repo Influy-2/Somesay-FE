@@ -1,4 +1,6 @@
 import {
+  formatRating,
+  formatCount,
   getSkinTypeLabel,
   type ProductReviewOverviewResponse,
 } from '@somesay/shared';
@@ -36,11 +38,11 @@ export const CreatorReviewSummarySection = ({
           <div
             className="flex items-center gap-1"
             role="img"
-            aria-label={`5점 만점에 ${productAvgRating.toFixed(1)}점`}
+            aria-label={`5점 만점에 ${formatRating(productAvgRating)}점`}
           >
             <StarRating rating={productAvgRating} />
             <span className="body1-b" aria-hidden="true">
-              {productAvgRating.toFixed(1)}
+              {formatRating(productAvgRating)}
             </span>
             <span className="body1-b text-grey06" aria-hidden="true">
               /
@@ -54,9 +56,9 @@ export const CreatorReviewSummarySection = ({
 
           <span
             className="body1-b"
-            aria-label={`리뷰 ${productReviewCount.toLocaleString()}개`}
+            aria-label={`리뷰 ${formatCount(productReviewCount)}개`}
           >
-            리뷰 {productReviewCount.toLocaleString()}
+            리뷰 {formatCount(productReviewCount)}
           </span>
         </div>
       </div>

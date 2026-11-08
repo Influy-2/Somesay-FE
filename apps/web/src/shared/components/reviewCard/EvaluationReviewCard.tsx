@@ -8,6 +8,7 @@ import { StarRating } from '../rating/StarRating';
 import { ReviewVoteButton } from '../buttons/ReviewVoteButton';
 import { RateBar } from '../ratebar/RateBar';
 import type { ReviewVoteType } from '../buttons/ReviewVoteButton';
+import { formatCount } from '@somesay/shared';
 
 type EvaluationReviewCardProps = {
   creator: EvaluationCardCreator;
@@ -71,7 +72,7 @@ export const EvaluationReviewCard = ({
                   : '의 사용자가 반대했어요'}
               </p>
               <span className="text-grey06">
-                {participantCount.toLocaleString('ko-KR')}명 참여
+                {formatCount(participantCount)}명 참여
               </span>
             </div>
             <RateBar

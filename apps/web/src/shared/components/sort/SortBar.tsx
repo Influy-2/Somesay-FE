@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ToggleDownIcon } from '@/shared/icons';
 import { BottomSheet } from '../bottomSheet/BottomSheet';
 import cn from '@/utils/cn';
+import { formatCount } from '@somesay/shared';
 //이 수 넘기면 9999+로 표현
 const COUNT_OVERFLOW_THRESHOLD = 9999;
 
@@ -41,7 +42,7 @@ export const SortBar = ({
         <span className="body2-m text-grey08" aria-live="polite">
           {count >= COUNT_OVERFLOW_THRESHOLD
             ? `${COUNT_OVERFLOW_THRESHOLD.toLocaleString()}+개`
-            : `${count.toLocaleString()}개`}
+            : `${formatCount(count)}개`}
         </span>
 
         {/* 우측 정렬 드롭다운 */}

@@ -72,7 +72,7 @@ export const RecommendedCreatorProfileRow = ({
               <RecommendedCreatorProfile
                 creatorId={creator.creatorId}
                 name={creator.creatorName}
-                profileImageUrl={creator.creatorProfileImgUrl}
+                creatorProfileImgUrl={creator.creatorProfileImgUrl}
                 age={creator.creatorAge}
                 skinType={getSkinTypeLabels(creator.creatorSkinTypeIds).join(
                   ', '

@@ -61,7 +61,7 @@ export const CreatorsTab = ({
             <EvaluatedCreatorItemVertical
               key={creator.creatorId}
               creatorId={creator.creatorId}
-              profileImageUrl={creator.creatorProfileImgUrl}
+              creatorProfileImgUrl={creator.creatorProfileImgUrl}
               name={creator.creatorName}
               isSelected={selectedCreatorId === creator.creatorId}
               onClick={setSelectedCreatorId}

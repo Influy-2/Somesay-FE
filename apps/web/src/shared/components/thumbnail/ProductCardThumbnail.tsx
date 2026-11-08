@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { Star16Icon } from '@/shared/icons';
 import { PATH } from '@/routes/path';
 import { LoadingImage } from '../image/LoadingImage';
-import { formatPrice } from '@somesay/shared';
+import { formatRating, formatCount, formatPrice } from '@somesay/shared';
 interface ProductCardThumbnailProps {
   brandName: string;
   productName: string;
@@ -24,8 +24,9 @@ export const ProductCardThumbnail = ({
   productImgUrl,
   productId,
 }: ProductCardThumbnailProps) => {
-  const formattedReviewCount = reviewCount?.toLocaleString('ko-KR');
-  const formattedRating = rating.toFixed(2);
+  const formattedReviewCount =
+    reviewCount === undefined ? undefined : formatCount(reviewCount);
+  const formattedRating = formatRating(rating, 2);
   const reviewCountLabel =
     formattedReviewCount === undefined
       ? ''

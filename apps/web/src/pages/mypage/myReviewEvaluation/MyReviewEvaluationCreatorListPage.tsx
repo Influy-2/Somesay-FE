@@ -35,7 +35,7 @@ export const MyReviewEvaluationCreatorListPage = () => {
           <li key={creator.creatorId}>
             <EvaluatedCreatorItemHorizontal
               creatorId={creator.creatorId}
-              profileImageUrl={creator.creatorProfileImgUrl}
+              creatorProfileImgUrl={creator.creatorProfileImgUrl}
               name={creator.creatorName}
               age={creator.creatorAge}
               skinType={getSkinTypeLabels(creator.creatorSkinTypeIds).join(

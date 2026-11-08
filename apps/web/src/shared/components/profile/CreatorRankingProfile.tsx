@@ -7,7 +7,7 @@ import { formatSubscriberCount, getSkinTypeLabels } from '@somesay/shared';
 export interface CreatorRankingProfileProps {
   ranking: number;
   nickname: string;
-  profileImageUrl: string;
+  creatorProfileImgUrl: string;
   subscriberNum: number;
   trustScore: number;
   skinTypeIds: number[];
@@ -16,7 +16,7 @@ export interface CreatorRankingProfileProps {
 export const CreatorRankingProfile = ({
   ranking,
   nickname,
-  profileImageUrl,
+  creatorProfileImgUrl,
   subscriberNum,
   trustScore,
   skinTypeIds,
@@ -38,7 +38,7 @@ export const CreatorRankingProfile = ({
       )}
       <div className="bg-grey02 h-11 w-11 shrink-0 overflow-hidden rounded-full">
         <img
-          src={profileImageUrl}
+          src={creatorProfileImgUrl}
           alt={`${nickname} 프로필 이미지`}
           className="h-full w-full object-cover"
         />

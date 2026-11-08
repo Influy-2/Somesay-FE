@@ -63,6 +63,8 @@ export * from './constants/user.constants';
 // 유틸
 export { formatSubscriberCount } from './utils/formatSubscriberCount';
 export { formatPrice } from './utils/formatPrice';
+export { formatRating, formatCount } from './utils/formatNumber';
+export { flattenPages, getTotalCount } from './utils/pagination';
 
 // React Query 캐시 헬퍼 (찜 상태 동기화)
 export * from './query/productWishCache';

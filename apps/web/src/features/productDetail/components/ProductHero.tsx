@@ -39,7 +39,7 @@ export const ProductHero = ({ product, onHeartToggle }: ProductHeroProps) => {
       <BrandProfile
         brandName={brandName}
         brandId={brandId}
-        brandImageUrl={brandLogoImgUrl}
+        brandLogoImgUrl={brandLogoImgUrl}
       />
       <div className="flex flex-col gap-3.5 px-4 py-5">
         <h2 className="subhead-sb">{productName}</h2>

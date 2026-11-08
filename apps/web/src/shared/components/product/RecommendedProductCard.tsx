@@ -1,6 +1,11 @@
 // Product/상품추천화면
 
-import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
+import {
+  formatRating,
+  formatCount,
+  formatPrice,
+  type ProductPreviewCard,
+} from '@somesay/shared';
 import { Link } from 'react-router';
 
 import { PATH } from '@/routes/path';
@@ -28,7 +33,7 @@ export const RecommendedProductCard = ({
   onHeartToggle,
 }: RecommendedProductCardProps) => {
   const formattedPrice = formatPrice(productPrice);
-  const formattedReviewCount = productReviewCount?.toLocaleString('ko-KR') || 0;
+  const formattedReviewCount = formatCount(productReviewCount);
 
   return (
     <article className="bg-grey02 relative aspect-100/105 w-full overflow-hidden">
@@ -58,12 +63,14 @@ export const RecommendedProductCard = ({
             <div className="flex min-w-0 items-center gap-1" aria-hidden="true">
               <div className="flex shrink-0 items-center">
                 <StarIcon className="size-4 text-white" />
-                <span className="body2-sb">{productAvgRating.toFixed(1)}</span>
+                <span className="body2-sb">
+                  {formatRating(productAvgRating)}
+                </span>
               </div>
               <span className="body2-m shrink-0">({formattedReviewCount})</span>
-              {creatorProfileImgUrls?.length > 0 && (
+              {creatorProfileImgUrls.length > 0 && (
                 <AvatarStack
-                  creatorImageUrls={creatorProfileImgUrls}
+                  creatorProfileImgUrls={creatorProfileImgUrls}
                   borderColor="border-grey09"
                 />
               )}
@@ -92,7 +99,7 @@ export const RecommendedProductCard = ({
       <Link
         to={`${PATH.PRODUCT.BASE}/${productId}`}
         className="absolute inset-0"
-        aria-label={`${order}번째 추천 제품 ${brandName} ${productName}, ${formattedPrice}, 별점 ${productAvgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개 상세 페이지로 이동`}
+        aria-label={`${order}번째 추천 제품 ${brandName} ${productName}, ${formattedPrice}, 별점 ${formatRating(productAvgRating)}점, 리뷰 ${formattedReviewCount}개 상세 페이지로 이동`}
       />
     </article>
   );

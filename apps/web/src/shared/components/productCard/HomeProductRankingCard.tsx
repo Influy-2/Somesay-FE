@@ -1,5 +1,10 @@
 // Product/랭킹용/홈 컴포넌트
-import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
+import {
+  formatRating,
+  formatCount,
+  formatPrice,
+  type ProductPreviewCard,
+} from '@somesay/shared';
 import { Link } from 'react-router';
 
 import { PATH } from '@/routes/path';
@@ -26,13 +31,13 @@ export const HomeProductRankingCard = ({
   onHeartToggle,
 }: HomeProductRankingCardProps) => {
   const formattedReviewCount = productReviewCount
-    ? productReviewCount.toLocaleString('ko-KR')
+    ? formatCount(productReviewCount)
     : '0';
 
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(productPrice)}, 별점 ${productAvgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(productPrice)}, 별점 ${formatRating(productAvgRating)}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 이미지 영역 */}
       <div className="relative h-[12.5rem] w-full overflow-hidden">
@@ -86,12 +91,12 @@ export const HomeProductRankingCard = ({
           {/* 별점 */}
           <div className="flex items-center">
             <StarIcon className="text-primary-300 size-4" />
-            <span className="body2-sb">{productAvgRating.toFixed(1)}</span>
+            <span className="body2-sb">{formatRating(productAvgRating)}</span>
           </div>
           {/* 리뷰수 */}
           <span className="body2-m">({formattedReviewCount})</span>
           {/* 크리에이터 프로필 스택 */}
-          <AvatarStack creatorImageUrls={creatorProfileImgUrls} />
+          <AvatarStack creatorProfileImgUrls={creatorProfileImgUrls} />
         </div>
       </div>
       <Link

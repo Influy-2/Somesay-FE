@@ -26,7 +26,7 @@ export const ReviewComment = ({
       <ConsumerReviewProfile
         nickname={nickname}
         userId={userId}
-        {...(profileImg ? { profileImageUrl: profileImg } : {})}
+        {...(profileImg ? { userProfileImgUrl: profileImg } : {})}
         {...(skinTypeIds ? { skinTypeIds } : {})}
         {...(skinExpectationIds ? { skinExpectationIds } : {})}
       />

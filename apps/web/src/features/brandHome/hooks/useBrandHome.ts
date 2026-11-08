@@ -14,6 +14,7 @@ import {
   getSubCategoryId,
 } from '../utils/brandHome.params';
 import type { BrandProductSortType } from '@somesay/shared';
+import { flattenPages, getTotalCount } from '@somesay/shared';
 
 /**
  * 브랜드 홈의 조회 조건과 상품 목록을 한곳에서 다룹니다.
@@ -96,10 +97,10 @@ export const useBrandHome = (brandId?: number) => {
   );
 
   const products = useMemo(
-    () => activeProductQuery.data?.pages.flatMap((page) => page.content) ?? [],
-    [activeProductQuery.data?.pages]
+    () => flattenPages(activeProductQuery.data),
+    [activeProductQuery.data]
   );
-  const productCount = activeProductQuery.data?.pages[0]?.totalCount ?? 0;
+  const productCount = getTotalCount(activeProductQuery.data);
 
   const loadMoreRef = useInfiniteScroll({
     hasNextPage: activeProductQuery.hasNextPage ?? false,

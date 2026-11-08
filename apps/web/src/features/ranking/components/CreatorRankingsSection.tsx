@@ -1,9 +1,9 @@
 import { useAuthGuard } from '@/shared/hooks';
-import { flattenRankingPages } from '../ranking.utils';
 import { CreatorRankingCard, MoreButton } from '@/shared/components';
 import { useFetchCreatorRanking } from '@/shared/hooks';
 import { CreatorRankingSkeleton } from './CreatorRankingSkeleton';
 import { RankingFeedback } from './RankingFeedback';
+import { flattenPages } from '@somesay/shared';
 
 // 30위까지만 노출합니다(기획 2.2.1).
 const PAGE_SIZE = 10;
@@ -11,10 +11,7 @@ const CREATOR_RANKING_LIMIT = 30;
 
 export const CreatorRankingsSection = () => {
   const query = useFetchCreatorRanking({ size: PAGE_SIZE });
-  const creators = flattenRankingPages(
-    query.data?.pages,
-    CREATOR_RANKING_LIMIT
-  );
+  const creators = flattenPages(query.data).slice(0, CREATOR_RANKING_LIMIT);
   const canLoadMore =
     creators.length < CREATOR_RANKING_LIMIT && query.hasNextPage;
 

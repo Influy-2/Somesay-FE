@@ -1,4 +1,9 @@
-import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
+import {
+  formatRating,
+  formatCount,
+  formatPrice,
+  type ProductPreviewCard,
+} from '@somesay/shared';
 import { Link } from 'react-router';
 
 import { PATH } from '@/routes/path';
@@ -24,10 +29,7 @@ export const ProductRankingCard = ({
   ranking,
   onHeartToggle,
 }: ProductRankingCardProps) => {
-  // 이전 mapper 의 `reviewCount ?? 0` 방어를 옮겨 둡니다. (스펙상 non-null 이지만 null 이 올 수 있음)
-  const formattedReviewCount = (productReviewCount ?? 0).toLocaleString(
-    'ko-KR'
-  );
+  const formattedReviewCount = formatCount(productReviewCount);
 
   return (
     <article className="relative flex min-w-0 flex-col items-start gap-2">
@@ -69,11 +71,11 @@ export const ProductRankingCard = ({
         <div className="flex max-w-full items-center gap-1 overflow-hidden">
           <div className="flex shrink-0 items-center">
             <Star16Icon className="text-primary-300 size-4" />
-            <span className="body2-sb">{productAvgRating.toFixed(1)}</span>
+            <span className="body2-sb">{formatRating(productAvgRating)}</span>
           </div>
           <span className="body2-m shrink-0">({formattedReviewCount})</span>
           {creatorProfileImgUrls.length > 0 && (
-            <AvatarStack creatorImageUrls={creatorProfileImgUrls} />
+            <AvatarStack creatorProfileImgUrls={creatorProfileImgUrls} />
           )}
         </div>
       </div>
@@ -81,7 +83,7 @@ export const ProductRankingCard = ({
       <Link
         to={`${PATH.PRODUCT.BASE}/${productId}`}
         className="absolute inset-0"
-        aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(productPrice)}, 별점 ${productAvgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개 상세 페이지로 이동`}
+        aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(productPrice)}, 별점 ${formatRating(productAvgRating)}점, 리뷰 ${formattedReviewCount}개 상세 페이지로 이동`}
       />
     </article>
   );
