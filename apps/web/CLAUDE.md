@@ -113,7 +113,7 @@ Zustand 스토어 안에서는 훅을 호출할 수 없기 때문이다. `AuthPr
 // Do
 type RecommendedProductCardProps = ProductCardType & { order: number };
 interface CreatorHomeProfileProps extends BasicCreatorProfileType { ... }
-type EvaluationCardProfileProps = Pick<CreatorType, 'nickname' | 'profileImgUrl'>;
+type EvaluationCardProfileProps = Pick<CreatorType, 'creatorName' | 'profileImgUrl'>;
 
 // Don't — 익명 객체로 도메인 모양을 다시 적는다
 interface XProps {
@@ -211,6 +211,7 @@ export const Hearted: Story = { args: { isHearted: true } }; // 상태별로 하
 
 - `title`은 **폴더명에서 기계적으로 유도**한다. 재량으로 정하지 않는다.
 - 공통 래핑(라우터·모바일 폭)은 `.storybook/preview.tsx`가 한다. 개별 `decorators`는 그 스토리만 폭·배경이 달라야 할 때 쓴다.
+- 클릭으로 상태가 바뀌는 스토리는 `render: function Render(args) {…}`로 쓴다. 화살표 함수면 훅 사용 시 `rules-of-hooks` 에러가 난다.
 - mock 이미지는 `@/assets/mock_*`를 쓴다.
 - 스토리를 만들지 않는 예외 — 레이아웃·호스트 컴포넌트(`GlobalLayout` `SnackbarHost` `BottomTabLayout`)처럼 단독으로 렌더할 의미가 없는 것.
 

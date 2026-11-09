@@ -16,8 +16,6 @@ description: Figma 디자인을 Somesay React 컴포넌트로 구현할 때 사�
 - `get_screenshot` — 레이아웃을 눈으로 확인. 코드 출력만으로는 겹침·정렬을 알 수 없다.
 - `get_variable_defs` — 디자인 변수명을 확인해 `global.css` 토큰과 맞춘다.
 
-**`.claude/docs/features.md`에서 해당 화면번호(`1.2.1` 체계)를 찾아 읽는다.** 디자인에 안 보이는 조건·제약(선택 개수 제한, 비활성 조건)이 거기 있다.
-
 ## 2. 계획 제시 → 승인 대기
 
 ```

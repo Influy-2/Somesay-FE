@@ -74,7 +74,7 @@ Props에서 기계적으로 뽑는다.
 
 ```tsx
 export const Default: Story = {
-  render: (args) => {
+  render: function Render(args) {
     const [isHearted, setIsHearted] = useState(false);
 
     return (
@@ -87,6 +87,8 @@ export const Default: Story = {
   },
 };
 ```
+
+`render`는 반드시 이름 있는 `function Render`로 쓴다. 화살표 함수면 ESLint가 컴포넌트로 인식하지 못해 `rules-of-hooks` 에러가 난다. 화살표 함수 규칙(CORE RULE 3)의 유일한 예외다. `args`를 그대로 받아 Controls 패널이 계속 동작한다.
 
 ## 6. 데코레이터
 
