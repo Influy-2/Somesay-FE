@@ -15,6 +15,7 @@ import { PATH } from '@/routes/path';
 import { CTAButton, PageHeader } from '@/shared/components';
 import { SomesayIcon, X24Icon } from '@/shared/icons';
 
+/** @spec 11.2.4, 11.4.1, 11.4.2 */
 export const CompletePage = () => {
   const location = useLocation();
   const navigate = useNavigate();

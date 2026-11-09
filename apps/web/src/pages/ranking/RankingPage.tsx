@@ -64,6 +64,7 @@ export const RankingPage = () => {
       />
 
       {/* 상품과 크리에이터 신뢰도 랭킹을 URL 쿼리로 전환합니다. */}
+      {/* @spec 2.3.1 */}
       <TabBar
         className="px-4"
         tabs={[
@@ -85,6 +86,7 @@ export const RankingPage = () => {
       />
 
       {/* 두 패널을 모두 마운트해 aria-controls 참조를 유지하되, 내용은 선택된 탭만 조회합니다. */}
+      {/* @spec 2.1.1, 2.1.2, 2.1.3 */}
       <div
         role="tabpanel"
         id={PRODUCT_PANEL_ID}
@@ -94,6 +96,7 @@ export const RankingPage = () => {
         {activeTab === 'products' && <ProductRankingsSection />}
       </div>
 
+      {/* @spec 2.2.1, 2.2.2 */}
       <div
         role="tabpanel"
         id={CREATOR_PANEL_ID}

@@ -12,6 +12,7 @@ import { useSnackbarStore } from '@/shared/stores';
 
 const VERIFICATION_SUCCESS_DELAY_MS = 1000;
 
+/** @spec 11.1.1, 11.3.1, 11.3.2, 11.3.3 */
 export const EmailVerificationPage = () => {
   const navigate = useNavigate();
   const email = useOnboardingStore((state) => state.email);

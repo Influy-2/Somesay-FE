@@ -30,6 +30,7 @@ const SORT_OPTIONS = [
 
 const ALL_CATEGORY = { id: 0, label: '전체' };
 
+/** @spec 5.5.3 */
 export const AddProductPage = () => {
   const navigate = useNavigate();
   const location = useLocation();

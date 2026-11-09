@@ -4,6 +4,7 @@ import { CharacterCountInput, PageHeader } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { MOCK_ACCOUNT, MOCK_USERS } from '@/features/myPage';
 
+/** @spec 5.5.1 */
 export const NicknamePage = () => {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState(MOCK_ACCOUNT.nickname);
