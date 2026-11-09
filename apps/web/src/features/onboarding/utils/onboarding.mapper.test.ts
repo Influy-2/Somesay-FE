@@ -33,8 +33,8 @@ describe('onboarding payload mappers', () => {
       userNickname: 'somesay',
       userGender: 'FEMALE',
       userAge: 'TWENTIES',
-      userSkinExpectationIds: [1, 7],
-      userSkinTypeIds: [1, 8],
+      skinConcernIds: [1, 7],
+      skinTypeIds: [1, 8],
     });
   });
 
@@ -47,7 +47,7 @@ describe('onboarding payload mappers', () => {
         concerns: ['없는 고민'],
         skinTypeNames: ['지성', '없는 타입'],
       })
-    ).toMatchObject({ userSkinExpectationIds: [], userSkinTypeIds: [2] });
+    ).toMatchObject({ skinConcernIds: [], skinTypeIds: [2] });
   });
 
   it('잘 맞는 상품과 안 맞는 상품이 있으면 각각 payload를 만든다', () => {

@@ -20,8 +20,12 @@ export const ReviewCommentList = ({
             nickname={comment.userNickname}
             isAgree={comment.reactionType === 'AGREE'}
             content={comment.commentContent}
-            skinTypeIds={comment.userSkinTypeIds}
-            skinExpectationIds={comment.userSkinExpectationIds}
+            skinTypeIds={comment.userSkinTypes.map(
+              ({ skinTypeId }) => skinTypeId
+            )}
+            skinExpectationIds={comment.userSkinConcerns.map(
+              ({ skinConcernId }) => skinConcernId
+            )}
             userId={comment.userId}
           />
         </li>

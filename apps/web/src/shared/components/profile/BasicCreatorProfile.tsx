@@ -3,8 +3,6 @@ import { YoutubeIcon } from '@/shared/icons';
 import {
   formatSubscriberCount,
   getAgeLabel,
-  getSkinTypeLabel,
-  getSkinTypeLabels,
   type BasicCreatorProfileType,
 } from '@somesay/shared';
 import { ChipBasic } from '../chips/ChipBasic';
@@ -22,12 +20,14 @@ export const BasicCreatorProfile = ({
   creatorProfileImgUrl,
   creatorSubscriberNum,
   creatorAge,
-  creatorSkinTypeIds = [],
+  creatorSkinTypes = [],
   trustRank,
   highlightedLabels = [],
 }: BasicCreatorProfileProps) => {
   // 여러 피부 타입을 쉼표로 구분하여 표시
-  const skinTypeLabel = getSkinTypeLabels(creatorSkinTypeIds).join(', ');
+  const skinTypeLabel = creatorSkinTypes
+    .map(({ skinTypeName }) => skinTypeName)
+    .join(', ');
   const ageLabel = getAgeLabel(creatorAge);
   const highlightedLabelSet = new Set(highlightedLabels);
   const showTrustRank =
@@ -83,18 +83,15 @@ export const BasicCreatorProfile = ({
               label={ageLabel}
               variant={highlightedLabelSet.has(ageLabel) ? 'blue' : 'default'}
             />
-            {creatorSkinTypeIds.map((skinTypeId) => {
-              const label = getSkinTypeLabel(skinTypeId);
-              if (!label) return null;
-
-              return (
-                <ChipBasic
-                  key={skinTypeId}
-                  label={label}
-                  variant={highlightedLabelSet.has(label) ? 'blue' : 'default'}
-                />
-              );
-            })}
+            {creatorSkinTypes.map(({ skinTypeId, skinTypeName }) => (
+              <ChipBasic
+                key={skinTypeId}
+                label={skinTypeName}
+                variant={
+                  highlightedLabelSet.has(skinTypeName) ? 'blue' : 'default'
+                }
+              />
+            ))}
           </div>
         </div>
       </div>

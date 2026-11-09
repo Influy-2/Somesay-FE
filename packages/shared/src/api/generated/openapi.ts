@@ -448,10 +448,15 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * 리뷰에서 검색하기
-         * @description `query` 로 리뷰를 검색합니다. 일치 구간은 `<b><u>…</u></b>` 로 하이라이트됩니다.
-         *     * `sortBy`: `default`(관련도) / `createdAt_desc` / `rating_desc` / `rating_asc`
-         *     * 페이징: 응답의 `nextCursor` 를 다음 요청의 `searchAfter` 로 전달
+         * 통합 검색 - 리뷰
+         * @description `keyword` 로 크리에이터 리뷰를 검색합니다.
+         *     * `keyword` 는 앞뒤 공백을 지우고 검색합니다. 비어 있으면 결과가 없습니다. 최대 100자
+         *     * 필터: `skinTypeIds`(리뷰한 제품의 피부타입), `mainCategoryId`(리뷰한 제품의 대분류), `attributeIds`(리뷰의 긍정 칩). 같은 필터 안은 OR, 필터끼리는 AND
+         *     * `sortType`: `RELEVANCE`(기본) / `RECENT` / `RATING` / `RATING_LOW`
+         *     * `reviewContent` 는 검색어를 `<b>` 로 감싼 HTML 이스케이프 문자열입니다. 항상 HTML 로 렌더링합니다.
+         *     * `reviewChips.positive` 의 `isFilterMatched` 는 `attributeIds` 로 걸린 칩만 `true` 입니다. `negative` 는 항상 `false`
+         *     * 페이징: 첫 페이지는 `searchAfter` 없이, 다음 페이지는 응답의 `nextCursor` 를 `searchAfter` 로 전달. `totalCount` 는 매 페이지 포함
+         *     * 검색 반영은 최대 1시간 늦습니다(매시 정각 재색인).
          */
         get: operations["searchReviews"];
         put?: never;
@@ -470,11 +475,16 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * 제품에서 검색하기 (크리에이터 + 상품)
-         * @description `query` 로 크리에이터(최대 3명)와 상품을 함께 검색합니다.
-         *     * 크리에이터는 첫 페이지(`searchAfter` 없음)에만 내려가고, 다음 페이지는 빈 목록입니다.
-         *     * `sortBy`: `default`(관련도) / `rating_desc` / `price_desc` / `price_asc`
-         *     * 페이징: 응답의 `nextCursor` 를 다음 요청의 `searchAfter` 로 전달
+         * 통합 검색 - 제품
+         * @description `keyword` 로 크리에이터(최대 3명)와 제품을 함께 검색합니다.
+         *     * `keyword` 는 앞뒤 공백을 지우고 검색합니다. 비어 있으면 결과가 없습니다(`creators`·`products.content` 모두 `[]`). 최대 100자
+         *     * 필터: `skinTypeIds`(제품 피부타입), `mainCategoryId`, `attributeIds`(제품 기대효과 칩). 같은 필터 안은 OR, 필터끼리는 AND
+         *     * `sortType`: `RELEVANCE`(기본) / `RATING` / `PRICE` / `PRICE_HIGH`
+         *     * 크리에이터는 첫 페이지(`searchAfter` 없음)에만 내려가고, 다음 페이지는 `[]` 입니다. 필터와 `sortType` 은 적용하지 않습니다.
+         *     * `productShortSummary` 는 검색어를 `<b>` 로 감싼 HTML 이스케이프 문자열입니다. 항상 HTML 로 렌더링합니다.
+         *     * `productEffectChips`·`productSkinTypes` 의 `isFilterMatched` 는 필터로 걸린 항목만 `true` 입니다(검색어 일치는 `false`).
+         *     * 페이징: 첫 페이지는 `searchAfter` 없이, 다음 페이지는 응답의 `nextCursor` 를 `searchAfter` 로 전달. `totalCount` 는 매 페이지 포함
+         *     * 검색 반영은 최대 1시간 늦습니다(매시 정각 재색인).
          *     * 비로그인 가능. 로그인 시 찜 여부(`isWished`) 반영
          */
         get: operations["searchProductsAndCreators"];
@@ -660,8 +670,8 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * 리뷰 개수, AI 요약 및 피부 타입
-         * @description 제품의 리뷰 개수, AI 요약, 기대효과 칩 상위 5개를 반환합니다.
+         * 크리에이터 리뷰 요약
+         * @description 상품 상세페이지의 크리에이터 리뷰 요약 항목을 반환합니다.
          */
         get: operations["getReviewOverview"];
         put?: never;
@@ -885,8 +895,13 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * 크리에이터의 리뷰 중 검색(무한스크롤)
-         * @description 크리에이터의 리뷰를 키워드와 소분류로 검색합니다. `sortType`: `POPULAR` / `RECENT`(기본)
+         * 크리에이터 리뷰 검색
+         * @description 크리에이터의 리뷰를 `keyword` 와 대분류(`mainCategoryId`, 리뷰한 제품 기준)로 검색합니다.
+         *     * `keyword` 는 리뷰 본문·제품명·브랜드명·크리에이터명·카테고리명·칩·피부고민에서 찾습니다. 비우면 필터만 적용합니다(최대 100자).
+         *     * `sortType`: `RECENT`(기본) / `POPULAR`. `POPULAR` 의 공감 수는 최대 1시간 전 기준입니다.
+         *     * `reviewContent` 는 검색어를 `<b>` 로 감싼 HTML 이스케이프 문자열입니다. 항상 HTML 로 렌더링합니다.
+         *     * 페이징: 첫 페이지는 `searchAfter` 없이, 다음 페이지는 응답의 `nextCursor` 를 `searchAfter` 로 전달. `totalCount` 는 매 페이지 포함
+         *     * 검색 반영은 최대 1시간 늦습니다(매시 정각 재색인).
          */
         get: operations["getSearchedReviews"];
         put?: never;
@@ -969,13 +984,39 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * 브랜드별 상품 검색
-         * @description 브랜드 내 상품을 제품명(`keyword`)과 소분류(`subCategoryId`)로 검색합니다.
+         * 브랜드 내 상품 검색
+         * @description 브랜드 내 상품을 `keyword` 와 대분류(`mainCategoryId`)로 검색합니다.
+         *     * `keyword` 는 제품명·브랜드명·카테고리명·기대효과 칩·피부고민·한 줄 요약에서 찾습니다. 비우면 필터만 적용합니다(최대 100자).
          *     * `sortType`: `RATING`(기본) / `REVIEW` / `PRICE`
-         *     * `totalCount` 는 첫 페이지에서만 계산되며, 이후 페이지는 `null` 입니다.
+         *     * `productShortSummary` 는 검색어를 `<b>` 로 감싼 HTML 이스케이프 문자열입니다. 항상 HTML 로 렌더링합니다.
+         *     * 피부타입·기대효과 필터가 없어 `isFilterMatched` 는 항상 `false` 입니다.
+         *     * 페이징: 첫 페이지는 `searchAfter` 없이, 다음 페이지는 응답의 `nextCursor` 를 `searchAfter` 로 전달. `totalCount` 는 매 페이지 포함
+         *     * 검색 반영은 최대 1시간 늦습니다(매시 정각 재색인).
          *     * 비로그인 가능. 로그인 시 찜 여부(`isWished`) 반영
          */
         get: operations["getSearchedProducts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/attributes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 속성 목록 조회
+         * @description 속성 목록을 `attributeId` 오름차순으로 반환합니다.
+         *     * `mainCategoryId` 없음: 모든 대분류에 속한 공통 속성
+         *     * `mainCategoryId` 있음: 해당 대분류의 속성
+         */
+        get: operations["getAttributes"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1082,8 +1123,8 @@ export interface components {
             userGender: "MALE" | "FEMALE" | "NONE";
             /** @enum {string} */
             userAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            userSkinExpectationIds: number[];
-            userSkinTypeIds: number[];
+            skinConcernIds: number[];
+            skinTypeIds: number[];
         };
         ApiResponseSignUpInfoResponse: {
             code: string;
@@ -1098,8 +1139,18 @@ export interface components {
             userGender: "MALE" | "FEMALE" | "NONE";
             /** @enum {string} */
             userAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            userSkinExpectationIds: number[];
-            userSkinTypeIds: number[];
+            userSkinConcerns: components["schemas"]["SkinConcernResponse"][];
+            userSkinTypes: components["schemas"]["SkinTypeResponse"][];
+        };
+        SkinConcernResponse: {
+            /** Format: int64 */
+            skinConcernId: number;
+            skinConcernName: string;
+        };
+        SkinTypeResponse: {
+            /** Format: int64 */
+            skinTypeId: number;
+            skinTypeName: string;
         };
         ApiResponseVoid: {
             code: string;
@@ -1136,8 +1187,8 @@ export interface components {
             indexedReviewCount: number;
         };
         SkinInfoRequest: {
-            userSkinExpectationIds: number[];
-            userSkinTypeIds: number[];
+            skinConcernIds: number[];
+            skinTypeIds: number[];
         };
         ApiResponseSkinInfoResponse: {
             code: string;
@@ -1147,8 +1198,8 @@ export interface components {
         SkinInfoResponse: {
             /** Format: int64 */
             userId: number;
-            userSkinExpectationIds: number[];
-            userSkinTypeIds: number[];
+            userSkinConcerns: components["schemas"]["SkinConcernResponse"][];
+            userSkinTypes: components["schemas"]["SkinTypeResponse"][];
         };
         ApiResponseString: {
             code: string;
@@ -1243,7 +1294,7 @@ export interface components {
             /** Format: int32 */
             productReviewCount: number;
             productShortSummary: string;
-            productSkinTypeIds: number[];
+            productSkinTypes: components["schemas"]["SkinTypeResponse"][];
             productEffectChips: components["schemas"]["EffectChip"][];
             creatorProfileImgUrls: string[];
             isWished: boolean;
@@ -1297,7 +1348,7 @@ export interface components {
             creatorProfileImgUrl: string;
             /** @enum {string} */
             creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds: number[];
+            creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: int32 */
@@ -1386,7 +1437,7 @@ export interface components {
             creatorProfileImgUrl: string;
             /** @enum {string} */
             creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds: number[];
+            creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: int32 */
@@ -1419,7 +1470,7 @@ export interface components {
             userProfileImgUrl: string;
             /** @enum {string} */
             userGender: "MALE" | "FEMALE" | "NONE";
-            userSkinTypeIds: number[];
+            userSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int64 */
             userReactedProductCount: number;
             /** Format: int64 */
@@ -1445,13 +1496,23 @@ export interface components {
             userGender: "MALE" | "FEMALE" | "NONE";
             /** @enum {string} */
             userAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            userSkinTypeIds: number[];
-            userSkinExpectationIds: number[];
+            userSkinTypes: components["schemas"]["SkinTypeResponse"][];
+            userSkinConcerns: components["schemas"]["SkinConcernResponse"][];
         };
         ApiResponseCursorResponseReviewSearchItemResponse: {
             code: string;
             message: string;
             data: components["schemas"]["CursorResponseReviewSearchItemResponse"];
+        };
+        ChipSearchItemResponse: {
+            /** Format: int64 */
+            chipId: number;
+            chipName: string;
+            /** @enum {string} */
+            chipPolarity: "POSITIVE" | "NEGATIVE";
+            /** Format: int64 */
+            attributeId: number;
+            isFilterMatched: boolean;
         };
         CursorResponseReviewSearchItemResponse: {
             content: components["schemas"]["ReviewSearchItemResponse"][];
@@ -1460,11 +1521,15 @@ export interface components {
             nextCursor: Record<string, never>[];
             hasNext: boolean;
         };
+        ReviewChipsSearchResponse: {
+            positive: components["schemas"]["ChipSearchItemResponse"][];
+            negative: components["schemas"]["ChipSearchItemResponse"][];
+        };
         ReviewSearchItemResponse: {
             /** Format: int64 */
             reviewId: number;
             reviewContent: string;
-            reviewChips: components["schemas"]["ReviewChips"];
+            reviewChips: components["schemas"]["ReviewChipsSearchResponse"];
             /** Format: double */
             reviewRating: number;
             /** Format: int64 */
@@ -1473,9 +1538,11 @@ export interface components {
             creatorProfileImgUrl: string;
             /** @enum {string} */
             creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds: number[];
+            creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
+            /** Format: double */
+            creatorTrustScore: number;
             /** Format: int32 */
             creatorRanking: number;
             /** Format: int64 */
@@ -1498,22 +1565,56 @@ export interface components {
             creatorProfileImgUrl: string;
             /** @enum {string} */
             creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds: number[];
+            creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: int32 */
             creatorRanking: number;
         };
-        CursorResponseProductCard: {
-            content: components["schemas"]["ProductCard"][];
+        CursorResponseProductSearchItemResponse: {
+            content: components["schemas"]["ProductSearchItemResponse"][];
             /** Format: int64 */
             totalCount: number;
             nextCursor: Record<string, never>[];
             hasNext: boolean;
         };
+        EffectChipSearchResponse: {
+            /** Format: int64 */
+            chipId: number;
+            chipName: string;
+            isFilterMatched: boolean;
+        };
+        ProductSearchItemResponse: {
+            /** Format: int64 */
+            productId: number;
+            /** Format: int64 */
+            mainCategoryId: number;
+            /** Format: int64 */
+            subCategoryId: number;
+            brandName: string;
+            productName: string;
+            productImgUrl: string;
+            /** Format: int32 */
+            productPrice: number;
+            /** Format: double */
+            productAvgRating: number;
+            /** Format: int32 */
+            productReviewCount: number;
+            productShortSummary: string;
+            productSkinTypes: components["schemas"]["SkinTypeSearchResponse"][];
+            productEffectChips: components["schemas"]["EffectChipSearchResponse"][];
+            creatorProfileImgUrls: string[];
+            isWished: boolean;
+        };
         SearchResponse: {
             creators: components["schemas"]["CreatorSearchItemResponse"][];
-            products: components["schemas"]["CursorResponseProductCard"];
+            products: components["schemas"]["CursorResponseProductSearchItemResponse"];
+        };
+        SkinTypeSearchResponse: {
+            /** Format: int64 */
+            skinTypeId: number;
+            skinTypeName: string;
+            isFilterMatched: boolean;
         };
         ApiResponseTimeLinkListResponse: {
             code: string;
@@ -1554,8 +1655,8 @@ export interface components {
             userId: number;
             userNickname: string;
             userProfileImgUrl: string;
-            userSkinTypeIds: number[];
-            userSkinExpectationIds: number[];
+            userSkinTypes: components["schemas"]["SkinTypeResponse"][];
+            userSkinConcerns: components["schemas"]["SkinConcernResponse"][];
         };
         SliceResponseCommentItemResponse: {
             content: components["schemas"]["CommentItemResponse"][];
@@ -1587,7 +1688,7 @@ export interface components {
             creatorProfileImgUrl?: string;
             /** @enum {string} */
             creatorAge?: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds?: number[];
+            creatorSkinTypes?: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum?: number;
             /** Format: double */
@@ -1643,7 +1744,7 @@ export interface components {
             creatorProfileImgUrl: string;
             /** @enum {string} */
             creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds: number[];
+            creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: int32 */
@@ -1726,7 +1827,7 @@ export interface components {
             creatorProfileImgUrl: string;
             /** @enum {string} */
             creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds: number[];
+            creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: double */
@@ -1754,9 +1855,7 @@ export interface components {
             /** Format: int32 */
             productReviewCount: number;
             productAiSummary: string;
-            productFrequentMention: string;
-            productConsideration: string;
-            productSkinTypeIds: number[];
+            productSkinTypes: components["schemas"]["SkinTypeResponse"][];
             productEffectChips: components["schemas"]["EffectChip"][];
         };
         ApiResponseListReactionReviewResponse: {
@@ -1777,7 +1876,7 @@ export interface components {
             creatorProfileImgUrl: string;
             /** @enum {string} */
             creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds: number[];
+            creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
         };
         ApiResponseReviewChips: {
             code: string;
@@ -1809,14 +1908,14 @@ export interface components {
             reviewRating: number;
             /** Format: double */
             reviewAgreeRatio: number;
-            reviewMostAgreedSkinTypeIds: number[];
+            reviewMostAgreedSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
             creatorProfileImgUrl: string;
             /** @enum {string} */
             creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds: number[];
+            creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: double */
@@ -1860,8 +1959,8 @@ export interface components {
             userId?: number;
             userNickname?: string;
             userProfileImgUrl?: string;
-            userSkinTypeIds?: number[];
-            userSkinExpectationIds?: number[];
+            userSkinTypes?: components["schemas"]["SkinTypeResponse"][];
+            userSkinConcerns?: components["schemas"]["SkinConcernResponse"][];
             /** Format: int64 */
             reviewId?: number;
             reviewContent?: string;
@@ -1874,7 +1973,7 @@ export interface components {
             creatorProfileImgUrl?: string;
             /** @enum {string} */
             creatorAge?: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds?: number[];
+            creatorSkinTypes?: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum?: number;
             /** Format: double */
@@ -1906,7 +2005,7 @@ export interface components {
             creatorProfileImgUrl?: string;
             /** @enum {string} */
             creatorAge?: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds?: number[];
+            creatorSkinTypes?: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum?: number;
             /** Format: double */
@@ -1948,7 +2047,7 @@ export interface components {
             creatorProfileImgUrl: string;
             /** @enum {string} */
             creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
-            creatorSkinTypeIds: number[];
+            creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: int32 */
@@ -2001,6 +2100,39 @@ export interface components {
             totalPages: number;
             hasNext: boolean;
         };
+        ApiResponseCursorResponseCreatorReviewSearchItemResponse: {
+            code: string;
+            message: string;
+            data: components["schemas"]["CursorResponseCreatorReviewSearchItemResponse"];
+        };
+        CreatorReviewSearchItemResponse: {
+            /** Format: int64 */
+            reviewId: number;
+            reviewContent: string;
+            reviewChips: components["schemas"]["ReviewChips"];
+            /** Format: double */
+            reviewRating: number;
+            /** Format: date-time */
+            reviewCreatedAt: string;
+            /** Format: int64 */
+            creatorId: number;
+            /** Format: int64 */
+            productId: number;
+            brandName: string;
+            productName: string;
+            productImgUrl: string;
+            /** Format: int32 */
+            productPrice: number;
+            mainCategoryName: string;
+            subCategoryName: string;
+        };
+        CursorResponseCreatorReviewSearchItemResponse: {
+            content: components["schemas"]["CreatorReviewSearchItemResponse"][];
+            /** Format: int64 */
+            totalCount: number;
+            nextCursor: Record<string, never>[];
+            hasNext: boolean;
+        };
         ApiResponseListMainCategoryResponse: {
             code: string;
             message: string;
@@ -2036,6 +2168,21 @@ export interface components {
             /** Format: int32 */
             brandRanking: number;
             subCategories: components["schemas"]["SubCategoryItemResponse"][];
+        };
+        ApiResponseCursorResponseProductSearchItemResponse: {
+            code: string;
+            message: string;
+            data: components["schemas"]["CursorResponseProductSearchItemResponse"];
+        };
+        ApiResponseListAttributeResponse: {
+            code: string;
+            message: string;
+            data: components["schemas"]["AttributeResponse"][];
+        };
+        AttributeResponse: {
+            /** Format: int64 */
+            attributeId: number;
+            attributeName: string;
         };
     };
     responses: never;
@@ -3175,13 +3322,13 @@ export interface operations {
     searchReviews: {
         parameters: {
             query: {
-                query: string;
-                subCategoryId?: number;
-                skinExpectationIds?: number[];
+                keyword: string;
                 skinTypeIds?: number[];
+                mainCategoryId?: number;
+                attributeIds?: number[];
+                sortType?: "RELEVANCE" | "RECENT" | "RATING" | "RATING_LOW";
                 size?: number;
-                sortBy?: string;
-                searchAfter?: Record<string, never>[];
+                searchAfter?: string[];
             };
             header?: never;
             path?: never;
@@ -3198,18 +3345,36 @@ export interface operations {
                     "application/json": components["schemas"]["ApiResponseCursorResponseReviewSearchItemResponse"];
                 };
             };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
         };
     };
     searchProductsAndCreators: {
         parameters: {
             query: {
-                query: string;
-                subCategoryId?: number;
-                skinExpectationIds?: number[];
+                keyword: string;
                 skinTypeIds?: number[];
+                mainCategoryId?: number;
+                attributeIds?: number[];
+                sortType?: "RELEVANCE" | "RATING" | "PRICE" | "PRICE_HIGH";
                 size?: number;
-                sortBy?: string;
-                searchAfter?: Record<string, never>[];
+                searchAfter?: string[];
             };
             header?: never;
             path?: never;
@@ -3224,6 +3389,24 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiResponseSearchResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
         };
@@ -3852,10 +4035,10 @@ export interface operations {
         parameters: {
             query?: {
                 keyword?: string;
-                subCategoryId?: number;
+                mainCategoryId?: number;
                 sortType?: "POPULAR" | "RECENT";
-                page?: number;
                 size?: number;
+                searchAfter?: string[];
             };
             header?: never;
             path: {
@@ -3871,11 +4054,20 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ApiResponsePageResponseCreatorReviewResponse"];
+                    "application/json": components["schemas"]["ApiResponseCursorResponseCreatorReviewSearchItemResponse"];
                 };
             };
             /** @description Not Found */
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -3976,10 +4168,10 @@ export interface operations {
         parameters: {
             query?: {
                 keyword?: string;
-                subCategoryId?: number;
+                mainCategoryId?: number;
                 sortType?: "RATING" | "REVIEW" | "PRICE";
-                page?: number;
                 size?: number;
+                searchAfter?: string[];
             };
             header?: never;
             path: {
@@ -3995,7 +4187,47 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ApiResponseCountedSliceResponseProductCard"];
+                    "application/json": components["schemas"]["ApiResponseCursorResponseProductSearchItemResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+        };
+    };
+    getAttributes: {
+        parameters: {
+            query?: {
+                mainCategoryId?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponseListAttributeResponse"];
                 };
             };
             /** @description Not Found */

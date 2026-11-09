@@ -4,7 +4,6 @@ import type { CreatorRankingResponse } from '../../api/schema';
  * 크리에이터 프로필 묶음입니다.
  * 랭킹·홈 큐레이션 리뷰 카드·상품 리뷰·리뷰 검색 응답에 같은 이름으로 평탄하게 실려,
  * 응답 객체를 그대로 프로필 컴포넌트에 넘길 수 있습니다. (예: `creator={review}`)
- * 신뢰도(`creatorTrustScore`)는 리뷰 검색 응답에 없어 넣지 않았습니다. 필요한 컴포넌트가 따로 Pick 합니다.
  */
 export type BasicCreatorProfileType = Pick<
   CreatorRankingResponse,
@@ -12,7 +11,7 @@ export type BasicCreatorProfileType = Pick<
   | 'creatorName'
   | 'creatorProfileImgUrl'
   | 'creatorAge'
-  | 'creatorSkinTypeIds'
+  | 'creatorSkinTypes'
   | 'creatorSubscriberNum'
 >;
 

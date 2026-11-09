@@ -1,7 +1,7 @@
 // /my-page 상단 내 정보
 import { Link } from 'react-router';
 
-import { getAgeLabel, getSkinTypeLabels } from '@somesay/shared';
+import { getAgeLabel } from '@somesay/shared';
 
 import { PATH } from '@/routes/path';
 import { ChipBasic } from '@/shared/components';
@@ -11,7 +11,7 @@ import type { AgeType, MyPageResponse } from '@somesay/shared';
 
 interface MyProfileProps extends Pick<
   MyPageResponse,
-  'userProfileImgUrl' | 'userNickname' | 'userSkinTypeIds'
+  'userProfileImgUrl' | 'userNickname' | 'userSkinTypes'
 > {
   // 마이페이지 응답에 연령이 없어 /users/info(userAge) 캐시에서 받습니다.
   userAge: AgeType | null;
@@ -20,7 +20,7 @@ interface MyProfileProps extends Pick<
 export const MyProfile = ({
   userProfileImgUrl,
   userNickname,
-  userSkinTypeIds,
+  userSkinTypes,
   userAge,
 }: MyProfileProps) => {
   return (
@@ -44,8 +44,8 @@ export const MyProfile = ({
         </span>
         <div className="flex flex-wrap gap-1">
           <ChipBasic label={getAgeLabel(userAge)} />
-          {getSkinTypeLabels(userSkinTypeIds).map((label) => (
-            <ChipBasic key={label} label={label} />
+          {userSkinTypes.map(({ skinTypeId, skinTypeName }) => (
+            <ChipBasic key={skinTypeId} label={skinTypeName} />
           ))}
         </div>
       </div>

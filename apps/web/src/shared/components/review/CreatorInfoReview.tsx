@@ -14,7 +14,7 @@ export interface CreatorInfoReviewProps {
     | 'creatorProfileImgUrl'
     | 'creatorSubscriberNum'
     | 'creatorTrustScore'
-    | 'creatorSkinTypeIds'
+    | 'creatorSkinTypes'
     | 'reviewRating'
     | 'reviewContent'
     | 'reviewAgreeCount'
@@ -35,7 +35,9 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
         creatorProfileImgUrl={review.creatorProfileImgUrl}
         subscriberNum={review.creatorSubscriberNum}
         trustScore={review.creatorTrustScore}
-        skinTypeIds={review.creatorSkinTypeIds}
+        skinTypeIds={review.creatorSkinTypes.map(
+          ({ skinTypeId }) => skinTypeId
+        )}
       />
 
       <div className="mb-5">

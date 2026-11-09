@@ -4,7 +4,6 @@ import {
   EvaluatedCreatorItemHorizontal,
 } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
-import { getSkinTypeLabels } from '@somesay/shared';
 import { MOCK_EVALUATED_CREATORS_LIST } from '@/features/myPage';
 
 /** @spec 5.6.2 */
@@ -38,9 +37,9 @@ export const MyReviewEvaluationCreatorListPage = () => {
               creatorProfileImgUrl={creator.creatorProfileImgUrl}
               name={creator.creatorName}
               age={creator.creatorAge}
-              skinType={getSkinTypeLabels(creator.creatorSkinTypeIds).join(
-                ', '
-              )}
+              skinType={creator.creatorSkinTypes
+                .map(({ skinTypeName }) => skinTypeName)
+                .join(', ')}
               reviewCount={creator.myReactionCount}
             />
           </li>

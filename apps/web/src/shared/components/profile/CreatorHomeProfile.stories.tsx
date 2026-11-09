@@ -16,7 +16,7 @@ const meta: Meta<typeof CreatorHomeProfile> = {
     creatorProfileImgUrl: { control: 'text' },
     creatorSubscriberNum: { control: 'number' },
     creatorAge: { control: 'select', options: AGE_TYPES },
-    creatorSkinTypeIds: { control: 'object' },
+    creatorSkinTypes: { control: 'object' },
   },
 };
 
@@ -31,6 +31,6 @@ export const Default: Story = {
     creatorProfileImgUrl: 'https://placehold.co/100',
     creatorSubscriberNum: 0,
     creatorAge: 'TWENTIES',
-    creatorSkinTypeIds: [1],
+    creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
   },
 };

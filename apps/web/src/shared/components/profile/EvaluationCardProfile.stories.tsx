@@ -18,7 +18,7 @@ const meta: Meta<typeof EvaluationCardProfile> = {
     creatorTrustScore: { control: 'number' },
     creatorRanking: { control: 'number' },
     creatorAge: { control: 'select', options: AGE_TYPES },
-    creatorSkinTypeIds: { control: 'object' },
+    creatorSkinTypes: { control: 'object' },
   },
 };
 
@@ -34,7 +34,7 @@ export const Evaluated: Story = {
     creatorTrustScore: 4.5,
     creatorRanking: 5,
     creatorAge: 'TWENTIES',
-    creatorSkinTypeIds: [3],
+    creatorSkinTypes: [{ skinTypeId: 3, skinTypeName: '복합성' }],
   },
 };
 
@@ -47,7 +47,7 @@ export const EvaluatedNoRank: Story = {
     creatorTrustScore: 4.5,
     creatorRanking: 0,
     creatorAge: 'THIRTIES',
-    creatorSkinTypeIds: [2],
+    creatorSkinTypes: [{ skinTypeId: 2, skinTypeName: '지성' }],
   },
 };
 
@@ -60,6 +60,6 @@ export const NotEvaluated: Story = {
     creatorTrustScore: 4.5,
     creatorRanking: 5,
     creatorAge: 'TWENTIES',
-    creatorSkinTypeIds: [3],
+    creatorSkinTypes: [{ skinTypeId: 3, skinTypeName: '복합성' }],
   },
 };

@@ -26,7 +26,7 @@ const meta: Meta<typeof CreatorRankingCard> = {
     creatorYoutubeLink: { control: 'text' },
     creatorSubscriberNum: { control: 'number' },
     creatorAge: { control: 'select', options: AGE_TYPES },
-    creatorSkinTypeIds: { control: 'object' },
+    creatorSkinTypes: { control: 'object' },
     creatorTrustScore: { control: 'number' },
   },
 };
@@ -44,7 +44,7 @@ const defaultArgs = {
   creatorYoutubeLink: 'https://www.youtube.com',
   creatorSubscriberNum: 1_300_000,
   creatorAge: 'TWENTIES' as const,
-  creatorSkinTypeIds: [1],
+  creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
   creatorTrustScore: 100,
 };
 
@@ -75,7 +75,12 @@ export const LongContent: Story = {
     creatorRanking: 30,
     creatorName: '아주 긴 이름을 가진 뷰티 크리에이터 채널',
     creatorSubscriberNum: 12_345_678,
-    creatorSkinTypeIds: [1, 6, 5, 3],
+    creatorSkinTypes: [
+      { skinTypeId: 1, skinTypeName: '건성' },
+      { skinTypeId: 6, skinTypeName: '민감성' },
+      { skinTypeId: 5, skinTypeName: '수부지' },
+      { skinTypeId: 3, skinTypeName: '복합성' },
+    ],
     creatorTrustScore: 87.6,
   },
 };

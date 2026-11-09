@@ -1,7 +1,6 @@
 import {
   formatSubscriberCount,
   getAgeLabel,
-  getSkinTypeLabels,
   type CreatorRankingUpDownType,
 } from '@somesay/shared';
 import { Link } from 'react-router';
@@ -25,12 +24,14 @@ export const CreatorRankingCard = ({
   creatorName,
   creatorSubscriberNum,
   creatorAge,
-  creatorSkinTypeIds,
+  creatorSkinTypes,
   creatorTrustScore,
 }: CreatorRankingUpDownType) => {
   const subscriberLabel = formatSubscriberCount(creatorSubscriberNum);
   const ageLabel = getAgeLabel(creatorAge);
-  const skinTypeLabels = getSkinTypeLabels(creatorSkinTypeIds);
+  const skinTypeLabels = creatorSkinTypes.map(
+    ({ skinTypeName }) => skinTypeName
+  );
   const skinTypeLabel =
     skinTypeLabels.length > 0
       ? skinTypeLabels.join(', ')

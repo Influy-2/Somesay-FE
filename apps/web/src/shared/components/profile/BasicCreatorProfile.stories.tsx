@@ -16,7 +16,7 @@ const meta: Meta<typeof BasicCreatorProfile> = {
     trustRank: { control: 'number' },
     highlightedLabels: { control: 'object' },
     creatorAge: { control: 'select', options: AGE_TYPES },
-    creatorSkinTypeIds: { control: 'object' },
+    creatorSkinTypes: { control: 'object' },
   },
 };
 
@@ -31,7 +31,7 @@ export const Default: Story = {
     creatorSubscriberNum: 0,
     trustRank: 3,
     creatorAge: 'TWENTIES',
-    creatorSkinTypeIds: [1],
+    creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
     highlightedLabels: ['건성'],
   },
 };

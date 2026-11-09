@@ -17,7 +17,7 @@ const meta: Meta<typeof CreatorRankingUpDownRow> = {
     creatorSubscriberNum: { control: 'number' },
     creatorTrustScore: { control: 'number' },
     creatorAge: { control: 'select', options: AGE_TYPES },
-    creatorSkinTypeIds: { control: 'object' },
+    creatorSkinTypes: { control: 'object' },
     creatorRanking: { control: 'number' },
     creatorYoutubeLink: { control: 'text' },
   },
@@ -37,7 +37,10 @@ export const Default: Story = {
     creatorSubscriberNum: 2,
     creatorTrustScore: 90,
     creatorAge: 'TWENTIES',
-    creatorSkinTypeIds: [1, 6],
+    creatorSkinTypes: [
+      { skinTypeId: 1, skinTypeName: '건성' },
+      { skinTypeId: 6, skinTypeName: '민감성' },
+    ],
     creatorRanking: 2,
   },
 };

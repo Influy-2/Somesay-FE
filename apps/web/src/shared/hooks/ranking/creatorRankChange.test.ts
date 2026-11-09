@@ -11,7 +11,7 @@ const createCreator = (
   creatorName: '크리에이터',
   creatorProfileImgUrl: '',
   creatorAge: 'TWENTIES',
-  creatorSkinTypeIds: [1],
+  creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
   creatorSubscriberNum: 1000,
   creatorRanking,
   creatorOldRanking,

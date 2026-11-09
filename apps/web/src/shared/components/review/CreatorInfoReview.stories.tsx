@@ -23,7 +23,10 @@ export const Default: Story = {
       creatorSubscriberNum: 124000,
       creatorProfileImgUrl: mockProfile,
       creatorTrustScore: 92,
-      creatorSkinTypeIds: [1, 6],
+      creatorSkinTypes: [
+        { skinTypeId: 1, skinTypeName: '건성' },
+        { skinTypeId: 6, skinTypeName: '민감성' },
+      ],
       reviewContent:
         '촉촉하고 흡수가 빨라서 데일리로 쓰기 정말 좋아요. 자극 없이 순하게 스며드는 느낌이에요.',
       reviewRating: 4.5,
@@ -42,7 +45,7 @@ export const NoEvaluation: Story = {
       creatorSubscriberNum: 32000,
       creatorProfileImgUrl: mockProfile,
       creatorTrustScore: 85,
-      creatorSkinTypeIds: [3],
+      creatorSkinTypes: [{ skinTypeId: 3, skinTypeName: '복합성' }],
       reviewContent: '향이 은은하고 발림성이 좋아요.',
       reviewRating: 4,
       reviewAgreeCount: 0,

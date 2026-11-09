@@ -36,7 +36,7 @@ export const MyPage = () => {
         <MyProfile
           userProfileImgUrl={data.userProfileImgUrl}
           userNickname={data.userNickname}
-          userSkinTypeIds={data.userSkinTypeIds}
+          userSkinTypes={data.userSkinTypes}
           userAge={user?.userAge ?? null}
         />
         {/* @spec 5.1.2 */}

@@ -1,34 +1,21 @@
 import {
   formatRating,
   formatCount,
-  getSkinTypeLabel,
   type ProductReviewOverviewResponse,
 } from '@somesay/shared';
 import { useMySkinProfile } from '@/shared/hooks';
 import { ChipLarge, StarRating } from '@/shared/components';
-import {
-  BulletDotIcon,
-  DotIcon,
-  QuoteCloseIcon,
-  QuoteOpenIcon,
-} from '@/shared/icons';
+import { DotIcon, QuoteCloseIcon, QuoteOpenIcon } from '@/shared/icons';
 
 // 크리에이터 리뷰 요약 정보를 표시하는 섹션입니다.
 export const CreatorReviewSummarySection = ({
   productAvgRating,
   productReviewCount,
   productAiSummary,
-  productFrequentMention,
-  productConsideration,
-  productSkinTypeIds,
+  productSkinTypes,
   productEffectChips,
 }: ProductReviewOverviewResponse) => {
   const { isMySkinTypeId } = useMySkinProfile();
-  // 자주 언급되는 점·참고할 점은 운영에서 null 이 와서(타입은 non-null) 아래 `text &&` 로 숨깁니다.
-  const mentionItems = [
-    { label: '자주 언급되는 점', text: productFrequentMention },
-    { label: '참고할 점', text: productConsideration },
-  ];
   return (
     <section className="flex flex-col gap-5 bg-white px-4 py-5">
       <h2 className="headline4">크리에이터 리뷰 요약</h2>
@@ -74,41 +61,21 @@ export const CreatorReviewSummarySection = ({
           <QuoteCloseIcon />
         </div>
       </div>
-      {mentionItems.map(
-        ({ label, text }) =>
-          text && (
-            <div key={label} className="flex flex-col gap-1 px-2">
-              <p className="body2-m text-grey06">{label}</p>
-              <ul>
-                <li className="body2-m flex list-none items-start gap-2">
-                  <BulletDotIcon
-                    className="text-grey08 mt-2 shrink-0"
-                    aria-hidden="true"
-                  />
-                  <span>{text}</span>
-                </li>
-              </ul>
-            </div>
-          )
-      )}
+      {/* TODO: 자주 언급되는 점·참고할 점이 리뷰 개요 응답에서 빠졌습니다. 서버가 필드를 다시 주면 복구합니다.
+          (productFrequentMention·productConsideration 을 BulletDotIcon 목록으로 그리던 블록) */}
       <div className="bg-grey02 my-1 h-px w-full" />
       {/* 4. 태그 영역 */}
       <div className="flex flex-col gap-5">
         <div>
           <p className="body2-m text-grey06 mb-1.5">잘 맞는 피부 타입</p>
           <div className="flex flex-wrap gap-2.5">
-            {productSkinTypeIds.map((skinTypeId) => {
-              const label = getSkinTypeLabel(skinTypeId);
-              if (!label) return null;
-
-              return (
-                <ChipLarge
-                  key={skinTypeId}
-                  label={label}
-                  color={isMySkinTypeId(skinTypeId) ? 'blue100' : 'white'}
-                />
-              );
-            })}
+            {productSkinTypes.map(({ skinTypeId, skinTypeName }) => (
+              <ChipLarge
+                key={skinTypeId}
+                label={skinTypeName}
+                color={isMySkinTypeId(skinTypeId) ? 'blue100' : 'white'}
+              />
+            ))}
           </div>
         </div>
         <div>

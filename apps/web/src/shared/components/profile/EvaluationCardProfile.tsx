@@ -2,11 +2,7 @@
 
 import { SomesaySmIcon, YoutubeIcon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
-import {
-  formatSubscriberCount,
-  getAgeLabel,
-  getSkinTypeLabels,
-} from '@somesay/shared';
+import { formatSubscriberCount, getAgeLabel } from '@somesay/shared';
 import type { CreatorRankingResponse } from '@somesay/shared';
 
 // 리뷰 평가 카드(EvaluationReviewCard)도 같은 크리에이터 정보를 받습니다.
@@ -18,7 +14,7 @@ export type EvaluationCardCreator = Pick<
   | 'creatorTrustScore'
   | 'creatorRanking'
   | 'creatorAge'
-  | 'creatorSkinTypeIds'
+  | 'creatorSkinTypes'
 >;
 
 type EvaluationCardProfileProps = EvaluationCardCreator & {
@@ -33,7 +29,7 @@ export const EvaluationCardProfile = ({
   creatorTrustScore,
   creatorRanking,
   creatorAge,
-  creatorSkinTypeIds,
+  creatorSkinTypes,
 }: EvaluationCardProfileProps) => {
   // 순위 밖 크리에이터는 운영에서 순위가 null 로 옵니다(타입은 non-null).
   const showRank =
@@ -104,7 +100,7 @@ export const EvaluationCardProfile = ({
           {evaluated && (
             <div className="flex items-center gap-1">
               <ChipBasic label={getAgeLabel(creatorAge)} />
-              {getSkinTypeLabels(creatorSkinTypeIds).map((label) => (
+              {creatorSkinTypes.map(({ skinTypeName: label }) => (
                 <ChipBasic key={label} label={label} />
               ))}
             </div>

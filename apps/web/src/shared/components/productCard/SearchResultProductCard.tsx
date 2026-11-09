@@ -4,8 +4,6 @@ import {
   formatCount,
   formatPrice,
   type ProductCard,
-  getSkinTypeLabel,
-  getSkinTypeLabels,
 } from '@somesay/shared';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
@@ -103,19 +101,16 @@ export const SearchResultProductCard = ({
         <span className="caption1-m text-grey06 self-center">잘 맞는 타입</span>
         <div
           className="flex flex-wrap gap-x-1 gap-y-2"
-          aria-label={`잘 맞는 타입: ${getSkinTypeLabels(product.productSkinTypeIds).join(', ')}`}
+          aria-label={`잘 맞는 타입: ${product.productSkinTypes.map(({ skinTypeName }) => skinTypeName).join(', ')}`}
         >
-          {product.productSkinTypeIds.map((skinTypeId) => {
-            const label = getSkinTypeLabel(skinTypeId);
-            if (!label) return null;
-
+          {product.productSkinTypes.map(({ skinTypeId, skinTypeName }) => {
             const isMatched =
               MOCK_USER_SKIN_PROFILE.skinTypeIds.includes(skinTypeId);
 
             return (
               <ChipBasic
                 key={skinTypeId}
-                label={label}
+                label={skinTypeName}
                 variant={isMatched ? 'blue' : 'default'}
               />
             );

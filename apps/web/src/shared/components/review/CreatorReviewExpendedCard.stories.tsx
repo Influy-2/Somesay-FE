@@ -26,7 +26,7 @@ const mockCreator = {
   creatorSubscriberNum: 124000,
   creatorTrustScore: 92,
   creatorAge: 'TWENTIES' as const,
-  creatorSkinTypeIds: [1],
+  creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
 };
 
 export const Default: Story = {

@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 
 import cn from '@/utils/cn';
 import { RecommendedCreatorProfile } from '@/shared/components';
-import { getSkinTypeLabels } from '@somesay/shared';
 import type { RecommendedCreatorMockType } from './mock';
 
 /**
@@ -74,9 +73,9 @@ export const RecommendedCreatorProfileRow = ({
                 name={creator.creatorName}
                 creatorProfileImgUrl={creator.creatorProfileImgUrl}
                 age={creator.creatorAge}
-                skinType={getSkinTypeLabels(creator.creatorSkinTypeIds).join(
-                  ', '
-                )}
+                skinType={creator.creatorSkinTypes
+                  .map(({ skinTypeName }) => skinTypeName)
+                  .join(', ')}
               />
             </div>
 

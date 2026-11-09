@@ -5,7 +5,6 @@ import { ChipBasic } from '../chips/ChipBasic';
 import {
   formatSubscriberCount,
   getAgeLabel,
-  getSkinTypeLabels,
   type CreatorDetailResponse,
 } from '@somesay/shared';
 import { BlackHeartButton } from '../buttons/BlackHeartButton';
@@ -16,7 +15,7 @@ type CreatorHomeProfileProps = Pick<
   | 'creatorProfileImgUrl'
   | 'creatorSubscriberNum'
   | 'creatorAge'
-  | 'creatorSkinTypeIds'
+  | 'creatorSkinTypes'
   | 'creatorYoutubeLink'
 > & {
   // 찜 수·찜 여부는 UI 값입니다. (크리에이터 상세 응답에 해당 필드 없음)
@@ -30,13 +29,15 @@ export const CreatorHomeProfile = ({
   creatorProfileImgUrl,
   creatorSubscriberNum,
   creatorAge,
-  creatorSkinTypeIds,
+  creatorSkinTypes,
   likeCount: initialLikeCount,
   isLiked: initialLiked = false,
   onLikeClick,
   creatorYoutubeLink,
 }: CreatorHomeProfileProps) => {
-  const skinTypeLabels = getSkinTypeLabels(creatorSkinTypeIds);
+  const skinTypeLabels = creatorSkinTypes.map(
+    ({ skinTypeName }) => skinTypeName
+  );
   const skinTypeLabel = skinTypeLabels.join(', ');
   const ageLabel = getAgeLabel(creatorAge);
   const [liked, setLiked] = useState(initialLiked);

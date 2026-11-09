@@ -41,8 +41,8 @@ export const buildSignUpInfoRequest = ({
   userNickname: nickname.trim(),
   userGender: gender,
   userAge: age,
-  userSkinExpectationIds: toOptionIds(concerns, USER_SKIN_CONCERN_OPTIONS),
-  userSkinTypeIds: toOptionIds(skinTypeNames, SKIN_TYPE_OPTIONS),
+  skinConcernIds: toOptionIds(concerns, USER_SKIN_CONCERN_OPTIONS),
+  skinTypeIds: toOptionIds(skinTypeNames, SKIN_TYPE_OPTIONS),
 });
 
 export const buildProductFitPayloads = (

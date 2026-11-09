@@ -23,7 +23,10 @@ const MOCK_SEARCH_PRODUCT: ProductCard = {
   creatorProfileImgUrls: MOCK_CREATOR_IMAGE_URLS,
   productShortSummary:
     '"세럼이 끈적임 없이 촉촉하고, 수분감이 많아서 특히 건성 피부인 분들에게 추천해요."',
-  productSkinTypeIds: [1, 6],
+  productSkinTypes: [
+    { skinTypeId: 1, skinTypeName: '건성' },
+    { skinTypeId: 6, skinTypeName: '민감성' },
+  ],
   productEffectChips: [
     '각질제거',
     '여드름 진정',
@@ -54,9 +57,10 @@ const MOCK_SEARCH_REVIEW_BASE: Omit<
   creatorName: '크리에이터닉네임',
   creatorProfileImgUrl: mockProfileImg,
   creatorAge: 'TWENTIES',
-  creatorSkinTypeIds: [1],
+  creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
   creatorSubscriberNum: 12000,
   creatorRanking: 5,
+  creatorTrustScore: 80,
   productId: MOCK_SEARCH_PRODUCT.productId,
   brandName: MOCK_SEARCH_PRODUCT.brandName,
   productName: MOCK_SEARCH_PRODUCT.productName,

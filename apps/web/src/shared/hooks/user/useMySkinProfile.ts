@@ -13,7 +13,9 @@ export const useMySkinProfile = () => {
   const { data: userInfo } = useFetchUserInfo();
 
   // 피부 타입은 서버와 사용자 양쪽 다 id를 갖고 있어, 표기 차이에 흔들리지 않게 id로 비교합니다.
-  const mySkinTypeIdSet = new Set(userInfo?.userSkinTypeIds ?? []);
+  const mySkinTypeIdSet = new Set(
+    userInfo?.userSkinTypes.map(({ skinTypeId }) => skinTypeId) ?? []
+  );
 
   const isMySkinTypeId = (id: number) => mySkinTypeIdSet.has(id);
 

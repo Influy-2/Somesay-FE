@@ -11,7 +11,7 @@ export const MOCK_CREATOR: CreatorDetailResponse = {
   creatorName: '레오제이',
   creatorProfileImgUrl: mockProfileImg,
   creatorAge: 'TWENTIES',
-  creatorSkinTypeIds: [1],
+  creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
   creatorSubscriberNum: 300000,
   creatorRanking: 1,
   creatorTrustScore: 99,

@@ -3,8 +3,6 @@ import { Link } from 'react-router';
 import {
   formatSubscriberCount,
   getAgeLabel,
-  getSkinTypeLabel,
-  getSkinTypeLabels,
   type AgeType,
   type CreatorRankingUpDownType,
 } from '@somesay/shared';
@@ -34,13 +32,15 @@ export const CreatorRankingUpDownRow = ({
   creatorName,
   creatorSubscriberNum,
   creatorAge,
-  creatorSkinTypeIds,
+  creatorSkinTypes,
   creatorTrustScore,
   isMyAge = () => false,
   isMySkinTypeId = () => false,
 }: CreatorRankingUpDownRowProps) => {
   // aria-label을 위한 문자열 생성
-  const skinTypeLabel = getSkinTypeLabels(creatorSkinTypeIds).join(', ');
+  const skinTypeLabel = creatorSkinTypes
+    .map(({ skinTypeName }) => skinTypeName)
+    .join(', ');
   const ageLabel = getAgeLabel(creatorAge);
 
   const rankChangeLabel =
@@ -111,18 +111,13 @@ export const CreatorRankingUpDownRow = ({
               label={ageLabel}
               variant={isMyAge(creatorAge) ? 'blue' : 'default'}
             />
-            {creatorSkinTypeIds.map((skinTypeId) => {
-              const label = getSkinTypeLabel(skinTypeId);
-              if (!label) return null;
-
-              return (
-                <ChipBasic
-                  key={skinTypeId}
-                  label={label}
-                  variant={isMySkinTypeId(skinTypeId) ? 'blue' : 'default'}
-                />
-              );
-            })}
+            {creatorSkinTypes.map(({ skinTypeId, skinTypeName }) => (
+              <ChipBasic
+                key={skinTypeId}
+                label={skinTypeName}
+                variant={isMySkinTypeId(skinTypeId) ? 'blue' : 'default'}
+              />
+            ))}
           </div>
         </div>
       </div>

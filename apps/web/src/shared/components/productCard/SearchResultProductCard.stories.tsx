@@ -40,7 +40,10 @@ const MOCK_PRODUCT: ProductCard = {
   isWished: false,
   creatorProfileImgUrls: MOCK_CREATOR_IMAGE_URLS,
   productShortSummary: '촉촉하고 흡수가 빨라서 데일리로 쓰기 좋아요.',
-  productSkinTypeIds: [1, 3],
+  productSkinTypes: [
+    { skinTypeId: 1, skinTypeName: '건성' },
+    { skinTypeId: 3, skinTypeName: '복합성' },
+  ],
   productEffectChips: toEffectChips(['보습', '탄력', '미백']),
 };
 
@@ -95,7 +98,10 @@ export const HighPrice: Story = {
       productReviewCount: 3420,
       productShortSummary:
         '고가이지만 그만한 가치가 있어요. 민감 피부에도 트러블 없이 사용 가능합니다.',
-      productSkinTypeIds: [6, 1],
+      productSkinTypes: [
+        { skinTypeId: 6, skinTypeName: '민감성' },
+        { skinTypeId: 1, skinTypeName: '건성' },
+      ],
       productEffectChips: toEffectChips(['보습', '진정', '미백', '탄력']),
     },
     onHeartToggle: () => {},
@@ -115,7 +121,7 @@ export const FewTags: Story = {
   args: {
     product: {
       ...MOCK_PRODUCT,
-      productSkinTypeIds: [2],
+      productSkinTypes: [{ skinTypeId: 2, skinTypeName: '지성' }],
       productEffectChips: toEffectChips(['모공']),
     },
     onHeartToggle: () => {},

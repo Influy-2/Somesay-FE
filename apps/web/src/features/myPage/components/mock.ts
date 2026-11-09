@@ -50,7 +50,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreatorMockType[] = [
     creatorName: '김크리스탈김크리스탈김트리스탈',
     creatorProfileImgUrl: '',
     creatorAge: 'TWENTIES',
-    creatorSkinTypeIds: [2],
+    creatorSkinTypes: [{ skinTypeId: 2, skinTypeName: '지성' }],
     creatorSubscriberNum: 100000,
     review: {
       reviewId: 1,
@@ -69,7 +69,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreatorMockType[] = [
     creatorName: '뷰티인사이더',
     creatorProfileImgUrl: '',
     creatorAge: 'THIRTIES',
-    creatorSkinTypeIds: [1],
+    creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
     creatorSubscriberNum: 100000,
     review: {
       reviewId: 2,
@@ -88,7 +88,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreatorMockType[] = [
     creatorName: '글로우픽',
     creatorProfileImgUrl: '',
     creatorAge: 'TWENTIES',
-    creatorSkinTypeIds: [3],
+    creatorSkinTypes: [{ skinTypeId: 3, skinTypeName: '복합성' }],
     creatorSubscriberNum: 100000,
     review: {
       reviewId: 3,
@@ -106,7 +106,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreatorMockType[] = [
     creatorName: '스킨로그',
     creatorProfileImgUrl: '',
     creatorAge: 'THIRTIES',
-    creatorSkinTypeIds: [6],
+    creatorSkinTypes: [{ skinTypeId: 6, skinTypeName: '민감성' }],
     creatorSubscriberNum: 100000,
     review: {
       reviewId: 4,
@@ -124,7 +124,7 @@ export const MOCK_RECOMMENDED_CREATORS: RecommendedCreatorMockType[] = [
     creatorName: '뷰티블로거',
     creatorProfileImgUrl: '',
     creatorAge: 'TWENTIES',
-    creatorSkinTypeIds: [1],
+    creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
     creatorSubscriberNum: 100000,
     review: {
       reviewId: 5,
@@ -147,14 +147,14 @@ export const MOCK_EVALUATED_CREATORS_LIST: ReactedCreatorResponse[] =
       creatorName,
       creatorProfileImgUrl,
       creatorAge,
-      creatorSkinTypeIds,
+      creatorSkinTypes,
       creatorSubscriberNum,
     }) => ({
       creatorId,
       creatorName,
       creatorProfileImgUrl,
       creatorAge,
-      creatorSkinTypeIds,
+      creatorSkinTypes,
       creatorSubscriberNum,
       myReactionCount: 3,
     })
