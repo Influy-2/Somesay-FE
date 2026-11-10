@@ -74,7 +74,7 @@ export const ReviewRankingItem = ({
           )}
 
           <div className="bg-white px-4">
-            {/* 영상이 없는 리뷰는 운영에서 video* 가 null 로 옵니다(타입은 non-null). */}
+            {/* 영상이 없는 리뷰는 video* 가 null 입니다. */}
             {review.videoUrl && (
               <OriginalVideoCard
                 youtubeUrl={review.videoUrl}

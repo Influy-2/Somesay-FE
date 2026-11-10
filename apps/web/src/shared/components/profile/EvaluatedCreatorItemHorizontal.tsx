@@ -9,7 +9,7 @@ import { ArrowRightIcon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
 interface EvaluatedCreatorItemHorizontalProps {
   creatorId: number;
-  creatorProfileImgUrl: string;
+  creatorProfileImgUrl: string | null;
   name: string;
   age: AgeType | null;
   skinType: string;

@@ -44,13 +44,15 @@ export const BasicCreatorProfile = ({
         className="bg-grey02 flex aspect-square h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full"
         aria-hidden="true"
       >
-        <img
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover"
-          src={creatorProfileImgUrl}
-          alt=""
-        />
+        {creatorProfileImgUrl && (
+          <img
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover"
+            src={creatorProfileImgUrl}
+            alt=""
+          />
+        )}
       </div>
 
       {/* 텍스트 정보 */}

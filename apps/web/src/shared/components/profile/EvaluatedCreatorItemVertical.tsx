@@ -4,7 +4,7 @@ import cn from '@/utils/cn';
 
 interface EvaluatedCreatorItemVerticalProps {
   creatorId: number;
-  creatorProfileImgUrl: string;
+  creatorProfileImgUrl: string | null;
   name: string;
   isSelected: boolean;
   onClick: (creatorId: number) => void;

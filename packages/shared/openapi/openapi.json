@@ -4434,7 +4434,10 @@
             "format": "int64"
           },
           "myReactionType": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "AGREE",
               "DISAGREE"
@@ -4555,7 +4558,10 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -4751,13 +4757,22 @@
             "format": "int64"
           },
           "userEmail": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "userNickname": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "userProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "jwtAccessToken": {
             "type": "string"
@@ -5065,7 +5080,10 @@
             "type": "boolean"
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int64"
           }
         }
@@ -5104,10 +5122,16 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productPrice": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "productAvgRating": {
@@ -5119,7 +5143,10 @@
             "format": "int32"
           },
           "productShortSummary": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productSkinTypes": {
             "type": "array",
@@ -5202,7 +5229,10 @@
             "type": "boolean"
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int64"
           }
         }
@@ -5215,13 +5245,19 @@
             "format": "int64"
           },
           "reviewContent": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviewChips": {
             "$ref": "#/components/schemas/ReviewChips"
           },
           "reviewRating": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double"
           },
           "productId": {
@@ -5235,10 +5271,16 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productVolume": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -5270,10 +5312,16 @@
             "type": "string"
           },
           "creatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -5340,7 +5388,10 @@
             "type": "boolean"
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int64"
           }
         }
@@ -5367,13 +5418,19 @@
             "format": "int64"
           },
           "reviewContent": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviewChips": {
             "$ref": "#/components/schemas/ReviewChips"
           },
           "reviewRating": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double"
           },
           "creatorId": {
@@ -5391,10 +5448,16 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productVolume": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -5433,7 +5496,10 @@
             "type": "boolean"
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int64"
           }
         }
@@ -5452,7 +5518,10 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "myReactionCount": {
             "type": "integer",
@@ -5495,7 +5564,10 @@
             "type": "boolean"
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int64"
           }
         }
@@ -5511,10 +5583,16 @@
             "type": "string"
           },
           "creatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -5578,7 +5656,10 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -5607,7 +5688,10 @@
             "type": "string"
           },
           "userProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "userGender": {
             "type": "string",
@@ -5667,13 +5751,22 @@
             "format": "int64"
           },
           "userNickname": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "userProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "userGender": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "MALE",
               "FEMALE",
@@ -5681,7 +5774,10 @@
             ]
           },
           "userAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -5759,7 +5855,10 @@
             "format": "int64"
           },
           "nextCursor": {
-            "type": "array",
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
               "type": "object"
             }
@@ -5794,13 +5893,19 @@
             "format": "int64"
           },
           "reviewContent": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviewChips": {
             "$ref": "#/components/schemas/ReviewChipsSearchResponse"
           },
           "reviewRating": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double"
           },
           "creatorId": {
@@ -5811,10 +5916,16 @@
             "type": "string"
           },
           "creatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -5839,7 +5950,10 @@
             "format": "double"
           },
           "creatorRanking": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "productId": {
@@ -5853,10 +5967,16 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productPrice": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           }
         }
@@ -5886,10 +6006,16 @@
             "type": "string"
           },
           "creatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -5910,7 +6036,10 @@
             "format": "int32"
           },
           "creatorRanking": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           }
         }
@@ -5929,7 +6058,10 @@
             "format": "int64"
           },
           "nextCursor": {
-            "type": "array",
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
               "type": "object"
             }
@@ -5976,10 +6108,16 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productPrice": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "productAvgRating": {
@@ -5991,7 +6129,10 @@
             "format": "int32"
           },
           "productShortSummary": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productSkinTypes": {
             "type": "array",
@@ -6070,14 +6211,23 @@
             "type": "string"
           },
           "videoTitle": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "videoViewCount": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int64"
           },
           "videoUploadAt": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time"
           }
         }
@@ -6123,7 +6273,10 @@
             "format": "int64"
           },
           "reactionType": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "AGREE",
               "DISAGREE"
@@ -6144,7 +6297,10 @@
             "type": "string"
           },
           "userProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "userSkinTypes": {
             "type": "array",
@@ -6316,10 +6472,16 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productPrice": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "productAvgRating": {
@@ -6388,10 +6550,16 @@
             "type": "string"
           },
           "creatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -6416,7 +6584,10 @@
             "format": "int32"
           },
           "creatorOldRanking": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "creatorTrustScore": {
@@ -6424,7 +6595,10 @@
             "format": "double"
           },
           "creatorYoutubeLink": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -6479,32 +6653,56 @@
             "type": "string"
           },
           "brandLogoImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productName": {
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productPrice": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "productVolume": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productNotes": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "collabCreatorName": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "collabCreatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "collabCreatorYoutubeLink": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "isWished": {
             "type": "boolean"
@@ -6572,13 +6770,19 @@
             "format": "int64"
           },
           "reviewContent": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviewChips": {
             "$ref": "#/components/schemas/ReviewChips"
           },
           "reviewRating": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double"
           },
           "reviewAgreeCount": {
@@ -6609,10 +6813,16 @@
             "type": "string"
           },
           "creatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -6637,21 +6847,36 @@
             "format": "double"
           },
           "creatorRanking": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "videoUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "videoTitle": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "videoViewCount": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int64"
           },
           "videoUploadAt": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time"
           },
           "previewComments": {
@@ -6692,7 +6917,10 @@
             "format": "int32"
           },
           "productAiSummary": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productSkinTypes": {
             "type": "array",
@@ -6733,13 +6961,19 @@
             "format": "int64"
           },
           "reviewContent": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviewChips": {
             "$ref": "#/components/schemas/ReviewChips"
           },
           "reviewRating": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double"
           },
           "creatorId": {
@@ -6750,10 +6984,16 @@
             "type": "string"
           },
           "creatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -6820,11 +7060,17 @@
         "type": "object",
         "properties": {
           "skinTypeId": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int64"
           },
           "skinTypeName": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviews": {
             "type": "array",
@@ -6842,13 +7088,19 @@
             "format": "int64"
           },
           "reviewContent": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviewChips": {
             "$ref": "#/components/schemas/ReviewChips"
           },
           "reviewRating": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double"
           },
           "reviewAgreeRatio": {
@@ -6869,10 +7121,16 @@
             "type": "string"
           },
           "creatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -6907,10 +7165,16 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productPrice": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "productAvgRating": {
@@ -7256,10 +7520,16 @@
             "type": "string"
           },
           "creatorProfileImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorAge": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "TEENS",
               "TWENTIES",
@@ -7280,7 +7550,10 @@
             "format": "int32"
           },
           "creatorRanking": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "creatorTrustScore": {
@@ -7288,10 +7561,16 @@
             "format": "double"
           },
           "creatorYoutubeLink": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "creatorPersonalColor": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "enum": [
               "COOL",
               "WARM"
@@ -7337,13 +7616,19 @@
             "format": "int64"
           },
           "reviewContent": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviewChips": {
             "$ref": "#/components/schemas/ReviewChips"
           },
           "reviewRating": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double"
           },
           "reviewCreatedAt": {
@@ -7365,10 +7650,16 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productPrice": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "mainCategoryName": {
@@ -7423,13 +7714,19 @@
             "format": "int64"
           },
           "reviewContent": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviewChips": {
             "$ref": "#/components/schemas/ReviewChips"
           },
           "reviewRating": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double"
           },
           "reviewCreatedAt": {
@@ -7451,10 +7748,16 @@
             "type": "string"
           },
           "productImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "productPrice": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "mainCategoryName": {
@@ -7479,7 +7782,10 @@
             "format": "int64"
           },
           "nextCursor": {
-            "type": "array",
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
               "type": "object"
             }
@@ -7517,7 +7823,10 @@
             "type": "string"
           },
           "mainCategoryImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "subCategories": {
             "type": "array",
@@ -7564,10 +7873,16 @@
             "type": "string"
           },
           "brandLogoImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "brandImgUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "brandAvgRating": {
             "type": "number",
@@ -7578,7 +7893,10 @@
             "format": "int32"
           },
           "brandRanking": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32"
           },
           "subCategories": {

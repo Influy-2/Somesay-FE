@@ -31,7 +31,7 @@ export const EvaluationCardProfile = ({
   creatorAge,
   creatorSkinTypes,
 }: EvaluationCardProfileProps) => {
-  // 순위 밖 크리에이터는 운영에서 순위가 null 로 옵니다(타입은 non-null).
+  // 순위 밖 크리에이터는 순위가 null 입니다.
   const showRank =
     creatorRanking != null && creatorRanking > 0 && creatorRanking <= 30;
 
@@ -47,14 +47,16 @@ export const EvaluationCardProfile = ({
       {/* 프로필 이미지 */}
       {evaluated ? (
         <div
-          className="size-11 shrink-0 overflow-hidden rounded-full"
+          className="bg-grey02 size-11 shrink-0 overflow-hidden rounded-full"
           aria-hidden="true"
         >
-          <img
-            src={creatorProfileImgUrl}
-            alt={`${creatorName} 프로필`}
-            className="size-full object-cover"
-          />
+          {creatorProfileImgUrl && (
+            <img
+              src={creatorProfileImgUrl}
+              alt={`${creatorName} 프로필`}
+              className="size-full object-cover"
+            />
+          )}
         </div>
       ) : (
         <div

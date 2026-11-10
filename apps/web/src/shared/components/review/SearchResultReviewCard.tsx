@@ -17,7 +17,11 @@ export const SearchResultReviewCard = ({
   return (
     <article
       className="border-grey02 flex flex-col gap-5 border-b px-4 pb-6"
-      aria-label={`${creatorName}의 리뷰, 별점 ${rating}점`}
+      aria-label={
+        rating == null
+          ? `${creatorName}의 리뷰`
+          : `${creatorName}의 리뷰, 별점 ${rating}점`
+      }
     >
       {/* 크리에이터 프로필 */}
       <BasicCreatorProfile {...review} />
@@ -26,10 +30,12 @@ export const SearchResultReviewCard = ({
         {/* 별점 + 리뷰 텍스트 */}
         <div className="flex flex-col gap-1">
           {/* 별점 */}
-          <div className="flex items-center gap-1">
-            <StarRating rating={rating} />
-            <span className="body2-sb text-black">{rating}</span>
-          </div>
+          {rating != null && (
+            <div className="flex items-center gap-1">
+              <StarRating rating={rating} />
+              <span className="body2-sb text-black">{rating}</span>
+            </div>
+          )}
           {/* 리뷰 텍스트 */}
           <p className="body2-m line-clamp-4 text-black">{content}</p>
         </div>

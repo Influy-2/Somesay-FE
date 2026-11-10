@@ -29,7 +29,7 @@ export const BestReviewSection = () => {
     return null;
   }
 
-  // 비로그인이면 skinTypeId·skinTypeName 이 null 로 옵니다(타입은 non-null). 아래 `skinTypeName ?` 로 분기합니다.
+  // 비로그인이면 skinTypeId·skinTypeName 이 null 이라 아래 `skinTypeName ?` 로 분기합니다.
   const { reviews, skinTypeName } = curation;
 
   return (

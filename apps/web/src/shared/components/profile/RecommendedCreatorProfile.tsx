@@ -9,7 +9,7 @@ import { ChipBasic } from '../chips/ChipBasic';
 interface RecommendedCreatorProfileProps {
   creatorId: number;
   name: string;
-  creatorProfileImgUrl: string;
+  creatorProfileImgUrl: string | null;
   age: AgeType | null;
   skinType: string;
 }

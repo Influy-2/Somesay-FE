@@ -8,10 +8,10 @@ import { formatRating, formatCount, formatPrice } from '@somesay/shared';
 interface ProductCardThumbnailProps {
   brandName: string;
   productName: string;
-  price: number;
-  rating: number;
+  price: number | null;
+  rating: number | null;
   reviewCount?: number;
-  productImgUrl: string;
+  productImgUrl: string | null;
   productId?: number;
 }
 
@@ -26,7 +26,9 @@ export const ProductCardThumbnail = ({
 }: ProductCardThumbnailProps) => {
   const formattedReviewCount =
     reviewCount === undefined ? undefined : formatCount(reviewCount);
-  const formattedRating = formatRating(rating, 2);
+  const formattedRating = rating == null ? null : formatRating(rating, 2);
+  const ratingLabel =
+    formattedRating == null ? '' : `, 별점 ${formattedRating}점`;
   const reviewCountLabel =
     formattedReviewCount === undefined
       ? ''
@@ -34,7 +36,7 @@ export const ProductCardThumbnail = ({
   return (
     <div
       className="border-grey03 relative flex w-full items-center overflow-hidden border bg-white p-5"
-      aria-label={`${brandName} ${productName}, ${formatPrice(price)}원, 별점 ${formattedRating}점${reviewCountLabel}`}
+      aria-label={`${brandName} ${productName}, ${formatPrice(price)}원${ratingLabel}${reviewCountLabel}`}
     >
       {/* 좌측 텍스트 */}
       <div
@@ -46,10 +48,12 @@ export const ProductCardThumbnail = ({
         <p className="truncate">{formatPrice(price)}</p>
         <div className="flex items-center gap-1">
           {/* 별점 */}
-          <div className="flex items-center">
-            <Star16Icon className="text-primary-300" />
-            <span>{formattedRating}</span>
-          </div>
+          {formattedRating != null && (
+            <div className="flex items-center">
+              <Star16Icon className="text-primary-300" />
+              <span>{formattedRating}</span>
+            </div>
+          )}
           {formattedReviewCount !== undefined && (
             <span className="truncate">({formattedReviewCount})</span>
           )}

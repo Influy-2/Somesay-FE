@@ -7,8 +7,8 @@ import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
 
 interface ReviewPreviewCardProps {
   reviewId: number;
-  rating: number;
-  content: string;
+  rating: number | null;
+  content: string | null;
   product: Pick<
     ProductPreviewCard,
     'productId' | 'productName' | 'brandName' | 'productImgUrl' | 'productPrice'
@@ -31,10 +31,12 @@ export const ReviewPreviewCard = ({
     >
       <div className="flex flex-1 flex-col gap-1">
         {/* 별점 */}
-        <div className="flex items-center gap-1">
-          <StarRating rating={rating} />
-          <span className="body2-sb">{rating}</span>
-        </div>
+        {rating != null && (
+          <div className="flex items-center gap-1">
+            <StarRating rating={rating} />
+            <span className="body2-sb">{rating}</span>
+          </div>
+        )}
         {/* 리뷰 */}
         <div className="flex flex-1 items-start">
           <p className="body2-m line-clamp-4">{content}</p>
@@ -43,19 +45,20 @@ export const ReviewPreviewCard = ({
 
       {/* 상품 정보 */}
       <div className="flex w-full items-center gap-3">
-        <div className="border-grey02 h-[3.6875rem] w-[3.25rem] shrink-0 overflow-hidden border">
-          <img
-            src={product.productImgUrl}
-            alt=""
-            className="h-full w-full object-cover"
-          />
+        <div className="border-grey02 bg-grey01 h-[3.6875rem] w-[3.25rem] shrink-0 overflow-hidden border">
+          {product.productImgUrl && (
+            <img
+              src={product.productImgUrl}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          )}
         </div>
         <div className="flex flex-1 flex-col gap-1">
           <span className="caption1-m text-black">{product.brandName}</span>
           <span className="caption1-m line-clamp-1 text-black">
             {product.productName}
           </span>
-          {/* 운영에서 가격이 null 로 오는 상품이 있어 formatPrice 로 안전하게 표시합니다. */}
           <span className="caption1-m text-black">
             {formatPrice(product.productPrice)}
           </span>

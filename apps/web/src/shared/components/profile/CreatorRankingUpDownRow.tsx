@@ -82,12 +82,14 @@ export const CreatorRankingUpDownRow = ({
         </div>
 
         {/* 프로필 이미지 */}
-        <div className="size-[3.375rem] shrink-0 overflow-hidden rounded-full">
-          <img
-            src={creatorProfileImgUrl}
-            alt=""
-            className="size-full object-cover"
-          />
+        <div className="bg-grey02 size-[3.375rem] shrink-0 overflow-hidden rounded-full">
+          {creatorProfileImgUrl && (
+            <img
+              src={creatorProfileImgUrl}
+              alt=""
+              className="size-full object-cover"
+            />
+          )}
         </div>
 
         {/* 이름 + 채널 + 칩 */}

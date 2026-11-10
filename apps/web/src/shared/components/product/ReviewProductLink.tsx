@@ -18,12 +18,14 @@ export const ReviewProductLink = ({ product }: ReviewProductLinkProps) => {
       aria-label={`연결 상품: ${product.brandName} ${product.productName}`}
     >
       {/* 사진 */}
-      <div className="border-grey02 h-[3.6875rem] w-[3.25rem] shrink-0 overflow-hidden border">
-        <img
-          src={product.productImgUrl}
-          alt=""
-          className="h-full w-full object-cover"
-        />
+      <div className="border-grey02 bg-grey01 h-[3.6875rem] w-[3.25rem] shrink-0 overflow-hidden border">
+        {product.productImgUrl && (
+          <img
+            src={product.productImgUrl}
+            alt=""
+            className="h-full w-full object-cover"
+          />
+        )}
       </div>
       {/* 브랜드 상품이름 가격 */}
       <div className="flex flex-1 flex-col gap-1">
@@ -31,7 +33,6 @@ export const ReviewProductLink = ({ product }: ReviewProductLinkProps) => {
         <span className="caption1-m line-clamp-1 text-black">
           {product.productName}
         </span>
-        {/* 운영에서 가격이 null 로 오는 상품이 있어 formatPrice 로 안전하게 표시합니다. */}
         <span className="caption1-m text-black">
           {formatPrice(product.productPrice)}
         </span>

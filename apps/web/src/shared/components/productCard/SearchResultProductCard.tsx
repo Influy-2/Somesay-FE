@@ -34,12 +34,14 @@ export const SearchResultProductCard = ({
     >
       <div className="flex gap-3">
         {/* 이미지 */}
-        <div className="border-grey02 relative h-[117.5px] w-26 shrink-0 overflow-hidden border-[0.7px]">
-          <img
-            src={product.productImgUrl}
-            alt=""
-            className="h-full w-full object-cover"
-          />
+        <div className="border-grey02 bg-grey01 relative h-[117.5px] w-26 shrink-0 overflow-hidden border-[0.7px]">
+          {product.productImgUrl && (
+            <img
+              src={product.productImgUrl}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          )}
           <div className="absolute right-2 bottom-2 z-1">
             <HeartButton
               isHearted={product.isWished}
@@ -91,7 +93,9 @@ export const SearchResultProductCard = ({
       </div>
 
       {/* 리뷰 한 줄 요약 */}
-      <p className="body2-sb text-grey09">{product.productShortSummary}</p>
+      {product.productShortSummary && (
+        <p className="body2-sb text-grey09">{product.productShortSummary}</p>
+      )}
 
       {/* 칩 영역 (잘 맞는 타입, 기대 효과) */}
       <div

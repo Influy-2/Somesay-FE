@@ -56,14 +56,16 @@ export const CreatorHomeProfile = ({
     >
       {/* 프로필 사진 */}
       <div
-        className="flex aspect-square h-15.25 w-15.25 shrink-0 items-center justify-center overflow-hidden rounded-full"
+        className="bg-grey02 flex aspect-square h-15.25 w-15.25 shrink-0 items-center justify-center overflow-hidden rounded-full"
         aria-hidden="true"
       >
-        <img
-          className="h-full w-full object-cover"
-          src={creatorProfileImgUrl}
-          alt={`${creatorName} 프로필 사진`}
-        />
+        {creatorProfileImgUrl && (
+          <img
+            className="h-full w-full object-cover"
+            src={creatorProfileImgUrl}
+            alt={`${creatorName} 프로필 사진`}
+          />
+        )}
       </div>
 
       {/* 텍스트 정보 */}
@@ -76,17 +78,25 @@ export const CreatorHomeProfile = ({
           <span className="font-pretendard shrink-0 text-[1.25rem] leading-[150%] font-semibold">
             {creatorName}
           </span>
-          <a
-            href={creatorYoutubeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="caption-m text-grey08 flex shrink-0 items-center gap-0.5"
-            aria-label={`${creatorName} 유튜브 채널로 이동`}
-          >
-            <YoutubeIcon />
-            {formatSubscriberCount(creatorSubscriberNum)}
-            <Move12Icon />
-          </a>
+          {/* 채널 링크가 없어도 구독자 수는 보여 주고, 이동 화살표만 뺍니다. */}
+          {creatorYoutubeLink ? (
+            <a
+              href={creatorYoutubeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="caption-m text-grey08 flex shrink-0 items-center gap-0.5"
+              aria-label={`${creatorName} 유튜브 채널로 이동`}
+            >
+              <YoutubeIcon />
+              {formatSubscriberCount(creatorSubscriberNum)}
+              <Move12Icon />
+            </a>
+          ) : (
+            <span className="caption-m text-grey08 flex shrink-0 items-center gap-0.5">
+              <YoutubeIcon />
+              {formatSubscriberCount(creatorSubscriberNum)}
+            </span>
+          )}
         </div>
 
         {/* 피부/나이 칩 */}

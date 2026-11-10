@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { AGE_TYPES, type BasicCreatorProfileType } from '@somesay/shared';
+import { AGE_TYPES } from '@somesay/shared';
 
 import { BasicCreatorProfile } from './BasicCreatorProfile';
 
@@ -48,7 +48,6 @@ export const WithoutVisibleTrustRank: Story = {
 export const WithoutAge: Story = {
   args: {
     ...Default.args,
-    // 타입은 non-null 이지만 운영에서 null 이 옵니다.
-    creatorAge: null as unknown as BasicCreatorProfileType['creatorAge'],
+    creatorAge: null,
   },
 };

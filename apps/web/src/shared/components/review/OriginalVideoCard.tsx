@@ -4,11 +4,11 @@ import { Move12Icon } from '@/shared/icons';
 import { OriginalVideo } from './OriginalVideo';
 interface OriginalVideoCardProps {
   youtubeUrl: string;
-  videoTitle: string;
-  viewCount: number;
-  uploadDate?: string;
+  videoTitle: string | null;
+  viewCount: number | null;
+  uploadDate?: string | null;
   creatorName: string;
-  creatorProfileImgUrl?: string;
+  creatorProfileImgUrl?: string | null;
   timeLinkCount: number;
   reviewId: number;
   onOpenTimeLinkSheet?: (reviewId: number) => void;

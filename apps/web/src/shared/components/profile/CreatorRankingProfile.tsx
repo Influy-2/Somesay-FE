@@ -5,9 +5,9 @@ import { ChipBasic } from '../chips/ChipBasic';
 import { formatSubscriberCount, getSkinTypeLabels } from '@somesay/shared';
 
 export interface CreatorRankingProfileProps {
-  ranking: number;
+  ranking: number | null;
   nickname: string;
-  creatorProfileImgUrl: string;
+  creatorProfileImgUrl: string | null;
   subscriberNum: number;
   trustScore: number;
   skinTypeIds: number[];
@@ -22,7 +22,7 @@ export const CreatorRankingProfile = ({
   skinTypeIds,
 }: CreatorRankingProfileProps) => {
   const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
-  // 순위 밖 크리에이터는 운영에서 순위가 null 로 옵니다(타입은 non-null).
+  // 순위 밖 크리에이터는 순위가 null 입니다.
   // `null <= 30` 은 JS 에서 true 라 "null위"가 보이지 않도록 값부터 확인합니다.
   const showRanking = ranking != null && ranking > 0 && ranking <= 30;
 
@@ -37,11 +37,13 @@ export const CreatorRankingProfile = ({
         </span>
       )}
       <div className="bg-grey02 h-11 w-11 shrink-0 overflow-hidden rounded-full">
-        <img
-          src={creatorProfileImgUrl}
-          alt={`${nickname} 프로필 이미지`}
-          className="h-full w-full object-cover"
-        />
+        {creatorProfileImgUrl && (
+          <img
+            src={creatorProfileImgUrl}
+            alt={`${nickname} 프로필 이미지`}
+            className="h-full w-full object-cover"
+          />
+        )}
       </div>
       <div className="flex flex-1 flex-col">
         <div className="flex items-center gap-2">

@@ -41,12 +41,14 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
       />
 
       <div className="mb-5">
-        <div className="flex items-center gap-1">
-          <StarRating rating={review.reviewRating} />
-          <span className="body2-sb" aria-hidden="true">
-            {review.reviewRating}
-          </span>
-        </div>
+        {review.reviewRating != null && (
+          <div className="flex items-center gap-1">
+            <StarRating rating={review.reviewRating} />
+            <span className="body2-sb" aria-hidden="true">
+              {review.reviewRating}
+            </span>
+          </div>
+        )}
         <p className="body2-m">{review.reviewContent}</p>
       </div>
 

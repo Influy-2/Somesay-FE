@@ -1061,8 +1061,8 @@ export interface components {
         ReviewReactionResponse: {
             /** Format: int64 */
             reviewId: number;
-            /** @enum {string} */
-            myReactionType: "AGREE" | "DISAGREE";
+            /** @enum {string|null} */
+            myReactionType: "AGREE" | "DISAGREE" | null;
             /** Format: int32 */
             reviewAgreeCount: number;
             /** Format: int32 */
@@ -1104,7 +1104,7 @@ export interface components {
             productId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
         };
         TokenReissueRequest: {
             refreshToken: string;
@@ -1165,9 +1165,9 @@ export interface components {
         JwtLoginResponse: {
             /** Format: int64 */
             userId: number;
-            userEmail: string;
-            userNickname: string;
-            userProfileImgUrl: string;
+            userEmail: string | null;
+            userNickname: string | null;
+            userProfileImgUrl: string | null;
             jwtAccessToken: string;
             refreshToken: string;
             isEnabled: boolean;
@@ -1270,7 +1270,7 @@ export interface components {
             pageSize: number;
             hasNext: boolean;
             /** Format: int64 */
-            totalCount: number;
+            totalCount: number | null;
         };
         EffectChip: {
             /** Format: int64 */
@@ -1286,14 +1286,14 @@ export interface components {
             subCategoryId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
             /** Format: int32 */
-            productPrice: number;
+            productPrice: number | null;
             /** Format: double */
             productAvgRating: number;
             /** Format: int32 */
             productReviewCount: number;
-            productShortSummary: string;
+            productShortSummary: string | null;
             productSkinTypes: components["schemas"]["SkinTypeResponse"][];
             productEffectChips: components["schemas"]["EffectChip"][];
             creatorProfileImgUrls: string[];
@@ -1321,21 +1321,21 @@ export interface components {
             pageSize: number;
             hasNext: boolean;
             /** Format: int64 */
-            totalCount: number;
+            totalCount: number | null;
         };
         RecentReview: {
             /** Format: int64 */
             reviewId: number;
-            reviewContent: string;
+            reviewContent: string | null;
             reviewChips: components["schemas"]["ReviewChips"];
             /** Format: double */
-            reviewRating: number;
+            reviewRating: number | null;
             /** Format: int64 */
             productId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
-            productVolume: string;
+            productImgUrl: string | null;
+            productVolume: string | null;
         };
         ReviewChips: {
             positive: components["schemas"]["ChipItem"][];
@@ -1345,9 +1345,9 @@ export interface components {
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
-            creatorProfileImgUrl: string;
-            /** @enum {string} */
-            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            creatorProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
@@ -1368,7 +1368,7 @@ export interface components {
             pageSize: number;
             hasNext: boolean;
             /** Format: int64 */
-            totalCount: number;
+            totalCount: number | null;
         };
         MyReactionResponse: {
             /** Format: int64 */
@@ -1378,18 +1378,18 @@ export interface components {
             commentContent: string;
             /** Format: int64 */
             reviewId: number;
-            reviewContent: string;
+            reviewContent: string | null;
             reviewChips: components["schemas"]["ReviewChips"];
             /** Format: double */
-            reviewRating: number;
+            reviewRating: number | null;
             /** Format: int64 */
             creatorId: number;
             /** Format: int64 */
             productId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
-            productVolume: string;
+            productImgUrl: string | null;
+            productVolume: string | null;
         };
         ApiResponseCountedSliceResponseReactedProductResponse: {
             code: string;
@@ -1404,14 +1404,14 @@ export interface components {
             pageSize: number;
             hasNext: boolean;
             /** Format: int64 */
-            totalCount: number;
+            totalCount: number | null;
         };
         ReactedProductResponse: {
             /** Format: int64 */
             productId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
             /** Format: int32 */
             myReactionCount: number;
         };
@@ -1428,15 +1428,15 @@ export interface components {
             pageSize: number;
             hasNext: boolean;
             /** Format: int64 */
-            totalCount: number;
+            totalCount: number | null;
         };
         ReactedCreatorResponse: {
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
-            creatorProfileImgUrl: string;
-            /** @enum {string} */
-            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            creatorProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
@@ -1456,7 +1456,7 @@ export interface components {
             productId: number;
             productName: string;
             brandName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
         };
         ApiResponseMyPageResponse: {
             code: string;
@@ -1467,7 +1467,7 @@ export interface components {
             /** Format: int64 */
             userId: number;
             userNickname: string;
-            userProfileImgUrl: string;
+            userProfileImgUrl: string | null;
             /** @enum {string} */
             userGender: "MALE" | "FEMALE" | "NONE";
             userSkinTypes: components["schemas"]["SkinTypeResponse"][];
@@ -1490,12 +1490,12 @@ export interface components {
         InfoResponse: {
             /** Format: int64 */
             userId: number;
-            userNickname: string;
-            userProfileImgUrl: string;
-            /** @enum {string} */
-            userGender: "MALE" | "FEMALE" | "NONE";
-            /** @enum {string} */
-            userAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            userNickname: string | null;
+            userProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            userGender: "MALE" | "FEMALE" | "NONE" | null;
+            /** @enum {string|null} */
+            userAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             userSkinTypes: components["schemas"]["SkinTypeResponse"][];
             userSkinConcerns: components["schemas"]["SkinConcernResponse"][];
         };
@@ -1518,7 +1518,7 @@ export interface components {
             content: components["schemas"]["ReviewSearchItemResponse"][];
             /** Format: int64 */
             totalCount: number;
-            nextCursor: Record<string, never>[];
+            nextCursor: Record<string, never>[] | null;
             hasNext: boolean;
         };
         ReviewChipsSearchResponse: {
@@ -1528,30 +1528,30 @@ export interface components {
         ReviewSearchItemResponse: {
             /** Format: int64 */
             reviewId: number;
-            reviewContent: string;
+            reviewContent: string | null;
             reviewChips: components["schemas"]["ReviewChipsSearchResponse"];
             /** Format: double */
-            reviewRating: number;
+            reviewRating: number | null;
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
-            creatorProfileImgUrl: string;
-            /** @enum {string} */
-            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            creatorProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: double */
             creatorTrustScore: number;
             /** Format: int32 */
-            creatorRanking: number;
+            creatorRanking: number | null;
             /** Format: int64 */
             productId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
             /** Format: int32 */
-            productPrice: number;
+            productPrice: number | null;
         };
         ApiResponseSearchResponse: {
             code: string;
@@ -1562,20 +1562,20 @@ export interface components {
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
-            creatorProfileImgUrl: string;
-            /** @enum {string} */
-            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            creatorProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: int32 */
-            creatorRanking: number;
+            creatorRanking: number | null;
         };
         CursorResponseProductSearchItemResponse: {
             content: components["schemas"]["ProductSearchItemResponse"][];
             /** Format: int64 */
             totalCount: number;
-            nextCursor: Record<string, never>[];
+            nextCursor: Record<string, never>[] | null;
             hasNext: boolean;
         };
         EffectChipSearchResponse: {
@@ -1593,14 +1593,14 @@ export interface components {
             subCategoryId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
             /** Format: int32 */
-            productPrice: number;
+            productPrice: number | null;
             /** Format: double */
             productAvgRating: number;
             /** Format: int32 */
             productReviewCount: number;
-            productShortSummary: string;
+            productShortSummary: string | null;
             productSkinTypes: components["schemas"]["SkinTypeSearchResponse"][];
             productEffectChips: components["schemas"]["EffectChipSearchResponse"][];
             creatorProfileImgUrls: string[];
@@ -1625,11 +1625,11 @@ export interface components {
             /** Format: int64 */
             timeLinkId: number;
             videoUrl: string;
-            videoTitle: string;
+            videoTitle: string | null;
             /** Format: int64 */
-            videoViewCount: number;
+            videoViewCount: number | null;
             /** Format: date-time */
-            videoUploadAt: string;
+            videoUploadAt: string | null;
         };
         TimeLinkListResponse: {
             /** Format: int64 */
@@ -1646,15 +1646,15 @@ export interface components {
             commentId: number;
             /** Format: int64 */
             reactionId: number;
-            /** @enum {string} */
-            reactionType: "AGREE" | "DISAGREE";
+            /** @enum {string|null} */
+            reactionType: "AGREE" | "DISAGREE" | null;
             commentContent: string;
             /** Format: date-time */
             commentCreatedAt: string;
             /** Format: int64 */
             userId: number;
             userNickname: string;
-            userProfileImgUrl: string;
+            userProfileImgUrl: string | null;
             userSkinTypes: components["schemas"]["SkinTypeResponse"][];
             userSkinConcerns: components["schemas"]["SkinConcernResponse"][];
         };
@@ -1714,9 +1714,9 @@ export interface components {
             productId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
             /** Format: int32 */
-            productPrice: number;
+            productPrice: number | null;
             /** Format: double */
             productAvgRating: number;
             /** Format: int32 */
@@ -1741,19 +1741,19 @@ export interface components {
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
-            creatorProfileImgUrl: string;
-            /** @enum {string} */
-            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            creatorProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: int32 */
             creatorRanking: number;
             /** Format: int32 */
-            creatorOldRanking: number;
+            creatorOldRanking: number | null;
             /** Format: double */
             creatorTrustScore: number;
-            creatorYoutubeLink: string;
+            creatorYoutubeLink: string | null;
         };
         SliceResponseCreatorRankingResponse: {
             content: components["schemas"]["CreatorRankingResponse"][];
@@ -1774,16 +1774,16 @@ export interface components {
             /** Format: int64 */
             brandId: number;
             brandName: string;
-            brandLogoImgUrl: string;
+            brandLogoImgUrl: string | null;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
             /** Format: int32 */
-            productPrice: number;
-            productVolume: string;
-            productNotes: string;
-            collabCreatorName: string;
-            collabCreatorProfileImgUrl: string;
-            collabCreatorYoutubeLink: string;
+            productPrice: number | null;
+            productVolume: string | null;
+            productNotes: string | null;
+            collabCreatorName: string | null;
+            collabCreatorProfileImgUrl: string | null;
+            collabCreatorYoutubeLink: string | null;
             isWished: boolean;
         };
         ApiResponseListProductPreviewCard: {
@@ -1807,10 +1807,10 @@ export interface components {
         ProductReviewResponse: {
             /** Format: int64 */
             reviewId: number;
-            reviewContent: string;
+            reviewContent: string | null;
             reviewChips: components["schemas"]["ReviewChips"];
             /** Format: double */
-            reviewRating: number;
+            reviewRating: number | null;
             /** Format: int32 */
             reviewAgreeCount: number;
             /** Format: int32 */
@@ -1824,22 +1824,22 @@ export interface components {
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
-            creatorProfileImgUrl: string;
-            /** @enum {string} */
-            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            creatorProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: double */
             creatorTrustScore: number;
             /** Format: int32 */
-            creatorRanking: number;
-            videoUrl: string;
-            videoTitle: string;
+            creatorRanking: number | null;
+            videoUrl: string | null;
+            videoTitle: string | null;
             /** Format: int64 */
-            videoViewCount: number;
+            videoViewCount: number | null;
             /** Format: date-time */
-            videoUploadAt: string;
+            videoUploadAt: string | null;
             previewComments: components["schemas"]["CommentItemResponse"][];
         };
         ApiResponseProductReviewOverviewResponse: {
@@ -1854,7 +1854,7 @@ export interface components {
             productAvgRating: number;
             /** Format: int32 */
             productReviewCount: number;
-            productAiSummary: string;
+            productAiSummary: string | null;
             productSkinTypes: components["schemas"]["SkinTypeResponse"][];
             productEffectChips: components["schemas"]["EffectChip"][];
         };
@@ -1866,16 +1866,16 @@ export interface components {
         ReactionReviewResponse: {
             /** Format: int64 */
             reviewId: number;
-            reviewContent: string;
+            reviewContent: string | null;
             reviewChips: components["schemas"]["ReviewChips"];
             /** Format: double */
-            reviewRating: number;
+            reviewRating: number | null;
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
-            creatorProfileImgUrl: string;
-            /** @enum {string} */
-            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            creatorProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
         };
         ApiResponseReviewChips: {
@@ -1895,26 +1895,26 @@ export interface components {
         };
         HomeCurationResponse: {
             /** Format: int64 */
-            skinTypeId: number;
-            skinTypeName: string;
+            skinTypeId: number | null;
+            skinTypeName: string | null;
             reviews: components["schemas"]["ReviewCardResponse"][];
         };
         ReviewCardResponse: {
             /** Format: int64 */
             reviewId: number;
-            reviewContent: string;
+            reviewContent: string | null;
             reviewChips: components["schemas"]["ReviewChips"];
             /** Format: double */
-            reviewRating: number;
+            reviewRating: number | null;
             /** Format: double */
             reviewAgreeRatio: number;
             reviewMostAgreedSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
-            creatorProfileImgUrl: string;
-            /** @enum {string} */
-            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            creatorProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
@@ -1924,9 +1924,9 @@ export interface components {
             productId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
             /** Format: int32 */
-            productPrice: number;
+            productPrice: number | null;
             /** Format: double */
             productAvgRating: number;
             /** Format: int32 */
@@ -2044,19 +2044,19 @@ export interface components {
             /** Format: int64 */
             creatorId: number;
             creatorName: string;
-            creatorProfileImgUrl: string;
-            /** @enum {string} */
-            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS";
+            creatorProfileImgUrl: string | null;
+            /** @enum {string|null} */
+            creatorAge: "TEENS" | "TWENTIES" | "THIRTIES" | "FORTIES" | "FIFTIES" | "SIXTIES_PLUS" | null;
             creatorSkinTypes: components["schemas"]["SkinTypeResponse"][];
             /** Format: int32 */
             creatorSubscriberNum: number;
             /** Format: int32 */
-            creatorRanking: number;
+            creatorRanking: number | null;
             /** Format: double */
             creatorTrustScore: number;
-            creatorYoutubeLink: string;
-            /** @enum {string} */
-            creatorPersonalColor: "COOL" | "WARM";
+            creatorYoutubeLink: string | null;
+            /** @enum {string|null} */
+            creatorPersonalColor: "COOL" | "WARM" | null;
             /** Format: int64 */
             creatorReviewCount: number;
             /** Format: int64 */
@@ -2074,10 +2074,10 @@ export interface components {
         CreatorReviewResponse: {
             /** Format: int64 */
             reviewId: number;
-            reviewContent: string;
+            reviewContent: string | null;
             reviewChips: components["schemas"]["ReviewChips"];
             /** Format: double */
-            reviewRating: number;
+            reviewRating: number | null;
             /** Format: date-time */
             reviewCreatedAt: string;
             /** Format: int64 */
@@ -2086,9 +2086,9 @@ export interface components {
             productId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
             /** Format: int32 */
-            productPrice: number;
+            productPrice: number | null;
             mainCategoryName: string;
             subCategoryName: string;
         };
@@ -2108,10 +2108,10 @@ export interface components {
         CreatorReviewSearchItemResponse: {
             /** Format: int64 */
             reviewId: number;
-            reviewContent: string;
+            reviewContent: string | null;
             reviewChips: components["schemas"]["ReviewChips"];
             /** Format: double */
-            reviewRating: number;
+            reviewRating: number | null;
             /** Format: date-time */
             reviewCreatedAt: string;
             /** Format: int64 */
@@ -2120,9 +2120,9 @@ export interface components {
             productId: number;
             brandName: string;
             productName: string;
-            productImgUrl: string;
+            productImgUrl: string | null;
             /** Format: int32 */
-            productPrice: number;
+            productPrice: number | null;
             mainCategoryName: string;
             subCategoryName: string;
         };
@@ -2130,7 +2130,7 @@ export interface components {
             content: components["schemas"]["CreatorReviewSearchItemResponse"][];
             /** Format: int64 */
             totalCount: number;
-            nextCursor: Record<string, never>[];
+            nextCursor: Record<string, never>[] | null;
             hasNext: boolean;
         };
         ApiResponseListMainCategoryResponse: {
@@ -2142,7 +2142,7 @@ export interface components {
             /** Format: int64 */
             mainCategoryId: number;
             mainCategoryName: string;
-            mainCategoryImgUrl: string;
+            mainCategoryImgUrl: string | null;
             subCategories: components["schemas"]["SubCategoryItemResponse"][];
         };
         SubCategoryItemResponse: {
@@ -2159,14 +2159,14 @@ export interface components {
             /** Format: int64 */
             brandId: number;
             brandName: string;
-            brandLogoImgUrl: string;
-            brandImgUrl: string;
+            brandLogoImgUrl: string | null;
+            brandImgUrl: string | null;
             /** Format: double */
             brandAvgRating: number;
             /** Format: int32 */
             brandReviewCount: number;
             /** Format: int32 */
-            brandRanking: number;
+            brandRanking: number | null;
             subCategories: components["schemas"]["SubCategoryItemResponse"][];
         };
         ApiResponseCursorResponseProductSearchItemResponse: {
