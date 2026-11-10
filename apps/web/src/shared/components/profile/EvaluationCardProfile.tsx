@@ -2,56 +2,61 @@
 
 import { SomesaySmIcon, YoutubeIcon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
-import {
-  formatSubscriberCount,
-  getAgeLabel,
-  getSkinTypeLabels,
-} from '@somesay/shared';
-import type { CreatorType } from '@somesay/shared';
+import { formatSubscriberCount, getAgeLabel } from '@somesay/shared';
+import type { CreatorRankingResponse } from '@somesay/shared';
 
-type EvaluationCardProfileProps = Pick<
-  CreatorType,
+// 리뷰 평가 카드(EvaluationReviewCard)도 같은 크리에이터 정보를 받습니다.
+export type EvaluationCardCreator = Pick<
+  CreatorRankingResponse,
   | 'creatorName'
-  | 'profileImgUrl'
-  | 'subscriberNum'
-  | 'trustScore'
-  | 'ranking'
-  | 'age'
-  | 'skinTypeIds'
-> & {
+  | 'creatorProfileImgUrl'
+  | 'creatorSubscriberNum'
+  | 'creatorTrustScore'
+  | 'creatorRanking'
+  | 'creatorAge'
+  | 'creatorSkinTypes'
+>;
+
+type EvaluationCardProfileProps = EvaluationCardCreator & {
   evaluated: boolean;
 };
 
 export const EvaluationCardProfile = ({
   evaluated,
   creatorName,
-  profileImgUrl,
-  subscriberNum,
-  trustScore,
-  ranking,
-  age,
-  skinTypeIds,
+  creatorProfileImgUrl,
+  creatorSubscriberNum,
+  creatorTrustScore,
+  creatorRanking,
+  creatorAge,
+  creatorSkinTypes,
 }: EvaluationCardProfileProps) => {
-  const showRank = ranking > 0 && ranking <= 30;
+  // 순위 밖 크리에이터는 순위가 null 입니다.
+  const showRank =
+    creatorRanking != null && creatorRanking > 0 && creatorRanking <= 30;
 
   return (
     <div
       className="flex w-full items-center gap-2.5"
       aria-label={
-        evaluated ? `크리에이터: ${creatorName}, 신뢰도 ${trustScore}점` : ''
+        evaluated
+          ? `크리에이터: ${creatorName}, 신뢰도 ${creatorTrustScore}점`
+          : ''
       }
     >
       {/* 프로필 이미지 */}
       {evaluated ? (
         <div
-          className="size-11 shrink-0 overflow-hidden rounded-full"
+          className="bg-grey02 size-11 shrink-0 overflow-hidden rounded-full"
           aria-hidden="true"
         >
-          <img
-            src={profileImgUrl}
-            alt={`${creatorName} 프로필`}
-            className="size-full object-cover"
-          />
+          {creatorProfileImgUrl && (
+            <img
+              src={creatorProfileImgUrl}
+              alt={`${creatorName} 프로필`}
+              className="size-full object-cover"
+            />
+          )}
         </div>
       ) : (
         <div
@@ -72,7 +77,7 @@ export const EvaluationCardProfile = ({
           {/* 유튜브 */}
           <div className="caption2-m flex shrink-0 items-center gap-0.5 text-black">
             <YoutubeIcon />
-            {evaluated ? formatSubscriberCount(subscriberNum) : '???만'}
+            {evaluated ? formatSubscriberCount(creatorSubscriberNum) : '???만'}
           </div>
         </div>
 
@@ -82,20 +87,22 @@ export const EvaluationCardProfile = ({
             <div className="text-grey07 flex justify-center">
               <span className="caption1-m">신뢰도 </span>
               <span className="caption1-b">
-                {evaluated ? `${trustScore}점` : '??점'}
+                {evaluated ? `${creatorTrustScore}점` : '??점'}
               </span>
             </div>
             {evaluated && showRank && (
               <>
                 <div className="bg-grey04 h-2.5 w-px" />
-                <span className="caption1-b text-grey07">{ranking}위</span>
+                <span className="caption1-b text-grey07">
+                  {creatorRanking}위
+                </span>
               </>
             )}
           </div>
           {evaluated && (
             <div className="flex items-center gap-1">
-              <ChipBasic label={getAgeLabel(age)} />
-              {getSkinTypeLabels(skinTypeIds).map((label) => (
+              <ChipBasic label={getAgeLabel(creatorAge)} />
+              {creatorSkinTypes.map(({ skinTypeName: label }) => (
                 <ChipBasic key={label} label={label} />
               ))}
             </div>

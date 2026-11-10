@@ -3,33 +3,43 @@ import { YoutubeIcon } from '@/shared/icons';
 import { Move12Icon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
 import {
-  BasicCreatorProfileType,
   formatSubscriberCount,
   getAgeLabel,
-  getSkinTypeLabels,
+  type CreatorDetailResponse,
 } from '@somesay/shared';
 import { BlackHeartButton } from '../buttons/BlackHeartButton';
-interface CreatorHomeProfileProps extends BasicCreatorProfileType {
+
+type CreatorHomeProfileProps = Pick<
+  CreatorDetailResponse,
+  | 'creatorName'
+  | 'creatorProfileImgUrl'
+  | 'creatorSubscriberNum'
+  | 'creatorAge'
+  | 'creatorSkinTypes'
+  | 'creatorYoutubeLink'
+> & {
+  // 찜 수·찜 여부는 UI 값입니다. (크리에이터 상세 응답에 해당 필드 없음)
   likeCount: number;
   isLiked?: boolean;
   onLikeClick?: () => void;
-  youtubeUrl: string;
-}
+};
 
 export const CreatorHomeProfile = ({
   creatorName,
-  profileImgUrl,
-  subscriberNum,
-  age,
-  skinTypeIds,
+  creatorProfileImgUrl,
+  creatorSubscriberNum,
+  creatorAge,
+  creatorSkinTypes,
   likeCount: initialLikeCount,
   isLiked: initialLiked = false,
   onLikeClick,
-  youtubeUrl,
+  creatorYoutubeLink,
 }: CreatorHomeProfileProps) => {
-  const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
+  const skinTypeLabels = creatorSkinTypes.map(
+    ({ skinTypeName }) => skinTypeName
+  );
   const skinTypeLabel = skinTypeLabels.join(', ');
-  const ageLabel = getAgeLabel(age);
+  const ageLabel = getAgeLabel(creatorAge);
   const [liked, setLiked] = useState(initialLiked);
   const [currentLikeCount, setCurrentLikeCount] = useState(initialLikeCount);
 
@@ -42,18 +52,20 @@ export const CreatorHomeProfile = ({
   return (
     <div
       className="flex w-full items-center gap-2"
-      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${subscriberNum}만, ${ageLabel}, ${skinTypeLabel}`}
+      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${creatorSubscriberNum}만, ${ageLabel}, ${skinTypeLabel}`}
     >
       {/* 프로필 사진 */}
       <div
-        className="flex aspect-square h-15.25 w-15.25 shrink-0 items-center justify-center overflow-hidden rounded-full"
+        className="bg-grey02 flex aspect-square h-15.25 w-15.25 shrink-0 items-center justify-center overflow-hidden rounded-full"
         aria-hidden="true"
       >
-        <img
-          className="h-full w-full object-cover"
-          src={profileImgUrl}
-          alt={`${creatorName} 프로필 사진`}
-        />
+        {creatorProfileImgUrl && (
+          <img
+            className="h-full w-full object-cover"
+            src={creatorProfileImgUrl}
+            alt={`${creatorName} 프로필 사진`}
+          />
+        )}
       </div>
 
       {/* 텍스트 정보 */}
@@ -66,17 +78,25 @@ export const CreatorHomeProfile = ({
           <span className="font-pretendard shrink-0 text-[1.25rem] leading-[150%] font-semibold">
             {creatorName}
           </span>
-          <a
-            href={youtubeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="caption-m text-grey08 flex shrink-0 items-center gap-0.5"
-            aria-label={`${creatorName} 유튜브 채널로 이동`}
-          >
-            <YoutubeIcon />
-            {formatSubscriberCount(subscriberNum)}
-            <Move12Icon />
-          </a>
+          {/* 채널 링크가 없어도 구독자 수는 보여 주고, 이동 화살표만 뺍니다. */}
+          {creatorYoutubeLink ? (
+            <a
+              href={creatorYoutubeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="caption-m text-grey08 flex shrink-0 items-center gap-0.5"
+              aria-label={`${creatorName} 유튜브 채널로 이동`}
+            >
+              <YoutubeIcon />
+              {formatSubscriberCount(creatorSubscriberNum)}
+              <Move12Icon />
+            </a>
+          ) : (
+            <span className="caption-m text-grey08 flex shrink-0 items-center gap-0.5">
+              <YoutubeIcon />
+              {formatSubscriberCount(creatorSubscriberNum)}
+            </span>
+          )}
         </div>
 
         {/* 피부/나이 칩 */}

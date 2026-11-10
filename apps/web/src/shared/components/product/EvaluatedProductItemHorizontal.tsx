@@ -6,7 +6,7 @@ import { ArrowRightIcon } from '@/shared/icons';
 
 interface EvaluatedProductItemHorizontalProps {
   productId: number;
-  productImgUrl: string;
+  productImgUrl: string | null;
   productName: string;
   brandName: string;
   reviewCount: number;

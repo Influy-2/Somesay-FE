@@ -2,10 +2,13 @@ import { Star16Icon } from '@/shared/icons';
 import cn from '@/utils/cn';
 
 interface StarRatingProps {
-  rating: number;
+  rating: number | null;
 }
 // TODO: 디자인 수정에 따른 수정 필요
 export const StarRating = ({ rating }: StarRatingProps) => {
+  // 별점이 없는 리뷰는 빈 별 5개 대신 아무것도 그리지 않습니다. (0점으로 오해하지 않도록)
+  if (rating == null) return null;
+
   const filled = Math.round(rating);
 
   return (

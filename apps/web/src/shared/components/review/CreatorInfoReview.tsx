@@ -3,35 +3,53 @@
 import { CreatorRankingProfile } from '../profile/CreatorRankingProfile';
 import { RateBar } from '../ratebar/RateBar';
 import { StarRating } from '../rating/StarRating';
-import type { ProductReviewType } from '@somesay/shared';
+import type { ProductReviewResponse } from '@somesay/shared';
+import { formatCount } from '@somesay/shared';
 
 export interface CreatorInfoReviewProps {
-  review: ProductReviewType;
+  review: Pick<
+    ProductReviewResponse,
+    | 'creatorRanking'
+    | 'creatorName'
+    | 'creatorProfileImgUrl'
+    | 'creatorSubscriberNum'
+    | 'creatorTrustScore'
+    | 'creatorSkinTypes'
+    | 'reviewRating'
+    | 'reviewContent'
+    | 'reviewAgreeCount'
+    | 'reviewDisagreeCount'
+    | 'reviewAgreeRatio'
+  >;
 }
 
 export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
-  const participantCount = review.agreeCount + review.disagreeCount;
+  const participantCount = review.reviewAgreeCount + review.reviewDisagreeCount;
   const isEvaluated = participantCount > 0;
 
   return (
     <div className="flex flex-col px-4 pt-5">
       <CreatorRankingProfile
-        ranking={review.ranking}
+        ranking={review.creatorRanking}
         nickname={review.creatorName}
-        profileImageUrl={review.profileImgUrl}
-        subscriberNum={review.subscriberNum}
-        trustScore={review.trustScore}
-        skinTypeIds={review.skinTypeIds}
+        creatorProfileImgUrl={review.creatorProfileImgUrl}
+        subscriberNum={review.creatorSubscriberNum}
+        trustScore={review.creatorTrustScore}
+        skinTypeIds={review.creatorSkinTypes.map(
+          ({ skinTypeId }) => skinTypeId
+        )}
       />
 
       <div className="mb-5">
-        <div className="flex items-center gap-1">
-          <StarRating rating={review.rating} />
-          <span className="body2-sb" aria-hidden="true">
-            {review.rating}
-          </span>
-        </div>
-        <p className="body2-m">{review.content}</p>
+        {review.reviewRating != null && (
+          <div className="flex items-center gap-1">
+            <StarRating rating={review.reviewRating} />
+            <span className="body2-sb" aria-hidden="true">
+              {review.reviewRating}
+            </span>
+          </div>
+        )}
+        <p className="body2-m">{review.reviewContent}</p>
       </div>
 
       <div className="pb-4">
@@ -40,14 +58,14 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
             <div className="flex items-center justify-between">
               <div>
                 <span className="body2-b">
-                  {Math.round(review.agreeRatio)}%
+                  {Math.round(review.reviewAgreeRatio)}%
                 </span>
                 <span className="body2-m text-grey08">
                   의 사용자가 이 리뷰에 공감했어요
                 </span>
               </div>
               <span className="body2-m text-grey06">
-                {participantCount.toLocaleString()}명 참여
+                {formatCount(participantCount)}명 참여
               </span>
             </div>
           ) : (
@@ -57,7 +75,7 @@ export const CreatorInfoReview = ({ review }: CreatorInfoReviewProps) => {
           )}
         </div>
         {isEvaluated ? (
-          <RateBar percentage={review.agreeRatio} />
+          <RateBar percentage={review.reviewAgreeRatio} />
         ) : (
           <div className="bg-grey01 mr-2 h-1.5 w-full" aria-hidden="true" />
         )}

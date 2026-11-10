@@ -4,7 +4,7 @@ import cn from '@/utils/cn';
 
 interface EvaluatedProductItemVerticalProps {
   productId: number;
-  productImgUrl: string;
+  productImgUrl: string | null;
   productName: string;
   isSelected: boolean;
   onClick: (productId: number) => void;

@@ -5,21 +5,21 @@ import { PATH } from '@/routes/path';
 
 export interface BrandProfileProps {
   brandName: string;
-  brandImageUrl: string | null;
+  brandLogoImgUrl: string | null;
   brandId: number;
 }
 
 export const BrandProfile = ({
   brandName,
   brandId,
-  brandImageUrl,
+  brandLogoImgUrl,
 }: BrandProfileProps) => {
   return (
     <div className="border-grey02 flex items-center justify-between border-b px-4 py-5">
       <div className="flex items-center gap-1.5">
-        {brandImageUrl && (
+        {brandLogoImgUrl && (
           <img
-            src={brandImageUrl}
+            src={brandLogoImgUrl}
             alt=""
             aria-hidden="true"
             className="bg-grey03 h-6 w-6 rounded-full object-cover"

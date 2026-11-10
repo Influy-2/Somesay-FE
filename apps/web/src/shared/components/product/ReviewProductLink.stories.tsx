@@ -21,7 +21,7 @@ const MOCK_PRODUCT = {
   brandName: '이니스프리',
   productName: '그린티 씨드 세럼 80ml',
   productImgUrl: mockProductImg,
-  price: 35000,
+  productPrice: 35000,
 };
 
 // 화살표 있음 — 상세 페이지 이동 링크
@@ -59,7 +59,7 @@ export const HighPrice: Story = {
       ...MOCK_PRODUCT,
       brandName: '설화수',
       productName: '자음 생크림 진설',
-      price: 289000,
+      productPrice: 289000,
     },
     showArrow: true,
   },

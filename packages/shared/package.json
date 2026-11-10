@@ -4,14 +4,19 @@
   "private": true,
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "scripts": {
+    "api:fetch": "node scripts/sync-openapi.mjs",
+    "api:gen": "openapi-typescript openapi/openapi.json --properties-required-by-default -o src/api/generated/openapi.ts",
+    "api:sync": "pnpm api:fetch && pnpm api:gen"
+  },
   "dependencies": {
     "@tanstack/react-query": "^5.90.20",
-    "axios": "^1.13.5",
-    "zustand": "^5.0.11"
+    "openapi-typescript-helpers": "^0.1.0"
   },
   "devDependencies": {
     "@somesay/config": "workspace:*",
     "@tanstack/eslint-plugin-query": "^5.91.4",
+    "openapi-typescript": "^7.13.0",
     "typescript": "^5.9.3"
   }
 }

@@ -11,7 +11,7 @@ description: Somesay 공용 컴포넌트의 Storybook 스토리를 작성하거�
 ## 1. 컴포넌트 분석
 
 1. 대상 파일을 읽는다. 이름만 받았으면 `apps/web/src/shared/components/**/{이름}.tsx`로 찾는다.
-2. Props 타입을 따라간다 — `@somesay/shared`면 `packages/shared/src/domain/{도메인}/`, 같은 폴더면 `*.types.ts`.
+2. Props 타입을 따라간다 — `@somesay/shared`의 서버 타입이면 `packages/shared/src/api/schema.ts`(→ `generated/openapi.ts`), 프론트 전용 `…Type`이면 `packages/shared/src/domain/{도메인}/`, 같은 폴더면 `*.types.ts`. nullable 필드는 null 상태 스토리도 고려한다.
 3. 이미 `.stories.tsx`가 있으면 읽고 **개선점만** 제안한다. 통째로 다시 쓰지 않는다.
 
 확인할 것 — Props의 필수/선택 · 유니온 값 목록 · 함수 Props(상태 토글 여부) · `w-full`/`fixed`/`createPortal` 사용(데코레이터 판단) · 접근성 속성(`aria-*`, `role`)

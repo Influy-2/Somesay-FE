@@ -1,9 +1,6 @@
-import {
-  fetchBrandProducts,
-  QUERY_KEYS,
-  type BrandProductSortType,
-} from '@somesay/shared';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import type { BrandProductSortType } from '@somesay/shared';
+
+import { useApiInfiniteQuery } from '@/shared/api';
 
 interface UseFetchBrandProductsOptions {
   brandId?: number;
@@ -23,25 +20,22 @@ export const useFetchBrandProducts = ({
 }: UseFetchBrandProductsOptions) => {
   const isValidBrandId =
     typeof brandId === 'number' && Number.isInteger(brandId) && brandId > 0;
-  const productParams = {
-    size,
-    ...(typeof subCategoryId === 'number' ? { subCategoryId } : {}),
-    ...(sortType ? { sortType } : {}),
-  };
 
-  const query = useInfiniteQuery({
-    queryKey: QUERY_KEYS.BRAND.PRODUCTS(brandId ?? 0, productParams),
-    initialPageParam: 0,
-    queryFn: ({ pageParam }) =>
-      fetchBrandProducts(brandId ?? 0, {
-        page: pageParam,
-        ...productParams,
-      }),
-    getNextPageParam: (lastPage, pages) =>
-      lastPage.hasNext ? pages.length : undefined,
-    enabled: enabled && isValidBrandId,
-    throwOnError: false,
-  });
-
-  return query;
+  return useApiInfiniteQuery(
+    '/api/v1/brands/{brandId}/products',
+    {
+      params: {
+        path: { brandId: brandId ?? 0 },
+        query: {
+          size,
+          ...(typeof subCategoryId === 'number' ? { subCategoryId } : {}),
+          ...(sortType ? { sortType } : {}),
+        },
+      },
+    },
+    {
+      enabled: enabled && isValidBrandId,
+      throwOnError: false,
+    }
+  );
 };

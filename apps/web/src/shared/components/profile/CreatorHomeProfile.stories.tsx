@@ -11,14 +11,12 @@ const meta: Meta<typeof CreatorHomeProfile> = {
   argTypes: {
     likeCount: { control: 'number' },
     isLiked: { control: 'boolean' },
-    youtubeUrl: { control: 'text' },
-    creatorId: { control: 'number' },
+    creatorYoutubeLink: { control: 'text' },
     creatorName: { control: 'text' },
-    profileImgUrl: { control: 'text' },
-    subscriberNum: { control: 'number' },
-    trustScore: { control: 'number' },
-    age: { control: 'select', options: AGE_TYPES },
-    skinTypeIds: { control: 'object' },
+    creatorProfileImgUrl: { control: 'text' },
+    creatorSubscriberNum: { control: 'number' },
+    creatorAge: { control: 'select', options: AGE_TYPES },
+    creatorSkinTypes: { control: 'object' },
   },
 };
 
@@ -28,13 +26,11 @@ type Story = StoryObj<typeof CreatorHomeProfile>;
 export const Default: Story = {
   args: {
     likeCount: 0,
-    youtubeUrl: 'https://placehold.co/100',
-    creatorId: 1,
+    creatorYoutubeLink: 'https://placehold.co/100',
     creatorName: '이름',
-    profileImgUrl: 'https://placehold.co/100',
-    subscriberNum: 0,
-    trustScore: 4.5,
-    age: 'TWENTIES',
-    skinTypeIds: [1],
+    creatorProfileImgUrl: 'https://placehold.co/100',
+    creatorSubscriberNum: 0,
+    creatorAge: 'TWENTIES',
+    creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
   },
 };

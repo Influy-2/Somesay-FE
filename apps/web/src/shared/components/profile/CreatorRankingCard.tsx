@@ -1,12 +1,12 @@
 import {
   formatSubscriberCount,
   getAgeLabel,
-  getSkinTypeLabels,
   type CreatorRankingUpDownType,
 } from '@somesay/shared';
 import { Link } from 'react-router';
 
 import { PATH } from '@/routes/path';
+import { getTrustScoreLabel, getTrustScoreText } from './trustScore.utils';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import {
   ArrowDownIcon,
@@ -17,19 +17,21 @@ import {
 
 export const CreatorRankingCard = ({
   creatorId,
-  ranking,
+  creatorRanking,
   rankChange,
   rankChangeDiff,
-  profileImgUrl,
+  creatorProfileImgUrl,
   creatorName,
-  subscriberNum,
-  age,
-  skinTypeIds,
-  trustScore,
+  creatorSubscriberNum,
+  creatorAge,
+  creatorSkinTypes,
+  creatorTrustScore,
 }: CreatorRankingUpDownType) => {
-  const subscriberLabel = formatSubscriberCount(subscriberNum);
-  const ageLabel = getAgeLabel(age);
-  const skinTypeLabels = getSkinTypeLabels(skinTypeIds);
+  const subscriberLabel = formatSubscriberCount(creatorSubscriberNum);
+  const ageLabel = getAgeLabel(creatorAge);
+  const skinTypeLabels = creatorSkinTypes.map(
+    ({ skinTypeName }) => skinTypeName
+  );
   const skinTypeLabel =
     skinTypeLabels.length > 0
       ? skinTypeLabels.join(', ')
@@ -45,11 +47,13 @@ export const CreatorRankingCard = ({
     <Link
       to={`${PATH.CREATOR.BASE}/${creatorId}`}
       className="flex w-full items-center justify-between gap-3"
-      aria-label={`${ranking}위 ${creatorName} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageLabel}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel}`}
+      aria-label={`${creatorRanking}위 ${creatorName} 크리에이터 홈으로 이동, 구독자 ${subscriberLabel}, ${ageLabel}, ${skinTypeLabel}, ${getTrustScoreLabel(creatorTrustScore)}, ${rankChangeLabel}`}
     >
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <div className="flex w-[1.4375rem] shrink-0 flex-col items-center gap-0.5">
-          <span className="subhead-sb text-center text-black">{ranking}</span>
+          <span className="subhead-sb text-center text-black">
+            {creatorRanking}
+          </span>
           <span
             className={`caption1-m flex items-center gap-0.5 ${rankChangeDiff === 'up' ? 'text-primary-400' : 'text-black'}`}
             aria-hidden="true"
@@ -67,9 +71,9 @@ export const CreatorRankingCard = ({
 
         <div className="flex min-w-0 flex-1 items-center gap-4">
           <div className="bg-grey02 size-[3.375rem] shrink-0 overflow-hidden rounded-full">
-            {profileImgUrl && (
+            {creatorProfileImgUrl && (
               <img
-                src={profileImgUrl}
+                src={creatorProfileImgUrl}
                 alt=""
                 loading="lazy"
                 decoding="async"
@@ -105,7 +109,7 @@ export const CreatorRankingCard = ({
         className="body1-sb shrink-0 whitespace-nowrap text-black"
         aria-hidden="true"
       >
-        {trustScore.toFixed(0)}점
+        {getTrustScoreText(creatorTrustScore)}
       </span>
     </Link>
   );

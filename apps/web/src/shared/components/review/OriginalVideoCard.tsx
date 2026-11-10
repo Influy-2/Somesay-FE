@@ -4,11 +4,11 @@ import { Move12Icon } from '@/shared/icons';
 import { OriginalVideo } from './OriginalVideo';
 interface OriginalVideoCardProps {
   youtubeUrl: string;
-  videoTitle: string;
-  viewCount: number;
-  uploadDate?: string;
+  videoTitle: string | null;
+  viewCount: number | null;
+  uploadDate?: string | null;
   creatorName: string;
-  creatorProfileImgUrl?: string;
+  creatorProfileImgUrl?: string | null;
   timeLinkCount: number;
   reviewId: number;
   onOpenTimeLinkSheet?: (reviewId: number) => void;
@@ -30,7 +30,7 @@ export const OriginalVideoCard = ({
       {/* 헤더 */}
       <div className="mb-2 flex items-center justify-between">
         <h3 className="body2-sb text-black">이 리뷰 원본 보기</h3>
-        {timeLinkCount && timeLinkCount > 1 && (
+        {timeLinkCount > 1 && (
           <button
             type="button"
             onClick={() => onOpenTimeLinkSheet?.(reviewId)}

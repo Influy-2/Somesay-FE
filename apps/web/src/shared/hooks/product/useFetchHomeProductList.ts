@@ -1,27 +1,22 @@
-import { fetchHomeProductList, QUERY_KEYS } from '@somesay/shared';
-import { useQuery } from '@tanstack/react-query';
+import { useApiQuery } from '@/shared/api';
 
 interface UseFetchHomeProductListOptions {
   mainCategoryId?: number;
-  subCategoryId?: number;
 }
 
-// 홈 카테고리별 추천 상품 목록을 조회하는 React Query hook입니다.
+// 홈 카테고리별 상품 목록을 조회하는 React Query hook입니다. (mainCategoryId 가 없으면 전체)
 export const useFetchHomeProductList = ({
   mainCategoryId,
-  subCategoryId,
-}: UseFetchHomeProductListOptions = {}) => {
-  const productParams = {
-    ...(typeof mainCategoryId === 'number' ? { mainCategoryId } : {}),
-    ...(typeof subCategoryId === 'number' ? { subCategoryId } : {}),
-  };
-
-  const query = useQuery({
-    queryKey: QUERY_KEYS.HOME.PRODUCT_LIST(productParams),
-    queryFn: () => fetchHomeProductList(productParams),
-    throwOnError: false,
-    retry: false,
-  });
-
-  return query;
-};
+}: UseFetchHomeProductListOptions = {}) =>
+  useApiQuery(
+    '/api/v1/home/products',
+    {
+      params: {
+        query: typeof mainCategoryId === 'number' ? { mainCategoryId } : {},
+      },
+    },
+    {
+      throwOnError: false,
+      retry: false,
+    }
+  );

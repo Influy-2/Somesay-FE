@@ -1,5 +1,6 @@
 import { HeartBlackOffIcon } from '@/shared/icons';
 import { HeartOnIcon } from '@/shared/icons';
+import { formatCount } from '@somesay/shared';
 
 interface BlackHeartButtonProps {
   isLiked: boolean;
@@ -25,7 +26,7 @@ export const BlackHeartButton = ({
         <span className="caption1-m">
           {likeCount >= 10000
             ? `${Math.floor(likeCount / 10000)}만`
-            : likeCount.toLocaleString()}
+            : formatCount(likeCount)}
         </span>
       )}
     </button>

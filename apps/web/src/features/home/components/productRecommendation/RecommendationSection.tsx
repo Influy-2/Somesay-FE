@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { getConcernLabels, getSkinTypeLabels } from '@somesay/shared';
-
 import { YoutubeIcon } from '@/shared/icons';
 import { useFetchUserInfo } from '@/shared/hooks';
 
@@ -13,7 +11,6 @@ import {
 } from './filter.constants';
 import { hasAnySelection } from './recommendation.utils';
 import { TypeRow } from './TypeRow';
-import { useRequestRecommendations } from './useRequestRecommendations';
 import { useRotatingSuggestion } from './useRotatingSuggestion';
 import type {
   RecommendedFilterGroupType,
@@ -36,19 +33,19 @@ export const RecommendationSection = () => {
   const { suggestion, suggestionIndex } = useRotatingSuggestion({
     isEnabled: isRotating,
   });
-  const { requestRecommendations, isRequesting } = useRequestRecommendations();
+  // TODO: 추천 API 재정의 후 다시 연결 (/home/recommend 스펙에서 삭제됨)
+  // 요청 중 상태는 API 가 다시 연결될 때 mutation 의 isPending 으로 바꿉니다.
+  const isRequesting = false;
 
   // 회원가입에서 저장한 조건은 순환 중에도 내용을 고정합니다. (색과 등장 모션은 함께 순환)
   const { data: userInfo } = useFetchUserInfo();
   const savedFilters: SelectedFiltersType = {
-    skinConcern: getConcernLabels(userInfo?.skinExpectationIds ?? []).slice(
-      0,
-      MAX_SELECTIONS.skinConcern
-    ),
-    skinType: getSkinTypeLabels(userInfo?.skinTypeIds ?? []).slice(
-      0,
-      MAX_SELECTIONS.skinType
-    ),
+    skinConcern: (userInfo?.userSkinConcerns ?? [])
+      .map(({ skinConcernName }) => skinConcernName)
+      .slice(0, MAX_SELECTIONS.skinConcern),
+    skinType: (userInfo?.userSkinTypes ?? [])
+      .map(({ skinTypeName }) => skinTypeName)
+      .slice(0, MAX_SELECTIONS.skinType),
     category: [],
   };
 
@@ -91,7 +88,8 @@ export const RecommendationSection = () => {
       return;
     }
 
-    requestRecommendations(userFilters);
+    // TODO: 추천 API 재정의 후 다시 연결 (/home/recommend 스펙에서 삭제됨)
+    // 이전에는 여기서 추천을 조회해 결과가 있으면 추천 결과 화면으로 이동했습니다.
   };
 
   // 필터 초기화

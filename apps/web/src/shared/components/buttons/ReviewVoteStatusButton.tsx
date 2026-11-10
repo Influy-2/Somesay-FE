@@ -5,13 +5,13 @@ import { useState } from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 interface ReviewVoteStatusButtonProps {
   type: 'agree' | 'disagree';
-  profileImageUrl?: string;
+  creatorProfileImgUrl?: string;
   creatorName?: string;
 }
 
 export const ReviewVoteStatusButton = ({
   type,
-  profileImageUrl,
+  creatorProfileImgUrl,
   creatorName,
 }: ReviewVoteStatusButtonProps) => {
   const isAgree = type === 'agree';
@@ -34,9 +34,9 @@ export const ReviewVoteStatusButton = ({
               : ''
           }`}
         >
-          {profileImageUrl && (
+          {creatorProfileImgUrl && (
             <img
-              src={profileImageUrl}
+              src={creatorProfileImgUrl}
               alt=""
               className="h-full w-full object-cover"
             />

@@ -1,5 +1,10 @@
 // Product/랭킹용/홈 컴포넌트
-import { formatPrice, type ProductCardType } from '@somesay/shared';
+import {
+  formatRating,
+  formatCount,
+  formatPrice,
+  type ProductPreviewCard,
+} from '@somesay/shared';
 import { Link } from 'react-router';
 
 import { PATH } from '@/routes/path';
@@ -7,7 +12,7 @@ import { Star16Icon as StarIcon } from '@/shared/icons';
 import { AvatarStack } from './AvatarStack';
 import { HeartButton } from '../buttons/HeartButton';
 
-type HomeProductRankingCardProps = ProductCardType & {
+type HomeProductRankingCardProps = ProductPreviewCard & {
   ranking: number;
   onHeartToggle: () => void;
 };
@@ -17,22 +22,22 @@ export const HomeProductRankingCard = ({
   productImgUrl,
   brandName,
   productName,
-  price,
-  avgRating,
-  reviewCount,
+  productPrice,
+  productAvgRating,
+  productReviewCount,
   ranking,
-  isHearted,
-  creatorImageUrls,
+  isWished,
+  creatorProfileImgUrls,
   onHeartToggle,
 }: HomeProductRankingCardProps) => {
-  const formattedReviewCount = reviewCount
-    ? reviewCount.toLocaleString('ko-KR')
+  const formattedReviewCount = productReviewCount
+    ? formatCount(productReviewCount)
     : '0';
 
   return (
     <article
       className="relative flex flex-1 shrink-0 flex-col items-start"
-      aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(price)}, 별점 ${avgRating.toFixed(1)}점, 리뷰 ${formattedReviewCount}개`}
+      aria-label={`${ranking}위 ${brandName} ${productName}, ${formatPrice(productPrice)}, 별점 ${formatRating(productAvgRating)}점, 리뷰 ${formattedReviewCount}개`}
     >
       {/* 이미지 영역 */}
       <div className="relative h-[12.5rem] w-full overflow-hidden">
@@ -58,7 +63,7 @@ export const HomeProductRankingCard = ({
         {/* 찜 버튼 */}
         <div className="absolute right-2 bottom-2 z-1">
           <HeartButton
-            isHearted={isHearted}
+            isHearted={isWished}
             onHeartToggle={onHeartToggle}
             productName={productName}
           />
@@ -77,19 +82,21 @@ export const HomeProductRankingCard = ({
         <p className="body2-m w-full truncate text-black">{productName}</p>
 
         {/* 가격 */}
-        <p className="body2-m truncate text-black">{formatPrice(price)}</p>
+        <p className="body2-m truncate text-black">
+          {formatPrice(productPrice)}
+        </p>
 
         {/* 별점 + 리뷰수 + 크리에이터 프로필 */}
         <div className="flex items-center gap-1">
           {/* 별점 */}
           <div className="flex items-center">
             <StarIcon className="text-primary-300 size-4" />
-            <span className="body2-sb">{avgRating.toFixed(1)}</span>
+            <span className="body2-sb">{formatRating(productAvgRating)}</span>
           </div>
           {/* 리뷰수 */}
           <span className="body2-m">({formattedReviewCount})</span>
           {/* 크리에이터 프로필 스택 */}
-          <AvatarStack creatorImageUrls={creatorImageUrls} />
+          <AvatarStack creatorProfileImgUrls={creatorProfileImgUrls} />
         </div>
       </div>
       <Link

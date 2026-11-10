@@ -2,11 +2,11 @@ import { useRef } from 'react';
 import { CameraIcon } from '@/shared/icons';
 
 type AccountProfileImageProps = {
-  profileImageUrl: string | null;
+  userProfileImgUrl: string | null;
 };
 
 export const AccountProfileImage = ({
-  profileImageUrl,
+  userProfileImgUrl,
 }: AccountProfileImageProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -34,9 +34,9 @@ export const AccountProfileImage = ({
         onClick={() => fileInputRef.current?.click()}
       >
         <div className="bg-grey02 size-20 overflow-hidden rounded-full">
-          {profileImageUrl ? (
+          {userProfileImgUrl ? (
             <img
-              src={profileImageUrl}
+              src={userProfileImgUrl}
               alt="프로필 이미지"
               className="size-full object-cover"
             />

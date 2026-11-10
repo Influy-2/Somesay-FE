@@ -81,7 +81,7 @@ export const CategoryProductSection = () => {
                   onHeartToggle={() =>
                     toggleWish({
                       productId: product.productId,
-                      isHearted: product.isHearted,
+                      isWished: product.isWished,
                     })
                   }
                 />

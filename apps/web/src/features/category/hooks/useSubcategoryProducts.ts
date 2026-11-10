@@ -11,6 +11,7 @@ import {
   getProductSort,
   getSubCategoryId,
 } from '../utils/subcategory.params';
+import { flattenPages, getTotalCount } from '@somesay/shared';
 
 /**
  * 소분류 카테고리 화면의 조회 조건과 상품 목록을 한곳에서 다룹니다.
@@ -80,10 +81,10 @@ export const useSubcategoryProducts = (mainCategoryId?: number) => {
   );
 
   const products = useMemo(
-    () => productsQuery.data?.pages.flatMap((page) => page.products) ?? [],
-    [productsQuery.data?.pages]
+    () => flattenPages(productsQuery.data),
+    [productsQuery.data]
   );
-  const productCount = productsQuery.data?.pages[0]?.totalCount ?? 0;
+  const productCount = getTotalCount(productsQuery.data);
 
   const loadMoreRef = useInfiniteScroll({
     hasNextPage: productsQuery.hasNextPage,
@@ -109,7 +110,7 @@ export const useSubcategoryProducts = (mainCategoryId?: number) => {
       return;
     }
 
-    toggleWish({ productId, isHearted: product.isHearted });
+    toggleWish({ productId, isWished: product.isWished });
   };
 
   return {

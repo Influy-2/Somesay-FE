@@ -49,7 +49,7 @@ export const CreatorsTab = ({
           {
             MOCK_RECOMMENDED_CREATORS.find(
               (c) => c.creatorId === selectedCreatorId
-            )?.name
+            )?.creatorName
           }
         </span>
         <span className="shrink-0">' 리뷰에 남긴 평가</span>
@@ -61,8 +61,8 @@ export const CreatorsTab = ({
             <EvaluatedCreatorItemVertical
               key={creator.creatorId}
               creatorId={creator.creatorId}
-              profileImageUrl={creator.profileImageUrl}
-              name={creator.name}
+              creatorProfileImgUrl={creator.creatorProfileImgUrl}
+              name={creator.creatorName}
               isSelected={selectedCreatorId === creator.creatorId}
               onClick={setSelectedCreatorId}
             />

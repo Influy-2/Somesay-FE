@@ -46,7 +46,7 @@ description: PR 본문 초안을 쓸 때 사용한다. "PR 써줘", "PR 본문 �
   - mock 데이터는 허용한다.
 - **done 기준 (screen 기준 + 모두 충족)**
   - 대상에 `MOCK_*`가 없다.
-  - 이슈의 API마다 `packages/shared/src/constants/endpoints.ts` → api → query 훅 → 대상의 호출이 이어진다. 하나라도 못 찾으면 done이 아니다.
+  - 이슈의 API마다 `shared/hooks/` 훅이 그 경로(`'/api/v1/...'`)를 `useApiQuery`·`useApiInfiniteQuery`·`fetchClient`로 부르고 → 대상이 그 훅을 호출한다. 하나라도 못 찾으면 done이 아니다.
   - 로딩·에러·빈 상태를 처리한다.
   - 이슈의 API 중 어느 소분류 몫인지 불분명한 것이 있으면 done으로 쓰지 않는다.
 - 틀린 단계는 완료를 잘못 알리므로 **모르면 뺀다.**

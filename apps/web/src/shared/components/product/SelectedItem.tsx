@@ -4,7 +4,7 @@ import { CircleX20Icon } from '@/shared/icons';
 
 type SelectedItemProps = {
   productId: number;
-  productImgUrl: string;
+  productImgUrl: string | null;
   brandName: string;
   productName: string;
   onRemove: (productId: number) => void;

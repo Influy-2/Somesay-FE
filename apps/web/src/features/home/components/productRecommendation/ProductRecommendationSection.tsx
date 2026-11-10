@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { getSkinTypeLabel, type RecommendedProductType } from '@somesay/shared';
+import type { RecommendedProductType } from '@somesay/shared';
 
 import { CreatorReviewExpandedCard } from '@/shared/components';
 
@@ -49,26 +49,23 @@ export const ProductRecommendationSection = ({
               aria-hidden={index !== selectedIndex}
               inert={index !== selectedIndex}
             >
-              {product.productSkinTypeIds.length > 0 && (
+              {product.productSkinTypes.length > 0 && (
                 <ProductAttributeSection
                   title="잘 맞는 피부 타입"
-                  items={product.productSkinTypeIds.flatMap((skinTypeId) => {
-                    const label = getSkinTypeLabel(skinTypeId);
-
-                    // 선택 필터는 화면에서 고른 라벨이라 라벨로 비교합니다.
-                    return label
-                      ? [{ label, isHighlighted: isSelectedKeyword(label) }]
-                      : [];
-                  })}
+                  // 선택 필터는 화면에서 고른 라벨이라 라벨로 비교합니다.
+                  items={product.productSkinTypes.map(({ skinTypeName }) => ({
+                    label: skinTypeName,
+                    isHighlighted: isSelectedKeyword(skinTypeName),
+                  }))}
                 />
               )}
 
-              {product.productSkinExpectations.length > 0 && (
+              {product.productEffectChips.length > 0 && (
                 <ProductAttributeSection
                   title="기대 효과"
-                  items={product.productSkinExpectations.map(({ concern }) => ({
-                    label: concern,
-                    isHighlighted: isSelectedKeyword(concern),
+                  items={product.productEffectChips.map(({ chipName }) => ({
+                    label: chipName,
+                    isHighlighted: isSelectedKeyword(chipName),
                   }))}
                 />
               )}

@@ -11,11 +11,6 @@ export { useProductWish } from './product/useProductWish';
 export { useFetchHomeCreatorRanking } from './home/useFetchHomeCreatorRanking';
 export { useFetchHomeProductRanking } from './home/useFetchHomeProductRanking';
 export { useFetchHomeCuration } from './home/useFetchHomeCuration';
-export {
-  useFetchHomeRecommendations,
-  RECOMMENDATION_STALE_TIME,
-} from './home/useFetchHomeRecommendations';
-export { useWishRecommendedProducts } from './home/useWishRecommendedProducts';
 
 // Ranking
 export { useFetchProductsRanking } from './ranking/useFetchProductsRanking';

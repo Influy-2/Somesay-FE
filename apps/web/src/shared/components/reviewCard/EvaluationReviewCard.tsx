@@ -1,23 +1,17 @@
 // Review card/평가전 평가후
 
-import type { CreatorType } from '@somesay/shared';
-import { EvaluationCardProfile } from '../profile/EvaluationCardProfile';
+import {
+  EvaluationCardProfile,
+  type EvaluationCardCreator,
+} from '../profile/EvaluationCardProfile';
 import { StarRating } from '../rating/StarRating';
 import { ReviewVoteButton } from '../buttons/ReviewVoteButton';
 import { RateBar } from '../ratebar/RateBar';
 import type { ReviewVoteType } from '../buttons/ReviewVoteButton';
+import { formatCount } from '@somesay/shared';
 
 type EvaluationReviewCardProps = {
-  creator: Pick<
-    CreatorType,
-    | 'creatorName'
-    | 'profileImgUrl'
-    | 'subscriberNum'
-    | 'trustScore'
-    | 'ranking'
-    | 'age'
-    | 'skinTypeIds'
-  >;
+  creator: EvaluationCardCreator;
   rating: number;
   content: string;
   evaluated: boolean;
@@ -78,7 +72,7 @@ export const EvaluationReviewCard = ({
                   : '의 사용자가 반대했어요'}
               </p>
               <span className="text-grey06">
-                {participantCount.toLocaleString('ko-KR')}명 참여
+                {formatCount(participantCount)}명 참여
               </span>
             </div>
             <RateBar

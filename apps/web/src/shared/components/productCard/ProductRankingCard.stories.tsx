@@ -22,11 +22,11 @@ const meta: Meta<typeof ProductRankingCard> = {
     productImgUrl: { control: 'text' },
     brandName: { control: 'text' },
     productName: { control: 'text' },
-    price: { control: 'number' },
-    avgRating: { control: 'number' },
-    reviewCount: { control: 'number' },
-    creatorImageUrls: { control: 'object' },
-    isHearted: { control: 'boolean' },
+    productPrice: { control: 'number' },
+    productAvgRating: { control: 'number' },
+    productReviewCount: { control: 'number' },
+    creatorProfileImgUrls: { control: 'object' },
+    isWished: { control: 'boolean' },
     ranking: { control: 'number' },
   },
 };
@@ -40,11 +40,11 @@ export const Default: Story = {
     productImgUrl: mockProduct,
     brandName: '토리든',
     productName: '다이브인 저분자 히알루론산 세럼',
-    price: 24000,
-    avgRating: 4.9,
-    reviewCount: 43,
-    creatorImageUrls: [mockProfile1, mockProfile2, mockProfile3],
-    isHearted: false,
+    productPrice: 24000,
+    productAvgRating: 4.9,
+    productReviewCount: 43,
+    creatorProfileImgUrls: [mockProfile1, mockProfile2, mockProfile3],
+    isWished: false,
     ranking: 1,
     onHeartToggle: () => undefined,
   },
@@ -53,7 +53,7 @@ export const Default: Story = {
 export const Hearted: Story = {
   args: {
     ...Default.args,
-    isHearted: true,
+    isWished: true,
     ranking: 2,
   },
 };
@@ -61,7 +61,7 @@ export const Hearted: Story = {
 export const WithoutCreatorProfiles: Story = {
   args: {
     ...Default.args,
-    creatorImageUrls: [],
+    creatorProfileImgUrls: [],
     ranking: 10,
   },
 };
@@ -71,9 +71,14 @@ export const LongContent: Story = {
     ...Default.args,
     brandName: '매우 긴 브랜드명이 들어가는 경우',
     productName: '스토리에서 말줄임 처리를 확인하기 위한 아주 긴 상품명',
-    price: 1234567,
-    reviewCount: 123456,
-    creatorImageUrls: [mockProfile1, mockProfile2, mockProfile3, mockProfile1],
+    productPrice: 1234567,
+    productReviewCount: 123456,
+    creatorProfileImgUrls: [
+      mockProfile1,
+      mockProfile2,
+      mockProfile3,
+      mockProfile1,
+    ],
     ranking: 30,
   },
 };

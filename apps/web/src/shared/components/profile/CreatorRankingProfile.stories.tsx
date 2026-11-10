@@ -24,7 +24,7 @@ export const Default: Story = {
   args: {
     ranking: 1,
     nickname: '글로우픽',
-    profileImageUrl: mockProfile,
+    creatorProfileImgUrl: mockProfile,
     subscriberNum: 124000,
     trustScore: 92,
     skinTypeIds: [1, 6],

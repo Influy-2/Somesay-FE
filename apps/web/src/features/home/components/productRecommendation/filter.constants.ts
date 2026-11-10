@@ -1,7 +1,7 @@
 import {
   SKIN_TYPE_OPTIONS as USER_SKIN_TYPE_OPTIONS,
   USER_SKIN_CONCERN_OPTIONS,
-  type SubcategoryType,
+  type SubCategoryItemResponse,
 } from '@somesay/shared';
 
 import type {
@@ -26,7 +26,7 @@ export const INITIAL_FILTERS: SelectedFiltersType = {
 
 // 카테고리를 고르지 않은 상태를 뜻하는 선택지입니다. (서버에는 보내지 않습니다)
 export const ALL_SUBCATEGORY_ID = 0;
-export const ALL_SUBCATEGORY_OPTION: SubcategoryType = {
+export const ALL_SUBCATEGORY_OPTION: SubCategoryItemResponse = {
   subCategoryId: ALL_SUBCATEGORY_ID,
   subCategoryName: '전체',
 };

@@ -1,8 +1,8 @@
 import { SearchResultProductCard } from '@/shared/components';
-import type { CategoryProductType } from '@somesay/shared';
+import type { ProductCard } from '@somesay/shared';
 
 interface SubcategoryProductListProps {
-  products: CategoryProductType[];
+  products: ProductCard[];
   onHeartToggle: (productId: number) => void;
   isLoading: boolean;
   isError: boolean;

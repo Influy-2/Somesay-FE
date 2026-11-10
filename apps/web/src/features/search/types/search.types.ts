@@ -1,4 +1,4 @@
-import { SubcategoryType, FilterGroupType } from '@somesay/shared';
+import { SubCategoryItemResponse, FilterGroupType } from '@somesay/shared';
 
 export type SearchTabType = 'product' | 'review';
 export type ProductSearchSortOptionType = 'rating' | 'price_asc' | 'price_desc';
@@ -15,7 +15,7 @@ export interface RecentSearchItemType {
 export interface SelectedFiltersType {
   skinType: string[];
   effect: string[];
-  category: SubcategoryType[];
+  category: SubCategoryItemResponse[];
 }
 
-export type FilterOptionType = string | SubcategoryType;
+export type FilterOptionType = string | SubCategoryItemResponse;

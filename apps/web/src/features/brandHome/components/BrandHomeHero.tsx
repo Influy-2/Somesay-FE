@@ -1,9 +1,10 @@
-import type { BrandSummaryType } from '@somesay/shared';
+import type { BrandResponse } from '@somesay/shared';
 import { ArrowBackIcon, Star16Icon } from '@/shared/icons';
 import { ShareButton } from '@/shared/components';
+import { formatCount, formatRating } from '@somesay/shared';
 
 interface BrandHomeHeroProps {
-  brand: BrandSummaryType;
+  brand: BrandResponse;
   onBack: () => void;
 }
 
@@ -13,12 +14,14 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
       className="relative aspect-[390/260] w-full shrink-0 overflow-hidden bg-black"
       aria-labelledby="brand-home-title"
     >
-      <img
-        src={brand.brandImgUrl}
-        alt=""
-        className="absolute inset-0 size-full object-cover"
-        aria-hidden="true"
-      />
+      {brand.brandImgUrl && (
+        <img
+          src={brand.brandImgUrl}
+          alt=""
+          className="absolute inset-0 size-full object-cover"
+          aria-hidden="true"
+        />
+      )}
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/70" />
 
       <header className="absolute top-0 left-0 flex h-13.5 w-full items-center justify-between px-4 py-2.5 text-white">
@@ -39,11 +42,18 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
       </header>
 
       <div className="absolute bottom-5 left-4 flex items-center gap-3">
-        <img
-          src={brand.brandLogoUrl}
-          alt={`${brand.brandName} 로고`}
-          className="size-15 shrink-0 rounded-full object-cover"
-        />
+        {brand.brandLogoImgUrl ? (
+          <img
+            src={brand.brandLogoImgUrl}
+            alt={`${brand.brandName} 로고`}
+            className="size-15 shrink-0 rounded-full object-cover"
+          />
+        ) : (
+          <span
+            className="bg-grey01 size-15 shrink-0 rounded-full"
+            aria-hidden="true"
+          />
+        )}
         <div className="flex min-w-0 flex-col gap-1.5 text-white">
           <h1
             id="brand-home-title"
@@ -54,20 +64,25 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
           <div className="caption1-m text-grey01 flex flex-wrap items-center gap-2">
             <span className="caption1-b flex items-center">
               <Star16Icon aria-hidden="true" className="size-4" />
-              {brand.avgRating.toFixed(1)}
+              {formatRating(brand.brandAvgRating)}
             </span>
             <span className="bg-grey06 h-3 w-px" aria-hidden="true" />
             <span>
               리뷰
               <strong className="caption1-b">
-                {brand.totalReviewCount.toLocaleString()}
+                {formatCount(brand.brandReviewCount)}
               </strong>
             </span>
-            <span className="bg-grey06 h-3 w-px" aria-hidden="true" />
-            <span>
-              SOMESAY 브랜드 평점{' '}
-              <strong className="caption1-b">{brand.ranking}위</strong>
-            </span>
+            {/* 순위가 아직 매겨지지 않은 브랜드는 null 이라 항목째 숨깁니다. */}
+            {brand.brandRanking != null && (
+              <>
+                <span className="bg-grey06 h-3 w-px" aria-hidden="true" />
+                <span>
+                  SOMESAY 브랜드 평점{' '}
+                  <strong className="caption1-b">{brand.brandRanking}위</strong>
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>

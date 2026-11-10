@@ -18,7 +18,7 @@ type Story = StoryObj<typeof EvaluatedCreatorItemVertical>;
 export const Selected: Story = {
   args: {
     creatorId: 1,
-    profileImageUrl: '',
+    creatorProfileImgUrl: '',
     name: '김크리스탈',
     isSelected: true,
     onClick: () => {},
@@ -28,7 +28,7 @@ export const Selected: Story = {
 export const Unselected: Story = {
   args: {
     creatorId: 1,
-    profileImageUrl: '',
+    creatorProfileImgUrl: '',
     name: '김크리스탈',
     isSelected: false,
     onClick: () => {},

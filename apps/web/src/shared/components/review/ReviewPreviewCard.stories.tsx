@@ -21,7 +21,7 @@ export const Default: Story = {
       productName: '당근 패드당근 패드',
       brandName: '스킨푸드',
       productImgUrl: '',
-      price: 10000,
+      productPrice: 10000,
     },
   },
 };
@@ -36,7 +36,7 @@ export const ShortContent: Story = {
       productName: '당근 패드당근 패드',
       brandName: '스킨푸드',
       productImgUrl: '',
-      price: 10000,
+      productPrice: 10000,
     },
   },
 };
