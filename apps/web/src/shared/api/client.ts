@@ -5,12 +5,8 @@ import type { paths } from '@somesay/shared';
 const DEFAULT_API_ORIGIN = 'http://localhost:8080';
 const REQUEST_TIMEOUT_MS = 10000;
 
-// 스펙 경로에 /api/v1 이 이미 들어 있어 origin 만 씁니다.
-// VITE_API_BASE_URL 은 예전 axios 클라이언트 시절 값(…/api/v1 까지)을 배포 설정에 그대로 두고 있어,
-// 같은 값에서 origin 만 꺼냅니다. 경로 부분(/api/v1)은 쓰지 않습니다.
-const apiOrigin = import.meta.env.VITE_API_BASE_URL
-  ? new URL(import.meta.env.VITE_API_BASE_URL).origin
-  : DEFAULT_API_ORIGIN;
+// 스펙 경로에 /api/v1 이 이미 들어 있어 VITE_API_BASE_URL 은 origin 만 둡니다. (예: https://somesay.kr)
+const apiOrigin = import.meta.env.VITE_API_BASE_URL || DEFAULT_API_ORIGIN;
 
 /**
  * 스펙(`paths`) 타입을 아는 fetch 클라이언트입니다.
