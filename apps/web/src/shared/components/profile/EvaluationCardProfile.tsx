@@ -2,6 +2,7 @@
 
 import { SomesaySmIcon, YoutubeIcon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
+import { getTrustScoreLabel, getTrustScoreText } from './trustScore.utils';
 import { formatSubscriberCount, getAgeLabel } from '@somesay/shared';
 import type { CreatorRankingResponse } from '@somesay/shared';
 
@@ -40,7 +41,7 @@ export const EvaluationCardProfile = ({
       className="flex w-full items-center gap-2.5"
       aria-label={
         evaluated
-          ? `크리에이터: ${creatorName}, 신뢰도 ${creatorTrustScore}점`
+          ? `크리에이터: ${creatorName}, ${getTrustScoreLabel(creatorTrustScore)}`
           : ''
       }
     >
@@ -87,7 +88,7 @@ export const EvaluationCardProfile = ({
             <div className="text-grey07 flex justify-center">
               <span className="caption1-m">신뢰도 </span>
               <span className="caption1-b">
-                {evaluated ? `${creatorTrustScore}점` : '??점'}
+                {evaluated ? getTrustScoreText(creatorTrustScore) : '??점'}
               </span>
             </div>
             {evaluated && showRank && (

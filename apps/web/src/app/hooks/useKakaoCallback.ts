@@ -12,32 +12,8 @@ import {
   useOnboardingStore,
 } from '@/features/onboarding';
 import { PATH } from '@/routes/path';
-import { fetchClient, unwrapApiData } from '@/shared/api';
+import { usePostKakaoLogin } from '@/shared/hooks';
 import { useSnackbarStore } from '@/shared/stores';
-
-// 카카오 인가 코드를 백엔드에 전달해 로그인 결과(JwtLoginResponse)를 받아옵니다.
-// 응답은 { code, message, data } 래퍼로 오므로 data 를 벗겨 씁니다.
-const postKakaoLogin = (code: string) =>
-  unwrapApiData(
-    fetchClient.POST('/api/v1/auth/login/kakao', {
-      params: { query: { code } },
-    })
-  );
-
-const kakaoLoginRequests = new Map<string, ReturnType<typeof postKakaoLogin>>();
-
-// 개발 모드의 effect 재실행에서도 같은 인가 코드를 한 번만 교환합니다.
-const getKakaoLoginRequest = (code: string) => {
-  const cachedRequest = kakaoLoginRequests.get(code);
-  if (cachedRequest) return cachedRequest;
-
-  const request = postKakaoLogin(code).finally(() => {
-    kakaoLoginRequests.delete(code);
-  });
-
-  kakaoLoginRequests.set(code, request);
-  return request;
-};
 
 // 카카오 콜백 검증부터 로그인 완료 후 이동까지 처리합니다.
 export const useKakaoCallback = () => {
@@ -46,6 +22,7 @@ export const useKakaoCallback = () => {
   const startOnboarding = useOnboardingStore((state) => state.startOnboarding);
   const resetOnboarding = useOnboardingStore((state) => state.reset);
   const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
+  const { mutateAsync: postKakaoLogin } = usePostKakaoLogin();
 
   useEffect(() => {
     let ignore = false;
@@ -74,7 +51,7 @@ export const useKakaoCallback = () => {
 
       try {
         const { jwtAccessToken, refreshToken, isNewUser, userNickname } =
-          await getKakaoLoginRequest(code);
+          await postKakaoLogin(code);
 
         if (ignore) return;
 
@@ -106,5 +83,12 @@ export const useKakaoCallback = () => {
     return () => {
       ignore = true;
     };
-  }, [navigate, resetOnboarding, searchParams, showSnackbar, startOnboarding]);
+  }, [
+    navigate,
+    postKakaoLogin,
+    resetOnboarding,
+    searchParams,
+    showSnackbar,
+    startOnboarding,
+  ]);
 };

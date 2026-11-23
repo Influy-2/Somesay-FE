@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import {
   useQuery,
   type QueryFunction,
@@ -58,6 +59,15 @@ export const useApiQuery = <Path extends ApiGetPath, TSelected = ApiData<Path>>(
 ) => {
   const { select, ...restOptions } = options ?? {};
 
+  // 호출부가 고정해 넘긴 select 의 참조를 살리려고 select 에만 의존합니다. (렌더마다 새 함수면 unwrap 이 매번 다시 돕니다)
+  const selectData = useCallback(
+    (body: unknown) => {
+      const data = (body as { data: ApiData<Path> }).data;
+      return select ? select(data) : (data as TSelected);
+    },
+    [select]
+  );
+
   // openapi-react-query 의 경로별 제네릭은 TS 가 이 함수 안에서 풀지 못해 키·조회 함수만 느슨하게 받아옵니다.
   // 바깥 타입 보장(경로·init·반환 data)은 위 시그니처가 맡습니다.
   const { queryKey, queryFn } = (
@@ -68,10 +78,7 @@ export const useApiQuery = <Path extends ApiGetPath, TSelected = ApiData<Path>>(
     ...(restOptions as LooseRestOptions<TSelected>),
     queryKey,
     queryFn,
-    select: (body) => {
-      const data = (body as { data: ApiData<Path> }).data;
-      return select ? select(data) : (data as TSelected);
-    },
+    select: selectData,
   });
 };
 

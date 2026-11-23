@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import type {
   InfiniteData,
   UseInfiniteQueryOptions,
@@ -105,6 +106,37 @@ export const useApiInfiniteQuery = <
     ...restOptions
   } = options ?? {};
 
+  // 호출부가 고정해 넘긴 함수의 참조를 살리려고 각각 넘겨받은 함수에만 의존합니다.
+  // (렌더마다 새 함수면 TanStack 이 변경으로 보고 unwrap 을 매번 다시 돕니다)
+  const getNextPageParamWrapped = useCallback(
+    (lastPage: unknown, allPages: unknown[], lastPageParam: PageParam) => {
+      const lastData = unwrap(lastPage);
+
+      if (getNextPageParam) {
+        return getNextPageParam(
+          lastData as ApiData<Path>,
+          allPages.map(unwrap) as ApiData<Path>[],
+          lastPageParam
+        );
+      }
+
+      return hasNextPage(lastData) ? lastPageParam + 1 : undefined;
+    },
+    [getNextPageParam]
+  );
+
+  const selectPages = useCallback(
+    (data: InfiniteData<unknown, PageParam>) => {
+      const unwrapped = {
+        pages: data.pages.map(unwrap),
+        pageParams: data.pageParams,
+      } as ApiInfiniteData<Path>;
+
+      return select ? select(unwrapped) : unwrapped;
+    },
+    [select]
+  );
+
   // openapi-react-query 의 경로별 제네릭은 TS 가 이 함수 안에서 풀지 못해 느슨하게 부릅니다.
   // 바깥 타입 보장(경로·init·반환 pages)은 위 시그니처가 맡습니다.
   return ($api.useInfiniteQuery as unknown as LooseUseInfiniteQuery)(
@@ -115,27 +147,8 @@ export const useApiInfiniteQuery = <
       ...restOptions,
       pageParamName,
       initialPageParam,
-      getNextPageParam: (lastPage, allPages, lastPageParam) => {
-        const lastData = unwrap(lastPage);
-
-        if (getNextPageParam) {
-          return getNextPageParam(
-            lastData as ApiData<Path>,
-            allPages.map(unwrap) as ApiData<Path>[],
-            lastPageParam
-          );
-        }
-
-        return hasNextPage(lastData) ? lastPageParam + 1 : undefined;
-      },
-      select: (data) => {
-        const unwrapped = {
-          pages: data.pages.map(unwrap),
-          pageParams: data.pageParams,
-        } as ApiInfiniteData<Path>;
-
-        return select ? select(unwrapped) : unwrapped;
-      },
+      getNextPageParam: getNextPageParamWrapped,
+      select: selectPages,
     }
   ) as UseInfiniteQueryResult<TSelected, ApiQueryError>;
 };

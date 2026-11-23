@@ -5,8 +5,8 @@ import type {
 } from '@somesay/shared';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
-import { apiKey, fetchClient, unwrapApiData } from '@/shared/api';
-import { usePostUserProduct } from '@/shared/hooks';
+import { apiKey } from '@/shared/api';
+import { usePostSignUp, usePostUserProduct } from '@/shared/hooks';
 import { useSnackbarStore } from '@/shared/stores';
 import { useOnboardingStore } from '../stores/onboarding.store';
 import { finalizeOnboarding } from '../utils/onboarding.completion';
@@ -25,15 +25,14 @@ export const useCompleteOnboarding = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
+  const { mutateAsync: postSignUp } = usePostSignUp();
   const { mutateAsync: postUserProduct } = usePostUserProduct();
   const { mutate, isPending } = useMutation({
     mutationFn: async ({
       signUpInfo,
       userProducts,
     }: CompleteOnboardingVariables) => {
-      await unwrapApiData(
-        fetchClient.POST('/api/v1/auth/signup', { body: signUpInfo })
-      );
+      await postSignUp(signUpInfo);
       await Promise.all(
         userProducts.map((userProduct) => postUserProduct(userProduct))
       );

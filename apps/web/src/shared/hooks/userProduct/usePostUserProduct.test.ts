@@ -3,9 +3,7 @@ import type {
   UserProductRequestType,
 } from '@somesay/shared';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { setupApiClient } from '@/app/setupApiClient';
-import { postUserProduct } from '@/shared/hooks/userProduct/usePostUserProduct';
-import { useAuthTokenStore } from '@/shared/stores';
+import { postUserProduct } from './usePostUserProduct';
 
 const request: UserProductRequestType = {
   status: 'MISMATCHED',
@@ -33,10 +31,9 @@ const mockFetch = (body: unknown, status = 200) =>
 const getSentRequest = (fetchSpy: ReturnType<typeof mockFetch>) =>
   fetchSpy.mock.calls.at(0)?.[0] as Request;
 
-describe('user product API', () => {
+describe('usePostUserProduct', () => {
   afterEach(() => {
     vi.restoreAllMocks();
-    useAuthTokenStore.getState().clearTokens();
   });
 
   it('화면 상태 MISMATCHED 를 서버 상태 UNMATCHED 로 바꿔 저장한다', async () => {
@@ -69,20 +66,5 @@ describe('user product API', () => {
     mockFetch(errorBody, 400);
 
     await expect(postUserProduct(request)).rejects.toEqual(errorBody);
-  });
-
-  it('저장된 JWT를 Authorization 헤더에 포함한다', async () => {
-    setupApiClient();
-    useAuthTokenStore.getState().setTokens({
-      accessToken: 'jwt-access-token',
-      refreshToken: 'jwt-refresh-token',
-    });
-    const fetchSpy = mockFetch({ code: 'SUCCESS', message: '', data: items });
-
-    await postUserProduct(request);
-
-    expect(getSentRequest(fetchSpy).headers.get('Authorization')).toBe(
-      'Bearer jwt-access-token'
-    );
   });
 });

@@ -5,9 +5,9 @@
  * 실패 응답이면 서버 에러 본문(ApiErrorResponse)을 throw 합니다. `useApiQuery` 와 같은 규칙이라
  * `useMutation` 의 onError 가 같은 에러(`ApiQueryError`)를 받습니다.
  * @example
- * const signUpInfo = await unwrapApiData(
- *   fetchClient.POST('/api/v1/auth/signup', { body })
- * );
+ * // shared/hooks/{도메인}/ 의 mutation 훅 안에서 씁니다.
+ * mutationFn: (body) =>
+ *   unwrapApiData(fetchClient.POST('/api/v1/auth/signup', { body })),
  */
 export const unwrapApiData = async <Data>(
   request: Promise<{
