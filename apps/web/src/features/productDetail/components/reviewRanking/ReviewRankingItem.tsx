@@ -6,12 +6,12 @@ import {
   OriginalVideoCard,
 } from '@/shared/components';
 import { ReviewCommentList } from './ReviewCommentList';
-import type { ProductReviewType } from '@somesay/shared';
+import type { ProductReviewResponse } from '@somesay/shared';
 
 interface ReviewRankingItemProps {
-  review: ProductReviewType;
-  onOpenTimeLinkSheet: (review: ProductReviewType) => void;
-  onOpenCommentSheet: (review: ProductReviewType) => void;
+  review: ProductReviewResponse;
+  onOpenTimeLinkSheet: (review: ProductReviewResponse) => void;
+  onOpenCommentSheet: (review: ProductReviewResponse) => void;
 }
 
 const COMMENTS_PREVIEW_COUNT = 2;
@@ -27,7 +27,7 @@ export const ReviewRankingItem = ({
     COMMENTS_PREVIEW_COUNT
   );
   const remainingCommentCount =
-    review.totalCommentCount - COMMENTS_PREVIEW_COUNT;
+    review.reviewCommentCount - COMMENTS_PREVIEW_COUNT;
 
   return (
     <div className="border-grey01 flex flex-col">
@@ -74,15 +74,16 @@ export const ReviewRankingItem = ({
           )}
 
           <div className="bg-white px-4">
-            {review.youtubeUrl && (
+            {/* 영상이 없는 리뷰는 video* 가 null 입니다. */}
+            {review.videoUrl && (
               <OriginalVideoCard
-                youtubeUrl={review.youtubeUrl}
+                youtubeUrl={review.videoUrl}
                 creatorName={review.creatorName}
-                creatorProfileImgUrl={review.profileImgUrl}
-                timeLinkCount={review.timeLinkCount}
+                creatorProfileImgUrl={review.creatorProfileImgUrl}
+                timeLinkCount={review.reviewVideoCount}
                 reviewId={review.reviewId}
                 videoTitle={review.videoTitle}
-                viewCount={review.viewCount}
+                viewCount={review.videoViewCount}
                 onOpenTimeLinkSheet={() => onOpenTimeLinkSheet(review)}
               />
             )}

@@ -2,11 +2,11 @@
 
 interface OriginalVideoProps {
   youtubeUrl: string;
-  videoTitle: string;
-  viewCount: number;
-  uploadDate?: string;
+  videoTitle: string | null;
+  viewCount: number | null;
+  uploadDate?: string | null;
   creatorName: string;
-  creatorProfileImgUrl?: string;
+  creatorProfileImgUrl?: string | null;
 }
 
 const getYoutubeThumbnail = (url: string) => {

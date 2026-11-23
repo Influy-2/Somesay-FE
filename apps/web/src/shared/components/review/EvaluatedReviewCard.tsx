@@ -20,7 +20,7 @@ interface EvaluatedReviewCardProps {
       productName: string;
       brandName: string;
       productImgUrl: string;
-      price: number;
+      productPrice: number;
     };
     myComment?: {
       commentId: number;

@@ -1,9 +1,9 @@
 import { HorizontalScrollProductCard } from '@/shared/components';
 import { useProductWish } from '@/shared/hooks';
-import type { ProductCardType } from '@somesay/shared';
+import type { ProductPreviewCard } from '@somesay/shared';
 
 interface SimilarProductsListProps {
-  products: ProductCardType[];
+  products: ProductPreviewCard[];
 }
 
 export const SimilarProductsList = ({ products }: SimilarProductsListProps) => {
@@ -28,7 +28,7 @@ export const SimilarProductsList = ({ products }: SimilarProductsListProps) => {
               onHeartToggle={() =>
                 toggleWish({
                   productId: product.productId,
-                  isHearted: product.isHearted,
+                  isWished: product.isWished,
                 })
               }
             />

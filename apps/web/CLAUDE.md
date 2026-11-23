@@ -14,7 +14,8 @@
 | 공용화 지시를 받았거나 **3번째** 사용처가 생긴 UI | `shared/components/{그룹}/`                       |
 | 서버 상태 훅 (`useFetchX` `usePostX`)             | `shared/hooks/{도메인}/` — **사용처가 1곳이어도** |
 | 도메인 무관 UI 훅 (`useCarousel` `useDrag`)       | `shared/hooks/` 루트                              |
-| API 함수·DTO·타입·매퍼·쿼리키                     | `packages/shared/`                                |
+| API 클라이언트·조회 훅 도구 (`useApiQuery` 등)    | `shared/api/`                                     |
+| 서버 타입 별칭·프론트 전용 타입·캐시 유틸         | `packages/shared/`                                |
 
 ### 공용화는 늦게 한다
 
@@ -41,7 +42,7 @@ components/ hooks/ stores/ utils/ constants/ types/ schemas/ services/ index.ts
 ```
 
 - `services/` = 서버 API가 **아닌** 외부 연동 (토큰 저장, OAuth 리디렉션, 브라우저 스토리지).
-  서버 API 호출은 예외 없이 `packages/shared/api/`에 둔다.
+  서버 API 호출은 예외 없이 `shared/hooks/{도메인}/`의 훅이 `@/shared/api` 도구로 한다.
 - 쓰지 않는 이름 — `store/`(단수) `model/` `mocks/` `api/`
 - 중첩은 `components/{그룹}/`까지. 더 깊어지면 별도 feature로 승격한다.
 
@@ -121,7 +122,8 @@ interface XProps {
 }
 ```
 
-중첩 익명 객체가 나오면 그 모양은 `packages/shared/src/domain/`에 있어야 할 타입이다.
+서버 응답이면 `@somesay/shared`의 서버 타입(`schema.ts` 별칭)에서 `Pick` 한다.
+서버 응답이 아닌 중첩 익명 객체가 나오면 그 모양은 `packages/shared/src/domain/`에 있어야 할 타입이다.
 아직 API가 없어 타입이 없다면 그 사실을 말하고 임시임을 주석으로 남긴다.
 
 Props가 8개를 넘으면 **컴포넌트를 쪼갤 때다.** 표시 단위를 나누거나 `children`으로 합성한다.
@@ -182,11 +184,11 @@ Props가 8개를 넘으면 **컴포넌트를 쪼갤 때다.** 표시 단위를 �
 
 **분업** — Storybook이 "보이는 것", Vitest가 "계산되는 것"을 맡는다.
 
-| 대상                                                            | 도구                    |
-| --------------------------------------------------------------- | ----------------------- |
-| `shared/components/`의 모든 컴포넌트                            | Storybook 스토리 (필수) |
-| 순수 함수 · 매퍼 · zod 스키마 · Zustand 스토어 · 쿼리 캐시 유틸 | Vitest                  |
-| feature 컴포넌트 · 페이지                                       | 둘 다 만들지 않는다     |
+| 대상                                                                     | 도구                    |
+| ------------------------------------------------------------------------ | ----------------------- |
+| `shared/components/`의 모든 컴포넌트                                     | Storybook 스토리 (필수) |
+| 순수 함수 · `select` 변환 · zod 스키마 · Zustand 스토어 · 쿼리 캐시 유틸 | Vitest                  |
+| feature 컴포넌트 · 페이지                                                | 둘 다 만들지 않는다     |
 
 feature 컴포넌트는 공용 컴포넌트를 조립한 결과라 스토리를 만들어도 회귀 신호가 약하고
 Chromatic 스냅샷 비용만 늘어난다. 조립 로직이 복잡하면 그 로직을 훅·유틸로 빼서 Vitest로 덮는다.

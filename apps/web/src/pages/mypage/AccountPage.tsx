@@ -20,7 +20,7 @@ export const AccountPage = () => {
   const navigate = useNavigate();
 
   const {
-    profileImageUrl,
+    userProfileImgUrl,
     nickname,
     gender,
     age,
@@ -73,7 +73,7 @@ export const AccountPage = () => {
       />
       <div className="mt-13.5 flex flex-1 flex-col px-4 pb-4">
         {/* 프로필 이미지 */}
-        <AccountProfileImage profileImageUrl={profileImageUrl} />
+        <AccountProfileImage userProfileImgUrl={userProfileImgUrl} />
 
         <div className="divide-grey03 flex flex-col divide-y">
           {/* 기본 정보 수정 */}

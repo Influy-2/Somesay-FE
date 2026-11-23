@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import type { SubcategoryType } from '@somesay/shared';
+import type { SubCategoryItemResponse } from '@somesay/shared';
 
 import { useFetchCategories } from '@/shared/hooks';
 
@@ -41,7 +41,7 @@ export const useRotatingSuggestion = ({
 
   const subCategoryByName = useMemo(
     () =>
-      new Map<string, SubcategoryType>(
+      new Map<string, SubCategoryItemResponse>(
         categoryGroups.flatMap(({ subCategories }) =>
           subCategories.map(
             (subCategory) => [subCategory.subCategoryName, subCategory] as const

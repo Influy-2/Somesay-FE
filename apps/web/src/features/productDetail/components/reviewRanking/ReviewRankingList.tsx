@@ -5,7 +5,8 @@ import { OnOffButton } from '@/shared/components';
 import { ReviewRankingItem } from './ReviewRankingItem';
 import { ReviewCommentSheet } from './ReviewCommentSheet';
 import { ReviewTimeLinkSheet } from './ReviewTimeLinkSheet';
-import type { ProductReviewType } from '@somesay/shared';
+import type { ProductReviewResponse } from '@somesay/shared';
+import { flattenPages, getTotalCount } from '@somesay/shared';
 
 const INITIAL_DISPLAY_COUNT = 3;
 const LOAD_MORE_COUNT = 10;
@@ -19,16 +20,15 @@ export const ReviewRankingList = ({ productId }: ReviewRankingListProps) => {
   const [isMySkinTypeOnly, setIsMySkinTypeOnly] = useState(false);
   const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
   const [timeLinkReview, setTimeLinkReview] =
-    useState<ProductReviewType | null>(null);
-  const [commentReview, setCommentReview] = useState<ProductReviewType | null>(
-    null
-  );
+    useState<ProductReviewResponse | null>(null);
+  const [commentReview, setCommentReview] =
+    useState<ProductReviewResponse | null>(null);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useFetchProductReviews(productId, { filterByMySkin: isMySkinTypeOnly });
 
-  const reviews = data?.pages.flatMap((page) => page.content) ?? [];
-  const totalCount = data?.pages[0]?.totalElements ?? 0;
+  const reviews = flattenPages(data);
+  const totalCount = getTotalCount(data);
   const displayedReviews = reviews.slice(0, displayCount);
   const remainingCount = Math.max(totalCount - displayedReviews.length, 0);
 

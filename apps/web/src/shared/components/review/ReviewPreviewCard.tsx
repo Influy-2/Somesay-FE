@@ -3,19 +3,16 @@
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
 import { StarRating } from '../rating/StarRating';
-import { formatPrice } from '@somesay/shared';
+import { formatPrice, type ProductPreviewCard } from '@somesay/shared';
 
 interface ReviewPreviewCardProps {
   reviewId: number;
-  rating: number;
-  content: string;
-  product: {
-    productId: number;
-    productName: string;
-    brandName: string;
-    productImgUrl: string;
-    price: number;
-  };
+  rating: number | null;
+  content: string | null;
+  product: Pick<
+    ProductPreviewCard,
+    'productId' | 'productName' | 'brandName' | 'productImgUrl' | 'productPrice'
+  >;
 }
 
 export const ReviewPreviewCard = ({
@@ -34,10 +31,12 @@ export const ReviewPreviewCard = ({
     >
       <div className="flex flex-1 flex-col gap-1">
         {/* 별점 */}
-        <div className="flex items-center gap-1">
-          <StarRating rating={rating} />
-          <span className="body2-sb">{rating}</span>
-        </div>
+        {rating != null && (
+          <div className="flex items-center gap-1">
+            <StarRating rating={rating} />
+            <span className="body2-sb">{rating}</span>
+          </div>
+        )}
         {/* 리뷰 */}
         <div className="flex flex-1 items-start">
           <p className="body2-m line-clamp-4">{content}</p>
@@ -46,12 +45,14 @@ export const ReviewPreviewCard = ({
 
       {/* 상품 정보 */}
       <div className="flex w-full items-center gap-3">
-        <div className="border-grey02 h-[3.6875rem] w-[3.25rem] shrink-0 overflow-hidden border">
-          <img
-            src={product.productImgUrl}
-            alt=""
-            className="h-full w-full object-cover"
-          />
+        <div className="border-grey02 bg-grey01 h-[3.6875rem] w-[3.25rem] shrink-0 overflow-hidden border">
+          {product.productImgUrl && (
+            <img
+              src={product.productImgUrl}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          )}
         </div>
         <div className="flex flex-1 flex-col gap-1">
           <span className="caption1-m text-black">{product.brandName}</span>
@@ -59,7 +60,7 @@ export const ReviewPreviewCard = ({
             {product.productName}
           </span>
           <span className="caption1-m text-black">
-            {formatPrice(product.price)}
+            {formatPrice(product.productPrice)}
           </span>
         </div>
       </div>

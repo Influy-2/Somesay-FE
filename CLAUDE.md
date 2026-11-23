@@ -37,7 +37,7 @@ FE 2인(내가 총괄) / BE는 Spring 별도 팀. 대화·주석·문서는 한�
 ## 스택
 
 React 19 · Vite(SWC) · TS strict(`noUncheckedIndexedAccess` 포함) · Tailwind v4(`@theme`)
-TanStack Query(서버 상태) · Zustand(클라이언트 상태) · React Router · Axios · zod
+TanStack Query(서버 상태) · Zustand(클라이언트 상태) · React Router · openapi-fetch + openapi-react-query · zod
 Storybook 10 + Chromatic · Vitest · embla-carousel(`useCarousel`로만 사용)
 pnpm + Turbo 모노레포. **npm/yarn 금지.**
 
@@ -45,8 +45,10 @@ pnpm + Turbo 모노레포. **npm/yarn 금지.**
 
 ```
 apps/web/src/      routes/ pages/ features/ shared/ utils/ styles/
-packages/shared/   api/ domain/ query/ constants/ utils/   → import { X } from '@somesay/shared'
+packages/shared/   openapi/ api/ domain/ query/ constants/ utils/   → import { X } from '@somesay/shared'
 ```
+
+서버 타입·경로는 백엔드 Swagger에서 생성한다 (`packages/shared/openapi/` 스냅샷 → `api/generated/`). 손으로 쓰지 않는다.
 
 별칭 `@/*` → `apps/web/src/*`
 
@@ -56,6 +58,7 @@ packages/shared/   api/ domain/ query/ constants/ utils/   → import { X } from
 pnpm dev | build | lint | type-check      # turbo, 전체 워크스페이스
 pnpm --filter web test                    # vitest unit 프로젝트
 pnpm --filter web storybook               # :6006
+pnpm --filter @somesay/shared api:sync    # 백엔드 Swagger 스냅샷 갱신 + 타입 재생성
 ```
 
 ## 코딩 컨벤션
@@ -81,15 +84,15 @@ pnpm --filter web storybook               # :6006
 | 문서                        | 용도                                                          |
 | --------------------------- | ------------------------------------------------------------- |
 | `apps/web/CLAUDE.md`        | 앱 폴더 규약 · 상태관리 · UI 패턴 · 접근성 · Storybook/테스트 |
-| `packages/shared/CLAUDE.md` | 서버 계약 레이어 규약 (api / domain / query)                  |
+| `packages/shared/CLAUDE.md` | 서버 계약 레이어 규약 (스펙 동기화 / 타입 / 쿼리 키 / 캐시)   |
 
 **스킬** (해당 작업이면 자동 발동)
 
-| 스킬                 | 언제                                       |
-| -------------------- | ------------------------------------------ |
-| `api-integration`    | 백엔드 명세를 받아 API를 연동할 때         |
-| `figma-to-component` | Figma 디자인을 컴포넌트로 구현할 때        |
-| `storybook`          | 공용 컴포넌트의 스토리를 쓸 때             |
-| `write-pr`           | PR 본문 초안을 쓸 때 (팀웹 진행 주석 포함) |
+| 스킬                 | 언제                                          |
+| -------------------- | --------------------------------------------- |
+| `api-integration`    | API를 연동하거나 백엔드 스펙 변경을 반영할 때 |
+| `figma-to-component` | Figma 디자인을 컴포넌트로 구현할 때           |
+| `storybook`          | 공용 컴포넌트의 스토리를 쓸 때                |
+| `write-pr`           | PR 본문 초안을 쓸 때 (팀웹 진행 주석 포함)    |
 
 **커맨드** (직접 호출) — `/plan-mode` 설계 논의 · `/review-pr` PR 리뷰

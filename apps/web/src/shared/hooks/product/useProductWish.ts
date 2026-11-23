@@ -2,17 +2,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import {
   cancelProductWishQueries,
-  patchProductWish,
   setProductWishInCaches,
 } from '@somesay/shared';
 
+import { fetchClient, unwrapApiData } from '@/shared/api';
 import { useAuthGuard } from '../auth/useAuthGuard';
 import { useSnackbarStore } from '@/shared/stores';
 
 interface ToggleProductWishParams {
   productId: number;
   /** 토글하기 전의 현재 찜 상태 */
-  isHearted: boolean;
+  isWished: boolean;
 }
 
 /**
@@ -30,21 +30,26 @@ export const useProductWish = () => {
   const { mutate } = useMutation({
     // 같은 상품을 연타해도 요청이 직렬로 처리돼 응답 순서가 뒤집히지 않습니다.
     scope: { id: 'product-wish' },
-    mutationFn: ({ productId, isHearted }: ToggleProductWishParams) =>
-      patchProductWish(productId, isHearted ? 'NONE' : 'LIKE'),
-    onMutate: async ({ productId, isHearted }) => {
+    mutationFn: ({ productId, isWished }: ToggleProductWishParams) =>
+      unwrapApiData(
+        fetchClient.PATCH('/api/v1/products/{productId}/wish', {
+          params: { path: { productId } },
+          body: { wishStatus: isWished ? 'NONE' : 'LIKE' },
+        })
+      ),
+    onMutate: async ({ productId, isWished }) => {
       await cancelProductWishQueries(queryClient);
-      setProductWishInCaches(queryClient, productId, !isHearted);
+      setProductWishInCaches(queryClient, productId, !isWished);
     },
-    onError: (_error, { productId, isHearted }) => {
+    onError: (_error, { productId, isWished }) => {
       // 바뀐 값이 boolean 하나뿐이라 스냅샷 없이 이전 값을 다시 써서 되돌립니다.
-      setProductWishInCaches(queryClient, productId, isHearted);
+      setProductWishInCaches(queryClient, productId, isWished);
       showSnackbar('상품 찜 상태를 변경하지 못했어요.', {
         variant: 'error',
       });
     },
-    onSuccess: ({ productId, isHearted }) => {
-      setProductWishInCaches(queryClient, productId, isHearted);
+    onSuccess: ({ productId, wishStatus }) => {
+      setProductWishInCaches(queryClient, productId, wishStatus === 'LIKE');
     },
   });
 

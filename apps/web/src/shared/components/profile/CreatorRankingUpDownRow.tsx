@@ -3,14 +3,13 @@ import { Link } from 'react-router';
 import {
   formatSubscriberCount,
   getAgeLabel,
-  getSkinTypeLabel,
-  getSkinTypeLabels,
   type AgeType,
   type CreatorRankingUpDownType,
 } from '@somesay/shared';
 
 import { PATH } from '@/routes/path';
 import { ChipBasic } from '../chips/ChipBasic';
+import { getTrustScoreLabel, getTrustScoreText } from './trustScore.utils';
 import {
   YoutubeIcon,
   ArrowUpIcon,
@@ -26,21 +25,23 @@ type CreatorRankingUpDownRowProps = CreatorRankingUpDownType & {
 
 export const CreatorRankingUpDownRow = ({
   creatorId,
-  ranking,
+  creatorRanking,
   rankChange,
   rankChangeDiff,
-  profileImgUrl,
+  creatorProfileImgUrl,
   creatorName,
-  subscriberNum,
-  age,
-  skinTypeIds,
-  trustScore,
+  creatorSubscriberNum,
+  creatorAge,
+  creatorSkinTypes,
+  creatorTrustScore,
   isMyAge = () => false,
   isMySkinTypeId = () => false,
 }: CreatorRankingUpDownRowProps) => {
   // aria-label을 위한 문자열 생성
-  const skinTypeLabel = getSkinTypeLabels(skinTypeIds).join(', ');
-  const ageLabel = getAgeLabel(age);
+  const skinTypeLabel = creatorSkinTypes
+    .map(({ skinTypeName }) => skinTypeName)
+    .join(', ');
+  const ageLabel = getAgeLabel(creatorAge);
 
   const rankChangeLabel =
     rankChangeDiff === 'up'
@@ -55,7 +56,9 @@ export const CreatorRankingUpDownRow = ({
       <div className="flex items-center gap-3" aria-hidden="true">
         {/* 순위 번호 + 변동 */}
         <div className="flex w-[1.4375rem] flex-col items-center gap-0.5">
-          <span className="subhead-sb text-center text-black">{ranking}</span>
+          <span className="subhead-sb text-center text-black">
+            {creatorRanking}
+          </span>
           {/* 업다운 화살표 */}
           <div className="flex items-center gap-0.5">
             {rankChangeDiff === 'up' ? (
@@ -79,8 +82,14 @@ export const CreatorRankingUpDownRow = ({
         </div>
 
         {/* 프로필 이미지 */}
-        <div className="size-[3.375rem] shrink-0 overflow-hidden rounded-full">
-          <img src={profileImgUrl} alt="" className="size-full object-cover" />
+        <div className="bg-grey02 size-[3.375rem] shrink-0 overflow-hidden rounded-full">
+          {creatorProfileImgUrl && (
+            <img
+              src={creatorProfileImgUrl}
+              alt=""
+              className="size-full object-cover"
+            />
+          )}
         </div>
 
         {/* 이름 + 채널 + 칩 */}
@@ -93,7 +102,7 @@ export const CreatorRankingUpDownRow = ({
             <div className="flex items-center gap-0.5">
               <YoutubeIcon className="text-grey08 size-3.5" />
               <span className="caption2-m text-grey08 whitespace-nowrap">
-                {formatSubscriberCount(subscriberNum)}
+                {formatSubscriberCount(creatorSubscriberNum)}
               </span>
             </div>
           </div>
@@ -102,20 +111,15 @@ export const CreatorRankingUpDownRow = ({
           <div className="flex items-center gap-1">
             <ChipBasic
               label={ageLabel}
-              variant={isMyAge(age) ? 'blue' : 'default'}
+              variant={isMyAge(creatorAge) ? 'blue' : 'default'}
             />
-            {skinTypeIds.map((skinTypeId) => {
-              const label = getSkinTypeLabel(skinTypeId);
-              if (!label) return null;
-
-              return (
-                <ChipBasic
-                  key={skinTypeId}
-                  label={label}
-                  variant={isMySkinTypeId(skinTypeId) ? 'blue' : 'default'}
-                />
-              );
-            })}
+            {creatorSkinTypes.map(({ skinTypeId, skinTypeName }) => (
+              <ChipBasic
+                key={skinTypeId}
+                label={skinTypeName}
+                variant={isMySkinTypeId(skinTypeId) ? 'blue' : 'default'}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -125,14 +129,14 @@ export const CreatorRankingUpDownRow = ({
         className="body1-sb whitespace-nowrap text-black"
         aria-hidden="true"
       >
-        {trustScore.toFixed(0)}점
+        {getTrustScoreText(creatorTrustScore)}
       </span>
 
       {/* 행 전체를 크리에이터 상세로 잇는 링크 오버레이 */}
       <Link
         to={`${PATH.CREATOR.BASE}/${creatorId}`}
         className="absolute inset-0"
-        aria-label={`${ranking}위 ${creatorName}, 구독자 ${formatSubscriberCount(subscriberNum)}, ${ageLabel}, ${skinTypeLabel}, 신뢰도 ${trustScore.toFixed(0)}점, ${rankChangeLabel} 상세 페이지로 이동`}
+        aria-label={`${creatorRanking}위 ${creatorName}, 구독자 ${formatSubscriberCount(creatorSubscriberNum)}, ${ageLabel}, ${skinTypeLabel}, ${getTrustScoreLabel(creatorTrustScore)}, ${rankChangeLabel} 상세 페이지로 이동`}
       />
     </li>
   );

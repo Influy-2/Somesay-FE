@@ -1,9 +1,9 @@
 import cn from '@/utils/cn';
 import { ReviewComment } from '@/shared/components';
-import type { CommentPreviewType } from '@somesay/shared';
+import type { CommentItemResponse } from '@somesay/shared';
 
 interface ReviewCommentListProps {
-  comments: CommentPreviewType[];
+  comments: CommentItemResponse[];
   className?: string;
 }
 
@@ -15,13 +15,17 @@ export const ReviewCommentList = ({
   return (
     <ol className={cn('divide-grey03 flex flex-col divide-y px-4', className)}>
       {comments.map((comment) => (
-        <li key={comment.reactionId}>
+        <li key={comment.commentId}>
           <ReviewComment
-            nickname={comment.nickname}
+            nickname={comment.userNickname}
             isAgree={comment.reactionType === 'AGREE'}
-            content={comment.comment}
-            skinTypeIds={comment.skinTypeIds}
-            skinExpectationIds={comment.skinExpectationIds}
+            content={comment.commentContent}
+            skinTypeIds={comment.userSkinTypes.map(
+              ({ skinTypeId }) => skinTypeId
+            )}
+            skinExpectationIds={comment.userSkinConcerns.map(
+              ({ skinConcernId }) => skinConcernId
+            )}
             userId={comment.userId}
           />
         </li>

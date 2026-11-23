@@ -1,20 +1,22 @@
 import { useCallback } from 'react';
-import {
-  postLoginInfo,
-  QUERY_KEYS,
-  type LoginInfoType,
-  type UserProductRequestType,
+import type {
+  SignUpInfoRequest,
+  UserProductRequestType,
 } from '@somesay/shared';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
-import { usePostUserProduct } from '@/shared/hooks';
+import { apiKey } from '@/shared/api';
+import { usePostSignUp, usePostUserProduct } from '@/shared/hooks';
 import { useSnackbarStore } from '@/shared/stores';
 import { useOnboardingStore } from '../stores/onboarding.store';
 import { finalizeOnboarding } from '../utils/onboarding.completion';
-import { buildProductFitPayloads } from '../utils/onboarding.mapper';
+import {
+  buildProductFitPayloads,
+  buildSignUpInfoRequest,
+} from '../utils/onboarding.mapper';
 
 interface CompleteOnboardingVariables {
-  loginInfo: LoginInfoType;
+  signUpInfo: SignUpInfoRequest;
   userProducts: UserProductRequestType[];
 }
 
@@ -23,20 +25,23 @@ export const useCompleteOnboarding = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
+  const { mutateAsync: postSignUp } = usePostSignUp();
   const { mutateAsync: postUserProduct } = usePostUserProduct();
   const { mutate, isPending } = useMutation({
     mutationFn: async ({
-      loginInfo,
+      signUpInfo,
       userProducts,
     }: CompleteOnboardingVariables) => {
-      await postLoginInfo(loginInfo);
+      await postSignUp(signUpInfo);
       await Promise.all(
         userProducts.map((userProduct) => postUserProduct(userProduct))
       );
     },
     retry: false,
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: QUERY_KEYS.USER.INFO() });
+      void queryClient.invalidateQueries({
+        queryKey: apiKey('/api/v1/users/info'),
+      });
       finalizeOnboarding(navigate);
     },
     onError: () => {
@@ -50,7 +55,7 @@ export const useCompleteOnboarding = () => {
     if (isPending) return;
 
     const store = useOnboardingStore.getState();
-    const { nickname, gender, age, concerns, skinTypeNames } = store;
+    const { gender, age } = store;
 
     if (gender === null || age === null) {
       showSnackbar('회원가입 기본 정보를 확인해 주세요.', {
@@ -59,16 +64,8 @@ export const useCompleteOnboarding = () => {
       return;
     }
 
-    const loginInfo: LoginInfoType = {
-      nickname: nickname.trim(),
-      gender,
-      age,
-      concerns,
-      skinTypeNames,
-    };
-
     mutate({
-      loginInfo,
+      signUpInfo: buildSignUpInfoRequest({ ...store, gender, age }),
       userProducts: buildProductFitPayloads(store),
     });
   }, [isPending, mutate, showSnackbar]);

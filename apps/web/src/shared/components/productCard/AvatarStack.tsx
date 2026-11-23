@@ -5,28 +5,28 @@ import cn from '@/utils/cn';
 const MAX_VISIBLE_AVATARS = 3;
 
 interface AvatarStackProps {
-  creatorImageUrls: string[];
+  creatorProfileImgUrls: string[];
   borderColor?: string;
 }
 
 export const AvatarStack = ({
-  creatorImageUrls,
+  creatorProfileImgUrls,
   borderColor = 'border-white',
 }: AvatarStackProps) => {
-  const visibleImageUrls = creatorImageUrls.slice(0, MAX_VISIBLE_AVATARS);
+  const visibleImgUrls = creatorProfileImgUrls.slice(0, MAX_VISIBLE_AVATARS);
 
   return (
     <div className="flex flex-row-reverse items-center">
-      {[...visibleImageUrls].reverse().map((imageUrl, index, arr) => (
+      {[...visibleImgUrls].reverse().map((imgUrl, index, arr) => (
         <div
-          key={`${imageUrl}-${index}`}
+          key={`${imgUrl}-${index}`}
           className={cn(
             `relative size-5.5 overflow-hidden rounded-full border`,
             borderColor
           )}
           style={{ marginLeft: index === arr.length - 1 ? 0 : -6 }}
         >
-          <img src={imageUrl} alt="" className="size-full object-cover" />
+          <img src={imgUrl} alt="" className="size-full object-cover" />
         </div>
       ))}
     </div>

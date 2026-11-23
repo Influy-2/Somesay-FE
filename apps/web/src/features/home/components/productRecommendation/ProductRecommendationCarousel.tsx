@@ -46,7 +46,7 @@ export const ProductRecommendationCarousel = ({
                     onHeartToggle={() =>
                       toggleWish({
                         productId: product.productId,
-                        isHearted: product.isHearted,
+                        isWished: product.isWished,
                       })
                     }
                   />

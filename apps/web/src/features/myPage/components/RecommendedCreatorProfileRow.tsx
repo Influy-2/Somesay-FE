@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import cn from '@/utils/cn';
 import { RecommendedCreatorProfile } from '@/shared/components';
-import type { RecommendedCreator } from './mock';
+import type { RecommendedCreatorMockType } from './mock';
 
 /**
  * 프로필 줄의 레이아웃 값. 아래 className(`w-15`, `gap-3`)과 반드시 같이 움직여야 합니다.
@@ -14,7 +14,7 @@ const COLLAPSED_PROFILE_PX = 60; // w-15
 const PROFILE_GAP_PX = 12; // gap-3
 
 interface RecommendedCreatorProfileRowProps {
-  creators: RecommendedCreator[];
+  creators: RecommendedCreatorMockType[];
   selectedIndex: number;
   onSelect: (index: number) => void;
 }
@@ -70,10 +70,12 @@ export const RecommendedCreatorProfileRow = ({
             >
               <RecommendedCreatorProfile
                 creatorId={creator.creatorId}
-                name={creator.name}
-                profileImageUrl={creator.profileImageUrl}
-                age={creator.age}
-                skinType={creator.skinType}
+                name={creator.creatorName}
+                creatorProfileImgUrl={creator.creatorProfileImgUrl}
+                age={creator.creatorAge}
+                skinType={creator.creatorSkinTypes
+                  .map(({ skinTypeName }) => skinTypeName)
+                  .join(', ')}
               />
             </div>
 
@@ -82,7 +84,7 @@ export const RecommendedCreatorProfileRow = ({
               <button
                 type="button"
                 onClick={() => onSelect(index)}
-                aria-label={`${creator.name} 리뷰 보기`}
+                aria-label={`${creator.creatorName} 리뷰 보기`}
                 className="absolute inset-0"
               />
             )}

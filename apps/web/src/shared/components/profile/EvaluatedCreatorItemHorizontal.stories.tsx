@@ -13,7 +13,7 @@ type Story = StoryObj<typeof EvaluatedCreatorItemHorizontal>;
 export const Default: Story = {
   args: {
     creatorId: 1,
-    profileImageUrl: '',
+    creatorProfileImgUrl: '',
     name: '김크리스탈',
     age: 'TWENTIES',
     skinType: '지성',

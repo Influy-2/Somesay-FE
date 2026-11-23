@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, type ReactNode } from 'react';
-import { QUERY_KEYS } from '@somesay/shared';
 import { useQueryClient } from '@tanstack/react-query';
+import { apiKey } from '@/shared/api';
 import { useFetchUserInfo } from '@/shared/hooks';
 import { useAuthTokenStore } from '@/shared/stores';
 import {
@@ -25,7 +25,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     if (!accessToken) {
-      void queryClient.resetQueries({ queryKey: QUERY_KEYS.USER.ALL });
+      // 로그아웃·토큰 만료 시 이전 사용자의 정보가 남지 않도록 비웁니다.
+      void queryClient.resetQueries({ queryKey: apiKey('/api/v1/users/info') });
+      void queryClient.resetQueries({
+        queryKey: apiKey('/api/v1/users/mypage'),
+      });
     }
   }, [accessToken, queryClient]);
 

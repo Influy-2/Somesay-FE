@@ -14,6 +14,7 @@ import {
   getSubCategoryId,
 } from '../utils/brandHome.params';
 import type { BrandProductSortType } from '@somesay/shared';
+import { flattenPages, getTotalCount } from '@somesay/shared';
 
 /**
  * 브랜드 홈의 조회 조건과 상품 목록을 한곳에서 다룹니다.
@@ -85,21 +86,21 @@ export const useBrandHome = (brandId?: number) => {
   const categories = useMemo(
     () => [
       { id: ALL_SUB_CATEGORY_ID, label: '전체' },
-      ...(brandQuery.data?.availableSubCategories.map(
-        ({ subCategoryId, subName }) => ({
+      ...(brandQuery.data?.subCategories.map(
+        ({ subCategoryId, subCategoryName }) => ({
           id: subCategoryId,
-          label: subName,
+          label: subCategoryName,
         })
       ) ?? []),
     ],
-    [brandQuery.data?.availableSubCategories]
+    [brandQuery.data?.subCategories]
   );
 
   const products = useMemo(
-    () => activeProductQuery.data?.pages.flatMap((page) => page.products) ?? [],
-    [activeProductQuery.data?.pages]
+    () => flattenPages(activeProductQuery.data),
+    [activeProductQuery.data]
   );
-  const productCount = activeProductQuery.data?.pages[0]?.totalCount ?? 0;
+  const productCount = getTotalCount(activeProductQuery.data);
 
   const loadMoreRef = useInfiniteScroll({
     hasNextPage: activeProductQuery.hasNextPage ?? false,
@@ -135,7 +136,7 @@ export const useBrandHome = (brandId?: number) => {
       return;
     }
 
-    toggleWish({ productId, isHearted: product.isHearted });
+    toggleWish({ productId, isWished: product.isWished });
   };
 
   return {

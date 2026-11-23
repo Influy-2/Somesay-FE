@@ -9,7 +9,7 @@ import { ArrowRightIcon } from '@/shared/icons';
 import { ChipBasic } from '../chips/ChipBasic';
 interface EvaluatedCreatorItemHorizontalProps {
   creatorId: number;
-  profileImageUrl: string;
+  creatorProfileImgUrl: string | null;
   name: string;
   age: AgeType | null;
   skinType: string;
@@ -18,7 +18,7 @@ interface EvaluatedCreatorItemHorizontalProps {
 
 export const EvaluatedCreatorItemHorizontal = ({
   creatorId,
-  profileImageUrl,
+  creatorProfileImgUrl,
   name,
   age,
   skinType,
@@ -32,9 +32,9 @@ export const EvaluatedCreatorItemHorizontal = ({
       aria-label={`${name} 크리에이터 리뷰 평가 보기`}
     >
       <div className="bg-grey02 size-15 shrink-0 overflow-hidden rounded-full">
-        {profileImageUrl && (
+        {creatorProfileImgUrl && (
           <img
-            src={profileImageUrl}
+            src={creatorProfileImgUrl}
             alt={name}
             className="h-full w-full object-cover"
           />

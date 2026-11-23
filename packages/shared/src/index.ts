@@ -1,143 +1,70 @@
+// 서버 타입 (Swagger 생성물 별칭, 이름 = 스키마 이름)
 export type {
-  ProductBasicType,
-  ProductWishStateType,
-  ProductWishResultType,
-  ProductCategoryRefType,
-  ProductSkinExpectationType,
-  ProductSkinFitType,
-  ProductCardType,
-  CategoryProductType,
-  ProductDetailType,
-  ProductReviewType,
-  ProductsByCategoryType,
+  paths,
+  components,
+  ApiGetPath,
+  MainCategoryResponse,
+  SubCategoryItemResponse,
+  InfoResponse,
+  MyPageResponse,
+  SignUpInfoRequest,
+  UserProductRequest,
+  UserProductItemResponse,
+  ProductPreviewCard,
+  ProductCard,
+  EffectChip,
+  ProductDetailResponse,
+  WishRequest,
+  ProductWishResponse,
+  BrandResponse,
   ProductSortType,
-} from './domain/product/product.types';
-
-export type {
-  ProductSearchResultType,
-  ReviewSearchResultType,
-} from './domain/search/search.types';
-
-export type {
-  BrandAvailableSubCategoryType,
-  BrandSummaryType,
   BrandProductSortType,
-  BrandProductType,
-  BrandProductPageType,
-} from './domain/brand/brand.types';
+  ProductReviewResponse,
+  ProductReviewOverviewResponse,
+  CommentItemResponse,
+  TimeLinkItem,
+  ReviewSearchItemResponse,
+  CreatorRankingResponse,
+  HomeCurationResponse,
+  ReviewCardResponse,
+  CreatorDetailResponse,
+  CreatorReviewResponse,
+  ReactedCreatorResponse,
+  ReactedProductResponse,
+} from './api/schema';
 
+// 서버 에러 본문 (스펙의 에러 응답이 unknown 으로 생성돼 손으로 둠)
+export type { ApiErrorResponse } from './api/types';
+
+// 프론트 전용 타입 (…Type: 서버 응답이 아닌 화면 상태·계산 결과)
 export type {
-  CreatorType,
-  CreatorRankingUpDownType,
   BasicCreatorProfileType,
+  CreatorRankingUpDownType,
 } from './domain/creator/creator.types';
-export type { HomeCreatorRankingType } from './domain/ranking/ranking.types';
-
-export * from './domain/category/category.types';
 export * from './domain/filter/filter.types';
-
-export * from './constants/forbiddenWords.constants';
 export type {
-  CreatorReviewType,
-  CreatorReviewSummaryType,
-  TimeLinkType,
-  TimeLinksType,
-  HomeCurationReviewType,
-  HomeCurationType,
-} from './domain/review/review.types';
-
-export type {
-  CommentPreviewType,
-  CommentReactionType,
-} from './domain/comment/comment.types';
-
-export type {
-  HomeRecommendationParamsType,
-  RecommendedProductsWishResultType,
   RecommendedProductType,
   RecommendedTopReviewType,
   SelectedFiltersType,
 } from './domain/recommendation/recommendation.types';
-
-export * from './constants/user.constants';
-
-// UTILS
-export { formatSubscriberCount } from './utils/formatSubscriberCount';
-export { formatPrice } from './utils/formatPrice';
-//domain - auth
-export type { JwtLoginResponseDto } from './domain/auth/auth.dto';
 export type {
-  AuthTokenType,
-  KakaoLoginResultType,
-  LoginInfoType,
-} from './domain/auth/auth.types';
-export { mapJwtLoginResponseDto } from './domain/auth/auth.mapper';
-
-//domain - user
-export type {
-  AgeType,
-  GenderType,
-  UserInfoType,
-  UserMyPageStatisticsType,
-  UserMyPageType,
-  UserType,
-} from './domain/user/user.types';
-export { AGE_TYPES } from './domain/user/user.types';
-
-//domain - user product
-export type {
-  UserProductDetailType,
   UserProductRequestType,
-  UserProductResponseType,
   UserProductStatusType,
 } from './domain/userProduct/userProduct.types';
 
-//api
-export { apiClient, configureApiClient } from './api/client';
+// 서버 enum 값 목록 (zod 스키마·선택지용)
+export type { AgeType } from './domain/user/user.types';
+export { AGE_TYPES } from './domain/user/user.types';
 
-//api - auth
-export * from './api/auth/postKakaoLogin.api';
-export * from './api/auth/postLoginInfo.api';
+// 상수 (선택지·라벨 표)
+export * from './constants/forbiddenWords.constants';
+export * from './constants/user.constants';
 
-//api - user product
-export * from './api/userProduct/postUserProduct.api';
+// 유틸
+export { formatSubscriberCount } from './utils/formatSubscriberCount';
+export { formatPrice } from './utils/formatPrice';
+export { formatRating, formatCount } from './utils/formatNumber';
+export { flattenPages, getTotalCount } from './utils/pagination';
 
-//api - user
-export * from './api/user/fetchUserInfo.api';
-export * from './api/user/fetchUserMyPage.api';
-
-//api - ranking
-export * from './api/ranking/fetchCreatorRanking.api';
-export * from './api/ranking/fetchProductRanking.api';
-
-//api - home
-export * from './api/home/fetchHomeCreatorRanking.api';
-export * from './api/home/fetchHomeProductRanking.api';
-export * from './api/home/fetchHomeCuration.api';
-export * from './api/home/fetchHomeRecommendations.api';
-export * from './api/home/postRecommendProductsWish.api';
-
-//api - product
-export * from './api/product/fetchHomeProductList.api';
-export * from './api/product/fetchProductsByCategory.api';
-export * from './api/product/fetchProductDetail.api';
-export * from './api/product/fetchProductReviewOverview.api';
-export * from './api/product/fetchProductReviews.api';
-export * from './api/product/fetchSimilarProducts.api';
-export * from './api/product/patchProductWish.api';
-
-//api - category
-export * from './api/category/fetchCategories.api';
-
-//api - brand
-export * from './api/brand/fetchBrandDetail.api';
-export * from './api/brand/fetchBrandProducts.api';
-export * from './api/brand/fetchBrandProductSearch.api';
-
-//api - review
-export * from './api/review/fetchTimeLinks.api';
-export * from './api/review/fetchReviewComments.api';
-
-//query
-export * from './query/queryKeys';
+// React Query 캐시 헬퍼 (찜 상태 동기화)
 export * from './query/productWishCache';

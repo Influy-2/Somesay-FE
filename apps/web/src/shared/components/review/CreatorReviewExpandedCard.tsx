@@ -2,7 +2,7 @@
 // 글 길어지면 더보기 버전
 import { BasicCreatorProfile } from '../profile/BasicCreatorProfile';
 import { StarRating } from '../rating/StarRating';
-import { BasicCreatorProfileType } from '@somesay/shared';
+import type { BasicCreatorProfileType } from '@somesay/shared';
 
 interface CreatorReviewCardProps {
   creator: BasicCreatorProfileType;

@@ -9,7 +9,7 @@ import {
 import {
   CreatorHomeTrustScore,
   MOCK_CREATOR,
-  MOCK_TRUST_SCORE,
+  MOCK_CREATOR_LIKE_COUNT,
   MOCK_CREATOR_REVIEWS,
 } from '@/features/creatorHome';
 import { HorizontalCategoriesTab } from '@/shared/components';
@@ -44,11 +44,16 @@ export const CreatorHomePage = () => {
     setIsExpanded(false);
   };
 
+  // 리뷰 응답에는 대분류 id 가 없고 이름(mainCategoryName)만 있어 이름으로 거릅니다.
+  // TODO: 연동 시 확인 — 크리에이터 리뷰 검색 API 는 subCategoryId 로만 거른다(대분류 탭과 기준이 다름)
+  const selectedCategoryName = categories.find(
+    ({ id }) => id === selectedCategoryId
+  )?.label;
   const filteredReviews =
     selectedCategoryId === ALL_CATEGORY.id
       ? MOCK_CREATOR_REVIEWS
       : MOCK_CREATOR_REVIEWS.filter(
-          (review) => review.product.categoryId === selectedCategoryId
+          (review) => review.mainCategoryName === selectedCategoryName
         );
 
   const visibleReviews = isExpanded
@@ -76,9 +81,12 @@ export const CreatorHomePage = () => {
       />
       <div className="mb-7.5 flex flex-col gap-5 px-4 pt-2">
         {/* @spec 7.1.1, 7.1.2, 7.1.3 */}
-        <CreatorHomeProfile {...MOCK_CREATOR} />
+        <CreatorHomeProfile
+          {...MOCK_CREATOR}
+          likeCount={MOCK_CREATOR_LIKE_COUNT}
+        />
         {/* @spec 7.2.1, 7.2.2, 7.3.1 */}
-        <CreatorHomeTrustScore {...MOCK_TRUST_SCORE} isLoggedIn={true} />
+        <CreatorHomeTrustScore {...MOCK_CREATOR} isLoggedIn={true} />
       </div>
       {/* 검색 + 정렬 */}
       <div className="mb-6 flex flex-col gap-4 px-4">
@@ -109,7 +117,7 @@ export const CreatorHomePage = () => {
       <div className="flex flex-col gap-6 px-4 pb-10">
         {/* 리뷰 목록 */}
         {visibleReviews.map((review) => (
-          <li key={review.product.productId} className="list-none">
+          <li key={review.reviewId} className="list-none">
             <CreatorHomeReviewCard {...review} />
           </li>
         ))}

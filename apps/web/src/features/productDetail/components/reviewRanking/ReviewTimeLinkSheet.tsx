@@ -1,10 +1,10 @@
 import { BottomSheet, OriginalVideo } from '@/shared/components';
 import { useFetchTimeLinks } from '@/shared/hooks';
-import type { ProductReviewType } from '@somesay/shared';
+import type { ProductReviewResponse } from '@somesay/shared';
 
 interface ReviewTimeLinkSheetProps {
   /** 열려 있을 때만 리뷰가 담기고, 닫히면 null이다. */
-  review: ProductReviewType | null;
+  review: ProductReviewResponse | null;
   onClose: () => void;
 }
 
@@ -34,12 +34,12 @@ export const ReviewTimeLinkSheet = ({
           {timeLinkGroup?.timeLinks.map((link) => (
             <OriginalVideo
               key={link.timeLinkId}
-              youtubeUrl={link.youtubeUrl}
+              youtubeUrl={link.videoUrl}
               creatorName={review.creatorName}
-              creatorProfileImgUrl={review.profileImgUrl}
+              creatorProfileImgUrl={review.creatorProfileImgUrl}
               videoTitle={link.videoTitle}
-              viewCount={link.viewCount}
-              uploadDate={link.uploadAt}
+              viewCount={link.videoViewCount}
+              uploadDate={link.videoUploadAt}
             />
           ))}
         </div>

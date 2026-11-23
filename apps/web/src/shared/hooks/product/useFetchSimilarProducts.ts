@@ -1,18 +1,18 @@
-import { fetchSimilarProducts, QUERY_KEYS } from '@somesay/shared';
-import { useQuery } from '@tanstack/react-query';
+import { useApiQuery } from '@/shared/api';
 
+// 기대효과가 비슷한 상품(작은 카드) 목록을 조회합니다.
 export const useFetchSimilarProducts = (productId?: number) => {
   const isValidProductId =
     typeof productId === 'number' && Number.isFinite(productId);
 
-  return useQuery({
-    queryKey: isValidProductId
-      ? QUERY_KEYS.PRODUCT.SIMILAR(productId)
-      : [...QUERY_KEYS.PRODUCT.ALL, productId, 'similar'],
-    queryFn: () => fetchSimilarProducts(productId ?? 0),
-    enabled: isValidProductId,
-    // TODO: 에러 처리
-    throwOnError: false,
-    retry: 2,
-  });
+  return useApiQuery(
+    '/api/v1/products/{productId}/similar',
+    { params: { path: { productId: productId ?? 0 } } },
+    {
+      enabled: isValidProductId,
+      // TODO: 에러 처리
+      throwOnError: false,
+      retry: 2,
+    }
+  );
 };

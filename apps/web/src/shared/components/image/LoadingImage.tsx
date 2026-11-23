@@ -3,7 +3,7 @@ import { useState } from 'react';
 import cn from '@/utils/cn';
 
 interface LoadingImageProps {
-  src: string;
+  src: string | null;
   alt: string;
   className?: string;
   wrapperClassName?: string;

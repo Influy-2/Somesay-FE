@@ -11,12 +11,12 @@ const meta: Meta<typeof BasicCreatorProfile> = {
   argTypes: {
     creatorId: { control: 'number' },
     creatorName: { control: 'text' },
-    profileImgUrl: { control: 'text' },
-    subscriberNum: { control: 'number' },
+    creatorProfileImgUrl: { control: 'text' },
+    creatorSubscriberNum: { control: 'number' },
     trustRank: { control: 'number' },
     highlightedLabels: { control: 'object' },
-    age: { control: 'select', options: AGE_TYPES },
-    skinTypeIds: { control: 'object' },
+    creatorAge: { control: 'select', options: AGE_TYPES },
+    creatorSkinTypes: { control: 'object' },
   },
 };
 
@@ -27,11 +27,11 @@ export const Default: Story = {
   args: {
     creatorId: 1,
     creatorName: '이름',
-    profileImgUrl: 'https://placehold.co/100',
-    subscriberNum: 0,
+    creatorProfileImgUrl: 'https://placehold.co/100',
+    creatorSubscriberNum: 0,
     trustRank: 3,
-    age: 'TWENTIES',
-    skinTypeIds: [1],
+    creatorAge: 'TWENTIES',
+    creatorSkinTypes: [{ skinTypeId: 1, skinTypeName: '건성' }],
     highlightedLabels: ['건성'],
   },
 };
@@ -48,6 +48,6 @@ export const WithoutVisibleTrustRank: Story = {
 export const WithoutAge: Story = {
   args: {
     ...Default.args,
-    age: null,
+    creatorAge: null,
   },
 };

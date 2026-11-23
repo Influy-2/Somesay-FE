@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import type { CategoryGroupType } from '@somesay/shared';
+import type { MainCategoryResponse } from '@somesay/shared';
 import { MainArrowIcon } from '@/shared/icons';
 import cn from '@/utils/cn';
 import { PATH } from '@/routes/path';
 
 interface CategoryAccordionProps {
-  category: CategoryGroupType;
+  category: MainCategoryResponse;
 }
 
 export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
@@ -29,11 +29,18 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
           className="flex w-full cursor-pointer items-center justify-between"
         >
           <div className="flex items-center gap-3">
-            <img
-              src={category.imageUrl}
-              alt=""
-              className="bg-grey04 size-9 rounded-full object-cover"
-            />
+            {category.mainCategoryImgUrl ? (
+              <img
+                src={category.mainCategoryImgUrl}
+                alt=""
+                className="bg-grey04 size-9 rounded-full object-cover"
+              />
+            ) : (
+              <span
+                className="bg-grey04 size-9 shrink-0 rounded-full"
+                aria-hidden="true"
+              />
+            )}
             <span className={isOpen ? 'subhead-b' : 'subhead-sb'}>
               {category.mainCategoryName}
             </span>

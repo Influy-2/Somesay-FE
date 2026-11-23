@@ -8,7 +8,7 @@ const meta: Meta<typeof BrandProfile> = {
   tags: ['autodocs'],
   argTypes: {
     brandName: { control: 'text' },
-    brandImageUrl: { control: 'object' },
+    brandLogoImgUrl: { control: 'object' },
   },
 };
 

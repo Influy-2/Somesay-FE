@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 
 import { useAuthGuard } from '@/shared/hooks';
-import { flattenRankingPages } from '../ranking.utils';
 import {
   HorizontalCategoriesTab,
   MoreButton,
@@ -14,6 +13,7 @@ import {
 } from '@/shared/hooks';
 import { ProductRankingSkeleton } from './ProductRankingSkeleton';
 import { RankingFeedback } from './RankingFeedback';
+import { flattenPages } from '@somesay/shared';
 
 // 전체는 30위, 카테고리 필터 시 10위까지만 노출합니다(기획 2.1.1).
 const PAGE_SIZE = 10;
@@ -45,7 +45,7 @@ export const ProductRankingsSection = () => {
     size: PAGE_SIZE,
     ...(isAllCategory ? {} : { mainCategoryId: selectedCategoryId }),
   });
-  const products = flattenRankingPages(query.data?.pages, productLimit);
+  const products = flattenPages(query.data).slice(0, productLimit);
   const canLoadMore = products.length < productLimit && query.hasNextPage;
 
   // 더보기는 로그인 사용자에게만 허용합니다(기획).
@@ -83,7 +83,7 @@ export const ProductRankingsSection = () => {
                 onHeartToggle={() =>
                   toggleWish({
                     productId: product.productId,
-                    isHearted: product.isHearted,
+                    isWished: product.isWished,
                   })
                 }
               />

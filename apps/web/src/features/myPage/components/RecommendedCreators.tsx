@@ -89,9 +89,9 @@ export const RecommendedCreators = () => {
               >
                 <ReviewPreviewCard
                   reviewId={creator.review.reviewId}
-                  rating={creator.review.rating}
-                  content={creator.review.content}
-                  product={creator.review.product}
+                  rating={creator.review.reviewRating}
+                  content={creator.review.reviewContent}
+                  product={creator.review}
                 />
               </div>
             ))}

@@ -16,13 +16,3 @@ export const isRankingTab = (value: string | null): value is RankingTab =>
 /** 누락되거나 잘못된 탭 값을 기본 탭으로 정규화합니다. */
 export const getRankingTab = (value: string | null): RankingTab =>
   isRankingTab(value) ? value : DEFAULT_RANKING_TAB;
-
-interface RankingPage<TItem> {
-  content: TItem[];
-}
-
-/** 무한 쿼리의 페이지를 하나의 목록으로 합치고 화면 최대 개수로 자릅니다. */
-export const flattenRankingPages = <TItem>(
-  pages: RankingPage<TItem>[] | undefined,
-  limit: number
-) => pages?.flatMap((page) => page.content).slice(0, limit) ?? [];

@@ -4,18 +4,25 @@ import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
 import { MainArrowIcon } from '@/shared/icons';
 
-import type { UserMyPageStatisticsType } from '@somesay/shared';
+import type { MyPageResponse } from '@somesay/shared';
 
-type MyActivityStatisticsProps = UserMyPageStatisticsType;
+type MyActivityStatisticsProps = Pick<
+  MyPageResponse,
+  | 'userReactedProductCount'
+  | 'userReactedCreatorCount'
+  | 'userAgreeCount'
+  | 'userDisagreeCount'
+  | 'userCommentCount'
+>;
 
 const REVIEW_EVALUATION_PATH = `${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.REVIEW_EVALUATION.BASE}`;
 
 export const MyActivityStatistics = ({
-  reviewTotalCount,
-  reviewCreatorCount,
-  agreeReviewCount,
-  disagreeReviewCount,
-  commentCount,
+  userReactedProductCount,
+  userReactedCreatorCount,
+  userAgreeCount,
+  userDisagreeCount,
+  userCommentCount,
 }: MyActivityStatisticsProps) => {
   return (
     <div className="grid grid-cols-2 grid-rows-[auto_auto] gap-2">
@@ -23,17 +30,17 @@ export const MyActivityStatistics = ({
       <dl className="bg-grey01 col-span-2 flex py-4">
         <div className="flex flex-1 flex-col items-center gap-1">
           <dt className="body2-m text-grey08">공감한 리뷰</dt>
-          <dd className="subhead-m">{agreeReviewCount}</dd>
+          <dd className="subhead-m">{userAgreeCount}</dd>
         </div>
         <div className="bg-grey03 w-px" aria-hidden="true" />
         <div className="flex flex-1 flex-col items-center gap-1">
           <dt className="body2-m text-grey08">반대한 리뷰</dt>
-          <dd className="subhead-m">{disagreeReviewCount}</dd>
+          <dd className="subhead-m">{userDisagreeCount}</dd>
         </div>
         <div className="bg-grey03 w-px" aria-hidden="true" />
         <div className="flex flex-1 flex-col items-center gap-1">
           <dt className="body2-m text-grey08">코멘트</dt>
-          <dd className="subhead-m">{commentCount}</dd>
+          <dd className="subhead-m">{userCommentCount}</dd>
         </div>
       </dl>
 
@@ -41,7 +48,7 @@ export const MyActivityStatistics = ({
       <dl className="bg-grey01 flex flex-col gap-3 p-5">
         <dt className="body2-m text-grey08">평가한 상품</dt>
         <div className="flex items-center justify-between">
-          <dd className="headline2 font-normal!">{reviewTotalCount}</dd>
+          <dd className="headline2 font-normal!">{userReactedProductCount}</dd>
           <Link
             to={REVIEW_EVALUATION_PATH}
             state={{ activeTab: 'products' }}
@@ -56,7 +63,7 @@ export const MyActivityStatistics = ({
       <dl className="bg-grey01 flex flex-col gap-3 p-5">
         <dt className="body2-m text-grey08">평가한 크리에이터</dt>
         <div className="flex items-center justify-between">
-          <dd className="headline2 font-normal!">{reviewCreatorCount}</dd>
+          <dd className="headline2 font-normal!">{userReactedCreatorCount}</dd>
           <Link
             to={REVIEW_EVALUATION_PATH}
             state={{ activeTab: 'creators' }}

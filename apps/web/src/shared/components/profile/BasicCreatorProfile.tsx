@@ -3,16 +3,11 @@ import { YoutubeIcon } from '@/shared/icons';
 import {
   formatSubscriberCount,
   getAgeLabel,
-  getSkinTypeLabel,
-  getSkinTypeLabels,
   type BasicCreatorProfileType,
 } from '@somesay/shared';
 import { ChipBasic } from '../chips/ChipBasic';
 
-interface BasicCreatorProfileProps extends Omit<
-  BasicCreatorProfileType,
-  'trustScore'
-> {
+interface BasicCreatorProfileProps extends BasicCreatorProfileType {
   trustRank?: number;
   highlightedLabels?: readonly string[];
 }
@@ -22,16 +17,18 @@ const TRUST_RANK_LIMIT = 10;
 export const BasicCreatorProfile = ({
   creatorId,
   creatorName,
-  profileImgUrl,
-  subscriberNum,
-  age,
-  skinTypeIds = [],
+  creatorProfileImgUrl,
+  creatorSubscriberNum,
+  creatorAge,
+  creatorSkinTypes = [],
   trustRank,
   highlightedLabels = [],
 }: BasicCreatorProfileProps) => {
   // 여러 피부 타입을 쉼표로 구분하여 표시
-  const skinTypeLabel = getSkinTypeLabels(skinTypeIds).join(', ');
-  const ageLabel = getAgeLabel(age);
+  const skinTypeLabel = creatorSkinTypes
+    .map(({ skinTypeName }) => skinTypeName)
+    .join(', ');
+  const ageLabel = getAgeLabel(creatorAge);
   const highlightedLabelSet = new Set(highlightedLabels);
   const showTrustRank =
     trustRank !== undefined && trustRank > 0 && trustRank <= TRUST_RANK_LIMIT;
@@ -39,7 +36,7 @@ export const BasicCreatorProfile = ({
   return (
     <div
       className="flex w-full items-center gap-2.5"
-      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${formatSubscriberCount(subscriberNum)}${showTrustRank ? `, 신뢰도 ${trustRank}위` : ''}, ${ageLabel}, ${skinTypeLabel}`}
+      aria-label={`크리에이터: ${creatorName}, 유튜브 구독자 ${formatSubscriberCount(creatorSubscriberNum)}${showTrustRank ? `, 신뢰도 ${trustRank}위` : ''}, ${ageLabel}, ${skinTypeLabel}`}
       key={creatorId}
     >
       {/* 프로필 사진 */}
@@ -47,13 +44,15 @@ export const BasicCreatorProfile = ({
         className="bg-grey02 flex aspect-square h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full"
         aria-hidden="true"
       >
-        <img
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover"
-          src={profileImgUrl}
-          alt=""
-        />
+        {creatorProfileImgUrl && (
+          <img
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover"
+            src={creatorProfileImgUrl}
+            alt=""
+          />
+        )}
       </div>
 
       {/* 텍스트 정보 */}
@@ -66,7 +65,7 @@ export const BasicCreatorProfile = ({
           <span className="body1-sb shrink-0 text-black">{creatorName}</span>
           <div className="text-grey08 caption2-m flex shrink-0 items-center gap-0.5">
             <YoutubeIcon />
-            {formatSubscriberCount(subscriberNum)}
+            {formatSubscriberCount(creatorSubscriberNum)}
           </div>
         </div>
 
@@ -86,18 +85,15 @@ export const BasicCreatorProfile = ({
               label={ageLabel}
               variant={highlightedLabelSet.has(ageLabel) ? 'blue' : 'default'}
             />
-            {skinTypeIds.map((skinTypeId) => {
-              const label = getSkinTypeLabel(skinTypeId);
-              if (!label) return null;
-
-              return (
-                <ChipBasic
-                  key={skinTypeId}
-                  label={label}
-                  variant={highlightedLabelSet.has(label) ? 'blue' : 'default'}
-                />
-              );
-            })}
+            {creatorSkinTypes.map(({ skinTypeId, skinTypeName }) => (
+              <ChipBasic
+                key={skinTypeId}
+                label={skinTypeName}
+                variant={
+                  highlightedLabelSet.has(skinTypeName) ? 'blue' : 'default'
+                }
+              />
+            ))}
           </div>
         </div>
       </div>

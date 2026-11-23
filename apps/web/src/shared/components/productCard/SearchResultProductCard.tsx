@@ -1,9 +1,9 @@
 import { HeartButton } from '@/shared/components/buttons/HeartButton';
 import {
-  ProductSearchResultType,
+  formatRating,
+  formatCount,
   formatPrice,
-  getSkinTypeLabel,
-  getSkinTypeLabels,
+  type ProductCard,
 } from '@somesay/shared';
 import { ChipBasic } from '@/shared/components/chips/ChipBasic';
 import { AvatarStack } from './AvatarStack';
@@ -11,7 +11,7 @@ import { Star16Icon as StarIcon } from '@/shared/icons';
 import { Link } from 'react-router';
 import { PATH } from '@/routes/path';
 interface SearchResultProductCardProps {
-  product: ProductSearchResultType;
+  product: ProductCard;
   onHeartToggle: (productId: number) => void;
 }
 
@@ -25,22 +25,26 @@ export const SearchResultProductCard = ({
   product,
   onHeartToggle,
 }: SearchResultProductCardProps) => {
+  const formattedReviewCount = formatCount(product.productReviewCount);
+
   return (
     <article
       className="border-grey02 relative mx-4 flex flex-col gap-5 border-b pb-6"
-      aria-label={`${product.brandName} ${product.productName}, ${formatPrice(product.price)}, 별점 ${product.avgRating.toFixed(1)}점`}
+      aria-label={`${product.brandName} ${product.productName}, ${formatPrice(product.productPrice)}, 별점 ${formatRating(product.productAvgRating)}점`}
     >
       <div className="flex gap-3">
         {/* 이미지 */}
-        <div className="border-grey02 relative h-[117.5px] w-26 shrink-0 overflow-hidden border-[0.7px]">
-          <img
-            src={product.productImgUrl}
-            alt=""
-            className="h-full w-full object-cover"
-          />
+        <div className="border-grey02 bg-grey01 relative h-[117.5px] w-26 shrink-0 overflow-hidden border-[0.7px]">
+          {product.productImgUrl && (
+            <img
+              src={product.productImgUrl}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          )}
           <div className="absolute right-2 bottom-2 z-1">
             <HeartButton
-              isHearted={product.isHearted}
+              isHearted={product.isWished}
               onHeartToggle={() => onHeartToggle(product.productId)}
               productName={product.productName}
             />
@@ -59,33 +63,39 @@ export const SearchResultProductCard = ({
               </span>
             </div>
             <span className="body2-m leading-[155%] text-black">
-              {formatPrice(product.price)}
+              {formatPrice(product.productPrice)}
             </span>
             <div className="flex items-center gap-1">
               {/* 별점 */}
               <div
                 className="flex items-center"
-                aria-label={`별점 ${product.avgRating.toFixed(1)}점`}
+                aria-label={`별점 ${formatRating(product.productAvgRating)}점`}
               >
                 <StarIcon className="text-primary-300 size-4" />
-                <span className="body2-sb">{product.avgRating.toFixed(1)}</span>
+                <span className="body2-sb">
+                  {formatRating(product.productAvgRating)}
+                </span>
               </div>
               {/* 리뷰수 */}
               <span
                 className="body2-m leading-[155%]"
-                aria-label={`리뷰 ${product.reviewCount.toLocaleString()}개`}
+                aria-label={`리뷰 ${formattedReviewCount}개`}
               >
-                ({product.reviewCount.toLocaleString()})
+                ({formattedReviewCount})
               </span>
               {/* 크리에이터 프로필 스택 */}
-              <AvatarStack creatorImageUrls={product.creatorImageUrls} />
+              <AvatarStack
+                creatorProfileImgUrls={product.creatorProfileImgUrls}
+              />
             </div>
           </div>
         </div>
       </div>
 
       {/* 리뷰 한 줄 요약 */}
-      <p className="body2-sb text-grey09">{product.reviewSummary}</p>
+      {product.productShortSummary && (
+        <p className="body2-sb text-grey09">{product.productShortSummary}</p>
+      )}
 
       {/* 칩 영역 (잘 맞는 타입, 기대 효과) */}
       <div
@@ -95,19 +105,16 @@ export const SearchResultProductCard = ({
         <span className="caption1-m text-grey06 self-center">잘 맞는 타입</span>
         <div
           className="flex flex-wrap gap-x-1 gap-y-2"
-          aria-label={`잘 맞는 타입: ${getSkinTypeLabels(product.skinTypeIds).join(', ')}`}
+          aria-label={`잘 맞는 타입: ${product.productSkinTypes.map(({ skinTypeName }) => skinTypeName).join(', ')}`}
         >
-          {product.skinTypeIds.map((skinTypeId) => {
-            const label = getSkinTypeLabel(skinTypeId);
-            if (!label) return null;
-
+          {product.productSkinTypes.map(({ skinTypeId, skinTypeName }) => {
             const isMatched =
               MOCK_USER_SKIN_PROFILE.skinTypeIds.includes(skinTypeId);
 
             return (
               <ChipBasic
                 key={skinTypeId}
-                label={label}
+                label={skinTypeName}
                 variant={isMatched ? 'blue' : 'default'}
               />
             );
@@ -117,16 +124,16 @@ export const SearchResultProductCard = ({
         <span className="caption1-m text-grey06">기대 효과</span>
         <div
           className="flex flex-wrap gap-x-1 gap-y-2"
-          aria-label={`기대 효과: ${product.expectedEffects.join(', ')}`}
+          aria-label={`기대 효과: ${product.productEffectChips.map(({ chipName }) => chipName).join(', ')}`}
         >
-          {product.expectedEffects.map((effect, idx) => {
+          {product.productEffectChips.map(({ chipId, chipName }) => {
             const isMatched =
-              MOCK_USER_SKIN_PROFILE.expectedEffects.includes(effect);
+              MOCK_USER_SKIN_PROFILE.expectedEffects.includes(chipName);
 
             return (
               <ChipBasic
-                key={`${effect}-${idx}`}
-                label={effect}
+                key={chipId}
+                label={chipName}
                 variant={isMatched ? 'blue' : 'default'}
               />
             );

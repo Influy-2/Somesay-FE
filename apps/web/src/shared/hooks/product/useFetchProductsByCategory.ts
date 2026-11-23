@@ -1,6 +1,6 @@
-import { fetchProductsByCategory, QUERY_KEYS } from '@somesay/shared';
 import type { ProductSortType } from '@somesay/shared';
-import { useInfiniteQuery } from '@tanstack/react-query';
+
+import { useApiInfiniteQuery } from '@/shared/api';
 
 interface UseFetchProductsOptions {
   mainCategoryId?: number;
@@ -22,23 +22,23 @@ export const useFetchProductsByCategory = ({
     typeof mainCategoryId === 'number' &&
     Number.isInteger(mainCategoryId) &&
     mainCategoryId > 0;
-  const productParams = {
-    mainCategoryId: mainCategoryId ?? 0,
-    ...(typeof subCategoryId === 'number' ? { subCategoryId } : {}),
-    ...(sortType ? { sortType } : {}),
-  };
 
-  const query = useInfiniteQuery({
-    queryKey: QUERY_KEYS.PRODUCT.BY_CATEGORY(productParams),
-    initialPageParam: 0,
-    queryFn: ({ pageParam }) =>
-      fetchProductsByCategory({ page: pageParam, size, ...productParams }),
-    getNextPageParam: (lastPage, pages) =>
-      lastPage.hasNext ? pages.length : undefined,
-    enabled: enabled && isValidMainCategoryId,
-    // 조회 실패를 목록 안에서 안내하므로 전역 throwOnError(true)를 끕니다.
-    throwOnError: false,
-  });
-
-  return query;
+  return useApiInfiniteQuery(
+    '/api/v1/products',
+    {
+      params: {
+        query: {
+          mainCategoryId: mainCategoryId ?? 0,
+          size,
+          ...(typeof subCategoryId === 'number' ? { subCategoryId } : {}),
+          ...(sortType ? { sortType } : {}),
+        },
+      },
+    },
+    {
+      enabled: enabled && isValidMainCategoryId,
+      // 조회 실패를 목록 안에서 안내하므로 전역 throwOnError(true)를 끕니다.
+      throwOnError: false,
+    }
+  );
 };

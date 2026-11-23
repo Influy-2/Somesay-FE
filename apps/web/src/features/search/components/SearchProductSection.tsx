@@ -1,5 +1,5 @@
 import { SortBar, SearchResultProductCard } from '@/shared/components';
-import type { ProductSearchResultType } from '@somesay/shared';
+import type { ProductCard } from '@somesay/shared';
 
 import type { ProductSearchSortOptionType } from '../types/search.types';
 import { NoResultMessage } from './NoResultMessage';
@@ -14,7 +14,7 @@ const PRODUCT_SORT_OPTIONS: {
 ];
 
 interface SearchProductSectionProps {
-  products: ProductSearchResultType[];
+  products: ProductCard[];
   onHeartToggle: (productId: number) => void;
   sortBy: ProductSearchSortOptionType;
   onSortChange: (value: ProductSearchSortOptionType) => void;

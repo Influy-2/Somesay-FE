@@ -1,9 +1,9 @@
 import { formatPrice } from '@somesay/shared';
 import { BlackHeartButton, BrandProfile } from '@/shared/components';
-import type { ProductDetailType } from '@somesay/shared';
+import type { ProductDetailResponse } from '@somesay/shared';
 
 interface ProductHeroProps {
-  product: ProductDetailType;
+  product: ProductDetailResponse;
   onHeartToggle: () => void;
 }
 
@@ -12,13 +12,13 @@ export const ProductHero = ({ product, onHeartToggle }: ProductHeroProps) => {
     productImgUrl,
     brandName,
     brandId,
-    brandLogoUrl,
+    brandLogoImgUrl,
     productName,
-    price,
-    volume,
-    isHearted,
-    collabChannelName,
-    collabProfileImgUrl,
+    productPrice,
+    productVolume,
+    isWished,
+    collabCreatorName,
+    collabCreatorProfileImgUrl,
     productNotes,
   } = product;
 
@@ -39,24 +39,24 @@ export const ProductHero = ({ product, onHeartToggle }: ProductHeroProps) => {
       <BrandProfile
         brandName={brandName}
         brandId={brandId}
-        brandImageUrl={brandLogoUrl}
+        brandLogoImgUrl={brandLogoImgUrl}
       />
       <div className="flex flex-col gap-3.5 px-4 py-5">
         <h2 className="subhead-sb">{productName}</h2>
         {productNotes && <p className="body2-m text-grey06">{productNotes}</p>}
-        {collabChannelName && (
+        {collabCreatorName && (
           <div className="flex items-center gap-2 px-4">
-            {collabProfileImgUrl && (
+            {collabCreatorProfileImgUrl && (
               <div className="bg-grey02 size-5 overflow-hidden rounded-full">
                 <img
-                  src={collabProfileImgUrl}
-                  alt={collabChannelName}
+                  src={collabCreatorProfileImgUrl}
+                  alt={collabCreatorName}
                   className="h-full w-full object-cover"
                 />
               </div>
             )}
             <span className="body2-m">
-              {collabChannelName} 님의 공동 개발 상품
+              {collabCreatorName} 님의 공동 개발 상품
             </span>
           </div>
         )}
@@ -64,16 +64,16 @@ export const ProductHero = ({ product, onHeartToggle }: ProductHeroProps) => {
           <dl className="flex items-center gap-4">
             <div className="flex items-center gap-1">
               <dt className="body2-b">정가</dt>
-              <dd className="body2-m">{formatPrice(price)}</dd>
+              <dd className="body2-m">{formatPrice(productPrice)}</dd>
             </div>
             <div className="flex items-center gap-1">
               <dt className="body2-b">용량</dt>
               <dd className="body2-m">
-                {volume ? `${volume}ml` : '용량 정보 없음'}
+                {productVolume ? `${productVolume}ml` : '용량 정보 없음'}
               </dd>
             </div>
           </dl>
-          <BlackHeartButton isLiked={isHearted} onLikeToggle={onHeartToggle} />
+          <BlackHeartButton isLiked={isWished} onLikeToggle={onHeartToggle} />
         </div>
       </div>
     </section>

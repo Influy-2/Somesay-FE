@@ -1,7 +1,7 @@
-import type { ProductBasicType } from '@somesay/shared';
+import type { ProductCard } from '@somesay/shared';
 
 export type SelectableProduct = Pick<
-  ProductBasicType,
+  ProductCard,
   'productId' | 'productImgUrl' | 'brandName' | 'productName'
 > & {
   categoryId: number;

@@ -63,7 +63,7 @@ export const MyReviewEvaluationProductListPage = () => {
               productImgUrl={product.productImgUrl}
               productName={product.productName}
               brandName={product.brandName}
-              reviewCount={product.reviewCount}
+              reviewCount={product.myReactionCount}
             />
           </li>
         ))}

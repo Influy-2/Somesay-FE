@@ -5,7 +5,7 @@ import { RadioOnIcon, RadioOffIcon } from '@/shared/icons';
 
 type RadioProductItemProps = {
   productId: number;
-  productImgUrl: string;
+  productImgUrl: string | null;
   brandName: string;
   productName: string;
   isSelected: boolean;

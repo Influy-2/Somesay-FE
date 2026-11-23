@@ -16,7 +16,10 @@ import type {
   RecommendedFilterGroupType,
   SelectedFiltersType,
 } from './filter.types';
-import { type CategoryGroupType, type SubcategoryType } from '@somesay/shared';
+import {
+  type MainCategoryResponse,
+  type SubCategoryItemResponse,
+} from '@somesay/shared';
 import { useFetchCategories } from '@/shared/hooks';
 
 interface FilterBottomSheetProps {
@@ -31,7 +34,7 @@ interface FilterBottomSheetProps {
   isSubmitEnabled: boolean;
 }
 
-type FilterItem = string | SubcategoryType;
+type FilterItem = string | SubCategoryItemResponse;
 
 const getItemId = (v: FilterItem): string | number => {
   if (typeof v === 'string') return v;
@@ -166,7 +169,7 @@ export const FilterBottomSheet = ({
               />
 
               {/* 스킨케어, 마스크/팩, 클렌징 등 카테고리 그룹과 하위 카테고리를 맵핑하여 렌더링 */}
-              {categoryGroups.map((group: CategoryGroupType) => (
+              {categoryGroups.map((group: MainCategoryResponse) => (
                 <div
                   className="flex w-full flex-col items-start gap-3 self-stretch"
                   key={group.mainCategoryId}

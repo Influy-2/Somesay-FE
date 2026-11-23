@@ -1,6 +1,5 @@
 import { Link } from 'react-router';
 
-import { getSkinTypeLabels } from '@somesay/shared';
 import { ProductCardThumbnail, CreatorReviewCard } from '@/shared/components';
 import { SummaryBox } from './SummaryBox';
 import { useCarousel } from '@/shared/hooks/useCarousel';
@@ -14,7 +13,7 @@ export const BestReviewSection = () => {
   const { emblaRef, selectedIndex, slideCount } = useCarousel();
   const accessToken = useAuthTokenStore((state) => state.accessToken);
   const { data: userInfo, isFetched: isUserInfoFetched } = useFetchUserInfo();
-  const selectedSkinTypeId = userInfo?.skinTypeIds.at(0);
+  const selectedSkinTypeId = userInfo?.userSkinTypes.at(0)?.skinTypeId;
   const canFetchCuration = !accessToken || isUserInfoFetched;
   const {
     data: curation,
@@ -30,6 +29,7 @@ export const BestReviewSection = () => {
     return null;
   }
 
+  // 비로그인이면 skinTypeId·skinTypeName 이 null 이라 아래 `skinTypeName ?` 로 분기합니다.
   const { reviews, skinTypeName } = curation;
 
   return (
@@ -73,36 +73,39 @@ export const BestReviewSection = () => {
                 aria-label={`슬라이드 ${i + 1} / ${reviews.length}`} // "슬라이드 1 / 5" 등으로 읽어줌
                 className="flex min-w-0 flex-[0_0_100%] flex-col gap-2 pl-2.5"
               >
+                {/* TODO: 응답에 productAvgRating·productReviewCount 가 생겼습니다.
+                    상품 썸네일에 리뷰 별점 대신 상품 평균 별점을 보여줄지 기획 확인 (지금은 기존대로 리뷰 별점) */}
                 <ProductCardThumbnail
                   productId={item.productId}
                   brandName={item.brandName}
                   productName={item.productName}
                   productImgUrl={item.productImgUrl}
-                  price={item.price}
-                  rating={item.rating}
+                  price={item.productPrice}
+                  rating={item.reviewRating}
                 />
                 <Link
                   to={`${PATH.PRODUCT.BASE}/${item.productId}?review=${item.reviewId}`}
-                  aria-label={`${item.creator.creatorName}의 리뷰 전문 보기`}
+                  aria-label={`${item.creatorName}의 리뷰 전문 보기`}
                   className="block"
                 >
+                  {/* 리뷰 카드 응답은 creator* 접두사로 평탄해 리뷰 객체를 그대로 프로필에 넘깁니다. */}
                   <CreatorReviewCard
-                    creator={item.creator}
-                    rating={item.rating}
-                    content={item.content}
+                    creator={item}
+                    rating={item.reviewRating}
+                    content={item.reviewContent}
                     productName={item.productName}
                     highlightedLabels={skinTypeName ? [skinTypeName] : []}
                   />
                 </Link>
                 <div className="flex items-start gap-2 self-stretch">
                   <SummaryBox
-                    boldText={String(item.agreeRatio.toFixed(1)) + '%'}
+                    boldText={String(item.reviewAgreeRatio.toFixed(1)) + '%'}
                     plainText=" 의 사용자가 공감했어요"
                   />
                   <SummaryBox
-                    boldText={getSkinTypeLabels(
-                      item.mostAgreedSkinTypeIds
-                    ).join(', ')}
+                    boldText={item.reviewMostAgreedSkinTypes
+                      .map(({ skinTypeName }) => skinTypeName)
+                      .join(', ')}
                     plainText=" 사용자가 가장 많이 공감했어요"
                   />
                 </div>

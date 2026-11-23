@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { UserInfoType } from '@somesay/shared';
+import type { InfoResponse } from '@somesay/shared';
 
 export type AuthStatus =
   | 'checking'
@@ -10,7 +10,7 @@ export type AuthStatus =
 export interface AuthContextValue {
   status: AuthStatus;
   isAuthenticated: boolean;
-  user: UserInfoType | null;
+  user: InfoResponse | null;
   refreshUser: () => void;
 }
 

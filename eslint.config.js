@@ -7,6 +7,8 @@ module.exports = [
       '**/dist/**',
       '**/.turbo/**',
       '**/build/**',
+      // openapi-typescript 생성물입니다. 손대지 않고 pnpm api:sync 로만 갱신합니다.
+      '**/generated/**',
     ],
   },
   ...baseConfig,
