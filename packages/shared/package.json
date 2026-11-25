@@ -9,7 +9,8 @@
     "api:gen": "openapi-typescript openapi/openapi.json --properties-required-by-default -o src/api/generated/openapi.ts",
     "api:sync": "pnpm api:fetch && pnpm api:gen",
     "features:gen": "node scripts/gen-features.mjs",
-    "features:update": "node scripts/update-features.mjs"
+    "features:update": "node scripts/update-features.mjs",
+    "features:pull": "node --env-file-if-exists=.env scripts/pull-features.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.20",

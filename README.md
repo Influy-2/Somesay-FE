@@ -73,7 +73,7 @@ pnpm --filter web storybook    # Storybook (http://localhost:6006)
 2. `.tsx` 파일을 연 상태에서 명령 팔레트 → **TypeScript: Select TypeScript Version** → **Use Workspace Version**.
 
 동작하지 않으면 명령 팔레트의 **TypeScript: Open TS Server log**에서 `[somesay-feature]` 줄을 확인하세요.
-`tsc`·빌드·CI에는 영향이 없습니다.
+`tsc`·빌드·CI에는 영향이 없습니다. 자세한 사용법은 [기능 ID 안내서](./docs/feature-id/README.md)를 보세요.
 
 ## 프로젝트 구조
 
@@ -124,7 +124,8 @@ packages/config/   공용 tsconfig · ESLint 설정
 - 규약 문서: 루트·`apps/web`·`packages/shared`의 `CLAUDE.md`
 - 스킬(`.claude/skills`): `api-integration`, `figma-to-component`, `storybook`, `write-pr`
 - 커맨드(`.claude/commands`): `plan-mode`(설계 논의), `review-pr`(PR 리뷰)
-- 소분류를 그리는 JSX 요소에 `data-feature="F-0042"`처럼 바뀌지 않는 기능 ID를 달아 기능명세서와 연결하고, `apps/web/scripts/feature-impact.mjs`로 PR이 닿은 기능을 계산합니다.
+- 소분류를 그리는 JSX 요소에 `data-feature="F-0042"`처럼 바뀌지 않는 기능 ID를 달아 기능명세서와 연결하고, `apps/web/scripts/feature-impact.mjs`로 PR이 닿은 기능을 계산합니다. → [기능 ID 안내서](./docs/feature-id/README.md)
+- 사람용 사용 안내서는 [`docs/`](./docs/README.md)에 모읍니다.
 
 ## 기여
 

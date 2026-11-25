@@ -13,6 +13,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^20.4.1
         version: 20.4.1
+      '@somesay/ts-feature-plugin':
+        specifier: workspace:*
+        version: link:packages/ts-feature-plugin
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.55.0
         version: 8.55.0(@typescript-eslint/parser@8.55.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
@@ -107,6 +110,9 @@ importers:
       '@somesay/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@somesay/ts-feature-plugin':
+        specifier: workspace:*
+        version: link:../../packages/ts-feature-plugin
       '@storybook/addon-a11y':
         specifier: ^10.3.5
         version: 10.3.5(storybook@10.3.5(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
@@ -215,6 +221,8 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+
+  packages/ts-feature-plugin: {}
 
 packages:
   '@adobe/css-tools@4.4.4':

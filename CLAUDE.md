@@ -18,21 +18,45 @@ FE 2인(내가 총괄) / BE는 Spring 별도 팀. 대화·주석·문서는 한�
 4. **Tailwind만.** 커스텀 타이포/컬러 토큰만 사용. `style`은 런타임 계산값(`width: ${n}%`, 동적 transform)에만 허용.
 5. **시맨틱 HTML + ARIA.** `div` 남용 금지, 클릭 요소는 `<button type="button">`.
 6. **feature 단위 분리.** `shared/`로 올리는 건 **공용화 지시를 받았거나 3번째 사용처가 생겼을 때**뿐이다. 2곳이면 복제해 둔다.
-7. **주석은 "왜"를 쓴다.** "무엇"은 코드가 말한다. 한국어로 짧게. 예외는 페이지 파일의 `@spec` 태그(아래).
+7. **주석은 "왜"를 쓴다.** "무엇"은 코드가 말한다. 한국어로 짧게.
 
-### `@spec` 태그 — 기능명세서 소분류 번호
+### `data-feature` — 기능명세서와 코드 연결
 
-`write-pr` 스킬이 PR마다 어떤 소분류를 건드렸는지 읽는 표식이다. **`pages/` 파일 안에만** 쓰고 소분류 번호(`1.3.1`)만 적는다. 단계(`done`/`screen`)는 쓰지 않는다. 연결 상태가 바뀌면 거짓이 되기 때문이다.
+팀웹(team.influy.com)의 기능을 가리키는 번호는 두 종류다. **헷갈리지 않는다.**
 
-| 페이지 상황                                     | 위치                                              |
-| ----------------------------------------------- | ------------------------------------------------- |
-| 페이지 하나가 소분류 하나                       | 페이지 컴포넌트 위 `/** @spec 5.1.1 */`           |
-| 페이지가 중·대분류이고 소분류가 컴포넌트로 나뉨 | 소분류를 그리는 JSX 요소 위 `{/* @spec 5.1.1 */}` |
-| 소분류 컴포넌트를 페이지 파일 안에서 정의       | 그 컴포넌트 정의 위 `/** @spec 5.1.1 */`          |
+| 이름      | 예       | 성질                                                                  |
+| --------- | -------- | --------------------------------------------------------------------- |
+| 기능 ID   | `F-0042` | 기능이 생길 때 한 번 붙고 **절대 바뀌지 않는다.** 지워도 재사용 안 함 |
+| 표시 번호 | `3.1.2`  | 화면의 순서 번호. 기능을 옮기면 **바뀐다**                            |
 
-소분류 하나를 컴포넌트 여럿이 나눠 맡으면 가장 바깥 요소에 한 번만 쓴다.
-한 요소가 소분류 여럿을 그리면 쉼표로 잇는다: `{/* @spec 10.1.1, 10.1.2 */}`.
-태그가 붙은 JSX를 `pages/` 밖으로 옮기면 태그는 `pages/`에서 그 컴포넌트를 렌더하는 요소로 옮긴다. 태그는 `pages/` 안에만 둔다.
+**코드에는 기능 ID만** 쓴다. 사람에게 보여 줄 때(PR·대화)는 `3.1.2 상품 랭킹 (F-0042)`처럼 그 시점의 표시 번호·제목과 같이 쓴다.
+`docs/기능명세서/*.md`의 항목 번호는 문서 목차라 표시 번호와 다른 값이다.
+
+소분류를 그리는 JSX 요소에 `data-feature` 속성을 단다. 감싸지 않고 이미 있는 요소에 붙이며,
+`write-pr`이 `apps/web/scripts/feature-impact.mjs`로 PR의 영향 범위를 계산할 때 쓴다. 범위는 그 요소의 시작~끝이다.
+
+```tsx
+<section data-feature="F-0009" aria-label="상품 랭킹">…</section>
+<TabBar data-feature="F-0024" tabs={…} />
+<div data-feature={['F-0017', 'F-0019']}>…</div>
+```
+
+- 타입은 `apps/web/src/featureAttribute.d.ts`가 `React.Attributes`를 넓혀 준다. DOM 요소·컴포넌트 모두에 달 수 있고
+  컴포넌트 props는 고치지 않는다. 값은 `LeafFeatureId`(소분류만)라 없는 ID·중·대분류 ID는 타입 에러다.
+- 이름은 `id`가 아니다. HTML `id`(aria 연결)와 겹치기 때문이다. DOM 요소에 달면 HTML에 그대로 남는다.
+- **위치 — 그 소분류만 담는 가장 높은 요소.** 순서대로 고른다.
+  1. 기능 하나만 그리는 `features/` 컴포넌트 → **그 컴포넌트의 루트 요소** (루트가 Fragment면 형제마다)
+  2. 기능 여럿을 그리는 `features/` 컴포넌트 → 컴포넌트 안에서 기능별 하위 요소로 나눠 단다
+  3. 페이지 전체가 기능 하나 → 페이지 컴포넌트의 루트 요소
+  4. `shared/` 컴포넌트 → **안에 달지 않는다.** 쓰는 쪽(페이지·feature)의 요소에 단다
+- 컴포넌트 안에 단 표식은 그 컴포넌트를 렌더하는 요소(페이지의 `<ProductRankingSection />`)까지 같은 기능으로 계산된다.
+- 범위 하나에 ID가 하나면 그 안의 변경은 `changed`, 여럿이면 `possible`(사람이 확인)로 판정된다.
+  shared 카드 안의 이동(3.1.3 등)처럼 떼어 낼 수 없으면 목록과 함께 묶는다. 자기 화면 요소가 없는 기능(서버 처리, 미구현)은 달지 않는다.
+- 단계(`done`/`screen`)는 코드에 쓰지 않는다. 연결 상태가 바뀌면 거짓이 되기 때문이다.
+- 기능 목록이 바뀌면 팀웹 JSON을 붙여 넣어 갱신한다 — `pbpaste | pnpm --filter @somesay/shared features:update`
+  (`packages/shared/features/features.json` 스냅샷 → `src/features/generated/features.ts` 타입). 생성물은 직접 고치지 않는다.
+- 에디터 보조는 `packages/ts-feature-plugin`(tsserver 플러그인)이 한다 — F-ID hover에 표시 번호·제목, 표시 번호를 쓰면 기능 ID로 바꾸는 빠른 수정.
+  워크스페이스 TypeScript를 써야 켜진다 (README §VS Code 설정). pnpm에서 tsserver가 플러그인을 찾도록 **루트 devDependencies에도** 둔다.
 
 ## 스택
 
@@ -59,6 +83,9 @@ pnpm dev | build | lint | type-check      # turbo, 전체 워크스페이스
 pnpm --filter web test                    # vitest unit 프로젝트
 pnpm --filter web storybook               # :6006
 pnpm --filter @somesay/shared api:sync    # 백엔드 Swagger 스냅샷 갱신 + 타입 재생성
+pbpaste | pnpm --filter @somesay/shared features:update   # 팀웹 기능 목록 스냅샷 갱신 + 기능 ID 타입 재생성
+pnpm --filter @somesay/shared features:pull             # 팀웹 서버 DB에서 바로 받아 갱신 (packages/shared/.env 필요, .env.example 참고)
+node apps/web/scripts/feature-impact.mjs [base]           # 변경이 닿는 기능(F-ID) 계산 (write-pr가 사용)
 ```
 
 ## 코딩 컨벤션

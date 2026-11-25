@@ -1,0 +1,10 @@
+{
+  "name": "@somesay/ts-feature-plugin",
+  "version": "0.0.1",
+  "private": true,
+  "description": "에디터(tsserver)에서 기능 ID(F-0000)의 표시 번호·제목을 보여 주고 표시 번호를 기능 ID로 바꿔 주는 TypeScript 언어 서비스 플러그인",
+  "main": "index.cjs",
+  "scripts": {
+    "test": "node --test"
+  }
+}

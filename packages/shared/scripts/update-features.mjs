@@ -1,7 +1,7 @@
 // 팀웹 기능 목록 JSON 을 stdin 으로 받아 스냅샷(features/features.json)으로 저장하고 타입을 다시 만듭니다.
 // 팀웹은 SSH 로만 닿아서 fetch 대신 붙여 넣기를 받습니다. 스냅샷을 커밋해 두면 기능 변경이 PR diff 로 드러납니다.
 // 사용: pbpaste | pnpm --filter @somesay/shared features:update
-//       ssh … | pnpm --filter @somesay/shared features:update
+//      ssh -i <키파일> ubuntu@<IP> "sudo sqlite3 -json -readonly <디비위치>" <<< "SELECT printf('F-%04d', id) AS id, display_no, title FROM feature WHERE archived_at IS NULL ORDER BY id;" | pnpm --filter @somesay/shared features:update
 import { writeFile } from 'node:fs/promises';
 import { text } from 'node:stream/consumers';
 

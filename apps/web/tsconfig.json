@@ -3,7 +3,13 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "@somesay/ts-feature-plugin",
+        "featuresPath": "../../packages/shared/features/features.json"
+      }
+    ]
   },
   "include": ["src"]
 }
