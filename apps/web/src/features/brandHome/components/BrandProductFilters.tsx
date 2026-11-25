@@ -49,7 +49,7 @@ export const BrandProductFilters = ({
       className="flex flex-col gap-4 pt-4"
       aria-label={`${brandName} 상품 필터`}
     >
-      <div className="px-4">
+      <div data-feature="F-0152" className="px-4">
         <SearchBar
           placeholder={`${brandName}에서의 검색`}
           value={searchValue}
@@ -57,7 +57,7 @@ export const BrandProductFilters = ({
           onClear={onSearchClear}
         />
       </div>
-      <div className="px-4">
+      <div data-feature="F-0153" className="px-4">
         {/* TODO: 백엔드 수정에 맞춰서 수정 필요 */}
         <HorizontalCategoriesTab
           categories={categories}
@@ -67,6 +67,7 @@ export const BrandProductFilters = ({
         />
       </div>
       <SortBar
+        data-feature="F-0153"
         count={productCount}
         sortOptions={SORT_OPTIONS}
         currentSortValue={sortType}

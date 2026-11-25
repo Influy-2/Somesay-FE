@@ -24,7 +24,10 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
       )}
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/70" />
 
-      <header className="absolute top-0 left-0 flex h-13.5 w-full items-center justify-between px-4 py-2.5 text-white">
+      <header
+        data-feature="F-0154"
+        className="absolute top-0 left-0 flex h-13.5 w-full items-center justify-between px-4 py-2.5 text-white"
+      >
         <button
           type="button"
           onClick={onBack}
@@ -41,7 +44,10 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
         />
       </header>
 
-      <div className="absolute bottom-5 left-4 flex items-center gap-3">
+      <div
+        data-feature="F-0150"
+        className="absolute bottom-5 left-4 flex items-center gap-3"
+      >
         {brand.brandLogoImgUrl ? (
           <img
             src={brand.brandLogoImgUrl}
@@ -61,7 +67,10 @@ export const BrandHomeHero = ({ brand, onBack }: BrandHomeHeroProps) => {
           >
             {brand.brandName}
           </h1>
-          <div className="caption1-m text-grey01 flex flex-wrap items-center gap-2">
+          <div
+            data-feature="F-0151"
+            className="caption1-m text-grey01 flex flex-wrap items-center gap-2"
+          >
             <span className="caption1-b flex items-center">
               <Star16Icon aria-hidden="true" className="size-4" />
               {formatRating(brand.brandAvgRating)}

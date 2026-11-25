@@ -82,6 +82,7 @@ export const SearchHeader = ({
           </button>
           {/* 검색창 */}
           <SearchBar
+            data-feature="F-0124"
             placeholder="내돈내산 후기가 궁금한 상품을 검색해보세요"
             value={value}
             onChange={onQueryChange}

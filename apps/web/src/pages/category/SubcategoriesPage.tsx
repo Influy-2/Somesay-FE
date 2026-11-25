@@ -83,8 +83,7 @@ export const SubcategoriesPage = () => {
 
     return (
       <>
-        {/* @spec 4.2.1, 4.2.2 */}
-        <div className="px-4 pt-5 pb-3.5">
+        <div data-feature={['F-0047', 'F-0048']} className="px-4 pt-5 pb-3.5">
           <HorizontalCategoriesTab
             {...tabProps}
             ariaLabel={`${category.mainCategoryName} 소분류 카테고리`}
@@ -105,7 +104,6 @@ export const SubcategoriesPage = () => {
         <div className="pb-2.5">
           <SortBar sortOptions={SUBCATEGORY_SORT_OPTIONS} {...sortProps} />
         </div>
-        {/* @spec 4.2.3 */}
         <SubcategoryProductList {...listProps} />
         <SubcategoryLoadMore {...loadMoreProps} />
         <SearchFilterBottomSheet
@@ -128,8 +126,8 @@ export const SubcategoriesPage = () => {
     <div className="mt-13.5 flex flex-col bg-white">
       <PageHeader
         left={
-          /* @spec 4.2.4 */
           <button
+            data-feature="F-0050"
             type="button"
             aria-label="뒤로 가기"
             onClick={() => navigate(-1)}
@@ -140,11 +138,11 @@ export const SubcategoriesPage = () => {
         {...(category ? { title: category.mainCategoryName } : {})}
         right={[
           <Link
+            data-feature="F-0051"
             key="search"
             to={PATH.SEARCH.BASE}
             aria-label="검색 페이지로 이동"
           >
-            {/* @spec 4.2.5 */}
             <SearchIcon aria-hidden="true" />
           </Link>,
         ]}

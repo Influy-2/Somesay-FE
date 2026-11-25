@@ -33,7 +33,7 @@ export const BestReviewSection = () => {
   const { reviews, skinTypeName } = curation;
 
   return (
-    <div className="w-full overflow-auto">
+    <div data-feature="F-0007" className="w-full overflow-auto">
       <section
         aria-labelledby="best-review-title"
         aria-busy={isPending}

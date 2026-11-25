@@ -52,6 +52,9 @@ export type {
   UserProductStatusType,
 } from './domain/userProduct/userProduct.types';
 
+// 기능 ID (팀웹 기능 목록 스냅샷에서 생성)
+export type { FeatureId, LeafFeatureId } from './features/generated/features';
+
 // 서버 enum 값 목록 (zod 스키마·선택지용)
 export type { AgeType } from './domain/user/user.types';
 export { AGE_TYPES } from './domain/user/user.types';

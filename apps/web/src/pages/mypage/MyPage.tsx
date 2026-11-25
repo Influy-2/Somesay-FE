@@ -32,14 +32,12 @@ export const MyPage = () => {
 
     return (
       <>
-        {/* @spec 5.1.1 */}
         <MyProfile
           userProfileImgUrl={data.userProfileImgUrl}
           userNickname={data.userNickname}
           userSkinTypes={data.userSkinTypes}
           userAge={user?.userAge ?? null}
         />
-        {/* @spec 5.1.2 */}
         <MyActivityStatistics
           userReactedProductCount={data.userReactedProductCount}
           userReactedCreatorCount={data.userReactedCreatorCount}
@@ -60,8 +58,7 @@ export const MyPage = () => {
       <hr className="bg-grey01 my-7 h-1.75 border-0" />
 
       {/* 좌우 여백은 섹션이 직접 다룹니다 — 캐러셀이 화면 끝까지 흘러야 해서요. */}
-      {/* @spec 5.2.1, 5.2.2 */}
-      <div className="relative">
+      <div data-feature={['F-0057', 'F-0058']} className="relative">
         <RecommendedCreatorsTooltip />
         <RecommendedCreators />
       </div>
@@ -69,22 +66,20 @@ export const MyPage = () => {
       <hr className="bg-grey01 h-1.75 border-0" />
 
       <div className="divide-grey03 flex flex-col divide-y px-4 pb-10">
-        {/* @spec 5.3.2, 5.3.3 */}
         <InfoSection title="나의 활동">
           <InfoRow
             label="리뷰 관리"
             to={`${PATH.MY_PAGE.BASE}/${PATH.MY_PAGE.REVIEW_EVALUATION.BASE}`}
           />
-          <InfoRow label="찜한 상품" />
-          <InfoRow label="찜한 크리에이터" />
+          <InfoRow data-feature="F-0062" label="찜한 상품" />
+          <InfoRow data-feature="F-0061" label="찜한 크리에이터" />
         </InfoSection>
 
-        {/* @spec 5.4.1, 5.4.2, 5.4.3, 5.4.4, 5.4.5 */}
-        <InfoSection title="고객센터">
-          <InfoRow label="1:1 문의" />
-          <InfoRow label="제품 추가 요청" />
-          <InfoRow label="공지사항" />
-          <InfoRow label="자주 묻는 질문" />
+        <InfoSection data-feature="F-0064" title="고객센터">
+          <InfoRow data-feature="F-0065" label="1:1 문의" />
+          <InfoRow data-feature="F-0066" label="제품 추가 요청" />
+          <InfoRow data-feature="F-0067" label="공지사항" />
+          <InfoRow data-feature="F-0068" label="자주 묻는 질문" />
         </InfoSection>
       </div>
     </div>

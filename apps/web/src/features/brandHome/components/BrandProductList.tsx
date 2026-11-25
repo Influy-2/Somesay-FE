@@ -60,7 +60,11 @@ export const BrandProductList = ({
 
   return (
     <>
-      <ul className="flex flex-col gap-6 pt-2" aria-label="브랜드 상품 목록">
+      <ul
+        data-feature="F-0153"
+        className="flex flex-col gap-6 pt-2"
+        aria-label="브랜드 상품 목록"
+      >
         {products.map((product) => (
           <li key={product.productId}>
             <SearchResultProductCard
@@ -70,7 +74,7 @@ export const BrandProductList = ({
           </li>
         ))}
       </ul>
-      <div ref={loadMoreRef} className="min-h-10 pb-10">
+      <div data-feature="F-0153" ref={loadMoreRef} className="min-h-10 pb-10">
         {isFetchingNextPage && (
           <p className="body2-m text-grey06 py-4 text-center">
             상품을 더 불러오는 중이에요.

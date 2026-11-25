@@ -13,7 +13,6 @@ import { useSnackbarStore } from '@/shared/stores';
 
 type FitType = 'matches' | 'mismatches';
 
-/** @spec 5.5.3 */
 export const ProductFitPage = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -51,7 +50,7 @@ export const ProductFitPage = () => {
   };
 
   return (
-    <div className="mt-13.5 flex flex-1 flex-col">
+    <div data-feature="F-0072" className="mt-13.5 flex flex-1 flex-col">
       <PageHeader
         left={
           <button type="button" onClick={() => navigate(-1)}>

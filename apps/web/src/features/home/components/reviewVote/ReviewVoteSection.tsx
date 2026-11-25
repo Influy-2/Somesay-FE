@@ -24,6 +24,7 @@ export const ReviewVoteSection = () => {
 
   return (
     <section
+      data-feature="F-0012"
       aria-labelledby="review-vote-title"
       className="flex w-full flex-col items-center justify-center gap-5 px-4"
     >

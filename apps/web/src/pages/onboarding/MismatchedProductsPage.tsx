@@ -3,9 +3,9 @@ import { PATH } from '@/routes/path';
 
 const MISMATCHED_PRODUCT_SEARCH_PATH = `${PATH.ONBOARDING.BASE}/${PATH.ONBOARDING.MISMATCHED_PRODUCTS_SEARCH}`;
 
-/** @spec 11.2.3, 11.3.1, 11.3.2, 11.3.4, 11.3.5 */
 export const MismatchedProductsPage = () => (
   <OnboardingProductSelection
+    data-feature="F-0163"
     status="MISMATCHED"
     step="mismatchedProducts"
     title="이 중 안 맞았던 제품이 있으신가요?"

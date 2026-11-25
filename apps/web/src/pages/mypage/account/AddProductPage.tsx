@@ -30,7 +30,6 @@ const SORT_OPTIONS = [
 
 const ALL_CATEGORY = { id: 0, label: '전체' };
 
-/** @spec 5.5.3 */
 export const AddProductPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -137,6 +136,7 @@ export const AddProductPage = () => {
 
   return (
     <div
+      data-feature="F-0072"
       className={cn(
         'mt-13.5 flex flex-col',
         selectedProducts.length > 0 ? 'pb-60' : 'pb-25'

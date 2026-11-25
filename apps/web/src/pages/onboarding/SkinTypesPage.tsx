@@ -12,7 +12,6 @@ const SKIN_TYPE_LABELS = SKIN_TYPE_OPTIONS.map(
   ({ label }) => [label, label] as const
 );
 
-/** @spec 11.1.3, 11.3.1, 11.3.2, 11.3.3, 11.3.5 */
 export const SkinTypesPage = () => {
   const navigate = useNavigate();
   const skinTypeNames = useOnboardingStore((state) => state.skinTypeNames);
@@ -31,6 +30,7 @@ export const SkinTypesPage = () => {
 
   return (
     <OnboardingLayout
+      data-feature="F-0159"
       headerVariant="signup"
       progressStep="skinTypes"
       cta={{

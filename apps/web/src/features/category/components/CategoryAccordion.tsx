@@ -22,6 +22,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
     <li className="list-none">
       <div className="flex items-center px-4">
         <button
+          data-feature="F-0044"
           type="button"
           onClick={toggleAccordion}
           aria-expanded={isOpen}
@@ -47,6 +48,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
           </div>
         </button>
         <Link
+          data-feature="F-0045"
           to={`${PATH.CATEGORIES.BASE}/${category.mainCategoryId}`}
           aria-label={`${category.mainCategoryName} 전체보기 페이지로 이동`}
         >
@@ -56,6 +58,7 @@ export const CategoryAccordion = ({ category }: CategoryAccordionProps) => {
 
       {/* 소분류 목록 렌더링 */}
       <ul
+        data-feature="F-0045"
         id={subListId}
         role="region"
         className={cn('flex flex-col gap-6 px-8 pt-6', !isOpen && 'hidden')}

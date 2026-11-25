@@ -25,7 +25,10 @@ export const MyActivityStatistics = ({
   userCommentCount,
 }: MyActivityStatisticsProps) => {
   return (
-    <div className="grid grid-cols-2 grid-rows-[auto_auto] gap-2">
+    <div
+      data-feature="F-0055"
+      className="grid grid-cols-2 grid-rows-[auto_auto] gap-2"
+    >
       {/* 1행: 공감한 리뷰 / 반대한 리뷰 / 코멘트 - col-span-2 */}
       <dl className="bg-grey01 col-span-2 flex py-4">
         <div className="flex flex-1 flex-col items-center gap-1">

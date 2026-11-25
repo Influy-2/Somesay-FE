@@ -42,7 +42,7 @@ export const CreatorsTab = ({
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col">
+    <div data-feature="F-0076" className="flex flex-col">
       <p className="body1-sb flex items-center gap-1 truncate px-4 pt-5">
         <span className="min-w-0 truncate">
           '

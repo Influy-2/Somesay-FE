@@ -8,7 +8,12 @@ export const OnboardingCompleteBottomSheet = ({
   onClose,
 }: BottomSheetProps) => {
   return (
-    <BottomSheet isOpen={isOpen} onClose={onClose} ariaLabel="">
+    <BottomSheet
+      data-feature="F-0172"
+      isOpen={isOpen}
+      onClose={onClose}
+      ariaLabel=""
+    >
       <>d임시</>
     </BottomSheet>
   );

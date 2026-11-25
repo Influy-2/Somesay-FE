@@ -17,6 +17,7 @@ export const ProductRankingSection = () => {
 
   return (
     <section
+      data-feature="F-0009"
       aria-labelledby="product-ranking-title"
       aria-busy={isPending}
       className="flex w-full flex-col items-center justify-center gap-6 px-4"

@@ -73,7 +73,7 @@ export const ProductRankingsSection = () => {
     }
 
     return (
-      <div className="flex flex-col gap-6">
+      <div data-feature={['F-0017', 'F-0019']} className="flex flex-col gap-6">
         <ol className="grid grid-cols-2 gap-y-6">
           {products.map((product, index) => (
             <li key={product.productId} className="min-w-0 list-none">
@@ -120,7 +120,7 @@ export const ProductRankingsSection = () => {
 
   return (
     <section aria-label="상품 랭킹">
-      <div className="px-4 py-5">
+      <div data-feature="F-0018" className="px-4 py-5">
         <HorizontalCategoriesTab
           categories={categories}
           selectedId={selectedCategoryId}

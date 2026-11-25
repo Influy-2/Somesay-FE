@@ -9,7 +9,6 @@ import { ArrowBackIcon } from '@/shared/icons';
 import { useFetchCategories } from '@/shared/hooks';
 import { MOCK_EVALUATED_PRODUCTS_LIST } from '@/features/myPage';
 
-/** @spec 5.6.1 */
 export const MyReviewEvaluationProductListPage = () => {
   const navigate = useNavigate();
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
@@ -31,7 +30,7 @@ export const MyReviewEvaluationProductListPage = () => {
         );
 
   return (
-    <div className="mt-13.5 flex flex-col">
+    <div data-feature="F-0075" className="mt-13.5 flex flex-col">
       <PageHeader
         title="리뷰 평가한 상품"
         left={

@@ -10,7 +10,6 @@ import {
 } from '@/features/onboarding';
 import { ChevronRight20Icon } from '@/shared/icons';
 
-/** @spec 11.1.2, 11.3.1, 11.3.2, 11.3.3 */
 export const TermsAgreementPage = () => {
   const navigate = useNavigate();
   const savedAgreements = useOnboardingStore((state) => state.agreements);
@@ -44,6 +43,7 @@ export const TermsAgreementPage = () => {
 
   return (
     <OnboardingLayout
+      data-feature="F-0158"
       headerVariant="terms"
       cta={{
         label: '다음',

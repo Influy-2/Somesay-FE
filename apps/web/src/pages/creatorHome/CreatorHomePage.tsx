@@ -62,10 +62,10 @@ export const CreatorHomePage = () => {
 
   return (
     <div className="mt-13.5 flex flex-col bg-white">
-      {/* @spec 7.6.1, 7.6.2 */}
       <PageHeader
         left={
           <button
+            data-feature="F-0120"
             type="button"
             aria-label="뒤로 가기"
             onClick={() => navigate(-1)}
@@ -74,55 +74,58 @@ export const CreatorHomePage = () => {
           </button>
         }
         right={[
-          <Link key="share" to="/" aria-label="공유">
+          <Link data-feature="F-0121" key="share" to="/" aria-label="공유">
             <ShareIcon aria-hidden="true" />
           </Link>,
         ]}
       />
       <div className="mb-7.5 flex flex-col gap-5 px-4 pt-2">
-        {/* @spec 7.1.1, 7.1.2, 7.1.3 */}
         <CreatorHomeProfile
+          data-feature={['F-0104', 'F-0105', 'F-0106']}
           {...MOCK_CREATOR}
           likeCount={MOCK_CREATOR_LIKE_COUNT}
         />
-        {/* @spec 7.2.1, 7.2.2, 7.3.1 */}
         <CreatorHomeTrustScore {...MOCK_CREATOR} isLoggedIn={true} />
       </div>
       {/* 검색 + 정렬 */}
       <div className="mb-6 flex flex-col gap-4 px-4">
-        {/* @spec 7.4.1 */}
         <SearchBar
+          data-feature="F-0113"
           placeholder="레오제이에서의 검색"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           onSubmit={() => {}}
           onClear={() => setSearchValue('')}
         />
-        {/* @spec 7.5.1 */}
         <HorizontalCategoriesTab
+          data-feature="F-0115"
           categories={categories}
           selectedId={selectedCategoryId}
           onSelect={handleSelectCategory}
           ariaLabel="상품 카테고리"
         />
-        {/* @spec 7.5.3 */}
         <SortBar
+          data-feature="F-0117"
           count={filteredReviews.length}
           sortOptions={SORT_OPTIONS}
           currentSortValue={currentSortValue}
           onSelectSort={setCurrentSortValue}
         />
       </div>
-      {/* @spec 7.5.1, 7.5.2, 7.5.4 */}
       <div className="flex flex-col gap-6 px-4 pb-10">
         {/* 리뷰 목록 */}
         {visibleReviews.map((review) => (
-          <li key={review.reviewId} className="list-none">
+          <li
+            data-feature={['F-0115', 'F-0116']}
+            key={review.reviewId}
+            className="list-none"
+          >
             <CreatorHomeReviewCard {...review} />
           </li>
         ))}
         {filteredReviews.length > 3 && !isExpanded && (
           <button
+            data-feature="F-0118"
             type="button"
             onClick={() => setIsExpanded(true)}
             className="border-grey03 body2-m flex h-10 w-full items-center justify-center border py-2"

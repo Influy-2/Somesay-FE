@@ -40,6 +40,7 @@ export const CategoryProductSection = () => {
 
   return (
     <section
+      data-feature="F-0014"
       aria-labelledby="category-product-title"
       aria-busy={isPending}
       className="flex w-full flex-col gap-5 px-4"

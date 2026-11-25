@@ -12,7 +12,6 @@ const CONCERN_OPTIONS = USER_SKIN_CONCERN_OPTIONS.map(
   ({ label }) => [label, label] as const
 );
 
-/** @spec 11.2.1, 11.3.1, 11.3.2, 11.3.4, 11.3.5 */
 export const SkinConcernsPage = () => {
   const navigate = useNavigate();
   const concerns = useOnboardingStore((state) => state.concerns);
@@ -32,6 +31,7 @@ export const SkinConcernsPage = () => {
 
   return (
     <OnboardingLayout
+      data-feature="F-0161"
       headerVariant="signup"
       progressStep="skinConcerns"
       onSkip={moveToNextStep}

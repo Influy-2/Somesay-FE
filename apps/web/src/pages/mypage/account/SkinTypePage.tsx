@@ -10,7 +10,6 @@ import { MOCK_ACCOUNT } from '@/features/myPage';
 const UNKNOWN_SKIN_TYPE_ID = 8;
 const MAX_SELECTIONS = 2;
 
-/** @spec 5.5.2 */
 export const SkinTypePage = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<number[]>(MOCK_ACCOUNT.skinTypeIds);
@@ -43,7 +42,7 @@ export const SkinTypePage = () => {
   };
 
   return (
-    <div className="mt-13.5 flex flex-col">
+    <div data-feature="F-0071" className="mt-13.5 flex flex-col">
       <PageHeader
         left={
           <button type="button" onClick={() => navigate(-1)}>

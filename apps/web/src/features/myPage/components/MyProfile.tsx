@@ -24,7 +24,11 @@ export const MyProfile = ({
   userAge,
 }: MyProfileProps) => {
   return (
-    <section aria-label="내 프로필" className="mb-1 flex items-start py-5">
+    <section
+      data-feature="F-0054"
+      aria-label="내 프로필"
+      className="mb-1 flex items-start py-5"
+    >
       <div
         aria-hidden="true"
         className="bg-grey02 size-15 shrink-0 overflow-hidden rounded-full"

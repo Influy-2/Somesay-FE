@@ -8,7 +8,6 @@ import { MOCK_ACCOUNT } from '@/features/myPage';
 // 선택지는 라벨 테이블에서 파생한다. 값은 서버 enum 그대로 두고 표시만 한글로 한다.
 const AGE_OPTIONS = Object.entries(AGE_LABELS) as [AgeType, string][];
 
-/** @spec 5.5.1 */
 export const AgePage = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState(MOCK_ACCOUNT.age);
@@ -22,7 +21,7 @@ export const AgePage = () => {
   };
 
   return (
-    <div className="mt-13.5 flex flex-col">
+    <div data-feature="F-0070" className="mt-13.5 flex flex-col">
       <PageHeader
         left={
           <button type="button" onClick={() => navigate(-1)}>

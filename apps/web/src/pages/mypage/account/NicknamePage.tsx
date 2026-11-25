@@ -4,7 +4,6 @@ import { CharacterCountInput, PageHeader } from '@/shared/components';
 import { ArrowBackIcon } from '@/shared/icons';
 import { MOCK_ACCOUNT, MOCK_USERS } from '@/features/myPage';
 
-/** @spec 5.5.1 */
 export const NicknamePage = () => {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState(MOCK_ACCOUNT.nickname);
@@ -47,7 +46,7 @@ export const NicknamePage = () => {
   };
 
   return (
-    <div className="mt-13.5 flex flex-col">
+    <div data-feature="F-0070" className="mt-13.5 flex flex-col">
       <PageHeader
         left={
           <button type="button" onClick={() => navigate(-1)}>

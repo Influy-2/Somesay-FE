@@ -29,6 +29,9 @@ src/domain/{도메인}/{도메인}.types.ts   프론트 전용 타입 (…Type)
 src/query/{도메인}Cache.ts       캐시 직접 조작 유틸
 src/constants/                  선택지·라벨 표
 src/utils/                      포맷터·페이지 헬퍼 등 순수 함수
+features/features.json          팀웹 기능 목록 스냅샷 (커밋한다)
+scripts/update-features.mjs     stdin JSON 검증 → 스냅샷 저장 → 타입 생성
+src/features/generated/features.ts   생성 타입 (FeatureId, LeafFeatureId) — 직접 고치지 않는다
 ```
 
 API 클라이언트·조회 훅은 `apps/web/src/shared/api/`, 도메인별 훅은 `apps/web/src/shared/hooks/{도메인}/`에 있다.

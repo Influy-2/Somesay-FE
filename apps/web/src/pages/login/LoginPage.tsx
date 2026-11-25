@@ -40,7 +40,10 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="bg-primary-300 flex min-h-full flex-1 flex-col justify-between pb-[1.875rem]">
+    <div
+      data-feature="F-0157"
+      className="bg-primary-300 flex min-h-full flex-1 flex-col justify-between pb-[1.875rem]"
+    >
       <header className="flex h-[3.375rem] items-center self-stretch px-4 py-2.5">
         <button
           type="button"

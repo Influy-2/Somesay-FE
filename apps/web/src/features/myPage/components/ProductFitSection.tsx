@@ -70,7 +70,7 @@ export const ProductFitSection = ({
   mismatches,
 }: ProductFitSectionProps) => {
   return (
-    <InfoSection title="제품 적합도">
+    <InfoSection data-feature="F-0072" title="제품 적합도">
       <FitProductRow
         label="잘 맞았던 제품"
         products={matches}

@@ -67,6 +67,7 @@ export const CreatorRankingSection = () => {
 
   return (
     <section
+      data-feature="F-0010"
       aria-labelledby="creator-ranking-title"
       aria-busy={isPending}
       className="flex w-full flex-col items-center justify-center gap-5 px-4"

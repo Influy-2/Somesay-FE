@@ -55,7 +55,11 @@ export const SubcategoryProductList = ({
   }
 
   return (
-    <ul aria-label="상품 목록" className="flex flex-col gap-6">
+    <ul
+      data-feature="F-0049"
+      aria-label="상품 목록"
+      className="flex flex-col gap-6"
+    >
       {products.map((product) => (
         <li key={product.productId}>
           <SearchResultProductCard

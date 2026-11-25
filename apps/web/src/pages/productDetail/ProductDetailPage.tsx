@@ -39,11 +39,11 @@ export const ProductDetailPage = () => {
 
   return (
     <div className="mt-13.5 flex flex-col bg-white pb-30">
-      {/* @spec 6.6.1, 6.6.2 */}
       <PageHeader
         title="상품 여론 보기"
         left={
           <button
+            data-feature="F-0100"
             onClick={() => navigate(-1)}
             aria-label="뒤로 가기"
             type="button"
@@ -52,7 +52,12 @@ export const ProductDetailPage = () => {
           </button>
         }
         right={[
-          <Link key="home" to={PATH.HOME.BASE} aria-label="홈으로 이동">
+          <Link
+            data-feature="F-0101"
+            key="home"
+            to={PATH.HOME.BASE}
+            aria-label="홈으로 이동"
+          >
             <HomeOffIcon aria-hidden="true" />
           </Link>,
           <ShareButton
@@ -80,21 +85,16 @@ export const ProductDetailPage = () => {
 
         {product && (
           <>
-            {/* @spec 6.1.1, 6.1.2, 6.1.3 */}
             <ProductHero product={product} onHeartToggle={onHeartToggle} />
             {reviewOverview && (
-              /* @spec 6.2.1, 6.2.2, 6.2.3, 6.2.4, 6.2.5 */
               <CreatorReviewSummarySection {...reviewOverview} />
             )}
-            {/* @spec 6.3.1, 6.3.2, 6.3.3, 6.3.4, 6.3.5 */}
             <ReviewRankingList {...(productId ? { productId } : {})} />
-            {/* @spec 6.4.1 */}
             <SimilarProductsList products={similarProducts} />
           </>
         )}
       </div>
 
-      {/* @spec 6.5.1 */}
       <ProductReviewCtaBar
         onReviewEvaluationClick={handleGoToReviewEvaluation}
       />

@@ -43,7 +43,7 @@ export const CreatorHomeTrustScore = ({
     <div className="grid grid-cols-2 grid-rows-[109px_91px_91px] gap-1">
       {/* 1행: 신뢰도 + 공감률 - col-span-2 */}
       <div className="bg-grey02 col-span-2 row-span-1 flex items-center justify-between px-5 py-5">
-        <div className="flex flex-col gap-2">
+        <div data-feature="F-0108" className="flex flex-col gap-2">
           <div className="flex items-center gap-1">
             <span className="body2-m">신뢰도</span>
             {showTrustRank && (
@@ -75,7 +75,10 @@ export const CreatorHomeTrustScore = ({
           </div>
         </div>
 
-        <div className="mb-1 flex w-56.75 flex-col gap-1 self-end">
+        <div
+          data-feature="F-0109"
+          className="mb-1 flex w-56.75 flex-col gap-1 self-end"
+        >
           {/* 텍스트 - 오른쪽 정렬 */}
           <div className="flex h-4.25 items-center justify-end gap-1">
             <span className="caption1-m">공감률 90% 이상 리뷰</span>
@@ -98,7 +101,10 @@ export const CreatorHomeTrustScore = ({
       </div>
 
       {/* 2행&3행 왼쪽: 전체 리뷰 - row-span-2 */}
-      <div className="bg-grey02 col-span-1 row-span-2 flex flex-col items-start justify-end px-5 py-5">
+      <div
+        data-feature="F-0111"
+        className="bg-grey02 col-span-1 row-span-2 flex flex-col items-start justify-end px-5 py-5"
+      >
         <span className="body2-m">전체 리뷰</span>
         <span className="font-pretendard text-[2rem] leading-[124%] font-normal text-[#17171B]">
           {creatorReviewCount}
@@ -109,7 +115,10 @@ export const CreatorHomeTrustScore = ({
       {isLoggedIn ? (
         <>
           {/* 2행 오른쪽: 내가 공감한 리뷰 */}
-          <div className="bg-grey02 col-span-1 row-span-1 flex items-center justify-between px-5 py-4">
+          <div
+            data-feature="F-0111"
+            className="bg-grey02 col-span-1 row-span-1 flex items-center justify-between px-5 py-4"
+          >
             <div className="flex w-full flex-col gap-1">
               <span className="body2-m">내가 공감한 리뷰</span>
               <div className="flex items-center justify-between">
@@ -124,7 +133,10 @@ export const CreatorHomeTrustScore = ({
           </div>
 
           {/* 3행 오른쪽: 내가 반대한 리뷰 */}
-          <div className="bg-grey02 col-span-1 row-span-1 flex items-center justify-between px-5 py-4">
+          <div
+            data-feature="F-0111"
+            className="bg-grey02 col-span-1 row-span-1 flex items-center justify-between px-5 py-4"
+          >
             <div className="flex w-full flex-col gap-1">
               <span className="body2-m">내가 반대한 리뷰</span>
               <div className="flex items-center justify-between">
@@ -140,7 +152,10 @@ export const CreatorHomeTrustScore = ({
         </>
       ) : (
         /* 비로그인: 2행&3행 오른쪽 합쳐서 블라인드 */
-        <div className="bg-grey02 relative col-span-1 row-span-2 flex flex-col justify-between px-5 py-5">
+        <div
+          data-feature="F-0111"
+          className="bg-grey02 relative col-span-1 row-span-2 flex flex-col justify-between px-5 py-5"
+        >
           <Link to="/" className="self-end">
             <MainArrowIcon />
           </Link>

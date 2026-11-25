@@ -5,7 +5,6 @@ import { ArrowBackIcon } from '@/shared/icons';
 import { GENDER_OPTIONS } from '@somesay/shared';
 import { MOCK_ACCOUNT } from '@/features/myPage';
 
-/** @spec 5.5.1 */
 export const GenderPage = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState(MOCK_ACCOUNT.gender);
@@ -19,7 +18,7 @@ export const GenderPage = () => {
   };
 
   return (
-    <div className="mt-13.5 flex flex-col">
+    <div data-feature="F-0070" className="mt-13.5 flex flex-col">
       <PageHeader
         left={
           <button type="button" onClick={() => navigate(-1)}>

@@ -9,15 +9,15 @@ Somesay는 사용자의 **피부 맥락**(피부 타입·피부 고민 등)을 �
 
 ## 주요 기능
 
-| 영역 | 설명 |
-| --- | --- |
-| 온보딩 · 인증 | 카카오 로그인, 약관·이메일 인증, 닉네임·프로필, 피부 타입·고민 입력, 잘 맞았던/안 맞았던 제품 선택 |
-| 홈 | 피부 맥락 기반 제품 추천, 제품·크리에이터 랭킹, 큐레이션, 리뷰 공감 투표 |
-| 랭킹 · 카테고리 | 제품·크리에이터 랭킹, 카테고리·서브카테고리별 제품 탐색 |
-| 브랜드 · 제품 상세 | 브랜드 홈, 제품 상세, 크리에이터 리뷰 요약·랭킹, 유사 제품 |
-| 검색 | 제품·리뷰 검색, 최근 검색어, 필터 |
-| 마이페이지 | 내 피부 프로필, 잘 맞는/안 맞는 제품 관리, 찜 목록(제품·크리에이터), 리뷰 평가, 계정 설정 |
-| 크리에이터 홈 | 크리에이터 프로필과 신뢰 점수, 리뷰 모음 |
+| 영역               | 설명                                                                                               |
+| ------------------ | -------------------------------------------------------------------------------------------------- |
+| 온보딩 · 인증      | 카카오 로그인, 약관·이메일 인증, 닉네임·프로필, 피부 타입·고민 입력, 잘 맞았던/안 맞았던 제품 선택 |
+| 홈                 | 피부 맥락 기반 제품 추천, 제품·크리에이터 랭킹, 큐레이션, 리뷰 공감 투표                           |
+| 랭킹 · 카테고리    | 제품·크리에이터 랭킹, 카테고리·서브카테고리별 제품 탐색                                            |
+| 브랜드 · 제품 상세 | 브랜드 홈, 제품 상세, 크리에이터 리뷰 요약·랭킹, 유사 제품                                         |
+| 검색               | 제품·리뷰 검색, 최근 검색어, 필터                                                                  |
+| 마이페이지         | 내 피부 프로필, 잘 맞는/안 맞는 제품 관리, 찜 목록(제품·크리에이터), 리뷰 평가, 계정 설정          |
+| 크리에이터 홈      | 크리에이터 프로필과 신뢰 점수, 리뷰 모음                                                           |
 
 ## 기술 스택
 
@@ -40,10 +40,10 @@ pnpm dev                                  # http://localhost:5173
 
 `apps/web/.env`에는 다음 변수가 필요합니다. 값은 팀에 문의하세요.
 
-| 변수 | 설명 |
-| --- | --- |
-| `VITE_API_BASE_URL` | 백엔드 API 주소 |
-| `VITE_KAKAO_REST_API_KEY` | 카카오 로그인 REST API 키 |
+| 변수                      | 설명                        |
+| ------------------------- | --------------------------- |
+| `VITE_API_BASE_URL`       | 백엔드 API 주소             |
+| `VITE_KAKAO_REST_API_KEY` | 카카오 로그인 REST API 키   |
 | `VITE_KAKAO_REDIRECT_URI` | 카카오 로그인 리디렉션 주소 |
 
 ### 주요 명령어
@@ -56,6 +56,24 @@ pnpm type-check                # tsc --noEmit
 pnpm test                      # 단위 테스트(Vitest)
 pnpm --filter web storybook    # Storybook (http://localhost:6006)
 ```
+
+### VS Code 설정 (기능 ID 보조)
+
+`data-feature="F-0154"`에 마우스를 올리면 `11.1.5 상단 바`처럼 표시 번호·제목이 뜨고,
+`"3.3.1"`처럼 표시 번호를 쓰면 빠른 수정(Ctrl/Cmd + .)으로 기능 ID로 바꿀 수 있습니다.
+`packages/ts-feature-plugin`(TypeScript 언어 서비스 플러그인)이 해 주며, **레포의 TypeScript를 써야** 동작합니다. 처음 한 번만 설정하세요.
+
+1. `.vscode/settings.json`(gitignore됨)에 추가합니다.
+   ```json
+   {
+     "typescript.tsdk": "apps/web/node_modules/typescript/lib",
+     "typescript.enablePromptUseWorkspaceTsdk": true
+   }
+   ```
+2. `.tsx` 파일을 연 상태에서 명령 팔레트 → **TypeScript: Select TypeScript Version** → **Use Workspace Version**.
+
+동작하지 않으면 명령 팔레트의 **TypeScript: Open TS Server log**에서 `[somesay-feature]` 줄을 확인하세요.
+`tsc`·빌드·CI에는 영향이 없습니다.
 
 ## 프로젝트 구조
 
@@ -106,7 +124,7 @@ packages/config/   공용 tsconfig · ESLint 설정
 - 규약 문서: 루트·`apps/web`·`packages/shared`의 `CLAUDE.md`
 - 스킬(`.claude/skills`): `api-integration`, `figma-to-component`, `storybook`, `write-pr`
 - 커맨드(`.claude/commands`): `plan-mode`(설계 논의), `review-pr`(PR 리뷰)
-- 페이지 파일의 `@spec` 태그로 PR이 건드린 기능명세서 소분류 번호를 추적합니다.
+- 소분류를 그리는 JSX 요소에 `data-feature="F-0042"`처럼 바뀌지 않는 기능 ID를 달아 기능명세서와 연결하고, `apps/web/scripts/feature-impact.mjs`로 PR이 닿은 기능을 계산합니다.
 
 ## 기여
 

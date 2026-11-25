@@ -76,6 +76,11 @@ export const CreatorRankingsSection = () => {
   };
 
   return (
-    <section aria-label="크리에이터 신뢰도 랭킹">{renderCreators()}</section>
+    <section
+      data-feature={['F-0021', 'F-0022']}
+      aria-label="크리에이터 신뢰도 랭킹"
+    >
+      {renderCreators()}
+    </section>
   );
 };

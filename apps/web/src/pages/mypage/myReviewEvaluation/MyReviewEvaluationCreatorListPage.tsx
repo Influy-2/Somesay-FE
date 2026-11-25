@@ -6,12 +6,11 @@ import {
 import { ArrowBackIcon } from '@/shared/icons';
 import { MOCK_EVALUATED_CREATORS_LIST } from '@/features/myPage';
 
-/** @spec 5.6.2 */
 export const MyReviewEvaluationCreatorListPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-13.5 flex flex-col">
+    <div data-feature="F-0076" className="mt-13.5 flex flex-col">
       <PageHeader
         title="리뷰 평가한 크리에이터"
         left={
